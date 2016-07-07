@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import Root from './root';
+import { store } from './store';
 
 ReactDOM.render(
-    <h1>hello!!!!</h1>,
+    <Root store={ store }/>,
     document.getElementsByClassName('content')[0]
 );
