@@ -9,4 +9,4 @@ general:
     - "coverage"
 test:
     post:
-        - sudo pip install codecov && codecov
+        - bash <(curl -s https://codecov.io/bash)
