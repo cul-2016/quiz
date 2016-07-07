@@ -194,9 +194,6 @@
 <row name="score" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="medal" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default></row>
 <key type="PRIMARY" name="">
 <part>user_score_id</part>
 </key>
