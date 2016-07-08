@@ -1,0 +1,29 @@
+BEGIN;
+/* Table of users */
+
+
+CREATE TABLE IF NOT EXISTS users (
+    user_id SERIAL PRIMARY KEY,
+    email TEXT NOT NULL UNIQUE,
+    password TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS modules (
+    module_id CHAR(4) PRIMARY KEY,
+    user_id INTEGER NOT NULL,
+    title TEXT NOT NULL
+);
+
+ALTER TABLE modules
+    ADD CONSTRAINT modules_fk
+    FOREIGN KEY (user_id)
+    REFERENCES users (user_id)
+    ON DELETE RESTRICT;
+
+INSERT INTO users (email, password)
+    VALUES ('hello@foundersandcoders.com', 'mypassword');
+
+
+
+
+COMMIT;
