@@ -50,6 +50,7 @@
     "inert": "^4.0.1",
     "istanbul": "^1.0.0-alpha.2",
     "node-sass": "^3.8.0",
+    "pg": "^6.0.1",
     "postcss-loader": "^0.9.1",
     "react": "^15.2.0",
     "react-addons-test-utils": "^15.2.0",
