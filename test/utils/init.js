@@ -12,7 +12,7 @@ export const testClient = new Pool({ database: 'testing', idleTimeoutMillis: 200
 // end to end testing => pool and testing pg client need to refer to the same one when testing endpoints!
 
 testClient.connect((error, client, done) => {
-    console.log('you are in connet in init.js');
+    console.log('you are in connect in init.js');
 
     var schema = fs.readFileSync(__dirname + '/test-schema.txt', 'utf8');
 
