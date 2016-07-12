@@ -26,26 +26,15 @@ function query (queryText, queryArray, callback) {
         if (error) {
             callback(error);
         }
+        client.query(queryText, queryArray, (error, result) => {
+            done();
+            if (error) {
+                callback(error);
+            } else {
+                callback(null, result);
+            }
+        });
 
-        if (arguments.length === 2 && typeof arguments[1] === 'function') {
-            client.query(queryText, (error, result) => {
-                done();
-                if (error) {
-                    callback(error);
-                } else {
-                    callback(null, result);
-                }
-            });
-        } else {
-            client.query(queryText, queryArray, (error, result) => {
-                done();
-                if (error) {
-                    callback(error);
-                } else {
-                    callback(null, result);
-                }
-            });
-        }
     });
 }
 
