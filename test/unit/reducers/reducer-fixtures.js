@@ -1,4 +1,5 @@
 export const dashboard = {
     isFetchingDashboard: false,
-    data: []
+    data: [],
+    error: undefined
 };
