@@ -15,15 +15,14 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS modules (
     module_id CHAR(4) PRIMARY KEY,
     user_id INTEGER NOT NULL,
-    title TEXT NOT NULL
+    name TEXT NOT NULL
 );
 
 /* medals */
 CREATE TABLE IF NOT EXISTS medals (
     module_id CHAR(4),
-    bronze INTEGER DEFAULT 39 NOT NULL,
-    silver INTEGER DEFAULT 59 NOT NULL,
-    gold INT DEFAULT 100 NOT NULL
+    medal_name TEXT NOT NULL,
+    condition INTEGER NOT NULL
 );
 
 /* trophies */
