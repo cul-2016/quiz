@@ -3,6 +3,7 @@ import React from 'react';
 import TestUtils, { renderIntoDocument } from 'react-addons-test-utils';
 import shallowRenderer from '../utils/shallowRenderer';
 import Root from '../../src/js/root';
+import App from '../../src/js/components/app';
 import { store } from '../../src/js/store';
 
 test.skip('If no cookie present, redirects to login', (t) => {
@@ -14,4 +15,10 @@ test.skip('If no cookie present, redirects to login', (t) => {
     t.end();
     // const result = TestUtils.findRenderedDOMComponentWithTag(app, 'h3');
     // t.equal(result, 'Login');
+});
+
+test('App container mounts', (t) => {
+
+    const node = renderIntoDocument(<App />)
+    t.end();
 });

@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-const AppContainer = ({ children }) => {
+const App = ({ children }) => {
 
     return (
         <div>
@@ -9,8 +9,8 @@ const AppContainer = ({ children }) => {
     );
 };
 
-AppContainer.propTypes = {
+App.propTypes = {
     children: PropTypes.object.isRequired
 };
 
-export default AppContainer;
+export default App;
