@@ -1,24 +1,15 @@
 import test from 'tape';
 import React from 'react';
-import TestUtils, { renderIntoDocument } from 'react-addons-test-utils';
-import shallowRenderer from '../utils/shallowRenderer';
+import ReactDOM from 'react-dom';
+import { renderIntoDocument } from 'react-addons-test-utils';
 import Root from '../../src/js/root';
-import App from '../../src/js/components/app';
 import { store } from '../../src/js/store';
 
-test.skip('If no cookie present, redirects to login', (t) => {
+test('If no cookie present, redirects to login', (t) => {
 
-    // t.plan(1);
+    t.plan(1);
     document.cookie = 'fakecookie';
-    const app = renderIntoDocument(<Root store={ store } />);
-    console.log("APP", app);
-    t.end();
-    // const result = TestUtils.findRenderedDOMComponentWithTag(app, 'h3');
-    // t.equal(result, 'Login');
-});
-
-test('App container mounts', (t) => {
-
-    const node = renderIntoDocument(<App />)
-    t.end();
+    const app = renderIntoDocument(<div><Root store={ store } /></div>);
+    const result = ReactDOM.findDOMNode(app).querySelector('h3').textContent;
+    t.equal(result, 'Login', 'Redirects to login page');
 });

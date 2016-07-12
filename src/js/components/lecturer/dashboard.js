@@ -1,12 +1,30 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
-const Dashboard = () => {
+const Dashboard = ({ modules }) => {
+
+    let lecturerModules = modules.map((module, i) => {
+        return (
+            <div key={ i }>
+                { `${module.code} ${module.name}` }
+            </div>
+        );
+    });
 
     return (
         <div>
-            This is the lecturer dashboard
+            <h1>Welcome, lecturer</h1>
+            <div>
+                Add a new module
+            </div>
+            <div>
+                { lecturerModules }
+            </div>
         </div>
     );
+};
+
+Dashboard.propTypes = {
+    modules: PropTypes.array.isRequired
 };
 
 export default Dashboard;
