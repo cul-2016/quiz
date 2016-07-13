@@ -1,5 +1,5 @@
 var pg = require('pg');
-var database = process.env.PRODUCTION_URL;
+var database = process.env.DATABASE_URL;
 var config = {
     database: database,
     max: '100',
