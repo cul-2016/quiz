@@ -1,11 +1,20 @@
 var query = require('./query');
 
-function getModules (pool, user_id, callback) {
+/**
+ * Represents a function that fetches a list of modules belonging to the user
+ * For a lecturer, this will return modules they have created.
+ * For a student, this will return modules they have joined.
+ * @param {object} client - postgres database client
+ * @param {string} user_id - user id
+ * @param {function} callback - a callback function
+ */
+
+function getModules (client, user_id, callback) {
 
     var moduleQuery = 'SELECT module_id, name FROM modules WHERE user_id = $1;';
     var moduleValue = [user_id];
 
-    query(pool, moduleQuery, moduleValue, (error, response) => {
+    query(client, moduleQuery, moduleValue, (error, response) => {
         if (error) {
             callback(error);
         }

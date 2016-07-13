@@ -1,6 +1,6 @@
 import test from 'tape';
 import { testClient } from '../utils/init';
-import { users } from '../utils/database-fixtures';
+import { users } from '../utils/data-fixtures';
 
 test('database works', (t) => {
 
@@ -15,9 +15,8 @@ test('database works', (t) => {
             }
             t.equal(response.rowCount, 1, 'Query matches one row');
             t.deepEqual(response.rows[0], users[0], 'Correct user retrieved');
-            // testClient.end();
-            done();
 
+            done();
         });
     });
 });
