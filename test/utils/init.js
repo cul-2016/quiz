@@ -8,7 +8,8 @@ if (!process.env.TESTING) {
     throw new Error('Please set up the testing environment variables');
 }
 
-export const testClient = new Pool({ database: 'testing', idleTimeoutMillis: 2000 });
+const databaseName = process.env.CIRCLE_CI ? 'circle_test' : 'testing';
+export const testClient = new Pool({ database: databaseName, idleTimeoutMillis: 2000 });
 // end to end testing => pool and testing pg client need to refer to the same one when testing endpoints!
 
 testClient.connect((error, client, done) => {
