@@ -13,6 +13,9 @@ export const testClient = new Pool({ database: 'testing', idleTimeoutMillis: 200
 
 testClient.connect((error, client, done) => {
     console.log('you are in connect in init.js');
+    if (error) {
+        console.error(error);
+    }
 
     var schema = fs.readFileSync(__dirname + '/test-schema.txt', 'utf8');
 
