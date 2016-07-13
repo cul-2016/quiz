@@ -4,5 +4,5 @@
 
 export default function validCookieExists () {
 
-    return document.cookie.indexOf("quizID") !== -1;
+    return document.cookie.indexOf("quiz_id") !== -1;
 }

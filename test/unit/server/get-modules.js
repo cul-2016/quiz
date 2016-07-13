@@ -11,7 +11,6 @@ test('getting modules from database for a given lecturer using user_id', (t) => 
         if (error) {
             console.error(error);
         }
-        console.log(response, 'response');
         t.deepEquals(response.rows, expectedRows, 'database returns correct row of module');
         t.deepEquals(response.command, expectedCommand, 'Correct command of SELECT, lecturer is saved to db correctly');
     });
