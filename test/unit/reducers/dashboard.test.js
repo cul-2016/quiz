@@ -1,11 +1,14 @@
 import test from 'tape';
 import { dashboard as dashboardState } from './reducer-fixtures';
-import { dashboardData as data, dashboardError as error } from '../actions/action-fixtures';
+import { dashboardError as error } from '../actions/action-fixtures';
+import { dashboardData as data } from '../../utils/data-fixtures';
 import reducer from '../../../src/js/reducers/dashboard';
 import deepFreeze from '../../utils/deepFreeze';
 
 
 test('GET_DASHBOARD_REQUEST works', (t) => {
+
+    t.plan(1);
 
     const initialState = deepFreeze(dashboardState);
 
@@ -21,10 +24,11 @@ test('GET_DASHBOARD_REQUEST works', (t) => {
 
     const result = reducer(initialState, action);
     t.deepEqual(result, expected);
-    t.end();
 });
 
 test('GET_DASHBOARD_SUCCESS works', (t) => {
+
+    t.plan(1);
 
     const initialState = deepFreeze(dashboardState);
 
@@ -38,13 +42,14 @@ test('GET_DASHBOARD_SUCCESS works', (t) => {
         data,
         error: undefined
     };
-
     const result = reducer(initialState, action);
+
     t.deepEqual(result, expected);
-    t.end();
 });
 
 test('GET_DASHBOARD_FAILURE works', (t) => {
+
+    t.plan(1);
 
     const initialState = deepFreeze(dashboardState);
 
@@ -58,8 +63,7 @@ test('GET_DASHBOARD_FAILURE works', (t) => {
         data: [],
         error
     };
-
     const result = reducer(initialState, action);
+
     t.deepEqual(result, expected);
-    t.end();
 });

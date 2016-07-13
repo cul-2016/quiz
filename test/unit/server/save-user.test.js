@@ -25,6 +25,7 @@ test('saving student to database works', (t) => {
 });
 
 test('deleting lecturer from the database', (t) => {
+    
     testClient.connect((error, client, done) => {
         if (error) {
             console.error(error, 'error from deleting lecturer from the database');

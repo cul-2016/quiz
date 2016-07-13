@@ -1,7 +1,6 @@
-import Server from '../../server/server.js';
-export const server = Server.init(process.env.PORT);
-import { Pool } from 'pg';
-import fs from 'fs';
+var Server = require('../../server/server.js');
+var Pool = require('pg').Pool;
+var fs = require('fs');
 
 
 if (!process.env.TESTING) {
@@ -9,8 +8,7 @@ if (!process.env.TESTING) {
 }
 
 const databaseName = process.env.CIRCLE_CI ? 'circle_test' : 'testing';
-export const testClient = new Pool({ database: databaseName, idleTimeoutMillis: 2000 });
-// end to end testing => pool and testing pg client need to refer to the same one when testing endpoints!
+const testClient = new Pool({ database: databaseName, idleTimeoutMillis: 2000 });
 
 testClient.connect((error, client, done) => {
     console.log('test client is connected');
@@ -25,3 +23,8 @@ testClient.connect((error, client, done) => {
         done();
     });
 });
+
+module.exports = {
+    server: Server.init(process.env.PORT),
+    testClient: testClient
+};

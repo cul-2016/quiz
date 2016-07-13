@@ -1,5 +1,17 @@
 var pg = require('pg');
-var database = process.env.DATABASE_URL;
+var database;
+
+if (process.env.CIRCLE_CI) {
+    database = 'circle_test';
+} else if (process.env.TESTING) {
+    database = 'testing';
+} else {
+    database = process.env.DATABASE_URL;
+}
+
+console.log("DATABASE:", database);
+
+
 var config = {
     database: database,
     max: '100',
