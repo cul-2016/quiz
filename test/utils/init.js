@@ -17,15 +17,11 @@ testClient.connect((error, client, done) => {
     if (error) {
         console.error(error);
     }
-
     var schema = fs.readFileSync(__dirname + '/test-schema.txt', 'utf8');
-
     client.query(schema, (error, result) => {
         if (error) {
             console.error(error);
         }
-        console.log("RESULT", result);
         done();
-
     });
 });

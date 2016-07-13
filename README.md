@@ -29,3 +29,10 @@ When creating a client for the tests, we have to provide options to the `pg`.Poo
 
     - Eventually settled on having the client passed down to the query function, so that when the function is run either in the test or production, we can specify exactly which client to connect to.
     - each client is pooled, so that there is less of a bottleneck, currently set the pool connections to 100. check pg module documentation for more information. https://github.com/brianc/node-postgres
+    - **To setup the schema on HEROKU use the following command**
+    ```bash
+    heroku pg:psql --app (APPNAME) DATABASE < ./path/to/schema
+    ```
+    - to connect heroku db to pgAdmin
+        - go to file > Add Server.
+        - then follow this link - http://stackoverflow.com/questions/11769860/connect-to-a-heroku-database-with-pgadmin
