@@ -1,5 +1,6 @@
 var Hapi = require('hapi');
 var plugins = require('./plugins');
+var routes = require('./routes');
 
 exports.init = (port) => {
 
@@ -16,5 +17,7 @@ exports.init = (port) => {
             console.error(error);
         }
     });
+
+    server.route(routes);
     return server;
 };
