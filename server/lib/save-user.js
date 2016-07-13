@@ -1,4 +1,5 @@
 var query = require('./query');
+
 /**
 * Represents a function that saves a user to the database.
 * @param {Object} db - database client to which the function will need to connect to.

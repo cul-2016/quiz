@@ -14,7 +14,7 @@
     "pre-test": "node ./test/utils/init.js",
     "test": "tape -r babel-register --require ./test/utils/jsdom.js 'test/**/*.@(js|jsx)' | tap-spec",
     "postinstall": "webpack --config ./webpack.production.config.js --progress --colors",
-    "make-docs": "./node_modules/.bin/jsdoc server/lib"
+    "make-docs": "./node_modules/.bin/jsdoc -c ./conf.json -r"
   },
   "repository": {
     "type": "git",
