@@ -1,7 +1,10 @@
 import jsdom from 'jsdom';
 
-
-const doc = jsdom.jsdom('<!doctype html><html><body></body></html>');
+const options = {
+    cookie: "quizID=1; path=/",
+    url: 'http://localhost' // needed for React TestUtils renderIntoDocument
+};
+const doc = jsdom.jsdom('<!doctype html><html><body></body></html>', options);
 const win = doc.defaultView;
 
 global.document = doc;
