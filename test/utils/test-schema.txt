@@ -1,4 +1,20 @@
 BEGIN;
+DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS modules CASCADE;
+DROP TABLE IF EXISTS medals CASCADE;
+DROP TABLE IF EXISTS trophies CASCADE;
+DROP TABLE IF EXISTS quizzes CASCADE;
+DROP TABLE IF EXISTS questions CASCADE;
+DROP TABLE IF EXISTS responses CASCADE;
+DROP TABLE IF EXISTS scores CASCADE;
+DROP TABLE IF EXISTS module_members CASCADE;
+
+DROP SEQUENCE IF EXISTS user_id_seq;
+DROP SEQUENCE IF EXISTS quiz_id_seq;
+DROP SEQUENCE IF EXISTS question_id_seq;
+
+
+
 /* users */
 CREATE TABLE IF NOT EXISTS users (
     user_id SERIAL PRIMARY KEY,
@@ -157,5 +173,16 @@ INSERT INTO users (email, password, username)
     VALUES ('student@city.ac.uk', 'student', 'student');
 INSERT INTO users (email, password, is_lecturer)
     VALUES ('lecturer@city.ac.uk', 'lecturer', true);
+    INSERT INTO modules (module_id, user_id, name)
+        VALUES ( 'TEST', 1, 'test module');
+    INSERT INTO medals (module_id, medal_name, condition)
+        VALUES ('TEST', 'bronze', 39),
+               ('TEST', 'silver', 69),
+               ('TEST', 'gold', 100);
+    INSERT INTO trophies (module_id, trophy_name, condition)
+        VALUES ('TEST', 'participation', 3),
+               ('TEST', 'overall_average', 70),
+               ('TEST', 'full_marks', 100),
+               ('TEST', 'first_quiz', 1);
 
 COMMIT;
