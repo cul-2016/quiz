@@ -1,6 +1,6 @@
-var query = require('./pg-pool');
+var query = require('./query');
 
-function saveModule (module_id, user_id, name, medals, trophies, callback) {
+function saveModule (pool, module_id, user_id, name, medals, trophies, callback) {
 
     var moduleQuery = [
         'INSERT INTO modules (module_id, user_id, name) VALUES ( $1, $2, $3);',
@@ -23,11 +23,11 @@ function saveModule (module_id, user_id, name, medals, trophies, callback) {
         if (moduleArray.length === index) {
             return callback(null, result);
         } else {
-            query(moduleQuery[index], moduleArray[index], report);
+            query(pool, moduleQuery[index], moduleArray[index], report);
         }
     }
 
-    query(moduleQuery[index], moduleArray[index], report);
+    query(pool, moduleQuery[index], moduleArray[index], report);
 
 }
 module.exports = saveModule;

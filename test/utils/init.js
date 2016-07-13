@@ -1,7 +1,7 @@
 import Server from '../../server/server.js';
 export const server = Server.init(process.env.PORT);
 import { Pool } from 'pg';
-var fs = require('fs');
+import fs from 'fs';
 
 
 if (!process.env.TESTING) {
@@ -13,7 +13,7 @@ export const testClient = new Pool({ database: databaseName, idleTimeoutMillis: 
 // end to end testing => pool and testing pg client need to refer to the same one when testing endpoints!
 
 testClient.connect((error, client, done) => {
-    console.log('you are in connect in init.js');
+    console.log('test client is connected');
     if (error) {
         console.error(error);
     }

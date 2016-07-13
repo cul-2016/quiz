@@ -1,5 +1,4 @@
-var query = require('./pg-pool');
-
+var query = require('./query');
 /**
 * Represents a function that saves a user to the database.
 * @param {Object} db - database client to which the function will need to connect to.
@@ -9,7 +8,7 @@ var query = require('./pg-pool');
 * @param {string} username - username for the given student. Lecturer will not have the username and it will be an empty string
 * @param {Function} callback - callback function.
 */
-function saveUser (email, password, is_lecturer, username, callback) {
+function saveUser (pool, email, password, is_lecturer, username, callback) {
     var userQuery;
     var userArray;
     if (is_lecturer) {
@@ -19,7 +18,7 @@ function saveUser (email, password, is_lecturer, username, callback) {
         userQuery = 'INSERT INTO users (email, password, username) VALUES ( $1, $2, $3);';
         userArray = [email, password, username];
     }
-    query(userQuery, userArray, (error, result) => {
+    query(pool, userQuery, userArray, (error, result) => {
         if (error) {
             callback(error);
         }
