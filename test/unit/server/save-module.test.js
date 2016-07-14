@@ -1,6 +1,6 @@
 import test from 'tape';
 import { testClient } from '../../utils/init';
-import saveModule from '../../../server/lib/save-module';
+import saveModule from '../../../server/lib/saveModule';
 import { medals, trophies } from '../../utils/data-fixtures';
 
 test('adding a module to the database works ok', (t) => {
