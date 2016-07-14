@@ -1,22 +1,27 @@
 var pg = require('pg');
-var database;
+var config;
 
 if (process.env.CIRCLE_CI) {
-    database = 'circle_test';
+    config = {
+        database: 'circle_test'
+    };
 } else if (process.env.TESTING) {
-    database = 'testing';
+    config = {
+        database: 'testing'
+    };
 } else {
-    database = process.env.DATABASE_URL;
+    config = {
+        user: process.env.DATABASE_USER,
+        password: process.env.DATABASE_PASSWORD,
+        host: process.env.DATABASE_HOST,
+        port: process.env.DATABASE_PORT,
+        database: process.env.DATABASE_NAME,
+        ssl: true
+    };
 }
 
-console.log("DATABASE:", database);
-
-
-var config = {
-    database: database,
-    max: '100',
-    idleTimeoutMillis: 3000
-};
+config.max = '20';
+config.idleTimeoutMillis = 3000;
 
 var pool = new pg.Pool(config);
 

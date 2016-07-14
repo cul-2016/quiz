@@ -15,10 +15,12 @@ function getModules (client, user_id, callback) {
     var moduleValue = [user_id];
 
     query(client, moduleQuery, moduleValue, (error, response) => {
+    
         if (error) {
+            console.error(error);
             callback(error);
         }
-        callback(null, response);
+        callback(null, response.rows);
     });
 }
 
