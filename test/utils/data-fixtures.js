@@ -16,12 +16,12 @@ export const dashboardData = [
 ];
 
 export const medals = {
-    medal_name: [
+    trophy_name: [
         "bronze",
         "silver",
         "gold"
     ],
-    condition: [39, 69, 100]
+    condition: [39, 69]
 };
 
 export const trophies = {

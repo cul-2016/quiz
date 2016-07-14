@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 
-const NewModule = () => {
+const NewModule = ({ medals, updateValues }) => {
 
     return (
         <div>
@@ -14,13 +14,22 @@ const NewModule = () => {
             </div>
             <br />
             <div>
-                <span>Bronze</span>
-                <input type="number" />
-                <span>Silver</span>
-                <span>Gold</span>
+                <p>Bronze</p>
+                <span>0</span>
+                <input name="bronze" type="number" defaultValue={ medals[0] - 1 } onChange={ (e) => updateValues('bronze', e.target.value) } />
+                <p>Silver</p>
+                <span>{ medals[0] }</span> to <span>{ medals[1] }</span>
+                <p>Gold</p>
+                <input name="gold" type="number" defaultValue={ medals[1] + 1 } onChange={ (e) => updateValues('bronze', e.target.value) } />
+                <span>100</span>
             </div>
         </div>
     );
+};
+
+NewModule.propTypes = {
+    medals: PropTypes.array.isRequired,
+    updateValues: PropTypes.func.isRequired
 };
 
 export default NewModule;
