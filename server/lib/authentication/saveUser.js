@@ -1,4 +1,4 @@
-var query = require('./query');
+var query = require('../query');
 
 /**
 * Represents a function that saves a user to the database.

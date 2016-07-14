@@ -1,6 +1,6 @@
 import test from 'tape';
 import { testClient } from '../../utils/init';
-import saveUser from '../../../server/lib/saveUser';
+import saveUser from '../../../server/lib/authentication/saveUser';
 
 test('saving lecturer to database works', (t) => {
 
