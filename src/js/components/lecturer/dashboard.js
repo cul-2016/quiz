@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
 
 const Dashboard = ({ modules }) => {
 
@@ -13,9 +14,11 @@ const Dashboard = ({ modules }) => {
     return (
         <div>
             <h1>Welcome, lecturer</h1>
-            <div>
-                Add a new module
-            </div>
+            <Link to="new-module">            
+                <button>
+                    Add a new module
+                </button>
+            </Link>
             <div>
                 { lecturerModules }
             </div>
