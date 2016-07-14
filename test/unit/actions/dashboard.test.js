@@ -1,7 +1,8 @@
 import test from 'tape';
 import createThunk from '../../utils/mockThunk';
 import * as actions from '../../../src/js/actions/dashboard';
-import { dashboardData as data, dashboardError as error } from './action-fixtures';
+import { dashboardError as error } from './action-fixtures';
+import { dashboardData as data } from '../../utils/data-fixtures';
 import deepFreeze from '../../utils/deepFreeze';
 
 

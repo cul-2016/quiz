@@ -6,7 +6,11 @@ import Login from './components/login';
 import LecturerDashboardContainer from './containers/lecturer-dashboard-container';
 import StudentDashboardContainer from './containers/student-dashboard-container';
 
+import composeHooks from './lib/composeHooks';
+import fetchModules from './lib/fetchModules';
 import authenticate from './lib/authenticate';
+
+import { store } from './store';
 
 
 const Authd = () => {
@@ -28,7 +32,7 @@ const Root = ({ store }) => (
             <Route path="/" component={ App }>
                 <IndexRoute component={ Login } />
                 <Route onEnter={ authenticate }  path="auth" component={ Authd } />
-                <Route onEnter={ authenticate }  path="dashboard-lecturer" component={ LecturerDashboardContainer } />
+                <Route onEnter={ composeHooks(authenticate, fetchModules) }  path="dashboard-lecturer" component={ LecturerDashboardContainer } />
                 <Route onEnter={ authenticate }  path="dashboard-student" component={ StudentDashboardContainer } />
             </Route>
         </Router>

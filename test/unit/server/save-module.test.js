@@ -1,6 +1,7 @@
 import test from 'tape';
 import { testClient } from '../../utils/init';
 import saveModule from '../../../server/lib/save-module';
+import { medals, trophies } from '../../utils/data-fixtures';
 
 test('adding a module to the database works ok', (t) => {
 
@@ -10,32 +11,17 @@ test('adding a module to the database works ok', (t) => {
     const module_id = "MOD1";
     const user_id = 1;
     const name = "Test Module";
-    const medals = {
-        medal_name: [
-            "bronze",
-            "silver",
-            "gold"
-        ],
-        condition: [39, 69, 100]
-    };
-    const trophies = {
-        trophy_name: [
-            "participation",
-            "overall_average",
-            "full_marks",
-            "first_quiz"
-        ],
-        condition: [3, 60, 100, 1]
-    };
+
     saveModule(testClient, module_id, user_id, name, medals, trophies, (error, response) => {
 
-        t.deepEquals(error, expectedError, 'error is null, module is saved to db correctly.');
-        t.deepEquals(response.command, expectedCommand, 'Correct command of INSERT, module is saved to db correctly');
+        t.deepEqual(error, expectedError, 'error is null, module is saved to db correctly.');
+        t.deepEqual(response.command, expectedCommand, 'Correct command of INSERT, module is saved to db correctly');
     });
 });
 
 
 test('deleting lecturer from the database', (t) => {
+
     testClient.connect((error, client, done) => {
         if (error) {
             console.error(error, 'error from deleting module from the database');

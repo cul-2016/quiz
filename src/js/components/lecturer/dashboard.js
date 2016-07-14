@@ -5,7 +5,7 @@ const Dashboard = ({ modules }) => {
     let lecturerModules = modules.map((module, i) => {
         return (
             <div key={ i }>
-                { `${module.code} ${module.name}` }
+                { `${module.module_id} ${module.name}` }
             </div>
         );
     });
