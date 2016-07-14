@@ -6,7 +6,7 @@ import Dashboard from '../../../src/js/components/lecturer/dashboard';
 import { dashboardData as data } from '../../utils/data-fixtures';
 
 
-test.only('LecturerDashboard renders correctly', (t) => {
+test('LecturerDashboard renders correctly', (t) => {
 
     t.plan(2);
 
@@ -17,3 +17,5 @@ test.only('LecturerDashboard renders correctly', (t) => {
     t.equal(expectedHeader, 'Welcome, lecturer');
     t.equal(expectedButton, 'Add a new module');
 });
+
+// could add a test for clicking add module button
