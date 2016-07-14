@@ -1,12 +1,12 @@
-var getModules = require('../lib/get-modules');
+var validateModuleID = require('../lib/validateModuleID');
 var client = require('../lib/db-client');
 
 module.exports = {
     method: 'GET',
-    path: '/get-modules',
+    path: '/validate-module',
     handler: (request, reply) => {
-
-        getModules(client, request.query.user_id, (error, modules) => {
+        var module_id = request.query.module_id;
+        validateModuleID(client, module_id, (error, modules) => {
 
             var verdict = error || modules;
             reply(verdict);
