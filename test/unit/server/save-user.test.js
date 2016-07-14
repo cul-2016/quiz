@@ -1,6 +1,6 @@
 import test from 'tape';
 import { testClient } from '../../utils/init';
-import saveUser from '../../../server/lib/save-user';
+import saveUser from '../../../server/lib/saveUser';
 
 test('saving lecturer to database works', (t) => {
 
@@ -25,7 +25,7 @@ test('saving student to database works', (t) => {
 });
 
 test('deleting lecturer from the database', (t) => {
-    
+
     testClient.connect((error, client, done) => {
         if (error) {
             console.error(error, 'error from deleting lecturer from the database');

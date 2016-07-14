@@ -1,5 +1,5 @@
 var validateModuleID = require('../lib/validateModuleID');
-var client = require('../lib/db-client');
+var client = require('../lib/dbClient');
 
 module.exports = {
     method: 'GET',
