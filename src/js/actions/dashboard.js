@@ -1,4 +1,4 @@
-// import axios from 'axios';
+import axios from 'axios';
 
 export const GET_DASHBOARD_REQUEST = 'GET_DASHBOARD_REQUEST';
 export const GET_DASHBOARD_SUCCESS = 'GET_DASHBOARD_SUCCESS';
@@ -10,6 +10,17 @@ export function getDashboard () {
     return (dispatch) => {
 
         dispatch(getDashboardRequest());
+
+        let userID = 1;
+
+        axios.get(`/get-modules?user_id=${userID}`)
+            .then((response) => {
+                dispatch(getDashboardSuccess(response.data));
+            })
+            .catch((error) => {
+                console.error(error);
+                dispatch(getDashboardFailure(error));
+            });
     };
 }
 

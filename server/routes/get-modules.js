@@ -5,9 +5,9 @@ module.exports = {
     method: 'GET',
     path: '/get-modules',
     handler: (request, reply) => {
-        // console.log(client);
-        getModules(client, request.query.user_id, (error, modules) => {
 
+        getModules(client, request.query.user_id, (error, modules) => {
+            
             var verdict = error || modules;
             reply(verdict);
         });
