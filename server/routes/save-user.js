@@ -18,7 +18,6 @@ module.exports = {
                 reply(error);
             }
             saveUser(client, email, hashedPassword, is_lecturer, username, (error, result) => {
-                console.log(result);
                 if (error) {
                     reply(error);
                 }
