@@ -51,3 +51,26 @@ test('UPDATE_MEDAL_VALUES works when gold lower bound changes', (t) => {
     const result = reducer(initialState, action);
     t.deepEqual(result, expected);
 });
+
+test('UPDATE_MEDAL_VALUES handles the empty string', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(newModuleState);
+
+    const action = {
+        type: 'UPDATE_MEDAL_VALUES',
+        medal: 'gold',
+        value: ""
+    };
+
+    const expected = {
+        module_id: undefined,
+        name: undefined,
+        medals: [39, '-'],
+        trophies: undefined
+    };
+
+    const result = reducer(initialState, action);
+    t.deepEqual(result, expected);
+});

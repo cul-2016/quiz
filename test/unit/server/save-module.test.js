@@ -11,7 +11,7 @@ test('adding a module to the database works ok', (t) => {
     const module_id = "MOD1";
     const user_id = 1;
     const name = "Test Module";
-    console.log(medals);
+
     saveModule(testClient, module_id, user_id, name, medals, trophies, (error, response) => {
 
         t.deepEqual(error, expectedError, 'error is null, module is saved to db correctly.');
@@ -23,10 +23,10 @@ test('adding a module to the database works ok', (t) => {
 test('deleting lecturer from the database', (t) => {
 
     testClient.connect((error, client, done) => {
+        
         if (error) {
             console.error(error, 'error from deleting module from the database');
         }
-
         client.query('DELETE FROM modules WHERE module_id = $1', ['MOD1']);
         done();
         t.end();

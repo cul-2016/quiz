@@ -3,6 +3,11 @@ import React, { PropTypes } from 'react';
 
 const NewModule = ({ medals, updateValues }) => {
 
+    const doMaths = (originalValue, offset) => {
+    
+        return !isNaN(originalValue) ? originalValue + offset : '-';
+    };
+
     return (
         <div>
             <h1>Add a new module</h1>
@@ -15,13 +20,13 @@ const NewModule = ({ medals, updateValues }) => {
             <br />
             <div>
                 <p>Bronze</p>
-                <span>0</span>
-                <input name="bronze" type="number" defaultValue={ medals[0] - 1 } onChange={ (e) => updateValues('bronze', e.target.value) } />
+                <span>0 to </span>
+                <input name="bronze" type="number" min="1" max="96" defaultValue={ doMaths(medals[0], -1) } onChange={ (e) => updateValues('bronze', e.target.value) } />
                 <p>Silver</p>
-                <span>{ medals[0] }</span> to <span>{ medals[1] }</span>
+                <span className="silver lower-bound">{ medals[0] }</span> to <span className="silver upper-bound">{ medals[1] }</span>
                 <p>Gold</p>
-                <input name="gold" type="number" defaultValue={ medals[1] + 1 } onChange={ (e) => updateValues('bronze', e.target.value) } />
-                <span>100</span>
+                <input name="gold" type="number" min="4" max="99" defaultValue={ doMaths(medals[1], 1) } onChange={ (e) => updateValues('gold', e.target.value) } />
+                <span> to 100</span>
             </div>
         </div>
     );
