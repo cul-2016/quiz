@@ -23,7 +23,6 @@ function saveUser (pool, email, password, is_lecturer, username, callback) {
         if (error) {
             callback(error);
         }
-
         callback(null, result);
     });
 }
