@@ -171,8 +171,8 @@ ALTER TABLE module_members
 
 INSERT INTO users (email, password, username)
     VALUES ('student@city.ac.uk', 'student', 'student');
-INSERT INTO users (email, password, is_lecturer)
-    VALUES ('lecturer@city.ac.uk', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true);
+INSERT INTO users (email, password, is_lecturer, username)
+    VALUES ('lecturer@city.ac.uk', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, 'lecturer');
     INSERT INTO modules (module_id, user_id, name)
         VALUES ( 'TEST', 1, 'test module');
     INSERT INTO medals (module_id, medal_name, condition)
