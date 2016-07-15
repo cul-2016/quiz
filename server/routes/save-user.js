@@ -1,5 +1,7 @@
 var saveUser = require('../lib/authentication/saveUser');
 var client = require('../lib/dbClient');
+var getUser = require('../lib/getUser');
+
 var hashPassword = require('../lib/authentication/hashPassword');
 
 module.exports = {
@@ -16,10 +18,17 @@ module.exports = {
                 reply(error);
             }
             saveUser(client, email, hashedPassword, is_lecturer, username, (error, result) => {
-                var verdict = error || result;
+                console.log(result);
+                if (error) {
+                    reply(error);
+                }
+                getUser(client, email, (error, userDetails) => {
+                    delete userDetails[0].password;
+                    reply(userDetails[0])
+                        .state('user_id', userDetails[0].user_id.toString(), { path: "/" });
 
-                reply(verdict);
-                //TODO: need to figure out what information should be sent back to save in the state and cookies.
+                    //TODO: need to figure out what information should be sent back to save in the state and cookies.
+                });
             });
         });
     }
