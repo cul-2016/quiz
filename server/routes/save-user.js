@@ -13,11 +13,9 @@ module.exports = {
 
         hashPassword(password, (error, hashedPassword) => {
             if (error) {
-                console.log(error, 'from hashPassword');
                 reply(error);
             }
             saveUser(client, email, hashedPassword, is_lecturer, username, (error, result) => {
-                console.log(error, 'error from save user');
                 var verdict = error || result;
 
                 reply(verdict);
