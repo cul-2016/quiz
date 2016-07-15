@@ -42,6 +42,7 @@
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-0": "^6.5.0",
     "babel-register": "^6.9.0",
+    "bcrypt": "^0.8.7",
     "bell": "^7.9.1",
     "classnames": "^2.2.5",
     "css-loader": "^0.23.1",
