@@ -22,14 +22,23 @@ export default function newModule (state = initialState, action) {
 
 function updateMedalValues (state, action) {
 
-    if (action.medal === 'bronze') {
-        return update(state, {
-            medals: { $splice: [[0, 1, action.value + 1]] }
-        });
+    let newValue, index, offset;
+    
+    switch (action.medal) {
+
+    case 'bronze':
+        offset = 1;
+        index = 0;
+        break;
+
+    case 'gold':
+        offset = -1;
+        index = 1;
+        break;
     }
-    if (action.medal === 'gold') {
-        return update(state, {
-            medals: { $splice: [[1, 1, action.value - 1]] }
-        });
-    }
+    newValue = action.value === "" ? "-" : action.value + offset;
+
+    return update(state, {
+        medals: { $splice: [[index, 1, newValue]] }
+    });
 }

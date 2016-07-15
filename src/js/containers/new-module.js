@@ -10,6 +10,10 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
 
     updateValues: (medal, value) => {
+        
+        if (value !== "") {
+            value = parseInt(value, 10);
+        }
         dispatch(updateMedalValues(medal, value));
     }
 });
