@@ -23,10 +23,10 @@ test('adding a module to the database works ok', (t) => {
 test('deleting lecturer from the database', (t) => {
 
     testClient.connect((error, client, done) => {
+        
         if (error) {
             console.error(error, 'error from deleting module from the database');
         }
-
         client.query('DELETE FROM modules WHERE module_id = $1', ['MOD1']);
         done();
         t.end();
