@@ -6,9 +6,9 @@ module.exports = {
     path: '/validate-module',
     handler: (request, reply) => {
         var module_id = request.query.module_id;
-        validateModuleID(client, module_id, (error, modules) => {
+        validateModuleID(client, module_id, (error, exists) => {
 
-            var verdict = error || modules;
+            var verdict = error || exists;
             reply(verdict);
         });
     }

@@ -1,7 +1,5 @@
 import test from 'tape';
 import { newModule as newModuleState } from '../../../utils/reducer-fixtures';
-// import { newModuleError as error } from '../actions/action-fixtures';
-import { trophies } from '../../../utils/data-fixtures';
 import reducer from '../../../../src/js/reducers/new-module';
 import deepFreeze from '../../../utils/deepFreeze';
 
@@ -18,12 +16,7 @@ test('UPDATE_MEDAL_VALUES works when bronze upper bound changes', (t) => {
         value: 26
     };
 
-    const expected = {
-        module_id: undefined,
-        name: undefined,
-        medals: [27, 69],
-        trophies
-    };
+    const expected = Object.assign({}, newModuleState, { medals: [27, 69] });
 
     const result = reducer(initialState, action);
     t.deepEqual(result, expected);
@@ -41,12 +34,7 @@ test('UPDATE_MEDAL_VALUES works when gold lower bound changes', (t) => {
         value: 80
     };
 
-    const expected = {
-        module_id: undefined,
-        name: undefined,
-        medals: [39, 79],
-        trophies
-    };
+    const expected = Object.assign({}, newModuleState, { medals: [39, 79] });
 
     const result = reducer(initialState, action);
     t.deepEqual(result, expected);
@@ -64,12 +52,7 @@ test('UPDATE_MEDAL_VALUES handles the empty string', (t) => {
         value: ""
     };
 
-    const expected = {
-        module_id: undefined,
-        name: undefined,
-        medals: [39, '-'],
-        trophies
-    };
+    const expected = Object.assign({}, newModuleState, { medals: [39, '-'] });
 
     const result = reducer(initialState, action);
     t.deepEqual(result, expected);
