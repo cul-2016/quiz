@@ -10,3 +10,10 @@ export const newModule = {
     medals: [39, 69],
     trophies: undefined
 };
+
+export const signup = {
+    email: "",
+    password: "",
+    isFetchingSignup: false,
+    error: undefined
+};
