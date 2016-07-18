@@ -1,10 +1,17 @@
 import React, { PropTypes } from 'react';
-import { Link } from 'react-router';
+import classnames from 'classnames';
 
-const Login = ({ signup, handleEmailChange, handlePasswordChange }) => {
+
+const Login = ({ signup, handleEmailChange, handlePasswordChange, handleAuthenticateUser }) => {
+
+    let userValidation = classnames({
+        "display-none": signup.userIsAuthenticated !== false
+    });
+
     return (
         <div>
             This is the login page.
+            <p className={ userValidation }> Please enter a valid email and password</p>
             <input
                 value={ signup.username }
                 onChange={ (e) => handleEmailChange(e.target.value)}
@@ -18,9 +25,11 @@ const Login = ({ signup, handleEmailChange, handlePasswordChange }) => {
                 placeholder="Password"
             />
 
-            <Link to='auth'>
-                <h3>Login</h3>
-            </Link>
+
+        <h3 onClick={ () => handleAuthenticateUser(signup.email, signup.password) }>
+            Login
+        </h3>
+
         </div>
     );
 };
@@ -29,6 +38,7 @@ Login.propTypes = {
     signup: PropTypes.object.isRequired,
     handleEmailChange: PropTypes.func.isRequired,
     handlePasswordChange: PropTypes.func.isRequired,
+    handleAuthenticateUser: PropTypes.func.isRequired
 };
 
 export default Login;

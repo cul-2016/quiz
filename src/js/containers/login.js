@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Login from '../components/login';
-import { updateEmail, updatePassword } from '../actions/signup';
+import { updateEmail, updatePassword, authenticateUser } from '../actions/signup';
 
 const mapStateToProps = (state) => ({
     signup: state.signup
@@ -13,6 +13,9 @@ const mapDispatchToProps = (dispatch) => ({
     },
     handlePasswordChange: (value) => {
         dispatch(updatePassword(value));
+    },
+    handleAuthenticateUser: (email, password) => {
+        dispatch(authenticateUser(email, password));
     }
 });
 

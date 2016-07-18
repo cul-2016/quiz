@@ -14,10 +14,9 @@ function getUser (client, email, callback) {
     query(client, userQuery, userValue, (error, response) => {
 
         if (error) {
-            console.error(error);
-            callback(error);
+            return callback(error);
         }
-        callback(null, response.rows);
+        return callback(null, response.rows);
     });
 }
 

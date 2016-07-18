@@ -1,7 +1,63 @@
 import test from 'tape';
-// import createThunk from '../../utils/mockThunk';
+import createThunk from '../../utils/mockThunk';
 import * as actions from '../../../src/js/actions/signup';
 import deepFreeze from '../../utils/deepFreeze';
+import { authenticateUserError as error } from './action-fixtures';
+
+
+test('authenticateUser async action creator returns expected action', (t) => {
+
+    t.plan(1);
+
+    let actual;
+    const { dispatch, queue } = createThunk();
+    dispatch(actions.authenticateUser());
+
+    [{ ...actual }] = queue;
+
+    const expected = {
+        type: actions.AUTHENTICATE_USER_REQUEST,
+    };
+    t.deepEqual(actual, expected);
+});
+
+test('authenticateUserRequest creates the correct action', (t) => {
+
+    t.plan(1);
+
+    const expected = {
+        type: actions.AUTHENTICATE_USER_REQUEST,
+    };
+
+    const actual2 = deepFreeze(actions.authenticateUserRequest());
+    t.deepEqual(actual2, expected);
+});
+
+test('authenticateUserSuccess creates the correct action', (t) => {
+
+    t.plan(1);
+    const data = true;
+    const expected = {
+        type: actions.AUTHENTICATE_USER_SUCCESS,
+        data
+    };
+
+    const actual2 = deepFreeze(actions.authenticateUserSuccess(data));
+    t.deepEqual(actual2, expected);
+});
+
+test('authenticateUserFailure creates the correct action', (t) => {
+
+    t.plan(1);
+
+    const expected = {
+        type: actions.AUTHENTICATE_USER_FAILURE,
+        error
+    };
+    const actual = deepFreeze(actions.authenticateUserFailure(error));
+    t.deepEqual(actual, expected);
+});
+
 
 test('updateEmail creates the correct action', (t) => {
 

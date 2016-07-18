@@ -1,7 +1,7 @@
 import jsdom from 'jsdom';
 
 const options = {
-    cookie: "quiz_id=1; path=/",
+    cookie: "user_id=1; path=/",
     url: 'http://localhost' // needed for React TestUtils renderIntoDocument
 };
 const doc = jsdom.jsdom('<!doctype html><html><body></body></html>', options);

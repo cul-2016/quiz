@@ -14,6 +14,23 @@ export const newModule = {
 export const signup = {
     email: "",
     password: "",
-    isFetchingSignup: false,
+    isAuthenticating: false,
+    userIsAuthenticated: undefined,
     error: undefined
+};
+
+export const user = {
+    user_id: undefined,
+    email: undefined,
+    username: undefined,
+    is_lecturer: undefined,
+    isFetchingUser: false,
+    error: undefined
+};
+
+export const userDetails = {
+    user_id: 1,
+    email: 'test@test.com',
+    username: 'test',
+    is_lecturer: true
 };
