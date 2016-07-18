@@ -36,3 +36,7 @@ When creating a client for the tests, we have to provide options to the `pg`.Poo
     - to connect heroku db to pgAdmin
         - go to file > Add Server.
         - then follow this link - http://stackoverflow.com/questions/11769860/connect-to-a-heroku-database-with-pgadmin
+
+#### HAPI
+
+reply.state('cookie_name', cookie, { path: "/" }) **cookie** needs to be set to string, it cannot be a string.
