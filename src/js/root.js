@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { Router, Route, IndexRoute, hashHistory, Link } from 'react-router';
 import { Provider } from 'react-redux';
 import App from './components/app';
-import Login from './components/login';
+import LoginContainer from './containers/login';
 import LecturerDashboardContainer from './containers/lecturer-dashboard';
 import StudentDashboardContainer from './containers/student-dashboard';
 import NewModuleContainer from './containers/new-module';
@@ -31,7 +31,7 @@ const Root = ({ store }) => (
     <Provider store={ store }>
         <Router history={ hashHistory }>
             <Route path="/" component={ App }>
-                <IndexRoute component={ Login } />
+                <IndexRoute component={ LoginContainer } />
                 <Route onEnter={ authenticate } path="auth" component={ Authd } />
                 <Route onEnter={ composeHooks(authenticate, fetchModules) }  path="dashboard-lecturer" component={ LecturerDashboardContainer } />
                 <Route onEnter={ authenticate } path="dashboard-student" component={ StudentDashboardContainer } />
