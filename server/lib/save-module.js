@@ -9,12 +9,24 @@ function saveModule (pool, module_id, user_id, name, medals, trophies, callback)
     ];
     var moduleArray = [
         [module_id, user_id, name],
-        [module_id, medals.medal_name[0], medals.condition[0], medals.medal_name[1], medals.condition[1], medals.medal_name[2], medals.condition[2]],
-        [module_id, trophies.trophy_name[0], trophies.condition[0], trophies.trophy_name[1], trophies.condition[1], trophies.trophy_name[2], trophies.condition[2], trophies.trophy_name[3], trophies.condition[3]]
+        [
+            module_id,
+            medals.medal_name[0], medals.condition[0],
+            medals.medal_name[1], medals.condition[1],
+            medals.medal_name[2], medals.condition[2]],
+        [
+            module_id,
+            trophies.trophy_name[0], trophies.condition[0],
+            trophies.trophy_name[1], trophies.condition[1],
+            trophies.trophy_name[2], trophies.condition[2],
+            trophies.trophy_name[3], trophies.condition[3]
+        ]
     ];
 
 
     var index = 0;
+    query(pool, moduleQuery[index], moduleArray[index], report);
+
     function report (error, result) {
         index++;
         if (error) {
@@ -26,8 +38,6 @@ function saveModule (pool, module_id, user_id, name, medals, trophies, callback)
             query(pool, moduleQuery[index], moduleArray[index], report);
         }
     }
-
-    query(pool, moduleQuery[index], moduleArray[index], report);
-
 }
+
 module.exports = saveModule;

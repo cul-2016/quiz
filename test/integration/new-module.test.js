@@ -6,7 +6,15 @@ import NewModule from '../../src/js/components/new-module';
 import { updateMedalValues } from '../../src/js/actions/new-module';
 import { store } from '../../src/js/store';
 
-function updateValues (medal, value) {
+function updateTrophyVals (medal, value) {
+
+    if (value !== "") {
+        value = parseInt(value, 10);
+    }
+    store.dispatch(updateMedalValues(medal, value));
+}
+
+function updateMedalVals (medal, value) {
 
     if (value !== "") {
         value = parseInt(value, 10);
@@ -18,7 +26,11 @@ test('When lecturer adjusts bronze medal threshold, medal ranges update correctl
 
     t.plan(1);
 
-    const page = renderIntoDocument(<div><NewModule medals={ store.getState().newModule.medals } updateValues={ updateValues } /></div> );
+    const page = renderIntoDocument(<div><NewModule medals={ store.getState().newModule.medals }
+                                                    updateTrophyVals={ updateTrophyVals }
+                                                    updateMedalVals={ updateMedalVals }
+                                                    trophies={ store.getState().newModule.trophies } /></div> );
+                                                    
     const bronzeInput = ReactDOM.findDOMNode(page).querySelector('input[name="bronze"]');
     bronzeInput.value = 40;
     Simulate.change(bronzeInput);
@@ -32,7 +44,11 @@ test('When lecturer adjusts gold medal threshold, medal ranges update correctly'
 
     t.plan(1);
 
-    const page = renderIntoDocument(<div><NewModule medals={ store.getState().newModule.medals } updateValues={ updateValues } /></div> );
+    const page = renderIntoDocument(<div><NewModule medals={ store.getState().newModule.medals }
+                                                    updateTrophyVals={ updateTrophyVals }
+                                                    updateMedalVals={ updateMedalVals }
+                                                    trophies={ store.getState().newModule.trophies } /></div> );
+
     const goldInput = ReactDOM.findDOMNode(page).querySelector('input[name="gold"]');
     goldInput.value = 77;
     Simulate.change(goldInput);

@@ -15,7 +15,7 @@ testClient.connect((error, client, done) => {
     if (error) {
         if (error.code === 'ECONNREFUSED') {
             console.error("To run tests, you must be running a local instance of postgres!");
-            process.exit;
+            process.exit(1);
         }
     }
     var schema = fs.readFileSync(__dirname + '/test-schema.txt', 'utf8');

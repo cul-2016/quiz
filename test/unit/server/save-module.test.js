@@ -3,10 +3,11 @@ import { testClient } from '../../utils/init';
 import saveModule from '../../../server/lib/save-module';
 import { medals, trophies } from '../../utils/data-fixtures';
 
+
 test('adding a module to the database works ok', (t) => {
 
     t.plan(2);
-    const expectedError = null; // testing if the error is null so that the client has saved user correctly.
+    const expectedError = null;
     const expectedCommand = 'INSERT';
     const module_id = "MOD1";
     const user_id = 1;
@@ -19,11 +20,10 @@ test('adding a module to the database works ok', (t) => {
     });
 });
 
-
 test('deleting lecturer from the database', (t) => {
 
     testClient.connect((error, client, done) => {
-        
+
         if (error) {
             console.error(error, 'error from deleting module from the database');
         }
