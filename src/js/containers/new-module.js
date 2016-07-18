@@ -5,7 +5,8 @@ import NewModule from '../components/new-module';
 
 const mapStateToProps = (state) => ({
     medals: state.newModule.medals,
-    trophies: state.newModule.trophies
+    trophies: state.newModule.trophies,
+    moduleIDExists: state.newModule.moduleIDExists
 });
 
 const mapDispatchToProps = (dispatch) => ({
