@@ -10,7 +10,6 @@ module.exports = {
         var password = request.payload.password;
 
         getUser(client, email, (error, userDetails) => {
-
             if (error) {
                 reply(error);
             } else if (userDetails.length !== 1) {
@@ -18,7 +17,6 @@ module.exports = {
             } else {
                 var hashedPassword = userDetails[0].password;
                 validatePassword(password, hashedPassword, (error, response) => {
-
                     if (error) {
                         reply(error);
                     }
@@ -28,7 +26,8 @@ module.exports = {
                     else {
                         delete userDetails[0].password;
                         reply(userDetails[0])
-                            .state('user_id', userDetails[0].user_id.toString(), { path: "/" });
+                            .state('user_id', userDetails[0].user_id.toString(), { path: "/" })
+                            .state('cul-email', userDetails[0].email, { path: "/" });
                         //TODO: need to figure out what information should be sent back to save in the state and cookies.
                     }
                 });

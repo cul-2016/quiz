@@ -12,7 +12,11 @@ const options = {
         colors: true
     },
     proxy: {
-        "*": "http://localhost:9000"
+        "*": {
+            target: "http://localhost:9000",
+            secure: false,
+            changeOrigin: true
+        }
     }
 };
 
