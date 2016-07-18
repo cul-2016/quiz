@@ -28,7 +28,7 @@ export const trophies = {
     trophy_name: [
         "participation",
         "overall_average",
-        "full_marks",
+        "high_score",
         "first_quiz"
     ],
     condition: [3, 60, 100, 1]

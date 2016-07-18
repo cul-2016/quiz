@@ -1,20 +1,25 @@
 import { connect } from 'react-redux';
-import { updateMedalValues } from '../actions/new-module';
+import { updateMedalValues, updateTrophyValues } from '../actions/new-module';
 import NewModule from '../components/new-module';
 
 
 const mapStateToProps = (state) => ({
-    medals: state.newModule.medals
+    medals: state.newModule.medals,
+    trophies: state.newModule.trophies
 });
 
 const mapDispatchToProps = (dispatch) => ({
 
-    updateValues: (medal, value) => {
-        
+    updateMedalVals: (medal, value) => {
+
         if (value !== "") {
             value = parseInt(value, 10);
         }
         dispatch(updateMedalValues(medal, value));
+    },
+    updateTrophyVals: (trophy, value) => {
+        console.log("dispatch updateTrophyValues", trophy, value);
+        dispatch(updateTrophyValues(trophy, value));
     }
 });
 

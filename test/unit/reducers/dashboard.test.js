@@ -1,6 +1,6 @@
 import test from 'tape';
-import { dashboard as dashboardState } from './reducer-fixtures';
-import { dashboardError as error } from '../actions/action-fixtures';
+import { dashboard as dashboardState } from '../../utils/reducer-fixtures';
+import { dashboardError as error } from '../../utils/action-fixtures';
 import { dashboardData as data } from '../../utils/data-fixtures';
 import reducer from '../../../src/js/reducers/dashboard';
 import deepFreeze from '../../utils/deepFreeze';
