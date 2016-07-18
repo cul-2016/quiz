@@ -1,5 +1,5 @@
 import test from 'tape';
-import getModules from '../../../server/lib/get-modules';
+import getModules from '../../../server/lib/getModules';
 import { testClient } from '../../utils/init';
 
 test('getting modules from database for a given lecturer using user_id', (t) => {

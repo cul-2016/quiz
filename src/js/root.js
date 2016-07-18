@@ -3,8 +3,9 @@ import { Router, Route, IndexRoute, hashHistory, Link } from 'react-router';
 import { Provider } from 'react-redux';
 import App from './components/app';
 import Login from './components/login';
-import LecturerDashboardContainer from './containers/lecturer-dashboard-container';
-import StudentDashboardContainer from './containers/student-dashboard-container';
+import LecturerDashboardContainer from './containers/lecturer-dashboard';
+import StudentDashboardContainer from './containers/student-dashboard';
+import NewModuleContainer from './containers/new-module';
 
 import composeHooks from './lib/composeHooks';
 import fetchModules from './lib/fetchModules';
@@ -31,9 +32,10 @@ const Root = ({ store }) => (
         <Router history={ hashHistory }>
             <Route path="/" component={ App }>
                 <IndexRoute component={ Login } />
-                <Route onEnter={ authenticate }  path="auth" component={ Authd } />
+                <Route onEnter={ authenticate } path="auth" component={ Authd } />
                 <Route onEnter={ composeHooks(authenticate, fetchModules) }  path="dashboard-lecturer" component={ LecturerDashboardContainer } />
-                <Route onEnter={ authenticate }  path="dashboard-student" component={ StudentDashboardContainer } />
+                <Route onEnter={ authenticate } path="dashboard-student" component={ StudentDashboardContainer } />
+                <Route onEnter={ authenticate } path="new-module" component={ NewModuleContainer } />
             </Route>
         </Router>
     </Provider>
