@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 
 
-const NewModule = ({ medals, trophies, updateMedalVals, updateTrophyVals }) => {
+const NewModule = ({ medals, trophies, updateMedalVals, updateTrophyVals, validateID }) => {
 
     const doMaths = (originalValue, offset) => {
 
@@ -23,7 +23,7 @@ const NewModule = ({ medals, trophies, updateMedalVals, updateTrophyVals }) => {
             <h1>Add a new module</h1>
             <div>
                 <label>Code</label>
-                <input name="module_id" type="text" maxLength="4" />
+                <input name="module_id" type="text" maxLength="4" onChange={ (e) => validateID(e.target.value) } />
                 <label>Module name</label>
                 <input name="name" type="text" />
             </div>
@@ -51,7 +51,8 @@ NewModule.propTypes = {
     medals: PropTypes.array.isRequired,
     trophies: PropTypes.object.isRequired,
     updateMedalVals: PropTypes.func.isRequired,
-    updateTrophyVals: PropTypes.func.isRequired
+    updateTrophyVals: PropTypes.func.isRequired,
+    validateID: PropTypes.func.isRequired
 };
 
 export default NewModule;

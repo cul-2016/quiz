@@ -1,8 +1,8 @@
 var query = require('./query');
 
 /**
- * Represents a function that validates the module_id
- * returns true if the module already exists and false if it doesnt.
+ * Represents a function that validates the module_id.
+ * Returns true if the module_id exists and false if not.
  * @param {object} client - postgres database client
  * @param {string} module_id - module_id
  * @param {function} callback - a callback function
@@ -18,7 +18,7 @@ function validateModuleID (client, module_id, callback) {
             console.error(error);
             callback(error);
         }
-        callback(null, response.rows);
+        callback(null, response.rows[0].exists);
     });
 }
 

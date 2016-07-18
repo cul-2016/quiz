@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { updateMedalValues, updateTrophyValues } from '../actions/new-module';
+import { updateMedalValues, updateTrophyValues, validateModuleID } from '../actions/new-module';
 import NewModule from '../components/new-module';
 
 
@@ -18,8 +18,15 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(updateMedalValues(medal, value));
     },
     updateTrophyVals: (trophy, value) => {
-        console.log("dispatch updateTrophyValues", trophy, value);
+
         dispatch(updateTrophyValues(trophy, value));
+    },
+    validateID: (id) => {
+
+        if (id.length === 4) {
+
+            dispatch(validateModuleID(id));
+        }
     }
 });
 

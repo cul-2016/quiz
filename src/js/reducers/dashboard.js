@@ -1,5 +1,5 @@
 import update from 'react-addons-update';
-import * as actionsTypes from '../actions/dashboard';
+import * as actionTypes from '../actions/dashboard';
 
 
 const initialState = {
@@ -12,18 +12,18 @@ export default function dashboard (state = initialState, action) {
 
     switch (action.type) {
 
-    case actionsTypes.GET_DASHBOARD_REQUEST:
+    case actionTypes.GET_DASHBOARD_REQUEST:
         return update(state, {
             isFetchingDashboard: { $set: true }
         });
 
-    case actionsTypes.GET_DASHBOARD_SUCCESS:
+    case actionTypes.GET_DASHBOARD_SUCCESS:
         return update(state, {
             isFetchingDashboard: { $set: false },
             data: { $set: action.data }
         });
 
-    case actionsTypes.GET_DASHBOARD_FAILURE:
+    case actionTypes.GET_DASHBOARD_FAILURE:
         return update(state, {
             isFetchingDashboard: { $set: false },
             error: { $set: action.error }

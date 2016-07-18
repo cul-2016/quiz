@@ -2,28 +2,33 @@ import test from 'tape';
 import validateModuleID from '../../../server/lib/validateModuleID';
 import { testClient } from '../../utils/init';
 
-test('validating module_id with pre-existing module_id', (t) => {
 
-    const expectedRows = [{ exists: true }];
-    t.plan(1);
+test('validateModuleID returns true for a pre-existing module_id', (t) => {
+
+    t.plan(2);
+
+    const expected = true;
     validateModuleID(testClient, 'TEST', (error, response) => {
 
         if (error) {
             console.error(error);
         }
-        t.deepEquals(response, expectedRows, 'database returns true as the module_id already exists');
+        t.ok(typeof response === 'boolean', 'validateModuleID returns a boolean');
+        t.deepEqual(response, expected, 'database returns true');
     });
 });
 
-test('validating module_id with dummy module_id', (t) => {
+test('validateModuleID returns false for a pre-existing module_id', (t) => {
 
-    const expectedRows = [{ exists: false }];
-    t.plan(1);
+    t.plan(2);
+
+    const expected = false;
     validateModuleID(testClient, 'NEW1', (error, response) => {
 
         if (error) {
             console.error(error);
         }
-        t.deepEquals(response, expectedRows, 'database returns false as the module_id doesnt exists');
+        t.ok(typeof response === 'boolean', 'validateModuleID returns a boolean');
+        t.deepEqual(response, expected, 'database returns false');
     });
 });

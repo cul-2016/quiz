@@ -10,5 +10,8 @@ export const newModule = {
     module_id: undefined,
     name: undefined,
     medals: [39, 69],
-    trophies
+    trophies,
+    error: undefined,
+    isValidatingModuleID: false,
+    moduleIDExists: undefined
 };
