@@ -33,3 +33,11 @@ export const trophies = {
     ],
     condition: [3, 60, 100, 1]
 };
+
+
+export const userDetails = {
+    user_id: 1,
+    email: 'test@test.com',
+    username: 'test',
+    is_lecturer: true
+};
