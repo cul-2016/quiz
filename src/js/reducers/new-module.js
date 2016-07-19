@@ -1,6 +1,7 @@
 import update from 'react-addons-update';
 import * as actionTypes from '../actions/new-module';
 
+
 const initialState = {
     module_id: undefined,
     name: undefined,
@@ -15,8 +16,10 @@ const initialState = {
         condition: [3, 60, 100, 1]
     },
     error: undefined,
+    moduleIDExists: undefined,
+    validationProblem: false,
     isValidatingModuleID: false,
-    moduleIDExists: undefined
+    isSavingModule: undefined
 };
 
 export default function newModule (state = initialState, action) {
@@ -30,7 +33,7 @@ export default function newModule (state = initialState, action) {
 
     case actionTypes.VALIDATE_MODULE_ID_SUCCESS:
     case actionTypes.VALIDATE_MODULE_ID_FAILURE:
-        return handleResponse(state, action);
+        return handleValidateModule(state, action);
 
     case actionTypes.UPDATE_MEDAL_VALUES:
         return updateMedalValues(state, action);
@@ -38,12 +41,24 @@ export default function newModule (state = initialState, action) {
     case actionTypes.UPDATE_TROPHY_VALUES:
         return updateTrophyValues(state, action);
 
+    case actionTypes.ADD_NEW_MODULE_REQUEST:
+        return update(state, {
+            isSavingModule: { $set: true }
+        });
+
+    case actionTypes.ADD_NEW_MODULE_SUCCESS:
+    case actionTypes.ADD_NEW_MODULE_FAILURE:
+        return update(state, {
+            isSavingModule: { $set: false },
+            error: { $set: action.error }
+        });
+
     default:
         return state;
     }
 }
 
-function handleResponse (state, action) {
+function handleValidateModule (state, action) {
 
     return update(state, {
         isValidatingModuleID: { $set: false },

@@ -14,7 +14,6 @@ test('GET_DASHBOARD_REQUEST works', (t) => {
 
     const action = {
         type: 'GET_DASHBOARD_REQUEST',
-        isFetchingDashboard: true
     };
     const expected = {
         isFetchingDashboard: true,
@@ -34,7 +33,6 @@ test('GET_DASHBOARD_SUCCESS works', (t) => {
 
     const action = {
         type: 'GET_DASHBOARD_SUCCESS',
-        isFetchingDashboard: false,
         data
     };
     const expected = {
@@ -55,7 +53,6 @@ test('GET_DASHBOARD_FAILURE works', (t) => {
 
     const action = {
         type: 'GET_DASHBOARD_FAILURE',
-        isFetchingDashboard: false,
         error
     };
     const expected = {

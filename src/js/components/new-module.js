@@ -9,8 +9,13 @@ class NewModule extends React.Component {
         super(props);
 
         this.handleCodeInput = this.handleCodeInput.bind(this);
-    }
 
+        if (this.refs.module_id) {
+            this.state = {
+                codeLength: this.refs.module_id.value.length
+            };
+        }
+    }
 
     doMaths (originalValue, offset) {
 
@@ -30,29 +35,16 @@ class NewModule extends React.Component {
         });
     }
 
-    showCodeValidationIcon () {
-
-        let node = this.refs.module_id;
-
-        if (node) {
-            if (node.value.length >= 4) {
-
-                return this.props.moduleIDExists ? <i className="fa fa-times" /> : <i className="fa fa-check" />;
-            } else {
-                console.log("got nothing");
-                return <i />;
-            }
-        }
-    }
-
     handleCodeInput (value) {
 
         this.props.validateID(value);
-        this.showCodeValidationIcon();
+        this.setState({
+            codeLength: value.length
+        });
     }
 
     render () {
-
+        console.log("rerendering??");
         const { medals, trophies, updateMedalVals, moduleIDExists } = this.props;
 
         return (
@@ -61,7 +53,7 @@ class NewModule extends React.Component {
                 <div>
                     <label>Code</label>
                     <input ref="module_id" name="module_id" type="text" maxLength="4" onChange={ (e) => this.handleCodeInput(e.target.value) } />
-                    <ValidationIcon node={ this.refs.module_id } moduleIDExists={ moduleIDExists } />
+                    <ValidationIcon codeLength={ undefined } moduleIDExists={ moduleIDExists } />
                     <label>Module name</label>
                     <input name="name" type="text" />
                 </div>
@@ -81,6 +73,9 @@ class NewModule extends React.Component {
                     <h3>Trophies</h3>
                     { this.getTrophyComponent(trophies) }
                 </div>
+                <button onClick={ this.props.validateFormEntries }>
+                    Create module
+                </button>
             </div>
         );
     }
@@ -92,7 +87,8 @@ NewModule.propTypes = {
     updateMedalVals: PropTypes.func.isRequired,
     updateTrophyVals: PropTypes.func.isRequired,
     validateID: PropTypes.func.isRequired,
-    moduleIDExists: PropTypes.bool
+    moduleIDExists: PropTypes.bool,
+    validateFormEntries: PropTypes.func.isRequired
 };
 
 export default NewModule;
