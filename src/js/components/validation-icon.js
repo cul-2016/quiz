@@ -3,9 +3,6 @@ import React, { PropTypes } from 'react';
 
 class ValidationIcon extends React.Component {
 
-    constructor (props) {
-        super(props);
-    }
 
     render () {
 

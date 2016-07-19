@@ -13,5 +13,6 @@ export const newModule = {
     trophies,
     error: undefined,
     isValidatingModuleID: false,
-    moduleIDExists: undefined
+    moduleIDExists: undefined,
+    isSavingModule: undefined
 };
