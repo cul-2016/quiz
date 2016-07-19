@@ -6,6 +6,7 @@ import LoginContainer from './containers/login';
 import LecturerDashboardContainer from './containers/lecturer-dashboard';
 import StudentDashboardContainer from './containers/student-dashboard';
 import NewModuleContainer from './containers/new-module';
+import RegisterUserContainer from './containers/register-user';
 import Spinner from './components/spinner';
 
 import composeHooks from './lib/composeHooks';
@@ -25,7 +26,9 @@ const Root = ({ store }) => (
         <Router history={ hashHistory }>
             <Route path="/" component={ App }>
                 <IndexRoute onEnter={ userHasSignedIn } component={ LoginContainer } />
-            <Route onEnter={ composeHooks(authenticate, fetchUserDetails) } path="auth" component={ Spinner } />
+                <Route onEnter={ composeHooks(authenticate, fetchUserDetails) } path="auth" component={ Spinner } />
+            <Route path="/register-student" component={ RegisterUserContainer } />
+        <Route path="/register-lecturer1000" component={ RegisterUserContainer } />
                 <Route onEnter={ composeHooks(authenticate, fetchModules) }  path="dashboard-lecturer" component={ LecturerDashboardContainer } />
                 <Route onEnter={ authenticate } path="dashboard-student" component={ StudentDashboardContainer } />
                 <Route onEnter={ authenticate } path="new-module" component={ NewModuleContainer } />
