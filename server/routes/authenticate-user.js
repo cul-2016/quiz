@@ -26,8 +26,7 @@ module.exports = {
                     else {
                         delete userDetails[0].password;
                         reply(userDetails[0])
-                            .state('user_id', userDetails[0].user_id.toString(), { path: "/" })
-                            .state('cul-email', userDetails[0].email, { path: "/" });
+                            .state('cul_id', userDetails[0].user_id.toString(), { path: "/" });
                         //TODO: need to figure out what information should be sent back to save in the state and cookies.
                     }
                 });

@@ -14,7 +14,19 @@ export default function (state = initialState, action ) {
     switch (action.type) {
 
     case actionsTypes.SET_USER_DETAILS:
+    case actionsTypes.GET_USER_DETAILS_SUCCESS:
         return setUserDetails(state, action);
+
+    case actionsTypes.GET_USER_DETAILS_REQUEST:
+        return update(state, {
+            isFetchingUser: { $set: true }
+        });
+
+    case actionsTypes.GET_USER_DETAILS_FAILURE:
+        return update(state, {
+            isFetchingUser: { $set: false },
+            error: { $set: action.error }
+        });
 
     default:
         return state;
