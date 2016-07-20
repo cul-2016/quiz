@@ -2,7 +2,7 @@ import test from 'tape';
 import createThunk from '../../utils/mockThunk';
 import * as actions from '../../../src/js/actions/register';
 import deepFreeze from '../../utils/deepFreeze';
-import { registeringUserError as error } from './action-fixtures';
+import { registeringUserError as error } from '../../utils/action-fixtures';
 
 test('updateInputField action creator returns expected action', (t) => {
 
