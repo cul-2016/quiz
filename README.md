@@ -40,3 +40,9 @@ When creating a client for the tests, we have to provide options to the `pg`.Poo
 #### HAPI
 
 reply.state('cookie_name', cookie, { path: "/" }) **cookie** needs to be set to string, it cannot be a string.
+
+#### CHECK COVERAGE file
+    changed script to `check-coverage": "babel-node ./node_modules/babel-istanbul/lib/cli.js check-coverage"`
+    - dont need the tape and test file paths as the script for coverage will do so.
+
+    Also changed the istanbul.yml file to cover both root folders as follows `root: [ ./src, ./server ]`

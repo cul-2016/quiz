@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import classnames from 'classnames';
 
 const RegisterUser = ({ register, handleChange, handleRegisteringUser, location }) => {
 
@@ -8,9 +9,16 @@ const RegisterUser = ({ register, handleChange, handleRegisteringUser, location 
     } else {
         is_lecturer = true;
     }
+
+    let userExists = classnames({
+        "display-none": register.userExists !== true
+    });
+
+
     return (
         <div>
             Register page.
+            <p className={ userExists }> The email already exists please sign in</p>
             <input
                 value={ register.email }
                 onChange={ (e) => handleChange("email", e.target.value) }
