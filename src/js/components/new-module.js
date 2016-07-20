@@ -8,8 +8,6 @@ class NewModule extends React.Component {
 
         super(props);
 
-        this.handleCodeInput = this.handleCodeInput.bind(this);
-
         if (this.refs.module_id) {
             this.state = {
                 codeLength: this.refs.module_id.value.length
@@ -35,16 +33,8 @@ class NewModule extends React.Component {
         });
     }
 
-    handleCodeInput (value) {
-
-        this.props.validateID(value);
-        this.setState({
-            codeLength: value.length
-        });
-    }
-
     render () {
-        console.log("rerendering??");
+
         const { medals, trophies, updateMedalVals, moduleIDExists } = this.props;
 
         return (
@@ -52,10 +42,10 @@ class NewModule extends React.Component {
                 <h1>Add a new module</h1>
                 <div>
                     <label>Code</label>
-                    <input ref="module_id" name="module_id" type="text" maxLength="4" onChange={ (e) => this.handleCodeInput(e.target.value) } />
+                    <input ref="module_id" name="module_id" type="text" maxLength="4" onChange={ (e) => this.props.handleInputChange('module_id', e.target.value) } />
                     <ValidationIcon codeLength={ undefined } moduleIDExists={ moduleIDExists } />
                     <label>Module name</label>
-                    <input name="name" type="text" />
+                    <input name="name" type="text" onChange={ (e) => this.props.handleInputChange('name', e.target.value) } />
                 </div>
                 <br />
                 <div>
@@ -73,8 +63,8 @@ class NewModule extends React.Component {
                     <h3>Trophies</h3>
                     { this.getTrophyComponent(trophies) }
                 </div>
-                <button onClick={ this.props.validateFormEntries }>
-                    Create module
+                <button onClick={ this.props.submit }>
+                    Save module
                 </button>
             </div>
         );
@@ -84,11 +74,12 @@ class NewModule extends React.Component {
 NewModule.propTypes = {
     medals: PropTypes.array.isRequired,
     trophies: PropTypes.object.isRequired,
+    handleInputChange: PropTypes.func.isRequired,
     updateMedalVals: PropTypes.func.isRequired,
     updateTrophyVals: PropTypes.func.isRequired,
-    validateID: PropTypes.func.isRequired,
+    validateID: PropTypes.func,
     moduleIDExists: PropTypes.bool,
-    validateFormEntries: PropTypes.func.isRequired
+    submit: PropTypes.func.isRequired
 };
 
 export default NewModule;

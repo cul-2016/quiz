@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { updateMedalValues, updateTrophyValues, validateModuleID, addNewModule } from '../actions/new-module';
+import { updateMedalValues, updateTrophyValues, updateTextValues, validateModuleID, addNewModule } from '../actions/new-module';
 import NewModule from '../components/new-module';
 import { store } from '../store';
 
@@ -11,6 +11,12 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+
+    handleInputChange: (inputKey, value) => {
+
+        // dispatch
+        dispatch(updateTextValues(inputKey, value));
+    },
 
     updateMedalVals: (medal, value) => {
 
@@ -30,11 +36,24 @@ const mapDispatchToProps = (dispatch) => ({
             dispatch(validateModuleID(id));
         }
     },
-    validateFormEntries: () => {
+    submit: () => {
 
+        // data validation should happen here
         if (!store.getState().newModule.validationProblem) {
-            let data = Object.assign({}, store.getState().newModule);
-            delete data.validationProblem;
+
+            let currentState = store.getState().newModule;
+            let data = Object.assign(
+                {},
+                { module_id: currentState.module_id },
+                { name: currentState.name },
+                { trophies: currentState.trophies },
+                {
+                    medals: {
+                        medal_name: ["bronze", "silver", "gold"],
+                        condition: currentState.medals
+                    }
+                }
+            );
             dispatch(addNewModule(data));
         }
     }
