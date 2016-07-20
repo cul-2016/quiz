@@ -9,11 +9,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
 
     handleChange: (inputType, value) => {
-        console.log(inputType, value);
         dispatch(updateInputField(inputType, value));
     },
     handleRegisteringUser: (email, username, password, is_lecturer) => {
-        console.log(email, username, password);
         dispatch(registeringUser(email, username, password, is_lecturer));
     }
 
