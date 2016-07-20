@@ -33,7 +33,7 @@ function saveModule (pool, module_id, user_id, name, medals, trophies, callback)
     function report (error, result) {
         index++;
         if (error) {
-            console.error(">>>>", error);
+            console.error(error);
             return callback(error);
         }
         if (moduleArray.length === index) {
