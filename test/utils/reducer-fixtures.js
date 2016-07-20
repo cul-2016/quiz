@@ -41,3 +41,13 @@ export const userDetails = {
     username: 'test',
     is_lecturer: true
 };
+
+export const register = {
+    email: "",
+    username: "",
+    password: "",
+    isRegistering: false,
+    error: undefined,
+    userIsRegistered: undefined,
+    userExists: false
+};
