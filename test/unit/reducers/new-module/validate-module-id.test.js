@@ -1,6 +1,5 @@
 import test from 'tape';
 import { newModule as newModuleState } from '../../../utils/reducer-fixtures';
-// import { newModuleError as error } from '../actions/action-fixtures';
 import { trophies } from '../../../utils/data-fixtures';
 import reducer from '../../../../src/js/reducers/new-module';
 import deepFreeze from '../../../utils/deepFreeze';
