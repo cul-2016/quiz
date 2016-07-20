@@ -35,6 +35,11 @@ export default function newModule (state = initialState, action) {
     case actionTypes.VALIDATE_MODULE_ID_FAILURE:
         return handleValidateModule(state, action);
 
+    case actionTypes.UPDATE_TEXT_VALUES:
+        return update(state, {
+            [action.inputKey]: { $set: action.value }
+        });
+
     case actionTypes.UPDATE_MEDAL_VALUES:
         return updateMedalValues(state, action);
 

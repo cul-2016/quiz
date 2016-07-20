@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { renderIntoDocument, Simulate } from 'react-addons-test-utils';
 import NewModule from '../../src/js/components/new-module';
-import { updateMedalValues } from '../../src/js/actions/new-module';
+import { updateMedalValues, updateTextValues, addNewModule } from '../../src/js/actions/new-module';
 import { store } from '../../src/js/store';
 
 function updateTrophyVals (medal, value) {
@@ -22,15 +22,41 @@ function updateMedalVals (medal, value) {
     store.dispatch(updateMedalValues(medal, value));
 }
 
+function handleInputChange (inputKey, value) {
+    store.dispatch(updateTextValues(inputKey, value));
+}
+
+function submit () {
+
+    // data validation should happen here
+
+    let currentState = store.getState().newModule;
+    let data = Object.assign(
+        {},
+        { module_id: currentState.module_id },
+        { name: currentState.name },
+        { trophies: currentState.trophies },
+        {
+            medals: {
+                medal_name: ["bronze", "silver", "gold"],
+                condition: currentState.medals
+            }
+        }
+    );
+    store.dispatch(addNewModule(data));
+}
+
 test('When lecturer adjusts bronze medal threshold, medal ranges update correctly', (t) => {
 
     t.plan(1);
 
     const page = renderIntoDocument(<div><NewModule medals={ store.getState().newModule.medals }
+                                                    submit={ submit }
+                                                    handleInputChange={ handleInputChange }
                                                     updateTrophyVals={ updateTrophyVals }
                                                     updateMedalVals={ updateMedalVals }
                                                     trophies={ store.getState().newModule.trophies } /></div> );
-                                                    
+
     const bronzeInput = ReactDOM.findDOMNode(page).querySelector('input[name="bronze"]');
     bronzeInput.value = 40;
     Simulate.change(bronzeInput);

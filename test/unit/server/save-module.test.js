@@ -15,7 +15,7 @@ test('adding a module to the database works ok', (t) => {
 
     saveModule(testClient, module_id, user_id, name, medals, trophies, (error, response) => {
 
-        t.deepEqual(error, expectedError, 'error is null, module is saved to db correctly.');
+        t.equal(error, expectedError, 'error is null, module is saved to db correctly.');
         t.deepEqual(response.command, expectedCommand, 'Correct command of INSERT, module is saved to db correctly');
     });
 });

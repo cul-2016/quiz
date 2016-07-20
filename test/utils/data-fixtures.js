@@ -10,8 +10,8 @@ export const users = [
 
 export const dashboardData = [
     {
-        module_id: 'TEST',
-        name: 'test module'
+        module_id: 'CS50',
+        name: 'Intro to Computer Science'
     }
 ];
 
@@ -21,7 +21,7 @@ export const medals = {
         "silver",
         "gold"
     ],
-    condition: [39, 69, 100]
+    condition: [39, 69]
 };
 
 export const trophies = {
@@ -34,6 +34,7 @@ export const trophies = {
     condition: [3, 60, 100, 1]
 };
 
+export const newModule = Object.assign({}, dashboardData[0], { medals }, { trophies });
 
 export const userDetails = {
     user_id: 1,
