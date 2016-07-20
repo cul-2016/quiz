@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import ValidationIcon from './validation-icon';
+import ValidationIcon from './general/validation-icon';
 
 
 class NewModule extends React.Component {
