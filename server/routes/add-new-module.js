@@ -8,7 +8,7 @@ module.exports = {
 
         var user_id = request.query.user_id;
         var data = request.payload;
-        console.log("payload", data);
+        
         saveModule(client, data.module_id, user_id, data.name, data.medals, data.trophies, (error, result) => {
 
             var verdict = error || result;

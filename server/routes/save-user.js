@@ -29,7 +29,6 @@ module.exports = {
                             delete userDetails[0].password;
                             return reply(userDetails[0])
                             .state('cul_id', userDetails[0].user_id.toString(), { path: "/" });
-                            //TODO: need to figure out what information should be sent back to save in the state and cookies.
                         });
                     });
                 });
