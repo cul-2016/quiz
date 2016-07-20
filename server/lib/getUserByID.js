@@ -1,15 +1,15 @@
 var query = require('./query');
 
 /**
- * Represents a function that returns user details
+ * Represents a function that returns user details by user_id
  * @param {object} client - postgres database client
- * @param {string} email - email for the given user
+ * @param {string} user_id - user_id for the given user
  * @param {function} callback - a callback function
  */
-function getUser (client, email, callback) {
+function getUserByID (client, user_id, callback) {
 
-    var userQuery = 'SELECT * FROM users WHERE email = $1;';
-    var userValue = [email];
+    var userQuery = 'SELECT * FROM users WHERE user_id = $1;';
+    var userValue = [user_id];
 
     query(client, userQuery, userValue, (error, response) => {
 
@@ -20,4 +20,4 @@ function getUser (client, email, callback) {
     });
 }
 
-module.exports = getUser;
+module.exports = getUserByID;

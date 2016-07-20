@@ -10,7 +10,7 @@
     "build": "webpack --config ./webpack.production.config.js --colors --progress",
     "lint": "node_modules/eslint/bin/eslint.js 'src/**/*.@(js|jsx)'",
     "coverage": "./node_modules/.bin/babel-node ./node_modules/babel-istanbul/lib/cli.js cover ./node_modules/tape/bin/tape --require ./test/utils/jsdom.js 'test/**/*.@(js|jsx)'",
-    "check-coverage": "babel-node ./node_modules/istanbul/lib/cli.js check-coverage tape --require ./test/utils/jsdom.js 'test/**/*.@(js|jsx)'",
+    "check-coverage": "babel-node ./node_modules/babel-istanbul/lib/cli.js check-coverage",
     "pretest": "node ./test/utils/init.js",
     "test": "tape -r babel-register --require ./test/utils/jsdom.js 'test/**/*.@(js|jsx)' | tap-spec",
     "postinstall": "webpack --config ./webpack.production.config.js --progress --colors",
