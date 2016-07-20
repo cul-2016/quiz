@@ -1,5 +1,5 @@
-var getModules = require('../lib/get-modules');
-var client = require('../lib/db-client');
+var getModules = require('../lib/getModules');
+var client = require('../lib/dbClient');
 
 module.exports = {
     method: 'GET',
@@ -7,7 +7,7 @@ module.exports = {
     handler: (request, reply) => {
 
         getModules(client, request.query.user_id, (error, modules) => {
-            
+
             var verdict = error || modules;
             reply(verdict);
         });

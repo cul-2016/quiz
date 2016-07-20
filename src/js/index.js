@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Root from './root';
 import { store } from './store';
+require('../scss/main.scss');
+require('../scss/font-awesome/main.scss');
 
 ReactDOM.render(
     <Root store={ store }/>,
