@@ -1,6 +1,6 @@
 import test from 'tape';
-import { register as registerState } from './reducer-fixtures';
-import { registeringUserError as error } from '../actions/action-fixtures';
+import { register as registerState } from '../../utils/reducer-fixtures';
+import { registeringUserError as error } from '../../utils/action-fixtures';
 import reducer from '../../../src/js/reducers/register';
 import deepFreeze from '../../utils/deepFreeze';
 
