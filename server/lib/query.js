@@ -14,14 +14,14 @@ function query (pool, queryText, queryArray, callback) {
 
     pool.connect((error, client, done) => {
         if (error) {
-            callback(error);
+            return callback(error);
         }
         client.query(queryText, queryArray, (error, result) => {
             done();
             if (error) {
-                callback(error);
+                return callback(error);
             } else {
-                callback(null, result);
+                return callback(null, result);
             }
         });
 

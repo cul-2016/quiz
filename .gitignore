@@ -39,7 +39,6 @@ dump.rdb
 # Webpack bundle
 bundle.js
 
-# Environment variables
-secret.md
-*.sh
-migrate.js
+credentials.md
+
+# Fonts

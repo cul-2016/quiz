@@ -13,7 +13,10 @@ const testClient = new Pool({ database: databaseName, idleTimeoutMillis: 2000 })
 testClient.connect((error, client, done) => {
     console.log('test client is connected');
     if (error) {
-        console.error(error);
+        if (error.code === 'ECONNREFUSED') {
+            console.error("To run tests, you must be running a local instance of postgres!");
+            process.exit(1);
+        }
     }
     var schema = fs.readFileSync(__dirname + '/test-schema.txt', 'utf8');
     client.query(schema, (error, result) => {
