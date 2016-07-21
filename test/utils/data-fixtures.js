@@ -42,3 +42,22 @@ export const userDetails = {
     username: 'test',
     is_lecturer: true
 };
+
+export const quizzes = [
+    {
+        quiz_id: 2,
+        name: 'Pop quiz',
+        numQuestions: 10,
+        numEntries: 121,
+        isPresented: false
+    },
+    {
+        quiz_id: 5,
+        name: 'Awesome quiz',
+        numQuestions: 18,
+        numEntries: 11,
+        isPresented: true
+    }
+];
+
+export const module = Object.assign({}, newModule, { quizzes });

@@ -13,7 +13,7 @@ export function getDashboard () {
 
         let userID = 1;
 
-        axios.get(`/get-modules?user_id=${userID}`)
+        axios.get(`/get-module-list?user_id=${userID}`)
             .then((response) => {
                 dispatch(getDashboardSuccess(response.data));
             })

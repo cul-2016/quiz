@@ -15,6 +15,7 @@ import fetchModules from './lib/fetchModules';
 import authenticate from './lib/authenticate';
 import userHasSignedIn from './lib/userHasSignedIn';
 import fetchUserDetails from './lib/fetchUserDetails';
+import fetchModuleDetails from './lib/fetchModuleDetails';
 
 import { store } from './store';
 
@@ -31,7 +32,7 @@ const Root = ({ store }) => (
                 <Route onEnter={ composeHooks(authenticate, fetchModules) }  path="dashboard-lecturer" component={ LecturerDashboardContainer } />
                 <Route onEnter={ authenticate } path="dashboard-student" component={ StudentDashboardContainer } />
                 <Route onEnter={ authenticate } path="new-module" component={ NewModuleContainer } />
-                <Route onEnter={ authenticate } path="module/:module_id" component={ ModuleContainer } />
+                <Route onEnter={ composeHooks(authenticate, fetchModuleDetails) } path="module/:module_id" component={ ModuleContainer } />
             </Route>
         </Router>
     </Provider>

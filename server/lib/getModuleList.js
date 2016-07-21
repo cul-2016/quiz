@@ -9,7 +9,7 @@ var query = require('./query');
  * @param {function} callback - a callback function
  */
 
-function getModules (client, user_id, callback) {
+function getModuleList (client, user_id, callback) {
 
     var moduleQuery = 'SELECT module_id, name FROM modules WHERE user_id = $1;';
     var moduleValue = [user_id];
@@ -24,4 +24,4 @@ function getModules (client, user_id, callback) {
     });
 }
 
-module.exports = getModules;
+module.exports = getModuleList;

@@ -51,3 +51,10 @@ export const register = {
     userIsRegistered: undefined,
     userExists: false
 };
+
+export const module = {
+    module: undefined,
+    quizzes: undefined,
+    isFetchingModule: false,
+    error: undefined
+};

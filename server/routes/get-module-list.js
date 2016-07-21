@@ -1,12 +1,12 @@
-var getModules = require('../lib/getModules');
+var getModuleList = require('../lib/getModuleList');
 var client = require('../lib/dbClient');
 
 module.exports = {
     method: 'GET',
-    path: '/get-modules',
+    path: '/get-module-list',
     handler: (request, reply) => {
 
-        getModules(client, request.query.user_id, (error, modules) => {
+        getModuleList(client, request.query.user_id, (error, modules) => {
 
             var verdict = error || modules;
             reply(verdict);
