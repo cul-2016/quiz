@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Module from '../components/module';
+import Module from '../components/module/module';
 
 
 const mapStateToProps = (state) => ({
@@ -20,8 +20,25 @@ const mapStateToProps = (state) => ({
                 "first_quiz"
             ],
             condition: [3, 60, 100, 1]
+        },
+        numUsers: 100
+    },
+    quizzes: [
+        {
+            quiz_id: 2,
+            name: 'Pop quiz',
+            numQuestions: 10,
+            numEntries: 121,
+            isPresented: false
+        },
+        {
+            quiz_id: 5,
+            name: 'Awesome quiz',
+            numQuestions: 18,
+            numEntries: 11,
+            isPresented: true
         }
-    }
+    ]
 });
 
 const mapDispatchToProps = (dispatch) => ({
