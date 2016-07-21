@@ -171,18 +171,36 @@ ALTER TABLE module_members
 
 INSERT INTO users (email, password, username)
     VALUES ('student@city.ac.uk', 'student', 'student');
+
 INSERT INTO users (email, password, is_lecturer, username)
     VALUES ('lecturer@city.ac.uk', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, 'lecturer');
-    INSERT INTO modules (module_id, user_id, name)
-        VALUES ( 'TEST', 1, 'test module');
-    INSERT INTO medals (module_id, medal_name, condition)
-        VALUES ('TEST', 'bronze', 39),
-               ('TEST', 'silver', 69),
-               ('TEST', 'gold', 100);
-    INSERT INTO trophies (module_id, trophy_name, condition)
-        VALUES ('TEST', 'participation', 3),
-               ('TEST', 'overall_average', 70),
-               ('TEST', 'full_marks', 100),
-               ('TEST', 'first_quiz', 1);
+
+INSERT INTO modules (module_id, user_id, name)
+    VALUES ( 'TEST', 1, 'test module');
+
+INSERT INTO medals (module_id, medal_name, condition)
+    VALUES ('TEST', 'bronze', 39),
+           ('TEST', 'silver', 69),
+           ('TEST', 'gold', 100);
+
+INSERT INTO trophies (module_id, trophy_name, condition)
+    VALUES ('TEST', 'participation', 3),
+           ('TEST', 'overall_average', 70),
+           ('TEST', 'full_marks', 100),
+           ('TEST', 'first_quiz', 1);
+
+INSERT INTO quizzes (module_id, title)
+    VALUES ('TEST', 'Week 1 Quiz'),
+           ('TEST', 'Week 2 Quiz');
+
+INSERT INTO questions (quiz_id, question, A, B, C, D, correct_answer)
+    VALUES (1, 'What is the capital of England?', 'London', 'Cardiff', 'Edinburgh', 'Doncaster', 'A'),
+           (1, 'What is the capital of Croatia?', 'Zargreb', 'Cardiff', 'Edinburgh', 'Doncaster', 'A'),
+           (2, 'What is the National Animal of England?', 'Pikachu', 'Whale', 'Lion', 'Doncaster', 'C'),
+           (2, 'What is the capital of Tanzania?', 'Zargreb', 'Dodoma', 'Edinburgh', 'Doncaster', 'B');
+
+
+INSERT INTO module_members (module_id, user_id)
+    VALUES ('TEST', 1);
 
 COMMIT;
