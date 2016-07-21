@@ -1,6 +1,8 @@
 # quiz
 
-### Getting up and running
+## Getting up and running
+
+####This project uses Node version 4.4.7
 
 #### Database
 
@@ -11,10 +13,15 @@ brew doctor
 brew install postgres
 ```
 
-To run the postgres server:
+To run the postgres server.
 
 ```bash
 postgres -D /usr/local/var/postgres
+```
+
+This project comes with a handy convenience script to run the postgres server.  Simply:
+```bash
+npm run postgres
 ```
 
 #### Testing
