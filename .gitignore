@@ -39,6 +39,6 @@ dump.rdb
 # Webpack bundle
 bundle.js
 
-credentials.md
+env.sh
 
 # Fonts
