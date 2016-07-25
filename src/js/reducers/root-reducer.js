@@ -1,15 +1,15 @@
 import { combineReducers } from 'redux';
+import dashboard from './dashboard';
+import newModule from './new-module';
+import user from './user';
+import signup from './signup';
+import register from './register';
 
-let initialState = 0;
-
-function fakeReducer (state = initialState, action) {
-
-    if (action) {
-
-        return state;
-    }
-}
 
 export default combineReducers({
-    fakeReducer
+    user,
+    signup,
+    dashboard,
+    newModule,
+    register
 });

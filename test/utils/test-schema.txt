@@ -1,0 +1,206 @@
+BEGIN;
+DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS modules CASCADE;
+DROP TABLE IF EXISTS medals CASCADE;
+DROP TABLE IF EXISTS trophies CASCADE;
+DROP TABLE IF EXISTS quizzes CASCADE;
+DROP TABLE IF EXISTS questions CASCADE;
+DROP TABLE IF EXISTS responses CASCADE;
+DROP TABLE IF EXISTS scores CASCADE;
+DROP TABLE IF EXISTS module_members CASCADE;
+
+DROP SEQUENCE IF EXISTS user_id_seq;
+DROP SEQUENCE IF EXISTS quiz_id_seq;
+DROP SEQUENCE IF EXISTS question_id_seq;
+
+
+
+/* users */
+CREATE TABLE IF NOT EXISTS users (
+    user_id SERIAL PRIMARY KEY,
+    email TEXT NOT NULL UNIQUE,
+    password TEXT NOT NULL,
+    is_lecturer BOOLEAN DEFAULT FALSE NOT NULL,
+    username TEXT
+);
+
+/* modules */
+CREATE TABLE IF NOT EXISTS modules (
+    module_id CHAR(4) PRIMARY KEY,
+    user_id INTEGER NOT NULL,
+    name TEXT NOT NULL
+);
+
+/* medals */
+CREATE TABLE IF NOT EXISTS medals (
+    module_id CHAR(4),
+    medal_name TEXT NOT NULL,
+    condition INTEGER NOT NULL
+);
+
+/* trophies */
+CREATE TABLE IF NOT EXISTS trophies (
+    module_id CHAR(4),
+    trophy_name TEXT NOT NULL,
+    condition INTEGER NOT NULL
+);
+
+/* quizzes */
+CREATE TABLE IF NOT EXISTS quizzes (
+    quiz_id SERIAL PRIMARY KEY,
+    module_id CHAR(4),
+    title TEXT NOT NULL,
+    presented BOOLEAN DEFAULT FALSE NOT NULL
+);
+
+/* questions */
+CREATE TABLE IF NOT EXISTS questions (
+    question_id SERIAL PRIMARY KEY,
+    quiz_id INTEGER NOT NULL,
+    question TEXT NOT NULL,
+    A TEXT NOT NULL,
+    B TEXT NOT NULL,
+    C TEXT,
+    D TEXT,
+    correct_answer CHAR(1) NOT NULL
+);
+
+/* responses */
+CREATE TABLE IF NOT EXISTS responses (
+    user_id INTEGER NOT NULL,
+    quiz_id INTEGER NOT NULL,
+    question_id INTEGER NOT NULL,
+    response CHAR(1) NOT NULL
+);
+
+/* scores */
+CREATE TABLE IF NOT EXISTS scores (
+    user_id INTEGER NOT NULL,
+    quiz_id INTEGER NOT NULL,
+    score INTEGER NOT NULL
+);
+
+/* module_members */
+CREATE TABLE IF NOT EXISTS module_members (
+    module_id CHAR(4) NOT NULL,
+    user_id INTEGER NOT NULL
+);
+
+
+/********* altering tables to create foreign keys ********/
+
+/* modules */
+ALTER TABLE modules
+    ADD CONSTRAINT modules_to_users_fk
+    FOREIGN KEY (user_id)
+    REFERENCES users (user_id)
+    ON DELETE CASCADE;
+
+/* medals */
+ALTER TABLE medals
+    ADD CONSTRAINT medals_to_modules_fk
+    FOREIGN KEY (module_id)
+    REFERENCES modules (module_id)
+    ON DELETE CASCADE;
+
+/* trophies */
+ALTER TABLE trophies
+    ADD CONSTRAINT trophies_to_modules_fk
+    FOREIGN KEY (module_id)
+    REFERENCES modules (module_id)
+    ON DELETE CASCADE;
+
+/* quizzes */
+ALTER TABLE quizzes
+    ADD CONSTRAINT quizzes_to_modules_fk
+    FOREIGN KEY (module_id)
+    REFERENCES modules (module_id)
+    ON DELETE CASCADE;
+
+/* questions */
+ALTER TABLE questions
+    ADD CONSTRAINT questions_to_quizzes_fk
+    FOREIGN KEY (quiz_id)
+    REFERENCES quizzes (quiz_id)
+    ON DELETE CASCADE;
+
+/* responses */
+ALTER TABLE responses
+    ADD CONSTRAINT responses_to_users_fk
+    FOREIGN KEY (user_id)
+    REFERENCES users (user_id)
+    ON DELETE CASCADE;
+
+ALTER TABLE responses
+    ADD CONSTRAINT responses_to_quizzes_fk
+    FOREIGN KEY (quiz_id)
+    REFERENCES quizzes (quiz_id)
+    ON DELETE CASCADE;
+
+ALTER TABLE responses
+    ADD CONSTRAINT responses_to_questions_fk
+    FOREIGN KEY (question_id)
+    REFERENCES questions (question_id)
+    ON DELETE CASCADE;
+
+/* scores */
+ALTER TABLE scores
+    ADD CONSTRAINT scores_to_quizzes_fk
+    FOREIGN KEY (quiz_id)
+    REFERENCES quizzes (quiz_id)
+    ON DELETE CASCADE;
+
+ALTER TABLE scores
+    ADD CONSTRAINT scores_to_users_fk
+    FOREIGN KEY (user_id)
+    REFERENCES users (user_id)
+    ON DELETE CASCADE;
+
+/* module_members */
+ALTER TABLE module_members
+    ADD CONSTRAINT module_members_to_modules_fk
+    FOREIGN KEY (module_id)
+    REFERENCES modules (module_id)
+    ON DELETE CASCADE;
+
+ALTER TABLE module_members
+    ADD CONSTRAINT module_members_to_users_fk
+    FOREIGN KEY (user_id)
+    REFERENCES users (user_id)
+    ON DELETE CASCADE;
+
+INSERT INTO users (email, password, username)
+    VALUES ('student@city.ac.uk', 'student', 'student');
+
+INSERT INTO users (email, password, is_lecturer, username)
+    VALUES ('lecturer@city.ac.uk', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, 'lecturer');
+
+INSERT INTO modules (module_id, user_id, name)
+    VALUES ( 'TEST', 1, 'test module');
+
+INSERT INTO medals (module_id, medal_name, condition)
+    VALUES ('TEST', 'bronze', 39),
+           ('TEST', 'silver', 69),
+           ('TEST', 'gold', 100);
+
+INSERT INTO trophies (module_id, trophy_name, condition)
+    VALUES ('TEST', 'participation', 3),
+           ('TEST', 'overall_average', 70),
+           ('TEST', 'full_marks', 100),
+           ('TEST', 'first_quiz', 1);
+
+INSERT INTO quizzes (module_id, title)
+    VALUES ('TEST', 'Week 1 Quiz'),
+           ('TEST', 'Week 2 Quiz');
+
+INSERT INTO questions (quiz_id, question, A, B, C, D, correct_answer)
+    VALUES (1, 'What is the capital of England?', 'London', 'Cardiff', 'Edinburgh', 'Doncaster', 'A'),
+           (1, 'What is the capital of Croatia?', 'Zargreb', 'Cardiff', 'Edinburgh', 'Doncaster', 'A'),
+           (2, 'What is the National Animal of England?', 'Pikachu', 'Whale', 'Lion', 'Doncaster', 'C'),
+           (2, 'What is the capital of Tanzania?', 'Zargreb', 'Dodoma', 'Edinburgh', 'Doncaster', 'B');
+
+
+INSERT INTO module_members (module_id, user_id)
+    VALUES ('TEST', 1);
+
+COMMIT;
