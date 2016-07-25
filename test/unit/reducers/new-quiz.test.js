@@ -63,3 +63,19 @@ test('UPDATE_VALUE works', (t) => {
     t.deepEqual(result, expected);
 
 });
+
+test('UPDATE_QUIZ_NAME works', (t) => {
+
+    t.plan(1);
+    const initialState = deepFreeze(newQuizState);
+    const value = 'Week 1';
+    const action = {
+        type: 'UPDATE_QUIZ_NAME',
+        value
+    };
+
+    const expected = Object.assign({}, newQuizState, { name: 'Week 1' });
+
+    const result = reducer(initialState, action);
+    t.deepEqual(result, expected);
+});

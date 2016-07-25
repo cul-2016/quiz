@@ -30,3 +30,16 @@ test('updateValue action creator returns the exected action', (t) => {
     const actual = deepFreeze(actions.updateValue(inputType, value, index));
     t.deepEqual(actual, expected);
 });
+
+test('updateQuizName action creator returns the exected action', (t) => {
+
+    t.plan(1);
+    const value = 'Week 1';
+    const expected = {
+        type: actions.UPDATE_QUIZ_NAME,
+        value
+    };
+
+    const actual = deepFreeze(actions.updateQuizName(value));
+    t.deepEqual(actual, expected);
+});

@@ -18,6 +18,9 @@ export default function (state = initialState, action) {
     case actionsTypes.UPDATE_VALUE:
         return handleUpdateValue(state, action);
 
+    case actionsTypes.UPDATE_QUIZ_NAME:
+        return handleUpdateQuizName(state, action);
+
     default:
         return state;
     }
@@ -43,5 +46,12 @@ export const handleUpdateValue = (state, action) => {
     const newObj = Object.assign({}, state.questions[action.index], { [action.inputType]: action.value });
     return update(state, {
         questions: { $splice: [[action.index, 1, newObj]] }
+    });
+};
+
+export const handleUpdateQuizName = (state, action) => {
+
+    return update(state, {
+        name: { $set: action.value }
     });
 };
