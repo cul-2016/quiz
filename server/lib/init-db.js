@@ -15,7 +15,6 @@ db_pool.connect((error, client, done) => {
             if (error) {
                 console.error(error);
             }
-            console.log("RESULT", result);
             done();
             client.end();
         });
