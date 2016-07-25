@@ -19,7 +19,6 @@ import fetchModuleDetails from './lib/fetchModuleDetails';
 
 import { store } from './store';
 
-
 const Root = ({ store }) => (
 
     <Provider store={ store }>
