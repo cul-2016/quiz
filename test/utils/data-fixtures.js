@@ -2,7 +2,7 @@ export const users = [
     {
         user_id: 1,
         email: 'student@city.ac.uk',
-        password: 'student',
+        password: '$2a$10$UnvUuW91Jh6.zWQi3G/2J.HLDTomSqJHxvBC.TYx/Bj8HZa.AAm4K',
         is_lecturer: false,
         username: 'student'
     }

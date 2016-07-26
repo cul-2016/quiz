@@ -6,7 +6,7 @@ test('checking if the password is hashed by bcrypt', (t) => {
 
     t.plan(2);
 
-    var password = 'testing123';
+    var password = 'testingstudent';
     hashPassword(password, (error, hashedPassword) => {
         if (error) {
             console.error(error);

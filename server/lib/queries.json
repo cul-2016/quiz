@@ -1,8 +1,8 @@
 {
     "getModule": {
-        "quizzes": "SELECT quizzes.quiz_id, quizzes.title, quizzes.presented, ( SELECT COUNT(DISTINCT(responses.user_id)) AS num_entries FROM responses WHERE responses.quiz_id = quizzes.quiz_id GROUP BY quizzes.quiz_id ), (SELECT COUNT(questions.question_id) AS num_questions FROM questions WHERE questions.quiz_id = quizzes.quiz_id GROUP BY quizzes.quiz_id ) FROM quizzes LEFT JOIN responses ON quizzes.quiz_id = responses.quiz_id WHERE quizzes.module_id = ($1) GROUP BY quizzes.quiz_id ORDER BY quizzes.quiz_id",
+        "quizzes": "SELECT quizzes.quiz_id, quizzes.name, quizzes.is_presented, ( SELECT COUNT(DISTINCT(responses.user_id)) AS num_entries FROM responses WHERE responses.quiz_id = quizzes.quiz_id GROUP BY quizzes.quiz_id ), (SELECT COUNT(questions.question_id) AS num_questions FROM questions WHERE questions.quiz_id = quizzes.quiz_id GROUP BY quizzes.quiz_id ) FROM quizzes LEFT JOIN responses ON quizzes.quiz_id = responses.quiz_id WHERE quizzes.module_id = ($1) GROUP BY quizzes.quiz_id ORDER BY quizzes.quiz_id",
         "medals": "SELECT medals.medal_name, medals.condition FROM medals WHERE medals.module_id = ($1) ORDER BY condition",
         "trophies": "SELECT trophies.trophy_name, trophies.condition FROM trophies WHERE trophies.module_id = ($1) ORDER BY trophy_name",
-        "numUsers": "SELECT COUNT(user_id) FROM module_members WHERE module_id = ($1)"
+        "numEnrolled": "SELECT COUNT(user_id) FROM module_members WHERE module_id = ($1)"
     }
 }
