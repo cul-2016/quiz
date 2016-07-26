@@ -21,6 +21,22 @@ export default function (state = initialState, action) {
     case actionsTypes.UPDATE_QUIZ_NAME:
         return handleUpdateQuizName(state, action);
 
+    case actionsTypes.SAVE_QUIZ_REQUEST:
+        return update(state, {
+            isSavingQuiz: { $set: true }
+        });
+
+    case actionsTypes.SAVE_QUIZ_SUCCESS:
+        return update(state, {
+            isSavingQuiz: { $set: false }
+        });
+
+    case actionsTypes.SAVE_QUIZ_FAILURE:
+        return update(state, {
+            isSavingQuiz: { $set: false },
+            error: { $set: action.error }
+        });
+
     default:
         return state;
     }

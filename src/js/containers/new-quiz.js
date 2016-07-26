@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import NewQuiz from '../components/quiz/new-quiz';
-import { addQuestion, updateValue, updateQuizName } from '../actions/new-quiz';
+import { addQuestion, updateValue, updateQuizName, saveQuiz } from '../actions/new-quiz';
 
 const mapStateToProps = (state) => ({
 
@@ -14,12 +14,16 @@ const mapDispatchToProps = (dispatch) => ({
     },
 
     handleInputChange: (inputType, value, index) => {
-        // console.log(inputType, value, index);
         dispatch(updateValue(inputType, value, index));
     },
 
     handleQuizNameChange: (value) => {
         dispatch(updateQuizName(value));
+    },
+
+    handleSaveQuiz: (module_id, quizName, questions) => {
+        console.log('>>>>', module_id, quizName, questions);
+        dispatch(saveQuiz(module_id, quizName, questions));
     }
 });
 

@@ -77,3 +77,14 @@ export const newQuiz = {
     isSavingQuiz: false,
     error: undefined
 };
+
+export const questions = [
+    {
+        question: 'capital of England',
+        A: 'London',
+        B: 'Tokyo',
+        C: 'New York',
+        D: 'Paris',
+        correct_answer: 'A'
+    }
+];

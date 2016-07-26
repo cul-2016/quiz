@@ -1,8 +1,7 @@
 import test from 'tape';
 import { newQuiz as newQuizState } from '../../utils/reducer-fixtures';
 import { newQuizWithQuestion as newQuizStateWithQuestion } from '../../utils/reducer-fixtures';
-
-// import { newQuiz as data } from '../../utils/data-fixtures';
+import { saveQuizError as error } from '../../utils/action-fixtures';
 import reducer from '../../../src/js/reducers/new-quiz';
 import deepFreeze from '../../utils/deepFreeze';
 
@@ -77,5 +76,53 @@ test('UPDATE_QUIZ_NAME works', (t) => {
     const expected = Object.assign({}, newQuizState, { name: 'Week 1' });
 
     const result = reducer(initialState, action);
+    t.deepEqual(result, expected);
+});
+
+// -----
+// SAVE QUIZ
+// -----
+
+test('SAVE_QUIZ_REQUEST works', (t) => {
+
+    t.plan(1);
+    const initialState = deepFreeze(newQuizState);
+    const action = {
+        type: 'SAVE_QUIZ_REQUEST'
+    };
+    const expected = Object.assign({}, newQuizState, { isSavingQuiz: true });
+    const result = reducer(initialState, action);
+
+    t.deepEqual(result, expected);
+});
+
+test('SAVE_QUIZ_SUCCESS works', (t) => {
+
+    t.plan(1);
+    const initialState = deepFreeze(newQuizState);
+    const data = true;
+    const action = {
+        type: 'SAVE_QUIZ_SUCCESS',
+        data
+    };
+    const expected = Object.assign({}, newQuizState, { isSavingQuiz: false });
+
+    const result = reducer(initialState, action);
+
+    t.deepEqual(result, expected);
+});
+
+test('SAVE_QUIZ_FAILURE works', (t) => {
+
+    t.plan(1);
+    const initialState = deepFreeze(newQuizState);
+    const action = {
+        type: 'SAVE_QUIZ_FAILURE',
+        error
+    };
+    const expected = Object.assign({}, newQuizState, { isSavingQuiz: false, error: error });
+
+    const result = reducer(initialState, action);
+
     t.deepEqual(result, expected);
 });
