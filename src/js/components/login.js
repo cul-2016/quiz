@@ -26,9 +26,9 @@ const Login = ({ signup, handleEmailChange, handlePasswordChange, handleAuthenti
             />
 
 
-        <h3 onClick={ () => handleAuthenticateUser(signup.email, signup.password) }>
+        <button onClick={ () => handleAuthenticateUser(signup.email, signup.password) }>
             Login
-        </h3>
+        </button>
 
         </div>
     );
