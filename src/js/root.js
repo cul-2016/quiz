@@ -11,11 +11,7 @@ import ModuleContainer from './containers/module';
 import Spinner from './components/general/spinner';
 
 import composeHooks from './lib/composeHooks';
-import fetchModules from './lib/fetchModules';
-import authenticate from './lib/authenticate';
-import userHasSignedIn from './lib/userHasSignedIn';
-import fetchUserDetails from './lib/fetchUserDetails';
-import fetchModuleDetails from './lib/fetchModuleDetails';
+import * as hooks from './lib/onEnterHooks';
 
 import { store } from './store';
 
@@ -24,14 +20,35 @@ const Root = ({ store }) => (
     <Provider store={ store }>
         <Router history={ hashHistory }>
             <Route path="/" component={ App }>
-                <IndexRoute onEnter={ userHasSignedIn } component={ LoginContainer } />
-                <Route onEnter={ composeHooks(authenticate, fetchUserDetails) } path="auth" component={ Spinner } />
-                <Route path="/register-student" component={ RegisterUserContainer } />
-                <Route path="/register-lecturer1000" component={ RegisterUserContainer } />
-                <Route onEnter={ composeHooks(authenticate, fetchModules) }  path="dashboard-lecturer" component={ LecturerDashboardContainer } />
-                <Route onEnter={ authenticate } path="dashboard-student" component={ StudentDashboardContainer } />
-                <Route onEnter={ authenticate } path="new-module" component={ NewModuleContainer } />
-                <Route onEnter={ composeHooks(authenticate, fetchModuleDetails) } path="module/:module_id" component={ ModuleContainer } />
+                <IndexRoute
+                    onEnter={ hooks.userHasSignedIn }
+                    component={ LoginContainer } />
+                <Route
+                    onEnter={ composeHooks(hooks.authenticate, hooks.fetchUserDetails) }
+                    path="auth"
+                    component={ Spinner } />
+                <Route
+                    path="/register-student"
+                    component={ RegisterUserContainer } />
+                <Route
+                    path="/register-lecturer1000"
+                    component={ RegisterUserContainer } />
+                <Route
+                    onEnter={ composeHooks(hooks.authenticate, hooks.fetchModules) }
+                    path="dashboard-lecturer"
+                    component={ LecturerDashboardContainer } />
+                <Route
+                    onEnter={ hooks.authenticate }
+                    path="dashboard-student"
+                    component={ StudentDashboardContainer } />
+                <Route
+                    onEnter={ hooks.authenticate }
+                    path="new-module"
+                    component={ NewModuleContainer } />
+                <Route
+                    onEnter={ composeHooks(hooks.authenticate, hooks.fetchModuleDetails) }
+                    path="module/:module_id"
+                    component={ ModuleContainer } />
             </Route>
         </Router>
     </Provider>
