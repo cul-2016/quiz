@@ -6,8 +6,6 @@ module.exports = {
     path: '/get-module',
     handler: (request, reply) => {
 
-        // get module details
-
         getModule(client, request.query.module_id, (error, module) => {
 
             var verdict = error || module;

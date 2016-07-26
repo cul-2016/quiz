@@ -41,6 +41,7 @@ dump.rdb
 bundle.js
 
 env.sh
+queries.txt
 credentials.md
 
 # Fonts
