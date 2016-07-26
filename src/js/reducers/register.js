@@ -12,7 +12,7 @@ const initialState = {
 };
 
 
-export default function (state = initialState, action ) {
+export default function register (state = initialState, action ) {
     switch (action.type) {
 
     case actionsTypes.UPDATE_INPUT_FIELD:

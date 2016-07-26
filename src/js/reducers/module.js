@@ -8,7 +8,7 @@ const initialState = {
     error: undefined
 };
 
-export default function (state = initialState, action ) {
+export default function module (state = initialState, action ) {
 
     switch (action.type) {
 

@@ -18,7 +18,7 @@ export const newModule = {
     isSavingModule: undefined
 };
 
-export const signup = {
+export const login = {
     email: "",
     password: "",
     isAuthenticating: false,

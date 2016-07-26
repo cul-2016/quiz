@@ -10,7 +10,7 @@ export default function getUserID () {
         return result[0];
     }
     catch (error) {
-        console.log(error);
+        console.error(error);
         return undefined;
     }
 }
