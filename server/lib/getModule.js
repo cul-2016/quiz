@@ -1,5 +1,6 @@
 var query = require('./query'); // eslint-disable-line no-unused-vars
 var queries = require('./queries.json');
+var organiseModuleData = require('./organiseModuleData');
 
 /**
  * Fetches module information from the database.
@@ -14,28 +15,38 @@ function getModule (client, module_id, callback) {
     query(client, queries.getModule.quizzes, [module_id], (error, quizzes) => {
 
         if (error) {
+            console.error(error);
             callback(error);
         }
         query(client, queries.getModule.medals, [module_id], (error, medals) => {
 
             if (error) {
+                console.error(error);
                 callback(error);
             }
             query(client, queries.getModule.trophies, [module_id], (error, trophies) => {
 
                 if (error) {
+                    console.error(error);
                     callback(error);
                 }
-                query(client, queries.getModule.numUsers, [module_id], (error, numUsers) => {
+                query(client, queries.getModule.numEnrolled, [module_id], (error, numEnrolled) => {
 
-                    callback(
-                        null, {
-                            quizzes: quizzes.rows,
-                            medals: medals.rows,
-                            trophies: trophies.rows,
-                            numUsers: numUsers.rows
-                        }
-                    );
+                    if (error) {
+                        console.error(error);
+                        callback(error);
+                    }
+                    const allData = {
+                        quizzes: quizzes.rows,
+                        medals: medals.rows,
+                        trophies: trophies.rows,
+                        numEnrolled: numEnrolled.rows
+                    };
+
+                    organiseModuleData(module_id, allData, (error, organisedData) => {
+
+                        callback(null, organisedData);
+                    });
                 });
             });
         });

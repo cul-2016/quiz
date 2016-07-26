@@ -9,7 +9,7 @@ import getUserID from './getUserID';
 
 
 export function authenticate (nextState, replace, callback) {
-    
+
     if (!validCookieExists()) {
         replace('/');
     }
@@ -24,14 +24,14 @@ export function authenticate (nextState, replace, callback) {
  * @param {function} callback - (optional) can be used to make the transition block
  */
 
-export function fetchModuleDetails (nextState, replace, callback) {
+export function fetchModule (nextState, replace, callback) {
 
     store.dispatch(getModule(nextState.params.module_id));
     callback();
 }
 
 
-export function fetchModules (nextState, replace, callback) {
+export function hydrateDashboard (nextState, replace, callback) {
 
     store.dispatch(getDashboard());
     callback();
