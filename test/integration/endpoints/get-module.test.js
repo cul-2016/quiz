@@ -2,7 +2,7 @@ import test from 'tape';
 import { server } from '../../utils/init';
 
 
-test('`get-module` endpoint works', (t) => {
+test.skip('`get-module` endpoint works', (t) => {
 
     t.plan(18);
 

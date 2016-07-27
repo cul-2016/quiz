@@ -7,7 +7,7 @@ test('getting modules from database for a given lecturer using user_id', (t) => 
     t.plan(1);
     const expectedRows = [{ module_id: 'TEST', name: 'test module' }];
 
-    getModuleList(testClient, '1', (error, response) => {
+    getModuleList(testClient, '2', (error, response) => {
 
         if (error) {
             console.error(error);

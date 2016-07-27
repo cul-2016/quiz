@@ -35,7 +35,6 @@ export function saveQuiz (module_id, quizName, questions) {
             quizName,
             questions
         };
-
         axios.post('/save-quiz', payload)
             .then((response) => {
 

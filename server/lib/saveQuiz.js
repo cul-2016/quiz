@@ -10,16 +10,15 @@ var query = require('./query');
 
 function saveQuiz (client, module_id, quizName, callback) {
 
-    var query = 'INSERT INTO quizzes (module_id, name) VALUES ($1, $2) RETURNING quiz_id;';
+    var queryText = 'INSERT INTO quizzes (module_id, name) VALUES ($1, $2) RETURNING quiz_id;';
     var value = [module_id, quizName];
 
-    query(client, query, value, (error, response) => {
+    query(client, queryText, value, (error, response) => {
 
         if (error) {
             return callback(error);
         }
-        console.log(response);
-        return callback(null, response.rows);
+        return callback(null, response.rows[0].quiz_id);
     });
 }
 
