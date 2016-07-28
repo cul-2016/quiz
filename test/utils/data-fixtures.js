@@ -8,6 +8,13 @@ export const users = [
     }
 ];
 
+export const userDetails = {
+    user_id: 1,
+    email: 'test@test.com',
+    username: 'test',
+    is_lecturer: true
+};
+
 export const dashboardData = [
     {
         module_id: 'CS50',
@@ -36,12 +43,6 @@ export const trophies = {
 
 export const newModule = Object.assign({}, dashboardData[0], { medals }, { trophies });
 
-export const userDetails = {
-    user_id: 1,
-    email: 'test@test.com',
-    username: 'test',
-    is_lecturer: true
-};
 
 export const quizzes = [
     {
@@ -61,3 +62,38 @@ export const quizzes = [
 ];
 
 export const module = Object.assign({}, newModule, { quizzes });
+
+export const getModuleData = {
+    module_id: 'TEST',
+    name: 'test module',
+    medals: {
+        medal_name: ["bronze", "silver", "gold"],
+        condition: [39, 69]
+    },
+    trophies: {
+        trophy_name: [
+            "first_quiz",
+            "high_score",
+            "overall_average",
+            "participation"
+        ],
+        condition: [3, 60, 100, 1]
+    },
+    numEnrolled: 1,
+    quizzes: [
+        {
+            quiz_id: 2,
+            name: 'Week 1 Quiz',
+            numQuestions: 22,
+            numEntries: 1,
+            isPresented: false
+        },
+        {
+            quiz_id: 5,
+            name: 'Week 2 Quiz',
+            numQuestions: 2,
+            numEntries: 1,
+            isPresented: false
+        }
+    ]
+};

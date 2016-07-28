@@ -1,3 +1,8 @@
+require('babel-register')({
+    presets: ['es2015']
+});
+var camelCaseObjectKeys = require('./camelCaseObjectKeys');
+console.log(camelCaseObjectKeys);
 /**
  * Function to organise module into the expected structure.
  * Returns an object with the expected structure.
@@ -7,11 +12,21 @@
  */
 
 function organiseModuleData (module_id, data, callback) {
-    console.log(data);
+
+    console.log(">>>>>>>>",Object.keys(data));
+    var newData = data.quizzes.map((quiz, i) => {
+        if (i === 0) {
+
+            // console.log("quiz", quiz);
+        }
+        return camelCaseObjectKeys(quiz);
+    });
+    // console.log("DATAAAA", newData);
+
     const organisedData = {
         module_id: module_id,
-        name: undefined,
-        numEnrolled: data.numEnrolled[0].count,
+        name: data.general[0].name,
+        numEnrolled: data.general[0].num_enrolled,
         medals: {
             medal_name: [
                 data.medals[0].medal_name,
@@ -20,8 +35,7 @@ function organiseModuleData (module_id, data, callback) {
             ],
             condition: [
                 data.medals[0].condition,
-                data.medals[1].condition,
-                data.medals[2].condition
+                data.medals[1].condition
             ]
         },
         trophies: {
@@ -41,7 +55,7 @@ function organiseModuleData (module_id, data, callback) {
         quizzes: data.quizzes
     };
 
-    callback(null, organisedData);
+    // callback(null, organisedData);
 }
 
 module.exports = organiseModuleData;

@@ -1,3 +1,6 @@
+require('babel-register')({
+    presets: ['es2015']
+});
 var query = require('./query'); // eslint-disable-line no-unused-vars
 var queries = require('./queries.json');
 var organiseModuleData = require('./organiseModuleData');
@@ -40,9 +43,9 @@ function getModule (client, module_id, callback) {
                         quizzes: quizzes.rows,
                         medals: medals.rows,
                         trophies: trophies.rows,
-                        numEnrolled: numEnrolled.rows
+                        general: numEnrolled.rows
                     };
-
+                    // console.log(allData);
                     organiseModuleData(module_id, allData, (error, organisedData) => {
 
                         callback(null, organisedData);
