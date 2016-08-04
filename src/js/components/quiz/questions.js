@@ -1,6 +1,14 @@
 import React, { PropTypes } from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+
 
 const Questions = ({ questions, handleInputChange }) => {
+
+    const transitionOptions = {
+        transitionName: "fade",
+        transitionEnterTimeout: 500,
+        transitionLeaveTimeout: 500
+    };
 
     let mappedQuestions = questions.map((question, i) => {
         return (
@@ -35,7 +43,9 @@ const Questions = ({ questions, handleInputChange }) => {
 
     return (
             <div>
-                { mappedQuestions }
+                <ReactCSSTransitionGroup { ...transitionOptions }>
+                    { mappedQuestions }
+                </ReactCSSTransitionGroup>
             </div>
 
     );
