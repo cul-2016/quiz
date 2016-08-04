@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 import { Provider } from 'react-redux';
+
 import App from './components/app';
 import LoginContainer from './containers/login';
 import LecturerDashboardContainer from './containers/lecturer-dashboard';
@@ -9,6 +10,7 @@ import NewModuleContainer from './containers/new-module';
 import RegisterUserContainer from './containers/register-user';
 import ModuleContainer from './containers/module';
 import Spinner from './components/general/spinner';
+import NewQuizContainer from './containers/new-quiz';
 
 import composeHooks from './lib/composeHooks';
 import fetchModules from './lib/fetchModules';
@@ -18,7 +20,6 @@ import fetchUserDetails from './lib/fetchUserDetails';
 import fetchModuleDetails from './lib/fetchModuleDetails';
 
 import { store } from './store';
-
 
 const Root = ({ store }) => (
 
@@ -33,6 +34,7 @@ const Root = ({ store }) => (
                 <Route onEnter={ authenticate } path="dashboard-student" component={ StudentDashboardContainer } />
                 <Route onEnter={ authenticate } path="new-module" component={ NewModuleContainer } />
                 <Route onEnter={ composeHooks(authenticate, fetchModuleDetails) } path="module/:module_id" component={ ModuleContainer } />
+                <Route onEnter={ authenticate } path=":module_id/new-quiz" component={ NewQuizContainer } />
             </Route>
         </Router>
     </Provider>

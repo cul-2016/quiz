@@ -61,3 +61,19 @@ export const quizzes = [
 ];
 
 export const module = Object.assign({}, newModule, { quizzes });
+
+export const newQuiz = {
+    name: undefined,
+    questions: [
+        {
+            question: 'capital of England',
+            A: 'London',
+            B: 'Tokyo',
+            C: 'New York',
+            D: 'Paris',
+            correct_answer: 'A'
+        }
+    ],
+    isSavingQuiz: false,
+    error: undefined
+};

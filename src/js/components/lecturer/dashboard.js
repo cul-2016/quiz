@@ -5,16 +5,18 @@ const Dashboard = ({ modules }) => {
 
     let lecturerModules = modules.map((module, i) => {
         return (
-            <div key={ i }>
-                { `${module.module_id} ${module.name}` }
-            </div>
+            <Link key={ i } to={ 'module/' + module.module_id } >
+                <div key={ i }>
+                    { `${module.module_id} ${module.name}` }
+                </div>
+            </Link>
         );
     });
 
     return (
         <div>
             <h1>Welcome, lecturer</h1>
-            <Link to="new-module">            
+            <Link to="new-module">
                 <button>
                     Add a new module
                 </button>

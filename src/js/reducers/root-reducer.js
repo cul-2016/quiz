@@ -4,6 +4,7 @@ import newModule from './new-module';
 import user from './user';
 import signup from './signup';
 import register from './register';
+import newQuiz from './new-quiz';
 
 
 export default combineReducers({
@@ -11,5 +12,6 @@ export default combineReducers({
     signup,
     dashboard,
     newModule,
-    register
+    register,
+    newQuiz
 });
