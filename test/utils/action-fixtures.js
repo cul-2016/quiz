@@ -5,3 +5,4 @@ export const authenticateUserError = new Error('Failed to authenticate User');
 export const getUserDetailsError = new Error('Failed to get User details');
 export const registeringUserError = new Error('Failed to register user');
 export const getModuleError = new Error('Failed to get module details');
+export const saveQuizError = new Error('Failed to save Quiz');

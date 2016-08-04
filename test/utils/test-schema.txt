@@ -13,7 +13,7 @@ DROP SEQUENCE IF EXISTS user_id_seq;
 DROP SEQUENCE IF EXISTS quiz_id_seq;
 DROP SEQUENCE IF EXISTS question_id_seq;
 
-
+/********* create tables ********/
 
 /* users */
 CREATE TABLE IF NOT EXISTS users (
@@ -49,8 +49,8 @@ CREATE TABLE IF NOT EXISTS trophies (
 CREATE TABLE IF NOT EXISTS quizzes (
     quiz_id SERIAL PRIMARY KEY,
     module_id CHAR(4),
-    title TEXT NOT NULL,
-    presented BOOLEAN DEFAULT FALSE NOT NULL
+    name TEXT NOT NULL,
+    is_presented BOOLEAN DEFAULT FALSE NOT NULL
 );
 
 /* questions */
@@ -169,36 +169,59 @@ ALTER TABLE module_members
     REFERENCES users (user_id)
     ON DELETE CASCADE;
 
+
+/********* insert users ********/
+
 INSERT INTO users (email, password, username)
-    VALUES ('student@city.ac.uk', 'student', 'student');
+    VALUES ('student@city.ac.uk', '$2a$10$UnvUuW91Jh6.zWQi3G/2J.HLDTomSqJHxvBC.TYx/Bj8HZa.AAm4K', 'student');
 
 INSERT INTO users (email, password, is_lecturer, username)
     VALUES ('lecturer@city.ac.uk', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, 'lecturer');
 
+
+/********* insert modules ********/
+
 INSERT INTO modules (module_id, user_id, name)
-    VALUES ( 'TEST', 1, 'test module');
+    VALUES ( 'TEST', 2, 'test module');
+
+/********* insert medals ********/
 
 INSERT INTO medals (module_id, medal_name, condition)
     VALUES ('TEST', 'bronze', 39),
            ('TEST', 'silver', 69),
            ('TEST', 'gold', 100);
 
+/********* insert trophies ********/
+
 INSERT INTO trophies (module_id, trophy_name, condition)
     VALUES ('TEST', 'participation', 3),
            ('TEST', 'overall_average', 70),
-           ('TEST', 'full_marks', 100),
+           ('TEST', 'high_score', 100),
            ('TEST', 'first_quiz', 1);
 
-INSERT INTO quizzes (module_id, title)
+/********* insert quizzes ********/
+
+INSERT INTO quizzes (module_id, name)
     VALUES ('TEST', 'Week 1 Quiz'),
            ('TEST', 'Week 2 Quiz');
 
+/********* insert questions ********/
+
 INSERT INTO questions (quiz_id, question, A, B, C, D, correct_answer)
     VALUES (1, 'What is the capital of England?', 'London', 'Cardiff', 'Edinburgh', 'Doncaster', 'A'),
-           (1, 'What is the capital of Croatia?', 'Zargreb', 'Cardiff', 'Edinburgh', 'Doncaster', 'A'),
+           (1, 'What is the capital of Croatia?', 'Zagreb', 'Cardiff', 'Edinburgh', 'Doncaster', 'A'),
            (2, 'What is the National Animal of England?', 'Pikachu', 'Whale', 'Lion', 'Doncaster', 'C'),
-           (2, 'What is the capital of Tanzania?', 'Zargreb', 'Dodoma', 'Edinburgh', 'Doncaster', 'B');
+           (2, 'What is the capital of Tanzania?', 'Zagreb', 'Dodoma', 'Edinburgh', 'Doncaster', 'B');
 
+/********* insert responses ********/
+
+INSERT INTO responses (user_id, quiz_id, question_id, response)
+    VALUES (1, 1, 1, 'A'),
+           (1, 1, 2, 'A'),
+           (1, 2, 3, 'C'),
+           (1, 2, 4, 'B');
+
+/********* insert module members ********/
 
 INSERT INTO module_members (module_id, user_id)
     VALUES ('TEST', 1);

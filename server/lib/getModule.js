@@ -1,29 +1,59 @@
+require('babel-register')({
+    presets: ['es2015']
+});
 var query = require('./query'); // eslint-disable-line no-unused-vars
+var queries = require('./queries.json');
+var organiseModuleData = require('./organiseModuleData');
 
 /**
- *
+ * Fetches module information from the database.
+ * Returns an object of arrays. Keys: 'quizzes', 'medals', 'trophies'.
+ * @param {object} client - database client
+ * @param {string} module_id - unique module id
+ * @param {function} callback - callback function
  */
 
 function getModule (client, module_id, callback) {
 
-    //list of queries
-    // 'SELECT name FROM modules WHERE module_id = $1;';
-    // 'SELECT * FROM quizzes WHERE module_id = $1;'
-    // 'SELECT COUNT(*) FROM questions where quiz_id = $1;'; // multiple times for each quiz.
-    // 'SELECT count(*) FROM module_members where module_id = $1;';
-    //
-    // select modules.name, quizzes.title, quizzes.quiz_id, count(question)
-    //     from
-    //         questions
-    //         inner join quizzes
-    //             on quizzes.quiz_id = questions.quiz_id
-    //         inner join modules
-    //             on quizzes.module_id = modules.module_id
-    //     where
-    //         quizzes.module_id = 'TEST'
-    //     group by quizzes.quiz_id;
+    query(client, queries.getModule.quizzes, [module_id], (error, quizzes) => {
 
-    callback();
+        if (error) {
+            console.error(error);
+            callback(error);
+        }
+        query(client, queries.getModule.medals, [module_id], (error, medals) => {
+
+            if (error) {
+                console.error(error);
+                callback(error);
+            }
+            query(client, queries.getModule.trophies, [module_id], (error, trophies) => {
+
+                if (error) {
+                    console.error(error);
+                    callback(error);
+                }
+                query(client, queries.getModule.numEnrolled, [module_id], (error, numEnrolled) => {
+
+                    if (error) {
+                        console.error(error);
+                        callback(error);
+                    }
+                    const allData = {
+                        quizzes: quizzes.rows,
+                        medals: medals.rows,
+                        trophies: trophies.rows,
+                        general: numEnrolled.rows
+                    };
+                    // console.log(allData);
+                    organiseModuleData(module_id, allData, (error, organisedData) => {
+
+                        callback(null, organisedData);
+                    });
+                });
+            });
+        });
+    });
 }
 
 module.exports = getModule;

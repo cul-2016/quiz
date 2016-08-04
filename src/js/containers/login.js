@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 import Login from '../components/login';
-import { updateEmail, updatePassword, authenticateUser } from '../actions/signup';
+import { updateEmail, updatePassword, authenticateUser } from '../actions/login';
 
 const mapStateToProps = (state) => ({
-    signup: state.signup
+    login: state.login
 });
 
 const mapDispatchToProps = (dispatch) => ({

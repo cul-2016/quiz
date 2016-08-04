@@ -15,7 +15,7 @@ class NewModule extends React.Component {
         }
     }
 
-    doMaths (originalValue, offset) {
+    applyOffset (originalValue, offset) {
 
         return !isNaN(originalValue) ? originalValue + offset : '-';
     }
@@ -52,11 +52,11 @@ class NewModule extends React.Component {
                     <h3>Medals</h3>
                     <p>Bronze</p>
                     <span>0 to </span>
-                    <input name="bronze" type="number" min="1" max="96" defaultValue={ this.doMaths(medals[0], -1) } onChange={ (e) => updateMedalVals('bronze', e.target.value) } />
+                    <input name="bronze" type="number" min="1" max="96" defaultValue={ this.applyOffset(medals[0], -1) } onChange={ (e) => updateMedalVals('bronze', e.target.value) } />
                     <p>Silver</p>
                     <span className="silver lower-bound">{ medals[0] }</span> to <span className="silver upper-bound">{ medals[1] }</span>
                     <p>Gold</p>
-                    <input name="gold" type="number" min="4" max="99" defaultValue={ this.doMaths(medals[1], 1) } onChange={ (e) => updateMedalVals('gold', e.target.value) } />
+                    <input name="gold" type="number" min="4" max="99" defaultValue={ this.applyOffset(medals[1], 1) } onChange={ (e) => updateMedalVals('gold', e.target.value) } />
                     <span> to 100</span>
                 </div>
                 <div>

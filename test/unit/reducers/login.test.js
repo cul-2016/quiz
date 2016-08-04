@@ -1,7 +1,7 @@
 import test from 'tape';
-import { signup as signupState } from '../../utils/reducer-fixtures';
+import { login as loginState } from '../../utils/reducer-fixtures';
 import { authenticateUserError as error } from '../../utils/action-fixtures';
-import reducer from '../../../src/js/reducers/signup';
+import reducer from '../../../src/js/reducers/login';
 import deepFreeze from '../../utils/deepFreeze';
 
 
@@ -9,7 +9,7 @@ test('AUTHENTICATE_USER_REQUEST works', (t) => {
 
     t.plan(1);
 
-    const initialState = deepFreeze(signupState);
+    const initialState = deepFreeze(loginState);
 
     const action = {
         type: 'AUTHENTICATE_USER_REQUEST',
@@ -30,7 +30,7 @@ test('AUTHENTICATE_USER_SUCCESS works', (t) => {
 
     t.plan(1);
 
-    const initialState = deepFreeze(signupState);
+    const initialState = deepFreeze(loginState);
     const data = true;
     const action = {
         type: 'AUTHENTICATE_USER_SUCCESS',
@@ -52,7 +52,7 @@ test('AUTHENTICATE_USER_FAILURE works', (t) => {
 
     t.plan(1);
 
-    const initialState = deepFreeze(signupState);
+    const initialState = deepFreeze(loginState);
 
     const action = {
         type: 'AUTHENTICATE_USER_FAILURE',
@@ -76,7 +76,7 @@ test('UPDATE_EMAIL works when user enters a value', (t) => {
 
     t.plan(1);
 
-    const initialState = deepFreeze(signupState);
+    const initialState = deepFreeze(loginState);
 
     const action = {
         type: 'UPDATE_EMAIL',
@@ -99,7 +99,7 @@ test('UPDATE_PASSWORD works when user enters a value', (t) => {
 
     t.plan(1);
 
-    const initialState = deepFreeze(signupState);
+    const initialState = deepFreeze(loginState);
 
     const action = {
         type: 'UPDATE_PASSWORD',

@@ -3,13 +3,13 @@ import React, { PropTypes } from 'react';
 
 const Quizzes = ({ quizzes }) => {
 
-    const mappedQuizzes = quizzes.map((quiz) => {
+    const mappedQuizzes = quizzes.map((quiz, index) => {
 
         let iconClasses = quiz.isPresented ? 'fa fa-check' : 'fa fa-times';
 
         return (
 
-            <div>
+            <div key={ index }>
                 <h5>{ quiz.name }</h5>
                 <p>{`Number of questions: ${quiz.numQuestions}`}</p>
                 <p>{`Number of entries: ${quiz.numEntries}`}</p>

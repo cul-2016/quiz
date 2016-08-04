@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import classnames from 'classnames';
+import { Link } from 'react-router';
 
 const RegisterUser = ({ register, handleChange, handleRegisteringUser, location }) => {
 
@@ -16,34 +17,51 @@ const RegisterUser = ({ register, handleChange, handleRegisteringUser, location 
 
 
     return (
-        <div>
-            Register page.
-            <p className={ userExists }> The email already exists please sign in</p>
-            <input
-                value={ register.email }
-                onChange={ (e) => handleChange("email", e.target.value) }
-                type="email"
-                placeholder="Email"
-            />
-            <input
-                value={ register.username }
-                onChange={ (e) => handleChange("username", e.target.value)}
-                type="username"
-                placeholder="Username"
-            />
-            <input
-                value={ register.password }
-                onChange={ (e) => handleChange("password", e.target.value)}
-                type="password"
-                placeholder="Password"
-            />
 
+        <section className="hero is-danger is-fullheight">
+            <div className="hero-body">
+                <div className="container has-text-centered">
+                    <div className="columns">
+                        <div className="box column is-one-third is-offset-one-third">
+                            <h2 className="login-title">
+                              Register
+                            </h2>
+                            <p className={ userExists }><span className="tag is-danger"> The email already exists please sign in</span></p>
+                            <input
+                                className="input login-input"
+                                value={ register.email }
+                                onChange={ (e) => handleChange("email", e.target.value) }
+                                type="email"
+                                placeholder="Email"
+                                />
+                            <input
+                                className="input login-input"
+                                value={ register.username }
+                                onChange={ (e) => handleChange("username", e.target.value)}
+                                type="username"
+                                placeholder="Username"
+                                />
+                            <input
+                                className="input login-input"
+                                value={ register.password }
+                                onChange={ (e) => handleChange("password", e.target.value)}
+                                type="password"
+                                placeholder="Password"
+                                />
 
-        <h3 onClick={ () => handleRegisteringUser(register.email, register.username, register.password, is_lecturer) }>
-            Register
-        </h3>
+                            <a className="button is-warning login-button" onClick={ () => handleRegisteringUser(register.email, register.username, register.password, is_lecturer) }>
+                                Register
+                            </a>
 
-        </div>
+                            <p>
+                            <Link to="/"><span className="tag is-success">Already a user? Please Sign In here</span></Link>
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     );
 };
 

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import getUserID from '../lib/getUserID';
 
 export const GET_DASHBOARD_REQUEST = 'GET_DASHBOARD_REQUEST';
 export const GET_DASHBOARD_SUCCESS = 'GET_DASHBOARD_SUCCESS';
@@ -11,7 +12,7 @@ export function getDashboard () {
 
         dispatch(getDashboardRequest());
 
-        let userID = 1;
+        let userID = getUserID();
 
         axios.get(`/get-module-list?user_id=${userID}`)
             .then((response) => {

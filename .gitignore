@@ -25,6 +25,7 @@ build/Release
 
 # Dependency directory
 node_modules
+
 out
 
 # Optional npm cache directory
@@ -40,6 +41,7 @@ dump.rdb
 bundle.js
 
 env.sh
+queries.txt
 credentials.md
 
 # Fonts

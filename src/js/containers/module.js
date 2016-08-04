@@ -6,7 +6,7 @@ const mapStateToProps = (state) => ({
 
     state,
     module: {
-        module_id: 'CS50',
+        module_id: 'TEST',
         name: 'Intro to Computer Science',
         medals: {
             medal_name: ["bronze", "silver", "gold"],

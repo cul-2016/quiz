@@ -18,7 +18,7 @@ export const newModule = {
     isSavingModule: undefined
 };
 
-export const signup = {
+export const login = {
     email: "",
     password: "",
     isAuthenticating: false,
@@ -56,5 +56,26 @@ export const module = {
     module: undefined,
     quizzes: undefined,
     isFetchingModule: false,
+    error: undefined
+};
+
+export const newQuiz = {
+    name: undefined,
+    questions: [],
+    isSavingQuiz: false,
+    error: undefined
+};
+
+export const newQuizWithQuestion = {
+    name: undefined,
+    questions: [{
+        question: undefined,
+        A: undefined,
+        B: undefined,
+        C: undefined,
+        D: undefined,
+        correct_answer: undefined
+    }],
+    isSavingQuiz: false,
     error: undefined
 };
