@@ -2,7 +2,7 @@ import test from 'tape';
 import getModuleList from '../../../server/lib/getModuleList';
 import { testClient } from '../../utils/init';
 
-test.skip('getting list of modules from database for a given lecturer using user_id', (t) => {
+test('getting list of modules from database for a given lecturer using user_id', (t) => {
 
     t.plan(1);
     const expectedRows = [{ module_id: 'TEST', name: 'test module' }];
