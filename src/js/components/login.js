@@ -2,10 +2,10 @@ import React, { PropTypes } from 'react';
 import classnames from 'classnames';
 
 
-const Login = ({ signup, handleEmailChange, handlePasswordChange, handleAuthenticateUser }) => {
+const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthenticateUser }) => {
 
     let userValidation = classnames({
-        "display-none": signup.userIsAuthenticated !== false
+        "display-none": login.userIsAuthenticated !== false
     });
 
     return (
@@ -13,29 +13,29 @@ const Login = ({ signup, handleEmailChange, handlePasswordChange, handleAuthenti
             This is the login page.
             <p className={ userValidation }> Please enter a valid email and password</p>
             <input
-                value={ signup.username }
+                value={ login.username }
                 onChange={ (e) => handleEmailChange(e.target.value)}
                 type="email"
                 placeholder="Email"
             />
             <input
-                value={ signup.password }
+                value={ login.password }
                 onChange={ (e) => handlePasswordChange(e.target.value)}
                 type="password"
                 placeholder="Password"
             />
 
 
-        <h3 onClick={ () => handleAuthenticateUser(signup.email, signup.password) }>
+        <button onClick={ () => handleAuthenticateUser(login.email, login.password) }>
             Login
-        </h3>
+        </button>
 
         </div>
     );
 };
 
 Login.propTypes = {
-    signup: PropTypes.object.isRequired,
+    login: PropTypes.object.isRequired,
     handleEmailChange: PropTypes.func.isRequired,
     handlePasswordChange: PropTypes.func.isRequired,
     handleAuthenticateUser: PropTypes.func.isRequired

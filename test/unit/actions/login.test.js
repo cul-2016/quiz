@@ -1,6 +1,6 @@
 import test from 'tape';
 import createThunk from '../../utils/mockThunk';
-import * as actions from '../../../src/js/actions/signup';
+import * as actions from '../../../src/js/actions/login';
 import deepFreeze from '../../utils/deepFreeze';
 import { authenticateUserError as error } from '../../utils/action-fixtures';
 

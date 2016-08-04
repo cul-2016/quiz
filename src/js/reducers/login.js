@@ -1,5 +1,5 @@
 import update from 'react-addons-update';
-import * as actionsTypes from '../actions/signup';
+import * as actionsTypes from '../actions/login';
 
 const initialState = {
     email: "",
@@ -9,7 +9,7 @@ const initialState = {
     userIsAuthenticated: undefined
 };
 
-export default function (state = initialState, action ) {
+export default function login (state = initialState, action ) {
     switch (action.type) {
 
     case actionsTypes.UPDATE_EMAIL:

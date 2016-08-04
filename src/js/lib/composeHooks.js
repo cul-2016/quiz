@@ -1,6 +1,6 @@
 /**
  * Composes multiple react router onEnter hooks
- * @params {function} ...hooks - the functions you want to run serially
+ * @param {function} ...hooks - the functions you want to run serially
  */
 
 
