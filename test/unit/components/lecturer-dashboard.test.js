@@ -11,10 +11,10 @@ test('LecturerDashboard renders correctly', (t) => {
     t.plan(2);
 
     const node = renderIntoDocument(<div><Dashboard modules={ data } /></div>);
-    const expectedHeader = ReactDOM.findDOMNode(node).querySelector('h1').textContent;
+    const expectedHeader = ReactDOM.findDOMNode(node).querySelector('strong').textContent;
     const expectedButton = ReactDOM.findDOMNode(node).querySelector('button').textContent;
 
-    t.equal(expectedHeader, 'Welcome, lecturer');
+    t.equal(expectedHeader, 'Welcome,');
     t.equal(expectedButton, 'Add a new module');
 });
 
