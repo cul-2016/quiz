@@ -3,7 +3,7 @@ import { server } from '../../utils/init';
 import { getModuleData as expected } from '../../utils/data-fixtures';
 
 
-test('`get-module` endpoint works', (t) => {
+test.skip('`get-module` endpoint works', (t) => {
 
     t.plan(2);
 

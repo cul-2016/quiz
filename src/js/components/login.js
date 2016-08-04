@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import classnames from 'classnames';
+import { Link } from 'react-router';
 
 
 const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthenticateUser }) => {
@@ -9,28 +10,41 @@ const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthentic
     });
 
     return (
-        <div>
-            This is the login page.
-            <p className={ userValidation }> Please enter a valid email and password</p>
-            <input
-                value={ login.username }
-                onChange={ (e) => handleEmailChange(e.target.value)}
-                type="email"
-                placeholder="Email"
-            />
-            <input
-                value={ login.password }
-                onChange={ (e) => handlePasswordChange(e.target.value)}
-                type="password"
-                placeholder="Password"
-            />
+        <section className="hero is-primary is-fullheight">
+            <div className="hero-body">
+                <div className="container has-text-centered">
+                    <div className="columns">
+                        <div className="box column is-one-third is-offset-one-third">
+                            <h2 className="login-title">
+                              Log In
+                            </h2>
+                            <p className={ userValidation }> <span className="tag is-danger">Please enter a valid email and password</span></p>
+                            <input
+                                className="input login-input"
+                                value={ login.username }
+                                onChange={ (e) => handleEmailChange(e.target.value)}
+                                type="email"
+                                placeholder="Email"
+                                />
 
-
-        <button onClick={ () => handleAuthenticateUser(login.email, login.password) }>
-            Login
-        </button>
-
-        </div>
+                            <input
+                                className="input login-input"
+                                value={ login.password }
+                                onChange={ (e) => handlePasswordChange(e.target.value)}
+                                type="password"
+                                placeholder="Password"
+                                />
+                            <a className="button is-warning login-button" onClick={ () => handleAuthenticateUser(login.email, login.password) }>
+                                Login
+                            </a>
+                            <p>
+                            <Link to="/register-student"><span className="tag is-success">Not a user already? Please Register here</span></Link>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     );
 };
 
