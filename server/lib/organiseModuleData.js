@@ -1,8 +1,3 @@
-require('babel-register')({
-    presets: ['es2015']
-});
-var camelCaseObjectKeys = require('./camelCaseObjectKeys');
-console.log(camelCaseObjectKeys);
 /**
  * Function to organise module into the expected structure.
  * Returns an object with the expected structure.
@@ -13,20 +8,10 @@ console.log(camelCaseObjectKeys);
 
 function organiseModuleData (module_id, data, callback) {
 
-    console.log(">>>>>>>>",Object.keys(data));
-    var newData = data.quizzes.map((quiz, i) => {
-        if (i === 0) {
-
-            // console.log("quiz", quiz);
-        }
-        return camelCaseObjectKeys(quiz);
-    });
-    // console.log("DATAAAA", newData);
-
     const organisedData = {
         module_id: module_id,
         name: data.general[0].name,
-        numEnrolled: data.general[0].num_enrolled,
+        num_enrolled: parseInt(data.general[0].num_enrolled, 10),
         medals: {
             medal_name: [
                 data.medals[0].medal_name,
@@ -34,8 +19,8 @@ function organiseModuleData (module_id, data, callback) {
                 data.medals[2].medal_name
             ],
             condition: [
-                data.medals[0].condition,
-                data.medals[1].condition
+                parseInt(data.medals[0].condition, 10),
+                parseInt(data.medals[1].condition, 10)
             ]
         },
         trophies: {
@@ -46,16 +31,16 @@ function organiseModuleData (module_id, data, callback) {
                 data.trophies[3].trophy_name
             ],
             condition: [
-                data.trophies[0].condition,
-                data.trophies[1].condition,
-                data.trophies[2].condition,
-                data.trophies[3].condition,
+                parseInt(data.trophies[0].condition, 10),
+                parseInt(data.trophies[1].condition, 10),
+                parseInt(data.trophies[2].condition, 10),
+                parseInt(data.trophies[3].condition, 10),
             ]
         },
         quizzes: data.quizzes
     };
 
-    // callback(null, organisedData);
+    callback(null, organisedData);
 }
 
 module.exports = organiseModuleData;

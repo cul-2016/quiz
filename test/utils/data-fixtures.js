@@ -77,23 +77,23 @@ export const getModuleData = {
             "overall_average",
             "participation"
         ],
-        condition: [3, 60, 100, 1]
+        condition: [1, 100, 70, 3]
     },
-    numEnrolled: 1,
+    num_enrolled: 1,
     quizzes: [
         {
-            quiz_id: 2,
+            quiz_id: 1,
             name: 'Week 1 Quiz',
-            numQuestions: 22,
-            numEntries: 1,
-            isPresented: false
+            num_questions: '2',
+            num_entries: '1',
+            is_presented: false
         },
         {
-            quiz_id: 5,
+            quiz_id: 2,
             name: 'Week 2 Quiz',
-            numQuestions: 2,
-            numEntries: 1,
-            isPresented: false
+            num_questions: '2',
+            num_entries: '1',
+            is_presented: false
         }
     ]
 };

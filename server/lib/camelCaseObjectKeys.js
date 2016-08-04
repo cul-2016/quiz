@@ -6,29 +6,33 @@
 
 function convertToCamelCase (object) {
 
-    String.prototype.toCamelCase = () => {
+    String.prototype.toCamelCase = (e) => {
+        /*
         // console.log("what we got", this);
         const snakeCase = new RegExp(/_/);
-
-        try {
-
-            let underscoreIndex = this.match(snakeCase).index;
+        console.log("E", e);
+        // try {
+            console.log("THIS", this.valueOf());
+            let underscoreIndex = this.valueOf().match(snakeCase).index;
             // console.log("index", underscoreIndex);
-            let result = this.substr(0, underscoreIndex - 1) + this.charAt(underscoreIndex + 1).toUpperCase() + this.substr(underscoreIndex + 2);
+            let result = this.valueOf().substr(0, underscoreIndex - 1) + this.valueOf().charAt(underscoreIndex + 1).toUpperCase() + this.valueOf().substr(underscoreIndex + 2);
             // console.log("AFTER CAMEL", result);
             return result;
-        } catch (e) {
+        // } catch (e) {
 
-            return this;
-        }
+            // return this;
+        // }
+        */
+        return 8;
     };
 
 
     let copy = Object.assign({}, object);
 
     for (let key in copy) {
-        console.log(key);
-        console.log(key.prototype);
+        console.log("key", key.valueOf());
+        // console.log("prototype", String.prototype.toUpperCase);
+        console.log("res", key.toCamelCase());
         copy[key.toCamelCase()] = object[key];
     }
     console.log(copy);
