@@ -7,7 +7,7 @@ module.exports = {
     handler: (request, reply) => {
 
         getModule(client, request.query.module_id, (error, module) => {
-
+            console.log('you are in getmodule cb.', error, module);
             var verdict = error || module;
             reply(verdict);
         });

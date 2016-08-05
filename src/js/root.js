@@ -29,10 +29,10 @@ const Root = ({ store }) => (
                     path="auth"
                     component={ Spinner } />
                 <Route
-                    path="/register-student"
+                    path="register-student"
                     component={ RegisterUserContainer } />
                 <Route
-                    path="/register-lecturer1000"
+                    path="register-lecturer1000"
                     component={ RegisterUserContainer } />
                 <Route
                     onEnter={ composeHooks(hooks.authenticate, hooks.fetchUserDetails) }
@@ -44,8 +44,12 @@ const Root = ({ store }) => (
                     component={ NewModuleContainer } />
                 <Route
                     onEnter={ composeHooks(hooks.authenticate, hooks.fetchModule) }
-                    path="module/:module_id"
+                    path="/:module_id"
                     component={ ModuleContainer } />
+                    <Route
+                        onEnter={ composeHooks(hooks.authenticate, hooks.fetchModule) }
+                        path=":module_id/:quiz_id"
+                        component={ ModuleContainer } />
                 <Route
                     onEnter={ hooks.authenticate }
                     path=":module_id/new-quiz"

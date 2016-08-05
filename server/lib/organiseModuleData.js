@@ -7,12 +7,12 @@
  */
 
 function organiseModuleData (module_id, data, callback) {
-
+    console.log(data);
     const organisedData = {
         module: {
             module_id: module_id,
-            name: data.general[0].name,
-            num_enrolled: parseInt(data.general[0].num_enrolled, 10),
+            name: data.name[0].name,
+            num_enrolled: parseInt(data.num_enrolled[0].num_enrolled, 10),
             medals: {
                 medal_name: [
                     data.medals[0].medal_name,

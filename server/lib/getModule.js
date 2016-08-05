@@ -33,22 +33,31 @@ function getModule (client, module_id, callback) {
                     console.error(error);
                     callback(error);
                 }
-                query(client, queries.getModule.numEnrolled, [module_id], (error, numEnrolled) => {
+                query(client, queries.getModule.num_enrolled, [module_id], (error, num_enrolled) => {
 
                     if (error) {
                         console.error(error);
                         callback(error);
                     }
-                    const allData = {
-                        quizzes: quizzes.rows,
-                        medals: medals.rows,
-                        trophies: trophies.rows,
-                        general: numEnrolled.rows
-                    };
-                    // console.log(allData);
-                    organiseModuleData(module_id, allData, (error, organisedData) => {
 
-                        callback(null, organisedData);
+                    query(client, queries.getModule.name, [module_id], (error, name) => {
+
+                        if (error) {
+                            console.error(error);
+                            callback(error);
+                        }
+                        const allData = {
+                            quizzes: quizzes.rows,
+                            medals: medals.rows,
+                            trophies: trophies.rows,
+                            num_enrolled: num_enrolled.rows,
+                            name: name.rows
+                        };
+                        // console.log(allData);
+                        organiseModuleData(module_id, allData, (error, organisedData) => {
+
+                            callback(null, organisedData);
+                        });
                     });
                 });
             });

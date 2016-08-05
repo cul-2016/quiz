@@ -5,7 +5,7 @@ const Dashboard = ({ modules }) => {
     let lecturerModules = modules.map((module, i) => {
         return (
             <div className="box column is-8 is-offset-2" key={ i }>
-                <Link  to={ 'module/' + module.module_id } >
+                <Link  to={ module.module_id } >
                     <div key={ i }>
                         { `${module.module_id} ${module.name}` }
                     </div>
