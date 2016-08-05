@@ -27,7 +27,7 @@ export function getUserDetails (user_id) {
         .then((response) => {
             dispatch(getUserDetailsSuccess(response.data));
             if (response.data.is_lecturer) {
-                hashHistory.push('/dashboard-lecturer');
+                hashHistory.push('/dashboard');
             } else {
                 hashHistory.push('/dashboard-student');
             }

@@ -4,8 +4,7 @@ import { Provider } from 'react-redux';
 
 import App from './components/app';
 import LoginContainer from './containers/login';
-import LecturerDashboardContainer from './containers/lecturer-dashboard';
-import StudentDashboardContainer from './containers/student-dashboard';
+import DashboardContainer from './containers/dashboard';
 import NewModuleContainer from './containers/new-module';
 import RegisterUserContainer from './containers/register-user';
 import ModuleContainer from './containers/module';
@@ -36,13 +35,9 @@ const Root = ({ store }) => (
                     path="/register-lecturer1000"
                     component={ RegisterUserContainer } />
                 <Route
-                    onEnter={ composeHooks(hooks.authenticate, hooks.hydrateDashboard) }
-                    path="dashboard-lecturer"
-                    component={ LecturerDashboardContainer } />
-                <Route
-                    onEnter={ hooks.authenticate }
-                    path="dashboard-student"
-                    component={ StudentDashboardContainer } />
+                    onEnter={ composeHooks(hooks.authenticate, hooks.fetchUserDetails) }
+                    path="dashboard"
+                    component={ DashboardContainer } />
                 <Route
                     onEnter={ hooks.authenticate }
                     path="new-module"

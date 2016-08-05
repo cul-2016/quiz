@@ -2,11 +2,11 @@ import test from 'tape';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { renderIntoDocument } from 'react-addons-test-utils';
-import Dashboard from '../../../src/js/components/lecturer/dashboard';
+import Dashboard from '../../../src/js/components/dashboard';
 import { dashboardData as data } from '../../utils/data-fixtures';
 
 
-test('LecturerDashboard renders correctly', (t) => {
+test('Dashboard renders correctly', (t) => {
 
     t.plan(2);
 
