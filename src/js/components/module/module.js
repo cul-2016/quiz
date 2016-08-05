@@ -6,7 +6,6 @@ import { Link } from 'react-router';
 import Spinner from '../general/spinner';
 
 const Module = ({ module, quizzes, isFetchingModule }) => { // eslint-disable-line no-unused-vars
-    console.log(module, quizzes, '<<<<<');
 
     return (
         <div>

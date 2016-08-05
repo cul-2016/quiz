@@ -11,7 +11,6 @@ var query = require('./query');
  */
 
 function getModuleList (client, user_id, is_lecturer, callback) {
-    
     var moduleQuery, moduleValue;
     if (is_lecturer) {
 
@@ -22,7 +21,6 @@ function getModuleList (client, user_id, is_lecturer, callback) {
         moduleQuery = 'SELECT module_members.module_id, modules.name FROM module_members INNER JOIN modules ON module_members.module_id = modules.module_id WHERE module_members.user_id = $1;';
         moduleValue = [user_id];
     }
-    console.log(moduleQuery);
     query(client, moduleQuery, moduleValue, (error, response) => {
 
         if (error) {

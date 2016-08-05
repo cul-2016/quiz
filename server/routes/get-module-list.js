@@ -7,7 +7,6 @@ module.exports = {
     handler: (request, reply) => {
         var user_id = request.query.user_id;
         var is_lecturer = request.query.is_lecturer;
-        console.log("IS YOU A LECTURER", is_lecturer);
         if (is_lecturer !== undefined) {
 
             is_lecturer = is_lecturer.toLowerCase() === "true";
@@ -16,7 +15,6 @@ module.exports = {
                 reply(verdict);
             });
         } else {
-            console.log("we have an error");
             reply(new Error('is_lecturer is not defined'));
         }
     }
