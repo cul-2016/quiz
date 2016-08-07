@@ -44,7 +44,7 @@ export function registeringUser (email, name, password, is_lecturer) {
                     }
                 }
             }, (error) => {
-                console.log(error, 'error from axios /save-user');
+                console.error(error, 'error from axios /save-user');
             })
             .catch((error) => {
                 dispatch(registeringUserFailure(error));

@@ -1,42 +1,31 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
+import Nav from './general/nav';
 
-const Dashboard = ({ modules }) => {
+const Dashboard = ({ modules, username }) => {
     let lecturerModules = modules.map((module, i) => {
         return (
-            <div className="box column is-8 is-offset-2" key={ i }>
+            <div className="box column is-8 is-offset-2 module-list-item" key={ i }>
                 <Link  to={ module.module_id } >
                     <div key={ i }>
-                        { `${module.module_id} ${module.name}` }
+                        { `${module.module_id}: ${module.name}` }
                     </div>
                 </Link>
             </div>
         );
     });
     return (
-        <div>
-            <nav className="nav">
-                <div className="nav-left">
-                    <p className="nav-item is-brand">
-                    <strong>Welcome,</strong> lecturer
-                    </p>
-                </div>
-                <div className="nav-right nav-menu">
-                    <p className="nav-item" >
-                    Logout
-                    </p>
-                </div>
-            </nav>
+        <div className='dashboard'>
+            <Nav username={ username } />
 
-            <div className="columns">
-                <div className="column is-4 is-offset-8">
-                    <Link to="new-module">
-                        <button className="button is-primary">
-                            Add a new module
-                        </button>
-                    </Link>
-                </div>
+            <div className="column is-2 is-offset-8">
+                <Link to="new-module">
+                    <button className="button is-primary">
+                        Add a new module
+                    </button>
+                </Link>
             </div>
+
             <div>
                 { lecturerModules }
             </div>
@@ -45,7 +34,8 @@ const Dashboard = ({ modules }) => {
 };
 
 Dashboard.propTypes = {
-    modules: PropTypes.array.isRequired
+    modules: PropTypes.array.isRequired,
+    username: PropTypes.string
 };
 
 export default Dashboard;

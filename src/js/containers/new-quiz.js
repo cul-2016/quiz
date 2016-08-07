@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import NewQuiz from '../components/quiz/new-quiz';
+import NewQuiz from '../components/new-quiz/new-quiz';
 import { addQuestion, updateValue, updateQuizName, saveQuiz } from '../actions/new-quiz';
 
 const mapStateToProps = (state) => ({
@@ -22,7 +22,6 @@ const mapDispatchToProps = (dispatch) => ({
     },
 
     handleSaveQuiz: (module_id, quizName, questions) => {
-        console.log('>>>>', module_id, quizName, questions);
         dispatch(saveQuiz(module_id, quizName, questions));
     }
 });

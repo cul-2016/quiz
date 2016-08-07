@@ -10,6 +10,10 @@ import RegisterUserContainer from './containers/register-user';
 import ModuleContainer from './containers/module';
 import Spinner from './components/general/spinner';
 import NewQuizContainer from './containers/new-quiz';
+import LeaderboardContainer from './containers/leaderboard';
+import LiveQuizContainer from './containers/live-quiz';
+import QuizReviewContainer from './containers/quiz-review';
+import QuizHistoryContainer from './containers/quiz-history';
 
 import composeHooks from './lib/composeHooks';
 import * as hooks from './lib/onEnterHooks';
@@ -46,14 +50,26 @@ const Root = ({ store }) => (
                     onEnter={ composeHooks(hooks.authenticate, hooks.fetchModule) }
                     path="/:module_id"
                     component={ ModuleContainer } />
-                    <Route
-                        onEnter={ composeHooks(hooks.authenticate, hooks.fetchModule) }
-                        path=":module_id/:quiz_id"
-                        component={ ModuleContainer } />
                 <Route
                     onEnter={ hooks.authenticate }
                     path=":module_id/new-quiz"
                     component={ NewQuizContainer } />
+                <Route
+                    onEnter={ composeHooks(hooks.authenticate) }
+                    path=":module_id/:quiz_id/live"
+                    component={ LiveQuizContainer } />
+                <Route
+                    onEnter={ composeHooks(hooks.authenticate) }
+                    path=":module_id/:quiz_id/review"
+                    component={ QuizReviewContainer } />
+                <Route
+                    onEnter={ composeHooks(hooks.authenticate) }
+                    path=":module_id/:quiz_id/history"
+                    component={ QuizHistoryContainer } />
+                <Route
+                    onEnter={ composeHooks(hooks.authenticate, hooks.fetchModule) }
+                    path=":module_id/leaderboard"
+                    component={ LeaderboardContainer } />
             </Route>
         </Router>
     </Provider>
