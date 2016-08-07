@@ -43,7 +43,7 @@ export function authenticateUser (email, password) {
                     dispatch(setUserDetails(response.data));
                     dispatch(authenticateUserSuccess(true));
                     if (response.data.is_lecturer) {
-                        hashHistory.push('/dashboard-lecturer');
+                        hashHistory.push('/dashboard');
                     } else {
                         hashHistory.push('/dashboard-student');
                     }

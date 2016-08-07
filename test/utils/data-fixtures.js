@@ -90,22 +90,24 @@ export const questions = [
     }
 ];
 export const getModuleData = {
-    module_id: 'TEST',
-    name: 'test module',
-    medals: {
-        medal_name: ["bronze", "silver", "gold"],
-        condition: [39, 69]
+    module: {
+        module_id: 'TEST',
+        name: 'test module',
+        medals: {
+            medal_name: ["bronze", "silver", "gold"],
+            condition: [39, 69]
+        },
+        trophies: {
+            trophy_name: [
+                "first_quiz",
+                "high_score",
+                "overall_average",
+                "participation"
+            ],
+            condition: [1, 100, 70, 3]
+        },
+        num_enrolled: 1
     },
-    trophies: {
-        trophy_name: [
-            "first_quiz",
-            "high_score",
-            "overall_average",
-            "participation"
-        ],
-        condition: [1, 100, 70, 3]
-    },
-    num_enrolled: 1,
     quizzes: [
         {
             quiz_id: 1,

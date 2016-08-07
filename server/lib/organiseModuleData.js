@@ -9,33 +9,35 @@
 function organiseModuleData (module_id, data, callback) {
 
     const organisedData = {
-        module_id: module_id,
-        name: data.general[0].name,
-        num_enrolled: parseInt(data.general[0].num_enrolled, 10),
-        medals: {
-            medal_name: [
-                data.medals[0].medal_name,
-                data.medals[1].medal_name,
-                data.medals[2].medal_name
-            ],
-            condition: [
-                parseInt(data.medals[0].condition, 10),
-                parseInt(data.medals[1].condition, 10)
-            ]
-        },
-        trophies: {
-            trophy_name: [
-                data.trophies[0].trophy_name,
-                data.trophies[1].trophy_name,
-                data.trophies[2].trophy_name,
-                data.trophies[3].trophy_name
-            ],
-            condition: [
-                parseInt(data.trophies[0].condition, 10),
-                parseInt(data.trophies[1].condition, 10),
-                parseInt(data.trophies[2].condition, 10),
-                parseInt(data.trophies[3].condition, 10),
-            ]
+        module: {
+            module_id: module_id,
+            name: data.name[0].name,
+            num_enrolled: parseInt(data.num_enrolled[0].num_enrolled, 10),
+            medals: {
+                medal_name: [
+                    data.medals[0].medal_name,
+                    data.medals[1].medal_name,
+                    data.medals[2].medal_name
+                ],
+                condition: [
+                    parseInt(data.medals[0].condition, 10),
+                    parseInt(data.medals[1].condition, 10)
+                ]
+            },
+            trophies: {
+                trophy_name: [
+                    data.trophies[0].trophy_name,
+                    data.trophies[1].trophy_name,
+                    data.trophies[2].trophy_name,
+                    data.trophies[3].trophy_name
+                ],
+                condition: [
+                    parseInt(data.trophies[0].condition, 10),
+                    parseInt(data.trophies[1].condition, 10),
+                    parseInt(data.trophies[2].condition, 10),
+                    parseInt(data.trophies[3].condition, 10),
+                ]
+            }
         },
         quizzes: data.quizzes
     };

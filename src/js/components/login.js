@@ -19,6 +19,7 @@ const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthentic
                               Log In
                             </h2>
                             <p className={ userValidation }> <span className="tag is-danger">Please enter a valid email and password</span></p>
+                            <label className="label">Email</label>
                             <input
                                 className="input login-input"
                                 value={ login.username }
@@ -27,6 +28,7 @@ const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthentic
                                 placeholder="Email"
                                 />
 
+                            <label className="label">Password</label>
                             <input
                                 className="input login-input"
                                 value={ login.password }

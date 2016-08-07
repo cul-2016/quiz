@@ -11,8 +11,8 @@ const Quizzes = ({ quizzes }) => {
 
             <div key={ index }>
                 <h5>{ quiz.name }</h5>
-                <p>{`Number of questions: ${quiz.numQuestions}`}</p>
-                <p>{`Number of entries: ${quiz.numEntries}`}</p>
+                <p>{`Number of questions: ${quiz.num_questions}`}</p>
+                <p>{`Number of entries: ${quiz.num_entries}`}</p>
                 <p>Presented? <i className={ iconClasses } /></p>
             </div>
         );

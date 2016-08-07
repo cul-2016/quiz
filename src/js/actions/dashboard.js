@@ -1,5 +1,6 @@
 import axios from 'axios';
 import getUserID from '../lib/getUserID';
+import { store } from '../store';
 
 export const GET_DASHBOARD_REQUEST = 'GET_DASHBOARD_REQUEST';
 export const GET_DASHBOARD_SUCCESS = 'GET_DASHBOARD_SUCCESS';
@@ -13,8 +14,9 @@ export function getDashboard () {
         dispatch(getDashboardRequest());
 
         let userID = getUserID();
+        let is_lecturer = store.getState().user.is_lecturer;
 
-        axios.get(`/get-module-list?user_id=${userID}`)
+        axios.get(`/get-module-list?user_id=${userID}&is_lecturer=${is_lecturer}`)
             .then((response) => {
                 dispatch(getDashboardSuccess(response.data));
             })

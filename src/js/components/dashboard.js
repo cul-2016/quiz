@@ -2,11 +2,10 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
 const Dashboard = ({ modules }) => {
-
     let lecturerModules = modules.map((module, i) => {
         return (
-            <div className="column is-8 is-offset-2" key={ i }>
-                <Link  to={ 'module/' + module.module_id } >
+            <div className="box column is-8 is-offset-2" key={ i }>
+                <Link  to={ module.module_id } >
                     <div key={ i }>
                         { `${module.module_id} ${module.name}` }
                     </div>
@@ -14,7 +13,6 @@ const Dashboard = ({ modules }) => {
             </div>
         );
     });
-
     return (
         <div>
             <nav className="nav">
@@ -29,7 +27,7 @@ const Dashboard = ({ modules }) => {
                     </p>
                 </div>
             </nav>
-            
+
             <div className="columns">
                 <div className="column is-4 is-offset-8">
                     <Link to="new-module">
@@ -39,7 +37,7 @@ const Dashboard = ({ modules }) => {
                     </Link>
                 </div>
             </div>
-            <div className="box columns">
+            <div>
                 { lecturerModules }
             </div>
         </div>

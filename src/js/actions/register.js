@@ -38,7 +38,7 @@ export function registeringUser (email, name, password, is_lecturer) {
                     dispatch(registeringUserSuccess(true));
                     dispatch(setUserDetails(response.data));
                     if (response.data.is_lecturer) {
-                        hashHistory.push('/dashboard-lecturer');
+                        hashHistory.push('/dashboard');
                     } else {
                         hashHistory.push('/dashboard-student');
                     }
