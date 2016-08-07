@@ -15,7 +15,7 @@ export const getModule = (module_id) => {
 
         axios.get(`get-module?module_id=${module_id}`)
             .then((response) => {
-                console.log(response.data);
+
                 dispatch(getModuleSuccess(response.data));
             }, (error) => {
                 console.error(error, 'error from server');

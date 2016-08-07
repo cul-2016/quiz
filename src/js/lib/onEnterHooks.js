@@ -64,7 +64,6 @@ export function fetchUserDetails (nextState, replace, callback) {
  * @param {function} callback - (optional) can be used to make the transition block
  */
 export function fetchModule (nextState, replace, callback) {
-    console.log(nextState.params, '<<<<<<<<<');
     store.dispatch(getModule(nextState.params.module_id));
     callback();
 }

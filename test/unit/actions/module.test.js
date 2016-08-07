@@ -11,7 +11,7 @@ test('getModule async action creator returns expected action', (t) => {
 
     let actual;
     const { dispatch, queue } = createThunk();
-    console.log(createThunk(), 'createThunk');
+
     dispatch(actions.getModule());
 
     [{ ...actual }] = queue;

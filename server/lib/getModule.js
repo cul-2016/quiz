@@ -53,7 +53,7 @@ function getModule (client, module_id, callback) {
                             num_enrolled: num_enrolled.rows,
                             name: name.rows
                         };
-                        // console.log(allData);
+
                         organiseModuleData(module_id, allData, (error, organisedData) => {
 
                             callback(null, organisedData);

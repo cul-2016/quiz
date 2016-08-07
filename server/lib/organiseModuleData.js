@@ -7,7 +7,7 @@
  */
 
 function organiseModuleData (module_id, data, callback) {
-    console.log(data);
+
     const organisedData = {
         module: {
             module_id: module_id,

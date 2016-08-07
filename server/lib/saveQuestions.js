@@ -16,9 +16,9 @@ function saveQuestions (client, questions, callback) {
         if (error) {
             return callback(error);
         }
-        console.log(error, builtStatement, 'from composeQuestionStatement');
+
         preparedQuery(client, builtStatement, (error, response) => {
-            console.log(error, response, 'preparedQuery');
+
             if (error) {
                 return callback(error);
             }
