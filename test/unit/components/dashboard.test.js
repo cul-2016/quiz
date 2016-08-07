@@ -8,13 +8,11 @@ import { dashboardData as data } from '../../utils/data-fixtures';
 
 test('Dashboard renders correctly', (t) => {
 
-    t.plan(2);
+    t.plan(1);
 
     const node = renderIntoDocument(<div><Dashboard modules={ data } /></div>);
-    const expectedHeader = ReactDOM.findDOMNode(node).querySelector('strong').textContent;
     const expectedButton = ReactDOM.findDOMNode(node).querySelector('button').textContent;
 
-    t.equal(expectedHeader, 'Welcome,');
     t.equal(expectedButton, 'Add a new module');
 });
 
