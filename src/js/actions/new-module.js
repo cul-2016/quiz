@@ -24,7 +24,6 @@ export const validateModuleID = (id) => {
 
         axios.get(`/validate-module?module_id=${id}`)
         .then((response) => {
-            console.log("response", response.data);
             dispatch(validateModuleIDSuccess(response.data));
         })
         .catch((error) => {
