@@ -39,7 +39,7 @@ const Module = ({ module, quizzes, isFetchingModule }) => { // eslint-disable-li
 Module.propTypes = {
     module: PropTypes.object.isRequired,
     quizzes: PropTypes.array.isRequired,
-    isFetchingModule: PropTypes.func.isRequired
+    isFetchingModule: PropTypes.bool.isRequired
 };
 
 export default Module;
