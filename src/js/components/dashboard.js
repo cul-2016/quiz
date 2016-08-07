@@ -18,15 +18,14 @@ const Dashboard = ({ modules, username }) => {
         <div className='dashboard'>
             <Nav username={ username } />
 
-            <div className="columns">
-                <div className="column is-2 is-offset-8">
-                    <Link to="new-module">
-                        <button className="button is-primary">
-                            Add a new module
-                        </button>
-                    </Link>
-                </div>
+            <div className="column is-2 is-offset-8">
+                <Link to="new-module">
+                    <button className="button is-primary">
+                        Add a new module
+                    </button>
+                </Link>
             </div>
+
             <div>
                 { lecturerModules }
             </div>
