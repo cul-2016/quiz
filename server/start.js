@@ -11,7 +11,7 @@ io.on('connection', (socket) => {
 
     socket.on('disconnect', () => {
         console.log('DISCONNECTED');
-        io.emit('disconnected'); // this event is sent back to client
+        io.emit('disconnected', socket.id); // this event is sent back to client
     });
 
     /****/
@@ -22,14 +22,15 @@ io.on('connection', (socket) => {
         cb('Successfully joined room: ' + room);
     });
 
-    socket.on('start_quiz', (room, cb) => {
+    socket.on('lecturer_start_quiz', (quizInfo, cb) => {
+
+        var room = quizInfo.room;
+        var quiz_id = quizInfo.quiz_id;
+
         // broadcast to whole room
-        console.log(room);
-        socket.broadcast.to(room).emit('quiz has begun', 'this is the quiz starting! :)');
-        cb('THIS IS THE CALLBACK FROM SICKET BORADCAST Quiz has begun');
+        socket.broadcast.to(room).emit('invite_student_to_quiz', quiz_id);
+        cb('THIS IS THE CALLBACK');
     });
-
-
 });
 
 server.start((error) => {
