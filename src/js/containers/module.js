@@ -3,7 +3,6 @@ import Module from '../components/module/module';
 import { socketClient } from '../socket';
 import { store } from '../store.js';
 import { listenForModuleID } from '../lib/subscriptions';
-import { hashHistory } from 'react-router';
 
 listenForModuleID(store, socketClient);
 
