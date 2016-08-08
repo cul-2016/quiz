@@ -1,6 +1,10 @@
 import { connect } from 'react-redux';
 import Module from '../components/module/module';
+import { socketClient } from '../socket';
+import { store } from '../store.js';
+import { listenForModuleID } from '../lib/subscriptions';
 
+listenForModuleID(store, socketClient);
 
 const mapStateToProps = (state) => ({
     module: state.module.module,

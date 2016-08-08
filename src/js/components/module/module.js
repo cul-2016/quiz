@@ -25,7 +25,9 @@ const Module = ({ module, quizzes, isFetchingModule, username }) => { // eslint-
                             Leaderboard
                         </button>
                     </Link>
+                    
                     <Link to={ `${module.module_id}/new-quiz` } >
+
                         <button className="button">
                             Add a new Quiz
                         </button>
@@ -48,8 +50,8 @@ const Module = ({ module, quizzes, isFetchingModule, username }) => { // eslint-
 };
 
 Module.propTypes = {
-    module: PropTypes.object.isRequired,
-    quizzes: PropTypes.array.isRequired,
+    module: PropTypes.object,
+    quizzes: PropTypes.array,
     isFetchingModule: PropTypes.bool.isRequired,
     username: PropTypes.string
 };
