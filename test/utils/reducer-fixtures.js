@@ -62,8 +62,9 @@ export const module = {
 
 export const liveQuiz = {
     quiz_id: undefined,
-    question: undefined,
-    response: undefined
+    questions: undefined,
+    response: undefined,
+    currentQuestion: 0
 };
 
 export const newQuiz = {

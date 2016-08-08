@@ -4,7 +4,7 @@ import { getDashboard } from '../actions/dashboard';
  * Dispatches an action to hydrate the dashboard view
  * @param {object} store - redux store
  */
-export function listenForUserState (store) {
+export function fetchDashboard (store) {
 
     let unsubscribe = store.subscribe(listener);
 

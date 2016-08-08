@@ -21,9 +21,11 @@ const StudentModule = ({ isFetchingModule, username, isLiveQuiz, quiz_id, questi
                 <Nav username={ username } />
                 THIS IS THE STUDENT VIEW
 
-                <button className={ buttonClasses }>
-                    JOIN THE LIVE QUIZ!
-                </button>
+                <Link to='student/live'>
+                    <button className={ buttonClasses }>
+                        JOIN THE LIVE QUIZ!
+                    </button>
+                </Link>
             </div>
         }
         </div>
@@ -32,7 +34,7 @@ const StudentModule = ({ isFetchingModule, username, isLiveQuiz, quiz_id, questi
 
 StudentModule.propTypes = {
     isFetchingModule: PropTypes.bool.isRequired,
-    username: PropTypes.string,
+    username: PropTypes.string.isRequired,
     isLiveQuiz: PropTypes.bool.isRequired,
     quiz_id: PropTypes.number,
     question: PropTypes.string,

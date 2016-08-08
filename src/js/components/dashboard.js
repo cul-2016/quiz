@@ -9,7 +9,7 @@ const Dashboard = ({ modules, username, is_lecturer }) => {
 
         return (
             <div className="box column is-8 is-offset-2 module-list-item" key={ i }>
-                <Link  to={ `${role}/${module.module_id}` } >
+                <Link  to={ `${module.module_id}/${role}` } >
                     <div key={ i }>
                         { `${module.module_id}: ${module.name}` }
                     </div>

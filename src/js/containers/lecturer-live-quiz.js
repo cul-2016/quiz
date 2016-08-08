@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import LiveQuiz from '../components/live-quiz';
+import LiveQuiz from '../components/live-quiz/live-quiz';
 
 
 const mapStateToProps = (state) => ({ // eslint-disable-line
@@ -26,7 +26,8 @@ const mapStateToProps = (state) => ({ // eslint-disable-line
             D: 'Paris'
         }
     ],
-    currentQuestion: 0
+    currentQuestion: 0,
+    is_lecturer: state.user.is_lecturer
 });
 
 const mapDispatchToProps = (dispatch) => ({ // eslint-disable-line
@@ -37,6 +38,6 @@ const mapDispatchToProps = (dispatch) => ({ // eslint-disable-line
     }
 });
 
-const LiveQuizContainer = connect(mapStateToProps, mapDispatchToProps)(LiveQuiz);
+const LecturerLiveQuizContainer = connect(mapStateToProps, mapDispatchToProps)(LiveQuiz);
 
-export default LiveQuizContainer;
+export default LecturerLiveQuizContainer;

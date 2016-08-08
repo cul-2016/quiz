@@ -6,15 +6,18 @@ import { listenForModuleID } from '../lib/subscriptions';
 
 listenForModuleID(store, socketClient);
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state) => {
 
-    isFetchingModule: state.module.isFetchingModule,
-    username: state.user.username,
-    isLiveQuiz: state.module.isLiveQuiz,
-    quiz_id: state.liveQuiz.quiz_id,
-    question: state.liveQuiz.question,
-    response: state.liveQuiz.response
-});
+    return {
+
+        isFetchingModule: state.module.isFetchingModule,
+        username: state.user.username,
+        isLiveQuiz: state.module.isLiveQuiz,
+        quiz_id: state.liveQuiz.quiz_id,
+        question: state.liveQuiz.question,
+        response: state.liveQuiz.response
+    };
+};
 
 const mapDispatchToProps = (dispatch) => ({
     dispatch

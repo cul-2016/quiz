@@ -12,7 +12,8 @@ import StudentModuleContainer from './containers/student-module';
 import Spinner from './components/general/spinner';
 import NewQuizContainer from './containers/new-quiz';
 import LeaderboardContainer from './containers/leaderboard';
-import LiveQuizContainer from './containers/live-quiz';
+import LecturerLiveQuizContainer from './containers/lecturer-live-quiz';
+import StudentLiveQuizContainer from './containers/student-live-quiz';
 import QuizReviewContainer from './containers/quiz-review';
 import QuizHistoryContainer from './containers/quiz-history';
 
@@ -40,7 +41,7 @@ const Root = ({ store }) => (
                     path="register-lecturer1000"
                     component={ RegisterUserContainer } />
                 <Route
-                    onEnter={ composeHooks(hooks.authenticate, hooks.fetchUserDetails) }
+                    onEnter={ hooks.authenticate }
                     path="dashboard"
                     component={ DashboardContainer } />
                 <Route
@@ -49,30 +50,34 @@ const Root = ({ store }) => (
                     component={ NewModuleContainer } />
                 <Route
                     onEnter={ composeHooks(hooks.authenticate, hooks.fetchModule) }
-                    path="lecturer/:module_id"
+                    path=":module_id/lecturer"
                     component={ ModuleContainer } />
                 <Route
                     onEnter={ composeHooks(hooks.authenticate, hooks.fetchModule) }
-                    path="student/:module_id"
+                    path=":module_id/student"
                     component={ StudentModuleContainer } />
                 <Route
                     onEnter={ hooks.authenticate }
                     path=":module_id/new-quiz"
                     component={ NewQuizContainer } />
                 <Route
-                    onEnter={ composeHooks(hooks.authenticate) }
-                    path=":module_id/:quiz_id/live"
-                    component={ LiveQuizContainer } />
+                    onEnter={ hooks.authenticate }
+                    path=":module_id/lecturer/live"
+                    component={ LecturerLiveQuizContainer } />
                 <Route
-                    onEnter={ composeHooks(hooks.authenticate) }
+                    onEnter={ hooks.authenticate }
+                    path=":module_id/student/live"
+                    component={ StudentLiveQuizContainer } />
+                <Route
+                    onEnter={ hooks.authenticate }
                     path=":module_id/:quiz_id/review"
                     component={ QuizReviewContainer } />
                 <Route
-                    onEnter={ composeHooks(hooks.authenticate) }
+                    onEnter={ hooks.authenticate }
                     path=":module_id/:quiz_id/history"
                     component={ QuizHistoryContainer } />
                 <Route
-                    onEnter={ composeHooks(hooks.authenticate, hooks.fetchModule) }
+                    onEnter={ hooks.authenticate }
                     path=":module_id/leaderboard"
                     component={ LeaderboardContainer } />
             </Route>

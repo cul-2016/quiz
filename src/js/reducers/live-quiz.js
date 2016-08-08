@@ -3,8 +3,9 @@ import * as actionsTypes from '../actions/live-quiz';
 
 const initialState = {
     quiz_id: undefined,
-    question: undefined,
-    response: undefined
+    questions: undefined,
+    response: undefined,
+    currentQuestion: 0
 };
 
 export default function liveQuiz (state = initialState, action) {
