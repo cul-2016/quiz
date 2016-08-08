@@ -8,7 +8,8 @@ listenForUserState(store);
 const mapStateToProps = (state) => ({
 
     modules: state.dashboard.data,
-    username: state.user.username
+    username: state.user.username,
+    is_lecturer: state.user.is_lecturer
 });
 
 const DashboardContainer = connect(mapStateToProps)(Dashboard);

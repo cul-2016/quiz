@@ -29,7 +29,7 @@ export function getUserDetails (user_id) {
             if (response.data.is_lecturer) {
                 hashHistory.push('/dashboard');
             } else {
-                hashHistory.push('/dashboard-student');
+                hashHistory.push('/dashboard');
             }
         })
         .catch((error) => {

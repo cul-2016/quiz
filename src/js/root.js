@@ -8,6 +8,7 @@ import DashboardContainer from './containers/dashboard';
 import NewModuleContainer from './containers/new-module';
 import RegisterUserContainer from './containers/register-user';
 import ModuleContainer from './containers/module';
+import StudentModuleContainer from './containers/student-module';
 import Spinner from './components/general/spinner';
 import NewQuizContainer from './containers/new-quiz';
 import LeaderboardContainer from './containers/leaderboard';
@@ -48,8 +49,12 @@ const Root = ({ store }) => (
                     component={ NewModuleContainer } />
                 <Route
                     onEnter={ composeHooks(hooks.authenticate, hooks.fetchModule) }
-                    path="/:module_id"
+                    path="lecturer/:module_id"
                     component={ ModuleContainer } />
+                <Route
+                    onEnter={ composeHooks(hooks.authenticate, hooks.fetchModule) }
+                    path="student/:module_id"
+                    component={ StudentModuleContainer } />
                 <Route
                     onEnter={ hooks.authenticate }
                     path=":module_id/new-quiz"
