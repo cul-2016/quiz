@@ -24,7 +24,8 @@ io.on('connection', (socket) => {
 
     socket.on('start_quiz', (room, cb) => {
         // broadcast to whole room
-        socket.to(room).emit('quiz has begun');
+        console.log(room);
+        socket.broadcast.to(room).emit('quiz has begun', 'this is the quiz starting! :)');
         cb('THIS IS THE CALLBACK FROM SICKET BORADCAST Quiz has begun');
     });
 

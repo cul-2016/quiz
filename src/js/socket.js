@@ -10,7 +10,7 @@ socketClient.on('we have connected', (id) => {
     console.log("We're connected!", id);
 });
 
-socketClient.on('quiz has begun', () => {
-
+socketClient.on('quiz has begun', (msg) => {
+    console.log(msg);
     // handle in redux
 });
