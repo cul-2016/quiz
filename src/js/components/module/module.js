@@ -6,7 +6,7 @@ import Quizzes from './quizzes';
 import { Link } from 'react-router';
 import Spinner from '../general/spinner';
 
-const Module = ({ module, quizzes, isFetchingModule, username }) => { // eslint-disable-line no-unused-vars
+const Module = ({ module, quizzes, isFetchingModule, username, startQuiz }) => { // eslint-disable-line no-unused-vars
 
     return (
         <div>
@@ -25,7 +25,7 @@ const Module = ({ module, quizzes, isFetchingModule, username }) => { // eslint-
                             Leaderboard
                         </button>
                     </Link>
-                    
+
                     <Link to={ `${module.module_id}/new-quiz` } >
 
                         <button className="button">
@@ -42,7 +42,8 @@ const Module = ({ module, quizzes, isFetchingModule, username }) => { // eslint-
                     <Medals medals={ module.medals } />
                 </div>
 
-                <Quizzes quizzes={ quizzes } />
+                <Quizzes quizzes={ quizzes }
+                         startQuiz={ startQuiz }/>
             </div>
         }
         </div>
@@ -53,7 +54,8 @@ Module.propTypes = {
     module: PropTypes.object,
     quizzes: PropTypes.array,
     isFetchingModule: PropTypes.bool.isRequired,
-    username: PropTypes.string
+    username: PropTypes.string,
+    startQuiz: PropTypes.func.isRequired
 };
 
 export default Module;

@@ -1,11 +1,15 @@
 import React, { PropTypes } from 'react';
+import classnames from 'classnames';
 
-
-const Quizzes = ({ quizzes }) => {
+const Quizzes = ({ quizzes, startQuiz }) => {
 
     const mappedQuizzes = quizzes.map((quiz, index) => {
 
         let iconClasses = quiz.isPresented ? 'fa fa-check' : 'fa fa-times';
+
+        let buttonClass = classnames("button", {
+            "display-none": quiz.isPresented
+        });
 
         return (
 
@@ -14,6 +18,11 @@ const Quizzes = ({ quizzes }) => {
                 <p>{`Number of questions: ${quiz.num_questions}`}</p>
                 <p>{`Number of entries: ${quiz.num_entries}`}</p>
                 <p>Presented? <i className={ iconClasses } /></p>
+
+                <button className={ buttonClass }
+                        onClick={ () => startQuiz(quiz.quiz_id)}>
+                    Start Quiz
+                </button>
             </div>
         );
     });
@@ -26,7 +35,8 @@ const Quizzes = ({ quizzes }) => {
 };
 
 Quizzes.propTypes = {
-    quizzes: PropTypes.array.isRequired
+    quizzes: PropTypes.array.isRequired,
+    startQuiz: PropTypes.func.isRequired
 };
 
 export default Quizzes;

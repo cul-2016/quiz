@@ -4,10 +4,10 @@ let uri = process.env.DEVELOPMENT ? `${location.protocol}//${location.hostname}:
 
 export const socketClient = io(uri);
 
-socketClient.on('we have connected', () => {
+socketClient.on('we have connected', (id) => {
 
     // handle in redux
-    console.log("We're connected!");
+    console.log("We're connected!", id);
 });
 
 socketClient.on('quiz has begun', () => {

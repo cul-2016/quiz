@@ -6,8 +6,8 @@ var io = socket(server.listener);
 
 io.on('connection', (socket) => {
 
-    io.emit('we have connected');
-    console.log("CONNECTION!");
+    io.emit('we have connected', socket.id);
+    console.log("CONNECTION!", socket.id);
 
     socket.on('disconnect', () => {
         console.log('DISCONNECTED');
@@ -24,8 +24,8 @@ io.on('connection', (socket) => {
 
     socket.on('start_quiz', (room, cb) => {
         // broadcast to whole room
-        io.broadcast.to(room).emit('quiz has begun');
-        cb('Quiz has begun');
+        socket.to(room).emit('quiz has begun');
+        cb('THIS IS THE CALLBACK FROM SICKET BORADCAST Quiz has begun');
     });
 
 

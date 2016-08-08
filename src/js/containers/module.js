@@ -13,8 +13,17 @@ const mapStateToProps = (state) => ({
     username: state.user.username
 });
 
-const mapDispatchToProps = (dispatch) => ({
-    dispatch
+const mapDispatchToProps = (dispatch) => ({ // eslint-disable-line
+
+    startQuiz: (quiz_id) => { // eslint-disable-line
+        let module_id = store.getState().module.module.module_id;
+        // run socket quiz_start emitter
+        socketClient.emit('start_quiz', module_id, (msg) => {
+            console.log(msg);
+            //dispatch to fetch the questions for the given quiz
+            // take user to the given enpoint
+        });
+    }
 });
 
 
