@@ -50,6 +50,15 @@ export default function liveQuiz (state = initialState, action) {
             isQuizStarted: { $set: false }
         });
 
+    case actionsTypes.NEXT_QUESTION:
+        return update(state, {
+            nextQuestionIndex: { $set: state.nextQuestionIndex + 1 }
+        });
+
+    case actionsTypes.PREVIOUS_QUESTION:
+        return update(state, {
+            nextQuestionIndex: { $set: state.nextQuestionIndex - 1 }
+        });
 
     default:
         return state;

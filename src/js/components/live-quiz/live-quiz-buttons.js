@@ -8,11 +8,11 @@ const LiveQuizButtons = ({ is_lecturer, numQuestions, nextQuestionIndex, nextQue
     });
 
     let nextButtonClasses = classnames("button", {
-        "display-none": !is_lecturer || nextQuestionIndex === 0 || nextQuestionIndex === numQuestions - 1
+        "display-none": !is_lecturer || nextQuestionIndex === 0 || nextQuestionIndex === numQuestions
     });
 
     let endButtonClasses = classnames("button", {
-        "display-none": !is_lecturer || nextQuestionIndex !== numQuestions - 1
+        "display-none": !is_lecturer || nextQuestionIndex !== numQuestions
     });
 
     let submitButtonClasses = classnames("button", {
@@ -26,8 +26,8 @@ const LiveQuizButtons = ({ is_lecturer, numQuestions, nextQuestionIndex, nextQue
                 Start quiz!
             </button>
 
-            <button className={ nextButtonClasses } onClick={ () =>  nextQuestion }>
-                Next
+            <button className={ nextButtonClasses } onClick={ nextQuestion }>
+                Next question
             </button>
 
             <button className={ endButtonClasses } onClick={ () => console.log("Ending quiz") }>

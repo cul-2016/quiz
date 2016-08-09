@@ -50,3 +50,40 @@ test('END_QUIZ works', (t) => {
 
     t.deepEqual(actual, expected);
 });
+
+test('NEXT_QUESTION works', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(liveQuizState);
+    const action = {
+        type: 'NEXT_QUESTION',
+    };
+
+    const actual = reducer(initialState, action);
+    const expected = Object.assign({}, liveQuizState, { nextQuestionIndex: 1 });
+
+    t.deepEqual(actual, expected);
+});
+
+test('PREVIOUS_QUESTION works', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(
+        Object.assign(
+            {},
+            liveQuizState,
+            { nextQuestionIndex: 4 }
+        )
+    );
+
+    const action = {
+        type: 'PREVIOUS_QUESTION',
+    };
+
+    const actual = reducer(initialState, action);
+    const expected = Object.assign({}, liveQuizState, { nextQuestionIndex: 3 });
+
+    t.deepEqual(actual, expected);
+});

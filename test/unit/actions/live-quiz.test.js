@@ -26,13 +26,24 @@ test('startQuiz creates the correct action', (t) => {
     t.deepEqual(actual, expected);
 });
 
-test('endQuiz creates the correct action', (t) => {
+test('nextQuestion creates the correct action', (t) => {
     t.plan(1);
 
     const expected = {
-        type: actions.END_QUIZ,
+        type: actions.NEXT_QUESTION
     };
 
-    const actual = deepFreeze(actions.endQuiz());
+    const actual = deepFreeze(actions.nextQuestion());
+    t.deepEqual(actual, expected);
+});
+
+test('previousQuestion creates the correct action', (t) => {
+    t.plan(1);
+
+    const expected = {
+        type: actions.PREVIOUS_QUESTION
+    };
+
+    const actual = deepFreeze(actions.previousQuestion());
     t.deepEqual(actual, expected);
 });

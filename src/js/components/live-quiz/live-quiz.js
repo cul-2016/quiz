@@ -1,13 +1,18 @@
 import React, { PropTypes } from 'react'; //eslint-disable-line no-unused-vars
+import CurrentQuestion from './current-question';
 import LiveQuizButtons from './live-quiz-buttons';
 
 const LiveQuiz = ({ is_lecturer, questions, nextQuestionIndex, nextQuestion, isQuizStarted, submitResponse, startQuiz }) => {
-
+    console.log("QUESTIONS", questions);
     return (
         <div>
             <h1>This is the live quiz</h1>
+            <h2>Question index { nextQuestionIndex }</h2>
             <h3>
-            { isQuizStarted && questions[nextQuestionIndex].question }
+            {
+                isQuizStarted &&
+                <CurrentQuestion data={ questions[nextQuestionIndex - 1] } />
+            }
             </h3>
 
             <LiveQuizButtons
