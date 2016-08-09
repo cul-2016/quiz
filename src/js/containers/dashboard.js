@@ -1,9 +1,6 @@
 import { connect } from 'react-redux';
 import Dashboard from '../components/dashboard';
-import { store } from '../store';
-import { fetchDashboard } from '../lib/subscriptions';
 
-fetchDashboard(store);
 
 const mapStateToProps = (state) => ({
 

@@ -15,7 +15,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({ // eslint-disable-line
 
-    startQuiz: (quiz_id) => {
+    sendQuizInvite: (quiz_id) => {
 
         let quizInfo = {
             room: store.getState().module.module.module_id,
@@ -23,7 +23,7 @@ const mapDispatchToProps = (dispatch) => ({ // eslint-disable-line
             quiz_id
         };
 
-        socketClient.emit('lecturer_start_quiz', quizInfo, (msg) => {
+        socketClient.emit('send_quiz_invite', quizInfo, (msg) => {
             console.log(msg);
             //dispatch to fetch the questions for the given quiz
 
