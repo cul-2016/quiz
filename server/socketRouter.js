@@ -23,7 +23,7 @@ function socketRouter (socket) {
 
         // broadcast to whole room
         socket.broadcast.to(room).emit('receive_quiz_invite', quiz_id);
-        cb('THIS IS THE CALLBACK');
+        cb('STUDENTS INVITED TO QUIZ', room);
     });
 
     socket.on('send_next_question', (questionInfo, cb) => {

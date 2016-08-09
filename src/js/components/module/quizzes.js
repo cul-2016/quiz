@@ -23,7 +23,7 @@ const Quizzes = ({ location, quizzes, sendQuizInvite }) => {
                 <Link to={`${location.pathname}/live`}>
                     <button className={ buttonClass }
                         onClick={ () => sendQuizInvite(quiz.quiz_id) }>
-                        Start Quiz
+                        Invite students to quiz
                     </button>
                 </Link>
             </div>

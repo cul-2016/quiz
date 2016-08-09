@@ -19,17 +19,11 @@ const mapDispatchToProps = (dispatch) => ({ // eslint-disable-line
 
         let quizInfo = {
             room: store.getState().module.module.module_id,
-            // room: 'TEST',
             quiz_id
         };
-
+        console.log(quizInfo);
         socketClient.emit('send_quiz_invite', quizInfo, (msg) => {
             console.log(msg);
-            //dispatch to fetch the questions for the given quiz
-
-            // once we have the question
-            // take user to the given endpoint
-
         });
     }
 });
