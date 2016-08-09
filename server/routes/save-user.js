@@ -21,14 +21,15 @@ module.exports = {
                     if (error) {
                         return reply(error);
                     }
-                    saveUser(client, email, hashedPassword, is_lecturer, username, (error, result) => {
+                    saveUser(client, email, hashedPassword, is_lecturer, username, (error, result) => { // eslint-disable-line no-unused-vars
                         if (error) {
                             return reply(error);
                         }
                         getUser(client, email, (error, userDetails) => {
                             delete userDetails[0].password;
                             return reply(userDetails[0])
-                            .state('cul_id', userDetails[0].user_id.toString(), { path: "/" });
+                            .state('cul_id', userDetails[0].user_id.toString(), { path: "/" })
+                            .state('cul_is_lecturer', userDetails[0].is_lecturer.toString(), { path: "/" });
                         });
                     });
                 });

@@ -40,7 +40,7 @@ export function registeringUser (email, name, password, is_lecturer) {
                     if (response.data.is_lecturer) {
                         hashHistory.push('/dashboard');
                     } else {
-                        hashHistory.push('/dashboard-student');
+                        hashHistory.push('/dashboard');
                     }
                 }
             }, (error) => {

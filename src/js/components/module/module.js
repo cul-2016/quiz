@@ -6,7 +6,7 @@ import Quizzes from './quizzes';
 import { Link } from 'react-router';
 import Spinner from '../general/spinner';
 
-const Module = ({ module, quizzes, isFetchingModule, username }) => { // eslint-disable-line no-unused-vars
+const Module = ({ location, module, quizzes, isFetchingModule, username, sendQuizInvite }) => { // eslint-disable-line no-unused-vars
 
     return (
         <div>
@@ -25,7 +25,9 @@ const Module = ({ module, quizzes, isFetchingModule, username }) => { // eslint-
                             Leaderboard
                         </button>
                     </Link>
+
                     <Link to={ `${module.module_id}/new-quiz` } >
+
                         <button className="button">
                             Add a new Quiz
                         </button>
@@ -40,7 +42,9 @@ const Module = ({ module, quizzes, isFetchingModule, username }) => { // eslint-
                     <Medals medals={ module.medals } />
                 </div>
 
-                <Quizzes quizzes={ quizzes } />
+                <Quizzes quizzes={ quizzes }
+                         location={ location }
+                         sendQuizInvite={ sendQuizInvite }/>
             </div>
         }
         </div>
@@ -48,10 +52,12 @@ const Module = ({ module, quizzes, isFetchingModule, username }) => { // eslint-
 };
 
 Module.propTypes = {
-    module: PropTypes.object.isRequired,
-    quizzes: PropTypes.array.isRequired,
+    location: PropTypes.object.isRequired,
+    module: PropTypes.object,
+    quizzes: PropTypes.array,
     isFetchingModule: PropTypes.bool.isRequired,
-    username: PropTypes.string
+    username: PropTypes.string,
+    sendQuizInvite: PropTypes.func.isRequired
 };
 
 export default Module;

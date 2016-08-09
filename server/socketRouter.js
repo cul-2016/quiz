@@ -1,18 +1,11 @@
-var Server = require('./server.js');
-var socket = require('socket.io');
-var socketRouter = require('./socketRouter');
+function socketRouter (socket) {
 
-var server = Server.init(process.env.PORT || 9000);
-
-var io = socket(server.listener);
-io.on('connection', (socket) => {
-
-    io.emit('we have connected', socket.id);
+    socket.emit('we have connected', socket.id);
     console.log("CONNECTION!", socket.id);
 
     socket.on('disconnect', () => {
         console.log('DISCONNECTED');
-        io.emit('disconnected', socket.id); // this event is sent back to client
+        socket.emit('disconnected', socket.id); // this event is sent back to client
     });
 
     /****/
@@ -29,7 +22,6 @@ io.on('connection', (socket) => {
         var quiz_id = quizInfo.quiz_id;
 
         // broadcast to whole room
-        console.log("still sending quiz invite");
         socket.broadcast.to(room).emit('receive_quiz_invite', quiz_id);
         cb('STUDENTS INVITED TO QUIZ', room);
     });
@@ -41,12 +33,6 @@ io.on('connection', (socket) => {
         socket.broadcast.to(room).emit('receive_next_question', nextQuestion);
         cb('Done');
     });
-});
+}
 
-server.start((error) => {
-    if (error) {
-        console.error(error);
-        throw new Error("Could not start server:", error);
-    }
-    console.info('🌍 The server is running on: ', server.info.uri, server.info.protocol);
-});
+module.exports = socketRouter;

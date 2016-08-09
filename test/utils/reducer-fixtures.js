@@ -56,7 +56,17 @@ export const module = {
     module: undefined,
     quizzes: undefined,
     isFetchingModule: false,
-    error: undefined
+    error: undefined,
+    isQuizOpen: false
+};
+
+export const liveQuiz = {
+    quiz_id: undefined,
+    questions: undefined,
+    response: undefined,
+    nextQuestionIndex: 0,
+    isQuizStarted: false,
+    interval_id: undefined
 };
 
 export const newQuiz = {

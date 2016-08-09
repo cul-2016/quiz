@@ -5,12 +5,23 @@ const initialState = {
     module: undefined,
     quizzes: undefined,
     isFetchingModule: false,
-    error: undefined
+    error: undefined,
+    isQuizOpen: false
 };
 
 export default function module (state = initialState, action ) {
 
     switch (action.type) {
+
+    case actionsTypes.ACTIVATE_QUIZ:
+        return update(state, {
+            isQuizOpen: { $set: true }
+        });
+
+    case actionsTypes.DEACTIVATE_QUIZ:
+        return update(state, {
+            isQuizOpen: { $set: false }
+        });
 
     case actionsTypes.GET_MODULE_REQUEST:
         return update(state, {

@@ -1,6 +1,12 @@
 import { connect } from 'react-redux';
 import Module from '../components/module/module';
+import { socketClient } from '../socket';
+import { store } from '../store.js';
+import { joinWebsocketRoom } from '../lib/subscriptions';
+import sendQuizInvite from '../lib/sendQuizInvite';
+import { saveIntervalID } from '../actions/live-quiz';
 
+joinWebsocketRoom(store, socketClient);
 
 const mapStateToProps = (state) => ({
     module: state.module.module,
@@ -9,8 +15,18 @@ const mapStateToProps = (state) => ({
     username: state.user.username
 });
 
-const mapDispatchToProps = (dispatch) => ({
-    dispatch
+const mapDispatchToProps = (dispatch) => ({ // eslint-disable-line
+
+    sendQuizInvite: (quiz_id) => {
+
+        let quizInfo = {
+            room: store.getState().module.module.module_id,
+            quiz_id
+        };
+        console.log("sending quiz invite");
+        const interval_id = sendQuizInvite(socketClient, quizInfo);
+        dispatch(saveIntervalID(interval_id));
+    }
 });
 
 

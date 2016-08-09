@@ -1,11 +1,16 @@
 import React, { PropTypes } from 'react';
+import classnames from 'classnames';
+import { Link } from 'react-router';
 
-
-const Quizzes = ({ quizzes }) => {
+const Quizzes = ({ location, quizzes, sendQuizInvite }) => {
 
     const mappedQuizzes = quizzes.map((quiz, index) => {
 
         let iconClasses = quiz.isPresented ? 'fa fa-check' : 'fa fa-times';
+
+        let buttonClass = classnames("button", {
+            "display-none": quiz.isPresented
+        });
 
         return (
 
@@ -14,6 +19,13 @@ const Quizzes = ({ quizzes }) => {
                 <p>{`Number of questions: ${quiz.num_questions}`}</p>
                 <p>{`Number of entries: ${quiz.num_entries}`}</p>
                 <p>Presented? <i className={ iconClasses } /></p>
+
+                <Link to={`${location.pathname}/live`}>
+                    <button className={ buttonClass }
+                        onClick={ () => sendQuizInvite(quiz.quiz_id) }>
+                        Invite students to quiz
+                    </button>
+                </Link>
             </div>
         );
     });
@@ -26,7 +38,9 @@ const Quizzes = ({ quizzes }) => {
 };
 
 Quizzes.propTypes = {
-    quizzes: PropTypes.array.isRequired
+    location: PropTypes.object.isRequired,
+    quizzes: PropTypes.array.isRequired,
+    sendQuizInvite: PropTypes.func.isRequired
 };
 
 export default Quizzes;

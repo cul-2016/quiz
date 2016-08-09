@@ -45,7 +45,7 @@ export function authenticateUser (email, password) {
                     if (response.data.is_lecturer) {
                         hashHistory.push('/dashboard');
                     } else {
-                        hashHistory.push('/dashboard-student');
+                        hashHistory.push('/dashboard');
                     }
                 }
             })

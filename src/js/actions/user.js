@@ -23,18 +23,20 @@ export function getUserDetails (user_id) {
 
         dispatch(getUserDetailsRequest());
 
-        axios.get(`/get-user-details?user_id=${user_id}`)
-        .then((response) => {
-            dispatch(getUserDetailsSuccess(response.data));
-            if (response.data.is_lecturer) {
-                hashHistory.push('/dashboard');
-            } else {
-                hashHistory.push('/dashboard-student');
-            }
-        })
-        .catch((error) => {
-            dispatch(getUserDetailsFailure(error));
-        });
+        if (user_id) {
+            axios.get(`/get-user-details?user_id=${user_id}`)
+            .then((response) => {
+                dispatch(getUserDetailsSuccess(response.data));
+                if (response.data.is_lecturer) {
+                    hashHistory.push('/dashboard');
+                } else {
+                    hashHistory.push('/dashboard');
+                }
+            })
+            .catch((error) => {
+                dispatch(getUserDetailsFailure(error));
+            });
+        }
     };
 }
 

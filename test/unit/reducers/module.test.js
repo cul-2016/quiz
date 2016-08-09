@@ -58,3 +58,31 @@ test('GET_MODULE_FAILURE works', (t) => {
 
     t.deepEqual(result, expected);
 });
+
+test('ACTIVATE_QUIZ works', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(moduleState);
+    const action = {
+        type: 'ACTIVATE_QUIZ'
+    };
+    const expected = Object.assign({}, moduleState, { isQuizOpen: true });
+
+    const result = reducer(initialState, action);
+    t.deepEqual(result, expected);
+});
+
+test('DEACTIVATE_QUIZ works', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(moduleState);
+    const action = {
+        type: 'DEACTIVATE_QUIZ'
+    };
+    const expected = Object.assign({}, moduleState, { isQuizOpen: false });
+
+    const result = reducer(initialState, action);
+    t.deepEqual(result, expected);
+});
