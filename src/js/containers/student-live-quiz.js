@@ -3,15 +3,7 @@ import LiveQuiz from '../components/live-quiz/live-quiz';
 
 
 const mapStateToProps = (state) => ({ // eslint-disable-line
-    questions: [
-        {
-            question: 'capital of England',
-            A: 'London',
-            B: 'Tokyo',
-            C: 'New York',
-            D: 'Paris'
-        }
-    ],
+    question: state.liveQuiz.questions[0],
     is_lecturer: state.user.is_lecturer
 });
 

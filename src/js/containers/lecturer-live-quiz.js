@@ -7,12 +7,15 @@ import { getNextQuestion } from '../lib/getNextQuestion';
 import { sendNextQuestion } from '../lib/sendNextQuestion';
 
 
-const mapStateToProps = (state) => ({
-    questions: state.liveQuiz.questions,
-    nextQuestionIndex: state.liveQuiz.nextQuestionIndex,
-    is_lecturer: state.user.is_lecturer,
-    isQuizStarted: state.liveQuiz.isQuizStarted
-});
+const mapStateToProps = (state) => {
+    return {
+        question: state.liveQuiz.questions[state.liveQuiz.nextQuestionIndex - 1],
+        numQuestions: state.liveQuiz.questions.length,
+        nextQuestionIndex: state.liveQuiz.nextQuestionIndex,
+        is_lecturer: state.user.is_lecturer,
+        isQuizStarted: state.liveQuiz.isQuizStarted
+    };
+};
 
 const mapDispatchToProps = (dispatch) => ({ // eslint-disable-line
 

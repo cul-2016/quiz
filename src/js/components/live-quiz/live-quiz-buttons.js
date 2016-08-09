@@ -48,8 +48,8 @@ LiveQuizButtons.propTypes = {
     nextQuestionIndex: PropTypes.number,
     nextQuestion: PropTypes.func,
     submitResponse: PropTypes.func,
-    isQuizStarted: PropTypes.bool.isRequired,
-    startQuiz: PropTypes.func.isRequired
+    isQuizStarted: PropTypes.bool,
+    startQuiz: PropTypes.func
 };
 
 export default LiveQuizButtons;

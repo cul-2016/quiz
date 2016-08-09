@@ -22,6 +22,12 @@ socketClient.on('receive_quiz_invite', (quiz_id) => {
     }
 });
 
+socketClient.on('receive_next_question', (nextQuestion) => {
+    console.log('you have received the next question', nextQuestion);
+
+    // store.dispatch(setNextQuestion(question));
+});
+
 socketClient.on('disconnected', (id) => {
     console.log("We're disconnected", id);
 });
