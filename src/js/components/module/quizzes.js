@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import classnames from 'classnames';
 import { Link } from 'react-router';
 
-const Quizzes = ({ location, quizzes, startQuiz }) => {
+const Quizzes = ({ location, quizzes, sendQuizInvite }) => {
 
     const mappedQuizzes = quizzes.map((quiz, index) => {
 
@@ -22,7 +22,7 @@ const Quizzes = ({ location, quizzes, startQuiz }) => {
 
                 <Link to={`${location.pathname}/live`}>
                     <button className={ buttonClass }
-                        onClick={ () => startQuiz(quiz.quiz_id) }>
+                        onClick={ () => sendQuizInvite(quiz.quiz_id) }>
                         Start Quiz
                     </button>
                 </Link>
@@ -40,7 +40,7 @@ const Quizzes = ({ location, quizzes, startQuiz }) => {
 Quizzes.propTypes = {
     location: PropTypes.object.isRequired,
     quizzes: PropTypes.array.isRequired,
-    startQuiz: PropTypes.func.isRequired
+    sendQuizInvite: PropTypes.func.isRequired
 };
 
 export default Quizzes;

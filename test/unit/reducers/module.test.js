@@ -67,7 +67,7 @@ test('ACTIVATE_QUIZ works', (t) => {
     const action = {
         type: 'ACTIVATE_QUIZ'
     };
-    const expected = Object.assign({}, moduleState, { isLiveQuiz: true });
+    const expected = Object.assign({}, moduleState, { isQuizOpen: true });
 
     const result = reducer(initialState, action);
     t.deepEqual(result, expected);
@@ -81,7 +81,7 @@ test('DEACTIVATE_QUIZ works', (t) => {
     const action = {
         type: 'DEACTIVATE_QUIZ'
     };
-    const expected = Object.assign({}, moduleState, { isLiveQuiz: false });
+    const expected = Object.assign({}, moduleState, { isQuizOpen: false });
 
     const result = reducer(initialState, action);
     t.deepEqual(result, expected);

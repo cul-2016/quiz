@@ -1,21 +1,23 @@
 import React, { PropTypes } from 'react'; //eslint-disable-line no-unused-vars
 import LiveQuizButtons from './live-quiz-buttons';
 
-const LiveQuiz = ({ is_lecturer, questions, currentQuestion, nextQuestion, submitResponse }) => {
+const LiveQuiz = ({ is_lecturer, questions, nextQuestionIndex, nextQuestion, isQuizStarted, submitResponse, startQuiz }) => {
 
     return (
         <div>
             This is the live quiz
             {
-                questions[currentQuestion].question
+                isQuizStarted && questions[nextQuestionIndex].question
             }
 
             <LiveQuizButtons
                 is_lecturer={ is_lecturer }
                 numQuestions={ questions.length }
                 nextQuestion={ nextQuestion }
-                currentQuestion={ currentQuestion }
-                submitResponse={ submitResponse } />
+                nextQuestionIndex={ nextQuestionIndex }
+                submitResponse={ submitResponse }
+                isQuizStarted={ isQuizStarted }
+                startQuiz={ startQuiz } />
         </div>
     );
 };
@@ -23,9 +25,11 @@ const LiveQuiz = ({ is_lecturer, questions, currentQuestion, nextQuestion, submi
 LiveQuiz.propTypes = {
     is_lecturer: PropTypes.bool.isRequired,
     questions: PropTypes.array.isRequired,
-    currentQuestion: PropTypes.number,
+    nextQuestionIndex: PropTypes.number,
     nextQuestion: PropTypes.func,
-    submitResponse: PropTypes.func
+    isQuizStarted: PropTypes.bool.isRequired,
+    submitResponse: PropTypes.func,
+    startQuiz: PropTypes.func.isRequired
 };
 
 export default LiveQuiz;

@@ -4,10 +4,10 @@ import { Link } from 'react-router'; // eslint-disable-line no-unused-vars
 import Spinner from '../general/spinner';
 import classnames from 'classnames';
 
-const StudentModule = ({ isFetchingModule, username, isLiveQuiz, quiz_id, question, response }) => { //eslint-disable-line
+const StudentModule = ({ isFetchingModule, username, isQuizOpen, quiz_id, question, response }) => { //eslint-disable-line
 
     let buttonClasses = classnames("button is-success", {
-        "display-none": !isLiveQuiz
+        "display-none": !isQuizOpen
     });
 
     return (
@@ -35,7 +35,7 @@ const StudentModule = ({ isFetchingModule, username, isLiveQuiz, quiz_id, questi
 StudentModule.propTypes = {
     isFetchingModule: PropTypes.bool.isRequired,
     username: PropTypes.string.isRequired,
-    isLiveQuiz: PropTypes.bool.isRequired,
+    isQuizOpen: PropTypes.bool.isRequired,
     quiz_id: PropTypes.number,
     question: PropTypes.string,
     response: PropTypes.string

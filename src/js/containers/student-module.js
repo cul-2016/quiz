@@ -12,7 +12,7 @@ const mapStateToProps = (state) => {
 
         isFetchingModule: state.module.isFetchingModule,
         username: state.user.username,
-        isLiveQuiz: state.module.isLiveQuiz,
+        isQuizOpen: state.module.isQuizOpen,
         quiz_id: state.liveQuiz.quiz_id,
         question: state.liveQuiz.question,
         response: state.liveQuiz.response

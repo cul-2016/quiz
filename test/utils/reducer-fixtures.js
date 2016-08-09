@@ -57,7 +57,7 @@ export const module = {
     quizzes: undefined,
     isFetchingModule: false,
     error: undefined,
-    isLiveQuiz: false
+    isQuizOpen: false
 };
 
 export const liveQuiz = {
