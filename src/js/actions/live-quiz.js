@@ -7,10 +7,13 @@ export const NEXT_QUESTION = 'NEXT_QUESTION';
 export const PREVIOUS_QUESTION = 'PREVIOUS_QUESTION';
 
 
-export const setQuizID = (quiz_id) => ({
-    type: SET_QUIZ_ID,
-    quiz_id
-});
+export const setQuizID = (quiz_id) => {
+    console.log("setting quiz id");
+    return {
+        type: SET_QUIZ_ID,
+        quiz_id
+    };
+};
 
 export const startQuiz = () => ({
     type: START_QUIZ

@@ -29,6 +29,7 @@ io.on('connection', (socket) => {
         var quiz_id = quizInfo.quiz_id;
 
         // broadcast to whole room
+        console.log("still sending quiz invite");
         socket.broadcast.to(room).emit('receive_quiz_invite', quiz_id);
         cb('STUDENTS INVITED TO QUIZ', room);
     });

@@ -15,6 +15,7 @@ socketClient.on('we have connected', (id) => {
 
 socketClient.on('receive_quiz_invite', (quiz_id) => {
     // handle in redux
+    console.log("have received quiz invite");
     store.dispatch(activateQuiz());
     store.dispatch(setQuizID(quiz_id));
 });

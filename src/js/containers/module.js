@@ -21,7 +21,7 @@ const mapDispatchToProps = (dispatch) => ({ // eslint-disable-line
             room: store.getState().module.module.module_id,
             quiz_id
         };
-        console.log(quizInfo);
+        console.log("sending quiz invite");
         socketClient.emit('send_quiz_invite', quizInfo, (msg) => {
             console.log(msg);
         });

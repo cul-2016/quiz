@@ -11,9 +11,12 @@ export const GET_MODULE_FAILURE = 'GET_MODULE_FAILURE';
 // ACTIVATE/DEACTIVATE QUIZ
 //
 
-export const activateQuiz = () => ({
-    type: ACTIVATE_QUIZ,
-});
+export const activateQuiz = () => {
+    console.log('activiating quiz');
+    return {
+        type: ACTIVATE_QUIZ,
+    };
+};
 
 export const deactivateQuiz = () => ({
     type: DEACTIVATE_QUIZ,
