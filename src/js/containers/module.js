@@ -3,6 +3,8 @@ import Module from '../components/module/module';
 import { socketClient } from '../socket';
 import { store } from '../store.js';
 import { joinWebsocketRoom } from '../lib/subscriptions';
+import sendQuizInvite from '../lib/sendQuizInvite';
+import { saveIntervalID } from '../actions/live-quiz';
 
 joinWebsocketRoom(store, socketClient);
 
@@ -22,9 +24,8 @@ const mapDispatchToProps = (dispatch) => ({ // eslint-disable-line
             quiz_id
         };
         console.log("sending quiz invite");
-        socketClient.emit('send_quiz_invite', quizInfo, (msg) => {
-            console.log(msg);
-        });
+        const interval_id = sendQuizInvite(socketClient, quizInfo);
+        dispatch(saveIntervalID(interval_id));
     }
 });
 

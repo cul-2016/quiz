@@ -87,3 +87,20 @@ test('PREVIOUS_QUESTION works', (t) => {
 
     t.deepEqual(actual, expected);
 });
+
+test('SAVE_INTERVAL_ID works', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(Object.assign({}, liveQuizState));
+    const interval_id = 100;
+    const action = {
+        type: 'SAVE_INTERVAL_ID',
+        interval_id
+    };
+
+    const actual = reducer(initialState, action);
+    const expected = Object.assign({}, liveQuizState, { interval_id: 100 });
+
+    t.deepEqual(actual, expected);
+});

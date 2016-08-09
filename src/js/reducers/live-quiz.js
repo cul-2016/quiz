@@ -28,7 +28,8 @@ const initialState = {
     ],
     response: undefined,
     nextQuestionIndex: 0,
-    isQuizStarted: false
+    isQuizStarted: false,
+    interval_id: undefined
 };
 
 export default function liveQuiz (state = initialState, action) {
@@ -58,6 +59,11 @@ export default function liveQuiz (state = initialState, action) {
     case actionsTypes.PREVIOUS_QUESTION:
         return update(state, {
             nextQuestionIndex: { $set: state.nextQuestionIndex - 1 }
+        });
+
+    case actionsTypes.SAVE_INTERVAL_ID:
+        return update(state, {
+            interval_id: { $set: action.interval_id }
         });
 
     default:

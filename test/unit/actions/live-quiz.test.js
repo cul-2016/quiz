@@ -47,3 +47,16 @@ test('previousQuestion creates the correct action', (t) => {
     const actual = deepFreeze(actions.previousQuestion());
     t.deepEqual(actual, expected);
 });
+
+
+test('saveIntervalID creates the correct action', (t) => {
+    t.plan(1);
+    const interval_id = 100;
+    const expected = {
+        type: actions.SAVE_INTERVAL_ID,
+        interval_id
+    };
+
+    const actual = deepFreeze(actions.saveIntervalID(interval_id));
+    t.deepEqual(actual, expected);
+});
