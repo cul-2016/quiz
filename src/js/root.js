@@ -9,7 +9,6 @@ import NewModuleContainer from './containers/new-module';
 import RegisterUserContainer from './containers/register-user';
 import ModuleContainer from './containers/module';
 import StudentModuleContainer from './containers/student-module';
-import Spinner from './components/general/spinner';
 import NewQuizContainer from './containers/new-quiz';
 import LeaderboardContainer from './containers/leaderboard';
 import LecturerLiveQuizContainer from './containers/lecturer-live-quiz';
@@ -28,12 +27,8 @@ const Root = ({ store }) => (
         <Router history={ hashHistory }>
             <Route path="/" component={ App }>
                 <IndexRoute
-                    onEnter={ hooks.userHasSignedIn }
+                    onEnter={ hooks.shouldUserRedirect }
                     component={ LoginContainer } />
-                <Route
-                    onEnter={ composeHooks(hooks.authenticate, hooks.fetchUserDetails) }
-                    path="auth"
-                    component={ Spinner } />
                 <Route
                     path="register-student"
                     component={ RegisterUserContainer } />
