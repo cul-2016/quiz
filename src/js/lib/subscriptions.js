@@ -1,32 +1,8 @@
-import { getDashboard } from '../actions/dashboard';
-
-/**
- * Dispatches an action to hydrate the dashboard view
- * Is registered in Dashboard component
- * @param {object} store - redux store
- */
-export function fetchDashboard (store) {
-
-    let unsubscribe = store.subscribe(listener);
-
-    function listener () {
-
-        let status = store.getState().user.is_lecturer;
-
-        if (status !== undefined) {
-
-            unsubscribe();
-            store.dispatch(getDashboard());
-        }
-    }
-}
-
 /**
  * Runs a function that joins the websocket room
  * Is registered in Module and StudentModule components
  * @param {object} store - redux store
  */
-
 export function joinWebsocketRoom (store, socket) {
 
     let unsubscribe = store.subscribe(listener);
