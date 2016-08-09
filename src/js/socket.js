@@ -13,9 +13,8 @@ socketClient.on('we have connected', (id) => {
     console.log("We're connected!", id);
 });
 
-socketClient.on('invite_student_to_quiz', (quiz_id) => {
+socketClient.on('receive_quiz_invite', (quiz_id) => {
     // handle in redux
-
     store.dispatch(activateQuiz());
     store.dispatch(setQuizID(quiz_id));
 });
