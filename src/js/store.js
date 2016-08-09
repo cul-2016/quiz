@@ -21,7 +21,9 @@ const persistedState = loadUserState();
 export const store = initStore(persistedState);
 
 store.subscribe(() => {
-    saveUserState({
-        user: store.getState().user
-    });
+    if (store.getState().user.user_id) {
+        saveUserState({
+            user: store.getState().user
+        });
+    }
 });

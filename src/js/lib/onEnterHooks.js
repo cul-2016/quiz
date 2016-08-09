@@ -2,7 +2,9 @@ import { store } from '../store';
 import validCookieExists from './validCookieExists';
 import { getModule } from '../actions/module';
 import { getDashboard } from '../actions/dashboard';
-
+import { loadUserState } from './userState';
+import { getUserDetails } from '../actions/user';
+import getUserID from './getUserID';
 
 
 /**
@@ -16,6 +18,8 @@ import { getDashboard } from '../actions/dashboard';
 export function authenticate (nextState, replace, callback) {
     if (!validCookieExists()) {
         replace('/');
+    } else if (!loadUserState() && !store.getState().user.user_id) {
+        store.dispatch(getUserDetails(getUserID()));
     }
     callback();
 }
@@ -44,7 +48,10 @@ export function shouldUserRedirect (nextState, replace, callback) {
  * @param {function} callback - (optional) can be used to make the transition block
  */
 export function fetchModule (nextState, replace, callback) {
-    store.dispatch(getModule(nextState.params.module_id));
+
+    if (validCookieExists()) {
+        store.dispatch(getModule(nextState.params.module_id));
+    }
     callback();
 }
 
@@ -56,6 +63,8 @@ export function fetchModule (nextState, replace, callback) {
  * @param {function} callback - (optional) can be used to make the transition block
  */
 export function fetchModuleList (nextState, replace, callback) {
-    store.dispatch(getDashboard());
+    if (validCookieExists()) {
+        store.dispatch(getDashboard());
+    }
     callback();
 }
