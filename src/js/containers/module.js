@@ -2,9 +2,9 @@ import { connect } from 'react-redux';
 import Module from '../components/module/module';
 import { socketClient } from '../socket';
 import { store } from '../store.js';
-import { listenForModuleID } from '../lib/subscriptions';
+import { joinWebsocketRoom } from '../lib/subscriptions';
 
-listenForModuleID(store, socketClient);
+joinWebsocketRoom(store, socketClient);
 
 const mapStateToProps = (state) => ({
     module: state.module.module,

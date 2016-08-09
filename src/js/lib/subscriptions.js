@@ -2,6 +2,7 @@ import { getDashboard } from '../actions/dashboard';
 
 /**
  * Dispatches an action to hydrate the dashboard view
+ * Is registered in Dashboard component
  * @param {object} store - redux store
  */
 export function fetchDashboard (store) {
@@ -22,11 +23,12 @@ export function fetchDashboard (store) {
 
 /**
  * Runs a function that joins the websocket room
+ * Is registered in Module and StudentModule components
  * @param {object} store - redux store
  */
 
-export function listenForModuleID (store, socket) {
-    console.log('this is listn for module ik');
+export function joinWebsocketRoom (store, socket) {
+
     let unsubscribe = store.subscribe(listener);
 
     function listener () {
