@@ -5,10 +5,10 @@ const LiveQuiz = ({ is_lecturer, questions, nextQuestionIndex, nextQuestion, isQ
 
     return (
         <div>
-            This is the live quiz
-            {
-                isQuizStarted && questions[nextQuestionIndex].question
-            }
+            <h1>This is the live quiz</h1>
+            <h3>
+            { isQuizStarted && questions[nextQuestionIndex].question }
+            </h3>
 
             <LiveQuizButtons
                 is_lecturer={ is_lecturer }

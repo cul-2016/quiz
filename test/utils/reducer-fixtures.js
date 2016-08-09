@@ -64,7 +64,8 @@ export const liveQuiz = {
     quiz_id: undefined,
     questions: undefined,
     response: undefined,
-    currentQuestion: 0
+    nextQuestionIndex: 0,
+    isQuizStarted: false
 };
 
 export const newQuiz = {

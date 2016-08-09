@@ -14,3 +14,25 @@ test('setQuizID creates the correct action', (t) => {
     const actual = deepFreeze(actions.setQuizID(quiz_id));
     t.deepEqual(actual, expected);
 });
+
+test('startQuiz creates the correct action', (t) => {
+    t.plan(1);
+
+    const expected = {
+        type: actions.START_QUIZ,
+    };
+
+    const actual = deepFreeze(actions.startQuiz());
+    t.deepEqual(actual, expected);
+});
+
+test('endQuiz creates the correct action', (t) => {
+    t.plan(1);
+
+    const expected = {
+        type: actions.END_QUIZ,
+    };
+
+    const actual = deepFreeze(actions.endQuiz());
+    t.deepEqual(actual, expected);
+});

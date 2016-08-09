@@ -40,6 +40,17 @@ export default function liveQuiz (state = initialState, action) {
             quiz_id: { $set: action.quiz_id }
         });
 
+    case actionsTypes.START_QUIZ:
+        return update(state, {
+            isQuizStarted: { $set: true }
+        });
+
+    case actionsTypes.END_QUIZ:
+        return update(state, {
+            isQuizStarted: { $set: false }
+        });
+
+
     default:
         return state;
     }
