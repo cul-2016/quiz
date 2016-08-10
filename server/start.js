@@ -42,6 +42,15 @@ io.on('connection', (socket) => {
         console.log('NEXT QUESTION SENT', nextQuestion, room);
         cb('Done');
     });
+
+    socket.on('end_of_quiz', (data, cb) => {
+        var room = data.room;
+        var quiz_id = data.quiz_id;
+        socket.broadcast.to(room).emit('receive_end_of_quiz', quiz_id);
+
+        console.log('end of quiz sent');
+        cb('end of quiz sent');
+    });
 });
 
 server.start((error) => {

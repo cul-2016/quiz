@@ -1,7 +1,8 @@
 import { connect } from 'react-redux';
+import { hashHistory } from 'react-router';
 import LiveQuiz from '../components/live-quiz/live-quiz';
 import { store } from '../store';
-import { startQuiz, goToNextQuestion } from '../actions/live-quiz';
+import { startQuiz, endQuiz, goToNextQuestion } from '../actions/live-quiz';
 import { socketClient } from '../socket';
 import { getNextQuestion } from '../lib/getNextQuestion';
 import { sendNextQuestion } from '../lib/sendNextQuestion';
@@ -13,7 +14,8 @@ const mapStateToProps = (state) => {
         numQuestions: state.liveQuiz.questions && state.liveQuiz.questions.length,
         nextQuestionIndex: state.liveQuiz.nextQuestionIndex,
         is_lecturer: state.user.is_lecturer,
-        isQuizStarted: state.liveQuiz.isQuizStarted
+        isQuizStarted: state.liveQuiz.isQuizStarted,
+        quiz_id: state.liveQuiz.quiz_id
     };
 };
 
@@ -36,6 +38,22 @@ const mapDispatchToProps = (dispatch) => ({
         sendNextQuestion(socketClient, nextQuestion, () => {
 
             dispatch(goToNextQuestion());
+        });
+    },
+    endQuiz: (quiz_id) => {
+
+        const intervalID = store.getState().liveQuiz.interval_id;
+        const module_id = store.getState().module.module.module_id;
+        const data = {
+            room: module_id,
+            quiz_id
+        };
+        socketClient.emit('end_of_quiz', data, (msg) => {
+
+            console.log(msg);
+            clearInterval(intervalID);
+            hashHistory.push(`${module_id}/${quiz_id}/review`);
+            dispatch(endQuiz());
         });
     }
 });

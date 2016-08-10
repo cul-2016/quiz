@@ -1,19 +1,26 @@
 import React, { PropTypes } from 'react';
+import classnames from 'classnames';
 
+const CurrentQuestion = ({ data, response, handleSelection }) => {
 
-const CurrentQuestion = ({ data }) => {
-    
     let answersArray = Object.keys(data);
-    answersArray.splice(answersArray.indexOf('question'), 1)
-                              .sort();
+
+    answersArray.splice(answersArray.indexOf('question'), 1);
+    answersArray.splice(answersArray.indexOf('question_id'), 1)
+                .sort();
 
     let answers = answersArray.map((letter, i) => {
+        console.log(response, 'r', letter, 'l');
+        let classes = classnames("box", {
+            "response": letter === response
+        });
         return (
-            <div key={ i }>
+            <div key={ i } className={ classes } onClick={ () => handleSelection && handleSelection(letter) }>
                 <span>{ `${letter}: ` }</span>
                 { `${data[letter]}` }
             </div>
         );
+
     });
 
     return (
@@ -25,7 +32,9 @@ const CurrentQuestion = ({ data }) => {
 };
 
 CurrentQuestion.propTypes = {
-    data: PropTypes.object
+    data: PropTypes.object,
+    handleSelection: PropTypes.func,
+    response: PropTypes.string
 };
 
 export default CurrentQuestion;

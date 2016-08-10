@@ -1,9 +1,60 @@
 import test from 'tape';
 import * as actions from '../../../src/js/actions/live-quiz';
+import createThunk from '../../utils/mockThunk';
 import { nextQuestion, LiveQuizQuestions as questions } from '../../utils/data-fixtures';
-import { getQuizQuestionsError as error } from '../../utils/action-fixtures';
+import { getQuizQuestionsError, saveResponseError } from '../../utils/action-fixtures';
 import deepFreeze from '../../utils/deepFreeze';
 
+test('saveResponse async action creator returns expected action', (t) => {
+
+    t.plan(1);
+
+    let actual;
+    const { dispatch, queue } = createThunk();
+    dispatch(actions.saveResponse());
+
+    [{ ...actual }] = queue;
+
+    const expected = {
+        type: actions.SAVE_RESPONSE_REQUEST
+    };
+    t.deepEqual(actual, expected);
+});
+
+test('saveResponseRequest creates the correct action', (t) => {
+
+    t.plan(1);
+
+    const expected = {
+        type: actions.SAVE_RESPONSE_REQUEST
+    };
+
+    const actual2 = deepFreeze(actions.saveResponseRequest());
+    t.deepEqual(actual2, expected);
+});
+
+test('saveResponseSuccess creates the correct action', (t) => {
+
+    t.plan(1);
+    const expected = {
+        type: actions.SAVE_RESPONSE_SUCCESS
+    };
+
+    const actual2 = deepFreeze(actions.saveResponseSuccess());
+    t.deepEqual(actual2, expected);
+});
+
+test('saveResponseFailure creates the correct action', (t) => {
+
+    t.plan(1);
+
+    const expected = {
+        type: actions.SAVE_RESPONSE_FAILURE,
+        error: saveResponseError
+    };
+    const actual = deepFreeze(actions.saveResponseFailure(saveResponseError));
+    t.deepEqual(actual, expected);
+});
 
 test('setQuizID creates the correct action', (t) => {
     t.plan(1);
@@ -125,9 +176,21 @@ test('getQuizQuestionsFailure creates the correct action', (t) => {
 
     const expected = {
         type: actions.GET_QUIZ_QUESTIONS_FAILURE,
-        error
+        error: getQuizQuestionsError
     };
 
-    const actual = deepFreeze(actions.getQuizQuestionsFailure(error));
+    const actual = deepFreeze(actions.getQuizQuestionsFailure(getQuizQuestionsError));
+    t.deepEqual(actual, expected);
+});
+
+test('setResponse creates the correct action', (t) => {
+    t.plan(1);
+    const data = 'a';
+    const expected = {
+        type: actions.SET_RESPONSE,
+        data
+    };
+
+    const actual = deepFreeze(actions.setResponse(data));
     t.deepEqual(actual, expected);
 });

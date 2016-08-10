@@ -4,6 +4,7 @@ import * as actionsTypes from '../actions/live-quiz';
 const initialState = {
     error: undefined,
     isFetchingQuizQuestions: false,
+    isSavingResponse: false,
     quiz_id: undefined,
     questions: undefined,
     response: undefined,
@@ -33,6 +34,22 @@ export default function liveQuiz (state = initialState, action) {
             error: { $set: action.error }
         });
 
+    case actionsTypes.SAVE_RESPONSE_REQUEST:
+        return update(state, {
+            isSavingResponse: { $set: true }
+        });
+
+    case actionsTypes.SAVE_RESPONSE_SUCCESS:
+        return update(state, {
+            isSavingResponse: { $set: false }
+        });
+
+    case actionsTypes.SAVE_RESPONSE_FAILURE:
+        return update(state, {
+            isSavingResponse: { $set: false },
+            error: { $set: action.error }
+        });
+
     case actionsTypes.SET_QUIZ_ID:
         return update(state, {
             quiz_id: { $set: action.quiz_id }
@@ -44,9 +61,7 @@ export default function liveQuiz (state = initialState, action) {
         });
 
     case actionsTypes.END_QUIZ:
-        return update(state, {
-            isQuizStarted: { $set: false }
-        });
+        return initialState;
 
     case actionsTypes.SET_INTERVAL_ID:
         return update(state, {
@@ -55,7 +70,8 @@ export default function liveQuiz (state = initialState, action) {
 
     case actionsTypes.SET_NEXT_QUESTION:
         return update(state, {
-            questions: { $set: [action.nextQuestion] }
+            questions: { $set: [action.nextQuestion] },
+            response: { $set: undefined }
         });
 
     case actionsTypes.GO_TO_NEXT_QUESTION:
@@ -66,6 +82,11 @@ export default function liveQuiz (state = initialState, action) {
     case actionsTypes.GO_TO_PREVIOUS_QUESTION:
         return update(state, {
             nextQuestionIndex: { $set: state.nextQuestionIndex - 1 }
+        });
+
+    case actionsTypes.SET_RESPONSE:
+        return update(state, {
+            response: { $set: action.data }
         });
 
     default:
