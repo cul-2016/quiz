@@ -3,17 +3,17 @@ import CurrentQuestion from './current-question';
 import LiveQuizButtons from './live-quiz-buttons';
 
 const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex, nextQuestion, isQuizStarted, submitResponse, startQuiz, numQuestions }) => {
-    console.log("QUESTION", question);
+
     return (
         <div>
-                <h1>This is the live quiz</h1>
-                <h2>Question index { nextQuestionIndex }</h2>
-                <h3>
-                {
-                    isQuizStarted &&
-                    <CurrentQuestion data={ question } />
-                }
-                </h3>
+            <h1>This is the live quiz</h1>
+            <h2>Question index { nextQuestionIndex }</h2>
+            <h3>
+            {
+                isQuizStarted && question &&
+                <CurrentQuestion data={ question } />
+            }
+            </h3>
 
 
             <LiveQuizButtons
@@ -33,7 +33,7 @@ LiveQuiz.propTypes = {
     question: PropTypes.object,
     nextQuestionIndex: PropTypes.number,
     nextQuestion: PropTypes.func,
-    isQuizStarted: PropTypes.bool,
+    isQuizStarted: PropTypes.bool.isRequired,
     submitResponse: PropTypes.func,
     startQuiz: PropTypes.func,
     numQuestions: PropTypes.number

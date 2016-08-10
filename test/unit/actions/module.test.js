@@ -58,22 +58,22 @@ test('getModuleFailure creates the correct action', (t) => {
     t.deepEqual(actual, expected);
 });
 
-test('activateQuiz creates the correct action', (t) => {
+test('openQuiz creates the correct action', (t) => {
     t.plan(1);
     const expected = {
-        type: actions.ACTIVATE_QUIZ
+        type: actions.OPEN_QUIZ
     };
 
-    const actual = deepFreeze(actions.activateQuiz());
+    const actual = deepFreeze(actions.openQuiz());
     t.deepEqual(actual, expected);
 });
 
-test('deactivateQuiz creates the correct action', (t) => {
+test('closeQuiz creates the correct action', (t) => {
     t.plan(1);
     const expected = {
-        type: actions.DEACTIVATE_QUIZ
+        type: actions.CLOSE_QUIZ
     };
 
-    const actual = deepFreeze(actions.deactivateQuiz());
+    const actual = deepFreeze(actions.closeQuiz());
     t.deepEqual(actual, expected);
 });

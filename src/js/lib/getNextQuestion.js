@@ -1,12 +1,22 @@
+/**
+ * Function to get the next question in the quiz
+ * Returns an object containing the next question (object) and the socket room name (string).
+ * @param {object} - store - the redux store
+ */
+
 export function getNextQuestion (store) {
+
     let nextQuestionIndex = store.getState().liveQuiz.nextQuestionIndex;
     let questions = store.getState().liveQuiz.questions;
+    let quiz_id = store.getState().liveQuiz.quiz_id;
+
     let room = store.getState().module.module.module_id;
 
     return {
-        nextQuestion: questions[nextQuestionIndex],
+        questionObj: {
+            nextQuestion: questions[nextQuestionIndex],
+            quiz_id
+        },
         room
     };
-    // get the currentQuestion => uncrement for use inside the function then
-       //dispatch action to increment currentQuestion;
 }

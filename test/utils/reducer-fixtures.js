@@ -61,6 +61,8 @@ export const module = {
 };
 
 export const liveQuiz = {
+    error: undefined,
+    isFetchingQuizQuestions: false,
     quiz_id: undefined,
     questions: undefined,
     response: undefined,
