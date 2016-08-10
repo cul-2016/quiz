@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'; //eslint-disable-line no-unused-vars
 import CurrentQuestion from './current-question';
 import LiveQuizButtons from './live-quiz-buttons';
 
-const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex, nextQuestion, isQuizStarted, submitResponse, startQuiz, numQuestions, endQuiz, quiz_id }) => {
+const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex, nextQuestion, isQuizStarted, submitResponse, startQuiz, numQuestions, endQuiz, quiz_id, handleSelection }) => {
 
     return (
         <div>
@@ -11,7 +11,9 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex, nextQuestion, isQu
             <h3>
             {
                 isQuizStarted && question &&
-                <CurrentQuestion data={ question } />
+                <CurrentQuestion
+                    data={ question }
+                    handleSelection={ handleSelection }/>
             }
             </h3>
 
@@ -40,7 +42,8 @@ LiveQuiz.propTypes = {
     startQuiz: PropTypes.func,
     numQuestions: PropTypes.number,
     endQuiz: PropTypes.func,
-    quiz_id: PropTypes.number
+    quiz_id: PropTypes.number,
+    handleSelection: PropTypes.func
 };
 
 export default LiveQuiz;

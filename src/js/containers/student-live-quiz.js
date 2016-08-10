@@ -13,6 +13,10 @@ const mapDispatchToProps = (dispatch) => ({ // eslint-disable-line
     submitResponse: () => {
         // increment the current question
         // emit the next question event.
+    },
+    handleSelection: (letter) => {
+        console.log(letter);
+        //dispatch(updateSelected(letter));
     }
 });
 
