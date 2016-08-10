@@ -17,6 +17,5 @@ module.exports = {
         } else {
             reply(new Error('quiz_id is not defined'));
         }
-
     }
 };

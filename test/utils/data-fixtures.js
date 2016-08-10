@@ -90,12 +90,27 @@ export const questions = [
     }
 ];
 
+export const liveQuizQuestions = [
+    {
+        question_id: 1,
+        question: 'capital of England',
+        A: 'London',
+        B: 'Tokyo',
+        C: 'New York',
+        D: 'Paris'
+    }
+];
+
 export const nextQuestion = {
-    question: 'capital of England',
-    A: 'London',
-    B: 'Tokyo',
-    C: 'New York',
-    D: 'Paris'
+    quiz_id: 1,
+    nextQuestion: {
+        question_id: 1,
+        question: 'capital of England',
+        A: 'London',
+        B: 'Tokyo',
+        C: 'New York',
+        D: 'Paris'
+    }
 };
 
 export const getModuleData = {

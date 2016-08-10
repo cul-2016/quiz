@@ -1,7 +1,7 @@
 import test from 'tape';
-import { liveQuiz as liveQuizState } from '../../utils/reducer-fixtures';
+import { liveQuiz as liveQuizState, liveQuizError as error  } from '../../utils/reducer-fixtures';
 import reducer from '../../../src/js/reducers/live-quiz';
-import { nextQuestion } from '../../utils/data-fixtures';
+import { nextQuestion, liveQuizQuestion as questions } from '../../utils/data-fixtures';
 import deepFreeze from '../../utils/deepFreeze';
 
 test('SET_QUIZ_ID works', (t) => {
@@ -52,6 +52,40 @@ test('END_QUIZ works', (t) => {
     t.deepEqual(actual, expected);
 });
 
+test('SET_INTERVAL_ID works', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(Object.assign({}, liveQuizState));
+    const interval_id = 100;
+    const action = {
+        type: 'SET_INTERVAL_ID',
+        interval_id
+    };
+
+    const actual = reducer(initialState, action);
+    const expected = Object.assign({}, liveQuizState, { interval_id: 100 });
+
+    t.deepEqual(actual, expected);
+});
+
+test('SET_NEXT_QUESTION works', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(Object.assign({}, liveQuizState));
+
+    const action = {
+        type: 'SET_NEXT_QUESTION',
+        nextQuestion
+    };
+
+    const actual = reducer(initialState, action);
+    const expected = Object.assign({}, liveQuizState, { questions: [nextQuestion] });
+
+    t.deepEqual(actual, expected);
+});
+
 test('GO_TO_NEXT_QUESTION works', (t) => {
 
     t.plan(1);
@@ -89,36 +123,61 @@ test('GO_TO_PREVIOUS_QUESTION works', (t) => {
     t.deepEqual(actual, expected);
 });
 
-test('SET_INTERVAL_ID works', (t) => {
+test('GET_QUIZ_QUESTIONS_REQUEST works', (t) => {
 
     t.plan(1);
 
-    const initialState = deepFreeze(Object.assign({}, liveQuizState));
-    const interval_id = 100;
+    const initialState = deepFreeze(liveQuizState);
     const action = {
-        type: 'SET_INTERVAL_ID',
-        interval_id
+        type: 'GET_QUIZ_QUESTIONS_REQUEST',
     };
 
     const actual = reducer(initialState, action);
-    const expected = Object.assign({}, liveQuizState, { interval_id: 100 });
+    const expected = Object.assign({}, liveQuizState, { isFetchingQuizQuestions: true });
 
     t.deepEqual(actual, expected);
 });
 
-test('SET_NEXT_QUESTION works', (t) => {
+test('GET_QUIZ_QUESTIONS_SUCCESS works', (t) => {
 
     t.plan(1);
 
-    const initialState = deepFreeze(Object.assign({}, liveQuizState));
-
+    const initialState = deepFreeze(
+        Object.assign(
+            {},
+            liveQuizState,
+            { isFetchingQuizQuestions: true }
+        )
+    );
     const action = {
-        type: 'SET_NEXT_QUESTION',
-        nextQuestion
+        type: 'GET_QUIZ_QUESTIONS_SUCCESS',
+        questions
     };
 
     const actual = reducer(initialState, action);
-    const expected = Object.assign({}, liveQuizState, { questions: [nextQuestion] });
+    const expected = Object.assign({}, liveQuizState, { isFetchingQuizQuestions: false }, { questions });
+
+    t.deepEqual(actual, expected);
+});
+
+test('GET_QUIZ_QUESTIONS_FAILURE works', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(
+        Object.assign(
+            {},
+            liveQuizState,
+            { isFetchingQuizQuestions: true }
+        )
+    );
+    const action = {
+        type: 'GET_QUIZ_QUESTIONS_FAILURE',
+        error
+    };
+
+    const actual = reducer(initialState, action);
+    const expected = Object.assign({}, liveQuizState, { isFetchingQuizQuestions: false }, { error });
 
     t.deepEqual(actual, expected);
 });

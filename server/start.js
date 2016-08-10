@@ -1,6 +1,5 @@
 var Server = require('./server.js');
 var socket = require('socket.io');
-var socketRouter = require('./socketRouter');
 
 var server = Server.init(process.env.PORT || 9000);
 
@@ -34,11 +33,13 @@ io.on('connection', (socket) => {
         cb('STUDENTS INVITED TO QUIZ', room);
     });
 
-    socket.on('send_next_question', (questionInfo, cb) => {
-        var room = questionInfo.room;
-        var nextQuestion = questionInfo.nextQuestion;
-        console.log('NEXT QUESTION SENT', nextQuestion, room);
+    socket.on('send_next_question', (data, cb) => {
+
+        var room = data.room;
+        var nextQuestion = data.questionObj;
+        console.log("EXISTS?", nextQuestion);
         socket.broadcast.to(room).emit('receive_next_question', nextQuestion);
+        console.log('NEXT QUESTION SENT', nextQuestion, room);
         cb('Done');
     });
 });
