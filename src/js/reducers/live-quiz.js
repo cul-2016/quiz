@@ -44,9 +44,7 @@ export default function liveQuiz (state = initialState, action) {
         });
 
     case actionsTypes.END_QUIZ:
-        return update(state, {
-            isQuizStarted: { $set: false }
-        });
+        return initialState;
 
     case actionsTypes.SET_INTERVAL_ID:
         return update(state, {

@@ -35,6 +35,13 @@ socketClient.on('receive_next_question', (questionObj) => {
     store.dispatch(setNextQuestion(questionObj.nextQuestion));
 });
 
+socketClient.on('receive_end_of_quiz', (quiz_id) => {
+
+    console.log('received end of quiz notification', quiz_id);
+    // dispatch endQuiz()
+    //push to endpoint.
+});
+
 socketClient.on('disconnected', (id) => {
     console.log("We're disconnected", id);
 });
