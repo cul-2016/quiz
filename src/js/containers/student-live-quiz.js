@@ -2,9 +2,10 @@ import { connect } from 'react-redux';
 import LiveQuiz from '../components/live-quiz/live-quiz';
 
 
-const mapStateToProps = (state) => ({ // eslint-disable-line
-    question: state.liveQuiz.questions[0],
-    is_lecturer: state.user.is_lecturer
+const mapStateToProps = (state) => ({
+    question: state.liveQuiz.questions && state.liveQuiz.questions[0],
+    is_lecturer: state.user.is_lecturer,
+    isQuizStarted: state.liveQuiz.isQuizStarted
 });
 
 const mapDispatchToProps = (dispatch) => ({ // eslint-disable-line

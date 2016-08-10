@@ -13,12 +13,12 @@ export default function module (state = initialState, action ) {
 
     switch (action.type) {
 
-    case actionsTypes.ACTIVATE_QUIZ:
+    case actionsTypes.OPEN_QUIZ:
         return update(state, {
             isQuizOpen: { $set: true }
         });
 
-    case actionsTypes.DEACTIVATE_QUIZ:
+    case actionsTypes.CLOSE_QUIZ:
         return update(state, {
             isQuizOpen: { $set: false }
         });

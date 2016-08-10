@@ -1,16 +1,40 @@
 import { connect } from 'react-redux';
 import LiveQuiz from '../components/live-quiz/live-quiz';
 import { store } from '../store';
-import { startQuiz, nextQuestion as nextQuestionAction } from '../actions/live-quiz';
+import { startQuiz, goToNextQuestion } from '../actions/live-quiz';
 import { socketClient } from '../socket';
 import { getNextQuestion } from '../lib/getNextQuestion';
 import { sendNextQuestion } from '../lib/sendNextQuestion';
 
 
+const theQUESTIONS = [
+    {
+        question: 'capital of England',
+        A: 'London',
+        B: 'Tokyo',
+        C: 'New York',
+        D: 'Paris'
+    },
+    {
+        question: 'capital of Japan',
+        A: 'London',
+        B: 'Tokyo',
+        C: 'New York',
+        D: 'Paris'
+    },
+    {
+        question: 'capital of France',
+        A: 'London',
+        B: 'Tokyo',
+        C: 'New York',
+        D: 'Paris'
+    }
+];
+
 const mapStateToProps = (state) => {
     return {
-        question: state.liveQuiz.questions[state.liveQuiz.nextQuestionIndex - 1],
-        numQuestions: state.liveQuiz.questions.length,
+        question: theQUESTIONS[state.liveQuiz.nextQuestionIndex - 1],
+        numQuestions: theQUESTIONS.length,
         nextQuestionIndex: state.liveQuiz.nextQuestionIndex,
         is_lecturer: state.user.is_lecturer,
         isQuizStarted: state.liveQuiz.isQuizStarted
@@ -25,7 +49,7 @@ const mapDispatchToProps = (dispatch) => ({ // eslint-disable-line
 
         sendNextQuestion(socketClient, nextQuestion, () => {
             console.log("store.dispatch(nextQuestion)");
-            dispatch(nextQuestionAction());
+            dispatch(goToNextQuestion());
             dispatch(startQuiz());
         });
     },
@@ -34,7 +58,7 @@ const mapDispatchToProps = (dispatch) => ({ // eslint-disable-line
 
         sendNextQuestion(socketClient, nextQuestion, () => {
             console.log("store.dispatch(nextQuestion)");
-            dispatch(nextQuestionAction());
+            dispatch(goToNextQuestion());
         });
     }
 });

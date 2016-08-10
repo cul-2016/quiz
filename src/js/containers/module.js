@@ -4,7 +4,7 @@ import { socketClient } from '../socket';
 import { store } from '../store.js';
 import { joinWebsocketRoom } from '../lib/subscriptions';
 import sendQuizInvite from '../lib/sendQuizInvite';
-import { saveIntervalID } from '../actions/live-quiz';
+import { setIntervalID } from '../actions/live-quiz';
 
 joinWebsocketRoom(store, socketClient);
 
@@ -15,7 +15,7 @@ const mapStateToProps = (state) => ({
     username: state.user.username
 });
 
-const mapDispatchToProps = (dispatch) => ({ // eslint-disable-line
+const mapDispatchToProps = (dispatch) => ({
 
     sendQuizInvite: (quiz_id) => {
 
@@ -25,7 +25,7 @@ const mapDispatchToProps = (dispatch) => ({ // eslint-disable-line
         };
         console.log("sending quiz invite");
         const interval_id = sendQuizInvite(socketClient, quizInfo);
-        dispatch(saveIntervalID(interval_id));
+        dispatch(setIntervalID(interval_id));
     }
 });
 

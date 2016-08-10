@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 
 
 const CurrentQuestion = ({ data }) => {
-
+    console.log("new data?", data);
     let answersArray = Object.keys(data);
     answersArray.splice(answersArray.indexOf('question'), 1)
                               .sort();

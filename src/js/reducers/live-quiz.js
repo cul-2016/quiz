@@ -3,29 +3,7 @@ import * as actionsTypes from '../actions/live-quiz';
 
 const initialState = {
     quiz_id: 1,
-    questions: [
-        {
-            question: 'capital of England',
-            A: 'London',
-            B: 'Tokyo',
-            C: 'New York',
-            D: 'Paris'
-        },
-        {
-            question: 'capital of Japan',
-            A: 'London',
-            B: 'Tokyo',
-            C: 'New York',
-            D: 'Paris'
-        },
-        {
-            question: 'capital of France',
-            A: 'London',
-            B: 'Tokyo',
-            C: 'New York',
-            D: 'Paris'
-        }
-    ],
+    questions: undefined,
     response: undefined,
     nextQuestionIndex: 0,
     isQuizStarted: false,
@@ -51,19 +29,24 @@ export default function liveQuiz (state = initialState, action) {
             isQuizStarted: { $set: false }
         });
 
-    case actionsTypes.NEXT_QUESTION:
+    case actionsTypes.GO_TO_NEXT_QUESTION:
         return update(state, {
             nextQuestionIndex: { $set: state.nextQuestionIndex + 1 }
         });
 
-    case actionsTypes.PREVIOUS_QUESTION:
+    case actionsTypes.GO_TO_PREVIOUS_QUESTION:
         return update(state, {
             nextQuestionIndex: { $set: state.nextQuestionIndex - 1 }
         });
 
-    case actionsTypes.SAVE_INTERVAL_ID:
+    case actionsTypes.SET_INTERVAL_ID:
         return update(state, {
             interval_id: { $set: action.interval_id }
+        });
+
+    case actionsTypes.SET_NEXT_QUESTION:
+        return update(state, {
+            questions: { $set: [action.nextQuestion] }
         });
 
     default:

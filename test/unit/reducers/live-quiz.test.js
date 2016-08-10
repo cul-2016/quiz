@@ -1,6 +1,7 @@
 import test from 'tape';
 import { liveQuiz as liveQuizState } from '../../utils/reducer-fixtures';
 import reducer from '../../../src/js/reducers/live-quiz';
+import { nextQuestion } from '../../utils/data-fixtures';
 import deepFreeze from '../../utils/deepFreeze';
 
 test('SET_QUIZ_ID works', (t) => {
@@ -51,13 +52,13 @@ test('END_QUIZ works', (t) => {
     t.deepEqual(actual, expected);
 });
 
-test('NEXT_QUESTION works', (t) => {
+test('GO_TO_NEXT_QUESTION works', (t) => {
 
     t.plan(1);
 
     const initialState = deepFreeze(liveQuizState);
     const action = {
-        type: 'NEXT_QUESTION',
+        type: 'GO_TO_NEXT_QUESTION',
     };
 
     const actual = reducer(initialState, action);
@@ -66,7 +67,7 @@ test('NEXT_QUESTION works', (t) => {
     t.deepEqual(actual, expected);
 });
 
-test('PREVIOUS_QUESTION works', (t) => {
+test('GO_TO_PREVIOUS_QUESTION works', (t) => {
 
     t.plan(1);
 
@@ -79,7 +80,7 @@ test('PREVIOUS_QUESTION works', (t) => {
     );
 
     const action = {
-        type: 'PREVIOUS_QUESTION',
+        type: 'GO_TO_PREVIOUS_QUESTION',
     };
 
     const actual = reducer(initialState, action);
@@ -88,19 +89,36 @@ test('PREVIOUS_QUESTION works', (t) => {
     t.deepEqual(actual, expected);
 });
 
-test('SAVE_INTERVAL_ID works', (t) => {
+test('SET_INTERVAL_ID works', (t) => {
 
     t.plan(1);
 
     const initialState = deepFreeze(Object.assign({}, liveQuizState));
     const interval_id = 100;
     const action = {
-        type: 'SAVE_INTERVAL_ID',
+        type: 'SET_INTERVAL_ID',
         interval_id
     };
 
     const actual = reducer(initialState, action);
     const expected = Object.assign({}, liveQuizState, { interval_id: 100 });
+
+    t.deepEqual(actual, expected);
+});
+
+test('SET_NEXT_QUESTION works', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(Object.assign({}, liveQuizState));
+
+    const action = {
+        type: 'SET_NEXT_QUESTION',
+        nextQuestion
+    };
+
+    const actual = reducer(initialState, action);
+    const expected = Object.assign({}, liveQuizState, { questions: [nextQuestion] });
 
     t.deepEqual(actual, expected);
 });

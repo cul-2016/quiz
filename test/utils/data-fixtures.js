@@ -89,6 +89,15 @@ export const questions = [
         correct_answer: 'A'
     }
 ];
+
+export const nextQuestion = {
+    question: 'capital of England',
+    A: 'London',
+    B: 'Tokyo',
+    C: 'New York',
+    D: 'Paris'
+};
+
 export const getModuleData = {
     module: {
         module_id: 'TEST',

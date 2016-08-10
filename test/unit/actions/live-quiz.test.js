@@ -1,5 +1,6 @@
 import test from 'tape';
 import * as actions from '../../../src/js/actions/live-quiz';
+import { nextQuestion } from '../../utils/data-fixtures';
 import deepFreeze from '../../utils/deepFreeze';
 
 
@@ -26,37 +27,73 @@ test('startQuiz creates the correct action', (t) => {
     t.deepEqual(actual, expected);
 });
 
-test('nextQuestion creates the correct action', (t) => {
+test('endQuiz creates the correct action', (t) => {
     t.plan(1);
 
     const expected = {
-        type: actions.NEXT_QUESTION
+        type: actions.END_QUIZ,
     };
 
-    const actual = deepFreeze(actions.nextQuestion());
+    const actual = deepFreeze(actions.endQuiz());
     t.deepEqual(actual, expected);
 });
 
-test('previousQuestion creates the correct action', (t) => {
+test('startQuiz creates the correct action', (t) => {
     t.plan(1);
 
     const expected = {
-        type: actions.PREVIOUS_QUESTION
+        type: actions.START_QUIZ,
     };
 
-    const actual = deepFreeze(actions.previousQuestion());
+    const actual = deepFreeze(actions.startQuiz());
     t.deepEqual(actual, expected);
 });
 
 
-test('saveIntervalID creates the correct action', (t) => {
+test('goToNextQuestion creates the correct action', (t) => {
+    t.plan(1);
+
+    const expected = {
+        type: actions.GO_TO_NEXT_QUESTION
+    };
+
+    const actual = deepFreeze(actions.goToNextQuestion());
+    t.deepEqual(actual, expected);
+});
+
+test('goToPreviousQuestion creates the correct action', (t) => {
+    t.plan(1);
+
+    const expected = {
+        type: actions.GO_TO_PREVIOUS_QUESTION
+    };
+
+    const actual = deepFreeze(actions.goToPreviousQuestion());
+    t.deepEqual(actual, expected);
+});
+
+
+test('setIntervalID creates the correct action', (t) => {
     t.plan(1);
     const interval_id = 100;
     const expected = {
-        type: actions.SAVE_INTERVAL_ID,
+        type: actions.SET_INTERVAL_ID,
         interval_id
     };
 
-    const actual = deepFreeze(actions.saveIntervalID(interval_id));
+    const actual = deepFreeze(actions.setIntervalID(interval_id));
+    t.deepEqual(actual, expected);
+});
+
+test('setNextQuestion creates the correct action', (t) => {
+
+    t.plan(1);
+
+    const expected = {
+        type: actions.SET_NEXT_QUESTION,
+        nextQuestion
+    };
+
+    const actual = deepFreeze(actions.setNextQuestion(nextQuestion));
     t.deepEqual(actual, expected);
 });

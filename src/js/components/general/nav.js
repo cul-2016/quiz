@@ -10,9 +10,9 @@ const Nav = ({ username }) => {
                 </p>
             </div>
             <div className="nav-right nav-menu">
-                <p className="nav-item" >
+                <button className="nav-item" >
                 Logout
-                </p>
+                </button>
             </div>
         </nav>
     );
