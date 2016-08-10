@@ -66,6 +66,11 @@ export default function liveQuiz (state = initialState, action) {
             nextQuestionIndex: { $set: state.nextQuestionIndex - 1 }
         });
 
+    case actionsTypes.SET_RESPONSE:
+        return update(state, {
+            response: { $set: action.data }
+        });
+
     default:
         return state;
     }

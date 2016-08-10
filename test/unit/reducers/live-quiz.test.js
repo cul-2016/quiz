@@ -181,3 +181,18 @@ test('GET_QUIZ_QUESTIONS_FAILURE works', (t) => {
 
     t.deepEqual(actual, expected);
 });
+
+test('SET_RESPONSE works', (t) => {
+
+    t.plan(1);
+    const data = 'a';
+    const initialState = deepFreeze(liveQuizState);
+    const action = {
+        type: 'SET_RESPONSE',
+        data
+    };
+    const actual = reducer(initialState, action);
+    const expected = Object.assign({}, liveQuizState, { response: data });
+
+    t.deepEqual(actual, expected);
+});

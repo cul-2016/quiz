@@ -15,6 +15,9 @@ export const SET_NEXT_QUESTION = 'SET_NEXT_QUESTION';
 export const GO_TO_NEXT_QUESTION = 'GO_TO_NEXT_QUESTION';
 export const GO_TO_PREVIOUS_QUESTION = 'GO_TO_PREVIOUS_QUESTION';
 
+export const SET_RESPONSE = 'SET_RESPONSE';
+
+
 
 export function getQuizQuestions (quiz_id) {
 
@@ -76,4 +79,9 @@ export const goToNextQuestion = () => ({
 
 export const goToPreviousQuestion = () => ({
     type: GO_TO_PREVIOUS_QUESTION
+});
+
+export const setResponse = (data) => ({
+    type: SET_RESPONSE,
+    data
 });

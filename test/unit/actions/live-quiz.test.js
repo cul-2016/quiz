@@ -131,3 +131,15 @@ test('getQuizQuestionsFailure creates the correct action', (t) => {
     const actual = deepFreeze(actions.getQuizQuestionsFailure(error));
     t.deepEqual(actual, expected);
 });
+
+test('setResponse creates the correct action', (t) => {
+    t.plan(1);
+    const data = 'a';
+    const expected = {
+        type: actions.SET_RESPONSE,
+        data
+    };
+
+    const actual = deepFreeze(actions.setResponse(data));
+    t.deepEqual(actual, expected);
+});
