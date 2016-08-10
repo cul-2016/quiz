@@ -11,9 +11,9 @@ test('Dashboard renders correctly', (t) => {
     t.plan(1);
 
     const node = renderIntoDocument(<div><Dashboard modules={ data } /></div>);
-    const expectedButton = ReactDOM.findDOMNode(node).querySelector('button').textContent;
+    const expected = ReactDOM.findDOMNode(node).querySelector('.dashboard');
 
-    t.equal(expectedButton, 'Add a new module');
+    t.ok(expected);
 });
 
 // could add a test for clicking add module button

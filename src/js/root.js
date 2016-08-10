@@ -6,6 +6,7 @@ import App from './components/app';
 import LoginContainer from './containers/login';
 import DashboardContainer from './containers/dashboard';
 import NewModuleContainer from './containers/new-module';
+import JoinModuleContainer from './containers/join-module';
 import RegisterUserContainer from './containers/register-user';
 import ModuleContainer from './containers/module';
 import StudentModuleContainer from './containers/student-module';
@@ -41,8 +42,12 @@ const Root = ({ store }) => (
                     component={ DashboardContainer } />
                 <Route
                     onEnter={ hooks.authenticate }
-                    path="new-module"
+                    path="add-new-module"
                     component={ NewModuleContainer } />
+                <Route
+                    onEnter={ hooks.authenticate }
+                    path="join-module"
+                    component={ JoinModuleContainer } />
                 <Route
                     onEnter={ composeHooks(hooks.authenticate, hooks.fetchModule) }
                     path=":module_id/lecturer"
