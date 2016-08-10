@@ -7,7 +7,7 @@ var SaveUser = require('./routes/save-user');
 var ValidateUser = require('./routes/authenticate-user');
 var GetUserDetails = require('./routes/get-user-details');
 var SaveQuiz = require('./routes/save-quiz');
-
+var SaveStudentResponse = require('./routes/save-student-response');
 
 var routes = [
     Index,
@@ -18,7 +18,8 @@ var routes = [
     SaveUser,
     ValidateUser,
     GetUserDetails,
-    SaveQuiz
+    SaveQuiz,
+    SaveStudentResponse
 ];
 
 module.exports = routes;
