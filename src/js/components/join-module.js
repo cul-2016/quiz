@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-const JoinModule = ({ joining_module_id, handleInputChange }) => {
+const JoinModule = ({ module_id, handleInputChange }) => {
 
     return (
         <section className="hero is-primary is-fullheight">
@@ -14,7 +14,7 @@ const JoinModule = ({ joining_module_id, handleInputChange }) => {
                             <label className="label">Module Name</label>
                             <input
                                 className="input login-input"
-                                value={ joining_module_id || '' }
+                                value={ module_id || '' }
                                 onChange={ (e) => handleInputChange(e.target.value)}
                                 type="text"
                                 placeholder="Module Name"
@@ -28,7 +28,7 @@ const JoinModule = ({ joining_module_id, handleInputChange }) => {
 };
 
 JoinModule.propTypes = {
-    joining_module_id: PropTypes.string,
+    module_id: PropTypes.string,
     handleInputChange: PropTypes.func.isRequired
 };
 

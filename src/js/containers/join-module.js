@@ -3,7 +3,7 @@ import JoinModule from '../components/join-module';
 import { inputChange } from '../actions/join-module';
 
 const mapStateToProps = (state) => ({
-    joining_module_id: state.joinModule.module_id,
+    module_id: state.joinModule.module_id,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -76,6 +76,10 @@ export const newQuiz = {
     error: undefined
 };
 
+export const joinModule = {
+    module_id: undefined
+};
+
 export const newQuizWithQuestion = {
     name: undefined,
     questions: [{
