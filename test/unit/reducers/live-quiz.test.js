@@ -196,3 +196,61 @@ test('SET_RESPONSE works', (t) => {
 
     t.deepEqual(actual, expected);
 });
+
+test('SAVE_RESPONSE_REQUEST works', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(liveQuizState);
+    const action = {
+        type: 'SAVE_RESPONSE_REQUEST',
+    };
+
+    const actual = reducer(initialState, action);
+    const expected = Object.assign({}, liveQuizState, { isSavingResponse: true });
+
+    t.deepEqual(actual, expected);
+});
+
+test('SAVE_RESPONSE_SUCCESS works', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(
+        Object.assign(
+            {},
+            liveQuizState,
+            { isSavingResponse: true }
+        )
+    );
+    const action = {
+        type: 'SAVE_RESPONSE_SUCCESS'
+    };
+
+    const actual = reducer(initialState, action);
+    const expected = Object.assign({}, liveQuizState, { isSavingResponse: false });
+
+    t.deepEqual(actual, expected);
+});
+
+test('SAVE_RESPONSE_FAILURE works', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(
+        Object.assign(
+            {},
+            liveQuizState,
+            { isSavingResponse: true }
+        )
+    );
+    const action = {
+        type: 'SAVE_RESPONSE_FAILURE',
+        error
+    };
+
+    const actual = reducer(initialState, action);
+    const expected = Object.assign({}, liveQuizState, { isSavingResponse: false }, { error });
+
+    t.deepEqual(actual, expected);
+});

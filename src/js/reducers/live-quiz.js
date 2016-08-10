@@ -4,6 +4,7 @@ import * as actionsTypes from '../actions/live-quiz';
 const initialState = {
     error: undefined,
     isFetchingQuizQuestions: false,
+    isSavingResponse: false,
     quiz_id: undefined,
     questions: undefined,
     response: undefined,
@@ -30,6 +31,22 @@ export default function liveQuiz (state = initialState, action) {
     case actionsTypes.GET_QUIZ_QUESTIONS_FAILURE:
         return update(state, {
             isFetchingQuizQuestions: { $set: false },
+            error: { $set: action.error }
+        });
+
+    case actionsTypes.SAVE_RESPONSE_REQUEST:
+        return update(state, {
+            isSavingResponse: { $set: true }
+        });
+
+    case actionsTypes.SAVE_RESPONSE_SUCCESS:
+        return update(state, {
+            isSavingResponse: { $set: false }
+        });
+
+    case actionsTypes.SAVE_RESPONSE_FAILURE:
+        return update(state, {
+            isSavingResponse: { $set: false },
             error: { $set: action.error }
         });
 

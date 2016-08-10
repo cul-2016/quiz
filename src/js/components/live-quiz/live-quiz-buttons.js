@@ -16,7 +16,7 @@ const LiveQuizButtons = ({ is_lecturer, numQuestions, nextQuestionIndex, nextQue
     });
 
     let submitButtonClasses = classnames("button", {
-        "display-none": is_lecturer || numQuestions === 0
+        "display-none": is_lecturer || isQuizStarted === false
     });
 
 
@@ -34,7 +34,7 @@ const LiveQuizButtons = ({ is_lecturer, numQuestions, nextQuestionIndex, nextQue
                 End quiz
             </button>
 
-            <button className={ submitButtonClasses } onClick={ () =>  submitResponse }>
+            <button className={ submitButtonClasses } onClick={ submitResponse }>
                 Submit answer
             </button>
 
