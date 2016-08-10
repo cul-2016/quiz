@@ -70,7 +70,8 @@ export default function liveQuiz (state = initialState, action) {
 
     case actionsTypes.SET_NEXT_QUESTION:
         return update(state, {
-            questions: { $set: [action.nextQuestion] }
+            questions: { $set: [action.nextQuestion] },
+            response: { $set: undefined }
         });
 
     case actionsTypes.GO_TO_NEXT_QUESTION:
