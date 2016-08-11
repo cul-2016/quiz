@@ -13,7 +13,7 @@ const CurrentQuestion = ({ data, response, handleSelection }) => {
 
     let answers = answersArray.map((letter, i) => {
 
-        let classes = classnames("box column answer is-10 is-offset-1", {
+        let classes = classnames("box  answer", {
             "response": letter === response
         });
         return (

@@ -1,11 +1,7 @@
 import React, { PropTypes } from 'react';
+import normaliseLabel from '../../lib/normaliseLabel';
 
 const Trophies = ({ trophies, updateTrophyVals }) => {
-
-    const normaliseLabel = (text) => {
-
-        return `${text.charAt(0).toUpperCase()}${text.substr(1).replace('_', ' ')}`;
-    };
 
     let mappedTrophies = trophies.trophy_name.map((name, i) => {
 

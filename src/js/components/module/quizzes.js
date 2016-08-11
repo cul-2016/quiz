@@ -14,7 +14,7 @@ const Quizzes = ({ location, quizzes, sendQuizInvite }) => {
 
         return (
 
-            <div key={ index } className="box column is-6 is-offset-3">
+            <div key={ index } className="box">
                 <h5>{ quiz.name }</h5>
                 <p>{`Number of questions: ${quiz.num_questions}`}</p>
                 <p>{`Number of entries: ${quiz.num_entries}`}</p>

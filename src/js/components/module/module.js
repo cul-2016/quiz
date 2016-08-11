@@ -18,7 +18,7 @@ const Module = ({ location, module, quizzes, isFetchingModule, username, sendQui
             <div>
                 <Nav username={ username } />
 
-                <div className="column">
+                <div className="module container">
 
                     <Link to={ `${module.module_id}/leaderboard` }>
                         <button className="button">
@@ -29,12 +29,12 @@ const Module = ({ location, module, quizzes, isFetchingModule, username, sendQui
                     <Link to={ `${module.module_id}/new-quiz` } >
 
                         <button className="button">
-                            Add a new Quiz
+                            Add a new quiz
                         </button>
                     </Link>
                 </div>
 
-                <div className="box column is-8 is-offset-2">
+                <div className="box">
                     <h3>{ module.name }</h3>
                     <h5>{ module.module_id }</h5>
                     <p>{ `Users: ${module.num_enrolled}` }</p>
