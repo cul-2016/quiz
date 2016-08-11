@@ -22,7 +22,6 @@ export const login = {
     email: "",
     password: "",
     isAuthenticating: false,
-    userIsAuthenticated: undefined,
     error: undefined
 };
 

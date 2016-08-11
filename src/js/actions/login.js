@@ -9,6 +9,8 @@ export const AUTHENTICATE_USER_REQUEST = 'AUTHENTICATE_USER_REQUEST';
 export const AUTHENTICATE_USER_SUCCESS = 'AUTHENTICATE_USER_SUCCESS';
 export const AUTHENTICATE_USER_FAILURE = 'AUTHENTICATE_USER_FAILURE';
 
+export const LOGOUT = 'LOGOUT';
+
 
 export const updateEmail = (value) => ({
     type: UPDATE_EMAIL,
@@ -67,4 +69,8 @@ export const authenticateUserSuccess = (data) => ({
 export const authenticateUserFailure = (error) => ({
     type: AUTHENTICATE_USER_FAILURE,
     error
+});
+
+export const logout = () => ({
+    type: LOGOUT
 });

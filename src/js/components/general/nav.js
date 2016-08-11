@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import logout from '../../lib/logout';
 
 const Nav = ({ username }) => {
 
@@ -6,12 +7,12 @@ const Nav = ({ username }) => {
         <nav className="nav">
             <div className="nav-left">
                 <p className="nav-item is-brand">
-                <strong>Welcome, </strong> {username || 'lecturer'}
+                    <strong>Welcome, </strong> {username || 'lecturer'}
                 </p>
             </div>
-            <div className="nav-right nav-menu">
-                <button className="nav-item" >
-                Logout
+            <div className="nav-right">
+                <button className="nav-item" onClick= { logout }>
+                    Logout
                 </button>
             </div>
         </nav>
