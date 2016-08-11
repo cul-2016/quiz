@@ -3,6 +3,8 @@ import CurrentQuestion from './current-question';
 import LiveQuizButtons from './live-quiz-buttons';
 import classnames from 'classnames';
 
+
+
 const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex, nextQuestion, isQuizStarted, submitResponse, startQuiz, numQuestions, endQuiz, quiz_id, handleSelection, response, name }) => {
 
     let titleClass = classnames({
@@ -14,15 +16,16 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex, nextQuestion, isQu
                 <h3>{ name }</h3>
                 <h4 className={ titleClass }>Question { nextQuestionIndex }</h4>
             </div>
-            <div>
-            {
-                isQuizStarted && question &&
-                <CurrentQuestion
-                    data={ question }
-                    handleSelection={ handleSelection }
-                    response={ response }/>
-            }
-            </div>
+                <div className="section">
+                    {
+                        isQuizStarted && question &&
+                        <CurrentQuestion
+                            data={ question }
+                            handleSelection={ handleSelection }
+                            response={ response }/>
+                    }
+                </div>
+
 
 
             <LiveQuizButtons
@@ -34,7 +37,8 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex, nextQuestion, isQu
                 isQuizStarted={ isQuizStarted }
                 startQuiz={ startQuiz }
                 endQuiz={ endQuiz }
-                quiz_id={ quiz_id } />
+                quiz_id={ quiz_id }
+                response={ response } />
         </section>
     );
 };

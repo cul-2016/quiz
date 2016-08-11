@@ -4,7 +4,8 @@ import { addQuestion, updateValue, updateQuizName, saveQuiz } from '../actions/n
 
 const mapStateToProps = (state) => ({
 
-    newQuiz: state.newQuiz
+    newQuiz: state.newQuiz,
+    username: state.user.username
 });
 
 const mapDispatchToProps = (dispatch) => ({

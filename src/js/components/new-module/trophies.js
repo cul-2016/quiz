@@ -10,7 +10,7 @@ const Trophies = ({ trophies, updateTrophyVals }) => {
     let mappedTrophies = trophies.trophy_name.map((name, i) => {
 
         return (
-            <div className="column card has-text-centered" key={ i }>
+            <div className="column notification is-info has-text-centered" key={ i }>
                 <label className="label">{ normaliseLabel(name) }</label>
                 <input
                        type="number"

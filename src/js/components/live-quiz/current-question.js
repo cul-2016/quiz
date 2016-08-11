@@ -3,6 +3,8 @@ import classnames from 'classnames';
 
 const CurrentQuestion = ({ data, response, handleSelection }) => {
 
+
+
     let answersArray = Object.keys(data);
 
     answersArray.splice(answersArray.indexOf('question'), 1);
@@ -24,7 +26,7 @@ const CurrentQuestion = ({ data, response, handleSelection }) => {
     });
 
     return (
-        <div className="current-question section">
+        <div className="current-question">
             <h1>{ data.question }</h1>
             { answers }
         </div>
