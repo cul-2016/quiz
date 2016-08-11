@@ -3,25 +3,25 @@ import classnames from 'classnames';
 
 const LiveQuizButtons = ({ is_lecturer, numQuestions, nextQuestionIndex, nextQuestion, submitResponse, isQuizStarted, startQuiz, endQuiz, quiz_id }) => {
 
-    let startButtonClasses = classnames("button", {
+    let startButtonClasses = classnames("button is-large is-success", {
         "display-none": !is_lecturer || isQuizStarted
     });
 
-    let nextButtonClasses = classnames("button", {
+    let nextButtonClasses = classnames("button is-large is-info", {
         "display-none": !is_lecturer || nextQuestionIndex === 0 || nextQuestionIndex === numQuestions
     });
 
-    let endButtonClasses = classnames("button", {
+    let endButtonClasses = classnames("button is-large is-danger", {
         "display-none": !is_lecturer || nextQuestionIndex !== numQuestions
     });
 
-    let submitButtonClasses = classnames("button", {
+    let submitButtonClasses = classnames("button is-large is-success", {
         "display-none": is_lecturer || isQuizStarted === false
     });
 
 
     return (
-        <div>
+        <div className="column is-8 is-offset-2 has-text-centered">
             <button className={ startButtonClasses } onClick={ startQuiz }>
                 Start quiz!
             </button>
