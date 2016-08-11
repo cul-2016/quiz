@@ -24,56 +24,52 @@ const NewModule = ({ module_id_length, isValidatingModuleID, moduleIDExists,
         "fa-check": !isValidatingModuleID && module_id_length === 4 && moduleIDExists === false
     });
 
-    const moduleIDHelpClasses = classnames("help", {
+    const moduleIDHelpClasses = classnames("help is-white", {
         "is-danger": !isValidatingModuleID && module_id_length === 4 && moduleIDExists === true
     });
 
     return (
-        <section className="hero is-primary is-fullheight">
-            <div className="hero-body">
-                <div className="container has-text-centered">
-                    <div className="columns">
-                        <div className="box column is-8 is-offset-2">
-                            <h2>Add a new module</h2>
-                            <p>Please choose a <strong>unique</strong> code for your module.</p>
-                            <label className="label">Code</label>
-                            <p className="control has-icon has-icon-right">
+        <div className="container has-text-centered">
+            <div className="columns">
+                <div className="box column is-8 is-offset-2">
+                    <h2>Add a new module</h2>
+                    <p>Please choose a <strong>unique</strong> code for your module.</p>
+                    <label className="label">Code</label>
+                    <p className="control has-icon has-icon-right">
 
-                                <input
-                                    className={ moduleIDClasses }
-                                    name="module_id"
-                                    type="text"
-                                    maxLength="4"
-                                    onChange={ (e) => handleCodeInputChange('module_id', e.target.value) } />
-                                <i className={ iconClasses } />
-                                <span className={ moduleIDHelpClasses }> This code already exists.  Please choose another.</span>
-                            </p>
+                        <input
+                            className={ moduleIDClasses }
+                            name="module_id"
+                            type="text"
+                            maxLength="4"
+                            onChange={ (e) => handleCodeInputChange('module_id', e.target.value) } />
+                        <i className={ iconClasses } />
+                        <span className={ moduleIDHelpClasses }> This code already exists.  Please choose another.</span>
+                    </p>
 
-                            <label className="label">Module name</label>
-                            <input
-                                className="input"
-                                name="name"
-                                type="text"
-                                onChange={ (e) => handleInputChange('name', e.target.value) } />
+                    <label className="label">Module name</label>
+                    <input
+                        className="input"
+                        name="name"
+                        type="text"
+                        onChange={ (e) => handleInputChange('name', e.target.value) } />
 
-                            <br />
+                    <br />
 
-                            <Medals medals={ medals }
-                                    updateMedalVals={ updateMedalVals }
-                                    applyOffset={ applyOffset }/>
+                    <Medals medals={ medals }
+                            updateMedalVals={ updateMedalVals }
+                            applyOffset={ applyOffset }/>
 
-                            <Trophies trophies={ trophies }
-                                      updateTrophyVals={ updateTrophyVals }
-                                      applyOffset={ applyOffset } />
+                    <Trophies trophies={ trophies }
+                              updateTrophyVals={ updateTrophyVals }
+                              applyOffset={ applyOffset } />
 
-                            <button onClick={ submit }>
-                                Save module
-                            </button>
-                        </div>
-                    </div>
+                    <button onClick={ submit }>
+                        Save module
+                    </button>
                 </div>
             </div>
-        </section>
+        </div>
     );
 };
 

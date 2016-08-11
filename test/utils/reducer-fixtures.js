@@ -7,8 +7,8 @@ export const dashboard = {
 };
 
 export const newModule = {
-    module_id: undefined,
-    name: undefined,
+    module_id: "",
+    name: "",
     medals: [39, 69],
     trophies,
     error: undefined,
