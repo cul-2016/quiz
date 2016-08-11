@@ -20,28 +20,30 @@ const Dashboard = ({ modules, username, is_lecturer }) => {
     return (
         <div className='dashboard'>
             <Nav username={ username } />
-            {
-                is_lecturer &&
-                <div className="column is-2 is-offset-8">
-                    <Link to="add-new-module">
-                        <button className="button is-primary">
-                            Add a new module
-                        </button>
-                    </Link>
+            <div className="section">
+                {
+                    is_lecturer &&
+                    <div className="column is-2 is-offset-8">
+                        <Link to="add-new-module">
+                            <button className="button is-primary">
+                                Add a new module
+                            </button>
+                        </Link>
+                    </div>
+                }
+                {
+                    !is_lecturer &&
+                    <div className="column is-2 is-offset-8">
+                        <Link to="join-module">
+                            <button className="button is-primary is-medium">
+                                Join a module
+                            </button>
+                        </Link>
+                    </div>
+                }
+                <div>
+                    { lecturerModules }
                 </div>
-            }
-            {
-                !is_lecturer &&
-                <div className="column is-2 is-offset-8">
-                    <Link to="join-module">
-                        <button className="button is-primary">
-                            Join a module
-                        </button>
-                    </Link>
-                </div>
-            }
-            <div>
-                { lecturerModules }
             </div>
         </div>
     );

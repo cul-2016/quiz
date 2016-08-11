@@ -5792,7 +5792,7 @@ a.panel-block:hover {
   -webkit-align-items: stretch;
       -ms-flex-align: stretch;
           align-items: stretch;
-  background-color: #fff;
+  background-color: rgba(#ffffff, 0);
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -6673,7 +6673,7 @@ a.panel-block:hover {
 }
 
 .section {
-  background-color: #fff;
+  background-color: rgba(#ffffff, 0);
   padding: 20px 20px;
 }
 

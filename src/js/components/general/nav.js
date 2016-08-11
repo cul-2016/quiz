@@ -10,10 +10,12 @@ const Nav = ({ username }) => {
                     <strong>Welcome, </strong> {username || 'lecturer'}
                 </p>
             </div>
-            <div className="nav-right">
-                <button className="nav-item" onClick= { logout }>
+            <div className="nav-right nav-menu">
+                <span className="nav-item">
+                <button className="button is-danger" onClick= { logout }>
                     Logout
                 </button>
+                </span>
             </div>
         </nav>
     );
