@@ -34,7 +34,7 @@ export function getQuizQuestions (quiz_id) {
 
         dispatch(getQuizQuestionsRequest());
 
-        axios.get(`/get-quiz-questions?quiz_id=${quiz_id}`)
+        axios.post(`/get-quiz-questions?quiz_id=${quiz_id}`)
             .then((response) => {
                 dispatch(getQuizQuestionsSuccess(response.data));
             })
@@ -121,7 +121,9 @@ export function endQuiz (quiz_id) {
 
         dispatch(endQuizRequest());
 
-        axios.get(`/end-quiz?quiz_id=${quiz_id}`)
+        let payload = { quiz_id };
+
+        axios.post(`/end-quiz`, payload)
             .then(() => {
                 dispatch(endQuizSuccess());
             })
