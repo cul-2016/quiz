@@ -12,7 +12,7 @@ test('Dashboard renders correctly', (t) => {
 
     const node = renderIntoDocument(<div><Dashboard modules={ data } /></div>);
     const expected = ReactDOM.findDOMNode(node).querySelector('.dashboard');
-    
+
     t.ok(expected);
 });
 

@@ -11,12 +11,9 @@ export const GET_MODULE_FAILURE = 'GET_MODULE_FAILURE';
  * OPEN/CLOSE QUIX
  ****/
 
-export const openQuiz = () => {
-    console.log('opening quiz');
-    return {
-        type: OPEN_QUIZ,
-    };
-};
+export const openQuiz = () => ( {
+    type: OPEN_QUIZ,
+});
 
 export const closeQuiz = () => ({
     type: CLOSE_QUIZ,

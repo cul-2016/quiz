@@ -22,7 +22,6 @@ export const login = {
     email: "",
     password: "",
     isAuthenticating: false,
-    userIsAuthenticated: undefined,
     error: undefined
 };
 
@@ -77,6 +76,12 @@ export const newQuiz = {
     questions: [],
     isSavingQuiz: false,
     error: undefined
+};
+
+export const joinModule = {
+    module_id: undefined,
+    isJoiningModule: false,
+    error: undefined    
 };
 
 export const newQuizWithQuestion = {

@@ -8,6 +8,7 @@ var ValidateUser = require('./routes/authenticate-user');
 var GetUserDetails = require('./routes/get-user-details');
 var SaveQuiz = require('./routes/save-quiz');
 var GetQuizQuestions = require('./routes/get-quiz-questions');
+var JoinModule = require('./routes/join-module');
 var SaveStudentResponse = require('./routes/save-student-response');
 
 var routes = [
@@ -21,6 +22,7 @@ var routes = [
     GetUserDetails,
     SaveQuiz,
     GetQuizQuestions,
+    JoinModule,
     SaveStudentResponse
 ];
 

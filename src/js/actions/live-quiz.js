@@ -11,7 +11,10 @@ export const SAVE_RESPONSE_FAILURE = 'SAVE_RESPONSE_FAILURE';
 export const SET_QUIZ_ID = 'SET_QUIZ_ID';
 
 export const START_QUIZ = 'START_QUIZ';
-export const END_QUIZ = 'END_QUIZ';
+
+export const END_QUIZ_REQUEST = 'END_QUIZ_REQUEST';
+export const END_QUIZ_SUCCESS = 'END_QUIZ_SUCCESS';
+export const END_QUIZ_FAILURE = 'END_QUIZ_FAILURE';
 
 export const SET_INTERVAL_ID = 'SET_INTERVAL_ID';
 export const SET_NEXT_QUESTION = 'SET_NEXT_QUESTION';
@@ -21,14 +24,17 @@ export const GO_TO_PREVIOUS_QUESTION = 'GO_TO_PREVIOUS_QUESTION';
 
 export const SET_RESPONSE = 'SET_RESPONSE';
 
+/***
+ * GET QUIZ QUESTIONS
+ ***/
 
 export function getQuizQuestions (quiz_id) {
 
     return (dispatch) => {
 
-        dispatch(getQuizQuestionsRequest);
+        dispatch(getQuizQuestionsRequest());
 
-        axios.get(`/get-quiz-questions?quiz_id=${quiz_id}`)
+        axios.post(`/get-quiz-questions?quiz_id=${quiz_id}`)
             .then((response) => {
                 dispatch(getQuizQuestionsSuccess(response.data));
             })
@@ -52,6 +58,10 @@ export const getQuizQuestionsFailure = (error) => ({
     type: GET_QUIZ_QUESTIONS_FAILURE,
     error
 });
+
+/***
+ * SAVE RESPONSE
+ ***/
 
 export function saveResponse (data) {
 
@@ -82,6 +92,9 @@ export const saveResponseFailure = (error) => ({
     error
 });
 
+/***
+ * SET QUIZ ID, START QUIZ, SET INTERVAL ID
+ ***/
 
 export const setQuizID = (quiz_id) => ({
     type: SET_QUIZ_ID,
@@ -92,15 +105,51 @@ export const startQuiz = () => ({
     type: START_QUIZ
 });
 
-export const endQuiz = () => ({
-    type: END_QUIZ
-});
-
-
 export const setIntervalID = (interval_id) => ({
     type: SET_INTERVAL_ID,
     interval_id
 });
+
+
+/***
+ * END QUIZ
+ ***/
+
+export function endQuiz (quiz_id) {
+
+    return (dispatch) => {
+
+        dispatch(endQuizRequest());
+
+        let payload = { quiz_id };
+
+        axios.post(`/end-quiz`, payload)
+            .then(() => {
+                dispatch(endQuizSuccess());
+            })
+            .catch((error) => {
+                dispatch(endQuizFailure(error));
+            });
+    };
+}
+
+export const endQuizRequest = () => ({
+    type: END_QUIZ_REQUEST
+});
+
+export const endQuizSuccess = () => ({
+    type: END_QUIZ_SUCCESS
+});
+
+export const endQuizFailure = (error) => ({
+    type: END_QUIZ_FAILURE,
+    error
+});
+
+
+/***
+ * '*'NEXT QUESTION
+ ***/
 
 export const setNextQuestion = (nextQuestion) => ({
     type: SET_NEXT_QUESTION,

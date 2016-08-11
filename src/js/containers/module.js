@@ -23,8 +23,6 @@ const mapDispatchToProps = (dispatch) => ({
             room: store.getState().module.module.module_id,
             quiz_id
         };
-        
-        console.log("sending quiz invite");
 
         const interval_id = sendQuizInvite(socketClient, quizInfo);
         dispatch(setIntervalID(interval_id));
