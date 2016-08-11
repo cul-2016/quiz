@@ -6,7 +6,7 @@ var query = require('./query');
  * @param {integer} user_id - user_id of the students
  * @param {integer} quiz_id - quiz_id for the given Quiz
  * @param {integer} question_id - question_id for the given Question
- * @params {string} response - response for the given student
+ * @param {string} response - response for the given student
  * @param {function} callback - a callback function
  */
 

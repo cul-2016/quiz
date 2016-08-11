@@ -1,7 +1,7 @@
 require('babel-register')({
     presets: ['es2015']
 });
-var query = require('./query'); // eslint-disable-line no-unused-vars
+var query = require('./query'); 
 var queries = require('./queries.json');
 var organiseModuleData = require('./organiseModuleData');
 
