@@ -2,11 +2,16 @@ import React, { PropTypes } from 'react';
 
 const Trophies = ({ trophies, updateTrophyVals }) => {
 
+    const normaliseLabel = (text) => {
+
+        return `${text.charAt(0).toUpperCase()}${text.substr(1).replace('_', ' ')}`;
+    };
+
     let mappedTrophies = trophies.trophy_name.map((name, i) => {
 
         return (
             <div className="column card has-text-centered" key={ i }>
-                <label className="label">{ name }</label>
+                <label className="label">{ normaliseLabel(name) }</label>
                 <input
                        type="number"
                        min="1"
