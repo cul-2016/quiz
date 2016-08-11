@@ -10,7 +10,7 @@ const CurrentQuestion = ({ data, response, handleSelection }) => {
                 .sort();
 
     let answers = answersArray.map((letter, i) => {
-        console.log(response, 'r', letter, 'l');
+        
         let classes = classnames("box", {
             "response": letter === response
         });

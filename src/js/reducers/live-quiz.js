@@ -60,8 +60,19 @@ export default function liveQuiz (state = initialState, action) {
             isQuizStarted: { $set: true }
         });
 
-    case actionsTypes.END_QUIZ:
+    case actionsTypes.END_QUIZ_REQUEST:
+        return update(state, {
+            isEndingQuiz: { $set: true }
+        });
+
+    case actionsTypes.END_QUIZ_SUCCESS:
         return initialState;
+
+    case actionsTypes.END_QUIZ_FAILURE:
+        return update(state, {
+            isEndingQuiz: { $set: false },
+            error: { $set: action.error }
+        });
 
     case actionsTypes.SET_INTERVAL_ID:
         return update(state, {

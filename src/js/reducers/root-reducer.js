@@ -10,7 +10,7 @@ import module from './module';
 import liveQuiz from './live-quiz';
 
 
-export default combineReducers({
+const appReducer = combineReducers({
     user,
     login,
     dashboard,
@@ -21,3 +21,14 @@ export default combineReducers({
     module,
     liveQuiz
 });
+
+const rootReducer = (state, action) => {
+
+    if (action.type === 'LOGOUT') {
+
+        state = undefined;
+    }
+    return appReducer(state, action);
+};
+
+export default rootReducer;

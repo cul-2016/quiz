@@ -52,8 +52,8 @@ const mapDispatchToProps = (dispatch) => ({
 
             console.log(msg);
             clearInterval(intervalID);
+            dispatch(endQuiz(quiz_id));
             hashHistory.push(`${module_id}/${quiz_id}/review`);
-            dispatch(endQuiz());
         });
     }
 });

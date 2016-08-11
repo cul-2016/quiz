@@ -5,8 +5,7 @@ const initialState = {
     email: "",
     password: "",
     isAuthenticating: false,
-    error: undefined,
-    userIsAuthenticated: undefined
+    error: undefined
 };
 
 export default function login (state = initialState, action ) {
@@ -24,15 +23,13 @@ export default function login (state = initialState, action ) {
         });
 
     case actionsTypes.AUTHENTICATE_USER_SUCCESS:
-        return update(state, {
-            isAuthenticating: { $set: false },
-            userIsAuthenticated: { $set: action.data }
-        });
+        return initialState;
 
     case actionsTypes.AUTHENTICATE_USER_FAILURE:
         return update(state, {
             isAuthenticating: { $set: false },
-            error: { $set: action.error }
+            error: { $set: action.error },
+            password: { $set: "" }
         });
 
     default:
