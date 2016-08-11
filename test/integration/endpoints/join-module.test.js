@@ -30,16 +30,3 @@ test('`join-module` endpoint works', (t) => {
         t.equal(response.statusCode, 200, '200 status code');
     });
 });
-
-// test('deleting the member from module_members', (t) => {
-//
-//     testClient.connect((error, client, done) => {
-//
-//         if (error) {
-//             console.error(error, 'error from deleting module from the database');
-//         }
-//         client.query('DELETE FROM module_members WHERE user_id = $1 AND module_id = $2', [2, 'SOH1']);
-//         done();
-//         t.end();
-//     });
-// });
