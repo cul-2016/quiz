@@ -7,7 +7,8 @@ const mapStateToProps = (state) => ({
     question: state.liveQuiz.questions && state.liveQuiz.questions[0],
     is_lecturer: state.user.is_lecturer,
     isQuizStarted: state.liveQuiz.isQuizStarted,
-    response: state.liveQuiz.response
+    response: state.liveQuiz.response,
+    name: state.liveQuiz.name
 });
 
 const mapDispatchToProps = (dispatch) => ({ // eslint-disable-line

@@ -15,7 +15,8 @@ const mapStateToProps = (state) => {
         nextQuestionIndex: state.liveQuiz.nextQuestionIndex,
         is_lecturer: state.user.is_lecturer,
         isQuizStarted: state.liveQuiz.isQuizStarted,
-        quiz_id: state.liveQuiz.quiz_id
+        quiz_id: state.liveQuiz.quiz_id,
+        name: state.liveQuiz.name
     };
 };
 
