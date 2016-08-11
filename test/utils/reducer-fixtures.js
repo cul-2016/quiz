@@ -77,7 +77,9 @@ export const newQuiz = {
 };
 
 export const joinModule = {
-    module_id: undefined
+    module_id: undefined,
+    isJoiningModule: false,
+    error: undefined    
 };
 
 export const newQuizWithQuestion = {

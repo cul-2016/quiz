@@ -1,6 +1,16 @@
 import React, { PropTypes } from 'react';
+import classnames from 'classnames';
 
-const JoinModule = ({ module_id, handleInputChange }) => {
+const JoinModule = ({ module_id, moduleIDExists, handleInputChange, handleJoinModule }) => {
+
+    let joinModuleClass = classnames("button is-warning login-button", {
+        "is-disabled": module_id && !moduleIDExists && module_id.length !== 4
+    });
+
+    let inputClass = classnames("input login-input", {
+        "is-success": moduleIDExists && module_id && module_id.length === 4,
+        "is-danger": moduleIDExists === false && module_id && module_id.length === 4
+    });
 
     return (
         <section className="hero is-primary is-fullheight">
@@ -12,13 +22,17 @@ const JoinModule = ({ module_id, handleInputChange }) => {
                               Join a Module
                             </h2>
                             <label className="label">Module Name</label>
+                            <h6 className="">Please enter the 4 digit unique module id</h6>
                             <input
-                                className="input login-input"
+                                className={ inputClass }
                                 value={ module_id || '' }
                                 onChange={ (e) => handleInputChange(e.target.value)}
                                 type="text"
                                 placeholder="Module Name"
                                 />
+                            <a className={ joinModuleClass } onClick={ () => handleJoinModule() }>
+                                Join Module
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -29,7 +43,9 @@ const JoinModule = ({ module_id, handleInputChange }) => {
 
 JoinModule.propTypes = {
     module_id: PropTypes.string,
-    handleInputChange: PropTypes.func.isRequired
+    moduleIDExists: PropTypes.bool,
+    handleInputChange: PropTypes.func.isRequired,
+    handleJoinModule: PropTypes.func.isRequired
 };
 
 export default JoinModule;

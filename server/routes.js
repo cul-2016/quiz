@@ -8,7 +8,7 @@ var ValidateUser = require('./routes/authenticate-user');
 var GetUserDetails = require('./routes/get-user-details');
 var SaveQuiz = require('./routes/save-quiz');
 var GetQuizQuestions = require('./routes/get-quiz-questions');
-
+var JoinModule = require('./routes/join-module');
 
 var routes = [
     Index,
@@ -20,7 +20,8 @@ var routes = [
     ValidateUser,
     GetUserDetails,
     SaveQuiz,
-    GetQuizQuestions
+    GetQuizQuestions,
+    JoinModule
 ];
 
 module.exports = routes;
