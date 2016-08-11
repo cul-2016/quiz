@@ -10,3 +10,18 @@ input {
 .response {
     background-color: $blue;
 }
+
+// .label-inline {
+//     display: inline-block;
+// }
+
+.new-module-medals, .new-module-trophies {
+    margin-top: 30px;
+    input {
+        display: inline-block;
+    }
+}
+
+.new-module-trophies {
+    margin-bottom: 30px;
+}

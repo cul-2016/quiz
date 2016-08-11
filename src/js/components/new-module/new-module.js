@@ -29,12 +29,12 @@ const NewModule = ({ module_id_length, isValidatingModuleID, moduleIDExists,
     });
 
     return (
-        <div className="container has-text-centered">
-            <div className="columns">
-                <div className="box column is-8 is-offset-2">
+        <div className="">
+            <div className="">
+                <div className="">
                     <h2>Add a new module</h2>
 
-                    <div className="notification is-info">
+                    <div className="notification is-info has-text-centered">
 
                         <p>Please choose a <strong>unique</strong> code for your module.</p>
                         <p>Students will use this code to register for your module.</p>
@@ -70,7 +70,7 @@ const NewModule = ({ module_id_length, isValidatingModuleID, moduleIDExists,
                               updateTrophyVals={ updateTrophyVals }
                               applyOffset={ applyOffset } />
 
-                    <button className="button" onClick={ submit }>
+                          <button className="button is-success is-large" onClick={ submit }>
                         Save module
                     </button>
                 </div>

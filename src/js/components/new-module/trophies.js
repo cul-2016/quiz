@@ -5,9 +5,9 @@ const Trophies = ({ trophies, updateTrophyVals }) => {
     let mappedTrophies = trophies.trophy_name.map((name, i) => {
 
         return (
-            <div key={ i }>
+            <div className="column card" key={ i }>
                 <label className="label">{ name }</label>
-                <input className="input"
+                <input
                        type="number"
                        min="1"
                        max="100"
@@ -18,9 +18,11 @@ const Trophies = ({ trophies, updateTrophyVals }) => {
     });
 
     return (
-        <div>
+        <div className="new-module-trophies">
             <h3>Trophies</h3>
-            { mappedTrophies }
+            <div className="columns">
+                { mappedTrophies }
+            </div>
         </div>
     );
 };
