@@ -33,8 +33,14 @@ const NewModule = ({ module_id_length, isValidatingModuleID, moduleIDExists,
             <div className="columns">
                 <div className="box column is-8 is-offset-2">
                     <h2>Add a new module</h2>
-                    <p>Please choose a <strong>unique</strong> code for your module.</p>
-                    <label className="label">Code</label>
+
+                    <div className="notification is-info">
+
+                        <p>Please choose a <strong>unique</strong> code for your module.</p>
+                        <p>Students will use this code to register for your module.</p>
+                        <p>It must be <strong>4 characters</strong> in length.</p>
+                    </div>
+                    <label className="label">Code (4 characters long)</label>
                     <p className="control has-icon has-icon-right">
 
                         <input
@@ -64,7 +70,7 @@ const NewModule = ({ module_id_length, isValidatingModuleID, moduleIDExists,
                               updateTrophyVals={ updateTrophyVals }
                               applyOffset={ applyOffset } />
 
-                    <button onClick={ submit }>
+                    <button className="button" onClick={ submit }>
                         Save module
                     </button>
                 </div>
