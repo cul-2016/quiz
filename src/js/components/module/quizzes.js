@@ -16,8 +16,8 @@ const Quizzes = ({ location, quizzes, sendQuizInvite }) => {
 
             <div key={ index } className="box">
                 <h5>{ quiz.name }</h5>
-                <p>{`Number of questions: ${quiz.num_questions}`}</p>
-                <p>{`Number of entries: ${quiz.num_entries}`}</p>
+                <p>{`Number of questions: ${+quiz.num_questions}`}</p>
+                <p>{`Number of entries: ${+quiz.num_entries}`}</p>
                 <p>Presented? <i className={ iconClasses } /></p>
 
                 <Link to={`${location.pathname}/live`}>

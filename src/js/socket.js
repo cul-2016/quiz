@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import io from 'socket.io-client';
 import { store } from './store';
 import { hashHistory } from 'react-router';
