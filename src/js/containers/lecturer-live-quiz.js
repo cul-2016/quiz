@@ -1,7 +1,8 @@
 import { connect } from 'react-redux';
+import { hashHistory } from 'react-router';
 import LiveQuiz from '../components/live-quiz/live-quiz';
 import { store } from '../store';
-import { startQuiz, nextQuestion as nextQuestionAction } from '../actions/live-quiz';
+import { startQuiz, endQuiz, goToNextQuestion } from '../actions/live-quiz';
 import { socketClient } from '../socket';
 import { getNextQuestion } from '../lib/getNextQuestion';
 import { sendNextQuestion } from '../lib/sendNextQuestion';
@@ -9,32 +10,50 @@ import { sendNextQuestion } from '../lib/sendNextQuestion';
 
 const mapStateToProps = (state) => {
     return {
-        question: state.liveQuiz.questions[state.liveQuiz.nextQuestionIndex - 1],
-        numQuestions: state.liveQuiz.questions.length,
+        question: state.liveQuiz.questions && state.liveQuiz.questions[state.liveQuiz.nextQuestionIndex - 1],
+        numQuestions: state.liveQuiz.questions && state.liveQuiz.questions.length,
         nextQuestionIndex: state.liveQuiz.nextQuestionIndex,
         is_lecturer: state.user.is_lecturer,
-        isQuizStarted: state.liveQuiz.isQuizStarted
+        isQuizStarted: state.liveQuiz.isQuizStarted,
+        quiz_id: state.liveQuiz.quiz_id
     };
 };
 
-const mapDispatchToProps = (dispatch) => ({ // eslint-disable-line
+const mapDispatchToProps = (dispatch) => ({
 
     startQuiz: () => {
-        // dispatch isQuizStarted
+
         let nextQuestion = getNextQuestion(store);
 
         sendNextQuestion(socketClient, nextQuestion, () => {
-            console.log("store.dispatch(nextQuestion)");
-            dispatch(nextQuestionAction());
+
+            dispatch(goToNextQuestion());
             dispatch(startQuiz());
         });
     },
     nextQuestion: () => {
+
         let nextQuestion = getNextQuestion(store);
 
         sendNextQuestion(socketClient, nextQuestion, () => {
-            console.log("store.dispatch(nextQuestion)");
-            dispatch(nextQuestionAction());
+
+            dispatch(goToNextQuestion());
+        });
+    },
+    endQuiz: (quiz_id) => {
+
+        const intervalID = store.getState().liveQuiz.interval_id;
+        const module_id = store.getState().module.module.module_id;
+        const data = {
+            room: module_id,
+            quiz_id
+        };
+        socketClient.emit('end_of_quiz', data, (msg) => {
+
+            console.log(msg);
+            clearInterval(intervalID);
+            hashHistory.push(`${module_id}/${quiz_id}/review`);
+            dispatch(endQuiz());
         });
     }
 });

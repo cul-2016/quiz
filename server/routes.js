@@ -9,6 +9,7 @@ var GetUserDetails = require('./routes/get-user-details');
 var SaveQuiz = require('./routes/save-quiz');
 var GetQuizQuestions = require('./routes/get-quiz-questions');
 var JoinModule = require('./routes/join-module');
+var SaveStudentResponse = require('./routes/save-student-response');
 
 var routes = [
     Index,
@@ -21,7 +22,8 @@ var routes = [
     GetUserDetails,
     SaveQuiz,
     GetQuizQuestions,
-    JoinModule
+    JoinModule,
+    SaveStudentResponse
 ];
 
 module.exports = routes;

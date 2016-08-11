@@ -89,6 +89,30 @@ export const questions = [
         correct_answer: 'A'
     }
 ];
+
+export const liveQuizQuestions = [
+    {
+        question_id: 1,
+        question: 'capital of England',
+        A: 'London',
+        B: 'Tokyo',
+        C: 'New York',
+        D: 'Paris'
+    }
+];
+
+export const nextQuestion = {
+    quiz_id: 1,
+    nextQuestion: {
+        question_id: 1,
+        question: 'capital of England',
+        A: 'London',
+        B: 'Tokyo',
+        C: 'New York',
+        D: 'Paris'
+    }
+};
+
 export const getModuleData = {
     module: {
         module_id: 'TEST',

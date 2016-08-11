@@ -2,30 +2,11 @@ import update from 'react-addons-update';
 import * as actionsTypes from '../actions/live-quiz';
 
 const initialState = {
-    quiz_id: 1,
-    questions: [
-        {
-            question: 'capital of England',
-            A: 'London',
-            B: 'Tokyo',
-            C: 'New York',
-            D: 'Paris'
-        },
-        {
-            question: 'capital of Japan',
-            A: 'London',
-            B: 'Tokyo',
-            C: 'New York',
-            D: 'Paris'
-        },
-        {
-            question: 'capital of France',
-            A: 'London',
-            B: 'Tokyo',
-            C: 'New York',
-            D: 'Paris'
-        }
-    ],
+    error: undefined,
+    isFetchingQuizQuestions: false,
+    isSavingResponse: false,
+    quiz_id: undefined,
+    questions: undefined,
     response: undefined,
     nextQuestionIndex: 0,
     isQuizStarted: false,
@@ -35,6 +16,39 @@ const initialState = {
 export default function liveQuiz (state = initialState, action) {
 
     switch (action.type) {
+
+    case actionsTypes.GET_QUIZ_QUESTIONS_REQUEST:
+        return update(state, {
+            isFetchingQuizQuestions: { $set: true }
+        });
+
+    case actionsTypes.GET_QUIZ_QUESTIONS_SUCCESS:
+        return update(state, {
+            isFetchingQuizQuestions: { $set: false },
+            questions: { $set: action.questions }
+        });
+
+    case actionsTypes.GET_QUIZ_QUESTIONS_FAILURE:
+        return update(state, {
+            isFetchingQuizQuestions: { $set: false },
+            error: { $set: action.error }
+        });
+
+    case actionsTypes.SAVE_RESPONSE_REQUEST:
+        return update(state, {
+            isSavingResponse: { $set: true }
+        });
+
+    case actionsTypes.SAVE_RESPONSE_SUCCESS:
+        return update(state, {
+            isSavingResponse: { $set: false }
+        });
+
+    case actionsTypes.SAVE_RESPONSE_FAILURE:
+        return update(state, {
+            isSavingResponse: { $set: false },
+            error: { $set: action.error }
+        });
 
     case actionsTypes.SET_QUIZ_ID:
         return update(state, {
@@ -47,23 +61,32 @@ export default function liveQuiz (state = initialState, action) {
         });
 
     case actionsTypes.END_QUIZ:
+        return initialState;
+
+    case actionsTypes.SET_INTERVAL_ID:
         return update(state, {
-            isQuizStarted: { $set: false }
+            interval_id: { $set: action.interval_id }
         });
 
-    case actionsTypes.NEXT_QUESTION:
+    case actionsTypes.SET_NEXT_QUESTION:
+        return update(state, {
+            questions: { $set: [action.nextQuestion] },
+            response: { $set: undefined }
+        });
+
+    case actionsTypes.GO_TO_NEXT_QUESTION:
         return update(state, {
             nextQuestionIndex: { $set: state.nextQuestionIndex + 1 }
         });
 
-    case actionsTypes.PREVIOUS_QUESTION:
+    case actionsTypes.GO_TO_PREVIOUS_QUESTION:
         return update(state, {
             nextQuestionIndex: { $set: state.nextQuestionIndex - 1 }
         });
 
-    case actionsTypes.SAVE_INTERVAL_ID:
+    case actionsTypes.SET_RESPONSE:
         return update(state, {
-            interval_id: { $set: action.interval_id }
+            response: { $set: action.data }
         });
 
     default:

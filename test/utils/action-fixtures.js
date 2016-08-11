@@ -7,3 +7,5 @@ export const registeringUserError = new Error('Failed to register user');
 export const getModuleError = new Error('Failed to get module details');
 export const saveQuizError = new Error('Failed to save Quiz');
 export const joinModuleError = new Error('Failed to join Module');
+export const getQuizQuestionsError = new Error('Failed to get quiz questions');
+export const saveResponseError = new Error('Failed to save the response');
