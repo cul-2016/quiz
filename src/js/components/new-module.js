@@ -26,8 +26,8 @@ class NewModule extends React.Component {
 
             return (
                 <div key={ i }>
-                    <span>{ name }</span>
-                    <input type="number" min="1" max="100" defaultValue={ trophies.condition[i] } onChange={ (e) => this.props.updateTrophyVals(name, e.target.value) } />
+                    <label className="label">{ name }</label>
+                    <input className="input" type="number" min="1" max="100" defaultValue={ trophies.condition[i] } onChange={ (e) => this.props.updateTrophyVals(name, e.target.value) } />
                 </div>
             );
         });
@@ -38,26 +38,43 @@ class NewModule extends React.Component {
         const { medals, trophies, updateMedalVals, moduleIDExists } = this.props;
 
         return (
-            <div>
-                <h1>Add a new module</h1>
-                <div>
-                    <label>Code</label>
-                    <input ref="module_id" name="module_id" type="text" maxLength="4" onChange={ (e) => this.props.handleInputChange('module_id', e.target.value) } />
-                    <ValidationIcon codeLength={ undefined } moduleIDExists={ moduleIDExists } />
-                    <label>Module name</label>
-                    <input name="name" type="text" onChange={ (e) => this.props.handleInputChange('name', e.target.value) } />
-                </div>
+            <section className="hero is-primary is-fullheight">
+                <div className="hero-body">
+                    <div className="container has-text-centered">
+                        <div className="columns">
+                            <div className="box column is-8 is-offset-2">
+                                <h2>
+                                 Add a new module
+                                </h2>
+                                <label className="label">Code</label>
+                                <input
+                                    className="input"
+                                    ref="module_id"
+                                    name="module_id"
+                                    type="text"
+                                    maxLength="4"
+                                    onChange={ (e) => this.props.handleInputChange('module_id', e.target.value) } />
+                                <ValidationIcon
+                                    codeLength={ undefined } moduleIDExists={ moduleIDExists } />
+                                <label className="label">Module name</label>
+                                <input
+                                    className="input"
+                                    name="name"
+                                    type="text"
+                                    onChange={ (e) => this.props.handleInputChange('name', e.target.value) } />
+
                 <br />
                 <div>
                     <h3>Medals</h3>
-                    <p>Bronze</p>
-                    <span>0 to </span>
-                    <input name="bronze" type="number" min="1" max="96" defaultValue={ this.applyOffset(medals[0], -1) } onChange={ (e) => updateMedalVals('bronze', e.target.value) } />
-                    <p>Silver</p>
-                    <span className="silver lower-bound">{ medals[0] }</span> to <span className="silver upper-bound">{ medals[1] }</span>
-                    <p>Gold</p>
-                    <input name="gold" type="number" min="4" max="99" defaultValue={ this.applyOffset(medals[1], 1) } onChange={ (e) => updateMedalVals('gold', e.target.value) } />
-                    <span> to 100</span>
+
+                    <label className="label">Bronze</label>
+                    <span className="label">0 to </span>
+                    <input className="input" name="bronze" type="number" min="1" max="96" defaultValue={ this.applyOffset(medals[0], -1) } onChange={ (e) => updateMedalVals('bronze', e.target.value) } />
+                    <label className="label">Silver</label>
+                    <span className=" label silver lower-bound">{ medals[0] } </span><span className="label"> to </span><span className=" label silver upper-bound">{ medals[1] }</span>
+                    <label className="label">Gold</label>
+                    <input className="input" name="gold" type="number" min="4" max="99" defaultValue={ this.applyOffset(medals[1], 1) } onChange={ (e) => updateMedalVals('gold', e.target.value) } />
+                    <span className="label"> to 100</span>
                 </div>
                 <div>
                     <h3>Trophies</h3>
@@ -66,7 +83,11 @@ class NewModule extends React.Component {
                 <button onClick={ this.props.submit }>
                     Save module
                 </button>
-            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         );
     }
 }
