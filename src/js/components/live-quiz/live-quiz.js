@@ -11,7 +11,7 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex, nextQuestion, isQu
         "display-none": !nextQuestionIndex
     });
     return (
-        <section>
+        <section className="live-quiz">
             <div className="column is-8 is-offset-2 has-text-centered" >
                 <h3>{ name }</h3>
                 <h4 className={ titleClass }>Question { nextQuestionIndex }</h4>
