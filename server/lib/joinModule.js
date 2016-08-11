@@ -4,7 +4,7 @@ var query = require('./query');
  * Represents a function that saves the module in the members_module table
  * @param {object} client - postgres database client
  * @param {string} module_id - module_id the user would like to join
- * @params {integer} user_id - user_id for the given user
+ * @param {integer} user_id - user_id for the given user
  * @param {function} callback - a callback function
  */
 
