@@ -21,7 +21,8 @@ const Details = ({ moduleIDExists, isValidatingModuleID, module_id_length, handl
 
     return (
         <div className="section">
-            <h3>Module name and code</h3>
+            <h3>
+                <i className="fa fa-pencil" /> Module name and code</h3>
 
             <div className="notification is-info has-text-centered">
 
