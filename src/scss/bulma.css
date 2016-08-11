@@ -147,7 +147,7 @@ pre, code, kbd, samp {
   font-family: monospace, sans-serif;
 }
 
-label,
+/*label,*/
 input[type=button],
 input[type=submit],
 input[type=file],
@@ -275,7 +275,7 @@ span {
 }
 
 strong {
-  color: #222324;
+  /*color: #222324;*/
   font-weight: 700;
 }
 

@@ -5,7 +5,7 @@ const Trophies = ({ trophies, updateTrophyVals }) => {
     let mappedTrophies = trophies.trophy_name.map((name, i) => {
 
         return (
-            <div className="column card" key={ i }>
+            <div className="column card has-text-centered" key={ i }>
                 <label className="label">{ name }</label>
                 <input
                        type="number"
@@ -18,7 +18,7 @@ const Trophies = ({ trophies, updateTrophyVals }) => {
     });
 
     return (
-        <div className="new-module-trophies">
+        <div className="new-module-trophies section">
             <h3>Trophies</h3>
             <div className="columns">
                 { mappedTrophies }

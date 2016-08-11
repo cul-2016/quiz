@@ -1,0 +1,15 @@
+.new-module {
+    .notification {
+        color: white;
+    }
+
+    strong {
+        text-decoration: underline;
+    }
+
+    .section:first-of-type {
+        input {
+            margin-bottom: 30px;
+        }
+    }
+}

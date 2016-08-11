@@ -2,12 +2,12 @@ import React, { PropTypes } from 'react';
 
 const Medals = ({ applyOffset, updateMedalVals, medals }) => {
     return (
-        <div className="new-module-medals is-clearfix">
+        <div className="new-module-medals section">
             <h3>Medals</h3>
 
             <div className="columns">
 
-                <div className="column card">
+                <div className="column card has-text-centered">
 
                     <label className="label">Bronze</label>
                     <span className="label-inline">0 to </span>
@@ -18,12 +18,14 @@ const Medals = ({ applyOffset, updateMedalVals, medals }) => {
                         defaultValue={ applyOffset(medals[0], -1) }
                         onChange={ (e) => updateMedalVals('bronze', e.target.value) } />
                 </div>
-                <div className="column card">
+
+                <div className="column card has-text-centered">
 
                     <label className="label">Silver</label>
                     <span className="inline">{ `${medals[0]} to ${medals[1]}` }</span>
                 </div>
-                <div className="column card">
+
+                <div className="column card has-text-centered">
 
                     <label className="label">Gold</label>
                     <input
