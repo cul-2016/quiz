@@ -64,6 +64,7 @@ export const liveQuiz = {
     isFetchingQuizQuestions: false,
     isSavingResponse: false,
     quiz_id: undefined,
+    name: undefined,
     questions: undefined,
     response: undefined,
     nextQuestionIndex: 0,
@@ -81,7 +82,7 @@ export const newQuiz = {
 export const joinModule = {
     module_id: undefined,
     isJoiningModule: false,
-    error: undefined    
+    error: undefined
 };
 
 export const newQuizWithQuestion = {

@@ -2,7 +2,7 @@ import io from 'socket.io-client';
 import { store } from './store';
 import { hashHistory } from 'react-router';
 import { openQuiz } from './actions/module';
-import { setQuizID, startQuiz, endQuiz, setNextQuestion } from './actions/live-quiz';
+import { setQuizDetails, startQuiz, endQuiz, setNextQuestion } from './actions/live-quiz';
 
 let uri = process.env.DEVELOPMENT ? `${location.protocol}//${location.hostname}:9000` : '';
 export const socketClient = io(uri);
@@ -30,7 +30,7 @@ socketClient.on('receive_next_question', (questionObj) => {
 
     if (!isQuizStarted) {
 
-        store.dispatch(setQuizID(questionObj.quiz_id));
+        store.dispatch(setQuizDetails(questionObj.quiz_id, questionObj.name));
         store.dispatch(startQuiz());
     }
     store.dispatch(setNextQuestion(questionObj.nextQuestion));

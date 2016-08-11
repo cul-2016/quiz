@@ -8,7 +8,7 @@ export const SAVE_RESPONSE_REQUEST = 'SAVE_RESPONSE_REQUEST';
 export const SAVE_RESPONSE_SUCCESS = 'SAVE_RESPONSE_SUCCESS';
 export const SAVE_RESPONSE_FAILURE = 'SAVE_RESPONSE_FAILURE';
 
-export const SET_QUIZ_ID = 'SET_QUIZ_ID';
+export const SET_QUIZ_DETAILS = 'SET_QUIZ_DETAILS';
 
 export const START_QUIZ = 'START_QUIZ';
 
@@ -34,7 +34,7 @@ export function getQuizQuestions (quiz_id) {
 
         dispatch(getQuizQuestionsRequest());
 
-        axios.post(`/get-quiz-questions?quiz_id=${quiz_id}`)
+        axios.get(`/get-quiz-questions?quiz_id=${quiz_id}`)
             .then((response) => {
                 dispatch(getQuizQuestionsSuccess(response.data));
             })
@@ -96,9 +96,10 @@ export const saveResponseFailure = (error) => ({
  * SET QUIZ ID, START QUIZ, SET INTERVAL ID
  ***/
 
-export const setQuizID = (quiz_id) => ({
-    type: SET_QUIZ_ID,
-    quiz_id
+export const setQuizDetails = (quiz_id, name) => ({
+    type: SET_QUIZ_DETAILS,
+    quiz_id,
+    name
 });
 
 export const startQuiz = () => ({

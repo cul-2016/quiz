@@ -9,13 +9,15 @@ export function getNextQuestion (store) {
     let nextQuestionIndex = store.getState().liveQuiz.nextQuestionIndex;
     let questions = store.getState().liveQuiz.questions;
     let quiz_id = store.getState().liveQuiz.quiz_id;
+    let name = store.getState().liveQuiz.name;
 
     let room = store.getState().module.module.module_id;
 
     return {
         questionObj: {
             nextQuestion: questions[nextQuestionIndex],
-            quiz_id
+            quiz_id,
+            name
         },
         room
     };
