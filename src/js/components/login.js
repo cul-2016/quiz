@@ -10,39 +10,40 @@ const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthentic
     });
 
     return (
-        <section className="hero is-primary is-fullheight">
+        <section className="login hero is-primary is-fullheight">
             <div className="hero-body">
-                <div className="container has-text-centered">
-                    <div className="columns">
-                        <div className="box column is-one-third is-offset-one-third">
-                            <h2 className="login-title">
-                              Log In
-                            </h2>
-                            <p className={ userValidation }> <span className="tag is-danger">Please enter a valid email and password</span></p>
-                            <label className="label">Email</label>
-                            <input
-                                className="input login-input"
-                                value={ login.username }
-                                onChange={ (e) => handleEmailChange(e.target.value)}
-                                type="email"
-                                placeholder="Email"
-                                />
+                <div className="container narrow has-text-centered">
+                    <div className="box">
+                        <h2>Log In</h2>
+                        <p className={ userValidation }>
+                            <span className="tag is-danger">
+                                Please enter a valid email and password
+                            </span>
+                        </p>
+                        <label className="label has-text-left">Email</label>
+                        <input
+                            className="input"
+                            value={ login.username }
+                            onChange={ (e) => handleEmailChange(e.target.value)}
+                            type="email" />
 
-                            <label className="label">Password</label>
-                            <input
-                                className="input login-input"
-                                value={ login.password }
-                                onChange={ (e) => handlePasswordChange(e.target.value)}
-                                type="password"
-                                placeholder="Password"
-                                />
-                            <a className="button is-warning login-button" onClick={ () => handleAuthenticateUser(login.email, login.password) }>
-                                Login
-                            </a>
-                            <p>
-                            <Link to="/register-student"><span className="tag is-success">Not a user already? Please Register here</span></Link>
-                            </p>
-                        </div>
+                        <label className="label has-text-left">Password</label>
+                        <input
+                            className="input"
+                            value={ login.password }
+                            onChange={ (e) => handlePasswordChange(e.target.value) }
+                            type="password" />
+
+                        <button className="button is-warning" onClick={ () => handleAuthenticateUser(login.email, login.password) }>
+                            Login
+                        </button>
+                        <p>
+                            <Link to="/register-student">
+                                <span className="tag is-success">
+                                    Sign up here
+                                </span>
+                            </Link>
+                        </p>
                     </div>
                 </div>
             </div>

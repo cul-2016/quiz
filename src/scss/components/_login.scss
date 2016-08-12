@@ -1,12 +1,17 @@
-.login-input {
-    margin: 10px 0;
-}
+.login {
 
-.login-title {
-    color: black;
-    margin: 20px 0;
-}
-.login-button {
-    margin: 20px 0;
-    width: 100px;
+    h2 {
+        color: black;
+        margin: 20px 0;
+    }
+
+    input {
+        margin: 10px 0;
+        font-size: 16px;
+    }
+
+    button {
+        margin: 20px 0;
+        width: 100px;
+    }
 }
