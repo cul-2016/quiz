@@ -6,33 +6,59 @@ const Quizzes = ({ location, quizzes, sendQuizInvite }) => {
 
     const mappedQuizzes = quizzes.map((quiz, index) => {
 
-        let iconClasses = quiz.isPresented ? 'fa fa-check' : 'fa fa-times';
+        let iconClasses = classnames("fa", {
+            "fa-check": quiz.is_presented === true,
+            "fa-times": quiz.is_presented === false
+        });
 
         let buttonClass = classnames("button", {
-            "display-none": quiz.isPresented
+            "display-none": quiz.is_presented
         });
 
         return (
-
-            <div key={ index } className="box">
-                <h5>{ quiz.name }</h5>
-                <p>{`Number of questions: ${+quiz.num_questions}`}</p>
-                <p>{`Number of entries: ${+quiz.num_entries}`}</p>
-                <p>Presented? <i className={ iconClasses } /></p>
-
-                <Link to={`${location.pathname}/live`}>
-                    <button className={ buttonClass }
-                        onClick={ () => sendQuizInvite(quiz.quiz_id, quiz.name) }>
-                        Invite students to quiz
-                    </button>
-                </Link>
-            </div>
+            <tr key={ index }>
+                <td>{ quiz.name }</td>
+                <td>{+quiz.num_questions}</td>
+                <td>{+quiz.num_entries}</td>
+                <td><i className={ iconClasses } /></td>
+                <td>
+                    <Link to={`${location.pathname}/live`}>
+                        <span className={ buttonClass }
+                            onClick={ () => sendQuizInvite(quiz.quiz_id, quiz.name) }>
+                            Invite students to quiz
+                        </span>
+                    </Link>
+                </td>
+            </tr>
         );
     });
 
     return (
-        <div>
-            { mappedQuizzes }
+        <div className="section">
+
+            <table className="table">
+                <thead>
+                    <tr>
+                        <th>Quiz name</th>
+                        <th># questions</th>
+                        <th># entries</th>
+                        <th>Presented?</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Quiz name</th>
+                        <th># questions</th>
+                        <th># entries</th>
+                        <th>Presented?</th>
+                        <th></th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    { mappedQuizzes }
+                </tbody>
+            </table>
         </div>
     );
 };

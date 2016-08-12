@@ -15,7 +15,7 @@ const Trophies = ({ trophies }) => {
     });
 
     return (
-        <div className="module-trophies">
+        <div className="section">
             <h4>Trophies</h4>
             <div className="columns">
 

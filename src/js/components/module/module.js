@@ -16,23 +16,21 @@ const Module = ({ location, module, quizzes, isFetchingModule, username, sendQui
             !isFetchingModule &&
             <div>
                 <Nav username={ username } />
-                <div className="container">
+                <div className="container module">
 
-                    <div className="module">
+                    <Link to={ `${module.module_id}/leaderboard` }>
+                        <button className="button">
+                            Leaderboard
+                        </button>
+                    </Link>
 
-                        <Link to={ `${module.module_id}/leaderboard` }>
-                            <button className="button">
-                                Leaderboard
-                            </button>
-                        </Link>
+                    <Link to={ `${module.module_id}/new-quiz` } >
 
-                        <Link to={ `${module.module_id}/new-quiz` } >
+                        <button className="button">
+                            Add a new quiz
+                        </button>
+                    </Link>
 
-                            <button className="button">
-                                Add a new quiz
-                            </button>
-                        </Link>
-                    </div>
 
                     <Details name={ module.name }
                              module_id={ module.module_id }

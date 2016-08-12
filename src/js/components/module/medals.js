@@ -6,7 +6,7 @@ import normaliseLabel from '../../lib/normaliseLabel';
 const Medals = ({ medals }) => {
 
     return (
-            <div>
+            <div className="section">
                 <h4>Medals</h4>
                 <div className="columns has-text-centered">
 
@@ -19,7 +19,7 @@ const Medals = ({ medals }) => {
                         <span className="label">{ normaliseLabel(medals.medal_name[1]) }</span>
                         <span> { medals.condition[0] }  - { medals.condition[1] } </span>
                     </div>
-                    
+
                     <div className="box column">
                         <span className="label">{ normaliseLabel(medals.medal_name[2]) }</span>
                         <span> { applyOffset(medals.condition[1], 1) } - 100 </span>

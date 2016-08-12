@@ -5,10 +5,14 @@ import Medals from './medals';
 const Details = ({ name, module_id, num_enrolled, trophies, medals }) => {
 
     return (
-        <div className="box">
-            <h3>{ name }</h3>
-            <h5>{ module_id }</h5>
-            <p>{ `Users: ${+num_enrolled}` }</p>
+        <div>
+            <div className="section has-text-centered">
+
+                <h2>{ name }</h2>
+                <h5>{ module_id }</h5>
+                <h5><i className="fa fa-users" /> { `${+num_enrolled} students have registered` }</h5>
+            </div>
+
             <Trophies trophies={ trophies } />
             <Medals medals={ medals } />
         </div>
