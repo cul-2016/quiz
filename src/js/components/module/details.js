@@ -21,10 +21,10 @@ const Details = ({ name, module_id, num_enrolled, trophies, medals }) => {
 
 Details.propTypes = {
     name: PropTypes.string,
-    module_id: PropTypes.number,
+    module_id: PropTypes.string,
     num_enrolled: PropTypes.number,
-    trophies: PropTypes.array,
-    medals: PropTypes.array
+    trophies: PropTypes.object,
+    medals: PropTypes.object
 };
 
 export default Details;
