@@ -90,6 +90,31 @@ export const questions = [
     }
 ];
 
+export const reviewQuizQuestions = [{ quiz_id: 1,
+    question_id: 1,
+    question: 'What is the capital of England?',
+    a: 'London',
+    b: 'Cardiff',
+    c: 'Edinburgh',
+    d: 'Doncaster',
+    correct_answer: 'A',
+    a_response: '2',
+    b_response: '0',
+    c_response: '0',
+    d_response: '0' },
+  { quiz_id: 1,
+    question_id: 2,
+    question: 'What is the capital of Croatia?',
+    a: 'Zagreb',
+    b: 'Cardiff',
+    c: 'Edinburgh',
+    d: 'Doncaster',
+    correct_answer: 'A',
+    a_response: '1',
+    b_response: '0',
+    c_response: '0',
+    d_response: '0' }];
+
 export const liveQuizQuestions = [
     {
         question_id: 1,
