@@ -12,7 +12,7 @@ input {
 }
 
 /* achieves the effect that `.column` used to do */
-.container.narrow {
+.container.narrow, .box.narrow {
     margin: auto;
     max-width: 400px;
 }

@@ -8,7 +8,7 @@ const Dashboard = ({ modules, username, is_lecturer }) => {
         let role = is_lecturer ? 'lecturer' : 'student';
 
         return (
-            <div className="box column is-8 is-offset-2 module-list-item" key={ i }>
+            <div className="box narrow" key={ i }>
                 <Link  to={ `${module.module_id}/${role}` } >
                     <div key={ i }>
                         { `${module.module_id}: ${module.name}` }
@@ -20,26 +20,22 @@ const Dashboard = ({ modules, username, is_lecturer }) => {
     return (
         <div className='dashboard'>
             <Nav username={ username } />
-            <div className="section">
+            <div className="container">
                 {
                     is_lecturer &&
-                    <div className="column is-2 is-offset-8">
-                        <Link to="add-new-module">
+                        <Link className="column is-2 is-offset-8" to="add-new-module">
                             <button className="button is-primary">
                                 Add a new module
                             </button>
                         </Link>
-                    </div>
                 }
                 {
                     !is_lecturer &&
-                    <div className="column is-2 is-offset-8">
-                        <Link to="join-module">
+                        <Link className="column is-2 is-offset-8" to="join-module">
                             <button className="button is-primary is-medium">
                                 Join a module
                             </button>
                         </Link>
-                    </div>
                 }
                 <div>
                     { lecturerModules }
