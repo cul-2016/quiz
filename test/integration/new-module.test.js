@@ -2,7 +2,7 @@ import test from 'tape';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { renderIntoDocument, Simulate } from 'react-addons-test-utils';
-import NewModule from '../../src/js/components/new-module';
+import NewModule from '../../src/js/components/new-module/new-module';
 import { updateMedalValues, updateTextValues, addNewModule } from '../../src/js/actions/new-module';
 import { store } from '../../src/js/store';
 

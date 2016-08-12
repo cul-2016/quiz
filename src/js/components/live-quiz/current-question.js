@@ -3,6 +3,8 @@ import classnames from 'classnames';
 
 const CurrentQuestion = ({ data, response, handleSelection }) => {
 
+
+
     let answersArray = Object.keys(data);
 
     answersArray.splice(answersArray.indexOf('question'), 1);
@@ -10,14 +12,14 @@ const CurrentQuestion = ({ data, response, handleSelection }) => {
                 .sort();
 
     let answers = answersArray.map((letter, i) => {
-        
-        let classes = classnames("box", {
+
+        let classes = classnames("box  answer", {
             "response": letter === response
         });
         return (
             <div key={ i } className={ classes } onClick={ () => handleSelection && handleSelection(letter) }>
-                <span>{ `${letter}: ` }</span>
-                { `${data[letter]}` }
+                <span>{ `${letter.toUpperCase()}: ` }</span>
+                <span>{ `${data[letter]}` }</span>
             </div>
         );
 

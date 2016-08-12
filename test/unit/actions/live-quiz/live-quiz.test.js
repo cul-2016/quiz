@@ -5,15 +5,17 @@ import { nextQuestion } from '../../../utils/data-fixtures';
 
 
 
-test('setQuizID creates the correct action', (t) => {
+test('setQuizDetails creates the correct action', (t) => {
     t.plan(1);
     const quiz_id = 1;
+    const name = "week 1 quiz";
     const expected = {
-        type: actions.SET_QUIZ_ID,
-        quiz_id
+        type: actions.SET_QUIZ_DETAILS,
+        quiz_id,
+        name
     };
 
-    const actual = deepFreeze(actions.setQuizID(quiz_id));
+    const actual = deepFreeze(actions.setQuizDetails(quiz_id, name));
     t.deepEqual(actual, expected);
 });
 

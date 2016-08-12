@@ -147,7 +147,7 @@ pre, code, kbd, samp {
   font-family: monospace, sans-serif;
 }
 
-label,
+/*label,*/
 input[type=button],
 input[type=submit],
 input[type=file],
@@ -275,7 +275,7 @@ span {
 }
 
 strong {
-  color: #222324;
+  /*color: #222324;*/
   font-weight: 700;
 }
 
@@ -308,10 +308,13 @@ table th {
   color: #222324;
 }
 
-.block:not(:last-child), .box:not(:last-child), .content:not(:last-child), .notification:not(:last-child), .progress:not(:last-child), .title:not(:last-child),
+/** Mina's edit, prevent misshapen box last child **/
+
+.block:not(:last-child), /*.box:not(:last-child)*/, .content:not(:last-child), .notification:not(:last-child), .progress:not(:last-child), .title:not(:last-child),
 .subtitle:not(:last-child), .highlight:not(:last-child), .level:not(:last-child), .message:not(:last-child), .tabs:not(:last-child) {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
+
 
 .container {
   position: relative;
@@ -3103,7 +3106,8 @@ a.box:active {
   -webkit-flex-shrink: 1;
       -ms-flex-negative: 1;
           flex-shrink: 1;
-  padding: 10px;
+  /*padding: 10px;*/
+  margin: 10px;
 }
 
 .columns.is-mobile > .column.is-narrow {
@@ -5792,7 +5796,7 @@ a.panel-block:hover {
   -webkit-align-items: stretch;
       -ms-flex-align: stretch;
           align-items: stretch;
-  background-color: #fff;
+  background-color: rgba(#ffffff, 0);
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -6674,7 +6678,8 @@ a.panel-block:hover {
 
 .section {
   background-color: #fff;
-  padding: 40px 20px;
+  /*padding: 40px 20px;*/
+  padding: 20px 20px;
 }
 
 @media screen and (min-width: 980px) {

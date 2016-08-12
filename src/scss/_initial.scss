@@ -10,3 +10,9 @@ input {
 .response {
     background-color: $blue;
 }
+
+/* achieves the effect that `.column` used to do */
+.container.narrow, .box.narrow {
+    margin: auto;
+    max-width: 400px;
+}

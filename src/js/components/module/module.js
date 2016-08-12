@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import Nav from '../general/nav';
-import Trophies from './trophies';
-import Medals from './medals';
+import Details from './details';
 import Quizzes from './quizzes';
 import { Link } from 'react-router';
 import Spinner from '../general/spinner';
@@ -17,8 +16,7 @@ const Module = ({ location, module, quizzes, isFetchingModule, username, sendQui
             !isFetchingModule &&
             <div>
                 <Nav username={ username } />
-
-                <div className="column">
+                <div className="container module">
 
                     <Link to={ `${module.module_id}/leaderboard` }>
                         <button className="button">
@@ -29,22 +27,21 @@ const Module = ({ location, module, quizzes, isFetchingModule, username, sendQui
                     <Link to={ `${module.module_id}/new-quiz` } >
 
                         <button className="button">
-                            Add a new Quiz
+                            Add a new quiz
                         </button>
                     </Link>
-                </div>
 
-                <div className="box column is-8 is-offset-2">
-                    <h3>{ module.name }</h3>
-                    <h5>{ module.module_id }</h5>
-                    <p>{ `Users: ${module.num_enrolled}` }</p>
-                    <Trophies trophies={ module.trophies } />
-                    <Medals medals={ module.medals } />
-                </div>
 
-                <Quizzes quizzes={ quizzes }
-                         location={ location }
-                         sendQuizInvite={ sendQuizInvite }/>
+                    <Details name={ module.name }
+                             module_id={ module.module_id }
+                             num_enrolled={ module.num_enrolled }
+                             trophies={ module.trophies }
+                             medals={ module.medals }/>
+
+                    <Quizzes quizzes={ quizzes }
+                        location={ location }
+                        sendQuizInvite={ sendQuizInvite }/>
+                </div>
             </div>
         }
         </div>

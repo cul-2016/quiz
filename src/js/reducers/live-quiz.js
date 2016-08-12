@@ -6,6 +6,7 @@ const initialState = {
     isFetchingQuizQuestions: false,
     isSavingResponse: false,
     quiz_id: undefined,
+    name: undefined,
     questions: undefined,
     response: undefined,
     nextQuestionIndex: 0,
@@ -50,9 +51,10 @@ export default function liveQuiz (state = initialState, action) {
             error: { $set: action.error }
         });
 
-    case actionsTypes.SET_QUIZ_ID:
+    case actionsTypes.SET_QUIZ_DETAILS:
         return update(state, {
-            quiz_id: { $set: action.quiz_id }
+            quiz_id: { $set: action.quiz_id },
+            name: { $set: action.name }
         });
 
     case actionsTypes.START_QUIZ:

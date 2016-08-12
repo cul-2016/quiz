@@ -3,8 +3,8 @@ import * as actionTypes from '../actions/new-module';
 
 
 const initialState = {
-    module_id: undefined,
-    name: undefined,
+    module_id: "",
+    name: "",
     medals: [39, 69],
     trophies: {
         trophy_name: [

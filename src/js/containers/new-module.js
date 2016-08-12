@@ -1,21 +1,31 @@
 import { connect } from 'react-redux';
 import { updateMedalValues, updateTrophyValues, updateTextValues, validateModuleID, addNewModule } from '../actions/new-module';
-import NewModule from '../components/new-module';
+import NewModule from '../components/new-module/new-module';
 import { store } from '../store';
 
 
 const mapStateToProps = (state) => ({
     medals: state.newModule.medals,
     trophies: state.newModule.trophies,
-    moduleIDExists: state.newModule.moduleIDExists
+    moduleIDExists: state.newModule.moduleIDExists,
+    module_id_length: state.newModule.module_id.length,
+    isValidatingModuleID: state.newModule.isValidatingModuleID
 });
 
 const mapDispatchToProps = (dispatch) => ({
 
     handleInputChange: (inputKey, value) => {
 
-        // dispatch
         dispatch(updateTextValues(inputKey, value));
+    },
+
+    handleCodeInputChange: (inputKey, id) => {
+
+        if (id.length === 4) {
+
+            dispatch(validateModuleID(id));
+        }
+        dispatch(updateTextValues(inputKey, id));
     },
 
     updateMedalVals: (medal, value) => {
@@ -25,20 +35,14 @@ const mapDispatchToProps = (dispatch) => ({
         }
         dispatch(updateMedalValues(medal, value));
     },
+
     updateTrophyVals: (trophy, value) => {
 
         dispatch(updateTrophyValues(trophy, value));
     },
-    validateID: (id) => {
 
-        if (id.length === 4) {
-
-            dispatch(validateModuleID(id));
-        }
-    },
     submit: () => {
 
-        // data validation should happen here
         if (!store.getState().newModule.validationProblem) {
 
             let currentState = store.getState().newModule;

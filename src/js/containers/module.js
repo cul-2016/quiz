@@ -4,7 +4,7 @@ import { socketClient } from '../socket';
 import { store } from '../store.js';
 import { joinWebsocketRoom } from '../lib/subscriptions';
 import sendQuizInvite from '../lib/sendQuizInvite';
-import { setIntervalID, getQuizQuestions, setQuizID } from '../actions/live-quiz';
+import { setIntervalID, getQuizQuestions, setQuizDetails } from '../actions/live-quiz';
 
 joinWebsocketRoom(store, socketClient);
 
@@ -17,7 +17,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
 
-    sendQuizInvite: (quiz_id) => {
+    sendQuizInvite: (quiz_id, name) => {
 
         let quizInfo = {
             room: store.getState().module.module.module_id,
@@ -26,7 +26,7 @@ const mapDispatchToProps = (dispatch) => ({
 
         const interval_id = sendQuizInvite(socketClient, quizInfo);
         dispatch(setIntervalID(interval_id));
-        dispatch(setQuizID(quiz_id));
+        dispatch(setQuizDetails(quiz_id, name));
         dispatch(getQuizQuestions(quiz_id));
     }
 });

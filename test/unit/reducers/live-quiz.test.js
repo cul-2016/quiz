@@ -4,19 +4,21 @@ import reducer from '../../../src/js/reducers/live-quiz';
 import { nextQuestion, liveQuizQuestion as questions } from '../../utils/data-fixtures';
 import deepFreeze from '../../utils/deepFreeze';
 
-test('SET_QUIZ_ID works', (t) => {
+test('SET_QUIZ_DETAILS works', (t) => {
 
     t.plan(1);
 
     const initialState = deepFreeze(liveQuizState);
     const quiz_id = 1;
+    const name = "week 1 quiz";
     const action = {
-        type: 'SET_QUIZ_ID',
-        quiz_id
+        type: 'SET_QUIZ_DETAILS',
+        quiz_id,
+        name
     };
 
     const actual = reducer(initialState, action);
-    const expected = Object.assign({}, liveQuizState, { quiz_id });
+    const expected = Object.assign({}, liveQuizState, { quiz_id, name });
 
     t.deepEqual(actual, expected);
 });
