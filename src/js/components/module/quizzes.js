@@ -11,7 +11,7 @@ const Quizzes = ({ location, quizzes, sendQuizInvite }) => {
             "fa-times": quiz.is_presented === false
         });
 
-        let buttonClass = classnames("button", {
+        let buttonClass = classnames("button is-success", {
             "display-none": quiz.is_presented
         });
 
@@ -40,7 +40,7 @@ const Quizzes = ({ location, quizzes, sendQuizInvite }) => {
             "fa-times": quiz.is_presented === false
         });
 
-        let buttonClass = classnames("button", {
+        let buttonClass = classnames("button is-success", {
             "display-none": quiz.is_presented
         });
 
