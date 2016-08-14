@@ -1,6 +1,18 @@
 
 .module {
-    .section {
-        margin: 30px;
+
+    @media screen and (min-width: 769px) {
+
+        .section {
+            margin: 30px;
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+
+        .box {
+            margin-bottom: 10px;
+            padding: 10px;
+        }
     }
 }
