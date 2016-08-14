@@ -35,7 +35,7 @@ const Quizzes = ({ location, quizzes, sendQuizInvite }) => {
 
     return (
         <div className="section">
-
+            <h4>Quizzes</h4>
             <table className="table">
                 <thead>
                     <tr>
