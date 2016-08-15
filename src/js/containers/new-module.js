@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { updateMedalValues, updateTrophyValues, updateTextValues, validateModuleID, addNewModule } from '../actions/new-module';
 import NewModule from '../components/new-module/new-module';
 import { store } from '../store';
+import { hashHistory } from 'react-router';
 
 
 const mapStateToProps = (state) => ({
@@ -59,6 +60,7 @@ const mapDispatchToProps = (dispatch) => ({
                 }
             );
             dispatch(addNewModule(data));
+            hashHistory.push('/dashboard');
         }
     }
 });
