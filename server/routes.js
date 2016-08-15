@@ -13,6 +13,8 @@ var SaveStudentResponse = require('./handlers/save-student-response');
 var EndQuiz = require('./handlers/end-quiz');
 var GetQuizReview = require('./handlers/get-quiz-review');
 var GetModuleUsers = require('./handlers/get-module-users');
+var RemoveUserFromModule = require('./handlers/remove-user-from-module');
+
 
 var routes = [
     Index,
@@ -29,7 +31,8 @@ var routes = [
     SaveStudentResponse,
     EndQuiz,
     GetQuizReview,
-    GetModuleUsers
+    GetModuleUsers,
+    RemoveUserFromModule
 ];
 
 module.exports = routes;

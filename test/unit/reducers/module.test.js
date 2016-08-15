@@ -1,6 +1,6 @@
 import test from 'tape';
 import { module as moduleState } from '../../utils/reducer-fixtures';
-import { getModuleError as error, getModuleUsersError } from '../../utils/action-fixtures';
+import { getModuleError as error, getModuleUsersError, removeUserFromModule } from '../../utils/action-fixtures';
 import { module as data, getModuleUsers } from '../../utils/data-fixtures';
 import reducer from '../../../src/js/reducers/module';
 import deepFreeze from '../../utils/deepFreeze';
@@ -144,5 +144,58 @@ test('CLOSE_QUIZ works', (t) => {
     const expected = Object.assign({}, moduleState, { isQuizOpen: false });
 
     const result = reducer(initialState, action);
+    t.deepEqual(result, expected);
+});
+
+//
+// REMOVE USER FROM MODULE Reducers
+//
+test('REMOVE_USER_FROM_MODULE_REQUEST works', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(moduleState);
+
+    const action = {
+        type: 'REMOVE_USER_FROM_MODULE_REQUEST',
+    };
+    const expected = Object.assign({}, moduleState, { isRemovingUser: true });
+
+    const result = reducer(initialState, action);
+    t.deepEqual(result, expected);
+});
+
+test('REMOVE_USER_FROM_MODULE_SUCCESS works', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(moduleState);
+
+    const action = {
+        type: 'REMOVE_USER_FROM_MODULE_SUCCESS'
+    };
+    const expected = Object.assign({}, moduleState, {
+        isRemovingUser: false,
+    });
+
+    const result = reducer(initialState, action);
+
+    t.deepEqual(result, expected);
+});
+
+test('REMOVE_USER_FROM_MODULE_FAILURE works', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(moduleState);
+
+    const action = {
+        type: 'REMOVE_USER_FROM_MODULE_FAILURE',
+        error: removeUserFromModule
+    };
+    const expected = Object.assign({}, moduleState, { error: removeUserFromModule, isRemovingUser: false });
+
+    const result = reducer(initialState, action);
+
     t.deepEqual(result, expected);
 });

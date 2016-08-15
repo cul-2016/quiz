@@ -57,7 +57,8 @@ export const module = {
     isFetchingModule: false,
     error: undefined,
     isQuizOpen: false,
-    users: undefined
+    users: undefined,
+    isRemovingUser: false
 };
 
 export const liveQuiz = {
