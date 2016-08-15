@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router'; // eslint-disable-line no-unused-vars
 import classnames from 'classnames';
 import Nav from '../general/nav';
+import Tabs from './tabs';
 import Spinner from '../general/spinner';
 
 const StudentModule = ({ location, children, username,
@@ -21,6 +22,7 @@ const StudentModule = ({ location, children, username,
             !isFetchingModule &&
             <div>
                 <Nav username={ username } />
+                <Tabs location={ location } />
                 <div className="section has-text-centered">
                     <Link to={`${location.pathname}/live`}>
                         <button className={ buttonClasses }>
