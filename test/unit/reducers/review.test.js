@@ -16,7 +16,7 @@ test('GET_QUIZ_REVIEW_REQUEST works', (t) => {
     };
 
     const actual = reducer(initialState, action);
-    const expected = Object.assign({}, reviewState, { isFetchingReviewQuiz: true });
+    const expected = Object.assign({}, reviewState, { isFetchingReview: true });
 
     t.deepEqual(actual, expected);
 });
@@ -29,7 +29,7 @@ test('GET_QUIZ_REVIEW_SUCCESS works', (t) => {
         Object.assign(
             {},
             reviewState,
-            { isFetchingReviewQuiz: true }
+            { isFetchingReview: true }
         )
     );
     const action = {
@@ -37,7 +37,7 @@ test('GET_QUIZ_REVIEW_SUCCESS works', (t) => {
     };
 
     const actual = reducer(initialState, action);
-    const expected = Object.assign({}, reviewState, { isFetchingReviewQuiz: false }, { questions });
+    const expected = Object.assign({}, reviewState, { isFetchingReview: false }, { questions });
 
     t.deepEqual(actual, expected);
 });
@@ -50,7 +50,7 @@ test('GET_QUIZ_REVIEW_FAILURE works', (t) => {
         Object.assign(
             {},
             reviewState,
-            { isFetchingReviewQuiz: true }
+            { isFetchingReview: true }
         )
     );
     const action = {
@@ -59,7 +59,7 @@ test('GET_QUIZ_REVIEW_FAILURE works', (t) => {
     };
 
     const actual = reducer(initialState, action);
-    const expected = Object.assign({}, reviewState, { isFetchingReviewQuiz: false }, { error });
+    const expected = Object.assign({}, reviewState, { isFetchingReview: false }, { error });
 
     t.deepEqual(actual, expected);
 });

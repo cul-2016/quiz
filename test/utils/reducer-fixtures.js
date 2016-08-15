@@ -74,7 +74,7 @@ export const liveQuiz = {
 
 export const review = {
     error: undefined,
-    isFetchingReviewQuiz: false,
+    isFetchingReview: false,
     questions: undefined,
     currentQuizIndex: 0,
     isAnswerShowing: false,

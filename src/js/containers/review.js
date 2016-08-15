@@ -3,7 +3,7 @@ import Review from '../components/review/review';
 import { flipIsAnswerShowing, incrementCurrentQuizIndex } from '../actions/review';
 
 const mapStateToProps = (state) => ({
-    isFetchingReviewQuiz: state.review.isFetchingReviewQuiz,
+    isFetchingReview: state.review.isFetchingReview,
     numQuestions: state.review.questions && state.review.questions.length,
     question: state.review.questions && state.review.questions[state.review.currentQuizIndex],
     currentQuizIndex: state.review.currentQuizIndex,

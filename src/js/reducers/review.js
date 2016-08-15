@@ -3,7 +3,7 @@ import * as actionsTypes from '../actions/review';
 
 const initialState = {
     error: undefined,
-    isFetchingReviewQuiz: false,
+    isFetchingReview: false,
     questions: undefined,
     currentQuizIndex: 0,
     isAnswerShowing: false,
@@ -15,18 +15,18 @@ export default function review (state = initialState, action) {
 
     case actionsTypes.GET_QUIZ_REVIEW_REQUEST:
         return update(state, {
-            isFetchingReviewQuiz: { $set: true }
+            isFetchingReview: { $set: true }
         });
 
     case actionsTypes.GET_QUIZ_REVIEW_SUCCESS:
         return update(state, {
-            isFetchingReviewQuiz: { $set: false },
+            isFetchingReview: { $set: false },
             questions: { $set: action.questions }
         });
 
     case actionsTypes.GET_QUIZ_REVIEW_FAILURE:
         return update(state, {
-            isFetchingReviewQuiz: { $set: false },
+            isFetchingReview: { $set: false },
             error: { $set: action.error }
         });
 

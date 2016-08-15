@@ -3,12 +3,12 @@ import ShowAnswer from './show-answer';
 import ReviewButtons from './review-buttons';
 import Spinner from '../general/spinner';
 
-const Review = ({ isFetchingReviewQuiz, question, numQuestions, currentQuizIndex, isAnswerShowing, handleIsAnswerShowing, handleIncrementCurrentQuizIndex }) => {
+const Review = ({ isFetchingReview, question, numQuestions, currentQuizIndex, isAnswerShowing, handleIsAnswerShowing, handleIncrementCurrentQuizIndex }) => {
 
     return (
         <div>
             {
-                isFetchingReviewQuiz && <Spinner />
+                isFetchingReview && <Spinner />
             }
             <div className="has-text-centered" >
                 <h4>Question { currentQuizIndex + 1 }</h4>
@@ -30,7 +30,7 @@ const Review = ({ isFetchingReviewQuiz, question, numQuestions, currentQuizIndex
 };
 
 Review.propTypes = {
-    isFetchingReviewQuiz: PropTypes.bool.isRequired,
+    isFetchingReview: PropTypes.bool.isRequired,
     question: PropTypes.object,
     numQuestions: PropTypes.number,
     currentQuizIndex: PropTypes.number,
