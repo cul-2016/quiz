@@ -7,6 +7,9 @@ export const GET_MODULE_REQUEST = 'GET_MODULE_REQUEST';
 export const GET_MODULE_SUCCESS = 'GET_MODULE_SUCCESS';
 export const GET_MODULE_FAILURE = 'GET_MODULE_FAILURE';
 
+export const GET_MODULE_USERS_REQUEST = 'GET_MODULE_USERS_REQUEST';
+export const GET_MODULE_USERS_SUCCESS = 'GET_MODULE_USERS_SUCCESS';
+export const GET_MODULE_USERS_FAILURE = 'GET_MODULE_USERS_FAILURE';
 /****
  * OPEN/CLOSE QUIX
  ****/
@@ -53,5 +56,41 @@ export const getModuleSuccess = (data) => ({
 
 export const getModuleFailure = (error) => ({
     type: GET_MODULE_FAILURE,
+    error
+});
+
+//
+// GET MODULE USERS actions
+//
+
+export const getModuleUsers = (module_id) => {
+    return (dispatch) => {
+
+        dispatch(getModuleUsersRequest());
+
+        axios.get(`get-module-users?module_id=${module_id}`)
+            .then((response) => {
+
+                dispatch(getModuleUsersSuccess(response.data));
+            }, (error) => {
+                console.error(error, 'error from server');
+            })
+            .catch((error) => {
+                dispatch(getModuleUsersFailure(error));
+            });
+    };
+};
+
+export const getModuleUsersRequest = () => ({
+    type: GET_MODULE_USERS_REQUEST
+});
+
+export const getModuleUsersSuccess = (data) => ({
+    type: GET_MODULE_USERS_SUCCESS,
+    data
+});
+
+export const getModuleUsersFailure = (error) => ({
+    type: GET_MODULE_USERS_FAILURE,
     error
 });

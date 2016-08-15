@@ -1,11 +1,13 @@
 import test from 'tape';
 import { module as moduleState } from '../../utils/reducer-fixtures';
-import { getModuleError as error } from '../../utils/action-fixtures';
-import { module as data } from '../../utils/data-fixtures';
+import { getModuleError as error, getModuleUsersError } from '../../utils/action-fixtures';
+import { module as data, getModuleUsers } from '../../utils/data-fixtures';
 import reducer from '../../../src/js/reducers/module';
 import deepFreeze from '../../utils/deepFreeze';
 
-
+//
+// GET MODULE Reducers
+//
 test('GET_MODULE_REQUEST works', (t) => {
 
     t.plan(1);
@@ -59,6 +61,64 @@ test('GET_MODULE_FAILURE works', (t) => {
     t.deepEqual(result, expected);
 });
 
+//
+// GET MODULE USERS Reducers
+//
+test('GET_MODULE_USERS_REQUEST works', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(moduleState);
+
+    const action = {
+        type: 'GET_MODULE_USERS_REQUEST',
+    };
+    const expected = Object.assign({}, moduleState, { isFetchingModuleUsers: true });
+
+    const result = reducer(initialState, action);
+    t.deepEqual(result, expected);
+});
+
+test('GET_MODULE_USERS_SUCCESS works', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(moduleState);
+
+    const action = {
+        type: 'GET_MODULE_USERS_SUCCESS',
+        data: getModuleUsers
+    };
+    const expected = Object.assign({}, moduleState, {
+        isFetchingModuleUsers: false,
+        users: getModuleUsers,
+    });
+
+    const result = reducer(initialState, action);
+
+    t.deepEqual(result, expected);
+});
+
+test('GET_MODULE_USERS_FAILURE works', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(moduleState);
+
+    const action = {
+        type: 'GET_MODULE_USERS_FAILURE',
+        error: getModuleUsersError
+    };
+    const expected = Object.assign({}, moduleState, { error: error, isFetchingModuleUsers: false });
+
+    const result = reducer(initialState, action);
+
+    t.deepEqual(result, expected);
+});
+
+//
+//
+//
 test('OPEN_QUIZ works', (t) => {
 
     t.plan(1);

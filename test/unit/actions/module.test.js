@@ -1,10 +1,14 @@
 import test from 'tape';
 import createThunk from '../../utils/mockThunk';
 import * as actions from '../../../src/js/actions/module';
-import { getModuleError as error } from '../../utils/action-fixtures';
+import { getModuleError as error, getModuleUsersError } from '../../utils/action-fixtures';
 import deepFreeze from '../../utils/deepFreeze';
-import { module as data } from '../../utils/data-fixtures';
+import { module as data, getModuleUsers } from '../../utils/data-fixtures';
 
+
+//
+// GET MODULE  ACTIONS
+//
 test('getModule async action creator returns expected action', (t) => {
 
     t.plan(1);
@@ -57,6 +61,67 @@ test('getModuleFailure creates the correct action', (t) => {
     const actual = deepFreeze(actions.getModuleFailure(error));
     t.deepEqual(actual, expected);
 });
+
+//
+// GET MODULE USERS ACTIONS
+//
+test('getModuleUsers async action creator returns expected action', (t) => {
+
+    t.plan(1);
+
+    let actual;
+    const { dispatch, queue } = createThunk();
+
+    dispatch(actions.getModuleUsers());
+
+    [{ ...actual }] = queue;
+
+    const expected = {
+        type: actions.GET_MODULE_USERS_REQUEST
+    };
+    t.deepEqual(actual, expected);
+});
+
+test('getModuleUsersRequest creates the correct action', (t) => {
+
+    t.plan(1);
+
+    const expected = {
+        type: actions.GET_MODULE_USERS_REQUEST
+    }
+
+    const actual = deepFreeze(actions.getModuleUsersRequest());
+    t.deepEqual(actual, expected);
+});
+
+test('getModuleUsersSuccess creates the correct action', (t) => {
+    t.plan(1);
+    const expected = {
+        type: actions.GET_MODULE_USERS_SUCCESS,
+        data: getModuleUsers
+    }
+
+    const actual = deepFreeze(actions.getModuleUsersSuccess(getModuleUsers));
+    t.deepEqual(actual, expected);
+});
+
+test('getModuleUsersFailure creates the correct action', (t) => {
+
+    t.plan(1);
+
+    const expected = {
+        type: actions.GET_MODULE_USERS_FAILURE,
+        error: getModuleUsersError
+    };
+
+    const actual = deepFreeze(actions.getModuleUsersFailure(getModuleUsersError));
+    t.deepEqual(actual, expected);
+});
+
+//
+//
+//
+
 
 test('openQuiz creates the correct action', (t) => {
     t.plan(1);
