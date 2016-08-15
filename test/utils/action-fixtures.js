@@ -10,3 +10,4 @@ export const joinModuleError = new Error('Failed to join Module');
 export const getQuizQuestionsError = new Error('Failed to get quiz questions');
 export const saveResponseError = new Error('Failed to save the response');
 export const endQuizError = new Error('Failed to end the quiz');
+export const getQuizReviewError = new Error('Failed to get Quiz review details');

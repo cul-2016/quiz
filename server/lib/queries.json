@@ -5,5 +5,6 @@
         "trophies": "SELECT trophies.trophy_name, trophies.condition FROM trophies WHERE trophies.module_id = ($1) ORDER BY trophy_name",
         "num_enrolled": "SELECT COUNT(user_id) AS num_enrolled FROM module_members WHERE module_members.module_id = ($1)",
         "name": "SELECT name FROM modules WHERE module_id = ($1)"
-    }
+    },
+    "getQuizReview": "SELECT DISTINCT questions.quiz_id, questions.question_id, questions.question, questions.a, questions.b, questions.c, questions.d, questions.correct_answer, ( SELECT COUNT(CASE WHEN responses.response = 'A' THEN 1 end) AS a_response FROM responses WHERE responses.question_id = questions.question_id GROUP BY responses.question_id ), ( SELECT COUNT(CASE WHEN responses.response = 'B' THEN 1 end) AS b_response FROM responses WHERE responses.question_id = questions.question_id GROUP BY questions.question_id ), ( SELECT COUNT(CASE WHEN responses.response = 'C' THEN 1 end) AS c_response FROM responses WHERE responses.question_id = questions.question_id GROUP BY questions.question_id ), ( SELECT COUNT(CASE WHEN responses.response = 'D' THEN 1 end) AS d_response FROM responses WHERE responses.question_id = questions.question_id GROUP BY questions.question_id ) FROM questions LEFT JOIN responses ON questions.question_id = responses.question_id WHERE questions.quiz_id = $1 ORDER BY questions.question_id;"
 }

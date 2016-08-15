@@ -72,6 +72,14 @@ export const liveQuiz = {
     interval_id: undefined
 };
 
+export const review = {
+    error: undefined,
+    isFetchingReview: false,
+    questions: undefined,
+    currentQuizIndex: 0,
+    isAnswerShowing: false,
+};
+
 export const newQuiz = {
     name: undefined,
     questions: [],
