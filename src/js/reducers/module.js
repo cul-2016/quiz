@@ -6,7 +6,8 @@ const initialState = {
     quizzes: undefined,
     isFetchingModule: false,
     error: undefined,
-    isQuizOpen: false
+    isQuizOpen: false,
+    users: undefined
 };
 
 export default function module (state = initialState, action ) {
