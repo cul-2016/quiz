@@ -90,7 +90,7 @@ export const questions = [
     }
 ];
 
-export const reviewQuizQuestions = [{ quiz_id: 1,
+export const reviewQuestions = [{ quiz_id: 1,
     question_id: 1,
     question: 'What is the capital of England?',
     a: 'London',

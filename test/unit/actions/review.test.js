@@ -1,8 +1,8 @@
 import test from 'tape';
-import * as actions from '../../../src/js/actions/review-quiz';
+import * as actions from '../../../src/js/actions/review';
 import createThunk from '../../utils/mockThunk';
 import deepFreeze from '../../utils/deepFreeze';
-import { reviewQuizQuestions as questions } from '../../utils/data-fixtures';
+import { reviewQuestions as questions } from '../../utils/data-fixtures';
 import { getQuizReviewError as error } from '../../utils/action-fixtures';
 
 test('getQuizReview async action creator returns expected action', (t) => {

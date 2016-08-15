@@ -1,5 +1,5 @@
 import update from 'react-addons-update';
-import * as actionsTypes from '../actions/review-quiz';
+import * as actionsTypes from '../actions/review';
 
 const initialState = {
     error: undefined,
@@ -9,7 +9,7 @@ const initialState = {
     isAnswerShowing: false,
 };
 
-export default function reviewQuiz (state = initialState, action) {
+export default function review (state = initialState, action) {
 
     switch (action.type) {
 

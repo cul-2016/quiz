@@ -3,7 +3,7 @@ import ShowAnswer from './show-answer';
 import ReviewButtons from './review-buttons';
 import Spinner from '../general/spinner';
 
-const QuizReview = ({ isFetchingReviewQuiz, question, numQuestions, currentQuizIndex, isAnswerShowing, handleIsAnswerShowing, handleIncrementCurrentQuizIndex }) => {
+const Review = ({ isFetchingReviewQuiz, question, numQuestions, currentQuizIndex, isAnswerShowing, handleIsAnswerShowing, handleIncrementCurrentQuizIndex }) => {
 
     return (
         <div>
@@ -29,7 +29,7 @@ const QuizReview = ({ isFetchingReviewQuiz, question, numQuestions, currentQuizI
     );
 };
 
-QuizReview.propTypes = {
+Review.propTypes = {
     isFetchingReviewQuiz: PropTypes.bool.isRequired,
     question: PropTypes.object,
     numQuestions: PropTypes.number,
@@ -39,4 +39,4 @@ QuizReview.propTypes = {
     handleIncrementCurrentQuizIndex: PropTypes.func.isRequired
 };
 
-export default QuizReview;
+export default Review;

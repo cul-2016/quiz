@@ -4,7 +4,7 @@ import { getModule } from '../actions/module';
 import { getDashboard } from '../actions/dashboard';
 import { loadUserState } from './userState';
 import { getUserDetails } from '../actions/user';
-import { getQuizReview } from '../actions/review-quiz';
+import { getQuizReview } from '../actions/review';
 import getUserID from './getUserID';
 
 

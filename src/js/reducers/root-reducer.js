@@ -8,7 +8,7 @@ import register from './register';
 import newQuiz from './new-quiz';
 import module from './module';
 import liveQuiz from './live-quiz';
-import reviewQuiz from './review-quiz';
+import review from './review';
 
 const appReducer = combineReducers({
     user,
@@ -20,7 +20,7 @@ const appReducer = combineReducers({
     newQuiz,
     module,
     liveQuiz,
-    reviewQuiz
+    review
 });
 
 const rootReducer = (state, action) => {

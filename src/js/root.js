@@ -14,7 +14,7 @@ import NewQuizContainer from './containers/new-quiz';
 import LeaderboardContainer from './containers/leaderboard';
 import LecturerLiveQuizContainer from './containers/lecturer-live-quiz';
 import StudentLiveQuizContainer from './containers/student-live-quiz';
-import QuizReviewContainer from './containers/quiz-review';
+import ReviewContainer from './containers/review';
 import QuizResultContainer from './containers/quiz-result';
 import QuizHistoryContainer from './containers/quiz-history';
 
@@ -72,7 +72,7 @@ const Root = ({ store }) => (
                 <Route
                     onEnter={ composeHooks(hooks.authenticate, hooks.fetchquizReview) }
                     path=":module_id/:quiz_id/review"
-                    component={ QuizReviewContainer } />
+                    component={ ReviewContainer } />
                 <Route
                     onEnter={ hooks.authenticate }
                     path=":module_id/:quiz_id/result"
