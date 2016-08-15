@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'; //eslint-disable-line no-unused-vars
 
-const ModuleUsers = () => {
+const Users = () => {
 
     return (
         <div>
@@ -9,4 +9,4 @@ const ModuleUsers = () => {
     );
 };
 
-export default ModuleUsers;
+export default Users;
