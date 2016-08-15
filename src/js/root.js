@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Router, Route, IndexRoute, hashHistory } from 'react-router';
+import { Router, Route, IndexRoute, IndexRedirect, hashHistory } from 'react-router';
 import { Provider } from 'react-redux';
 
 import App from './components/app';
@@ -10,6 +10,8 @@ import JoinModuleContainer from './containers/join-module';
 import RegisterUserContainer from './containers/register-user';
 import ModuleContainer from './containers/module';
 import StudentModuleContainer from './containers/student-module';
+import StudentHistory from './components/student-module/history';
+import Feedback from './components/student-module/feedback';
 import NewQuizContainer from './containers/new-quiz';
 import LeaderboardContainer from './containers/leaderboard';
 import LecturerLiveQuizContainer from './containers/lecturer-live-quiz';
@@ -56,7 +58,17 @@ const Root = ({ store }) => (
                 <Route
                     onEnter={ composeHooks(hooks.authenticate, hooks.fetchModule) }
                     path=":module_id/student"
-                    component={ StudentModuleContainer } />
+                    component={ StudentModuleContainer }>
+                    <IndexRedirect to="feedback" />
+                    <Route
+                        onEnter={ composeHooks(hooks.authenticate) }
+                        path="history"
+                        component={ StudentHistory } />
+                    <Route
+                        onEnter={ composeHooks(hooks.authenticate) }
+                        path="feedback"
+                        component={ Feedback } />
+                </Route>
                 <Route
                     onEnter={ hooks.authenticate }
                     path=":module_id/new-quiz"

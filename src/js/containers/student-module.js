@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import StudentModule from '../components/module/student-module';
+import StudentModule from '../components/student-module/module';
 import { socketClient } from '../socket';
 import { store } from '../store.js';
 import { joinWebsocketRoom } from '../lib/subscriptions';
