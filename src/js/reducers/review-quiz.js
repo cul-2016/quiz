@@ -30,6 +30,16 @@ export default function reviewQuiz (state = initialState, action) {
             error: { $set: action.error }
         });
 
+    case actionsTypes.FLIP_IS_ANSWER_SHOWING:
+        return update(state, {
+            isAnswerShowing: { $set: !state.isAnswerShowing }
+        });
+
+    case actionsTypes.INCREMENT_CURRENT_QUIZ_INDEX:
+        return update(state, {
+            currentQuizIndex: { $set: state.currentQuizIndex + 1 }
+        });
+
     default:
         return state;
     }

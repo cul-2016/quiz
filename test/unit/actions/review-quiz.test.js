@@ -55,3 +55,27 @@ test('getQuizReviewFailure creates the correct action', (t) => {
     const actual = deepFreeze(actions.getQuizReviewFailure(error));
     t.deepEqual(actual, expected);
 });
+
+test('flipIsAnswerShowing creates the correct action', (t) => {
+
+    t.plan(1);
+
+    const expected = {
+        type: actions.FLIP_IS_ANSWER_SHOWING
+    };
+
+    const actual = deepFreeze(actions.flipIsAnswerShowing());
+    t.deepEqual(actual, expected);
+});
+
+test('incrementCurrentQuizIndex creates the correct action', (t) => {
+
+    t.plan(1);
+
+    const expected = {
+        type: actions.INCREMENT_CURRENT_QUIZ_INDEX
+    };
+
+    const actual = deepFreeze(actions.incrementCurrentQuizIndex());
+    t.deepEqual(actual, expected);
+});
