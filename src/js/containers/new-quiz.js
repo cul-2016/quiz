@@ -1,6 +1,8 @@
 import { connect } from 'react-redux';
 import NewQuiz from '../components/new-quiz/new-quiz';
 import { addQuestion, updateValue, updateQuizName, saveQuiz } from '../actions/new-quiz';
+import { hashHistory } from 'react-router';
+
 
 const mapStateToProps = (state) => ({
 
@@ -24,6 +26,7 @@ const mapDispatchToProps = (dispatch) => ({
 
     handleSaveQuiz: (module_id, quizName, questions) => {
         dispatch(saveQuiz(module_id, quizName, questions));
+        hashHistory.goBack();
     }
 });
 
