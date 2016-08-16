@@ -11,6 +11,7 @@ var GetQuizQuestions = require('./handlers/get-quiz-questions');
 var JoinModule = require('./handlers/join-module');
 var SaveStudentResponse = require('./handlers/save-student-response');
 var EndQuiz = require('./handlers/end-quiz');
+var GetQuizScore = require('./handlers/get-quiz-score');
 var GetQuizReview = require('./handlers/get-quiz-review');
 var GetModuleMembers = require('./handlers/get-module-members');
 var RemoveModuleMember = require('./handlers/remove-module-member');
@@ -30,6 +31,7 @@ var routes = [
     JoinModule,
     SaveStudentResponse,
     EndQuiz,
+    GetQuizScore,
     GetQuizReview,
     GetModuleMembers,
     RemoveModuleMember
