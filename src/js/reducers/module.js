@@ -8,7 +8,7 @@ const initialState = {
     isFetchingMembers: false,
     error: undefined,
     isQuizOpen: false,
-    users: undefined,
+    members: undefined,
     isRemovingMember: false
 };
 
@@ -52,7 +52,7 @@ export default function module (state = initialState, action ) {
     case actionsTypes.GET_MODULE_MEMBERS_SUCCESS:
         return update(state, {
             isFetchingMembers: { $set: false },
-            users: { $set: action.data },
+            members: { $set: action.data },
         });
 
     case actionsTypes.GET_MODULE_MEMBERS_FAILURE:
