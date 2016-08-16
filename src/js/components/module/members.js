@@ -2,18 +2,18 @@ import React, { PropTypes } from 'react'; //eslint-disable-line no-unused-vars
 import Spinner from '../general/spinner';
 import Nav from '../general/nav';
 
-const Members = ({ users, isFetchingMembers, isRemovingMember, username, handleRemovingMember, location }) => {
+const Members = ({ members, isFetchingMembers, isRemovingMember, username, handleRemovingMember, location }) => {
 
     let module_id = location.pathname.split('/')[1];
     let mappedUsers;
-    if (users) {
-        mappedUsers = users.map((user, i) => {
+    if (members) {
+        mappedUsers = members.map((member, i) => {
             return (
                 <div key={ i } className="box narrow">
-                    <span>{ user.user_id }</span>
-                    <h4>{ user.email }</h4>
-                    <label className='label'>username</label>{ user.username }
-                    <button className="button is-danger" onClick={ () => handleRemovingMember(module_id, user.user_id) }>
+                    <span>{ member.user_id }</span>
+                    <h4>{ member.email }</h4>
+                    <label className='label'>username</label>{ member.username }
+                    <button className="button is-danger" onClick={ () => handleRemovingMember(module_id, member.user_id) }>
                     <span className="icon">
                     <i className="fa fa-times"></i>
                     </span>
@@ -30,7 +30,7 @@ const Members = ({ users, isFetchingMembers, isRemovingMember, username, handleR
             isFetchingMembers || isRemovingMember && <Spinner />
         }
         {
-            !isFetchingMembers && users &&
+            !isFetchingMembers && members &&
             <div>
                 <Nav username={ username } />
                 <div>
@@ -45,7 +45,7 @@ const Members = ({ users, isFetchingMembers, isRemovingMember, username, handleR
 };
 
 Members.propTypes = {
-    users: PropTypes.array,
+    members: PropTypes.array,
     isFetchingMembers: PropTypes.bool.isRequired,
     isRemovingMember: PropTypes.bool.isRequired,
     username: PropTypes.string,
