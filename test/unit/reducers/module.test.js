@@ -91,7 +91,7 @@ test('GET_MODULE_MEMBERS_SUCCESS works', (t) => {
     };
     const expected = Object.assign({}, moduleState, {
         isFetchingMembers: false,
-        users: getModuleMembers,
+        members: getModuleMembers,
     });
 
     const result = reducer(initialState, action);
