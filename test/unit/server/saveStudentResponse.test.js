@@ -17,17 +17,3 @@ test('saving quiz to database works and returns the quiz id for the saved quiz',
         t.deepEqual(response.command, expectedCommand, 'Correct command of INSERT, module is saved to db correctly');
     });
 });
-
-
-test('deleting response from the database', (t) => {
-
-    testClient.connect((error, client, done) => {
-
-        if (error) {
-            console.error(error, 'error from deleting module from the database');
-        }
-        client.query('DELETE FROM responses WHERE user_id = $1 AND question_id = $2 ', [1, 1]);
-        done();
-        t.end();
-    });
-});
