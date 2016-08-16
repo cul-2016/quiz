@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'; //eslint-disable-line no-unused-vars
 
-const QuizResult = () => {
+const Result = () => {
 
     return (
         <div>
@@ -9,4 +9,4 @@ const QuizResult = () => {
     );
 };
 
-export default QuizResult;
+export default Result;

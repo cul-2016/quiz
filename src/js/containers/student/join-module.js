@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
-import JoinModule from '../components/join-module';
-import { inputChange, joinModule } from '../actions/join-module';
-import { validateModuleID } from '../actions/new-module';
-import { store } from '../store';
+import JoinModule from '../../components/join-module';
+import { inputChange, joinModule } from '../../actions/join-module';
+import { validateModuleID } from '../../actions/new-module';
+import { store } from '../../store';
 
 
 const mapStateToProps = (state) => ({
@@ -30,6 +30,6 @@ const mapDispatchToProps = (dispatch) => ({
 
 });
 
-const JoinModuleContainer = connect(mapStateToProps, mapDispatchToProps)(JoinModule);
+const StudentJoinModuleContainer = connect(mapStateToProps, mapDispatchToProps)(JoinModule);
 
-export default JoinModuleContainer;
+export default StudentJoinModuleContainer;
