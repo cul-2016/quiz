@@ -1,9 +1,9 @@
 import test from 'tape';
 import createThunk from '../../utils/mockThunk';
 import * as actions from '../../../src/js/actions/module';
-import { getModuleError as error, getModuleUsersError, removeModuleMembersError } from '../../utils/action-fixtures';
+import { getModuleError as error, getModuleMembersError, removeModuleMemberError } from '../../utils/action-fixtures';
 import deepFreeze from '../../utils/deepFreeze';
-import { module as data, getModuleUsers } from '../../utils/data-fixtures';
+import { module as data, getModuleMembers } from '../../utils/data-fixtures';
 
 
 //
@@ -65,56 +65,56 @@ test('getModuleFailure creates the correct action', (t) => {
 //
 // GET MODULE USERS ACTIONS
 //
-test('getModuleUsers async action creator returns expected action', (t) => {
+test('getModuleMembers async action creator returns expected action', (t) => {
 
     t.plan(1);
 
     let actual;
     const { dispatch, queue } = createThunk();
 
-    dispatch(actions.getModuleUsers());
+    dispatch(actions.getModuleMembers());
 
     [{ ...actual }] = queue;
 
     const expected = {
-        type: actions.GET_MODULE_USERS_REQUEST
+        type: actions.GET_MODULE_MEMBERS_REQUEST
     };
     t.deepEqual(actual, expected);
 });
 
-test('getModuleUsersRequest creates the correct action', (t) => {
+test('getModuleMembersRequest creates the correct action', (t) => {
 
     t.plan(1);
 
     const expected = {
-        type: actions.GET_MODULE_USERS_REQUEST
+        type: actions.GET_MODULE_MEMBERS_REQUEST
     }
 
-    const actual = deepFreeze(actions.getModuleUsersRequest());
+    const actual = deepFreeze(actions.getModuleMembersRequest());
     t.deepEqual(actual, expected);
 });
 
-test('getModuleUsersSuccess creates the correct action', (t) => {
+test('getModuleMembersSuccess creates the correct action', (t) => {
     t.plan(1);
     const expected = {
-        type: actions.GET_MODULE_USERS_SUCCESS,
-        data: getModuleUsers
+        type: actions.GET_MODULE_MEMBERS_SUCCESS,
+        data: getModuleMembers
     }
 
-    const actual = deepFreeze(actions.getModuleUsersSuccess(getModuleUsers));
+    const actual = deepFreeze(actions.getModuleMembersSuccess(getModuleMembers));
     t.deepEqual(actual, expected);
 });
 
-test('getModuleUsersFailure creates the correct action', (t) => {
+test('getModuleMembersFailure creates the correct action', (t) => {
 
     t.plan(1);
 
     const expected = {
-        type: actions.GET_MODULE_USERS_FAILURE,
-        error: getModuleUsersError
+        type: actions.GET_MODULE_MEMBERS_FAILURE,
+        error: getModuleMembersError
     };
 
-    const actual = deepFreeze(actions.getModuleUsersFailure(getModuleUsersError));
+    const actual = deepFreeze(actions.getModuleMembersFailure(getModuleMembersError));
     t.deepEqual(actual, expected);
 });
 
@@ -147,54 +147,54 @@ test('closeQuiz creates the correct action', (t) => {
 //
 // GET MODULE  ACTIONS
 //
-test('removeModuleMembers async action creator returns expected action', (t) => {
+test('removeModuleMember async action creator returns expected action', (t) => {
 
     t.plan(1);
 
     let actual;
     const { dispatch, queue } = createThunk();
 
-    dispatch(actions.removeModuleMembers());
+    dispatch(actions.removeModuleMember());
 
     [{ ...actual }] = queue;
 
     const expected = {
-        type: actions.REMOVE_MODULE_MEMBERS_REQUEST
+        type: actions.REMOVE_MODULE_MEMBER_REQUEST
     };
     t.deepEqual(actual, expected);
 });
 
-test('removeModuleMembersRequest creates the correct action', (t) => {
+test('removeModuleMemberRequest creates the correct action', (t) => {
 
     t.plan(1);
 
     const expected = {
-        type: actions.REMOVE_MODULE_MEMBERS_REQUEST
+        type: actions.REMOVE_MODULE_MEMBER_REQUEST
     }
 
-    const actual = deepFreeze(actions.removeModuleMembersRequest());
+    const actual = deepFreeze(actions.removeModuleMemberRequest());
     t.deepEqual(actual, expected);
 });
 
-test('removeModuleMembersSuccess creates the correct action', (t) => {
+test('removeModuleMemberSuccess creates the correct action', (t) => {
     t.plan(1);
     const expected = {
-        type: actions.REMOVE_MODULE_MEMBERS_SUCCESS,
+        type: actions.REMOVE_MODULE_MEMBER_SUCCESS,
     }
 
-    const actual = deepFreeze(actions.removeModuleMembersSuccess());
+    const actual = deepFreeze(actions.removeModuleMemberSuccess());
     t.deepEqual(actual, expected);
 });
 
-test('removeModuleMembersFailure creates the correct action', (t) => {
+test('removeModuleMemberFailure creates the correct action', (t) => {
 
     t.plan(1);
 
     const expected = {
-        type: actions.REMOVE_MODULE_MEMBERS_FAILURE,
-        error: removeModuleMembersError
+        type: actions.REMOVE_MODULE_MEMBER_FAILURE,
+        error: removeModuleMemberError
     };
 
-    const actual = deepFreeze(actions.removeModuleMembersFailure(removeModuleMembersError));
+    const actual = deepFreeze(actions.removeModuleMemberFailure(removeModuleMemberError));
     t.deepEqual(actual, expected);
 });

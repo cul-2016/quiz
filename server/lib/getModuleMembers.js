@@ -7,7 +7,7 @@ var query = require('./query');
  * @param {function} callback - a callback function
  */
 
-function getModuleUsers (client, module_id, callback) {
+function getModuleMembers (client, module_id, callback) {
 
     var moduleQuery = 'SELECT module_members.user_id, users.username, users.email FROM module_members INNER JOIN users ON module_members.user_id = users.user_id WHERE module_id = $1;';
     var moduleValue = [module_id];
@@ -24,4 +24,4 @@ function getModuleUsers (client, module_id, callback) {
     });
 }
 
-module.exports = getModuleUsers;
+module.exports = getModuleMembers;

@@ -1,6 +1,6 @@
 import { store } from '../store';
 import validCookieExists from './validCookieExists';
-import { getModule, getModuleUsers } from '../actions/module';
+import { getModule, getModuleMembers } from '../actions/module';
 import { getDashboard } from '../actions/dashboard';
 import { loadUserState } from './userState';
 import { getUserDetails } from '../actions/user';
@@ -96,7 +96,7 @@ export function fetchquizReview (nextState, replace, callback) {
 export function fetchModuleUsers (nextState, replace, callback) {
     if (validCookieExists()) {
         const module_id = nextState.params.module_id;
-        store.dispatch(getModuleUsers(module_id));
+        store.dispatch(getModuleMembers(module_id));
     }
     callback();
 }

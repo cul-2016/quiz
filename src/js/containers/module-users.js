@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Users from '../components/module/users';
-import { removeModuleMembers } from '../actions/module';
+import { removeModuleMember } from '../actions/module';
 
 const mapStateToProps = (state) => ({
     users: state.module.users,
@@ -13,7 +13,7 @@ const mapDispatchToProps = (dispatch) => ({
 
     handleRemovingUser: (module_id, user_id) => {
 
-        dispatch(removeModuleMembers(module_id, user_id));
+        dispatch(removeModuleMember(module_id, user_id));
     }
 });
 const ModuleUsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users);

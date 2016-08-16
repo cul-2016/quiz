@@ -1,7 +1,7 @@
 import test from 'tape';
 import { module as moduleState } from '../../utils/reducer-fixtures';
-import { getModuleError as error, getModuleUsersError, removeModuleMembers } from '../../utils/action-fixtures';
-import { module as data, getModuleUsers } from '../../utils/data-fixtures';
+import { getModuleError as error, getModuleMembersError, removeModuleMember } from '../../utils/action-fixtures';
+import { module as data, getModuleMembers } from '../../utils/data-fixtures';
 import reducer from '../../../src/js/reducers/module';
 import deepFreeze from '../../utils/deepFreeze';
 
@@ -64,14 +64,14 @@ test('GET_MODULE_FAILURE works', (t) => {
 //
 // GET MODULE USERS Reducers
 //
-test('GET_MODULE_USERS_REQUEST works', (t) => {
+test('GET_MODULE_MEMBERS_REQUEST works', (t) => {
 
     t.plan(1);
 
     const initialState = deepFreeze(moduleState);
 
     const action = {
-        type: 'GET_MODULE_USERS_REQUEST',
+        type: 'GET_MODULE_MEMBERS_REQUEST',
     };
     const expected = Object.assign({}, moduleState, { isFetchingModuleUsers: true });
 
@@ -79,19 +79,19 @@ test('GET_MODULE_USERS_REQUEST works', (t) => {
     t.deepEqual(result, expected);
 });
 
-test('GET_MODULE_USERS_SUCCESS works', (t) => {
+test('GET_MODULE_MEMBERS_SUCCESS works', (t) => {
 
     t.plan(1);
 
     const initialState = deepFreeze(moduleState);
 
     const action = {
-        type: 'GET_MODULE_USERS_SUCCESS',
-        data: getModuleUsers
+        type: 'GET_MODULE_MEMBERS_SUCCESS',
+        data: getModuleMembers
     };
     const expected = Object.assign({}, moduleState, {
         isFetchingModuleUsers: false,
-        users: getModuleUsers,
+        users: getModuleMembers,
     });
 
     const result = reducer(initialState, action);
@@ -99,15 +99,15 @@ test('GET_MODULE_USERS_SUCCESS works', (t) => {
     t.deepEqual(result, expected);
 });
 
-test('GET_MODULE_USERS_FAILURE works', (t) => {
+test('GET_MODULE_MEMBERS_FAILURE works', (t) => {
 
     t.plan(1);
 
     const initialState = deepFreeze(moduleState);
 
     const action = {
-        type: 'GET_MODULE_USERS_FAILURE',
-        error: getModuleUsersError
+        type: 'GET_MODULE_MEMBERS_FAILURE',
+        error: getModuleMembersError
     };
     const expected = Object.assign({}, moduleState, { error: error, isFetchingModuleUsers: false });
 
@@ -150,14 +150,14 @@ test('CLOSE_QUIZ works', (t) => {
 //
 // REMOVE USER FROM MODULE Reducers
 //
-test('REMOVE_MODULE_MEMBERS_REQUEST works', (t) => {
+test('REMOVE_MODULE_MEMBER_REQUEST works', (t) => {
 
     t.plan(1);
 
     const initialState = deepFreeze(moduleState);
 
     const action = {
-        type: 'REMOVE_MODULE_MEMBERS_REQUEST',
+        type: 'REMOVE_MODULE_MEMBER_REQUEST',
     };
     const expected = Object.assign({}, moduleState, { isRemovingMember: true });
 
@@ -165,14 +165,14 @@ test('REMOVE_MODULE_MEMBERS_REQUEST works', (t) => {
     t.deepEqual(result, expected);
 });
 
-test('REMOVE_MODULE_MEMBERS_SUCCESS works', (t) => {
+test('REMOVE_MODULE_MEMBER_SUCCESS works', (t) => {
 
     t.plan(1);
 
     const initialState = deepFreeze(moduleState);
 
     const action = {
-        type: 'REMOVE_MODULE_MEMBERS_SUCCESS'
+        type: 'REMOVE_MODULE_MEMBER_SUCCESS'
     };
     const expected = Object.assign({}, moduleState, {
         isRemovingMember: false,
@@ -183,17 +183,17 @@ test('REMOVE_MODULE_MEMBERS_SUCCESS works', (t) => {
     t.deepEqual(result, expected);
 });
 
-test('REMOVE_MODULE_MEMBERS_FAILURE works', (t) => {
+test('REMOVE_MODULE_MEMBER_FAILURE works', (t) => {
 
     t.plan(1);
 
     const initialState = deepFreeze(moduleState);
 
     const action = {
-        type: 'REMOVE_MODULE_MEMBERS_FAILURE',
-        error: removeModuleMembers
+        type: 'REMOVE_MODULE_MEMBER_FAILURE',
+        error: removeModuleMember
     };
-    const expected = Object.assign({}, moduleState, { error: removeModuleMembers, isRemovingMember: false });
+    const expected = Object.assign({}, moduleState, { error: removeModuleMember, isRemovingMember: false });
 
     const result = reducer(initialState, action);
 

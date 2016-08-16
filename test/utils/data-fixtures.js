@@ -175,7 +175,7 @@ export const getModuleData = {
     ]
 };
 
-export const getModuleUsers = [{
+export const getModuleMembers = [{
     email: 'student@city.ac.uk',
     user_id: 1,
     username: 'student'

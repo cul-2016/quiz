@@ -44,34 +44,34 @@ export default function module (state = initialState, action ) {
             error: { $set: action.error }
         });
 
-    case actionsTypes.GET_MODULE_USERS_REQUEST:
+    case actionsTypes.GET_MODULE_MEMBERS_REQUEST:
         return update(state, {
             isFetchingModuleUsers: { $set: true }
         });
 
-    case actionsTypes.GET_MODULE_USERS_SUCCESS:
+    case actionsTypes.GET_MODULE_MEMBERS_SUCCESS:
         return update(state, {
             isFetchingModuleUsers: { $set: false },
             users: { $set: action.data },
         });
 
-    case actionsTypes.GET_MODULE_USERS_FAILURE:
+    case actionsTypes.GET_MODULE_MEMBERS_FAILURE:
         return update(state, {
             isFetchingModuleUsers: { $set: false },
             error: { $set: action.error }
         });
 
-    case actionsTypes.REMOVE_MODULE_MEMBERS_REQUEST:
+    case actionsTypes.REMOVE_MODULE_MEMBER_REQUEST:
         return update(state, {
             isRemovingMember: { $set: true }
         });
 
-    case actionsTypes.REMOVE_MODULE_MEMBERS_SUCCESS:
+    case actionsTypes.REMOVE_MODULE_MEMBER_SUCCESS:
         return update(state, {
             isRemovingMember: { $set: false }
         });
 
-    case actionsTypes.REMOVE_MODULE_MEMBERS_FAILURE:
+    case actionsTypes.REMOVE_MODULE_MEMBER_FAILURE:
         return update(state, {
             isRemovingMember: { $set: false },
             error: { $set: action.error }
