@@ -227,4 +227,9 @@ INSERT INTO responses (user_id, quiz_id, question_id, response)
 INSERT INTO module_members (module_id, user_id)
     VALUES ('TEST', 1);
 
+
+/********* insert scores ********/
+
+INSERT INTO scores (user_id, quiz_id, score)
+    VALUES (1, 1, 5);
 COMMIT;

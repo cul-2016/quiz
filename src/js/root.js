@@ -18,6 +18,8 @@ import ReviewContainer from './containers/review';
 import QuizResultContainer from './containers/quiz-result';
 import QuizHistoryContainer from './containers/quiz-history';
 import ModuleMembersContainer from './containers/module-members';
+import QuizMembersContainer from './containers/quiz-members';
+
 
 import composeHooks from './lib/composeHooks';
 import * as hooks from './lib/onEnterHooks';
@@ -66,6 +68,10 @@ const Root = ({ store }) => (
                 onEnter={ composeHooks(hooks.authenticate, hooks.fetchModuleMembers) }
                 path=":module_id/members"
                 component={ ModuleMembersContainer } />
+                <Route
+                onEnter={ composeHooks(hooks.authenticate, hooks.fetchQuizMembers) }
+                path=":module_id/:quiz_id/members"
+                component={ QuizMembersContainer } />
                 <Route
                     onEnter={ hooks.authenticate }
                     path=":module_id/lecturer/live"

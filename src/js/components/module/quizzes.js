@@ -2,8 +2,7 @@ import React, { PropTypes } from 'react';
 import classnames from 'classnames';
 import { Link } from 'react-router';
 
-const Quizzes = ({ location, quizzes, sendQuizInvite }) => {
-
+const Quizzes = ({ location, quizzes, sendQuizInvite, module_id }) => {
     const mappedQuizzes = quizzes.map((quiz, index) => {
 
         let iconClasses = classnames("fa", {
@@ -19,7 +18,11 @@ const Quizzes = ({ location, quizzes, sendQuizInvite }) => {
             <tr key={ index }>
                 <td>{ quiz.name }</td>
                 <td>{+quiz.num_questions}</td>
-                <td>{+quiz.num_entries}</td>
+                <td>
+                    <Link to={`${module_id}/${quiz.quiz_id}/members`}>
+                        {+quiz.num_entries}
+                    </Link>
+                </td>
                 <td><i className={ iconClasses } /></td>
                 <td>
                     <Link to={`${location.pathname}/live`}>
@@ -66,7 +69,8 @@ const Quizzes = ({ location, quizzes, sendQuizInvite }) => {
 Quizzes.propTypes = {
     location: PropTypes.object.isRequired,
     quizzes: PropTypes.array.isRequired,
-    sendQuizInvite: PropTypes.func.isRequired
+    sendQuizInvite: PropTypes.func.isRequired,
+    module_id: PropTypes.string.isRequired
 };
 
 export default Quizzes;

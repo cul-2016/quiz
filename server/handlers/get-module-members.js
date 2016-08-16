@@ -8,8 +8,8 @@ module.exports = {
         var module_id = request.query.module_id;
         if (module_id !== undefined) {
 
-            getModuleMembers(client, module_id, (error, modules) => {
-                var verdict = error || modules;
+            getModuleMembers(client, module_id, (error, users) => {
+                var verdict = error || users;
                 reply(verdict);
             });
         } else {
