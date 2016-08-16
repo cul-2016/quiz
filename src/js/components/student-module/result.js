@@ -3,8 +3,14 @@ import React, { PropTypes } from 'react';
 const Result = ({ score }) => {
 
     return (
-        <div>
-            { score }
+        <div className="result hero is-info is-fullheight">
+            <div className="hero-body">
+                <div className="container has-text-centered">
+                    <h1 className="title score">
+                        { score }
+                    </h1>
+                </div>
+            </div>
         </div>
     );
 };
