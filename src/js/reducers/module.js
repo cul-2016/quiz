@@ -9,7 +9,7 @@ const initialState = {
     error: undefined,
     isQuizOpen: false,
     users: undefined,
-    isRemovingUser: false
+    isRemovingMember: false
 };
 
 export default function module (state = initialState, action ) {
@@ -61,19 +61,19 @@ export default function module (state = initialState, action ) {
             error: { $set: action.error }
         });
 
-    case actionsTypes.REMOVE_USER_FROM_MODULE_REQUEST:
+    case actionsTypes.REMOVE_MODULE_MEMBERS_REQUEST:
         return update(state, {
-            isRemovingUser: { $set: true }
+            isRemovingMember: { $set: true }
         });
 
-    case actionsTypes.REMOVE_USER_FROM_MODULE_SUCCESS:
+    case actionsTypes.REMOVE_MODULE_MEMBERS_SUCCESS:
         return update(state, {
-            isRemovingUser: { $set: false }
+            isRemovingMember: { $set: false }
         });
 
-    case actionsTypes.REMOVE_USER_FROM_MODULE_FAILURE:
+    case actionsTypes.REMOVE_MODULE_MEMBERS_FAILURE:
         return update(state, {
-            isRemovingUser: { $set: false },
+            isRemovingMember: { $set: false },
             error: { $set: action.error }
         });
 

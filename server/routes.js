@@ -13,7 +13,7 @@ var SaveStudentResponse = require('./handlers/save-student-response');
 var EndQuiz = require('./handlers/end-quiz');
 var GetQuizReview = require('./handlers/get-quiz-review');
 var GetModuleUsers = require('./handlers/get-module-users');
-var RemoveUserFromModule = require('./handlers/remove-user-from-module');
+var RemoveModuleMembers = require('./handlers/remove-module-members');
 
 
 var routes = [
@@ -32,7 +32,7 @@ var routes = [
     EndQuiz,
     GetQuizReview,
     GetModuleUsers,
-    RemoveUserFromModule
+    RemoveModuleMembers
 ];
 
 module.exports = routes;

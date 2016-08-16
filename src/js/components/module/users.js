@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'; //eslint-disable-line no-unused-vars
 import Spinner from '../general/spinner';
 import Nav from '../general/nav';
 
-const Users = ({ users, isFetchingModuleUsers, username, handleRemovingUser, location }) => {
+const Users = ({ users, isFetchingModuleUsers, isRemovingMember, username, handleRemovingUser, location }) => {
 
     let module_id = location.pathname.split('/')[1];
     let mappedUsers;
@@ -27,7 +27,7 @@ const Users = ({ users, isFetchingModuleUsers, username, handleRemovingUser, loc
     return (
         <div>
         {
-            isFetchingModuleUsers && <Spinner />
+            isFetchingModuleUsers || isRemovingMember && <Spinner />
         }
         {
             !isFetchingModuleUsers && users &&
@@ -47,6 +47,7 @@ const Users = ({ users, isFetchingModuleUsers, username, handleRemovingUser, loc
 Users.propTypes = {
     users: PropTypes.array,
     isFetchingModuleUsers: PropTypes.bool.isRequired,
+    isRemovingMember: PropTypes.bool.isRequired,
     username: PropTypes.string,
     handleRemovingUser: PropTypes.func.isRequired,
     location: PropTypes.object.isRequired

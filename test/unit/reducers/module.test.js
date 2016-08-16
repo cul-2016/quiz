@@ -1,6 +1,6 @@
 import test from 'tape';
 import { module as moduleState } from '../../utils/reducer-fixtures';
-import { getModuleError as error, getModuleUsersError, removeUserFromModule } from '../../utils/action-fixtures';
+import { getModuleError as error, getModuleUsersError, removeModuleMembers } from '../../utils/action-fixtures';
 import { module as data, getModuleUsers } from '../../utils/data-fixtures';
 import reducer from '../../../src/js/reducers/module';
 import deepFreeze from '../../utils/deepFreeze';
@@ -150,32 +150,32 @@ test('CLOSE_QUIZ works', (t) => {
 //
 // REMOVE USER FROM MODULE Reducers
 //
-test('REMOVE_USER_FROM_MODULE_REQUEST works', (t) => {
+test('REMOVE_MODULE_MEMBERS_REQUEST works', (t) => {
 
     t.plan(1);
 
     const initialState = deepFreeze(moduleState);
 
     const action = {
-        type: 'REMOVE_USER_FROM_MODULE_REQUEST',
+        type: 'REMOVE_MODULE_MEMBERS_REQUEST',
     };
-    const expected = Object.assign({}, moduleState, { isRemovingUser: true });
+    const expected = Object.assign({}, moduleState, { isRemovingMember: true });
 
     const result = reducer(initialState, action);
     t.deepEqual(result, expected);
 });
 
-test('REMOVE_USER_FROM_MODULE_SUCCESS works', (t) => {
+test('REMOVE_MODULE_MEMBERS_SUCCESS works', (t) => {
 
     t.plan(1);
 
     const initialState = deepFreeze(moduleState);
 
     const action = {
-        type: 'REMOVE_USER_FROM_MODULE_SUCCESS'
+        type: 'REMOVE_MODULE_MEMBERS_SUCCESS'
     };
     const expected = Object.assign({}, moduleState, {
-        isRemovingUser: false,
+        isRemovingMember: false,
     });
 
     const result = reducer(initialState, action);
@@ -183,17 +183,17 @@ test('REMOVE_USER_FROM_MODULE_SUCCESS works', (t) => {
     t.deepEqual(result, expected);
 });
 
-test('REMOVE_USER_FROM_MODULE_FAILURE works', (t) => {
+test('REMOVE_MODULE_MEMBERS_FAILURE works', (t) => {
 
     t.plan(1);
 
     const initialState = deepFreeze(moduleState);
 
     const action = {
-        type: 'REMOVE_USER_FROM_MODULE_FAILURE',
-        error: removeUserFromModule
+        type: 'REMOVE_MODULE_MEMBERS_FAILURE',
+        error: removeModuleMembers
     };
-    const expected = Object.assign({}, moduleState, { error: removeUserFromModule, isRemovingUser: false });
+    const expected = Object.assign({}, moduleState, { error: removeModuleMembers, isRemovingMember: false });
 
     const result = reducer(initialState, action);
 

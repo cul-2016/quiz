@@ -8,7 +8,7 @@ var query = require('./query');
  * @param {function} callback - a callback function
  */
 
-function removeUserFromModule (client, module_id, quiz_id, callback) {
+function removeModuleMembers (client, module_id, quiz_id, callback) {
 
     var moduleQuery = 'DELETE FROM module_members WHERE module_id = $1 AND user_id = $2;';
     var moduleValue = [module_id, quiz_id];
@@ -23,4 +23,4 @@ function removeUserFromModule (client, module_id, quiz_id, callback) {
     });
 }
 
-module.exports = removeUserFromModule;
+module.exports = removeModuleMembers;

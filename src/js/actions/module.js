@@ -11,9 +11,9 @@ export const GET_MODULE_USERS_REQUEST = 'GET_MODULE_USERS_REQUEST';
 export const GET_MODULE_USERS_SUCCESS = 'GET_MODULE_USERS_SUCCESS';
 export const GET_MODULE_USERS_FAILURE = 'GET_MODULE_USERS_FAILURE';
 
-export const REMOVE_USER_FROM_MODULE_REQUEST = 'REMOVE_USER_FROM_MODULE_REQUEST';
-export const REMOVE_USER_FROM_MODULE_SUCCESS = 'REMOVE_USER_FROM_MODULE_SUCCESS';
-export const REMOVE_USER_FROM_MODULE_FAILURE = 'REMOVE_USER_FROM_MODULE_FAILURE';
+export const REMOVE_MODULE_MEMBERS_REQUEST = 'REMOVE_MODULE_MEMBERS_REQUEST';
+export const REMOVE_MODULE_MEMBERS_SUCCESS = 'REMOVE_MODULE_MEMBERS_SUCCESS';
+export const REMOVE_MODULE_MEMBERS_FAILURE = 'REMOVE_MODULE_MEMBERS_FAILURE';
 
 /****
  * OPEN/CLOSE QUIZ
@@ -102,37 +102,37 @@ export const getModuleUsersFailure = (error) => ({
 
 
 //
-// REMOVE_USER_FROM_MODULE actions
+// REMOVE_MODULE_MEMBERS actions
 //
 
-export const removeUserFromModule = (module_id, user_id) => {
+export const removeModuleMembers = (module_id, user_id) => {
     return (dispatch) => {
 
-        dispatch(removeUserFromModuleRequest());
+        dispatch(removeModuleMembersRequest());
 
-        axios.get(`remove-user-from-module?module_id=${module_id}&user_id=${user_id}`)
+        axios.get(`remove-module-members?module_id=${module_id}&user_id=${user_id}`)
             .then(() => {
 
-                dispatch(removeUserFromModuleSuccess());
+                dispatch(removeModuleMembersSuccess());
                 dispatch(getModuleUsers(module_id));
             }, (error) => {
                 console.error(error, 'error from server');
             })
             .catch((error) => {
-                dispatch(removeUserFromModuleFailure(error));
+                dispatch(removeModuleMembersFailure(error));
             });
     };
 };
 
-export const removeUserFromModuleRequest = () => ({
-    type: REMOVE_USER_FROM_MODULE_REQUEST
+export const removeModuleMembersRequest = () => ({
+    type: REMOVE_MODULE_MEMBERS_REQUEST
 });
 
-export const removeUserFromModuleSuccess = () => ({
-    type: REMOVE_USER_FROM_MODULE_SUCCESS,
+export const removeModuleMembersSuccess = () => ({
+    type: REMOVE_MODULE_MEMBERS_SUCCESS,
 });
 
-export const removeUserFromModuleFailure = (error) => ({
-    type: REMOVE_USER_FROM_MODULE_FAILURE,
+export const removeModuleMembersFailure = (error) => ({
+    type: REMOVE_MODULE_MEMBERS_FAILURE,
     error
 });

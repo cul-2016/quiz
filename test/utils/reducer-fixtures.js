@@ -58,7 +58,7 @@ export const module = {
     error: undefined,
     isQuizOpen: false,
     users: undefined,
-    isRemovingUser: false
+    isRemovingMember: false
 };
 
 export const liveQuiz = {

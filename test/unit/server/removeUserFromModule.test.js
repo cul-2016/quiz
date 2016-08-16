@@ -1,6 +1,6 @@
 import test from 'tape';
 import { testClient } from '../../utils/init';
-import removeUserFromModule from '../../../server/lib/removeUserFromModule';
+import removeModuleMembers from '../../../server/lib/removeModuleMembers';
 
 test('saving quiz to database works and returns the quiz id for the saved quiz', (t) => {
 
@@ -10,7 +10,7 @@ test('saving quiz to database works and returns the quiz id for the saved quiz',
     const module_id = 'TEST';
     const user_id = 1;
 
-    removeUserFromModule(testClient, module_id, user_id, (error, response) => {
+    removeModuleMembers(testClient, module_id, user_id, (error, response) => {
         t.equal(error, expectedError, 'error is null, user is deleted from the db correctly.');
         t.deepEqual(response.command, expectedCommand, 'Correct command of DELETE, module is saved to db correctly');
     });
