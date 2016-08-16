@@ -1,6 +1,12 @@
 
 .module {
-    .section {
-        margin: 30px;
+
+    @media screen and (min-width: 769px) {
+
+        .section {
+            margin: 30px;
+        }
     }
+
+    
 }

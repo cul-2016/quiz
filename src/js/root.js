@@ -1,25 +1,29 @@
 import React, { PropTypes } from 'react';
-import { Router, Route, IndexRoute, hashHistory } from 'react-router';
+import { Router, Route, IndexRoute, IndexRedirect, hashHistory } from 'react-router';
 import { Provider } from 'react-redux';
 
 import App from './components/app';
 import LoginContainer from './containers/login';
 import DashboardContainer from './containers/dashboard';
 import NewModuleContainer from './containers/new-module';
-import JoinModuleContainer from './containers/join-module';
 import RegisterUserContainer from './containers/register-user';
-import ModuleContainer from './containers/module';
-import StudentModuleContainer from './containers/student-module';
 import NewQuizContainer from './containers/new-quiz';
-import LeaderboardContainer from './containers/leaderboard';
+
+import ModuleContainer from './containers/module';
 import LecturerLiveQuizContainer from './containers/lecturer-live-quiz';
-import StudentLiveQuizContainer from './containers/student-live-quiz';
-import ReviewContainer from './containers/review';
-import QuizResultContainer from './containers/quiz-result';
 import QuizHistoryContainer from './containers/quiz-history';
+import LeaderboardContainer from './containers/leaderboard';
+import ReviewContainer from './containers/review';
 import ModuleMembersContainer from './containers/module-members';
 import QuizMembersContainer from './containers/quiz-members';
 
+
+import StudentJoinModuleContainer from './containers/student/join-module';
+import StudentModuleContainer from './containers/student/module';
+import StudentHistory from './components/student-module/history';
+import StudentFeedback from './components/student-module/feedback';
+import StudentLiveQuizContainer from './containers/student/live-quiz';
+import StudentQuizResultContainer from './containers/student/quiz-result';
 
 import composeHooks from './lib/composeHooks';
 import * as hooks from './lib/onEnterHooks';
@@ -51,7 +55,7 @@ const Root = ({ store }) => (
                 <Route
                     onEnter={ hooks.authenticate }
                     path="join-module"
-                    component={ JoinModuleContainer } />
+                    component={ StudentJoinModuleContainer } />
                 <Route
                     onEnter={ composeHooks(hooks.authenticate, hooks.fetchModule) }
                     path=":module_id/lecturer"
@@ -59,7 +63,17 @@ const Root = ({ store }) => (
                 <Route
                     onEnter={ composeHooks(hooks.authenticate, hooks.fetchModule) }
                     path=":module_id/student"
-                    component={ StudentModuleContainer } />
+                    component={ StudentModuleContainer }>
+                    <IndexRedirect to="feedback" />
+                    <Route
+                        onEnter={ composeHooks(hooks.authenticate) }
+                        path="history"
+                        component={ StudentHistory } />
+                    <Route
+                        onEnter={ composeHooks(hooks.authenticate) }
+                        path="feedback"
+                        component={ StudentFeedback } />
+                </Route>
                 <Route
                     onEnter={ hooks.authenticate }
                     path=":module_id/new-quiz"
@@ -87,7 +101,7 @@ const Root = ({ store }) => (
                 <Route
                     onEnter={ hooks.authenticate }
                     path=":module_id/:quiz_id/result"
-                    component={ QuizResultContainer } />
+                    component={ StudentQuizResultContainer } />
                 <Route
                     onEnter={ hooks.authenticate }
                     path=":module_id/:quiz_id/history"

@@ -20,7 +20,7 @@ const Details = ({ moduleIDExists, isValidatingModuleID, module_id_length, handl
     });
 
     return (
-        <div className="section">
+        <div className="section average">
             <h3>
                 <i className="fa fa-pencil" /> Module name and code</h3>
 

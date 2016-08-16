@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
-import LiveQuiz from '../components/live-quiz/live-quiz';
-import { setResponse, saveResponse } from '../actions/live-quiz';
-import { store } from '../store';
+import LiveQuiz from '../../components/live-quiz/live-quiz';
+import { setResponse, saveResponse } from '../../actions/live-quiz';
+import { store } from '../../store';
 
 const mapStateToProps = (state) => ({
     question: state.liveQuiz.questions && state.liveQuiz.questions[0],

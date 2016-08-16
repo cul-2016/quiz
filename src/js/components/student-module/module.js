@@ -1,10 +1,13 @@
 import React, { PropTypes } from 'react';
-import Nav from '../general/nav';
 import { Link } from 'react-router'; // eslint-disable-line no-unused-vars
-import Spinner from '../general/spinner';
 import classnames from 'classnames';
+import Nav from '../general/nav';
+import Tabs from './tabs';
+import Spinner from '../general/spinner';
 
-const StudentModule = ({ location, isFetchingModule, username, isQuizOpen, quiz_id, question, response }) => { //eslint-disable-line
+const StudentModule = ({ location, children, username,
+                        isFetchingModule, isQuizOpen,
+                        quiz_id, question, response }) => { //eslint-disable-line no-unused-vars
 
     let buttonClasses = classnames("button is-success is-medium", {
         "display-none": !isQuizOpen
@@ -19,23 +22,17 @@ const StudentModule = ({ location, isFetchingModule, username, isQuizOpen, quiz_
             !isFetchingModule &&
             <div>
                 <Nav username={ username } />
+                <Tabs location={ location } />
                 <div className="section has-text-centered">
-                <Link to={`${location.pathname}/live`}>
-                    <button className={ buttonClasses }>
-                        JOIN THE LIVE QUIZ!
-                    </button>
-                </Link>
+                    <Link to={`${location.pathname}/live`}>
+                        <button className={ buttonClasses }>
+                            JOIN THE LIVE QUIZ!
+                        </button>
+                    </Link>
                 </div>
                 <div className="section">
-                    <h2 className="has-text-centered">Past Quizzes</h2>
-                    <div className="box column is-8 is-offset-2 module-list-item">
-                            <div>
-                                Week 1 Quiz 80%
-                            </div>
-                    </div>
+                    { children }
                 </div>
-
-
             </div>
         }
         </div>
@@ -44,6 +41,7 @@ const StudentModule = ({ location, isFetchingModule, username, isQuizOpen, quiz_
 
 StudentModule.propTypes = {
     location: PropTypes.object.isRequired,
+    children: PropTypes.object,
     isFetchingModule: PropTypes.bool.isRequired,
     username: PropTypes.string.isRequired,
     isQuizOpen: PropTypes.bool.isRequired,
