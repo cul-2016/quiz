@@ -64,7 +64,7 @@ const Root = ({ store }) => (
                     component={ NewQuizContainer } />
                 <Route
                 onEnter={ composeHooks(hooks.authenticate, hooks.fetchModuleMembers) }
-                path=":module_id/users"
+                path=":module_id/members"
                 component={ ModuleMembersContainer } />
                 <Route
                     onEnter={ hooks.authenticate }

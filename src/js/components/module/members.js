@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'; //eslint-disable-line no-unused-vars
 import Spinner from '../general/spinner';
 import Nav from '../general/nav';
 
-const Users = ({ users, isFetchingModuleMembers, isRemovingMember, username, handleRemovingUser, location }) => {
+const Members = ({ users, isFetchingMembers, isRemovingMember, username, handleRemovingMember, location }) => {
 
     let module_id = location.pathname.split('/')[1];
     let mappedUsers;
@@ -13,7 +13,7 @@ const Users = ({ users, isFetchingModuleMembers, isRemovingMember, username, han
                     <span>{ user.user_id }</span>
                     <h4>{ user.email }</h4>
                     <label className='label'>username</label>{ user.username }
-                    <button className="button is-danger" onClick={ () => handleRemovingUser(module_id, user.user_id) }>
+                    <button className="button is-danger" onClick={ () => handleRemovingMember(module_id, user.user_id) }>
                     <span className="icon">
                     <i className="fa fa-times"></i>
                     </span>
@@ -27,10 +27,10 @@ const Users = ({ users, isFetchingModuleMembers, isRemovingMember, username, han
     return (
         <div>
         {
-            isFetchingModuleMembers || isRemovingMember && <Spinner />
+            isFetchingMembers || isRemovingMember && <Spinner />
         }
         {
-            !isFetchingModuleMembers && users &&
+            !isFetchingMembers && users &&
             <div>
                 <Nav username={ username } />
                 <div>
@@ -44,13 +44,13 @@ const Users = ({ users, isFetchingModuleMembers, isRemovingMember, username, han
     );
 };
 
-Users.propTypes = {
+Members.propTypes = {
     users: PropTypes.array,
-    isFetchingModuleMembers: PropTypes.bool.isRequired,
+    isFetchingMembers: PropTypes.bool.isRequired,
     isRemovingMember: PropTypes.bool.isRequired,
     username: PropTypes.string,
-    handleRemovingUser: PropTypes.func.isRequired,
+    handleRemovingMember: PropTypes.func.isRequired,
     location: PropTypes.object.isRequired
 };
 
-export default Users;
+export default Members;

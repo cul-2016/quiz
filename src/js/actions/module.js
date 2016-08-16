@@ -65,7 +65,7 @@ export const getModuleFailure = (error) => ({
 });
 
 //
-// GET MODULE USERS actions
+// GET MODULE MEMBERS actions
 //
 
 export const getModuleMembers = (module_id) => {

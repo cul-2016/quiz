@@ -57,7 +57,7 @@ export const module = {
     isFetchingModule: false,
     error: undefined,
     isQuizOpen: false,
-    users: undefined,
+    members: undefined,
     isRemovingMember: false
 };
 

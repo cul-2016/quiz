@@ -73,7 +73,7 @@ test('GET_MODULE_MEMBERS_REQUEST works', (t) => {
     const action = {
         type: 'GET_MODULE_MEMBERS_REQUEST',
     };
-    const expected = Object.assign({}, moduleState, { isFetchingModuleMembers: true });
+    const expected = Object.assign({}, moduleState, { isFetchingMembers: true });
 
     const result = reducer(initialState, action);
     t.deepEqual(result, expected);
@@ -90,7 +90,7 @@ test('GET_MODULE_MEMBERS_SUCCESS works', (t) => {
         data: getModuleMembers
     };
     const expected = Object.assign({}, moduleState, {
-        isFetchingModuleMembers: false,
+        isFetchingMembers: false,
         users: getModuleMembers,
     });
 
@@ -109,7 +109,7 @@ test('GET_MODULE_MEMBERS_FAILURE works', (t) => {
         type: 'GET_MODULE_MEMBERS_FAILURE',
         error: getModuleMembersError
     };
-    const expected = Object.assign({}, moduleState, { error: error, isFetchingModuleMembers: false });
+    const expected = Object.assign({}, moduleState, { error: error, isFetchingMembers: false });
 
     const result = reducer(initialState, action);
 
