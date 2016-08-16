@@ -15,7 +15,6 @@ test('Gets a student\'s score for a quiz', (t) => {
         if (error) {
             console.error(error);
         }
-        console.log(response);
         t.deepEqual(response, expectedRows, 'returns the correct score');
     });
 });

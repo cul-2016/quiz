@@ -108,3 +108,9 @@ export const newQuizWithQuestion = {
     isSavingQuiz: false,
     error: undefined
 };
+
+export const score = {
+    score: undefined,
+    error: undefined,
+    isFetchingScore: false
+};
