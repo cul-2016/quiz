@@ -56,7 +56,9 @@ export const module = {
     quizzes: undefined,
     isFetchingModule: false,
     error: undefined,
-    isQuizOpen: false
+    isQuizOpen: false,
+    members: undefined,
+    isRemovingMember: false
 };
 
 export const liveQuiz = {
@@ -70,6 +72,14 @@ export const liveQuiz = {
     nextQuestionIndex: 0,
     isQuizStarted: false,
     interval_id: undefined
+};
+
+export const review = {
+    error: undefined,
+    isFetchingReview: false,
+    questions: undefined,
+    currentQuizIndex: 0,
+    isAnswerShowing: false,
 };
 
 export const newQuiz = {

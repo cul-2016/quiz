@@ -11,6 +11,10 @@ var GetQuizQuestions = require('./handlers/get-quiz-questions');
 var JoinModule = require('./handlers/join-module');
 var SaveStudentResponse = require('./handlers/save-student-response');
 var EndQuiz = require('./handlers/end-quiz');
+var GetQuizReview = require('./handlers/get-quiz-review');
+var GetModuleMembers = require('./handlers/get-module-members');
+var RemoveModuleMember = require('./handlers/remove-module-member');
+
 
 var routes = [
     Index,
@@ -25,7 +29,10 @@ var routes = [
     GetQuizQuestions,
     JoinModule,
     SaveStudentResponse,
-    EndQuiz
+    EndQuiz,
+    GetQuizReview,
+    GetModuleMembers,
+    RemoveModuleMember
 ];
 
 module.exports = routes;

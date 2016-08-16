@@ -12,8 +12,9 @@ import NewQuizContainer from './containers/new-quiz';
 import ModuleContainer from './containers/module';
 import LecturerLiveQuizContainer from './containers/lecturer-live-quiz';
 import QuizHistoryContainer from './containers/quiz-history';
-import QuizReviewContainer from './containers/quiz-review';
 import LeaderboardContainer from './containers/leaderboard';
+import ReviewContainer from './containers/review';
+import ModuleMembersContainer from './containers/module-members';
 
 import StudentJoinModuleContainer from './containers/student/join-module';
 import StudentModuleContainer from './containers/student/module';
@@ -76,6 +77,10 @@ const Root = ({ store }) => (
                     path=":module_id/new-quiz"
                     component={ NewQuizContainer } />
                 <Route
+                onEnter={ composeHooks(hooks.authenticate, hooks.fetchModuleMembers) }
+                path=":module_id/members"
+                component={ ModuleMembersContainer } />
+                <Route
                     onEnter={ hooks.authenticate }
                     path=":module_id/lecturer/live"
                     component={ LecturerLiveQuizContainer } />
@@ -84,9 +89,9 @@ const Root = ({ store }) => (
                     path=":module_id/student/live"
                     component={ StudentLiveQuizContainer } />
                 <Route
-                    onEnter={ hooks.authenticate }
+                    onEnter={ composeHooks(hooks.authenticate, hooks.fetchquizReview) }
                     path=":module_id/:quiz_id/review"
-                    component={ QuizReviewContainer } />
+                    component={ ReviewContainer } />
                 <Route
                     onEnter={ hooks.authenticate }
                     path=":module_id/:quiz_id/result"
