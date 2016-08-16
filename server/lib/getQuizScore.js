@@ -19,7 +19,7 @@ function getQuizScore (client, user_id, quiz_id, callback) {
             console.error(error);
             callback(error);
         }
-        callback(null, response.rows);
+        callback(null, parseInt(response.rows[0].count, 10));
     });
 }
 

@@ -3,7 +3,7 @@ var getQuizScore = require('../lib/getQuizScore');
 
 module.exports = {
     method: 'GET',
-    path: '/get-quiz-result',
+    path: '/get-quiz-score',
     handler: (request, reply) => {
 
         var user_id = request.query.user_id;
