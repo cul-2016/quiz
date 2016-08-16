@@ -110,7 +110,7 @@ export const newQuizWithQuestion = {
 };
 
 export const result = {
-    score: undefined,
+    score: 0,
     error: undefined,
     isFetchingResult: false
 };

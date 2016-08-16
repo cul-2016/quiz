@@ -2,7 +2,7 @@ import update from 'react-addons-update';
 import * as actionsTypes from '../actions/result';
 
 const initialState = {
-    score: undefined,
+    score: 0,
     isFetchingResult: false,
     error: undefined
 };
