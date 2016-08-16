@@ -64,7 +64,8 @@ export const module = {
 export const quizMembers = {
     members: undefined,
     isFetchingQuizMembers: false,
-    error: undefined
+    error: undefined,
+    isEditingScore: false
 };
 
 export const liveQuiz = {
