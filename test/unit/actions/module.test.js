@@ -63,7 +63,7 @@ test('getModuleFailure creates the correct action', (t) => {
 });
 
 //
-// GET MODULE USERS ACTIONS
+// GET MODULE MEMBERS ACTIONS
 //
 test('getModuleMembers async action creator returns expected action', (t) => {
 
@@ -145,7 +145,7 @@ test('closeQuiz creates the correct action', (t) => {
 
 
 //
-// GET MODULE  ACTIONS
+// REMOVE MODULE MEMBERS ACTIONS
 //
 test('removeModuleMember async action creator returns expected action', (t) => {
 

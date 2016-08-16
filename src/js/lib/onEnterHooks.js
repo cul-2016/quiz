@@ -93,7 +93,7 @@ export function fetchquizReview (nextState, replace, callback) {
  * @param {function} callback - (optional) can be used to make the transition block
  */
 
-export function fetchModuleUsers (nextState, replace, callback) {
+export function fetchModuleMembers (nextState, replace, callback) {
     if (validCookieExists()) {
         const module_id = nextState.params.module_id;
         store.dispatch(getModuleMembers(module_id));

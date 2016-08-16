@@ -5,7 +5,7 @@ const initialState = {
     module: undefined,
     quizzes: undefined,
     isFetchingModule: false,
-    isFetchingModuleUsers: false,
+    isFetchingModuleMembers: false,
     error: undefined,
     isQuizOpen: false,
     users: undefined,
@@ -46,18 +46,18 @@ export default function module (state = initialState, action ) {
 
     case actionsTypes.GET_MODULE_MEMBERS_REQUEST:
         return update(state, {
-            isFetchingModuleUsers: { $set: true }
+            isFetchingModuleMembers: { $set: true }
         });
 
     case actionsTypes.GET_MODULE_MEMBERS_SUCCESS:
         return update(state, {
-            isFetchingModuleUsers: { $set: false },
+            isFetchingModuleMembers: { $set: false },
             users: { $set: action.data },
         });
 
     case actionsTypes.GET_MODULE_MEMBERS_FAILURE:
         return update(state, {
-            isFetchingModuleUsers: { $set: false },
+            isFetchingModuleMembers: { $set: false },
             error: { $set: action.error }
         });
 

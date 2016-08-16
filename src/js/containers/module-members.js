@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
-import Users from '../components/module/users';
+import Members from '../components/module/members';
 import { removeModuleMember } from '../actions/module';
 
 const mapStateToProps = (state) => ({
     users: state.module.users,
-    isFetchingModuleUsers: state.module.isFetchingModuleUsers,
+    isFetchingModuleMembers: state.module.isFetchingModuleMembers,
     isRemovingMember: state.module.isRemovingMember,
     username: state.user.username
 });
@@ -16,6 +16,6 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(removeModuleMember(module_id, user_id));
     }
 });
-const ModuleUsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users);
+const ModuleMembersContainer = connect(mapStateToProps, mapDispatchToProps)(Members);
 
-export default ModuleUsersContainer;
+export default ModuleMembersContainer;

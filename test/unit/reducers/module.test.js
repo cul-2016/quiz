@@ -62,7 +62,7 @@ test('GET_MODULE_FAILURE works', (t) => {
 });
 
 //
-// GET MODULE USERS Reducers
+// GET MODULE MEMBERS Reducers
 //
 test('GET_MODULE_MEMBERS_REQUEST works', (t) => {
 
@@ -73,7 +73,7 @@ test('GET_MODULE_MEMBERS_REQUEST works', (t) => {
     const action = {
         type: 'GET_MODULE_MEMBERS_REQUEST',
     };
-    const expected = Object.assign({}, moduleState, { isFetchingModuleUsers: true });
+    const expected = Object.assign({}, moduleState, { isFetchingModuleMembers: true });
 
     const result = reducer(initialState, action);
     t.deepEqual(result, expected);
@@ -90,7 +90,7 @@ test('GET_MODULE_MEMBERS_SUCCESS works', (t) => {
         data: getModuleMembers
     };
     const expected = Object.assign({}, moduleState, {
-        isFetchingModuleUsers: false,
+        isFetchingModuleMembers: false,
         users: getModuleMembers,
     });
 
@@ -109,7 +109,7 @@ test('GET_MODULE_MEMBERS_FAILURE works', (t) => {
         type: 'GET_MODULE_MEMBERS_FAILURE',
         error: getModuleMembersError
     };
-    const expected = Object.assign({}, moduleState, { error: error, isFetchingModuleUsers: false });
+    const expected = Object.assign({}, moduleState, { error: error, isFetchingModuleMembers: false });
 
     const result = reducer(initialState, action);
 
@@ -148,7 +148,7 @@ test('CLOSE_QUIZ works', (t) => {
 });
 
 //
-// REMOVE USER FROM MODULE Reducers
+// REMOVE MODULE MEMBERS Reducers
 //
 test('REMOVE_MODULE_MEMBER_REQUEST works', (t) => {
 
