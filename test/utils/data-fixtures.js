@@ -174,3 +174,9 @@ export const getModuleData = {
         }
     ]
 };
+
+export const getModuleMembers = [{
+    email: 'student@city.ac.uk',
+    user_id: 1,
+    username: 'student'
+}];

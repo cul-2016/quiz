@@ -5,8 +5,11 @@ const initialState = {
     module: undefined,
     quizzes: undefined,
     isFetchingModule: false,
+    isFetchingMembers: false,
     error: undefined,
-    isQuizOpen: false
+    isQuizOpen: false,
+    members: undefined,
+    isRemovingMember: false
 };
 
 export default function module (state = initialState, action ) {
@@ -38,6 +41,39 @@ export default function module (state = initialState, action ) {
     case actionsTypes.GET_MODULE_FAILURE:
         return update(state, {
             isFetchingModule: { $set: false },
+            error: { $set: action.error }
+        });
+
+    case actionsTypes.GET_MODULE_MEMBERS_REQUEST:
+        return update(state, {
+            isFetchingMembers: { $set: true }
+        });
+
+    case actionsTypes.GET_MODULE_MEMBERS_SUCCESS:
+        return update(state, {
+            isFetchingMembers: { $set: false },
+            members: { $set: action.data },
+        });
+
+    case actionsTypes.GET_MODULE_MEMBERS_FAILURE:
+        return update(state, {
+            isFetchingMembers: { $set: false },
+            error: { $set: action.error }
+        });
+
+    case actionsTypes.REMOVE_MODULE_MEMBER_REQUEST:
+        return update(state, {
+            isRemovingMember: { $set: true }
+        });
+
+    case actionsTypes.REMOVE_MODULE_MEMBER_SUCCESS:
+        return update(state, {
+            isRemovingMember: { $set: false }
+        });
+
+    case actionsTypes.REMOVE_MODULE_MEMBER_FAILURE:
+        return update(state, {
+            isRemovingMember: { $set: false },
             error: { $set: action.error }
         });
 

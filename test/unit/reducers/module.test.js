@@ -1,11 +1,13 @@
 import test from 'tape';
 import { module as moduleState } from '../../utils/reducer-fixtures';
-import { getModuleError as error } from '../../utils/action-fixtures';
-import { module as data } from '../../utils/data-fixtures';
+import { getModuleError as error, getModuleMembersError, removeModuleMember } from '../../utils/action-fixtures';
+import { module as data, getModuleMembers } from '../../utils/data-fixtures';
 import reducer from '../../../src/js/reducers/module';
 import deepFreeze from '../../utils/deepFreeze';
 
-
+//
+// GET MODULE Reducers
+//
 test('GET_MODULE_REQUEST works', (t) => {
 
     t.plan(1);
@@ -59,6 +61,64 @@ test('GET_MODULE_FAILURE works', (t) => {
     t.deepEqual(result, expected);
 });
 
+//
+// GET MODULE MEMBERS Reducers
+//
+test('GET_MODULE_MEMBERS_REQUEST works', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(moduleState);
+
+    const action = {
+        type: 'GET_MODULE_MEMBERS_REQUEST',
+    };
+    const expected = Object.assign({}, moduleState, { isFetchingMembers: true });
+
+    const result = reducer(initialState, action);
+    t.deepEqual(result, expected);
+});
+
+test('GET_MODULE_MEMBERS_SUCCESS works', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(moduleState);
+
+    const action = {
+        type: 'GET_MODULE_MEMBERS_SUCCESS',
+        data: getModuleMembers
+    };
+    const expected = Object.assign({}, moduleState, {
+        isFetchingMembers: false,
+        members: getModuleMembers,
+    });
+
+    const result = reducer(initialState, action);
+
+    t.deepEqual(result, expected);
+});
+
+test('GET_MODULE_MEMBERS_FAILURE works', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(moduleState);
+
+    const action = {
+        type: 'GET_MODULE_MEMBERS_FAILURE',
+        error: getModuleMembersError
+    };
+    const expected = Object.assign({}, moduleState, { error: error, isFetchingMembers: false });
+
+    const result = reducer(initialState, action);
+
+    t.deepEqual(result, expected);
+});
+
+//
+//
+//
 test('OPEN_QUIZ works', (t) => {
 
     t.plan(1);
@@ -84,5 +144,58 @@ test('CLOSE_QUIZ works', (t) => {
     const expected = Object.assign({}, moduleState, { isQuizOpen: false });
 
     const result = reducer(initialState, action);
+    t.deepEqual(result, expected);
+});
+
+//
+// REMOVE MODULE MEMBERS Reducers
+//
+test('REMOVE_MODULE_MEMBER_REQUEST works', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(moduleState);
+
+    const action = {
+        type: 'REMOVE_MODULE_MEMBER_REQUEST',
+    };
+    const expected = Object.assign({}, moduleState, { isRemovingMember: true });
+
+    const result = reducer(initialState, action);
+    t.deepEqual(result, expected);
+});
+
+test('REMOVE_MODULE_MEMBER_SUCCESS works', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(moduleState);
+
+    const action = {
+        type: 'REMOVE_MODULE_MEMBER_SUCCESS'
+    };
+    const expected = Object.assign({}, moduleState, {
+        isRemovingMember: false,
+    });
+
+    const result = reducer(initialState, action);
+
+    t.deepEqual(result, expected);
+});
+
+test('REMOVE_MODULE_MEMBER_FAILURE works', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(moduleState);
+
+    const action = {
+        type: 'REMOVE_MODULE_MEMBER_FAILURE',
+        error: removeModuleMember
+    };
+    const expected = Object.assign({}, moduleState, { error: removeModuleMember, isRemovingMember: false });
+
+    const result = reducer(initialState, action);
+
     t.deepEqual(result, expected);
 });
