@@ -21,7 +21,7 @@ import StudentModuleContainer from './containers/student/module';
 import StudentHistory from './components/student-module/history';
 import StudentFeedback from './components/student-module/feedback';
 import StudentLiveQuizContainer from './containers/student/live-quiz';
-import StudentQuizResultContainer from './containers/student/quiz-result';
+import StudentQuizResultContainer from './containers/student/result';
 
 import composeHooks from './lib/composeHooks';
 import * as hooks from './lib/onEnterHooks';
@@ -93,8 +93,8 @@ const Root = ({ store }) => (
                     path=":module_id/:quiz_id/review"
                     component={ ReviewContainer } />
                 <Route
-                    onEnter={ composeHooks(hooks.authenticate, hooks.fetchScore) }
-                    path=":module_id/:quiz_id/score"
+                    onEnter={ composeHooks(hooks.authenticate, hooks.fetchResult) }
+                    path=":module_id/:quiz_id/result"
                     component={ StudentQuizResultContainer } />
                 <Route
                     onEnter={ hooks.authenticate }

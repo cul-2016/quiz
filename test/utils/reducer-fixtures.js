@@ -109,8 +109,8 @@ export const newQuizWithQuestion = {
     error: undefined
 };
 
-export const score = {
+export const result = {
     score: undefined,
     error: undefined,
-    isFetchingScore: false
+    isFetchingResult: false
 };

@@ -5,7 +5,7 @@ import { getDashboard } from '../actions/dashboard';
 import { loadUserState } from './userState';
 import { getUserDetails } from '../actions/user';
 import { getQuizReview } from '../actions/review';
-import { getQuizScore } from '../actions/score';
+import { getQuizResult } from '../actions/result';
 import getUserID from './getUserID';
 
 
@@ -103,19 +103,19 @@ export function fetchModuleMembers (nextState, replace, callback) {
 }
 
 /**
- * Fetches a student's quiz score  Is used as an onEnter hook for React Router
+ * Fetches a student's quiz results  Is used as an onEnter hook for React Router
  * Matches the signature of a React Router hook: https://github.com/reactjs/react-router/blob/master/docs/API.md#onenternextstate-replace-callback
  * @param {object} nextState - the next router state
  * @param {function} replace - function to redirect to another path
  * @param {function} callback - (optional) can be used to make the transition block
  */
-export function fetchScore (nextState, replace, callback) {
+export function fetchResult (nextState, replace, callback) {
 
     if (validCookieExists()) {
 
         const user_id = store.getState().user.user_id;
         const quiz_id = nextState.params.quiz_id;
-        store.dispatch(getQuizScore(user_id, quiz_id));
+        store.dispatch(getQuizResult(user_id, quiz_id));
     }
     callback();
 }

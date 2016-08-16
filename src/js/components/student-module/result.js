@@ -1,12 +1,16 @@
-import React, { PropTypes } from 'react'; //eslint-disable-line no-unused-vars
+import React, { PropTypes } from 'react';
 
-const Result = () => {
+const Result = ({ score }) => {
 
     return (
         <div>
-            This is the quiz result for student
+            { score }
         </div>
     );
+};
+
+Result.propTypes = {
+    score: PropTypes.number
 };
 
 export default Result;
