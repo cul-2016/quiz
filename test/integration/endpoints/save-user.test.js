@@ -23,7 +23,7 @@ test('`save-user` endpoint works when a lecturer registers', (t) => {
 
 test('`save-user` endpoint works when a student registers', (t) => {
 
-    t.plan(2);
+    t.plan(4);
     const options = {
         method: 'POST',
         url: '/save-user',
@@ -39,10 +39,33 @@ test('`save-user` endpoint works when a student registers', (t) => {
 
         t.equal(response.statusCode, 200, '200 status code');
         t.ok(response.result, 'Get data back');
+
+        const options = {
+            method: 'POST',
+            url: '/authenticate-user',
+            payload: {
+                email: 'lecturer@city.ac.uk',
+                password: 'testinglecturer',
+            }
+        };
+        const expectedResponse = {
+            email: 'lecturer@city.ac.uk',
+            is_lecturer: true,
+            user_id: 2,
+            username: 'lecturer'
+        };
+
+        server.inject(options, (response) => {
+
+            t.equal(response.statusCode, 200, '200 status code');
+            t.deepEqual(response.result, expectedResponse, 'Successfully retrieves user info');
+        });
     });
 });
 
-test('deleting recently added users from the database', (t) => {
+
+
+test.skip('deleting recently added users from the database', (t) => {
 
     testClient.connect((error, client, done) => {
         if (error) {
