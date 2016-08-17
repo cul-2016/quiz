@@ -180,3 +180,9 @@ export const getModuleMembers = [{
     user_id: 1,
     username: 'student'
 }];
+
+export const getQuizMembers = [{
+    user_id: 1,
+    quiz_id: 1,
+    score: 5
+}];

@@ -6,6 +6,7 @@ import { loadUserState } from './userState';
 import { getUserDetails } from '../actions/user';
 import { getQuizReview } from '../actions/review';
 import { getQuizResult } from '../actions/result';
+import { getQuizMembers } from '../actions/quiz-members';
 import getUserID from './getUserID';
 
 
@@ -87,7 +88,7 @@ export function fetchquizReview (nextState, replace, callback) {
 }
 
 /**
- * Fetches users that belong to a given module_id.  Is used as an onEnter hook for React Router
+ * Fetches members that belong to a given module_id.  Is used as an onEnter hook for React Router
  * Matches the signature of a React Router hook: https://github.com/reactjs/react-router/blob/master/docs/API.md#onenternextstate-replace-callback
  * @param {object} nextState - the next router state
  * @param {function} replace - function to redirect to another path
@@ -103,7 +104,7 @@ export function fetchModuleMembers (nextState, replace, callback) {
 }
 
 /**
- * Fetches a student's quiz results  Is used as an onEnter hook for React Router
+ * Fetches members that have completed a given quiz.  Is used as an onEnter hook for React Router
  * Matches the signature of a React Router hook: https://github.com/reactjs/react-router/blob/master/docs/API.md#onenternextstate-replace-callback
  * @param {object} nextState - the next router state
  * @param {function} replace - function to redirect to another path
@@ -116,6 +117,25 @@ export function fetchResult (nextState, replace, callback) {
         const user_id = store.getState().user.user_id;
         const quiz_id = nextState.params.quiz_id;
         store.dispatch(getQuizResult(user_id, quiz_id));
+    }
+    callback();
+}
+
+/**
+ * Fetches a student's quiz results  Is used as an onEnter hook for React Router
+ * Fetches members that have completed a given quiz.  Is used as an onEnter hook for React Router
+ * Matches the signature of a React Router hook: https://github.com/reactjs/react-router/blob/master/docs/API.md#onenternextstate-replace-callback
+ * @param {object} nextState - the next router state
+ * @param {function} replace - function to redirect to another path
+ * @param {function} callback - (optional) can be used to make the transition block
+ */
+
+export function fetchQuizMembers (nextState, replace, callback) {
+
+    if (validCookieExists()) {
+        
+        const quiz_id = nextState.params.quiz_id;
+        store.dispatch(getQuizMembers(quiz_id));
     }
     callback();
 }

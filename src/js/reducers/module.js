@@ -8,7 +8,7 @@ const initialState = {
     isFetchingMembers: false,
     error: undefined,
     isQuizOpen: false,
-    members: undefined,
+    members: [],
     isRemovingMember: false
 };
 
