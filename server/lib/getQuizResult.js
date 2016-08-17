@@ -17,7 +17,7 @@ function getQuizResult (client, user_id, quiz_id, callback) {
 
         if (error) {
             console.error(error);
-            callback(error);
+            return callback(error);
         }
         const data = {
             score: parseInt(response.rows[0].count, 10)

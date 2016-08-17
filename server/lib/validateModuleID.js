@@ -9,14 +9,14 @@ var query = require('./query');
  */
 function validateModuleID (client, module_id, callback) {
 
-    var moduleQuery = 'select exists(select 1 from modules where module_id=$1);';
+    var moduleQuery = 'SELECT EXISTS(SELECT 1 FROM modules WHERE module_id = $1);';
     var moduleValue = [module_id];
 
     query(client, moduleQuery, moduleValue, (error, response) => {
 
         if (error) {
             console.error(error);
-            callback(error);
+            return callback(error);
         }
         callback(null, response.rows[0].exists);
     });
