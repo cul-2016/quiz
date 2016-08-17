@@ -1,4 +1,5 @@
 var query = require('./query');
+var removeNullAnswers = require('./removeNullAnswers');
 
 /**
  * Represents a function that fetches a list of questions that belong to a quiz_id
@@ -18,7 +19,7 @@ function getQuizQuestions (client, quiz_id, callback) {
             console.error(error);
             return callback(error);
         }
-        callback(null, response.rows);
+        callback(null, removeNullAnswers(response.rows));
     });
 }
 
