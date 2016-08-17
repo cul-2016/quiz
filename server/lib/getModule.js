@@ -1,7 +1,7 @@
 require('babel-register')({
     presets: ['es2015']
 });
-var query = require('./query'); 
+var query = require('./query');
 var queries = require('./queries.json');
 var organiseModuleData = require('./organiseModuleData');
 
@@ -19,32 +19,32 @@ function getModule (client, module_id, callback) {
 
         if (error) {
             console.error(error);
-            callback(error);
+            return callback(error);
         }
         query(client, queries.getModule.medals, [module_id], (error, medals) => {
 
             if (error) {
                 console.error(error);
-                callback(error);
+                return callback(error);
             }
             query(client, queries.getModule.trophies, [module_id], (error, trophies) => {
 
                 if (error) {
                     console.error(error);
-                    callback(error);
+                    return callback(error);
                 }
                 query(client, queries.getModule.num_enrolled, [module_id], (error, num_enrolled) => {
 
                     if (error) {
                         console.error(error);
-                        callback(error);
+                        return callback(error);
                     }
 
                     query(client, queries.getModule.name, [module_id], (error, name) => {
 
                         if (error) {
                             console.error(error);
-                            callback(error);
+                            return callback(error);
                         }
                         const allData = {
                             quizzes: quizzes.rows,

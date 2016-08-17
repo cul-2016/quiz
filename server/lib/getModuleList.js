@@ -25,7 +25,7 @@ function getModuleList (client, user_id, is_lecturer, callback) {
 
         if (error) {
             console.error(error);
-            callback(error);
+            return callback(error);
         }
         callback(null, response.rows);
     });

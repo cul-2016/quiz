@@ -11,12 +11,12 @@ function getQuizQuestions (client, quiz_id, callback) {
 
     var moduleQuery = 'SELECT question_id, question, a, b, c, d FROM questions WHERE quiz_id=$1;';
     var moduleValue = [quiz_id];
-    
+
     query(client, moduleQuery, moduleValue, (error, response) => {
 
         if (error) {
             console.error(error);
-            callback(error);
+            return callback(error);
         }
         callback(null, response.rows);
     });
