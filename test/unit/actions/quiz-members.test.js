@@ -117,17 +117,17 @@ test('editScoreFailure creates the correct action', (t) => {
     t.deepEqual(actual, expected);
 });
 
-test('scoreChange creates the correct action', (t) => {
+test('updateScore creates the correct action', (t) => {
 
     t.plan(1);
     const score = 10;
     const member_key = 0
     const expected = {
-        type: actions.SCORE_CHANGE,
+        type: actions.UPDATE_SCORE,
         score,
         member_key
     };
 
-    const actual = deepFreeze(actions.scoreChange(score, member_key));
+    const actual = deepFreeze(actions.updateScore(score, member_key));
     t.deepEqual(actual, expected);
 });

@@ -10,7 +10,7 @@ export const EDIT_SCORE_REQUEST = 'EDIT_SCORE_REQUEST';
 export const EDIT_SCORE_SUCCESS = 'EDIT_SCORE_SUCCESS';
 export const EDIT_SCORE_FAILURE = 'EDIT_SCORE_FAILURE';
 
-export const SCORE_CHANGE = 'SCORE_CHANGE';
+export const UPDATE_SCORE = 'UPDATE_SCORE';
 
 //
 // GET QUIZ MEMBERS actions
@@ -89,8 +89,8 @@ export const editScoreFailure = (error) => ({
 //
 //
 
-export const scoreChange = (score, member_key) => ({
-    type: SCORE_CHANGE,
+export const updateScore = (score, member_key) => ({
+    type: UPDATE_SCORE,
     score,
     member_key
 });

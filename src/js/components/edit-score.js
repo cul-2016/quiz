@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-const EditQuiz = ({ members, params, handleScoreChange, handleEditScore }) => {
+const EditQuiz = ({ members, params, handleUpdateScore, handleEditScore }) => {
 
     let member_key = params.member_key;
     let quiz_id = params.quiz_id;
@@ -21,7 +21,7 @@ const EditQuiz = ({ members, params, handleScoreChange, handleEditScore }) => {
                             <input
                                 className="input"
                                 value={ members[member_key].score || '' }
-                                onChange={ (e) => handleScoreChange(e.target.value, member_key)}
+                                onChange={ (e) => handleUpdateScore(e.target.value, member_key)}
                                 type="number"
                                 placeholder="Module Name"
                                 />
@@ -39,7 +39,7 @@ const EditQuiz = ({ members, params, handleScoreChange, handleEditScore }) => {
 EditQuiz.propTypes = {
     members: PropTypes.array,
     params: PropTypes.object,
-    handleScoreChange: PropTypes.func,
+    handleUpdateScore: PropTypes.func,
     handleEditScore: PropTypes.func
 };
 

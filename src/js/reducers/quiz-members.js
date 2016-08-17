@@ -45,16 +45,16 @@ export default function quizMembers (state = initialState, action) {
             error: { $set: action.error }
         });
 
-    case actionsTypes.SCORE_CHANGE:
+    case actionsTypes.UPDATE_SCORE:
         console.log('you are in score chage');
-        return handleScoreChange(state, action);
+        return handleUpdateScore(state, action);
 
     default:
         return state;
     }
 }
 
-export const handleScoreChange = (state, action) => {
+export const handleUpdateScore = (state, action) => {
     const newObj = Object.assign({}, state.members[action.member_key], { score: action.score });
     return update(state, {
         members: { $splice: [[action.member_key, 1, newObj]] }

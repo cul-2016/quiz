@@ -9,7 +9,7 @@ var query = require('./query');
  * @param {function} callback - a callback function
  */
 
-function getQuizMembers (client, quiz_id, user_id, score, callback) {
+function editScore (client, quiz_id, user_id, score, callback) {
 
     var moduleQuery = 'UPDATE scores SET score = $1 WHERE quiz_id = $2 AND user_id = $3;';
     var moduleValue = [score, quiz_id, user_id];
@@ -26,4 +26,4 @@ function getQuizMembers (client, quiz_id, user_id, score, callback) {
     });
 }
 
-module.exports = getQuizMembers;
+module.exports = editScore;

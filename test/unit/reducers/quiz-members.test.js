@@ -114,14 +114,14 @@ test('EDIT_SCORE_FAILURE works', (t) => {
 });
 
 
-test('SCORE_CHANGE works', (t) => {
+test('UPDATE_SCORE works', (t) => {
 
     t.plan(1);
 
     const initialState = Object.assign({}, quizMembersState, { members: [{ user_id: 1, username: 'student', email: 'student@city.ac.uk', score: 1 }] });
 
     const action = {
-        type: 'SCORE_CHANGE',
+        type: 'UPDATE_SCORE',
         score: 5,
         member_key: 0
     };
