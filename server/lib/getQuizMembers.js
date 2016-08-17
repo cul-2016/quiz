@@ -18,9 +18,9 @@ function getQuizMembers (client, quiz_id, callback) {
 
         if (error) {
             console.error(error);
-            callback(error);
+            return callback(error);
         }
-        callback(null, response.rows);
+        return callback(null, response.rows);
     });
 }
 

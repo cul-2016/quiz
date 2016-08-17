@@ -2,7 +2,7 @@ import update from 'react-addons-update';
 import * as actionsTypes from '../actions/quiz-members';
 
 const initialState = {
-    members: undefined,
+    members: [],
     isFetchingQuizMembers: false,
     error: undefined,
     isEditingScore: false

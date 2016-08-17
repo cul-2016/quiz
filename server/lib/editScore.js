@@ -20,9 +20,9 @@ function editScore (client, quiz_id, user_id, score, callback) {
 
         if (error) {
             console.error(error);
-            callback(error);
+            return callback(error);
         }
-        callback(null, response);
+        return callback(null, response);
     });
 }
 
