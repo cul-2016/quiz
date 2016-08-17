@@ -13,8 +13,8 @@ const Tabs = ({ location }) => {
     });
     let currentURL = location.pathname.split('/');
 
-    let feedbackURL = `${currentURL[1]}/${currentURL[2]}/feedback`;
-    let historyURL = `${currentURL[1]}/${currentURL[2]}/history`;
+    let feedbackURL = `/${currentURL[1]}/${currentURL[2]}/feedback`;
+    let historyURL = `/${currentURL[1]}/${currentURL[2]}/history`;
 
     return (
         <div className="tabs is-boxed">
