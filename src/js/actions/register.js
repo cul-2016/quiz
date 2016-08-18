@@ -16,7 +16,7 @@ export const updateInputField = (inputKey, value) => ({
     inputKey
 });
 
-export function registeringUser (email, name, password, is_lecturer) {
+export function registeringUser (email, username, password, is_lecturer) {
 
     return (dispatch) => {
 
@@ -24,7 +24,7 @@ export function registeringUser (email, name, password, is_lecturer) {
 
         const payload = {
             email,
-            name,
+            username,
             password,
             is_lecturer
         };
