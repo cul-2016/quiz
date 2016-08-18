@@ -70,7 +70,8 @@ CREATE TABLE IF NOT EXISTS responses (
     user_id INTEGER NOT NULL,
     quiz_id INTEGER NOT NULL,
     question_id INTEGER NOT NULL,
-    response CHAR(1) NOT NULL
+    response CHAR(1) NOT NULL,
+    PRIMARY KEY (user_id, quiz_id, question_id)
 );
 
 /* scores */

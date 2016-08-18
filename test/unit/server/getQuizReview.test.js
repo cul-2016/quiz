@@ -2,7 +2,7 @@ import test from 'tape';
 import getQuizReview from '../../../server/lib/getQuizReview';
 import { testClient } from '../../utils/init';
 
-test('Gets list of questions for a quiz_id', (t) => {
+test('Get the review for a completed quiz', (t) => {
 
     t.plan(1);
     const expectedRows = [{ quiz_id: 1,
@@ -13,7 +13,7 @@ test('Gets list of questions for a quiz_id', (t) => {
         c: 'Edinburgh',
         d: 'Doncaster',
         correct_answer: 'A',
-        a_response: '2',
+        a_response: '1',
         b_response: '0',
         c_response: '0',
         d_response: '0' },
@@ -35,6 +35,6 @@ test('Gets list of questions for a quiz_id', (t) => {
         if (error) {
             console.error(error);
         }
-        t.deepEquals(response, expectedRows, 'database returns correct row of questions');
+        t.deepEqual(response, expectedRows, 'database returns the review');
     });
 });
