@@ -7,8 +7,11 @@
 @import 'components/current-questions';
 @import 'components/add-quiz';
 @import 'components/quiz-review';
+@import 'animation/bounce-in-up';
 @import 'animation/fade.css';
+@import 'animation/pulse';
 @import 'views/dashboard';
-@import 'views/new-module';
 @import 'views/live-quiz';
 @import 'views/module';
+@import 'views/new-module';
+@import 'views/result';

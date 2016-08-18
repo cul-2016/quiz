@@ -9,7 +9,7 @@ module.exports = {
     path: '/save-user',
     handler: (request, reply) => {
         var email = request.payload.email;
-        var password = request.payload.email;
+        var password = request.payload.password;
         var is_lecturer = request.payload.is_lecturer;
         var username = request.payload.username || '';
 

@@ -17,7 +17,7 @@ function removeModuleMember (client, module_id, quiz_id, callback) {
 
         if (error) {
             console.error(error);
-            callback(error);
+            return callback(error);
         }
         callback(null, response);
     });

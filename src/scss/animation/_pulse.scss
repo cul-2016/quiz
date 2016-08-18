@@ -1,0 +1,15 @@
+.animated-infinite {
+    animation-duration: 1.7s;
+    animation-fill-mode: both;
+    animation-timing-function: ease-in;
+    animation-iteration-count:infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+.pulse {
+    animation-name: pulse;
+}

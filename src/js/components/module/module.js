@@ -40,7 +40,8 @@ const Module = ({ location, module, quizzes, isFetchingModule, username, sendQui
 
                     <Quizzes quizzes={ quizzes }
                         location={ location }
-                        sendQuizInvite={ sendQuizInvite }/>
+                        sendQuizInvite={ sendQuizInvite }
+                        module_id={ module.module_id }/>
                 </div>
             </div>
         }
