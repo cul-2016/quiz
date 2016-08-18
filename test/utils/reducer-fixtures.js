@@ -93,6 +93,7 @@ export const newQuiz = {
     name: undefined,
     questions: [],
     isSavingQuiz: false,
+    isFetchingQuizDetails: false,
     error: undefined
 };
 

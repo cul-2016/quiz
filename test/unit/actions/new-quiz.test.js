@@ -1,10 +1,10 @@
 import test from 'tape';
 import * as actions from '../../../src/js/actions/new-quiz';
 import createThunk from '../../utils/mockThunk';
-import { dashboardData as data } from '../../utils/data-fixtures';
+import { dashboardData as data, getQuizDetailsData } from '../../utils/data-fixtures';
 import { questions as questions } from '../../utils/data-fixtures';
 import deepFreeze from '../../utils/deepFreeze';
-import { saveQuizError as error } from '../../utils/action-fixtures';
+import { saveQuizError as error, getQuizDetailsError } from '../../utils/action-fixtures';
 
 
 test('addQuestion action creator returns the expected action', (t) => {
@@ -105,5 +105,63 @@ test('saveQuizFailure creates the correct action', (t) => {
         error
     };
     const actual = deepFreeze(actions.saveQuizFailure(error));
+    t.deepEqual(actual, expected);
+});
+
+
+// -----
+// GET QUIZ QUESTIONS
+// -----
+
+
+test('getQuizDetails async action creator returns expected action', (t) => {
+
+    t.plan(1);
+    let quiz_id = 1;
+    let actual;
+    const { dispatch, queue } = createThunk();
+    dispatch(actions.getQuizDetails(quiz_id));
+
+    [{ ...actual }] = queue;
+
+    const expected = {
+        type: actions.GET_QUIZ_DETAILS_REQUEST,
+    };
+    t.deepEqual(actual, expected);
+});
+
+test('getQuizDetailsRequest creates the correct action', (t) => {
+
+    t.plan(1);
+
+    const expected = {
+        type: actions.GET_QUIZ_DETAILS_REQUEST,
+    };
+
+    const actual2 = deepFreeze(actions.getQuizDetailsRequest());
+    t.deepEqual(actual2, expected);
+});
+
+test('getQuizDetailsSuccess creates the correct action', (t) => {
+
+    t.plan(1);
+    const expected = {
+        type: actions.GET_QUIZ_DETAILS_SUCCESS,
+        data: getQuizDetailsData
+    };
+
+    const actual2 = deepFreeze(actions.getQuizDetailsSuccess(getQuizDetailsData));
+    t.deepEqual(actual2, expected);
+});
+
+test('getQuizDetailsFailure creates the correct action', (t) => {
+
+    t.plan(1);
+
+    const expected = {
+        type: actions.GET_QUIZ_DETAILS_FAILURE,
+        error: getQuizDetailsError
+    };
+    const actual = deepFreeze(actions.getQuizDetailsFailure(getQuizDetailsError));
     t.deepEqual(actual, expected);
 });

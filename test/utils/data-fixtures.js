@@ -79,6 +79,20 @@ export const newQuiz = {
     error: undefined
 };
 
+export const getQuizDetailsData = {
+    name: 'Old Quiz',
+    questions: [
+        {
+            question: 'capital of England',
+            A: 'London',
+            B: 'Tokyo',
+            C: 'New York',
+            D: 'Paris',
+            correct_answer: 'A'
+        }
+    ]
+};
+
 export const questions = [
     {
         question: 'capital of England',
