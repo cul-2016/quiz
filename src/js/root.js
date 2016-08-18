@@ -8,6 +8,8 @@ import DashboardContainer from './containers/dashboard';
 import NewModuleContainer from './containers/new-module';
 import RegisterUserContainer from './containers/register-user';
 import NewQuizContainer from './containers/new-quiz';
+import EditQuizContainer from './containers/edit-quiz';
+
 
 import ModuleContainer from './containers/module';
 import LecturerLiveQuizContainer from './containers/lecturer-live-quiz';
@@ -79,6 +81,10 @@ const Root = ({ store }) => (
                     onEnter={ hooks.authenticate }
                     path=":module_id/new-quiz"
                     component={ NewQuizContainer } />
+                <Route
+                    onEnter={ hooks.authenticate }
+                    path=":module_id/:quiz_id/edit-quiz"
+                    component={ EditQuizContainer } />
                 <Route
                 onEnter={ composeHooks(hooks.authenticate, hooks.fetchModuleMembers) }
                 path=":module_id/members"
