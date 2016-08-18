@@ -2,7 +2,6 @@ import test from 'tape';
 import createThunk from '../../../utils/mockThunk';
 import * as actions from '../../../../src/js/actions/new-module';
 import { validateModuleIDError as error } from '../../../utils/action-fixtures';
-import * as data from '../../../utils/data-fixtures';
 import deepFreeze from '../../../utils/deepFreeze';
 
 
@@ -14,7 +13,7 @@ test('validateModuleID creates the correct async action', (t) => {
     const { dispatch, queue } = createThunk();
     dispatch(actions.validateModuleID('1'));
 
-    [{...actual}] = queue;
+    [{ ...actual }] = queue;
 
     const expected = {
         type: actions.VALIDATE_MODULE_ID_REQUEST,

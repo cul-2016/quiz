@@ -1,8 +1,6 @@
 import test from 'tape';
 import * as actions from '../../../src/js/actions/new-quiz';
 import createThunk from '../../utils/mockThunk';
-import { dashboardData as data } from '../../utils/data-fixtures';
-import { questions as questions } from '../../utils/data-fixtures';
 import deepFreeze from '../../utils/deepFreeze';
 import { saveQuizError as error } from '../../utils/action-fixtures';
 

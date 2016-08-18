@@ -32,7 +32,7 @@ test('getQuizMembersRequest creates the correct action', (t) => {
 
     const expected = {
         type: actions.GET_QUIZ_MEMBERS_REQUEST
-    }
+    };
 
     const actual = deepFreeze(actions.getQuizMembersRequest());
     t.deepEqual(actual, expected);
@@ -43,7 +43,7 @@ test('getQuizMembersSuccess creates the correct action', (t) => {
     const expected = {
         type: actions.GET_QUIZ_MEMBERS_SUCCESS,
         data: getQuizMembers
-    }
+    };
 
     const actual = deepFreeze(actions.getQuizMembersSuccess(getQuizMembers));
     t.deepEqual(actual, expected);
@@ -88,7 +88,7 @@ test('editScoreRequest creates the correct action', (t) => {
 
     const expected = {
         type: actions.EDIT_SCORE_REQUEST
-    }
+    };
 
     const actual = deepFreeze(actions.editScoreRequest());
     t.deepEqual(actual, expected);
@@ -98,7 +98,7 @@ test('editScoreSuccess creates the correct action', (t) => {
     t.plan(1);
     const expected = {
         type: actions.EDIT_SCORE_SUCCESS
-    }
+    };
 
     const actual = deepFreeze(actions.editScoreSuccess());
     t.deepEqual(actual, expected);
@@ -121,7 +121,7 @@ test('updateScore creates the correct action', (t) => {
 
     t.plan(1);
     const score = 10;
-    const member_key = 0
+    const member_key = 0;
     const expected = {
         type: actions.UPDATE_SCORE,
         score,

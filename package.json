@@ -8,7 +8,7 @@
     "start:dev": "nodemon server/start.js",
     "dev": "node ./src/utils/dev-server.js",
     "build": "webpack --config ./webpack.production.config.js --colors --progress",
-    "lint": "node_modules/eslint/bin/eslint.js 'src/**/*.@(js|jsx)'",
+    "lint": "node_modules/eslint/bin/eslint.js 'src/**/*.@(js|jsx)' 'server/**/*.@(js|jsx)' 'test/**/*.@(js|jsx)'",
     "postgres": "postgres -D /usr/local/var/postgres",
     "heroku:postgres": "heroku pg:psql --app cul-app",
     "coverage": "./node_modules/.bin/babel-node ./node_modules/babel-istanbul/lib/cli.js cover ./node_modules/tape/bin/tape --require ./test/utils/jsdom.js 'test/**/*.@(js|jsx)'",

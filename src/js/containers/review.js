@@ -15,12 +15,10 @@ const mapDispatchToProps = (dispatch) => ({
     handleIsAnswerShowing: () => {
 
         //flip isAnswerShowing.
-        console.log('you clicked answer');
         dispatch(flipIsAnswerShowing());
     },
     handleIncrementCurrentQuizIndex: () => {
 
-        console.log('incrementing question');
         dispatch(incrementCurrentQuizIndex());
     }
 });

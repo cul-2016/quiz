@@ -1,5 +1,5 @@
 import test from 'tape';
-import { server, testClient } from '../../utils/init';
+import { server } from '../../utils/init';
 
 
 test('`join-module` endpoint returns error if user_id is undefined', (t) => {

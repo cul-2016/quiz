@@ -14,11 +14,11 @@ test('updateInputField action creator returns expected action', (t) => {
         type: actions.UPDATE_INPUT_FIELD,
         value,
         inputKey
-    }
+    };
 
     const actual2 = deepFreeze(actions.updateInputField(inputKey, value));
     t.deepEqual(actual2, expected);
-})
+});
 
 test('UserExists action creator returns expected action', (t) => {
 
@@ -26,10 +26,10 @@ test('UserExists action creator returns expected action', (t) => {
 
     const expected = {
         type: actions.USER_EXISTS
-    }
+    };
     const actual = deepFreeze(actions.userExists());
     t.deepEqual(actual, expected);
-})
+});
 
 // -----
 // REGISTERING USER
