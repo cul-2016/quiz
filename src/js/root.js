@@ -80,17 +80,17 @@ const Root = ({ store }) => (
                     path=":module_id/new-quiz"
                     component={ NewQuizContainer } />
                 <Route
-                onEnter={ composeHooks(hooks.authenticate, hooks.fetchModuleMembers) }
-                path=":module_id/members"
-                component={ ModuleMembersContainer } />
+                    onEnter={ composeHooks(hooks.authenticate, hooks.fetchModuleMembers) }
+                    path=":module_id/members"
+                    component={ ModuleMembersContainer } />
                 <Route
-                onEnter={ composeHooks(hooks.authenticate, hooks.fetchQuizMembers) }
-                path=":module_id/:quiz_id/members"
-                component={ QuizMembersContainer } />
+                    onEnter={ composeHooks(hooks.authenticate, hooks.fetchQuizMembers) }
+                    path=":module_id/:quiz_id/members"
+                    component={ QuizMembersContainer } />
                 <Route
-                onEnter={ hooks.authenticate }
-                path=":module_id/:quiz_id/:member_key/edit-score"
-                component={ EditScoreContainer } />
+                    onEnter={ hooks.authenticate }
+                    path=":module_id/:quiz_id/:member_key/edit-score"
+                    component={ EditScoreContainer } />
                 <Route
                     onEnter={ hooks.authenticate }
                     path=":module_id/lecturer/live"
