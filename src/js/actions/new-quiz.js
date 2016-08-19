@@ -85,9 +85,9 @@ export function getQuizDetails (quiz_id) {
 
         axios.get(`/get-quiz-details?quiz_id=${quiz_id}`)
             .then((response) => {
+                console.log(response);
 
-
-                dispatch(getQuizDetailsSuccess(response));
+                dispatch(getQuizDetailsSuccess(response.data));
 
             }, (error) => {
                 console.error(error, 'error from axios /get-quiz-questions');

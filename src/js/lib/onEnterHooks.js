@@ -7,7 +7,7 @@ import { getUserDetails } from '../actions/user';
 import { getQuizReview } from '../actions/review';
 import { getQuizResult } from '../actions/result';
 import { getQuizMembers } from '../actions/quiz-members';
-import { getQuizQuestions } from '../actions/new-quiz';
+import { getQuizDetails } from '../actions/new-quiz';
 import getUserID from './getUserID';
 
 
@@ -150,12 +150,12 @@ export function fetchQuizMembers (nextState, replace, callback) {
  * @param {function} callback - (optional) can be used to make the transition block
  */
 
-export function fetchQuizQuestions (nextState, replace, callback) {
+export function fetchQuizDetails (nextState, replace, callback) {
 
     if (validCookieExists()) {
 
         const quiz_id = nextState.params.quiz_id;
-        store.dispatch(getQuizQuestions(quiz_id));
+        store.dispatch(getQuizDetails(quiz_id));
     }
     callback();
 }

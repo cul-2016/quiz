@@ -1,18 +1,38 @@
 import { connect } from 'react-redux';
 import EditQuiz from '../components/edit-quiz/edit-quiz';
+import { addQuestion, updateValue, updateQuizName, saveQuiz } from '../actions/new-quiz';
+import { hashHistory } from 'react-router';
+
 
 
 
 const mapStateToProps = (state) => ({
-    newQuiz: state.newQuiz,
+    questions: state.newQuiz.questions,
+    name: state.newQuiz.name,
     username: state.user.username
 });
 
-// const mapDispatchToProps = (dispatch) => ({
-//
-// });
 
+const mapDispatchToProps = (dispatch) => ({
 
-const EditQuizContainer = connect(mapStateToProps)(EditQuiz);
+    handleAddQuestion: () => {
+        dispatch(addQuestion());
+    },
+
+    handleInputChange: (inputType, value, index) => {
+        dispatch(updateValue(inputType, value, index));
+    },
+
+    handleQuizNameChange: (value) => {
+        dispatch(updateQuizName(value));
+    },
+
+    handleSaveQuiz: (module_id, quizName, questions) => {
+        dispatch(saveQuiz(module_id, quizName, questions));
+        hashHistory.goBack();
+    }
+});
+
+const EditQuizContainer = connect(mapStateToProps, mapDispatchToProps)(EditQuiz);
 
 export default EditQuizContainer;

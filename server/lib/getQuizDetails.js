@@ -10,7 +10,7 @@ var query = require('./query');
 
 function getQuizDetails (client, quiz_id, callback) {
 
-    var questionsQuery = 'SELECT question, a as A, b as B, c as C, d as D, correct_answer FROM questions WHERE quiz_id = $1;';
+    var questionsQuery = 'SELECT question_id, question, a as A, b as B, c as C, d as D, correct_answer FROM questions WHERE quiz_id = $1;';
     query(client, questionsQuery, [quiz_id], (error, questions) => {
 
         if (error) {
