@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS scores (
 /* module_members */
 CREATE TABLE IF NOT EXISTS module_members (
     module_id CHAR(4) NOT NULL,
-    user_id INTEGER NOT NULL.
+    user_id INTEGER NOT NULL,
     PRIMARY KEY (module_id, user_id)
 );
 
