@@ -138,7 +138,7 @@ export const nextQuestion = {
     }
 };
 
-export const getModuleData = {
+export const getModuleForLecturerData = {
     module: {
         module_id: 'TEST',
         name: 'test module',
@@ -173,6 +173,22 @@ export const getModuleData = {
             is_presented: false
         }
     ]
+};
+
+export const getModuleForStudentData = {
+
+    module_id: 'TEST',
+    name: 'test module',
+    medals: {
+        medal_name: ["bronze", "silver", "gold"],
+        condition: [39, 69]
+    },
+    trophies_awarded: {
+        first_quiz: false,
+        high_score: false,
+        overall_average: false,
+        participation: false
+    }
 };
 
 export const getModuleMembers = [{

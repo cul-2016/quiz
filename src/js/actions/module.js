@@ -32,14 +32,13 @@ export const closeQuiz = () => ({
 // GET MODULE actions
 //
 
-export const getModule = (module_id) => {
+export const getModule = (module_id, is_lecturer, user_id) => {
     return (dispatch) => {
 
         dispatch(getModuleRequest());
 
-        axios.get(`get-module?module_id=${module_id}`)
+        axios.get(`get-module?module_id=${module_id}&is_lecturer=${is_lecturer}&${user_id}`)
             .then((response) => {
-
                 dispatch(getModuleSuccess(response.data));
             }, (error) => {
                 console.error(error, 'error from server');

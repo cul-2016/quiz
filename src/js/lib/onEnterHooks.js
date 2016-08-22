@@ -19,6 +19,7 @@ import getUserID from './getUserID';
  * @param {function} callback - (optional) can be used to make the transition block
  */
 export function authenticate (nextState, replace, callback) {
+
     if (!validCookieExists()) {
         replace('/');
     } else if (!loadUserState() && !store.getState().user.user_id) {
@@ -52,8 +53,13 @@ export function shouldUserRedirect (nextState, replace, callback) {
  */
 export function fetchModule (nextState, replace, callback) {
 
+    // get user's role
+    let module_id = nextState.params.module_id;
+    let is_lecturer = store.getState().user.is_lecturer;
+    let user_id = store.getState().user.user_id;
+
     if (validCookieExists()) {
-        store.dispatch(getModule(nextState.params.module_id));
+        store.dispatch(getModule(module_id, is_lecturer, user_id));
     }
     callback();
 }
@@ -66,6 +72,7 @@ export function fetchModule (nextState, replace, callback) {
  * @param {function} callback - (optional) can be used to make the transition block
  */
 export function fetchModuleList (nextState, replace, callback) {
+
     if (validCookieExists()) {
         store.dispatch(getDashboard());
     }
@@ -79,7 +86,8 @@ export function fetchModuleList (nextState, replace, callback) {
  * @param {function} replace - function to redirect to another path
  * @param {function} callback - (optional) can be used to make the transition block
  */
-export function fetchquizReview (nextState, replace, callback) {
+export function fetchQuizReview (nextState, replace, callback) {
+
     if (validCookieExists()) {
         const quiz_id = nextState.params.quiz_id;
         store.dispatch(getQuizReview(quiz_id));
@@ -96,6 +104,7 @@ export function fetchquizReview (nextState, replace, callback) {
  */
 
 export function fetchModuleMembers (nextState, replace, callback) {
+
     if (validCookieExists()) {
         const module_id = nextState.params.module_id;
         store.dispatch(getModuleMembers(module_id));
@@ -113,7 +122,6 @@ export function fetchModuleMembers (nextState, replace, callback) {
 export function fetchResult (nextState, replace, callback) {
 
     if (validCookieExists()) {
-
         const user_id = store.getState().user.user_id;
         const quiz_id = nextState.params.quiz_id;
         store.dispatch(getQuizResult(user_id, quiz_id));
@@ -133,7 +141,6 @@ export function fetchResult (nextState, replace, callback) {
 export function fetchQuizMembers (nextState, replace, callback) {
 
     if (validCookieExists()) {
-        
         const quiz_id = nextState.params.quiz_id;
         store.dispatch(getQuizMembers(quiz_id));
     }

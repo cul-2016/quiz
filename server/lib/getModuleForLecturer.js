@@ -6,41 +6,41 @@ var queries = require('./queries.json');
 var organiseModuleData = require('./organiseModuleData');
 
 /**
- * Fetches module information from the database.
+ * Fetches module information for a lecturer.
  * Returns an object of arrays. Keys: 'quizzes', 'medals', 'trophies'.
  * @param {object} client - database client
  * @param {string} module_id - unique module id
  * @param {function} callback - callback function
  */
 
-function getModule (client, module_id, callback) {
+function getModuleForLecturer (client, module_id, callback) {
 
-    query(client, queries.getModule.quizzes, [module_id], (error, quizzes) => {
+    query(client, queries.getModuleForLecturer.quizzes, [module_id], (error, quizzes) => {
 
         if (error) {
             console.error(error);
             return callback(error);
         }
-        query(client, queries.getModule.medals, [module_id], (error, medals) => {
+        query(client, queries.getModuleForLecturer.medals, [module_id], (error, medals) => {
 
             if (error) {
                 console.error(error);
                 return callback(error);
             }
-            query(client, queries.getModule.trophies, [module_id], (error, trophies) => {
+            query(client, queries.getModuleForLecturer.trophies, [module_id], (error, trophies) => {
 
                 if (error) {
                     console.error(error);
                     return callback(error);
                 }
-                query(client, queries.getModule.num_enrolled, [module_id], (error, num_enrolled) => {
+                query(client, queries.getModuleForLecturer.num_enrolled, [module_id], (error, num_enrolled) => {
 
                     if (error) {
                         console.error(error);
                         return callback(error);
                     }
 
-                    query(client, queries.getModule.name, [module_id], (error, name) => {
+                    query(client, queries.getModuleForLecturer.name, [module_id], (error, name) => {
 
                         if (error) {
                             console.error(error);
@@ -65,4 +65,4 @@ function getModule (client, module_id, callback) {
     });
 }
 
-module.exports = getModule;
+module.exports = getModuleForLecturer;
