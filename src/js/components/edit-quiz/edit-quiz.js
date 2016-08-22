@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import Questions from './questions';
 import Nav from '../general/nav';
 
-const EditQuiz = ({ questions, name, username, handleAddQuestion, handleInputChange, handleQuizNameChange, handleSaveQuiz, params }) => {
+const EditQuiz = ({ questions, name, username, handleAddQuestion, handleInputChange, handleQuizNameChange, handleEditQuiz, params }) => {
 
     return (
             <div>
@@ -15,7 +15,7 @@ const EditQuiz = ({ questions, name, username, handleAddQuestion, handleInputCha
                     <input
                         className="input"
                         type="text"
-                        defaultValue={ name }
+                        value={ name }
                         onChange={ (e) => handleQuizNameChange(e.target.value) }
                         placeholder='Quiz Name'></input>
                 </div>
@@ -28,7 +28,7 @@ const EditQuiz = ({ questions, name, username, handleAddQuestion, handleInputCha
                     <button className="button is-info add-question" onClick={ handleAddQuestion }>
                         Add Question
                     </button>
-                    <button className="button is-success save-question" onClick={ () => handleSaveQuiz(params.module_id, name, questions) }>
+                    <button className="button is-success save-question" onClick={ () => handleEditQuiz(params.module_id, params.quiz_id, name, questions) }>
                         Save and Exit
                     </button>
                 </div>
@@ -44,7 +44,7 @@ EditQuiz.propTypes = {
     handleAddQuestion: PropTypes.func.isRequired,
     handleInputChange: PropTypes.func.isRequired,
     handleQuizNameChange: PropTypes.func.isRequired,
-    handleSaveQuiz: PropTypes.func.isRequired,
+    handleEditQuiz: PropTypes.func.isRequired,
     params: PropTypes.object
 };
 

@@ -8,9 +8,15 @@ export const SAVE_QUIZ_REQUEST = 'SAVE_QUIZ_REQUEST';
 export const SAVE_QUIZ_SUCCESS = 'SAVE_QUIZ_SUCCESS';
 export const SAVE_QUIZ_FAILURE = 'SAVE_QUIZ_FAILURE';
 
+export const UPDATE_QUIZ_REQUEST = 'UPDATE_QUIZ_REQUEST';
+export const UPDATE_QUIZ_SUCCESS = 'UPDATE_QUIZ_SUCCESS';
+export const UPDATE_QUIZ_FAILURE = 'UPDATE_QUIZ_FAILURE';
+
 export const GET_QUIZ_DETAILS_REQUEST = 'GET_QUIZ_DETAILS_REQUEST';
 export const GET_QUIZ_DETAILS_SUCCESS = 'GET_QUIZ_DETAILS_SUCCESS';
 export const GET_QUIZ_DETAILS_FAILURE = 'GET_QUIZ_DETAILS_FAILURE';
+
+
 
 export const addQuestion = () => ({
     type: ADD_QUESTION
@@ -70,6 +76,68 @@ export const saveQuizSuccess = (data) => ({
 
 export const saveQuizFailure = (error) => ({
     type: SAVE_QUIZ_FAILURE,
+    error
+});
+
+//
+// UPDATE QUIZ ACTIONS
+//
+
+export function updateQuiz (module_id, quiz_id, quizName, questions) {
+
+    var editedQuestions = questions.filter((question) => {
+        if (question.question_id) {
+            return question;
+        }
+    }).map((question) => {
+        question["quiz_id"] = quiz_id;
+        return question;
+    });
+
+    var newQuestions = questions.filter((question) => {
+        if (!question.question_id) {
+            return question;
+        }
+    }).map((question) => {
+        question["quiz_id"] = quiz_id;
+        return question;
+    });
+
+    return (dispatch) => {
+
+        dispatch(updateQuizRequest());
+
+        const payload = {
+            module_id,
+            quiz_id,
+            quizName,
+            editedQuestions,
+            newQuestions
+        };
+        axios.post('/update-quiz', payload)
+            .then(() => {
+
+                dispatch(updateQuizSuccess());
+
+            }, (error) => {
+                console.error(error, 'error from axios /update-quiz');
+            })
+            .catch((error) => {
+                dispatch(updateQuizFailure(error));
+            });
+    };
+}
+
+export const updateQuizRequest = () => ({
+    type: UPDATE_QUIZ_REQUEST
+});
+
+export const updateQuizSuccess = () => ({
+    type: UPDATE_QUIZ_SUCCESS
+});
+
+export const updateQuizFailure = (error) => ({
+    type: UPDATE_QUIZ_FAILURE,
     error
 });
 

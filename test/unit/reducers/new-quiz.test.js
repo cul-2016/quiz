@@ -129,6 +129,55 @@ test('SAVE_QUIZ_FAILURE works', (t) => {
     t.deepEqual(result, expected);
 });
 
+
+// -----
+// UPDATE QUIZ
+// -----
+
+test('UPDATE_QUIZ_REQUEST works', (t) => {
+
+    t.plan(1);
+    const initialState = deepFreeze(newQuizState);
+    const action = {
+        type: 'UPDATE_QUIZ_REQUEST'
+    };
+    const expected = Object.assign({}, newQuizState, { isUpdatingQuiz: true });
+    const result = reducer(initialState, action);
+
+    t.deepEqual(result, expected);
+});
+
+test('UPDATE_QUIZ_SUCCESS works', (t) => {
+
+    t.plan(1);
+    const initialState = deepFreeze(newQuizState);
+    const data = true;
+    const action = {
+        type: 'UPDATE_QUIZ_SUCCESS',
+        data
+    };
+    const expected = Object.assign({}, newQuizState, { isUpdatingQuiz: false });
+
+    const result = reducer(initialState, action);
+
+    t.deepEqual(result, expected);
+});
+
+test('UPDATE_QUIZ_FAILURE works', (t) => {
+
+    t.plan(1);
+    const initialState = deepFreeze(newQuizState);
+    const action = {
+        type: 'UPDATE_QUIZ_FAILURE',
+        error
+    };
+    const expected = Object.assign({}, newQuizState, { isUpdatingQuiz: false, error: error });
+
+    const result = reducer(initialState, action);
+
+    t.deepEqual(result, expected);
+});
+
 // -----
 // GET QUIZ DETAILS QUIZ
 // -----

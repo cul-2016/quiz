@@ -18,6 +18,7 @@ var RemoveModuleMember = require('./handlers/remove-module-member');
 var GetQuizMembers = require('./handlers/get-quiz-members');
 var EditScore = require('./handlers/edit-score');
 var GetQuizDetails = require('./handlers/get-quiz-details');
+var UpdateQuiz = require('./handlers/update-quiz');
 
 var routes = [
     Index,
@@ -39,7 +40,8 @@ var routes = [
     RemoveModuleMember,
     GetQuizMembers,
     EditScore,
-    GetQuizDetails
+    GetQuizDetails,
+    UpdateQuiz
 ];
 
 module.exports = routes;

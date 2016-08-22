@@ -58,7 +58,6 @@ test('saveQuiz async action creator returns expected action', (t) => {
     t.plan(1);
     let module_id = 'TEST';
     let quizName = 'week 1';
-    let questions;
     let actual;
     const { dispatch, queue } = createThunk();
     dispatch(actions.saveQuiz(module_id, quizName, questions));
@@ -105,6 +104,65 @@ test('saveQuizFailure creates the correct action', (t) => {
         error
     };
     const actual = deepFreeze(actions.saveQuizFailure(error));
+    t.deepEqual(actual, expected);
+});
+
+
+// -----
+// UPDATE QUIZ
+// -----
+
+
+test('updateQuiz async action creator returns expected action', (t) => {
+
+    t.plan(1);
+    let module_id = 'TEST';
+    let quiz_id = 1
+    let quizName = 'week 1';
+    let actual;
+    const { dispatch, queue } = createThunk();
+    dispatch(actions.updateQuiz(module_id, quiz_id, quizName, questions));
+
+    [{ ...actual }] = queue;
+
+    const expected = {
+        type: actions.UPDATE_QUIZ_REQUEST,
+    };
+    t.deepEqual(actual, expected);
+});
+
+test('updateQuizRequest creates the correct action', (t) => {
+
+    t.plan(1);
+
+    const expected = {
+        type: actions.UPDATE_QUIZ_REQUEST,
+    };
+
+    const actual2 = deepFreeze(actions.updateQuizRequest());
+    t.deepEqual(actual2, expected);
+});
+
+test('updateQuizSuccess creates the correct action', (t) => {
+
+    t.plan(1);
+    const expected = {
+        type: actions.UPDATE_QUIZ_SUCCESS
+    };
+
+    const actual2 = deepFreeze(actions.updateQuizSuccess());
+    t.deepEqual(actual2, expected);
+});
+
+test('updateQuizFailure creates the correct action', (t) => {
+
+    t.plan(1);
+
+    const expected = {
+        type: actions.UPDATE_QUIZ_FAILURE,
+        error
+    };
+    const actual = deepFreeze(actions.updateQuizFailure(error));
     t.deepEqual(actual, expected);
 });
 

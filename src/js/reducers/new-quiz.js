@@ -5,6 +5,7 @@ const initialState = {
     name: undefined,
     questions: [],
     isSavingQuiz: false,
+    isUpdatingQuiz: false,
     isFetchingQuizDetails: false,
     error: undefined
 };
@@ -35,6 +36,22 @@ export default function (state = initialState, action) {
     case actionsTypes.SAVE_QUIZ_FAILURE:
         return update(state, {
             isSavingQuiz: { $set: false },
+            error: { $set: action.error }
+        });
+
+    case actionsTypes.UPDATE_QUIZ_REQUEST:
+        return update(state, {
+            isUpdatingQuiz: { $set: true }
+        });
+
+    case actionsTypes.UPDATE_QUIZ_SUCCESS:
+        return update(state, {
+            isUpdatingQuiz: { $set: false }
+        });
+
+    case actionsTypes.UPDATE_QUIZ_FAILURE:
+        return update(state, {
+            isUpdatingQuiz: { $set: false },
             error: { $set: action.error }
         });
 
