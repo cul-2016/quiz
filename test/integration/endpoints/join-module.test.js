@@ -26,7 +26,7 @@ test('`join-module` endpoint works', (t) => {
 
     t.plan(1);
 
-    server.inject('/join-module?module_id=SOH1&user_id=1', (response) => {
+    server.inject('/join-module?module_id=TEST&user_id=1', (response) => {
         t.equal(response.statusCode, 200, '200 status code');
     });
 });
