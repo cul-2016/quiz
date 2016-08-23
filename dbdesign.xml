@@ -86,7 +86,7 @@
 <row name="first_quiz" null="0" autoincrement="0">
 <datatype>bit</datatype>
 <default>false</default></row>
-<row name="full_marks" null="0" autoincrement="0">
+<row name="high_score" null="0" autoincrement="0">
 <datatype>bit</datatype>
 <default>false</default></row>
 <row name="overall_average" null="1" autoincrement="0">
@@ -94,7 +94,7 @@
 <default>false</default></row>
 <row name="participation" null="1" autoincrement="0">
 <datatype>bit</datatype>
-</row>
+<default>NULL</default></row>
 <key type="PRIMARY" name="">
 </key>
 </table>
