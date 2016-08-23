@@ -10,7 +10,7 @@ test('saving quiz to database works and returns the quiz id for the saved quiz',
     const user_id = 1;
     const quiz_id = 1;
     const question_id = 1;
-    const response = 'A';
+    const response = 'a';
 
     saveStudentResponse(testClient, user_id, quiz_id, question_id, response, (error, response) => {
         t.equal(error, expectedError, 'error is null, module is saved to db correctly.');

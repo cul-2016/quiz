@@ -108,10 +108,10 @@ export const newQuizWithQuestion = {
     name: undefined,
     questions: [{
         question: undefined,
-        A: undefined,
-        B: undefined,
-        C: undefined,
-        D: undefined,
+        a: undefined,
+        b: undefined,
+        c: undefined,
+        d: undefined,
         correct_answer: undefined
     }],
     isSavingQuiz: false,

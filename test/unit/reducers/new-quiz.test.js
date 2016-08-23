@@ -20,10 +20,10 @@ test('ADD_QUESTION works', (t) => {
         {
             questions: [{
                 question: undefined,
-                A: undefined,
-                B: undefined,
-                C: undefined,
-                D: undefined,
+                a: undefined,
+                b: undefined,
+                c: undefined,
+                d: undefined,
                 correct_answer: undefined
             }]
         }
@@ -51,10 +51,10 @@ test('UPDATE_VALUE works', (t) => {
         {
             questions: [{
                 question: 'capital of England?',
-                A: undefined,
-                B: undefined,
-                C: undefined,
-                D: undefined,
+                a: undefined,
+                b: undefined,
+                c: undefined,
+                d: undefined,
                 correct_answer: undefined
             }]
         }
@@ -207,11 +207,11 @@ test('GET_QUIZ_DETAILS_SUCCESS works', (t) => {
         questions: [
             {
                 question: 'capital of England',
-                A: 'London',
-                B: 'Tokyo',
-                C: 'New York',
-                D: 'Paris',
-                correct_answer: 'A'
+                a: 'London',
+                b: 'Tokyo',
+                c: 'New York',
+                d: 'Paris',
+                correct_answer: 'a'
             }
         ] });
 

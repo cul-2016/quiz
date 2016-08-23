@@ -15,13 +15,13 @@ function composeQuestionStatement (rows, callback) {
         valueClause.push('$' + params.length);
         params.push(row.question);
         valueClause.push('$' + params.length);
-        params.push(row.A);
+        params.push(row.a);
         valueClause.push('$' + params.length);
-        params.push(row.B);
+        params.push(row.b);
         valueClause.push('$' + params.length);
-        params.push(row.C);
+        params.push(row.c);
         valueClause.push('$' + params.length);
-        params.push(row.D);
+        params.push(row.d);
         valueClause.push('$' + params.length);
         params.push(row.correct_answer);
         valueClause.push('$' + params.length);
@@ -29,7 +29,7 @@ function composeQuestionStatement (rows, callback) {
     }
 
     callback(null, {
-        text: 'INSERT INTO questions (quiz_id, question, A, B, C, D, correct_answer) VALUES ' + chunks.join(', '),
+        text: 'INSERT INTO questions (quiz_id, question, a, b, c, d, correct_answer) VALUES ' + chunks.join(', '),
         values: params
     });
 

@@ -82,10 +82,10 @@ export default function (state = initialState, action) {
 export const handleAddQuestion = (state, action) => { //eslint-disable-line no-unused-vars
     const newQuestions = {
         question: undefined,
-        A: undefined,
-        B: undefined,
-        C: undefined,
-        D: undefined,
+        a: undefined,
+        b: undefined,
+        c: undefined,
+        d: undefined,
         correct_answer: undefined
     };
     return update(state, {

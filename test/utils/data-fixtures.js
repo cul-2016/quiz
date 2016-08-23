@@ -68,11 +68,11 @@ export const newQuiz = {
     questions: [
         {
             question: 'capital of England',
-            A: 'London',
-            B: 'Tokyo',
-            C: 'New York',
-            D: 'Paris',
-            correct_answer: 'A'
+            a: 'London',
+            b: 'Tokyo',
+            c: 'New York',
+            d: 'Paris',
+            correct_answer: 'a'
         }
     ],
     isSavingQuiz: false,
@@ -84,11 +84,11 @@ export const getQuizDetailsData = {
     questions: [
         {
             question: 'capital of England',
-            A: 'London',
-            B: 'Tokyo',
-            C: 'New York',
-            D: 'Paris',
-            correct_answer: 'A'
+            a: 'London',
+            b: 'Tokyo',
+            c: 'New York',
+            d: 'Paris',
+            correct_answer: 'a'
         }
     ]
 };
@@ -96,11 +96,11 @@ export const getQuizDetailsData = {
 export const questions = [
     {
         question: 'capital of England',
-        A: 'London',
-        B: 'Tokyo',
-        C: 'New York',
-        D: 'Paris',
-        correct_answer: 'A'
+        a: 'London',
+        b: 'Tokyo',
+        c: 'New York',
+        d: 'Paris',
+        correct_answer: 'a'
     }
 ];
 
@@ -111,7 +111,7 @@ export const reviewQuestions = [{ quiz_id: 1,
     b: 'Cardiff',
     c: 'Edinburgh',
     d: 'Doncaster',
-    correct_answer: 'A',
+    correct_answer: 'a',
     a_response: '2',
     b_response: '0',
     c_response: '0',
@@ -123,7 +123,7 @@ export const reviewQuestions = [{ quiz_id: 1,
     b: 'Cardiff',
     c: 'Edinburgh',
     d: 'Doncaster',
-    correct_answer: 'A',
+    correct_answer: 'a',
     a_response: '1',
     b_response: '0',
     c_response: '0',
@@ -133,10 +133,10 @@ export const liveQuizQuestions = [
     {
         question_id: 1,
         question: 'capital of England',
-        A: 'London',
-        B: 'Tokyo',
-        C: 'New York',
-        D: 'Paris'
+        a: 'London',
+        b: 'Tokyo',
+        c: 'New York',
+        d: 'Paris'
     }
 ];
 
@@ -145,10 +145,10 @@ export const nextQuestion = {
     nextQuestion: {
         question_id: 1,
         question: 'capital of England',
-        A: 'London',
-        B: 'Tokyo',
-        C: 'New York',
-        D: 'Paris'
+        a: 'London',
+        b: 'Tokyo',
+        c: 'New York',
+        d: 'Paris'
     }
 };
 

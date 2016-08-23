@@ -12,7 +12,7 @@ test('`save-student-response` endpoint works', (t) => {
             user_id: 1,
             quiz_id: 1,
             question_id: 1,
-            response: 'A'
+            response: 'a'
         }
     };
 

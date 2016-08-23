@@ -14,7 +14,7 @@ module.exports = {
         var newQuestions = request.payload.newQuestions;
 
 
-
+        console.log(editedQuestions, '......', newQuestions);
         // update quiz name
         updateQuiz(client, quiz_id, module_id, quizName, (error, quizResponse) => {
 
@@ -26,14 +26,19 @@ module.exports = {
                 if (error) {
                     return reply(error);
                 }
-                saveQuestions(client, newQuestions, (error, newQuizResponse) => {
+                else if (newQuestions.length !== 0) {
+                    saveQuestions(client, newQuestions, (error, newQuizResponse) => {
 
-                    if (error) {
-                        return reply(error);
-                    }
+                        if (error) {
+                            return reply(error);
+                        }
 
-                    return reply('made it to the end');
-                });
+                        return reply('made it to the end');
+                    });
+                }
+                else {
+                    return reply(true);
+                }
             });
         });
     }
