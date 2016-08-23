@@ -12,8 +12,6 @@ module.exports = {
             is_lecturer = request.query.is_lecturer,
             user_id = request.query.user_id;
 
-        console.log("IS LECTURER?", is_lecturer);
-
         if (is_lecturer === undefined) {
             const error = new Error("`is_lecturer` must be defined");
             console.error(error);
