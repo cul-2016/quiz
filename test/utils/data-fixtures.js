@@ -182,7 +182,7 @@ export const getModuleData = {
         {
             quiz_id: 2,
             name: 'Week 2 Quiz',
-            num_questions: '2',
+            num_questions: '3',
             num_entries: '1',
             is_presented: false
         }

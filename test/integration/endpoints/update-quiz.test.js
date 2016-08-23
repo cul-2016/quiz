@@ -28,7 +28,8 @@ test('`update-quiz` endpoint works', (t) => {
             d: 'Doncaster',
             correct_answer: 'a',
             quiz_id: '1' }],
-            newQuestions: []
+            newQuestions: [],
+            deletedQuestions: []
         }
     };
 

@@ -2,6 +2,7 @@ var client = require('../lib/dbClient');
 var updateQuiz = require('../lib/updateQuiz');
 var updateQuestions = require('../lib/updateQuestions');
 var saveQuestions = require('../lib/saveQuestions');
+var deleteQuestions = require('../lib/deleteQuestions');
 
 module.exports = {
     method: 'POST',
@@ -12,9 +13,10 @@ module.exports = {
         var quizName = request.payload.quizName;
         var editedQuestions = request.payload.editedQuestions;
         var newQuestions = request.payload.newQuestions;
+        var deletedQuestions = request.payload.deletedQuestions;
 
 
-        console.log(editedQuestions, '......', newQuestions);
+
         // update quiz name
         updateQuiz(client, quiz_id, module_id, quizName, (error, quizResponse) => {
 
@@ -25,18 +27,32 @@ module.exports = {
 
                 if (error) {
                     return reply(error);
-                }
-                else if (newQuestions.length !== 0) {
+                } else if (newQuestions.length !== 0) {
                     saveQuestions(client, newQuestions, (error, newQuizResponse) => {
 
                         if (error) {
                             return reply(error);
-                        }
+                        } else if (deletedQuestions.length !== 0) {
+                            deleteQuestions(client, deletedQuestions, (error, deleteQuestionsResponse) => {
 
-                        return reply('made it to the end');
+                                if (error) {
+                                    return reply(error);
+                                }
+                                return reply('made it to the end');
+                            });
+                        } else {
+                            return reply('made it to the end');
+                        }
                     });
-                }
-                else {
+                } else {
+                    if (deletedQuestions.length !== 0) {
+                        deleteQuestions(client, deletedQuestions, (error, deleteQuestionsResponse) => {
+                            if (error) {
+                                return reply(error);
+                            }
+                            return reply('made it to the end');
+                        });
+                    }
                     return reply(true);
                 }
             });

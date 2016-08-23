@@ -89,7 +89,7 @@ export const saveQuizFailure = (error) => ({
 // UPDATE QUIZ ACTIONS
 //
 
-export function updateQuiz (module_id, quiz_id, quizName, questions) {
+export function updateQuiz (module_id, quiz_id, quizName, questions, deletedQuestions) {
 
     var editedQuestions = questions.filter((question) => {
         if (question.question_id) {
@@ -118,7 +118,8 @@ export function updateQuiz (module_id, quiz_id, quizName, questions) {
             quiz_id,
             quizName,
             editedQuestions,
-            newQuestions
+            newQuestions,
+            deletedQuestions
         };
         axios.post('/update-quiz', payload)
             .then(() => {

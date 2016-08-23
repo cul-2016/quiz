@@ -212,7 +212,9 @@ INSERT INTO questions (quiz_id, question, A, B, C, D, correct_answer)
     VALUES (1, 'What is the capital of England?', 'London', 'Cardiff', 'Edinburgh', 'Doncaster', 'a'),
            (1, 'What is the capital of Croatia?', 'Zagreb', 'Cardiff', 'Edinburgh', 'Doncaster', 'a'),
            (2, 'What is the National Animal of England?', 'Pikachu', 'Whale', 'Lion', 'Doncaster', 'c'),
-           (2, 'What is the capital of Tanzania?', 'Zagreb', 'Dodoma', 'Edinburgh', 'Doncaster', 'b');
+           (2, 'What is the capital of Tanzania?', 'Zagreb', 'Dodoma', 'Edinburgh', 'Doncaster', 'b'),
+           (2, 'DELETE this question in deleteQuestions test?', 'Zagreb', 'Dodoma', 'Edinburgh', 'Doncaster', 'b');
+
 
 /********* insert responses ********/
 

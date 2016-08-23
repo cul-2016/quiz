@@ -9,6 +9,7 @@ import { hashHistory } from 'react-router';
 const mapStateToProps = (state) => ({
     questions: state.newQuiz.questions,
     name: state.newQuiz.name,
+    deletedQuestions: state.newQuiz.deletedQuestions,
     username: state.user.username
 });
 
@@ -20,7 +21,6 @@ const mapDispatchToProps = (dispatch) => ({
     },
 
     handleDeleteQuestion: (index) => {
-        console.log(index);
         dispatch(deleteQuestion(index));
     },
 
@@ -32,8 +32,8 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(updateQuizName(value));
     },
 
-    handleEditQuiz: (module_id, quiz_id, quizName, questions) => {
-        dispatch(updateQuiz(module_id, quiz_id, quizName, questions));
+    handleEditQuiz: (module_id, quiz_id, quizName, questions, deletedQuestions) => {
+        dispatch(updateQuiz(module_id, quiz_id, quizName, questions, deletedQuestions));
         hashHistory.goBack();
     }
 });

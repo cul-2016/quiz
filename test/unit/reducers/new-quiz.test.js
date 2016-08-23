@@ -1,6 +1,6 @@
 import test from 'tape';
 import { newQuiz as newQuizState } from '../../utils/reducer-fixtures';
-import { newQuizWithQuestion as newQuizStateWithQuestion } from '../../utils/reducer-fixtures';
+import { newQuizWithQuestion as newQuizStateWithQuestion, editQuizWithQuestion as editQuizWithQuestionState } from '../../utils/reducer-fixtures';
 import { getQuizDetailsData } from '../../utils/data-fixtures';
 
 import { saveQuizError as error, getQuizDetailsError } from '../../utils/action-fixtures';
@@ -37,14 +37,13 @@ test('DELETE_QUESTION works', (t) => {
 
     t.plan(1);
 
-    const initialState = deepFreeze(newQuizStateWithQuestion);
+    const initialState = deepFreeze(editQuizWithQuestionState);
     const action = {
         type: 'DELETE_QUESTION',
         index: 0
     };
 
-    const expected = Object.assign({}, newQuizState, { questions: [] });
-
+    const expected = Object.assign({}, newQuizState, { questions: [], deletedQuestions: [1] });
     const result = reducer(initialState, action);
     t.deepEqual(result, expected);
 });

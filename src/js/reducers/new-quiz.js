@@ -7,7 +7,8 @@ const initialState = {
     isSavingQuiz: false,
     isUpdatingQuiz: false,
     isFetchingQuizDetails: false,
-    error: undefined
+    error: undefined,
+    deletedQuestions: []
 };
 
 export default function (state = initialState, action) {
@@ -19,7 +20,8 @@ export default function (state = initialState, action) {
 
     case actionsTypes.DELETE_QUESTION:
         return update(state, {
-            questions: { $splice: [[action.index, 1]] }
+            questions: { $splice: [[action.index, 1]] },
+            deletedQuestions: { $push: [state.questions[action.index].question_id] }
         });
 
     case actionsTypes.UPDATE_VALUE:
