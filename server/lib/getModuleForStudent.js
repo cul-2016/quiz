@@ -41,12 +41,4 @@ function getModuleForStudent (client, module_id, user_id, callback) {
     });
 }
 
-/*
-SELECT modules.name, module_members.first_quiz, module_members.full_marks, module_members.overall_average, module_members.participation
-FROM modules
-JOIN module_members ON modules.module_id = module_members.module_id
-WHERE modules.module_id = 'TEST';
-
- */
-
 module.exports = getModuleForStudent;
