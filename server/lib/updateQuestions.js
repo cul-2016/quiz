@@ -2,7 +2,7 @@ var preparedQuery = require('./preparedQuery');
 var composeUpdateQuestionStatement = require('./composeUpdateQuestionStatement');
 
 /**
- * Represents a function that updates existing queestions
+ * Represents a function that updates existing questions
  * @param {object} client - postgres database client
  * @params {array} questions - array of questions
  * @param {function} callback - a callback function
