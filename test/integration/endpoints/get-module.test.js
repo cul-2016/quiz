@@ -26,7 +26,7 @@ test('`get-module` endpoint works for a lecturer', (t) => {
     });
 });
 
-test.skip('`get-module` endpoint works for a student', (t) => {
+test('`get-module` endpoint works for a student', (t) => {
 
     t.plan(2);
 

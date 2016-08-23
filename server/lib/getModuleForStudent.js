@@ -1,6 +1,6 @@
 var query = require('./query');
 var queries = require('./queries.json');
-
+var organiseModuleData = require('./organiseModuleData');
 /**
  * Fetches module information for a student.
  * Returns an object. Keys: 'module_id', 'name', 'medals', 'trophies_awarded'.
@@ -18,14 +18,25 @@ function getModuleForStudent (client, module_id, user_id, callback) {
             console.error(error);
             return callback(error);
         }
-        console.log(main.rows);
+        const mainData = main.rows;
+
         query(client, queries.getModuleForStudent.medals, [module_id], (error, medals) => {
 
             if (error) {
                 console.error(error);
                 return callback(error);
             }
-            console.log(medals.rows);
+            const medalsData = medals.rows;
+            const allData = mainData.concat(medalsData);
+
+            organiseModuleData(false, module_id, allData, (error, data) => {
+
+                if (error) {
+                    throw error;
+                }
+
+                callback(null, data);
+            });
         });
     });
 }

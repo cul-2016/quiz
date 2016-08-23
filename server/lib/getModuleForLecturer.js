@@ -54,7 +54,7 @@ function getModuleForLecturer (client, module_id, callback) {
                             name: name.rows
                         };
 
-                        organiseModuleData(module_id, allData, (error, organisedData) => {
+                        organiseModuleData(true, module_id, allData, (error, organisedData) => {
 
                             callback(null, organisedData);
                         });
