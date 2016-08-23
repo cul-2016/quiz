@@ -33,6 +33,22 @@ test('ADD_QUESTION works', (t) => {
     t.deepEqual(result, expected);
 });
 
+test('DELETE_QUESTION works', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(newQuizStateWithQuestion);
+    const action = {
+        type: 'DELETE_QUESTION',
+        index: 0
+    };
+
+    const expected = Object.assign({}, newQuizState, { questions: [] });
+
+    const result = reducer(initialState, action);
+    t.deepEqual(result, expected);
+});
+
 test('UPDATE_VALUE works', (t) => {
 
     t.plan(1);

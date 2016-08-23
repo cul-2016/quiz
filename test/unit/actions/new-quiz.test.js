@@ -2,7 +2,7 @@ import test from 'tape';
 import * as actions from '../../../src/js/actions/new-quiz';
 import createThunk from '../../utils/mockThunk';
 import { dashboardData as data, getQuizDetailsData } from '../../utils/data-fixtures';
-import { questions as questions } from '../../utils/data-fixtures';
+import { questions } from '../../utils/data-fixtures';
 import deepFreeze from '../../utils/deepFreeze';
 import { saveQuizError as error, getQuizDetailsError } from '../../utils/action-fixtures';
 
@@ -15,6 +15,19 @@ test('addQuestion action creator returns the expected action', (t) => {
     };
 
     const actual = deepFreeze(actions.addQuestion());
+    t.deepEqual(actual, expected);
+});
+
+test('deleteQuestion action creator returns the expected action', (t) => {
+
+    t.plan(1);
+    const index = 1;
+    const expected = {
+        type: actions.DELETE_QUESTION,
+        index
+    };
+
+    const actual = deepFreeze(actions.deleteQuestion(index));
     t.deepEqual(actual, expected);
 });
 

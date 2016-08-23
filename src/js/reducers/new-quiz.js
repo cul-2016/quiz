@@ -17,6 +17,11 @@ export default function (state = initialState, action) {
     case actionsTypes.ADD_QUESTION:
         return handleAddQuestion(state, action);
 
+    case actionsTypes.DELETE_QUESTION:
+        return update(state, {
+            questions: { $splice: [[action.index, 1]] }
+        });
+
     case actionsTypes.UPDATE_VALUE:
         return handleUpdateValue(state, action);
 

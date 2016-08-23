@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import Questions from './questions';
 import Nav from '../general/nav';
 
-const EditQuiz = ({ questions, name, username, handleAddQuestion, handleInputChange, handleQuizNameChange, handleEditQuiz, params }) => {
+const EditQuiz = ({ questions, name, username, handleAddQuestion, handleInputChange, handleQuizNameChange, handleEditQuiz, handleDeleteQuestion, params }) => {
 
     return (
             <div>
@@ -22,7 +22,8 @@ const EditQuiz = ({ questions, name, username, handleAddQuestion, handleInputCha
 
                 <Questions
                     questions={ questions }
-                    handleInputChange={ handleInputChange } />
+                    handleInputChange={ handleInputChange }
+                    handleDeleteQuestion={ handleDeleteQuestion } />
 
                 <div className="column is-8 is-offset-2 has-text-centered">
                     <button className="button is-info add-question" onClick={ handleAddQuestion }>
@@ -45,6 +46,7 @@ EditQuiz.propTypes = {
     handleInputChange: PropTypes.func.isRequired,
     handleQuizNameChange: PropTypes.func.isRequired,
     handleEditQuiz: PropTypes.func.isRequired,
+    handleDeleteQuestion: PropTypes.func.isRequired,
     params: PropTypes.object
 };
 

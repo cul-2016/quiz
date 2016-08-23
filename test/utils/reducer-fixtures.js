@@ -115,6 +115,8 @@ export const newQuizWithQuestion = {
         correct_answer: undefined
     }],
     isSavingQuiz: false,
+    isUpdatingQuiz: false,
+    isFetchingQuizDetails: false,
     error: undefined
 };
 

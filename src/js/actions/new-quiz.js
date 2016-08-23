@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 export const ADD_QUESTION = 'ADD_QUESTION';
+export const DELETE_QUESTION = 'DELETE_QUESTION';
 export const UPDATE_VALUE = 'UPDATE_VALUE';
 export const UPDATE_QUIZ_NAME = 'UPDATE_QUIZ_NAME';
 
@@ -20,6 +21,11 @@ export const GET_QUIZ_DETAILS_FAILURE = 'GET_QUIZ_DETAILS_FAILURE';
 
 export const addQuestion = () => ({
     type: ADD_QUESTION
+});
+
+export const deleteQuestion = (index) => ({
+    type: DELETE_QUESTION,
+    index
 });
 
 export const updateValue = (inputType, value, index) => ({

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import EditQuiz from '../components/edit-quiz/edit-quiz';
-import { addQuestion, updateValue, updateQuizName, updateQuiz } from '../actions/new-quiz';
+import { addQuestion, deleteQuestion, updateValue, updateQuizName, updateQuiz } from '../actions/new-quiz';
 import { hashHistory } from 'react-router';
 
 
@@ -17,6 +17,11 @@ const mapDispatchToProps = (dispatch) => ({
 
     handleAddQuestion: () => {
         dispatch(addQuestion());
+    },
+
+    handleDeleteQuestion: (index) => {
+        console.log(index);
+        dispatch(deleteQuestion(index));
     },
 
     handleInputChange: (inputType, value, index) => {
