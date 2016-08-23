@@ -188,7 +188,8 @@ INSERT INTO users (email, password, is_lecturer, username)
 /********* insert modules ********/
 
 INSERT INTO modules (module_id, user_id, name)
-    VALUES ( 'TEST', 2, 'test module');
+    VALUES ('TEST', 2, 'test module'),
+           ('PSY1', 2, 'Intro to Psychology');
 
 /********* insert medals ********/
 

@@ -15,6 +15,8 @@ function joinModule (client, module_id, user_id, callback) {
 
     query(client, queries.joinModule, values, (error, response) => {
 
+        console.log(error);
+
         if (error) {
             return callback(error);
         }
