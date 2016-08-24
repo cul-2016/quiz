@@ -4,7 +4,7 @@ var composeDeleteQuestionStatement = require('./composeDeleteQuestionStatement')
 /**
  * Represents a function that deletes existing questions
  * @param {object} client - postgres database client
- * @params {array} questions - array of question_id for the quetions that will be deleted
+ * @param {array} questions - array of question_id for the quetions that will be deleted
  * @param {function} callback - a callback function
  */
 
