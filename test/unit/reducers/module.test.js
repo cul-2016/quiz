@@ -1,7 +1,9 @@
 import test from 'tape';
 import { module as moduleState } from '../../utils/reducer-fixtures';
 import { getModuleError as error, getModuleMembersError, removeModuleMember } from '../../utils/action-fixtures';
-import { module as data, getModuleMembers } from '../../utils/data-fixtures';
+import { module as lecturerData,
+         getModuleForStudentData as studentData,
+         getModuleMembers } from '../../utils/data-fixtures';
 import reducer from '../../../src/js/reducers/module';
 import deepFreeze from '../../utils/deepFreeze';
 
@@ -23,20 +25,44 @@ test('GET_MODULE_REQUEST works', (t) => {
     t.deepEqual(result, expected);
 });
 
-test('GET_MODULE_SUCCESS works', (t) => {
+test('GET_MODULE_SUCCESS works for a lecturer', (t) => {
 
     t.plan(1);
 
     const initialState = deepFreeze(moduleState);
 
+    const is_lecturer = true;
     const action = {
         type: 'GET_MODULE_SUCCESS',
-        data
+        is_lecturer,
+        data: lecturerData
     };
     const expected = Object.assign({}, moduleState, {
         isFetchingModule: false,
-        module: data.module,
-        quizzes: data.quizzes
+        module: lecturerData.module,
+        quizzes: lecturerData.quizzes
+    });
+
+    const result = reducer(initialState, action);
+
+    t.deepEqual(result, expected);
+});
+
+test('GET_MODULE_SUCCESS works for a student', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(moduleState);
+
+    const is_lecturer = false;
+    const action = {
+        type: 'GET_MODULE_SUCCESS',
+        is_lecturer,
+        data: studentData
+    };
+    const expected = Object.assign({}, moduleState, {
+        isFetchingModule: false,
+        module: studentData
     });
 
     const result = reducer(initialState, action);

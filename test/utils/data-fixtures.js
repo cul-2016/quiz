@@ -68,25 +68,39 @@ export const newQuiz = {
     questions: [
         {
             question: 'capital of England',
-            A: 'London',
-            B: 'Tokyo',
-            C: 'New York',
-            D: 'Paris',
-            correct_answer: 'A'
+            a: 'London',
+            b: 'Tokyo',
+            c: 'New York',
+            d: 'Paris',
+            correct_answer: 'a'
         }
     ],
     isSavingQuiz: false,
     error: undefined
 };
 
+export const getQuizDetailsData = {
+    name: 'Old Quiz',
+    questions: [
+        {
+            question: 'capital of England',
+            a: 'London',
+            b: 'Tokyo',
+            c: 'New York',
+            d: 'Paris',
+            correct_answer: 'a'
+        }
+    ]
+};
+
 export const questions = [
     {
         question: 'capital of England',
-        A: 'London',
-        B: 'Tokyo',
-        C: 'New York',
-        D: 'Paris',
-        correct_answer: 'A'
+        a: 'London',
+        b: 'Tokyo',
+        c: 'New York',
+        d: 'Paris',
+        correct_answer: 'a'
     }
 ];
 
@@ -97,7 +111,7 @@ export const reviewQuestions = [{ quiz_id: 1,
     b: 'Cardiff',
     c: 'Edinburgh',
     d: 'Doncaster',
-    correct_answer: 'A',
+    correct_answer: 'a',
     a_response: '2',
     b_response: '0',
     c_response: '0',
@@ -109,7 +123,7 @@ export const reviewQuestions = [{ quiz_id: 1,
     b: 'Cardiff',
     c: 'Edinburgh',
     d: 'Doncaster',
-    correct_answer: 'A',
+    correct_answer: 'a',
     a_response: '1',
     b_response: '0',
     c_response: '0',
@@ -119,10 +133,10 @@ export const liveQuizQuestions = [
     {
         question_id: 1,
         question: 'capital of England',
-        A: 'London',
-        B: 'Tokyo',
-        C: 'New York',
-        D: 'Paris'
+        a: 'London',
+        b: 'Tokyo',
+        c: 'New York',
+        d: 'Paris'
     }
 ];
 
@@ -131,14 +145,14 @@ export const nextQuestion = {
     nextQuestion: {
         question_id: 1,
         question: 'capital of England',
-        A: 'London',
-        B: 'Tokyo',
-        C: 'New York',
-        D: 'Paris'
+        a: 'London',
+        b: 'Tokyo',
+        c: 'New York',
+        d: 'Paris'
     }
 };
 
-export const getModuleData = {
+export const getModuleForLecturerData = {
     module: {
         module_id: 'TEST',
         name: 'test module',
@@ -168,11 +182,27 @@ export const getModuleData = {
         {
             quiz_id: 2,
             name: 'Week 2 Quiz',
-            num_questions: '2',
+            num_questions: '3',
             num_entries: '1',
             is_presented: false
         }
     ]
+};
+
+export const getModuleForStudentData = {
+
+    module_id: 'TEST',
+    name: 'test module',
+    medals: {
+        medal_name: ["bronze", "silver", "gold"],
+        condition: [39, 69]
+    },
+    trophies_awarded: {
+        first_quiz: false,
+        high_score: false,
+        overall_average: false,
+        participation: false
+    }
 };
 
 export const getModuleMembers = [{

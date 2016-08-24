@@ -14,10 +14,10 @@ test('addNewModule creates the correct async action', (t) => {
     const { dispatch, queue } = createThunk();
 
     let module = Object.assign({}, data.dashboardData[0], { medals: data.medals }, { trophies: data.trophies });
-    
+
     dispatch(actions.addNewModule(module));
 
-    [{...actual}] = queue;
+    [{ ...actual }] = queue;
 
     const expected = {
         type: actions.ADD_NEW_MODULE_REQUEST,

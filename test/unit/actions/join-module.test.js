@@ -40,7 +40,7 @@ test('joinModuleRequest creates the correct action', (t) => {
 
     const expected = {
         type: actions.JOIN_MODULE_REQUEST
-    }
+    };
 
     const actual = deepFreeze(actions.joinModuleRequest());
     t.deepEqual(actual, expected);
@@ -50,7 +50,7 @@ test('joinModuleSuccess creates the correct action', (t) => {
     t.plan(1);
     const expected = {
         type: actions.JOIN_MODULE_SUCCESS,
-    }
+    };
 
     const actual = deepFreeze(actions.joinModuleSuccess());
     t.deepEqual(actual, expected);

@@ -5,7 +5,10 @@ const initialState = {
     name: undefined,
     questions: [],
     isSavingQuiz: false,
-    error: undefined
+    isUpdatingQuiz: false,
+    isFetchingQuizDetails: false,
+    error: undefined,
+    deletedQuestions: []
 };
 
 export default function (state = initialState, action) {
@@ -14,6 +17,12 @@ export default function (state = initialState, action) {
 
     case actionsTypes.ADD_QUESTION:
         return handleAddQuestion(state, action);
+
+    case actionsTypes.DELETE_QUESTION:
+        return update(state, {
+            questions: { $splice: [[action.index, 1]] },
+            deletedQuestions: { $push: [state.questions[action.index].question_id] }
+        });
 
     case actionsTypes.UPDATE_VALUE:
         return handleUpdateValue(state, action);
@@ -37,6 +46,40 @@ export default function (state = initialState, action) {
             error: { $set: action.error }
         });
 
+    case actionsTypes.UPDATE_QUIZ_REQUEST:
+        return update(state, {
+            isUpdatingQuiz: { $set: true }
+        });
+
+    case actionsTypes.UPDATE_QUIZ_SUCCESS:
+        return update(state, {
+            isUpdatingQuiz: { $set: false }
+        });
+
+    case actionsTypes.UPDATE_QUIZ_FAILURE:
+        return update(state, {
+            isUpdatingQuiz: { $set: false },
+            error: { $set: action.error }
+        });
+
+    case actionsTypes.GET_QUIZ_DETAILS_REQUEST:
+        return update(state, {
+            isFetchingQuizDetails: { $set: true }
+        });
+
+    case actionsTypes.GET_QUIZ_DETAILS_SUCCESS:
+        return update(state, {
+            isFetchingQuizDetails: { $set: false },
+            name: { $set: action.data.name },
+            questions: { $set: action.data.questions }
+        });
+
+    case actionsTypes.GET_QUIZ_DETAILS_FAILURE:
+        return update(state, {
+            isFetchingQuizDetails: { $set: false },
+            error: { $set: action.error }
+        });
+
     default:
         return state;
     }
@@ -46,10 +89,10 @@ export default function (state = initialState, action) {
 export const handleAddQuestion = (state, action) => { //eslint-disable-line no-unused-vars
     const newQuestions = {
         question: undefined,
-        A: undefined,
-        B: undefined,
-        C: undefined,
-        D: undefined,
+        a: undefined,
+        b: undefined,
+        c: undefined,
+        d: undefined,
         correct_answer: undefined
     };
     return update(state, {

@@ -32,13 +32,24 @@ export default function module (state = initialState, action ) {
         });
 
     case actionsTypes.GET_MODULE_SUCCESS:
-        return update(state, {
-            isFetchingModule: { $set: false },
-            module: { $set: action.data.module },
-            quizzes: { $set: action.data.quizzes }
-        });
 
-    case actionsTypes.GET_MODULE_FAILURE:
+        if (action.is_lecturer) {
+
+            return update(state, {
+                isFetchingModule: { $set: false },
+                module: { $set: action.data.module },
+                quizzes: { $set: action.data.quizzes }
+            });
+        }
+        if (action.is_lecturer == false) {
+
+            return update(state, {
+                isFetchingModule: { $set: false },
+                module: { $set: action.data }
+            });
+        }
+
+    case actionsTypes.GET_MODULE_FAILURE: //eslint-disable-line no-fallthrough
         return update(state, {
             isFetchingModule: { $set: false },
             error: { $set: action.error }

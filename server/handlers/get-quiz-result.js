@@ -1,5 +1,6 @@
 var client = require('../lib/dbClient');
 var getQuizResult = require('../lib/getQuizResult');
+var getNewTrophyState = require('../lib/getNewTrophyState'); //eslint-disable-line no-unused-vars
 
 module.exports = {
     method: 'GET',

@@ -1,5 +1,5 @@
 import test from 'tape';
-import { server, testClient } from '../../utils/init';
+import { server } from '../../utils/init';
 
 
 test('`join-module` endpoint returns error if user_id is undefined', (t) => {
@@ -26,7 +26,8 @@ test('`join-module` endpoint works', (t) => {
 
     t.plan(1);
 
-    server.inject('/join-module?module_id=SOH1&user_id=1', (response) => {
+    server.inject('/join-module?module_id=PSY1&user_id=1', (response) => {
+
         t.equal(response.statusCode, 200, '200 status code');
     });
 });

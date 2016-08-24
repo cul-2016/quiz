@@ -1,3 +1,6 @@
+require('babel-register')({
+    presets: ['es2015']
+});
 var Hapi = require('hapi');
 var plugins = require('./plugins');
 var routes = require('./routes');

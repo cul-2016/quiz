@@ -33,6 +33,13 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id }) => {
                         </span>
                     </Link>
                 </td>
+                <td>
+                <Link to={`${module_id}/${quiz.quiz_id}/edit-quiz`}>
+                    <span className={ buttonClass }>
+                        Edit Quiz
+                    </span>
+                </Link>
+                </td>
             </tr>
         );
     });
@@ -64,6 +71,11 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id }) => {
                         Invite students to quiz
                     </button>
                 </Link>
+                <Link to={`${module_id}/${quiz.quiz_id}/edit-quiz`}>
+                    <span className={ buttonClass }>
+                        Edit Quiz
+                    </span>
+                </Link>
             </div>
         );
     });
@@ -79,6 +91,7 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id }) => {
                         <th># entries</th>
                         <th>Presented?</th>
                         <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tfoot>
@@ -87,6 +100,7 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id }) => {
                         <th># questions</th>
                         <th># entries</th>
                         <th>Presented?</th>
+                        <th></th>
                         <th></th>
                     </tr>
                 </tfoot>

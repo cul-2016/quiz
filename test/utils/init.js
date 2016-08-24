@@ -18,8 +18,9 @@ testClient.connect((error, client, done) => {
             process.exit(1);
         }
     }
-    console.info('test client is connected');
+    console.info('test client is connected'); //eslint-disable-line no-console
     var schema = fs.readFileSync(__dirname + '/test-schema.txt', 'utf8');
+
     client.query(schema, (error) => {
         if (error) {
             console.error('Problem with parsing the test database schema', error);
