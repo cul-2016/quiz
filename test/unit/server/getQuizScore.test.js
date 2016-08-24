@@ -1,8 +1,8 @@
 import test from 'tape';
-import getQuizResult from '../../../server/lib/getQuizResult';
+import getQuizScore from '../../../server/lib/getQuizScore';
 import { testClient } from '../../utils/init';
 
-test('Gets a student\'s result for a quiz', (t) => {
+test('Gets a student\'s score for a quiz', (t) => {
 
     t.plan(1);
 
@@ -12,11 +12,11 @@ test('Gets a student\'s result for a quiz', (t) => {
         score: 2
     };
 
-    getQuizResult(testClient, user_id, quiz_id, (error, response) => {
+    getQuizScore(testClient, user_id, quiz_id, (error, response) => {
 
         if (error) {
             console.error(error);
         }
-        t.deepEqual(response, expected, 'returns the correct result');
+        t.deepEqual(response, expected, 'returns the correct score');
     });
 });
