@@ -74,7 +74,8 @@ CREATE TABLE IF NOT EXISTS responses (
     user_id INTEGER NOT NULL,
     quiz_id INTEGER NOT NULL,
     question_id INTEGER NOT NULL,
-    response CHAR(1) NOT NULL
+    response CHAR(1) NOT NULL,
+    PRIMARY KEY (user_id, quiz_id, question_id)
 );
 
 /* scores */
@@ -87,7 +88,12 @@ CREATE TABLE IF NOT EXISTS scores (
 /* module_members */
 CREATE TABLE IF NOT EXISTS module_members (
     module_id CHAR(4) NOT NULL,
-    user_id INTEGER NOT NULL
+    user_id INTEGER NOT NULL,
+    first_quiz BOOLEAN NOT NULL DEFAULT false,
+    high_score BOOLEAN NOT NULL DEFAULT false,
+    overall_average BOOLEAN NOT NULL DEFAULT false,
+    participation BOOLEAN NOT NULL DEFAULT false,
+    PRIMARY KEY (module_id, user_id)
 );
 
 
@@ -147,6 +153,7 @@ ALTER TABLE responses
     REFERENCES questions (question_id)
     ON DELETE CASCADE;
 
+
 /* scores */
 ALTER TABLE scores
     ADD CONSTRAINT scores_to_quizzes_fk
@@ -196,10 +203,11 @@ INSERT INTO medals (module_id, medal_name, condition)
 /********* insert trophies ********/
 
 INSERT INTO trophies (module_id, trophy_name, condition)
-    VALUES ('TEST', 'participation', 3),
+    VALUES ('TEST', 'first_quiz', 1),
+           ('TEST', 'high_score', 100),
            ('TEST', 'overall_average', 70),
-           ('TEST', 'full_marks', 100),
-           ('TEST', 'first_quiz', 1);
+           ('TEST', 'participation', 3);
+
 
 
 /********* insert quizzes ********/

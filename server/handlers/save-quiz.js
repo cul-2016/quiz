@@ -10,12 +10,13 @@ module.exports = {
         var quizName = request.payload.quizName;
         var questions = request.payload.questions;
 
+
         saveQuiz(client, module_id, quizName, (error, quiz_id) => {
+
 
             if (error) {
                 return reply(error);
             }
-
             var mappedQuestions = questions.map((question) => {
                 question.quiz_id = quiz_id;
                 return question;

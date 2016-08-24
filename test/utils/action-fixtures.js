@@ -16,3 +16,4 @@ export const removeModuleMemberError = new Error('Failed to remove user from the
 export const getQuizResultError = new Error('Failed to get quiz result');
 export const getQuizMembersError = new Error('Failed to get members for the given quiz');
 export const editScoreError = new Error('Failed to edit the score');
+export const getQuizDetailsData = new Error('Failed to get quiz details');

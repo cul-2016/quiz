@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react';
-import { Link, hashHistory } from 'react-router';
+import { Link } from 'react-router';
 import classnames from 'classnames';
 
 
 const Tabs = ({ location }) => {
-    console.log(location, hashHistory);
+
     let feedbackClasses = classnames("tabs", {
         "is-active": location.pathname.indexOf("feedback") > -1
     });
