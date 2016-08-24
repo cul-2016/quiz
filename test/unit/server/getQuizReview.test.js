@@ -25,7 +25,7 @@ test('Gets list of questions for a quiz review', (t) => {
         c: 'Edinburgh',
         d: 'Doncaster',
         correct_answer: 'a',
-        a_response: '1',
+        a_response: '0',
         b_response: '0',
         c_response: '0',
         d_response: '0' }];
@@ -35,6 +35,6 @@ test('Gets list of questions for a quiz review', (t) => {
         if (error) {
             console.error(error);
         }
-        t.deepEquals(response, expectedRows, 'database returns correct row of questions');
+        t.deepEqual(response, expectedRows, 'database returns the review');
     });
 });

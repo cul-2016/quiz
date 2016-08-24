@@ -10,8 +10,13 @@ const StudentModule = ({ location, children, username,
                         quiz_id, question, response }) => { //eslint-disable-line no-unused-vars
 
 
-    let buttonClasses = classnames("section has-text-centered animated-infinite pulse", {
-        "display-none": !isQuizOpen
+    let buttonAreaClasses = classnames("section has-text-centered", {
+        "animated-infinite pulse": isQuizOpen
+    });
+
+    let buttonClasses = classnames("button is-medium", {
+        "is-warning": isQuizOpen,
+        "is-disabled": !isQuizOpen
     });
 
     let url = location.pathname.split('/');
@@ -26,9 +31,9 @@ const StudentModule = ({ location, children, username,
             !isFetchingModule &&
             <div>
                 <Nav username={ username } />
-                <div className={ buttonClasses }>
+                <div className={ buttonAreaClasses }>
                     <Link to={ livePath }>
-                        <button className="button is-success is-medium">
+                        <button className={ buttonClasses }>
                             JOIN THE LIVE QUIZ!
                         </button>
                     </Link>

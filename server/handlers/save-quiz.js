@@ -10,10 +10,10 @@ module.exports = {
         var quizName = request.payload.quizName;
         var questions = request.payload.questions;
 
-        console.log(module_id, quizName, questions,'>>>>');
+
         saveQuiz(client, module_id, quizName, (error, quiz_id) => {
 
-            console.log(error, quiz_id,'<<<');
+
             if (error) {
                 return reply(error);
             }

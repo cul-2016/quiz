@@ -1,7 +1,7 @@
 import test from 'tape';
 import * as actions from '../../../src/js/actions/new-quiz';
 import createThunk from '../../utils/mockThunk';
-import { dashboardData as data, getQuizDetailsData } from '../../utils/data-fixtures';
+import { getQuizDetailsData } from '../../utils/data-fixtures';
 import { questions } from '../../utils/data-fixtures';
 import deepFreeze from '../../utils/deepFreeze';
 import { saveQuizError as error, getQuizDetailsError } from '../../utils/action-fixtures';
@@ -130,7 +130,7 @@ test('updateQuiz async action creator returns expected action', (t) => {
 
     t.plan(1);
     let module_id = 'TEST';
-    let quiz_id = 1
+    let quiz_id = 1;
     let quizName = 'week 1';
     let actual;
     const { dispatch, queue } = createThunk();

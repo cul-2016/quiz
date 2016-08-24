@@ -18,22 +18,22 @@ module.exports = {
 
 
         // update quiz name
-        updateQuiz(client, quiz_id, module_id, quizName, (error, quizResponse) => {
+        updateQuiz(client, quiz_id, module_id, quizName, (error, quizResponse) => { //eslint-disable-line
 
             if (error) {
                 return reply(error);
             }
-            updateQuestions(client, editedQuestions, (error, updateQuestionsResponse) => {
+            updateQuestions(client, editedQuestions, (error, updateQuestionsResponse) => { //eslint-disable-line
 
                 if (error) {
                     return reply(error);
                 } else if (newQuestions.length !== 0) {
-                    saveQuestions(client, newQuestions, (error, newQuizResponse) => {
+                    saveQuestions(client, newQuestions, (error, newQuizResponse) => { //eslint-disable-line
 
                         if (error) {
                             return reply(error);
                         } else if (deletedQuestions.length !== 0) {
-                            deleteQuestions(client, deletedQuestions, (error, deleteQuestionsResponse) => {
+                            deleteQuestions(client, deletedQuestions, (error, deleteQuestionsResponse) => { //eslint-disable-line
 
                                 if (error) {
                                     return reply(error);
@@ -46,7 +46,7 @@ module.exports = {
                     });
                 } else {
                     if (deletedQuestions.length !== 0) {
-                        deleteQuestions(client, deletedQuestions, (error, deleteQuestionsResponse) => {
+                        deleteQuestions(client, deletedQuestions, (error, deleteQuestionsResponse) => { //eslint-disable-line
                             if (error) {
                                 return reply(error);
                             }

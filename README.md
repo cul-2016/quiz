@@ -3,7 +3,7 @@
 
 ## Getting up and running
 
-####This project uses Node version 4.4.7
+####This project uses Node version 4.4.7 and PostgreSQL version 9.5.x
 
 #### Database
 
@@ -54,6 +54,14 @@ Don't need the tape and test file paths as the script for coverage will do so.
 Also added this following option to the the `istanbul.yml` file to cover both root folders:
 ```
 root: [ ./src, ./server ]
+```
+
+##### Circle CI
+The Circle CI build environment must be set to Ubuntu 14.04 (Trusty) or higher, in order for Circle CI to run the tests using a PostgreSQL 9.5.x version.
+
+To configure, on Circle CI go to:
+```
+Builds > Settings > Build Environment
 ```
 
 ## General information

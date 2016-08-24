@@ -32,20 +32,36 @@ test('getModuleRequest creates the correct action', (t) => {
 
     const expected = {
         type: actions.GET_MODULE_REQUEST
-    }
-
+    };
     const actual = deepFreeze(actions.getModuleRequest());
     t.deepEqual(actual, expected);
 });
 
-test('getModuleSuccess creates the correct action', (t) => {
+test('getModuleSuccess creates the correct action for a lecturer', (t) => {
+
     t.plan(1);
+    const is_lecturer = true;
+
     const expected = {
         type: actions.GET_MODULE_SUCCESS,
+        is_lecturer,
         data
-    }
+    };
+    const actual = deepFreeze(actions.getModuleSuccess(is_lecturer, data));
+    t.deepEqual(actual, expected);
+});
 
-    const actual = deepFreeze(actions.getModuleSuccess(data));
+test('getModuleSuccess creates the correct action for a student', (t) => {
+
+    t.plan(1);
+    const is_lecturer = false;
+
+    const expected = {
+        type: actions.GET_MODULE_SUCCESS,
+        is_lecturer,
+        data
+    };
+    const actual = deepFreeze(actions.getModuleSuccess(is_lecturer, data));
     t.deepEqual(actual, expected);
 });
 
@@ -57,7 +73,6 @@ test('getModuleFailure creates the correct action', (t) => {
         type: actions.GET_MODULE_FAILURE,
         error
     };
-
     const actual = deepFreeze(actions.getModuleFailure(error));
     t.deepEqual(actual, expected);
 });
@@ -88,7 +103,7 @@ test('getModuleMembersRequest creates the correct action', (t) => {
 
     const expected = {
         type: actions.GET_MODULE_MEMBERS_REQUEST
-    }
+    };
 
     const actual = deepFreeze(actions.getModuleMembersRequest());
     t.deepEqual(actual, expected);
@@ -99,7 +114,7 @@ test('getModuleMembersSuccess creates the correct action', (t) => {
     const expected = {
         type: actions.GET_MODULE_MEMBERS_SUCCESS,
         data: getModuleMembers
-    }
+    };
 
     const actual = deepFreeze(actions.getModuleMembersSuccess(getModuleMembers));
     t.deepEqual(actual, expected);
@@ -118,9 +133,6 @@ test('getModuleMembersFailure creates the correct action', (t) => {
     t.deepEqual(actual, expected);
 });
 
-//
-//
-//
 
 
 test('openQuiz creates the correct action', (t) => {
@@ -170,7 +182,7 @@ test('removeModuleMemberRequest creates the correct action', (t) => {
 
     const expected = {
         type: actions.REMOVE_MODULE_MEMBER_REQUEST
-    }
+    };
 
     const actual = deepFreeze(actions.removeModuleMemberRequest());
     t.deepEqual(actual, expected);
@@ -180,7 +192,7 @@ test('removeModuleMemberSuccess creates the correct action', (t) => {
     t.plan(1);
     const expected = {
         type: actions.REMOVE_MODULE_MEMBER_SUCCESS,
-    }
+    };
 
     const actual = deepFreeze(actions.removeModuleMemberSuccess());
     t.deepEqual(actual, expected);
