@@ -5,13 +5,13 @@ export const GET_QUIZ_RESULT_SUCCESS = 'GET_QUIZ_RESULT_SUCCESS';
 export const GET_QUIZ_RESULT_FAILURE = 'GET_QUIZ_RESULT_FAILURE';
 
 
-export function getQuizResult (user_id, quiz_id) {
+export function getQuizResult (user_id, module_id, quiz_id) {
 
     return (dispatch) => {
 
         dispatch(getQuizResultRequest());
 
-        axios.get(`/get-quiz-result?user_id=${user_id}&quiz_id=${quiz_id}`)
+        axios.get(`/get-quiz-result?user_id=${user_id}&module_id=${module_id}&quiz_id=${quiz_id}`)
             .then((response) => {
                 dispatch(getQuizResultSuccess(response.data));
             })

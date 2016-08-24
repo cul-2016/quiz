@@ -123,8 +123,9 @@ export function fetchResult (nextState, replace, callback) {
 
     if (validCookieExists()) {
         const user_id = store.getState().user.user_id;
+        const module_id = nextState.params.module_id;
         const quiz_id = nextState.params.quiz_id;
-        store.dispatch(getQuizResult(user_id, quiz_id));
+        store.dispatch(getQuizResult(user_id, module_id, quiz_id));
     }
     callback();
 }
