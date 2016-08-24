@@ -16,7 +16,7 @@ module.exports = {
             if (error) {
                 return reply(error);
             }
-            getNewTrophyState(client, user_id, module_id, quiz_id, score, (error, newTrophyState) => {
+            getNewTrophyState(client, user_id, module_id, quiz_id, score.percentage, (error, newTrophyState) => {
 
                 var verdict = error || newTrophyState;
                 reply(verdict);
