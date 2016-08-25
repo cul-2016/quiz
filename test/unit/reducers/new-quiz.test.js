@@ -1,7 +1,9 @@
 import test from 'tape';
 import { newQuiz as newQuizState } from '../../utils/reducer-fixtures';
-import { newQuizWithQuestion as newQuizStateWithQuestion } from '../../utils/reducer-fixtures';
-import { saveQuizError as error } from '../../utils/action-fixtures';
+import { newQuizWithQuestion as newQuizStateWithQuestion, editQuizWithQuestion as editQuizWithQuestionState } from '../../utils/reducer-fixtures';
+import { getQuizDetailsData } from '../../utils/data-fixtures';
+
+import { saveQuizError as error, getQuizDetailsError } from '../../utils/action-fixtures';
 import reducer from '../../../src/js/reducers/new-quiz';
 import deepFreeze from '../../utils/deepFreeze';
 
@@ -18,15 +20,30 @@ test('ADD_QUESTION works', (t) => {
         {
             questions: [{
                 question: undefined,
-                A: undefined,
-                B: undefined,
-                C: undefined,
-                D: undefined,
+                a: undefined,
+                b: undefined,
+                c: undefined,
+                d: undefined,
                 correct_answer: undefined
             }]
         }
     );
 
+    const result = reducer(initialState, action);
+    t.deepEqual(result, expected);
+});
+
+test('DELETE_QUESTION works', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(editQuizWithQuestionState);
+    const action = {
+        type: 'DELETE_QUESTION',
+        index: 0
+    };
+
+    const expected = Object.assign({}, newQuizState, { questions: [], deletedQuestions: [1] });
     const result = reducer(initialState, action);
     t.deepEqual(result, expected);
 });
@@ -49,10 +66,10 @@ test('UPDATE_VALUE works', (t) => {
         {
             questions: [{
                 question: 'capital of England?',
-                A: undefined,
-                B: undefined,
-                C: undefined,
-                D: undefined,
+                a: undefined,
+                b: undefined,
+                c: undefined,
+                d: undefined,
                 correct_answer: undefined
             }]
         }
@@ -121,6 +138,112 @@ test('SAVE_QUIZ_FAILURE works', (t) => {
         error
     };
     const expected = Object.assign({}, newQuizState, { isSavingQuiz: false, error: error });
+
+    const result = reducer(initialState, action);
+
+    t.deepEqual(result, expected);
+});
+
+
+// -----
+// UPDATE QUIZ
+// -----
+
+test('UPDATE_QUIZ_REQUEST works', (t) => {
+
+    t.plan(1);
+    const initialState = deepFreeze(newQuizState);
+    const action = {
+        type: 'UPDATE_QUIZ_REQUEST'
+    };
+    const expected = Object.assign({}, newQuizState, { isUpdatingQuiz: true });
+    const result = reducer(initialState, action);
+
+    t.deepEqual(result, expected);
+});
+
+test('UPDATE_QUIZ_SUCCESS works', (t) => {
+
+    t.plan(1);
+    const initialState = deepFreeze(newQuizState);
+    const data = true;
+    const action = {
+        type: 'UPDATE_QUIZ_SUCCESS',
+        data
+    };
+    const expected = Object.assign({}, newQuizState, { isUpdatingQuiz: false });
+
+    const result = reducer(initialState, action);
+
+    t.deepEqual(result, expected);
+});
+
+test('UPDATE_QUIZ_FAILURE works', (t) => {
+
+    t.plan(1);
+    const initialState = deepFreeze(newQuizState);
+    const action = {
+        type: 'UPDATE_QUIZ_FAILURE',
+        error
+    };
+    const expected = Object.assign({}, newQuizState, { isUpdatingQuiz: false, error: error });
+
+    const result = reducer(initialState, action);
+
+    t.deepEqual(result, expected);
+});
+
+// -----
+// GET QUIZ DETAILS QUIZ
+// -----
+
+test('GET_QUIZ_DETAILS_REQUEST works', (t) => {
+
+    t.plan(1);
+    const initialState = deepFreeze(newQuizState);
+    const action = {
+        type: 'GET_QUIZ_DETAILS_REQUEST'
+    };
+    const expected = Object.assign({}, newQuizState, { isFetchingQuizDetails: true });
+    const result = reducer(initialState, action);
+
+    t.deepEqual(result, expected);
+});
+
+test('GET_QUIZ_DETAILS_SUCCESS works', (t) => {
+
+    t.plan(1);
+    const initialState = deepFreeze(newQuizState);
+    const action = {
+        type: 'GET_QUIZ_DETAILS_SUCCESS',
+        data: getQuizDetailsData
+    };
+    const expected = Object.assign({}, newQuizState, { isFetchingQuizDetails: false }, {  name: 'Old Quiz',
+        questions: [
+            {
+                question: 'capital of England',
+                a: 'London',
+                b: 'Tokyo',
+                c: 'New York',
+                d: 'Paris',
+                correct_answer: 'a'
+            }
+        ] });
+
+    const result = reducer(initialState, action);
+
+    t.deepEqual(result, expected);
+});
+
+test('GET_QUIZ_DETAILS_FAILURE works', (t) => {
+
+    t.plan(1);
+    const initialState = deepFreeze(newQuizState);
+    const action = {
+        type: 'GET_QUIZ_DETAILS_FAILURE',
+        error: getQuizDetailsError
+    };
+    const expected = Object.assign({}, newQuizState, { isFetchingQuizDetails: false, error: getQuizDetailsError });
 
     const result = reducer(initialState, action);
 

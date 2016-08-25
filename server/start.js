@@ -7,11 +7,11 @@ var io = socket(server.listener);
 io.on('connection', (socket) => {
 
     io.emit('we have connected', socket.id);
-    console.log("CONNECTION!", socket.id);
+    console.log("CONNECTION!", socket.id); //eslint-disable-line no-console
 
     socket.on('disconnect', () => {
-        console.log('DISCONNECTED');
-        io.emit('disconnected', socket.id); // this event is sent back to client
+        console.log('DISCONNECTED'); //eslint-disable-line no-console
+        io.emit('disconnected', socket.id);
     });
 
     /****/
@@ -19,7 +19,7 @@ io.on('connection', (socket) => {
     socket.on('join_room', (room, cb) => {
 
         socket.join(room);
-        cb('Successfully joined room: ' + room);
+        cb('Successfully joined room: ' + room); //eslint-disable-line no-console
     });
 
     socket.on('send_quiz_invite', (quizInfo, cb) => {
@@ -28,7 +28,7 @@ io.on('connection', (socket) => {
         var quiz_id = quizInfo.quiz_id;
 
         // broadcast to whole room
-        console.log("still sending quiz invite");
+        console.log("still sending quiz invite"); //eslint-disable-line no-console
         socket.broadcast.to(room).emit('receive_quiz_invite', quiz_id);
         cb('STUDENTS INVITED TO QUIZ', room);
     });
@@ -37,9 +37,8 @@ io.on('connection', (socket) => {
 
         var room = data.room;
         var nextQuestion = data.questionObj;
-        console.log("EXISTS?", nextQuestion);
         socket.broadcast.to(room).emit('receive_next_question', nextQuestion);
-        console.log('NEXT QUESTION SENT', nextQuestion, room);
+        console.log('NEXT QUESTION SENT', nextQuestion, room); //eslint-disable-line no-console
         cb('Done');
     });
 
@@ -48,7 +47,7 @@ io.on('connection', (socket) => {
         var quiz_id = data.quiz_id;
         socket.broadcast.to(room).emit('receive_end_of_quiz', quiz_id);
 
-        console.log('end of quiz sent');
+        console.log('end of quiz sent'); //eslint-disable-line no-console
         cb('end of quiz sent');
     });
 });
@@ -58,5 +57,5 @@ server.start((error) => {
         console.error(error);
         throw new Error("Could not start server:", error);
     }
-    console.info('🌍 The server is running on: ', server.info.uri, server.info.protocol);
+    console.info('🌍 The server is running on: ', server.info.uri, server.info.protocol); //eslint-disable-line no-console
 });

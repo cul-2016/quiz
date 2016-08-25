@@ -1,6 +1,7 @@
 import update from 'react-addons-update';
 import * as actionsTypes from '../actions/live-quiz';
 
+
 const initialState = {
     error: undefined,
     isFetchingQuizQuestions: false,
@@ -24,10 +25,12 @@ export default function liveQuiz (state = initialState, action) {
         });
 
     case actionsTypes.GET_QUIZ_QUESTIONS_SUCCESS:
+
         return update(state, {
             isFetchingQuizQuestions: { $set: false },
             questions: { $set: action.questions }
         });
+
 
     case actionsTypes.GET_QUIZ_QUESTIONS_FAILURE:
         return update(state, {

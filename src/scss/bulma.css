@@ -5093,12 +5093,12 @@ a.box:active {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
-  display: flex;
+  display: inline-flex;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center;
-  padding: 10px;
+  padding: 15px;
 }
 
 .nav-item a {

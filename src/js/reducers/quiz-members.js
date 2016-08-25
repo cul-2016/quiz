@@ -46,7 +46,6 @@ export default function quizMembers (state = initialState, action) {
         });
 
     case actionsTypes.UPDATE_SCORE:
-        console.log('you are in score chage');
         return handleUpdateScore(state, action);
 
     default:

@@ -9,9 +9,9 @@ module.exports = {
         if (quiz_id !== undefined) {
 
             quiz_id = parseInt(quiz_id, 10);
-            getQuizQuestions(client, quiz_id, (error, module) => {
+            getQuizQuestions(client, quiz_id, (error, questions) => {
 
-                var verdict = error || module;
+                var verdict = error || questions;
                 reply(verdict);
             });
         } else {

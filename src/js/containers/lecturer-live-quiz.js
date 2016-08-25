@@ -51,7 +51,7 @@ const mapDispatchToProps = (dispatch) => ({
         };
         socketClient.emit('end_of_quiz', data, (msg) => {
 
-            console.log(msg);
+            console.log("END QUIZ", msg);
             clearInterval(intervalID);
             dispatch(endQuiz(quiz_id));
             hashHistory.push(`${module_id}/${quiz_id}/review`);

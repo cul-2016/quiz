@@ -37,108 +37,111 @@
         <type label="SET" length="1" sql="SET" quote=""/>
         <type label="Bit" length="0" sql="bit" quote=""/>
     </group>
-</datatypes><table x="1113" y="362" name="user_details">
-<row name="id" null="0" autoincrement="1">
+</datatypes><table x="626" y="454" name="users">
+<row name="user_id" null="0" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <row name="email" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
+<datatype>VARCHAR</datatype>
 <default>NULL</default></row>
 <row name="password" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
+<datatype>VARCHAR</datatype>
 <default>NULL</default></row>
-<row name="isLecturer" null="1" autoincrement="0">
+<row name="is_lecturer" null="1" autoincrement="0">
 <datatype>bit</datatype>
 <default>NULL</default></row>
+<row name="username" null="0" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>'NULL'</default></row>
 <key type="PRIMARY" name="">
-<part>id</part>
+<part>user_id</part>
 </key>
 </table>
-<table x="655" y="277" name="all_modules">
-<row name="all_modules_id" null="0" autoincrement="0">
+<table x="645" y="116" name="modules">
+<row name="module_id" null="0" autoincrement="0">
 <datatype>VARCHAR(4)</datatype>
 <default>'NULL'</default><comment>Unique 4 letter Code</comment>
 </row>
-<row name="id_user_details" null="0" autoincrement="0">
+<row name="user_id" null="0" autoincrement="0">
 <datatype>INTEGER</datatype>
-<default>NULL</default><relation table="user_details" row="id" />
+<default>NULL</default><relation table="users" row="user_id" />
 </row>
-<row name="title" null="1" autoincrement="0">
+<row name="name" null="1" autoincrement="0">
 <datatype>MEDIUMTEXT</datatype>
 <default>NULL</default></row>
 <key type="PRIMARY" name="">
-<part>all_modules_id</part>
+<part>module_id</part>
 </key>
 </table>
-<table x="763" y="495" name="module_members">
-<row name="user_modules_id" null="1" autoincrement="1">
+<table x="780" y="268" name="module_members">
+<row name="user_id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
-<default>NULL</default></row>
-<row name="all_modules_id" null="0" autoincrement="0">
+<default>NULL</default><relation table="users" row="user_id" />
+</row>
+<row name="module_id" null="0" autoincrement="0">
 <datatype>VARCHAR(4)</datatype>
-<default>'NULL'</default><relation table="all_modules" row="all_modules_id" />
+<default>'NULL'</default><relation table="modules" row="module_id" />
 <comment>Unique 4 letter Code</comment>
 </row>
-<row name="id_user_details" null="0" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default><relation table="user_details" row="id" />
-</row>
-<key type="PRIMARY" name="">
-</key>
-</table>
-<table x="874" y="32" name="medal">
-<row name="all_modules_id" null="0" autoincrement="0">
-<datatype>VARCHAR(4)</datatype>
-<default>'NULL'</default><relation table="all_modules" row="all_modules_id" />
-<comment>Unique 4 letter Code</comment>
-</row>
-<row name="bronze" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default></row>
-<row name="silver" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default></row>
-<row name="gold" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default></row>
-<row name="white" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
+<row name="first_quiz" null="0" autoincrement="0">
+<datatype>bit</datatype>
+<default>false</default></row>
+<row name="high_score" null="0" autoincrement="0">
+<datatype>bit</datatype>
+<default>false</default></row>
+<row name="overall_average" null="1" autoincrement="0">
+<datatype>bit</datatype>
+<default>false</default></row>
+<row name="participation" null="1" autoincrement="0">
+<datatype>bit</datatype>
 <default>NULL</default></row>
 <key type="PRIMARY" name="">
 </key>
 </table>
-<table x="550" y="30" name="all_quizzes">
-<row name="all_quizzes_id" null="1" autoincrement="1">
-<datatype>INTEGER</datatype>
-<default>NULL</default></row>
-<row name="all_modules_id" null="0" autoincrement="0">
+<table x="1001" y="40" name="medal">
+<row name="module_id" null="0" autoincrement="0">
 <datatype>VARCHAR(4)</datatype>
-<default>'NULL'</default><relation table="all_modules" row="all_modules_id" />
+<default>'NULL'</default><relation table="modules" row="module_id" />
 <comment>Unique 4 letter Code</comment>
 </row>
-<row name="title" null="1" autoincrement="0">
+<row name="medal_name" null="0" autoincrement="0">
+<datatype>VARCHAR</datatype>
+</row>
+<row name="condition" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+</key>
+</table>
+<table x="372" y="77" name="quizzes">
+<row name="quizzes_id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="module_id" null="0" autoincrement="0">
+<datatype>VARCHAR(4)</datatype>
+<default>'NULL'</default><relation table="modules" row="module_id" />
+<comment>Unique 4 letter Code</comment>
+</row>
+<row name="name" null="1" autoincrement="0">
 <datatype>MEDIUMTEXT</datatype>
 <default>NULL</default></row>
-<row name="presented" null="0" autoincrement="0">
+<row name="is_presented" null="0" autoincrement="0">
 <datatype>bit</datatype>
 <default>0</default></row>
 <key type="PRIMARY" name="">
-<part>all_quizzes_id</part>
+<part>quizzes_id</part>
 </key>
 </table>
-<table x="215" y="315" name="responses">
-<row name="id" null="1" autoincrement="1">
+<table x="175" y="383" name="responses">
+<row name="user_id" null="0" autoincrement="0">
 <datatype>INTEGER</datatype>
-<default>NULL</default></row>
-<row name="id_user_details" null="0" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default><relation table="user_details" row="id" />
+<default>NULL</default><relation table="users" row="user_id" />
 </row>
-<row name="all_quizzes_id_quiz" null="1" autoincrement="0">
+<row name="quiz_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
-<default>NULL</default><relation table="all_quizzes" row="all_quizzes_id" />
+<default>NULL</default><relation table="quizzes" row="quizzes_id" />
 </row>
-<row name="question_id_questions" null="1" autoincrement="0">
+<row name="question_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="questions" row="question_id" />
 </row>
@@ -146,30 +149,29 @@
 <datatype>CHAR</datatype>
 <default>NULL</default></row>
 <key type="PRIMARY" name="">
-<part>id</part>
 </key>
 </table>
-<table x="268" y="50" name="questions">
-<row name="question_id" null="1" autoincrement="1">
+<table x="176" y="75" name="questions">
+<row name="question_id" null="0" autoincrement="1">
 <datatype>INTEGER</datatype>
-<default>NULL</default></row>
-<row name="question" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default></row>
-<row name="all_quizzes_id" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default><relation table="all_quizzes" row="all_quizzes_id" />
 </row>
-<row name="A" null="1" autoincrement="0">
+<row name="question" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+</row>
+<row name="quiz_id" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<relation table="quizzes" row="quizzes_id" />
+</row>
+<row name="a" null="1" autoincrement="0">
 <datatype>CHAR</datatype>
 <default>NULL</default></row>
-<row name="B" null="1" autoincrement="0">
+<row name="b" null="1" autoincrement="0">
 <datatype>CHAR</datatype>
 <default>NULL</default></row>
-<row name="C" null="1" autoincrement="0">
+<row name="c" null="1" autoincrement="0">
 <datatype>CHAR</datatype>
 <default>NULL</default></row>
-<row name="D" null="1" autoincrement="0">
+<row name="d" null="1" autoincrement="0">
 <datatype>CHAR</datatype>
 <default>NULL</default></row>
 <row name="correct_answer" null="0" autoincrement="0">
@@ -179,29 +181,25 @@
 <part>question_id</part>
 </key>
 </table>
-<table x="237" y="503" name="all_user_score">
-<row name="user_score_id" null="1" autoincrement="1">
+<table x="373" y="406" name="scores">
+<row name="user_id" null="0" autoincrement="0">
 <datatype>INTEGER</datatype>
-<default>NULL</default></row>
-<row name="id_user_details" null="0" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default><relation table="user_details" row="id" />
+<default>NULL</default><relation table="users" row="user_id" />
 </row>
-<row name="all_quizzes_id_quiz" null="1" autoincrement="0">
+<row name="quiz_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
-<default>NULL</default><relation table="all_quizzes" row="all_quizzes_id" />
+<default>NULL</default><relation table="quizzes" row="quizzes_id" />
 </row>
 <row name="score" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <key type="PRIMARY" name="">
-<part>user_score_id</part>
 </key>
 </table>
 <table x="1000" y="144" name="trophies">
-<row name="all_modules_id_all_modules" null="0" autoincrement="0">
+<row name="module_id" null="0" autoincrement="0">
 <datatype>VARCHAR(4)</datatype>
-<default>'NULL'</default><relation table="all_modules" row="all_modules_id" />
+<default>'NULL'</default><relation table="modules" row="module_id" />
 <comment>Unique 4 letter Code</comment>
 </row>
 <row name="trophy name" null="0" autoincrement="0">

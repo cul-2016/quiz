@@ -1,4 +1,5 @@
 var query = require('./query');
+var queries = require('./queries.json');
 
 /**
  * Represents a function that saves the students response into response table
@@ -12,10 +13,9 @@ var query = require('./query');
 
 function saveStudentResponse (client, user_id, quiz_id, question_id, response, callback) {
 
-    var queryText = 'INSERT INTO responses (user_id, quiz_id, question_id, response) VALUES ($1, $2, $3, $4);';
     var value = [user_id, quiz_id, question_id, response];
 
-    query(client, queryText, value, (error, response) => {
+    query(client, queries.saveStudentResponse, value, (error, response) => {
 
         if (error) {
             return callback(error);

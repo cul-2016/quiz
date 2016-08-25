@@ -32,15 +32,14 @@ export const closeQuiz = () => ({
 // GET MODULE actions
 //
 
-export const getModule = (module_id) => {
+export const getModule = (module_id, is_lecturer, user_id) => {
     return (dispatch) => {
 
         dispatch(getModuleRequest());
 
-        axios.get(`get-module?module_id=${module_id}`)
+        axios.get(`get-module?module_id=${module_id}&is_lecturer=${is_lecturer}&${user_id}`)
             .then((response) => {
-
-                dispatch(getModuleSuccess(response.data));
+                dispatch(getModuleSuccess(is_lecturer, response.data));
             }, (error) => {
                 console.error(error, 'error from server');
             })
@@ -54,8 +53,9 @@ export const getModuleRequest = () => ({
     type: GET_MODULE_REQUEST
 });
 
-export const getModuleSuccess = (data) => ({
+export const getModuleSuccess = (is_lecturer, data) => ({
     type: GET_MODULE_SUCCESS,
+    is_lecturer,
     data
 });
 

@@ -1,29 +1,40 @@
 import test from 'tape';
+import query from '../../../server/lib/query';
 import { testClient } from '../../utils/init';
 import joinModule from '../../../server/lib/joinModule';
 
-test('adding the user to a given module via module_members table', (t) => {
+test('`joinModule` adds a student to a module', (t) => {
 
     t.plan(2);
-    const expectedError = null;
+
     const expectedCommand = 'INSERT';
     const module_id = 'TEST';
-    const user_id = 2;
+    const user_id = 3;
+
     joinModule(testClient, module_id, user_id, (error, response) => {
-        t.equal(error, expectedError, 'error is null, user joins the module correctly');
+        t.equal(error, null, 'error is null, student joins the module correctly');
         t.deepEqual(response.command, expectedCommand, 'Correct command of INSERT, user is added to module_members correctly');
     });
 });
 
-test('deleting the member from module_members', (t) => {
+test('`joinModule` does not add duplicate students to a module', (t) => {
 
-    testClient.connect((error, client, done) => {
+    t.plan(1);
+
+    const module_id = 'TEST';
+    const user_id = 3;
+
+    joinModule(testClient, module_id, user_id, (error) => {
 
         if (error) {
-            console.error(error, 'error from deleting module from the database');
+            console.error(error);
         }
-        client.query('DELETE FROM module_members WHERE user_id = $1', [2]);
-        done();
-        t.end();
+
+        let queryText = "SELECT (module_id, user_id) FROM module_members WHERE module_id = ($1) AND user_id = ($2);";
+
+        query(testClient, queryText, [module_id, user_id], (error, response) => {
+
+            t.equal(response.rowCount, 1, 'Duplicate values not inserted');
+        });
     });
 });

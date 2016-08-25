@@ -11,7 +11,7 @@ db_pool.connect((error, client, done) => {
 
     fs.readFile(__dirname + '/schema.txt', 'utf8', (error, schema) => {
 
-        client.query(schema, (error, result) => {
+        client.query(schema, (error, result) => { //eslint-disable-line no-unused-vars
             if (error) {
                 console.error(error);
             }
