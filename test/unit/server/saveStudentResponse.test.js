@@ -8,9 +8,9 @@ test('saving student response works', (t) => {
     const expectedError = null;
     const expectedCommand = 'INSERT';
     const user_id = 1;
-    const quiz_id = 2;
+    const quiz_id = 1;
     const question_id = 1;
-    const response = 'a';
+    const response = 'c';
 
     saveStudentResponse(testClient, user_id, quiz_id, question_id, response, (error, response) => {
         t.equal(error, expectedError, 'error is null, response is saved to db correctly.');
