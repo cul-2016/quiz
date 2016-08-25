@@ -12,7 +12,7 @@ var organiseModuleData = require('./organiseModuleData');
 
 function getModuleForStudent (client, module_id, user_id, callback) {
 
-    query(client, queries.getModuleForStudent.main, [module_id], (error, main) => {
+    query(client, queries.getModuleForStudent.main, [module_id, user_id], (error, main) => {
 
         if (error) {
             console.error(error);

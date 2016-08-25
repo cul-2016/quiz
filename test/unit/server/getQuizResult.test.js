@@ -8,9 +8,7 @@ test('Gets a student\'s result for a quiz', (t) => {
 
     const user_id = 1;
     const quiz_id = 2;
-    const expected = {
-        score: 2
-    };
+    const expected = { score: 1 };
 
     getQuizResult(testClient, user_id, quiz_id, (error, response) => {
 

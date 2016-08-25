@@ -11,6 +11,7 @@ import liveQuiz from './live-quiz';
 import review from './review';
 import result from './result';
 import quizMembers from './quiz-members';
+import leaderboard from './leaderboard';
 
 const appReducer = combineReducers({
     user,
@@ -24,7 +25,8 @@ const appReducer = combineReducers({
     liveQuiz,
     review,
     result,
-    quizMembers
+    quizMembers,
+    leaderboard
 });
 
 const rootReducer = (state, action) => {
