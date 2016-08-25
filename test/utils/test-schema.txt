@@ -222,7 +222,7 @@ INSERT INTO quizzes (module_id, name)
 
 /********* insert questions ********/
 
-INSERT INTO questions (quiz_id, question, A, B, C, D, correct_answer)
+INSERT INTO questions (quiz_id, question, a, b, c, d, correct_answer)
     VALUES (1, 'What is the capital of England?', 'London', 'Cardiff', 'Edinburgh', 'Doncaster', 'a'),
            (1, 'What is the capital of Croatia?', 'Zagreb', 'Cardiff', 'Edinburgh', 'Doncaster', 'a'),
            (2, 'What is the National Animal of England?', 'Pikachu', 'Whale', 'Lion', 'Doncaster', 'c'),
