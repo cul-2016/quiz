@@ -33,13 +33,6 @@ test('Gets the module for a given student', (t) => {
                 num_entries: '3',
                 num_questions: '2',
                 quiz_id: 2
-            },
-            {
-                is_presented: false,
-                name: 'Test Quiz',
-                num_entries: null,
-                num_questions: '1',
-                quiz_id: 3
             }
         ]
     };
