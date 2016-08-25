@@ -20,7 +20,6 @@ import ModuleMembersContainer from './containers/module-members';
 import QuizMembersContainer from './containers/quiz-members';
 import EditScoreContainer from './containers/edit-score';
 
-
 import StudentJoinModuleContainer from './containers/student/join-module';
 import StudentModuleContainer from './containers/student/module';
 import StudentHistory from './components/student-module/history';

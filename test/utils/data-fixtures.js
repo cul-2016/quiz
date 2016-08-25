@@ -169,21 +169,21 @@ export const getModuleForLecturerData = {
             ],
             condition: [1, 100, 70, 3]
         },
-        num_enrolled: 1
+        num_enrolled: 3
     },
     quizzes: [
         {
             quiz_id: 1,
             name: 'Week 1 Quiz',
             num_questions: '2',
-            num_entries: '1',
+            num_entries: '3',
             is_presented: false
         },
         {
             quiz_id: 2,
             name: 'Week 2 Quiz',
             num_questions: '3',
-            num_entries: '1',
+            num_entries: '3',
             is_presented: false
         }
     ]

@@ -2,15 +2,15 @@ import test from 'tape';
 import getQuizScore from '../../../server/lib/getQuizScore';
 import { testClient } from '../../utils/init';
 
-test('Gets a student\'s score for a quiz', (t) => {
+test("Gets a student's score for a quiz", (t) => {
 
     t.plan(1);
 
     const user_id = 1;
     const quiz_id = 2;
     const expected = {
-        raw: 2,
-        percentage: 100
+        raw: 1,
+        percentage: 50
     };
 
     getQuizScore(testClient, user_id, quiz_id, (error, response) => {
