@@ -33,7 +33,7 @@ test('`save-student-response` endpoint works again', (t) => {
             user_id: 1,
             quiz_id: 1,
             question_id: 5,
-            response: 'B'
+            response: 'b'
         }
     };
 
