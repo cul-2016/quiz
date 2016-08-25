@@ -19,20 +19,20 @@ const Questions = ({ questions, handleInputChange }) => {
 
 
                 <label className="label"> A </label>
-                <input className="input column is-9" type="text" defaultValue={ question.A } onChange={ (e) => handleInputChange('A', e.target.value, i) } placeholder='A' ></input>
-                <span><input className="radio column is-1 radio-button" type="radio" name={ i } value="A" onClick={ (e) => handleInputChange('correct_answer', e.target.value, i) } /></span>
+                <input className="input column is-9" type="text" defaultValue={ question.A } onChange={ (e) => handleInputChange('a', e.target.value, i) } placeholder='a' ></input>
+                <span><input className="radio column is-1 radio-button" type="radio" name={ i } value="a" onClick={ (e) => handleInputChange('correct_answer', e.target.value, i) } /></span>
 
                 <label className="label"> B </label>
-                <input className="input column is-9" type="text" defaultValue={ question.B } onChange={ (e) => handleInputChange('B', e.target.value, i) }  placeholder='B' ></input>
-                <span><input className="radio column is-1 radio-button" type="radio" name={ i } value="B" onClick={ (e) => handleInputChange('correct_answer', e.target.value, i) } /></span>
+                <input className="input column is-9" type="text" defaultValue={ question.B } onChange={ (e) => handleInputChange('b', e.target.value, i) }  placeholder='b' ></input>
+                <span><input className="radio column is-1 radio-button" type="radio" name={ i } value="b" onClick={ (e) => handleInputChange('correct_answer', e.target.value, i) } /></span>
 
                 <label className="label"> C </label>
-                <input className="input column is-9" type="text" defaultValue={ question.C } onChange={ (e) => handleInputChange('C', e.target.value, i) }  placeholder='C' ></input>
-                <span><input className="radio column is-1 radio-button" type="radio" name={ i } value="C" onClick={ (e) => handleInputChange('correct_answer', e.target.value, i) } /></span>
+                <input className="input column is-9" type="text" defaultValue={ question.C } onChange={ (e) => handleInputChange('c', e.target.value, i) }  placeholder='c' ></input>
+                <span><input className="radio column is-1 radio-button" type="radio" name={ i } value="c" onClick={ (e) => handleInputChange('correct_answer', e.target.value, i) } /></span>
 
                 <label className="label"> D </label>
-                <input className="input column is-9" type="text" defaultValue={ question.D } onChange={ (e) => handleInputChange('D', e.target.value, i) }  placeholder='D' ></input>
-                <span><input className="radio column is-1 radio-button" type="radio" name={ i } value="D" onClick={ (e) => handleInputChange('correct_answer', e.target.value, i) } /></span>
+                <input className="input column is-9" type="text" defaultValue={ question.D } onChange={ (e) => handleInputChange('d', e.target.value, i) }  placeholder='d' ></input>
+                <span><input className="radio column is-1 radio-button" type="radio" name={ i } value="d" onClick={ (e) => handleInputChange('correct_answer', e.target.value, i) } /></span>
 
 
             </div>

@@ -93,7 +93,10 @@ export const newQuiz = {
     name: undefined,
     questions: [],
     isSavingQuiz: false,
-    error: undefined
+    isUpdatingQuiz: false,
+    isFetchingQuizDetails: false,
+    error: undefined,
+    deletedQuestions: []
 };
 
 export const joinModule = {
@@ -106,14 +109,36 @@ export const newQuizWithQuestion = {
     name: undefined,
     questions: [{
         question: undefined,
-        A: undefined,
-        B: undefined,
-        C: undefined,
-        D: undefined,
+        a: undefined,
+        b: undefined,
+        c: undefined,
+        d: undefined,
         correct_answer: undefined
     }],
     isSavingQuiz: false,
-    error: undefined
+    isUpdatingQuiz: false,
+    isFetchingQuizDetails: false,
+    error: undefined,
+    deletedQuestions: []
+};
+
+export const editQuizWithQuestion = {
+    name: undefined,
+    questions: [{
+        quiz_id: 1,
+        question_id: 1,
+        question: 'test questions',
+        a: 'a',
+        b: 'b',
+        c: 'c',
+        d: 'd',
+        correct_answer: 'a'
+    }],
+    isSavingQuiz: false,
+    isUpdatingQuiz: false,
+    isFetchingQuizDetails: false,
+    error: undefined,
+    deletedQuestions: []
 };
 
 export const result = {

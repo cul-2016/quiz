@@ -11,8 +11,8 @@ test('`save-student-response` endpoint works', (t) => {
         payload: {
             user_id: 1,
             quiz_id: 1,
-            question_id: 5,
-            response: 'A'
+            question_id: 1,
+            response: 'a'
         }
     };
 

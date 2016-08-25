@@ -7,6 +7,7 @@ import { getUserDetails } from '../actions/user';
 import { getQuizReview } from '../actions/review';
 import { getQuizResult } from '../actions/result';
 import { getQuizMembers } from '../actions/quiz-members';
+import { getQuizDetails } from '../actions/new-quiz';
 import getUserID from './getUserID';
 
 
@@ -144,6 +145,25 @@ export function fetchQuizMembers (nextState, replace, callback) {
     if (validCookieExists()) {
         const quiz_id = nextState.params.quiz_id;
         store.dispatch(getQuizMembers(quiz_id));
+    }
+    callback();
+}
+
+
+/**
+ * Fetches all the questions for a given quiz_id.  Is used as an onEnter hook for React Router
+ * Matches the signature of a React Router hook: https://github.com/reactjs/react-router/blob/master/docs/API.md#onenternextstate-replace-callback
+ * @param {object} nextState - the next router state
+ * @param {function} replace - function to redirect to another path
+ * @param {function} callback - (optional) can be used to make the transition block
+ */
+
+export function fetchQuizDetails (nextState, replace, callback) {
+
+    if (validCookieExists()) {
+
+        const quiz_id = nextState.params.quiz_id;
+        store.dispatch(getQuizDetails(quiz_id));
     }
     callback();
 }
