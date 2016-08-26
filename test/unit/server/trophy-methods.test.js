@@ -1,6 +1,7 @@
 import test from 'tape';
 import { getFirstQuizState,
-         getHighScoreState } from '../../../server/lib/trophy-methods'; //eslint-disable-line
+         getHighScoreState,
+         getOverallAverageState } from '../../../server/lib/trophy-methods';
 import { testClient } from '../../utils/init';
 
 
@@ -56,6 +57,34 @@ test('`getHighScoreState` does not award an ineligible student with `high_score`
         t.plan(2);
 
         t.equal(typeof result, 'boolean', "getHighScoreState returns a Boolean value");
+        t.equal(result, false, 'Trophy not awarded');
+    });
+});
+
+test('`getOverallAverageState` awards an eligible student with `overall_average` trophy', (t) => {
+
+    const user_id = 1; // this student's overall average is 75%
+    const module_id = 'TEST';
+
+    getOverallAverageState(testClient, user_id, module_id, (error, result) => {
+
+        t.plan(2);
+
+        t.equal(typeof result, 'boolean', "getOverallAverageState returns a Boolean value");
+        t.equal(result, true, 'Trophy awarded');
+    });
+});
+
+test('`getOverallAverageState` does not award an ineligible student with `overall_average` trophy', (t) => {
+
+    const user_id = 3; // this student's overall average is 50%
+    const module_id = 'TEST';
+
+    getOverallAverageState(testClient, user_id, module_id, (error, result) => {
+
+        t.plan(2);
+
+        t.equal(typeof result, 'boolean', "getOverallAverageState returns a Boolean value");
         t.equal(result, false, 'Trophy not awarded');
     });
 });

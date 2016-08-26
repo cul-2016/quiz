@@ -1,4 +1,7 @@
-var getFirstQuizState = require('./trophy-methods').getFirstQuizState; //eslint-disable-line no-unused-vars
+var getFirstQuizState = require('./trophy-methods').getFirstQuizState;
+var getHighScoreState = require('./trophy-methods').getHighScoreState;
+var getOverallAverageState = require('./trophy-methods').getOverallAverageState;
+
 /**
  * Calculates a student's new trophy state on completion of a quiz
  * @param {object} client - postgres database client
@@ -19,6 +22,25 @@ function getNewTrophyState (client, user_id, module_id, quiz_id, score, callback
             callback(error);
         }
         trophies_awarded.push(first_quiz);
+
+        getHighScoreState(client, module_id, score.percentage, (error, high_score) => {
+
+            if (error) {
+                console.error(error);
+                callback(error);
+            }
+            trophies_awarded.push(high_score);
+
+            getOverallAverageState(client, user_id, module_id, (error, overall_average) => {
+
+                if (error) {
+                    console.error(error);
+                    callback(error);
+                }
+                trophies_awarded.push(overall_average);
+
+            });
+        });
     });
 }
 
