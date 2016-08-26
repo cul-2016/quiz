@@ -3,10 +3,10 @@ import Questions from './questions';
 import Nav from '../general/nav';
 import classnames from 'classnames';
 
-const NewQuiz = ({ newQuiz, handleAddQuestion, handleInputChange, handleQuizNameChange, handleSaveQuiz, location, username }) => {
+const NewQuiz = ({ newQuiz, handleAddQuestion, handleDeleteQuestion, handleInputChange, handleQuizNameChange, handleSaveQuiz, location, username }) => {
 
     const questionsValidation = newQuiz.questions.map((question) => {
-        if (!question.question || !question.a || !question.b || !question.c || !question.d || !question.correct_answer){
+        if (!question.question || !question.a || !question.b || !question.correct_answer){
             return false;
         } else {
             return true;
@@ -42,7 +42,8 @@ const NewQuiz = ({ newQuiz, handleAddQuestion, handleInputChange, handleQuizName
 
                 <Questions
                     questions={ newQuiz.questions }
-                    handleInputChange={ handleInputChange } />
+                    handleInputChange={ handleInputChange }
+                    handleDeleteQuestion={ handleDeleteQuestion } />
 
                 <div className="column is-8 is-offset-2 has-text-centered">
                     <button className="button is-info add-question" onClick={ handleAddQuestion }>
@@ -61,6 +62,7 @@ const NewQuiz = ({ newQuiz, handleAddQuestion, handleInputChange, handleQuizName
 NewQuiz.propTypes = {
     newQuiz: PropTypes.object.isRequired,
     handleAddQuestion: PropTypes.func.isRequired,
+    handleDeleteQuestion: PropTypes.func.isRequired,
     handleInputChange: PropTypes.func.isRequired,
     handleQuizNameChange: PropTypes.func.isRequired,
     handleSaveQuiz: PropTypes.func.isRequired,

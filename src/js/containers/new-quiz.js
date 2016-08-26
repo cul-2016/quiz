@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import NewQuiz from '../components/new-quiz/new-quiz';
-import { addQuestion, updateValue, updateQuizName, saveQuiz } from '../actions/new-quiz';
+import { addQuestion, deleteQuestion, updateValue, updateQuizName, saveQuiz } from '../actions/new-quiz';
 import { hashHistory } from 'react-router';
 
 
@@ -14,6 +14,10 @@ const mapDispatchToProps = (dispatch) => ({
 
     handleAddQuestion: () => {
         dispatch(addQuestion());
+    },
+
+    handleDeleteQuestion: (index) => {
+        dispatch(deleteQuestion(index));
     },
 
     handleInputChange: (inputType, value, index) => {
