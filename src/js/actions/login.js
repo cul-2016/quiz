@@ -10,6 +10,7 @@ export const AUTHENTICATE_USER_SUCCESS = 'AUTHENTICATE_USER_SUCCESS';
 export const AUTHENTICATE_USER_FAILURE = 'AUTHENTICATE_USER_FAILURE';
 
 export const LOGOUT = 'LOGOUT';
+export const INCORRECT_USER_DETAILS = 'INCORRECT_USER_DETAILS';
 
 
 export const updateEmail = (value) => ({
@@ -40,7 +41,7 @@ export function authenticateUser (email, password) {
         axios.post('/authenticate-user', payload)
             .then((response) => {
                 if (response.data === false) {
-                    dispatch(authenticateUserSuccess(false));
+                    dispatch(incorrectUserDetails(false));
                 } else {
                     dispatch(setUserDetails(response.data));
                     dispatch(authenticateUserSuccess(true));
@@ -73,4 +74,9 @@ export const authenticateUserFailure = (error) => ({
 
 export const logout = () => ({
     type: LOGOUT
+});
+
+export const incorrectUserDetails = (data) => ({
+    type: INCORRECT_USER_DETAILS,
+    data
 });

@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 
 const RegisterUser = ({ register, handleChange, handleRegisteringUser, location }) => {
 
+    let isEmailValid = /.+@.+\..+/.test(register.email);
     let is_lecturer;
     if (location.pathname === '/register-student') {
         is_lecturer = false;
@@ -15,6 +16,13 @@ const RegisterUser = ({ register, handleChange, handleRegisteringUser, location 
         "display-none": register.userExists !== true
     });
 
+    let registerButtonClasses = classnames("button is-warning login-button", {
+        "is-disabled": !isEmailValid || !register.password || !register.username
+    });
+
+    let invalidEmailClasses = classnames("help is-danger", {
+        "display-none": register.email.length === 0 || isEmailValid
+    });
 
     return (
 
@@ -37,6 +45,8 @@ const RegisterUser = ({ register, handleChange, handleRegisteringUser, location 
                             value={ register.email }
                             onChange={ (e) => handleChange("email", e.target.value) }
                             type="email" />
+                        <span className={ invalidEmailClasses }>This email is invalid</span>
+
 
                         <label className="label has-text-left">Choose a username</label>
                         <input
@@ -52,7 +62,7 @@ const RegisterUser = ({ register, handleChange, handleRegisteringUser, location 
                             onChange={ (e) => handleChange("password", e.target.value)}
                             type="password" />
 
-                        <button className="button is-warning login-button" onClick={ () => handleRegisteringUser(register.email, register.username, register.password, is_lecturer) }>
+                        <button className={ registerButtonClasses } onClick={ () => handleRegisteringUser(register.email, register.username, register.password, is_lecturer) }>
                             Register
                         </button>
 

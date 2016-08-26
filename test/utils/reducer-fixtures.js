@@ -22,7 +22,8 @@ export const login = {
     email: "",
     password: "",
     isAuthenticating: false,
-    error: undefined
+    error: undefined,
+    userIsAuthenticated: undefined
 };
 
 export const user = {
