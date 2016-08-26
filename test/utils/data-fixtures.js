@@ -216,3 +216,20 @@ export const getQuizMembers = [{
     quiz_id: 1,
     score: 5
 }];
+
+export const leaderboard = [
+    {
+        average: 75,
+        module_id: 'TEST',
+        user_id: 1,
+        username: 'student'
+    }, {
+        average: 50,
+        module_id: 'TEST',
+        user_id: 3,
+        username: 'sohil'
+    }, {
+        average: 25,
+        module_id: 'TEST',
+        user_id: 4,
+        username: 'mina' }];

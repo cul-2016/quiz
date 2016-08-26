@@ -34,6 +34,12 @@ export const user = {
     error: undefined
 };
 
+export const leaderboard = {
+    leaderboard: [],
+    isFetchingLeaderboard: false,
+    error: undefined
+};
+
 export const userDetails = {
     user_id: 1,
     email: 'test@test.com',
