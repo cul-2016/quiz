@@ -1,11 +1,12 @@
 import React, { PropTypes } from 'react';
-import { Link } from 'react-router'; // eslint-disable-line no-unused-vars
+import { Link } from 'react-router';
 import classnames from 'classnames';
 import Nav from '../general/nav';
 import Tabs from './tabs';
 import Spinner from '../general/spinner';
+import Trophies from './trophies';
 
-const StudentModule = ({ location, children, username,
+const StudentModule = ({ location, children, username, trophies, trophies_awarded,
                         isFetchingModule, isQuizOpen,
                         quiz_id, question, response }) => { //eslint-disable-line no-unused-vars
 
@@ -21,7 +22,7 @@ const StudentModule = ({ location, children, username,
 
     let url = location.pathname.split('/');
     let livePath = `/${url[1]}/${url[2]}/live`;
-
+    console.log(trophies, trophies_awarded);
     return (
         <div>
         {
@@ -40,6 +41,8 @@ const StudentModule = ({ location, children, username,
                 </div>
                 <Tabs location={ location } />
 
+                <Trophies trophies={ trophies } trophies_awarded={ trophies_awarded } />
+
                 <div className="section">
                     { children }
                 </div>
@@ -52,8 +55,10 @@ const StudentModule = ({ location, children, username,
 StudentModule.propTypes = {
     location: PropTypes.object.isRequired,
     children: PropTypes.object,
-    isFetchingModule: PropTypes.bool.isRequired,
     username: PropTypes.string.isRequired,
+    trophies: PropTypes.array,
+    trophies_awarded: PropTypes.object,
+    isFetchingModule: PropTypes.bool.isRequired,
     isQuizOpen: PropTypes.bool.isRequired,
     quiz_id: PropTypes.number,
     question: PropTypes.string,
