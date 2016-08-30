@@ -4,24 +4,27 @@
  * @param {object} store - redux store
  */
 export function joinWebsocketRoom (store, socket) {
-    console.log('JOIN WEB SOCKET ROOM SUBSCRIBER DOES NOT WORK');
-    let unsubscribe = store.subscribe(listener); //eslint-disable-line
 
+    let currentModuleID;
     function listener () {
-        let module_id;
-        try {
-            module_id = store.getState().module.module.module_id;
+        let previousModuleID = currentModuleID;
 
-        } catch (error) {
-            return undefined;
-        }
+        const state = store.getState();
 
-        if (module_id !== undefined) {
-            console.log('YOU ARE INSIDE IF STATEMENT');
-            // unsubscribe();
-            socket.emit('join_room', module_id, (msg) => {
+        currentModuleID = state &&
+            state.module &&
+            state.module.module &&
+            state.module.module.module_id;
+
+        if (previousModuleID !== currentModuleID) {
+
+            socket.emit('join_room', currentModuleID, (msg) => {
                 console.log(msg);
             });
         }
     }
+
+    let unsubscribe = store.subscribe(listener); //eslint-disable-line
+    listener();
+
 }
