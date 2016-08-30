@@ -19,6 +19,7 @@ io.on('connection', (socket) => {
     socket.on('join_room', (room, cb) => {
 
         socket.join(room);
+        console.log(socket.rooms, 'JOINED HERE');
         cb('Successfully joined room: ' + room); //eslint-disable-line no-console
     });
 
@@ -52,9 +53,14 @@ io.on('connection', (socket) => {
     });
 
     socket.on('leave_room', (cb) => {
-        console.log(socket.rooms, "SOCKET BACKEND");
-        // socket.leave(room);
-        cb('Successfully left room: '); //eslint-disable-line no-console
+
+        var roomList = Object.keys(socket.rooms).filter((room) => {
+            return !room.match(/\/#.*/);
+        });
+        roomList.forEach((room) => {
+            socket.leave(room);
+        });
+        cb(`Successfully left room:>>>${roomList}<<< with exception of default room`); //eslint-disable-line no-console
     });
 
 });

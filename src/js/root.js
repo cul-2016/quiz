@@ -62,14 +62,14 @@ const Root = ({ store }) => (
                     onEnter={ composeHooks(hooks.authenticate, hooks.fetchModule) }
                     path=":module_id/lecturer"
                     component={ ModuleContainer } />
-                <Route path=":module_id/student" component={ StudentModuleContainer } onEnter={ hooks.fetchModule } >
+                <Route path=":module_id/student" component={ StudentModuleContainer }>
                     <IndexRedirect to="feedback" />
                     <Route
                         onEnter={ composeHooks(hooks.authenticate) }
                         path="history"
                         component={ StudentHistory } />
                     <Route
-                        onEnter={ composeHooks(hooks.authenticate) }
+                        onEnter={ composeHooks(hooks.authenticate, hooks.fetchModule) }
                         path="feedback"
                         component={ StudentFeedback } />
                 </Route>
