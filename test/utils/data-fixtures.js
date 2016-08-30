@@ -177,14 +177,14 @@ export const getModuleForLecturerData = {
             name: 'Week 1 Quiz',
             num_questions: '2',
             num_entries: '3',
-            is_presented: false
+            is_presented: true
         },
         {
             quiz_id: 2,
             name: 'Week 2 Quiz',
             num_questions: '3',
             num_entries: '3',
-            is_presented: false
+            is_presented: true
         }
     ]
 };

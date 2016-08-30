@@ -17,7 +17,8 @@ const RegisterUser = ({ register, handleChange, handleRegisteringUser, location 
     });
 
     let registerButtonClasses = classnames("button is-warning login-button", {
-        "is-disabled": !isEmailValid || !register.password || !register.username
+        "is-disabled": !isEmailValid || !register.password || !register.username,
+        "is-loading": register.isRegistering === true
     });
 
     let invalidEmailClasses = classnames("help is-danger", {

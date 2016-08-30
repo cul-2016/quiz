@@ -5,9 +5,12 @@ select
     users.username,
     quizzes.module_id,
     ( SELECT SUM(scores.score) AS total_score FROM scores WHERE scores.user_id = users.user_id GROUP BY scores.user_id ),
-    ( SELECT COUNT(questions.question_id) as total_num_questions FROM questions),
-    ( SELECT CAST (SUM(scores.score) AS FLOAT) FROM scores WHERE scores.user_id = users.user_id GROUP BY scores.user_id ) /
-    ( SELECT CAST (COUNT(questions.question_id) AS FLOAT) FROM questions) * 100 as average
+    ( SELECT COUNT(questions.question_id) as total_num_questions FROM questions inner join quizzes on questions.quiz_id = quizzes.quiz_id WHERE quizzes.module_id = 'TEST' AND quizzes.is_presented = true),
+    ( SELECT CASE WHEN
+        (SELECT CAST (COUNT(questions.question_id) AS FLOAT) FROM questions inner join quizzes on questions.quiz_id = quizzes.quiz_id WHERE quizzes.module_id = 'TEST' AND quizzes.is_presented = true) = 0 THEN null
+    ELSE
+        ( SELECT CAST (SUM(scores.score) AS FLOAT) FROM scores WHERE scores.user_id = users.user_id GROUP BY scores.user_id ) /
+        ( SELECT CAST (COUNT(questions.question_id) AS FLOAT) FROM questions inner join quizzes on questions.quiz_id = quizzes.quiz_id WHERE quizzes.module_id = 'TEST' AND quizzes.is_presented = true) * 100 END as average )
 from scores
 inner join quizzes
     on quizzes.quiz_id = scores.quiz_id
@@ -16,7 +19,6 @@ inner join users
 inner join questions
     on quizzes.quiz_id = questions.quiz_id
 where quizzes.module_id = 'TEST' ORDER BY average DESC;
-
 
 
 select

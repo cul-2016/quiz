@@ -12,7 +12,8 @@ const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthentic
     });
 
     let submitButtonClasses = classnames("button is-warning", {
-        "is-loading": login.isAuthenticating === true
+        "is-loading": login.isAuthenticating === true,
+        "is-disabled": !isEmailValid || login.password.length === 0
     });
 
     let invalidEmailClasses = classnames("help is-danger", {

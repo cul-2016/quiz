@@ -2,7 +2,7 @@ import test from 'tape';
 import getModuleForLecturer from '../../../server/lib/getModuleForLecturer';
 import { testClient } from '../../utils/init';
 
-test('Gets the module for a given student', (t) => {
+test('Gets the module for a given lecturer', (t) => {
 
     t.plan(1);
     const expectedRows = {
@@ -21,14 +21,14 @@ test('Gets the module for a given student', (t) => {
         },
         quizzes: [
             {
-                is_presented: false,
+                is_presented: true,
                 name: 'Week 1 Quiz',
                 num_entries: '3',
                 num_questions: '2',
                 quiz_id: 1
             },
             {
-                is_presented: false,
+                is_presented: true,
                 name: 'Week 2 Quiz',
                 num_entries: '3',
                 num_questions: '2',
