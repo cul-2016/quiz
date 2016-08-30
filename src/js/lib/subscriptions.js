@@ -18,9 +18,13 @@ export function joinWebsocketRoom (store, socket) {
 
         if (previousModuleID !== currentModuleID) {
 
-            socket.emit('join_room', currentModuleID, (msg) => {
-                console.log(msg);
-            });
+            if (currentModuleID !== undefined) {
+                socket.emit('join_room', currentModuleID, (msg) => {
+                    console.log(msg);
+                });
+            } else {
+                console.log("you've returned to the dashboard");
+            }
         }
     }
 

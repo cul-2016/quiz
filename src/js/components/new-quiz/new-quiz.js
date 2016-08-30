@@ -16,7 +16,8 @@ const NewQuiz = ({ newQuiz, handleAddQuestion, handleDeleteQuestion, handleInput
     });
 
     const submitClasses = classnames("button is-success save-question", {
-        "is-disabled": !newQuiz.name || questionsValidation === false
+        "is-disabled": !newQuiz.name || questionsValidation === false,
+        "is-loading": newQuiz.isSavingQuiz
     });
     const quizNameClasses = classnames("help is-danger", {
         "display-none": newQuiz.name

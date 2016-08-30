@@ -30,7 +30,9 @@ const mapDispatchToProps = (dispatch) => ({
 
     handleSaveQuiz: (module_id, quizName, questions) => {
         dispatch(saveQuiz(module_id, quizName, questions));
-        hashHistory.goBack();
+        setTimeout(() => {
+            hashHistory.goBack();
+        }, 750);
     }
 });
 

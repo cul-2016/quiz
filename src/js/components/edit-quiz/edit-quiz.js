@@ -4,7 +4,7 @@ import Nav from '../general/nav';
 import classnames from 'classnames';
 
 
-const EditQuiz = ({ questions, name, deletedQuestions, username, handleAddQuestion, handleInputChange, handleQuizNameChange, handleEditQuiz, handleDeleteQuestion, params }) => {
+const EditQuiz = ({ questions, isUpdatingQuiz, name, deletedQuestions, username, handleAddQuestion, handleInputChange, handleQuizNameChange, handleEditQuiz, handleDeleteQuestion, params }) => {
 
     const questionsValidation = questions.map((question) => {
         if (!question.question || !question.a || !question.b || !question.correct_answer){
@@ -17,7 +17,8 @@ const EditQuiz = ({ questions, name, deletedQuestions, username, handleAddQuesti
     });
 
     const submitClasses = classnames("button is-success save-question", {
-        "is-disabled": !name || questionsValidation === false
+        "is-disabled": !name || questionsValidation === false,
+        "is-loading": isUpdatingQuiz
     });
     const quizNameClasses = classnames("help is-danger", {
         "display-none": name
@@ -61,6 +62,7 @@ const EditQuiz = ({ questions, name, deletedQuestions, username, handleAddQuesti
 
 EditQuiz.propTypes = {
     questions: PropTypes.array,
+    isUpdatingQuiz: PropTypes.bool,
     name: PropTypes.string,
     username: PropTypes.string,
     deletedQuestions: PropTypes.array,
