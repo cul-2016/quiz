@@ -16,8 +16,9 @@ test('Gets the module for a given student', (t) => {
             first_quiz: false,
             high_score: false,
             overall_average: false,
-            participation: false 
-        } };
+            participation: false
+        }
+    };
 
     getModuleForStudent(testClient, 'TEST', 1, (error, response) => {
 

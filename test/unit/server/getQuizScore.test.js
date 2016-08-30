@@ -10,7 +10,7 @@ test("Gets a student's score for a quiz", (t) => {
     const quiz_id = 2;
     const expected = {
         raw: 1,
-        percentage: 50
+        percentage: 33
     };
 
     getQuizScore(testClient, user_id, quiz_id, (error, response) => {

@@ -104,30 +104,36 @@ export const questions = [
     }
 ];
 
-export const reviewQuestions = [{ quiz_id: 1,
-    question_id: 1,
-    question: 'What is the capital of England?',
-    a: 'London',
-    b: 'Cardiff',
-    c: 'Edinburgh',
-    d: 'Doncaster',
-    correct_answer: 'a',
-    a_response: '2',
-    b_response: '0',
-    c_response: '0',
-    d_response: '0' },
-  { quiz_id: 1,
-    question_id: 2,
-    question: 'What is the capital of Croatia?',
-    a: 'Zagreb',
-    b: 'Cardiff',
-    c: 'Edinburgh',
-    d: 'Doncaster',
-    correct_answer: 'a',
-    a_response: '1',
-    b_response: '0',
-    c_response: '0',
-    d_response: '0' }];
+export const reviewQuestions = [
+    {
+        quiz_id: 1,
+        question_id: 1,
+        question: 'What is the capital of England?',
+        a: 'London',
+        b: 'Cardiff',
+        c: 'Edinburgh',
+        d: 'Doncaster',
+        correct_answer: 'a',
+        a_response: '2',
+        b_response: '0',
+        c_response: '0',
+        d_response: '0'
+    },
+    {
+        quiz_id: 1,
+        question_id: 2,
+        question: 'What is the capital of Croatia?',
+        a: 'Zagreb',
+        b: 'Cardiff',
+        c: 'Edinburgh',
+        d: 'Doncaster',
+        correct_answer: 'a',
+        a_response: '1',
+        b_response: '0',
+        c_response: '0',
+        d_response: '0'
+    }
+];
 
 export const liveQuizQuestions = [
     {
@@ -167,7 +173,7 @@ export const getModuleForLecturerData = {
                 "overall_average",
                 "participation"
             ],
-            condition: [1, 100, 70, 3]
+            condition: [1, 100, 65, 2]
         },
         num_enrolled: 3
     },
@@ -177,14 +183,14 @@ export const getModuleForLecturerData = {
             name: 'Week 1 Quiz',
             num_questions: '2',
             num_entries: '3',
-            is_presented: false
+            is_presented: true
         },
         {
             quiz_id: 2,
             name: 'Week 2 Quiz',
             num_questions: '3',
-            num_entries: '3',
-            is_presented: false
+            num_entries: '2',
+            is_presented: true
         }
     ]
 };

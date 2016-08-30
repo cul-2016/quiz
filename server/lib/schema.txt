@@ -205,7 +205,7 @@ INSERT INTO medals (module_id, medal_name, condition)
 INSERT INTO trophies (module_id, trophy_name, condition)
     VALUES ('TEST', 'first_quiz', 1),
            ('TEST', 'high_score', 100),
-           ('TEST', 'overall_average', 70),
+           ('TEST', 'overall_average', 65),
            ('TEST', 'participation', 3);
 
 

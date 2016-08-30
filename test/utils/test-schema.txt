@@ -209,16 +209,17 @@ INSERT INTO medals (module_id, medal_name, condition)
 /********* insert trophies ********/
 
 INSERT INTO trophies (module_id, trophy_name, condition)
-    VALUES ('TEST', 'participation', 3),
-           ('TEST', 'overall_average', 70),
+    VALUES ('TEST', 'first_quiz', 1),
            ('TEST', 'high_score', 100),
-           ('TEST', 'first_quiz', 1);
+           ('TEST', 'overall_average', 65),
+           ('TEST', 'participation', 2);
+
 
 /********* insert quizzes ********/
 
-INSERT INTO quizzes (module_id, name)
-    VALUES ('TEST', 'Week 1 Quiz'),
-           ('TEST', 'Week 2 Quiz');
+INSERT INTO quizzes (module_id, name, is_presented)
+    VALUES ('TEST', 'Week 1 Quiz', true),
+           ('TEST', 'Week 2 Quiz', true);
 
 /********* insert questions ********/
 
@@ -242,9 +243,7 @@ INSERT INTO responses (user_id, quiz_id, question_id, response)
            (3, 2, 3, 'a'),
            (3, 2, 4, 'b'),
            (4, 1, 1, 'c'),
-           (4, 1, 2, 'c'),
-           (4, 2, 3, 'a'),
-           (4, 2, 4, 'b');
+           (4, 1, 2, 'c');
 
 /********* insert module members ********/
 
@@ -261,7 +260,6 @@ INSERT INTO scores (user_id, quiz_id, score)
            (1, 2, 1),
            (3, 1, 1),
            (3, 2, 1),
-           (4, 1, 0),
-           (4, 2, 1);
+           (4, 1, 0);
 
 COMMIT;
