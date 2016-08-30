@@ -182,7 +182,15 @@ INSERT INTO users (email, password, username)
     VALUES ('student@city.ac.uk', '$2a$10$UnvUuW91Jh6.zWQi3G/2J.HLDTomSqJHxvBC.TYx/Bj8HZa.AAm4K', 'student');
 
 INSERT INTO users (email, password, is_lecturer, username)
-    VALUES ('lecturer@city.ac.uk', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, 'lecturer');
+VALUES ('lecturer@city.ac.uk', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, 'lecturer');
+
+INSERT INTO users (email, password, username)
+    VALUES ('sohil@city.ac.uk', '$2a$10$UnvUuW91Jh6.zWQi3G/2J.HLDTomSqJHxvBC.TYx/Bj8HZa.AAm4K', 'sohil');
+
+INSERT INTO users (email, password, username)
+    VALUES ('mina@city.ac.uk', '$2a$10$UnvUuW91Jh6.zWQi3G/2J.HLDTomSqJHxvBC.TYx/Bj8HZa.AAm4K', 'mina');
+
+
 
 
 /********* insert modules ********/
@@ -201,20 +209,21 @@ INSERT INTO medals (module_id, medal_name, condition)
 /********* insert trophies ********/
 
 INSERT INTO trophies (module_id, trophy_name, condition)
-    VALUES ('TEST', 'participation', 3),
-           ('TEST', 'overall_average', 70),
+    VALUES ('TEST', 'first_quiz', 1),
            ('TEST', 'high_score', 100),
-           ('TEST', 'first_quiz', 1);
+           ('TEST', 'overall_average', 65),
+           ('TEST', 'participation', 2);
+
 
 /********* insert quizzes ********/
 
-INSERT INTO quizzes (module_id, name)
-    VALUES ('TEST', 'Week 1 Quiz'),
-           ('TEST', 'Week 2 Quiz');
+INSERT INTO quizzes (module_id, name, is_presented)
+    VALUES ('TEST', 'Week 1 Quiz', true),
+           ('TEST', 'Week 2 Quiz', true);
 
 /********* insert questions ********/
 
-INSERT INTO questions (quiz_id, question, A, B, C, D, correct_answer)
+INSERT INTO questions (quiz_id, question, a, b, c, d, correct_answer)
     VALUES (1, 'What is the capital of England?', 'London', 'Cardiff', 'Edinburgh', 'Doncaster', 'a'),
            (1, 'What is the capital of Croatia?', 'Zagreb', 'Cardiff', 'Edinburgh', 'Doncaster', 'a'),
            (2, 'What is the National Animal of England?', 'Pikachu', 'Whale', 'Lion', 'Doncaster', 'c'),
@@ -227,17 +236,30 @@ INSERT INTO questions (quiz_id, question, A, B, C, D, correct_answer)
 INSERT INTO responses (user_id, quiz_id, question_id, response)
     VALUES (1, 1, 1, 'a'),
            (1, 1, 2, 'a'),
-           (1, 2, 3, 'c'),
-           (1, 2, 4, 'b');
+           (1, 2, 3, 'a'),
+           (1, 2, 4, 'b'),
+           (3, 1, 1, 'a'),
+           (3, 1, 2, 'b'),
+           (3, 2, 3, 'a'),
+           (3, 2, 4, 'b'),
+           (4, 1, 1, 'c'),
+           (4, 1, 2, 'c');
 
 /********* insert module members ********/
 
 INSERT INTO module_members (module_id, user_id)
-    VALUES ('TEST', 1);
+    VALUES ('TEST', 1),
+           ('TEST', 3),
+           ('TEST', 4);
 
 
 /********* insert scores ********/
 
 INSERT INTO scores (user_id, quiz_id, score)
-    VALUES (1, 1, 5);
+    VALUES (1, 1, 2),
+           (1, 2, 1),
+           (3, 1, 1),
+           (3, 2, 1),
+           (4, 1, 0);
+
 COMMIT;

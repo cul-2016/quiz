@@ -20,7 +20,6 @@ import ModuleMembersContainer from './containers/module-members';
 import QuizMembersContainer from './containers/quiz-members';
 import EditScoreContainer from './containers/edit-score';
 
-
 import StudentJoinModuleContainer from './containers/student/join-module';
 import StudentModuleContainer from './containers/student/module';
 import StudentHistory from './components/student-module/history';
@@ -115,7 +114,7 @@ const Root = ({ store }) => (
                     path=":module_id/:quiz_id/history"
                     component={ QuizHistoryContainer } />
                 <Route
-                    onEnter={ hooks.authenticate }
+                    onEnter={ composeHooks(hooks.authenticate, hooks.fetchLeaderboard) }
                     path=":module_id/leaderboard"
                     component={ LeaderboardContainer } />
             </Route>

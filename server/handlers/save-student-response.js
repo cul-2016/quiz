@@ -13,7 +13,6 @@ module.exports = {
             user_id = parseInt(user_id);
             quiz_id = parseInt(quiz_id);
             question_id = parseInt(question_id);
-            response = response.toUpperCase();
             saveStudentResponse(client, user_id, quiz_id, question_id, response, (error, response) => {
                 var verdict = error || response;
                 reply(verdict);

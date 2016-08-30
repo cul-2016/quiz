@@ -5,30 +5,35 @@ import { testClient } from '../../utils/init';
 test('Gets list of questions for a quiz review', (t) => {
 
     t.plan(1);
-    const expectedRows = [{ quiz_id: 1,
-        question_id: 1,
-        question: 'What is the capital of England?',
-        a: 'London',
-        b: 'Cardiff',
-        c: 'Edinburgh',
-        d: 'Doncaster',
-        correct_answer: 'a',
-        a_response: '1',
-        b_response: '0',
-        c_response: '0',
-        d_response: '0' },
-      { quiz_id: 1,
-        question_id: 2,
-        question: 'What is the capital of Croatia?',
-        a: 'Zagreb',
-        b: 'Cardiff',
-        c: 'Edinburgh',
-        d: 'Doncaster',
-        correct_answer: 'a',
-        a_response: '0',
-        b_response: '0',
-        c_response: '0',
-        d_response: '0' }];
+    const expectedRows = [
+        {
+            question_id: 1,
+            quiz_id: 1,
+            question: 'What is the capital of England?',
+            a: 'London',
+            b: 'Cardiff',
+            c: 'Edinburgh',
+            d: 'Doncaster',
+            a_responses: '2',
+            b_responses: '0',
+            c_responses: '1',
+            d_responses: '0',
+            correct_answer: 'a'
+        },
+        {
+            question_id: 2,
+            quiz_id: 1,
+            question: 'What is the capital of Croatia?',
+            a: 'Zagreb',
+            b: 'Cardiff',
+            c: 'Edinburgh',
+            d: 'Doncaster',
+            a_responses: '1',
+            b_responses: '1',
+            c_responses: '1',
+            d_responses: '0',
+            correct_answer: 'a'
+        }];
 
     getQuizReview(testClient, '1', (error, response) => {
 

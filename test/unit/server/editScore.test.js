@@ -8,7 +8,7 @@ test('editing score for a user in a quiz', (t) => {
     const expectedCommand = 'UPDATE';
     var quiz_id = 1;
     var user_id = 1;
-    var score = 10;
+    var score = 2;
     editScore(testClient, quiz_id, user_id, score, (error, response) => {
 
         if (error) {

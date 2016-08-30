@@ -5,8 +5,19 @@ import { Link } from 'react-router';
 
 const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthenticateUser }) => {
 
+    let isEmailValid = /.+@.+\..+/.test(login.email);
+
     let userValidation = classnames({
         "display-none": login.userIsAuthenticated !== false
+    });
+
+    let submitButtonClasses = classnames("button is-warning", {
+        "is-loading": login.isAuthenticating === true,
+        "is-disabled": !isEmailValid || login.password.length === 0
+    });
+
+    let invalidEmailClasses = classnames("help is-danger", {
+        "display-none": login.email.length === 0 || isEmailValid
     });
 
     return (
@@ -26,6 +37,8 @@ const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthentic
                             value={ login.username }
                             onChange={ (e) => handleEmailChange(e.target.value)}
                             type="email" />
+                        <span className={ invalidEmailClasses }>This email is invalid</span>
+
 
                         <label className="label has-text-left">Password</label>
                         <input
@@ -34,7 +47,7 @@ const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthentic
                             onChange={ (e) => handlePasswordChange(e.target.value) }
                             type="password" />
 
-                        <button className="button is-warning" onClick={ () => handleAuthenticateUser(login.email, login.password) }>
+                        <button className={ submitButtonClasses } onClick={ () => handleAuthenticateUser(login.email, login.password) }>
                             Login
                         </button>
                         <p>

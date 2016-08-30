@@ -8,6 +8,7 @@ import { getQuizReview } from '../actions/review';
 import { getQuizResult } from '../actions/result';
 import { getQuizMembers } from '../actions/quiz-members';
 import { getQuizDetails } from '../actions/new-quiz';
+import { getLeaderboard } from '../actions/leaderboard';
 import getUserID from './getUserID';
 
 
@@ -124,8 +125,9 @@ export function fetchResult (nextState, replace, callback) {
 
     if (validCookieExists()) {
         const user_id = store.getState().user.user_id;
+        const module_id = nextState.params.module_id;
         const quiz_id = nextState.params.quiz_id;
-        store.dispatch(getQuizResult(user_id, quiz_id));
+        store.dispatch(getQuizResult(user_id, module_id, quiz_id));
     }
     callback();
 }
@@ -163,6 +165,25 @@ export function fetchQuizDetails (nextState, replace, callback) {
 
         const quiz_id = nextState.params.quiz_id;
         store.dispatch(getQuizDetails(quiz_id));
+    }
+    callback();
+}
+
+
+/**
+ * Fetches the leaderboard for a given module_id.  Is used as an onEnter hook for React Router
+ * Matches the signature of a React Router hook: https://github.com/reactjs/react-router/blob/master/docs/API.md#onenternextstate-replace-callback
+ * @param {object} nextState - the next router state
+ * @param {function} replace - function to redirect to another path
+ * @param {function} callback - (optional) can be used to make the transition block
+ */
+
+export function fetchLeaderboard (nextState, replace, callback) {
+
+    if (validCookieExists()) {
+
+        const module_id = nextState.params.module_id;
+        store.dispatch(getLeaderboard(module_id));
     }
     callback();
 }
