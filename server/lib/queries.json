@@ -26,5 +26,6 @@
     "getParticipationState": {
         "data": "SELECT COUNT(participated_quiz) AS participation FROM (SELECT DISTINCT(responses.quiz_id) as participated_quiz FROM responses JOIN quizzes ON quizzes.quiz_id = responses.quiz_id WHERE responses.user_id = ($1) AND quizzes.module_id = ($2)) as participations;",
         "condition": "SELECT condition FROM trophies WHERE module_id = ($1) AND trophy_name = 'participation';"
-    }
+    },
+    "getLeaderboard": "SELECT DISTINCT(scores.user_id), users.username, quizzes.module_id, ( SELECT CASE WHEN (SELECT CAST (COUNT(questions.question_id) AS FLOAT) FROM questions inner join quizzes on questions.quiz_id = quizzes.quiz_id WHERE quizzes.module_id = 'TEST' AND quizzes.is_presented = true) = 0 THEN 0 ELSE ( SELECT CAST (SUM(scores.score) AS FLOAT) FROM scores WHERE scores.user_id = users.user_id GROUP BY scores.user_id ) / ( SELECT CAST (COUNT(questions.question_id) AS FLOAT) FROM questions inner join quizzes on questions.quiz_id = quizzes.quiz_id WHERE quizzes.module_id = $1 AND quizzes.is_presented = true) * 100 END as average ) from scores inner join quizzes on quizzes.quiz_id = scores.quiz_id inner join users on scores.user_id = users.user_id inner join questions on quizzes.quiz_id = questions.quiz_id where quizzes.module_id = $1 ORDER BY average DESC;"
 }

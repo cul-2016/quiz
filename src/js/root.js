@@ -114,7 +114,7 @@ const Root = ({ store }) => (
                     path=":module_id/:quiz_id/history"
                     component={ QuizHistoryContainer } />
                 <Route
-                    onEnter={ hooks.authenticate }
+                    onEnter={ composeHooks(hooks.authenticate, hooks.fetchLeaderboard) }
                     path=":module_id/leaderboard"
                     component={ LeaderboardContainer } />
             </Route>

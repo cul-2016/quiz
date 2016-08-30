@@ -5,6 +5,7 @@ const initialState = {
     email: "",
     password: "",
     isAuthenticating: false,
+    userIsAuthenticated: undefined,
     error: undefined
 };
 
@@ -30,6 +31,12 @@ export default function login (state = initialState, action ) {
             isAuthenticating: { $set: false },
             error: { $set: action.error },
             password: { $set: "" }
+        });
+
+    case actionsTypes.INCORRECT_USER_DETAILS:
+        return update(state, {
+            isAuthenticating: { $set: false },
+            userIsAuthenticated: { $set: action.data }
         });
 
     default:

@@ -222,3 +222,24 @@ export const getQuizMembers = [{
     quiz_id: 1,
     score: 5
 }];
+
+export const leaderboardData = [
+    {
+        average: 60,
+        module_id: 'TEST',
+        user_id: 1,
+        username: 'student'
+    },
+    {
+        average: 40,
+        module_id: 'TEST',
+        user_id: 3,
+        username: 'sohil'
+    },
+    {
+        average: 0,
+        module_id: 'TEST',
+        user_id: 4,
+        username: 'mina'
+    }
+];

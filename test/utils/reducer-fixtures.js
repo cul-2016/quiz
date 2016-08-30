@@ -22,7 +22,8 @@ export const login = {
     email: "",
     password: "",
     isAuthenticating: false,
-    error: undefined
+    error: undefined,
+    userIsAuthenticated: undefined
 };
 
 export const user = {
@@ -31,6 +32,12 @@ export const user = {
     username: undefined,
     is_lecturer: undefined,
     isFetchingUser: false,
+    error: undefined
+};
+
+export const leaderboard = {
+    leaderboard: [],
+    isFetchingLeaderboard: false,
     error: undefined
 };
 

@@ -6,7 +6,7 @@ import { testClient } from '../../utils/init';
 test('`getModuleForLecturer` returns correct module information', (t) => {
 
     t.plan(1);
-
+    
     getModuleForLecturer(testClient, 'TEST', (error, response) => {
 
         if (error) {

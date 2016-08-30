@@ -188,6 +188,14 @@ INSERT INTO users (email, password, username)
 INSERT INTO users (email, password, is_lecturer)
     VALUES ('lecturer@city.ac.uk', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true);
 
+
+INSERT INTO users (email, password, username)
+    VALUES ('sohil@city.ac.uk', '$2a$10$UnvUuW91Jh6.zWQi3G/2J.HLDTomSqJHxvBC.TYx/Bj8HZa.AAm4K', 'sohil');
+
+INSERT INTO users (email, password, username)
+    VALUES ('mina@city.ac.uk', '$2a$10$UnvUuW91Jh6.zWQi3G/2J.HLDTomSqJHxvBC.TYx/Bj8HZa.AAm4K', 'mina');
+
+
 /********* insert module ********/
 
 INSERT INTO modules (module_id, user_id, name)
@@ -227,14 +235,32 @@ INSERT INTO questions (quiz_id, question, a, b, c, d, correct_answer)
 /********* insert responses ********/
 
 INSERT INTO responses (user_id, quiz_id, question_id, response)
-    VALUES (1, 1, 1, 'a'),
-           (1, 1, 2, 'a'),
-           (1, 2, 3, 'c'),
-           (1, 2, 4, 'b');
+   VALUES (1, 1, 1, 'a'),
+          (1, 1, 2, 'a'),
+          (1, 2, 3, 'a'),
+          (1, 2, 4, 'b'),
+          (3, 1, 1, 'a'),
+          (3, 1, 2, 'b'),
+          (3, 2, 3, 'a'),
+          (3, 2, 4, 'b'),
+          (4, 1, 1, 'c'),
+          (4, 1, 2, 'c');
 
 /********* insert module members ********/
 
 INSERT INTO module_members (module_id, user_id)
-    VALUES ('TEST', 1);
+   VALUES ('TEST', 1),
+          ('TEST', 3),
+          ('TEST', 4);
+
+
+/********* insert scores ********/
+
+INSERT INTO scores (user_id, quiz_id, score)
+   VALUES (1, 1, 2),
+          (1, 2, 1),
+          (3, 1, 1),
+          (3, 2, 1),
+          (4, 1, 0);
 
 COMMIT;
