@@ -20,7 +20,11 @@
     "getFirstQuizState": "SELECT DISTINCT(user_id) FROM responses WHERE user_id = ($1) AND quiz_id = ($2);",
     "getHighScoreState": "SELECT condition FROM trophies WHERE module_id = ($1) AND trophy_name = 'high_score';",
     "getOverallAverageState": {
-        "average": "SELECT AVG(percentage_score) AS overall_average FROM (SELECT quiz_id, CAST(score AS FLOAT) / CAST(num_questions AS FLOAT) * 100 as percentage_score FROM (SELECT scores.quiz_id AS quiz_id, scores.score AS score, COUNT(questions.question) AS num_questions FROM scores JOIN questions ON questions.quiz_id = scores.quiz_id JOIN quizzes ON quizzes.quiz_id = scores.quiz_id WHERE scores.user_id = ($1) AND quizzes.module_id = ($2) GROUP BY scores.quiz_id, scores.score ORDER BY scores.quiz_id) AS quiz_scores) AS averages;",
+        "data": "SELECT ROUND(AVG(percentage_score)) AS overall_average FROM (SELECT quiz_id, CAST(score AS FLOAT) / CAST(num_questions AS FLOAT) * 100 as percentage_score FROM (SELECT scores.quiz_id AS quiz_id, scores.score AS score, COUNT(questions.question) AS num_questions FROM scores JOIN questions ON questions.quiz_id = scores.quiz_id JOIN quizzes ON quizzes.quiz_id = scores.quiz_id WHERE scores.user_id = ($1) AND quizzes.module_id = ($2) GROUP BY scores.quiz_id, scores.score ORDER BY scores.quiz_id) AS quiz_scores) AS averages;",
         "condition": "SELECT condition FROM trophies WHERE module_id = ($1) AND trophy_name = 'overall_average';"
+    },
+    "getParticipationState": {
+        "data": "SELECT COUNT(participated_quiz) AS participation FROM (SELECT DISTINCT(responses.quiz_id) as participated_quiz FROM responses JOIN quizzes ON quizzes.quiz_id = responses.quiz_id WHERE responses.user_id = ($1) AND quizzes.module_id = ($2)) as participations;",
+        "condition": "SELECT condition FROM trophies WHERE module_id = ($1) AND trophy_name = 'participation';"
     }
 }

@@ -1,7 +1,8 @@
 import test from 'tape';
 import { getFirstQuizState,
          getHighScoreState,
-         getOverallAverageState } from '../../../server/lib/trophy-methods';
+         getOverallAverageState,
+         getParticipationState } from '../../../server/lib/trophy-methods';
 import { testClient } from '../../utils/init';
 
 
@@ -63,7 +64,7 @@ test('`getHighScoreState` does not award an ineligible student with `high_score`
 
 test('`getOverallAverageState` awards an eligible student with `overall_average` trophy', (t) => {
 
-    const user_id = 1; // this student's overall average is 75%
+    const user_id = 1; // this student's overall average is 67%
     const module_id = 'TEST';
 
     getOverallAverageState(testClient, user_id, module_id, (error, result) => {
@@ -77,7 +78,7 @@ test('`getOverallAverageState` awards an eligible student with `overall_average`
 
 test('`getOverallAverageState` does not award an ineligible student with `overall_average` trophy', (t) => {
 
-    const user_id = 3; // this student's overall average is 50%
+    const user_id = 3; // this student's overall average is 42%
     const module_id = 'TEST';
 
     getOverallAverageState(testClient, user_id, module_id, (error, result) => {
@@ -85,6 +86,34 @@ test('`getOverallAverageState` does not award an ineligible student with `overal
         t.plan(2);
 
         t.equal(typeof result, 'boolean', "getOverallAverageState returns a Boolean value");
+        t.equal(result, false, 'Trophy not awarded');
+    });
+});
+
+test('`getParticipationState` awards an eligible student with `participation` trophy', (t) => {
+
+    const user_id = 1;
+    const module_id = 'TEST';
+
+    getParticipationState(testClient, user_id, module_id, (error, result) => {
+
+        t.plan(2);
+
+        t.equal(typeof result, 'boolean', "getParticipationState returns a Boolean value");
+        t.equal(result, true, 'Trophy awarded');
+    });
+});
+
+test('`getParticipationState` does not award an ineligible student with `participation` trophy', (t) => {
+
+    const user_id = 4;
+    const module_id = 'TEST';
+
+    getParticipationState(testClient, user_id, module_id, (error, result) => {
+
+        t.plan(2);
+
+        t.equal(typeof result, 'boolean', "getParticipationState returns a Boolean value");
         t.equal(result, false, 'Trophy not awarded');
     });
 });
