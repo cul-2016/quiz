@@ -13,13 +13,13 @@ var organiseModuleData = require('./organiseModuleData');
 function getModuleForStudent (client, module_id, user_id, callback) {
 
     query(client, queries.getModuleForStudent.main, [module_id, user_id], (error, main) => {
-        console.log(module_id, user_id);
+
         if (error) {
             console.error(error);
             return callback(error);
         }
         const mainData = main.rows;
-        console.log(mainData, 'MAIN DATA');
+
         query(client, queries.getModuleForStudent.medals, [module_id], (error, medals) => {
 
             if (error) {
@@ -28,7 +28,7 @@ function getModuleForStudent (client, module_id, user_id, callback) {
             }
             const medalsData = medals.rows;
             const allData = mainData.concat(medalsData);
-            console.log(allData, 'ALL DATA');
+
             organiseModuleData(false, module_id, allData, (error, data) => {
 
                 if (error) {

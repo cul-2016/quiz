@@ -1,6 +1,6 @@
 import { store } from '../store';
 import validCookieExists from './validCookieExists';
-import { getModule, getModuleMembers } from '../actions/module';
+import { getModule, getModuleMembers, clearModuleState } from '../actions/module';
 import { getDashboard } from '../actions/dashboard';
 import { loadUserState } from './userState';
 import { getUserDetails } from '../actions/user';
@@ -221,6 +221,22 @@ export function leaveRoom (nextState, replace, callback) {
         socketClient.emit('leave_room', (msg) => {
             console.log(msg);
         });
+    }
+    callback();
+}
+
+/**
+ * clear the module state when entering dashboard.  Is used as an onEnter hook for React Router
+ * Matches the signature of a React Router hook: https://github.com/reactjs/react-router/blob/master/docs/API.md#onenternextstate-replace-callback
+ * @param {object} nextState - the next router state
+ * @param {function} replace - function to redirect to another path
+ * @param {function} callback - (optional) can be used to make the transition block
+ */
+
+export function resetModuleState (nextState, replace, callback) {
+
+    if (validCookieExists()) {
+        store.dispatch(clearModuleState());
     }
     callback();
 }

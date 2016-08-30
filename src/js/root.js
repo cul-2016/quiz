@@ -47,7 +47,7 @@ const Root = ({ store }) => (
                     path="register-lecturer1000"
                     component={ RegisterUserContainer } />
                 <Route
-                    onEnter={ composeHooks(hooks.authenticate, hooks.fetchModuleList, hooks.leaveRoom) }
+                    onEnter={ composeHooks(hooks.authenticate, hooks.fetchModuleList, hooks.leaveRoom, hooks.resetModuleState) }
                     path="dashboard"
                     component={ DashboardContainer } />
                 <Route
@@ -62,14 +62,14 @@ const Root = ({ store }) => (
                     onEnter={ composeHooks(hooks.authenticate, hooks.fetchModule) }
                     path=":module_id/lecturer"
                     component={ ModuleContainer } />
-                <Route path=":module_id/student" component={ StudentModuleContainer }>
+                <Route path=":module_id/student" component={ StudentModuleContainer } onEnter={ hooks.fetchModule } >
                     <IndexRedirect to="feedback" />
                     <Route
                         onEnter={ composeHooks(hooks.authenticate) }
                         path="history"
                         component={ StudentHistory } />
                     <Route
-                        onEnter={ composeHooks(hooks.authenticate, hooks.fetchModule) }
+                        onEnter={ composeHooks(hooks.authenticate) }
                         path="feedback"
                         component={ StudentFeedback } />
                 </Route>
