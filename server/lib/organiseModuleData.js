@@ -8,7 +8,7 @@
  */
 
 function organiseModuleData (is_lecturer, module_id, data, callback) {
-
+    console.log(data, 'DATA');
     if (arguments.length !== 4) {
         callback(new Error("Wrong number of arguments for organiseModuleData - should be 4"));
     }

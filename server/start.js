@@ -50,6 +50,13 @@ io.on('connection', (socket) => {
         console.log('end of quiz sent'); //eslint-disable-line no-console
         cb('end of quiz sent');
     });
+
+    socket.on('leave_room', (cb) => {
+        console.log(socket.rooms, "SOCKET BACKEND");
+        // socket.leave(room);
+        cb('Successfully left room: '); //eslint-disable-line no-console
+    });
+
 });
 
 server.start((error) => {

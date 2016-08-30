@@ -47,11 +47,11 @@ const Root = ({ store }) => (
                     path="register-lecturer1000"
                     component={ RegisterUserContainer } />
                 <Route
-                    onEnter={ composeHooks(hooks.authenticate, hooks.fetchModuleList) }
+                    onEnter={ composeHooks(hooks.authenticate, hooks.fetchModuleList, hooks.leaveRoom) }
                     path="dashboard"
                     component={ DashboardContainer } />
                 <Route
-                    onEnter={ hooks.authenticate }
+                    onEnter={ hooks.authenticateLecturer }
                     path="add-new-module"
                     component={ NewModuleContainer } />
                 <Route
@@ -82,9 +82,9 @@ const Root = ({ store }) => (
                     path=":module_id/:quiz_id/edit-quiz"
                     component={ EditQuizContainer } />
                 <Route
-                onEnter={ composeHooks(hooks.authenticate, hooks.fetchModuleMembers) }
-                path=":module_id/members"
-                component={ ModuleMembersContainer } />
+                    onEnter={ composeHooks(hooks.authenticate, hooks.fetchModuleMembers) }
+                    path=":module_id/members"
+                    component={ ModuleMembersContainer } />
                 <Route
                     onEnter={ composeHooks(hooks.authenticate, hooks.fetchQuizMembers) }
                     path=":module_id/:quiz_id/members"

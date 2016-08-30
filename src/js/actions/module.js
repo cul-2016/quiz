@@ -37,7 +37,7 @@ export const getModule = (module_id, is_lecturer, user_id) => {
 
         dispatch(getModuleRequest());
 
-        axios.get(`get-module?module_id=${module_id}&is_lecturer=${is_lecturer}&${user_id}`)
+        axios.get(`get-module?module_id=${module_id}&is_lecturer=${is_lecturer}&user_id=${user_id}`)
             .then((response) => {
                 dispatch(getModuleSuccess(is_lecturer, response.data));
             }, (error) => {
