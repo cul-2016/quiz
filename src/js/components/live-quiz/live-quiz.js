@@ -2,11 +2,25 @@ import React, { PropTypes } from 'react'; //eslint-disable-line no-unused-vars
 import CurrentQuestion from './current-question';
 import LiveQuizButtons from './live-quiz-buttons';
 import classnames from 'classnames';
+import { store } from '../../store';
+import { clearResponseSubmitted } from '../../actions/live-quiz';
 // import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 // import ReactTransitionGroup from 'react-addons-transition-group';
 
 
-const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex, nextQuestion, isQuizStarted, submitResponse, startQuiz, numQuestions, endQuiz, quiz_id, handleSelection, response, name }) => {
+const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex, nextQuestion, isQuizStarted, submitResponse, isResponseSumitted, startQuiz, numQuestions, endQuiz, quiz_id, handleSelection, response, name }) => {
+
+    let showOnSubmit = classnames("submit-success", {
+        "display-none": !isResponseSumitted
+    });
+
+    if (isResponseSumitted) {
+        setTimeout(() =>{
+            store.dispatch(clearResponseSubmitted());
+        }, 1000);
+    }
+
+
 
     let titleClass = classnames({
         "display-none": !nextQuestionIndex
@@ -20,11 +34,23 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex, nextQuestion, isQu
             </div>
                 <div className="section">
                     {
+                        !isQuizStarted &&
+                        <div>
+                            Waiting for Quiz to Start
+                        </div>
+                    }
+                    {
                         isQuizStarted && question &&
+                        <div>
                         <CurrentQuestion
                             data={ question }
                             handleSelection={ handleSelection }
                             response={ response }/>
+                        <div className={ showOnSubmit }>
+                            YOU HAVE SUBMITTED THE ANSWER
+                        </div>
+                        </div>
+
                     }
                 </div>
 
@@ -53,6 +79,7 @@ LiveQuiz.propTypes = {
     nextQuestion: PropTypes.func,
     isQuizStarted: PropTypes.bool.isRequired,
     submitResponse: PropTypes.func,
+    isResponseSumitted: PropTypes.bool,
     startQuiz: PropTypes.func,
     numQuestions: PropTypes.number,
     endQuiz: PropTypes.func,

@@ -24,6 +24,8 @@ export const GO_TO_PREVIOUS_QUESTION = 'GO_TO_PREVIOUS_QUESTION';
 
 export const SET_RESPONSE = 'SET_RESPONSE';
 
+export const CLEAR_RESPONSE_SUBMITTED = 'CLEAR_RESPONSE_SUBMITTED';
+
 /***
  * GET QUIZ QUESTIONS
  ***/
@@ -168,4 +170,8 @@ export const goToPreviousQuestion = () => ({
 export const setResponse = (data) => ({
     type: SET_RESPONSE,
     data
+});
+
+export const clearResponseSubmitted = () => ({
+    type: CLEAR_RESPONSE_SUBMITTED
 });

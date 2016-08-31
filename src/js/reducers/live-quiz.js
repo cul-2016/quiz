@@ -6,6 +6,7 @@ const initialState = {
     error: undefined,
     isFetchingQuizQuestions: false,
     isSavingResponse: false,
+    isResponseSumitted: false,
     quiz_id: undefined,
     name: undefined,
     questions: undefined,
@@ -40,7 +41,8 @@ export default function liveQuiz (state = initialState, action) {
 
     case actionsTypes.SAVE_RESPONSE_REQUEST:
         return update(state, {
-            isSavingResponse: { $set: true }
+            isSavingResponse: { $set: true },
+            isResponseSumitted: { $set: true }
         });
 
     case actionsTypes.SAVE_RESPONSE_SUCCESS:
@@ -103,6 +105,11 @@ export default function liveQuiz (state = initialState, action) {
     case actionsTypes.SET_RESPONSE:
         return update(state, {
             response: { $set: action.data }
+        });
+
+    case actionsTypes.CLEAR_RESPONSE_SUBMITTED:
+        return update(state, {
+            isResponseSumitted: { $set: false }
         });
 
     default:
