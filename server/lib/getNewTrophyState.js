@@ -9,10 +9,15 @@ var getParticipationState = require('./trophy-methods').getParticipationState;
  * @param {number} user_id - user id
  * @param {string} module_id - module id
  * @param {number} quiz_id - quiz id
+ * @param {number} percentageScore - the student's score as a percentage
  * @param {function} callback - a callback function
  */
 
-function getNewTrophyState (client, user_id, module_id, quiz_id, score, callback) { //eslint-disable-line no-unused-vars
+function getNewTrophyState (client, user_id, module_id, quiz_id, percentageScore, callback) { //eslint-disable-line no-unused-vars
+
+    if (arguments.length !== 6) {
+        throw new Error("`getNewTrophyState`: Incorrect number of arguments");
+    }
 
     var trophies_awarded = [];
 
@@ -24,7 +29,7 @@ function getNewTrophyState (client, user_id, module_id, quiz_id, score, callback
         }
         trophies_awarded.push(first_quiz);
 
-        getHighScoreState(client, module_id, score.percentage, (error, high_score) => {
+        getHighScoreState(client, module_id, percentageScore, (error, high_score) => {
 
             if (error) {
                 console.error(error);

@@ -1,5 +1,6 @@
 var client = require('../lib/dbClient');
 var getQuizScore = require('../lib/getQuizScore');
+var setQuizScore = require('../lib/setQuizScore');
 var getNewTrophyState = require('../lib/getNewTrophyState');
 var setNewTrophyState = require('../lib/setNewTrophyState');
 
@@ -18,16 +19,23 @@ module.exports = {
                 console.error(error);
                 return reply(error);
             }
-            getNewTrophyState(client, user_id, module_id, quiz_id, score.percentage, (error, newTrophyState) => {
+            setQuizScore(client, user_id, quiz_id, score.raw, (error) => {
 
                 if (error) {
                     console.error(error);
                     return reply(error);
                 }
-                setNewTrophyState(client, user_id, module_id, newTrophyState, (error) => {
+                getNewTrophyState(client, user_id, module_id, quiz_id, score.percentage, (error, newTrophyState) => {
 
-                    var verdict = error || { newTrophyState: newTrophyState, score: score };
-                    reply(verdict);
+                    if (error) {
+                        console.error(error);
+                        return reply(error);
+                    }
+                    setNewTrophyState(client, user_id, module_id, newTrophyState, (error) => {
+
+                        var verdict = error || { newTrophyState: newTrophyState, score: score };
+                        reply(verdict);
+                    });
                 });
             });
         });

@@ -15,6 +15,7 @@
         "score": "SELECT COUNT(CASE WHEN responses.response = questions.correct_answer THEN 1 END) FROM responses JOIN questions ON questions.question_id = responses.question_id WHERE responses.user_id = ($1) AND responses.quiz_id = ($2);",
         "num_questions": "SELECT COUNT(question_id) FROM questions WHERE quiz_id = ($1);"
     },
+    "setQuizScore": "UPDATE scores SET score = $3 WHERE user_id = $1 AND quiz_id = $2;",
     "saveStudentResponse": "INSERT INTO responses (user_id, quiz_id, question_id, response) VALUES ($1, $2, $3, $4) ON CONFLICT (user_id, quiz_id, question_id) DO UPDATE SET response = $4 WHERE (responses.user_id, responses.quiz_id, responses.question_id) = ($1, $2, $3);",
     "joinModule": "INSERT INTO module_members (module_id, user_id) VALUES ($1, $2) ON CONFLICT DO NOTHING;",
     "getFirstQuizState": "SELECT DISTINCT(user_id) FROM responses WHERE user_id = ($1) AND quiz_id = ($2);",
