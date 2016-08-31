@@ -42,7 +42,6 @@ test("`setNewTrophyState` returns an error if newTrophyState is incorrect", (t) 
     const module_id = 'TEST';
     const newTrophyState = [true, false, true];
 
-
     setNewTrophyState(testClient, user_id, module_id, newTrophyState, (error) => {
 
         if (error) {

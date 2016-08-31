@@ -24,7 +24,6 @@ module.exports = {
                     console.error(error);
                     return reply(error);
                 }
-
                 setNewTrophyState(client, user_id, module_id, newTrophyState, (error) => {
 
                     var verdict = error || { newTrophyState: newTrophyState, score: score };

@@ -2,7 +2,7 @@ import test from 'tape';
 import getQuizScore from '../../../server/lib/getQuizScore';
 import { testClient } from '../../utils/init';
 
-test("Gets a student's score for a quiz", (t) => {
+test("`getQuizScore` gets a student's score for a quiz", (t) => {
 
     t.plan(1);
 
