@@ -18,7 +18,7 @@ export function result (state = initialState, action) {
         });
 
     case actionsTypes.GET_QUIZ_RESULT_SUCCESS:
-        console.log(action.data);
+        
         return update(state, {
             isFetchingResult: { $set: false },
             score: { $set: action.data.score.raw },
