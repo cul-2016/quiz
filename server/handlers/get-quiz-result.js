@@ -18,7 +18,7 @@ module.exports = {
             }
             getNewTrophyState(client, user_id, module_id, quiz_id, score.percentage, (error, newTrophyState) => {
 
-                var verdict = error || newTrophyState;
+                var verdict = error || { newTrophyState: newTrophyState, score: score };
                 reply(verdict);
             });
         });

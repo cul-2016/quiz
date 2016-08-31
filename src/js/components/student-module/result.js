@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import { Motion, spring, presets } from 'react-motion'; //eslint-disable-line no-unused-vars
 import { Link } from 'react-router';
 
 

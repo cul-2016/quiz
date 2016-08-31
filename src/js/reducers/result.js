@@ -1,13 +1,14 @@
 import update from 'react-addons-update';
 import * as actionsTypes from '../actions/result';
 
-const initialState = {
+export const initialState = {
     score: 0,
+    newTrophyState: [],
     isFetchingResult: false,
     error: undefined
 };
 
-export default function result (state = initialState, action) {
+export function result (state = initialState, action) {
 
     switch (action.type) {
 
@@ -17,9 +18,11 @@ export default function result (state = initialState, action) {
         });
 
     case actionsTypes.GET_QUIZ_RESULT_SUCCESS:
+        console.log(action.data);
         return update(state, {
             isFetchingResult: { $set: false },
-            score: { $set: action.data.score }
+            score: { $set: action.data.score.raw },
+            newTrophyState: { $set: action.data.newTrophyState }
         });
 
     case actionsTypes.GET_QUIZ_RESULT_FAILURE:

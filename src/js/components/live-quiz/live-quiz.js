@@ -18,18 +18,17 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex, nextQuestion, isQu
 
                 <h4 className={ titleClass }>Question { nextQuestionIndex }</h4>
             </div>
-                <div className="section">
-                    {
-                        isQuizStarted && question &&
-                        <CurrentQuestion
-                            data={ question }
-                            handleSelection={ handleSelection }
-                            response={ response }/>
-                    }
-                </div>
 
-
-
+            <div className="section">
+                {
+                    isQuizStarted && question &&
+                    <CurrentQuestion
+                        data={ question }
+                        handleSelection={ handleSelection }
+                        response={ response }/>
+                }
+            </div>
+            
             <LiveQuizButtons
                 is_lecturer={ is_lecturer }
                 numQuestions={ numQuestions }
