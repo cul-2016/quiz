@@ -1,18 +1,31 @@
 import React, { PropTypes } from 'react';
 import normaliseLabel from '../../lib/normaliseLabel';
+import classnames from 'classnames';
 
 
 const Trophies = ({ trophies, trophies_awarded }) => { //eslint-disable-line
 
     let mappedTrophies = [];
 
+    // trophies_awarded = {
+    //     first_quiz: true,
+    //     high_score: false,
+    //     overall_average: true,
+    //     participation: false
+    // };
+
     if (trophies) {
 
         mappedTrophies = trophies.map((name, i) => {
+
+            let trophyClasses = classnames("fa fa-trophy", {
+                "awarded": trophies_awarded[name]
+            });
+
             return (
                 <div className="box column has-text-centered" key={ i }>
                     <div className="label">{ normaliseLabel(name) }</div>
-                    <img src="https://cloud.githubusercontent.com/assets/8915092/18100873/7ccfd0e8-6ee4-11e6-846b-627d2b828956.png" />
+                    <i className={ trophyClasses } />
                 </div>
             );
         });

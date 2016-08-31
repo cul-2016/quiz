@@ -6,7 +6,8 @@ import Tabs from './tabs';
 import Spinner from '../general/spinner';
 import Trophies from './trophies';
 
-const StudentModule = ({ location, children, username, trophies, trophies_awarded,
+const StudentModule = ({ location, children,
+                        username, trophies, trophies_awarded,
                         isFetchingModule, isQuizOpen,
                         quiz_id, question, response }) => { //eslint-disable-line no-unused-vars
 
@@ -22,7 +23,7 @@ const StudentModule = ({ location, children, username, trophies, trophies_awarde
 
     let url = location.pathname.split('/');
     let livePath = `/${url[1]}/${url[2]}/live`;
-    console.log(trophies, trophies_awarded);
+
     return (
         <div>
         {
