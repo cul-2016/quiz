@@ -10,7 +10,8 @@ import { getQuizMembers } from '../actions/quiz-members';
 import { getQuizDetails } from '../actions/new-quiz';
 import { getLeaderboard } from '../actions/leaderboard';
 import getUserID from './getUserID';
-
+import isUserLecturer from './isUserLecturer';
+import { socketClient } from '../socket';
 
 /**
  * Checks if user is authenticated.  Redirects  to '/' if they're not
@@ -23,6 +24,24 @@ import getUserID from './getUserID';
 export function authenticate (nextState, replace, callback) {
 
     if (!validCookieExists()) {
+        replace('/');
+    } else if (!loadUserState() && !store.getState().user.user_id) {
+        store.dispatch(getUserDetails(getUserID()));
+    }
+    callback();
+}
+
+/**
+ * Checks if user is authenticated and a lecturer.  Redirects  to '/' if they're not
+ * Is used as an onEnter hook for React Router
+ * Matches the signature of a React Router hook: https://github.com/reactjs/react-router/blob/master/docs/API.md#onenternextstate-replace-callback
+ * @param {object} nextState - the next router state
+ * @param {function} replace - function to redirect to another path
+ * @param {function} callback - (optional) can be used to make the transition block
+ */
+export function authenticateLecturer (nextState, replace, callback) {
+
+    if (!validCookieExists() || isUserLecturer() === false) {
         replace('/');
     } else if (!loadUserState() && !store.getState().user.user_id) {
         store.dispatch(getUserDetails(getUserID()));
@@ -184,6 +203,24 @@ export function fetchLeaderboard (nextState, replace, callback) {
 
         const module_id = nextState.params.module_id;
         store.dispatch(getLeaderboard(module_id));
+    }
+    callback();
+}
+
+/**
+ * leaves all the socket rooms the user is part of.  Is used as an onEnter hook for React Router
+ * Matches the signature of a React Router hook: https://github.com/reactjs/react-router/blob/master/docs/API.md#onenternextstate-replace-callback
+ * @param {object} nextState - the next router state
+ * @param {function} replace - function to redirect to another path
+ * @param {function} callback - (optional) can be used to make the transition block
+ */
+
+export function leaveRoom (nextState, replace, callback) {
+
+    if (validCookieExists()) {
+        socketClient.emit('leave_room', (msg) => {
+            console.log(msg);
+        });
     }
     callback();
 }
