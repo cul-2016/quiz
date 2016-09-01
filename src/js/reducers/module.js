@@ -7,7 +7,7 @@ export const initialState = {
     medals: undefined,
     trophies: undefined,
     num_enrolled: undefined,
-    trophies_awarded: [],
+    trophies_awarded: undefined,
     members: [],
     quizzes: undefined,
     error: undefined,
@@ -54,7 +54,7 @@ export function module (state = initialState, action ) {
             });
         }
         if (action.is_lecturer == false) {
-
+            
             return update(state, {
                 isFetchingModule: { $set: false },
                 module_id: { $set: action.data.module_id },

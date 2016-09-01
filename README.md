@@ -98,4 +98,4 @@ These listeners are located in `src/js/lib/subscriptions.js`.
 
 `fetchDashboard` is registered when the `Dashboard` component is mounted.  It executes when `state.user.is_lecturer !== undefined`
 
-`joinWebsocketRoom` is registered when the `Module` and `StudentModule` components are mounted.  It executes when `state.module.module.module_id !== undefined`.
+`joinWebsocketRoom` is registered when the `Module` and `StudentModule` components are mounted.  It executes when `state.module.module_id !== undefined`.

@@ -2,9 +2,18 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
 
-const Result = ({ score, location }) => {
+const Result = ({ location, score, newTrophies }) => {
 
     let module_id = location.pathname.split('/')[1];
+
+    console.log("NEW TROPHIES", newTrophies);
+
+    let trophiesToPresent = newTrophies.map((trophy) => {
+
+        return (
+            <h4>{ trophy }</h4>
+        );
+    });
 
     return (
         <div className="result hero is-info is-bold is-fullheight">
@@ -14,6 +23,10 @@ const Result = ({ score, location }) => {
                     <h1 className="title score animated bounceInUp">
                         { score }
                     </h1>
+
+                    <div>
+                        { trophiesToPresent }
+                    </div>
                 </div>
             </div>
             <div className="hero-foot">
@@ -29,8 +42,9 @@ const Result = ({ score, location }) => {
 };
 
 Result.propTypes = {
+    location: PropTypes.object,
     score: PropTypes.number.isRequired,
-    location: PropTypes.object
+    newTrophies: PropTypes.array
 };
 
 export default Result;

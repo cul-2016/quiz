@@ -9,7 +9,13 @@ import { setIntervalID, getQuizQuestions, setQuizDetails } from '../actions/live
 joinWebsocketRoom(store, socketClient);
 
 const mapStateToProps = (state) => ({
-    module: state.module.module,
+    module: {
+        module_id: state.module.module_id,
+        name: state.module.name,
+        medals: state.module.medals,
+        trophies: state.module.trophies,
+        num_enrolled: state.module.num_enrolled
+    },
     quizzes: state.module.quizzes,
     isFetchingModule: state.module.isFetchingModule,
     username: state.user.username
@@ -20,7 +26,7 @@ const mapDispatchToProps = (dispatch) => ({
     sendQuizInvite: (quiz_id, name) => {
 
         let quizInfo = {
-            room: store.getState().module.module.module_id,
+            room: store.getState().module.module_id,
             quiz_id
         };
 

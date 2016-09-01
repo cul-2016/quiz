@@ -45,7 +45,7 @@ test('GET_MODULE_SUCCESS works for a lecturer', (t) => {
         lecturerData,
         { isFetchingModule: false }
     );
-
+    console.log(lecturerData);
     const result = reducer(initialState, action);
 
     t.deepEqual(result, expected);

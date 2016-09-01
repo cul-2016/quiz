@@ -44,13 +44,13 @@ const mapDispatchToProps = (dispatch) => ({
     endQuiz: (quiz_id) => {
 
         const intervalID = store.getState().liveQuiz.interval_id;
-        const module_id = store.getState().module.module.module_id;
+        const module_id = store.getState().module.module_id;
         const data = {
             room: module_id,
             quiz_id
         };
         socketClient.emit('end_of_quiz', data, (msg) => { //eslint-disable-line
-            
+
             clearInterval(intervalID);
             dispatch(endQuiz(quiz_id));
             hashHistory.push(`${module_id}/${quiz_id}/holding-page`);

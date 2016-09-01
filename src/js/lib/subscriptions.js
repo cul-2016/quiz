@@ -13,8 +13,7 @@ export function joinWebsocketRoom (store, socket) {
 
         currentModuleID = state &&
             state.module &&
-            state.module.module &&
-            state.module.module.module_id;
+            state.module.module_id;
 
         if (previousModuleID !== currentModuleID) {
 

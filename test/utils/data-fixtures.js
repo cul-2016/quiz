@@ -63,6 +63,60 @@ export const quizzes = [
 
 export const module = Object.assign({}, newModule, { quizzes });
 
+
+export const getModuleForLecturerData = {
+
+    module_id: 'TEST',
+    name: 'test module',
+    medals: {
+        medal_name: ["bronze", "silver", "gold"],
+        condition: [39, 69]
+    },
+    trophies: {
+        trophy_name: [
+            "first_quiz",
+            "high_score",
+            "overall_average",
+            "participation"
+        ],
+        condition: [1, 100, 65, 2]
+    },
+    num_enrolled: 3,
+    quizzes: [
+        {
+            quiz_id: 1,
+            name: 'Week 1 Quiz',
+            num_questions: '2',
+            num_entries: '3',
+            is_presented: true
+        },
+        {
+            quiz_id: 2,
+            name: 'Week 2 Quiz',
+            num_questions: '3',
+            num_entries: '2',
+            is_presented: true
+        }
+    ]
+};
+
+export const getModuleForStudentData = {
+
+    module_id: 'TEST',
+    name: 'test module',
+    medals: {
+        medal_name: ["bronze", "silver", "gold"],
+        condition: [39, 69]
+    },
+    trophies_awarded: {
+        first_quiz: false,
+        high_score: false,
+        overall_average: false,
+        participation: false
+    }
+};
+
+
 export const newQuiz = {
     name: undefined,
     questions: [
@@ -155,58 +209,6 @@ export const nextQuestion = {
         b: 'Tokyo',
         c: 'New York',
         d: 'Paris'
-    }
-};
-
-export const getModuleForLecturerData = {
-
-    module_id: 'TEST',
-    name: 'test module',
-    medals: {
-        medal_name: ["bronze", "silver", "gold"],
-        condition: [39, 69]
-    },
-    trophies: {
-        trophy_name: [
-            "first_quiz",
-            "high_score",
-            "overall_average",
-            "participation"
-        ],
-        condition: [1, 100, 65, 2]
-    },
-    num_enrolled: 3,
-    quizzes: [
-        {
-            quiz_id: 1,
-            name: 'Week 1 Quiz',
-            num_questions: '2',
-            num_entries: '3',
-            is_presented: true
-        },
-        {
-            quiz_id: 2,
-            name: 'Week 2 Quiz',
-            num_questions: '3',
-            num_entries: '2',
-            is_presented: true
-        }
-    ]
-};
-
-export const getModuleForStudentData = {
-
-    module_id: 'TEST',
-    name: 'test module',
-    medals: {
-        medal_name: ["bronze", "silver", "gold"],
-        condition: [39, 69]
-    },
-    trophies_awarded: {
-        first_quiz: false,
-        high_score: false,
-        overall_average: false,
-        participation: false
     }
 };
 
