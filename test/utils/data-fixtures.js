@@ -159,24 +159,23 @@ export const nextQuestion = {
 };
 
 export const getModuleForLecturerData = {
-    module: {
-        module_id: 'TEST',
-        name: 'test module',
-        medals: {
-            medal_name: ["bronze", "silver", "gold"],
-            condition: [39, 69]
-        },
-        trophies: {
-            trophy_name: [
-                "first_quiz",
-                "high_score",
-                "overall_average",
-                "participation"
-            ],
-            condition: [1, 100, 65, 2]
-        },
-        num_enrolled: 3
+
+    module_id: 'TEST',
+    name: 'test module',
+    medals: {
+        medal_name: ["bronze", "silver", "gold"],
+        condition: [39, 69]
     },
+    trophies: {
+        trophy_name: [
+            "first_quiz",
+            "high_score",
+            "overall_average",
+            "participation"
+        ],
+        condition: [1, 100, 65, 2]
+    },
+    num_enrolled: 3,
     quizzes: [
         {
             quiz_id: 1,

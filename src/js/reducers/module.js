@@ -1,18 +1,23 @@
 import update from 'react-addons-update';
 import * as actionsTypes from '../actions/module';
 
-const initialState = {
-    module: undefined,
+export const initialState = {
+    module_id: undefined,
+    name: undefined,
+    medals: undefined,
+    trophies: undefined,
+    num_enrolled: undefined,
+    trophies_awarded: [],
+    members: [],
     quizzes: undefined,
+    error: undefined,
     isFetchingModule: false,
     isFetchingMembers: false,
-    error: undefined,
     isQuizOpen: false,
-    members: [],
     isRemovingMember: false
 };
 
-export default function module (state = initialState, action ) {
+export function module (state = initialState, action ) {
 
     switch (action.type) {
 
@@ -40,7 +45,11 @@ export default function module (state = initialState, action ) {
 
             return update(state, {
                 isFetchingModule: { $set: false },
-                module: { $set: action.data.module },
+                module_id: { $set: action.data.module_id },
+                name: { $set: action.data.name },
+                medals: { $set: action.data.medals },
+                trophies: { $set: action.data.trophies },
+                num_enrolled: { $set: action.data.num_enrolled },
                 quizzes: { $set: action.data.quizzes }
             });
         }
@@ -48,7 +57,10 @@ export default function module (state = initialState, action ) {
 
             return update(state, {
                 isFetchingModule: { $set: false },
-                module: { $set: action.data }
+                module_id: { $set: action.data.module_id },
+                name: { $set: action.data.name },
+                medals: { $set: action.data.medals },
+                trophies_awarded: { $set: action.data.trophies_awarded }
             });
         }
 
