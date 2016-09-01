@@ -40,6 +40,9 @@ export default function review (state = initialState, action) {
             currentQuizIndex: { $set: state.currentQuizIndex + 1 }
         });
 
+    case actionsTypes.CLEAR_REVIEW_STATE:
+        return initialState;
+
     default:
         return state;
     }

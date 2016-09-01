@@ -49,12 +49,11 @@ const mapDispatchToProps = (dispatch) => ({
             room: module_id,
             quiz_id
         };
-        socketClient.emit('end_of_quiz', data, (msg) => {
-
-            console.log("END QUIZ", msg);
+        socketClient.emit('end_of_quiz', data, (msg) => { //eslint-disable-line
+            
             clearInterval(intervalID);
             dispatch(endQuiz(quiz_id));
-            hashHistory.push(`${module_id}/${quiz_id}/review`);
+            hashHistory.push(`${module_id}/${quiz_id}/live-quiz-break`);
         });
     }
 });

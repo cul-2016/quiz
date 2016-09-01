@@ -3,7 +3,7 @@ import ShowAnswer from './show-answer';
 import ReviewButtons from './review-buttons';
 import Spinner from '../general/spinner';
 
-const Review = ({ isFetchingReview, question, numQuestions, currentQuizIndex, isAnswerShowing, handleIsAnswerShowing, handleIncrementCurrentQuizIndex }) => {
+const Review = ({ isFetchingReview, question, numQuestions, currentQuizIndex, isAnswerShowing, handleIsAnswerShowing, handleIncrementCurrentQuizIndex, endReview, params }) => {
 
     return (
         <div>
@@ -24,7 +24,9 @@ const Review = ({ isFetchingReview, question, numQuestions, currentQuizIndex, is
                 numQuestions={ numQuestions }
                 currentQuizIndex={ currentQuizIndex }
                 handleIsAnswerShowing={ handleIsAnswerShowing }
-                handleIncrementCurrentQuizIndex={ handleIncrementCurrentQuizIndex } />
+                handleIncrementCurrentQuizIndex={ handleIncrementCurrentQuizIndex }
+                endReview={ endReview }
+                params={ params } />
         </div>
     );
 };
@@ -36,7 +38,9 @@ Review.propTypes = {
     currentQuizIndex: PropTypes.number,
     isAnswerShowing: PropTypes.bool.isRequired,
     handleIsAnswerShowing: PropTypes.func.isRequired,
-    handleIncrementCurrentQuizIndex: PropTypes.func.isRequired
+    handleIncrementCurrentQuizIndex: PropTypes.func.isRequired,
+    endReview: PropTypes.func.isRequired,
+    params: PropTypes.object.isRequired
 };
 
 export default Review;

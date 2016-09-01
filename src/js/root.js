@@ -15,6 +15,7 @@ import ModuleContainer from './containers/module';
 import LecturerLiveQuizContainer from './containers/lecturer-live-quiz';
 import QuizHistoryContainer from './containers/quiz-history';
 import LeaderboardContainer from './containers/leaderboard';
+import HoldingPageComponent from './components/holding-page';
 import ReviewContainer from './containers/review';
 import ModuleMembersContainer from './containers/module-members';
 import QuizMembersContainer from './containers/quiz-members';
@@ -101,6 +102,10 @@ const Root = ({ store }) => (
                     onEnter={ hooks.authenticate }
                     path=":module_id/student/live"
                     component={ StudentLiveQuizContainer } />
+                <Route
+                    onEnter={ hooks.authenticate }
+                    path=":module_id/:quiz_id/live-quiz-break"
+                    component={ HoldingPageComponent } />
                 <Route
                     onEnter={ composeHooks(hooks.authenticate, hooks.fetchQuizReview) }
                     path=":module_id/:quiz_id/review"

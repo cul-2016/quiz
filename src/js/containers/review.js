@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Review from '../components/review/review';
-import { flipIsAnswerShowing, incrementCurrentQuizIndex } from '../actions/review';
+import { flipIsAnswerShowing, incrementCurrentQuizIndex, clearReviewState } from '../actions/review';
 
 const mapStateToProps = (state) => ({
     isFetchingReview: state.review.isFetchingReview,
@@ -20,6 +20,11 @@ const mapDispatchToProps = (dispatch) => ({
     handleIncrementCurrentQuizIndex: () => {
 
         dispatch(incrementCurrentQuizIndex());
+    },
+
+    endReview: () => {
+
+        dispatch(clearReviewState());
     }
 });
 
