@@ -5,6 +5,7 @@ import Quizzes from './quizzes';
 import { Link } from 'react-router';
 import Spinner from '../general/spinner';
 
+
 const Module = ({ location, module, quizzes, isFetchingModule, username, sendQuizInvite }) => { // eslint-disable-line no-unused-vars
 
     return (
