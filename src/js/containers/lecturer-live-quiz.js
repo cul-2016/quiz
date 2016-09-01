@@ -53,7 +53,7 @@ const mapDispatchToProps = (dispatch) => ({
             
             clearInterval(intervalID);
             dispatch(endQuiz(quiz_id));
-            hashHistory.push(`${module_id}/${quiz_id}/live-quiz-break`);
+            hashHistory.push(`${module_id}/${quiz_id}/holding-page`);
         });
     }
 });

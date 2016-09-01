@@ -109,7 +109,7 @@ const Root = ({ store }) => (
                     component={ StudentLiveQuizContainer } />
                 <Route
                     onEnter={ hooks.authenticate }
-                    path=":module_id/:quiz_id/live-quiz-break"
+                    path=":module_id/:quiz_id/holding-page"
                     component={ HoldingPageComponent } />
                 <Route
                     onEnter={ composeHooks(hooks.authenticate, hooks.fetchQuizReview) }

@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'; //eslint-disable-line no-unused-vars
+import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
 const HoldingPage = ({ params }) => {
