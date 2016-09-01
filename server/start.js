@@ -19,7 +19,6 @@ io.on('connection', (socket) => {
     socket.on('join_room', (room, cb) => {
 
         socket.join(room);
-        console.log(socket.rooms, 'JOINED HERE');
         cb('Successfully joined room: ' + room); //eslint-disable-line no-console
     });
 
@@ -60,7 +59,7 @@ io.on('connection', (socket) => {
         roomList.forEach((room) => {
             socket.leave(room);
         });
-        cb(`Successfully left room:>>>${roomList}<<< with exception of default room`); //eslint-disable-line no-console
+        cb(`Successfully left room:>>>${roomList}<<< with exception of default room`);
     });
 
 });

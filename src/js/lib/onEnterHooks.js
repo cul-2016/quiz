@@ -40,7 +40,7 @@ export function authenticate (nextState, replace, callback) {
  * @param {function} callback - (optional) can be used to make the transition block
  */
 export function authenticateLecturer (nextState, replace, callback) {
-    console.log(typeof isUserLecturer(), '<<<<<<<<<<<<<<<<<<<<<<<<<');
+
     if (!validCookieExists() || isUserLecturer() === false) {
         replace('/');
     } else if (!loadUserState() && !store.getState().user.user_id) {

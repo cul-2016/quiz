@@ -7,11 +7,7 @@
 export default function isUserLecturer () {
     try {
         const result = document.cookie.match(/cul_is_lecturer=(true|false)/)[0].match(/(true|false)/);
-        if (result[0] === 'true') {
-            return true;
-        } else {
-            return false;
-        }
+        return result[0] === 'true';
     }
     catch (error) {
         console.error(error);

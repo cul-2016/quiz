@@ -8,7 +8,7 @@ const mapStateToProps = (state) => ({
     is_lecturer: state.user.is_lecturer,
     isQuizStarted: state.liveQuiz.isQuizStarted,
     isSavingResponse: state.liveQuiz.isSavingResponse,
-    isResponseSumitted: state.liveQuiz.isResponseSumitted,
+    isResponseSubmitted: state.liveQuiz.isResponseSubmitted,
     response: state.liveQuiz.response,
     name: state.liveQuiz.name
 });

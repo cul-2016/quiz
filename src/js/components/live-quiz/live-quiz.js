@@ -3,20 +3,20 @@ import CurrentQuestion from './current-question';
 import LiveQuizButtons from './live-quiz-buttons';
 import classnames from 'classnames';
 import { store } from '../../store';
-import { clearResponseSubmitted } from '../../actions/live-quiz';
+import { toggleIsResponseSubmitted } from '../../actions/live-quiz';
 // import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 // import ReactTransitionGroup from 'react-addons-transition-group';
 
 
-const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex, nextQuestion, isQuizStarted, submitResponse, isResponseSumitted, startQuiz, numQuestions, endQuiz, quiz_id, handleSelection, response, name }) => {
+const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex, nextQuestion, isQuizStarted, submitResponse, isResponseSubmitted, startQuiz, numQuestions, endQuiz, quiz_id, handleSelection, response, name }) => {
 
     let showOnSubmit = classnames("submit-success", {
-        "display-none": !isResponseSumitted
+        "display-none": !isResponseSubmitted
     });
 
-    if (isResponseSumitted) {
+    if (isResponseSubmitted) {
         setTimeout(() =>{
-            store.dispatch(clearResponseSubmitted());
+            store.dispatch(toggleIsResponseSubmitted());
         }, 1000);
     }
 
@@ -42,13 +42,13 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex, nextQuestion, isQu
                     {
                         isQuizStarted && question &&
                         <div>
-                        <CurrentQuestion
-                            data={ question }
-                            handleSelection={ handleSelection }
-                            response={ response }/>
-                        <div className={ showOnSubmit }>
-                            YOU HAVE SUBMITTED THE ANSWER
-                        </div>
+                            <CurrentQuestion
+                                data={ question }
+                                handleSelection={ handleSelection }
+                                response={ response }/>
+                            <div className={ showOnSubmit }>
+                                YOU HAVE SUBMITTED THE ANSWER
+                            </div>
                         </div>
 
                     }
@@ -79,7 +79,7 @@ LiveQuiz.propTypes = {
     nextQuestion: PropTypes.func,
     isQuizStarted: PropTypes.bool.isRequired,
     submitResponse: PropTypes.func,
-    isResponseSumitted: PropTypes.bool,
+    isResponseSubmitted: PropTypes.bool,
     startQuiz: PropTypes.func,
     numQuestions: PropTypes.number,
     endQuiz: PropTypes.func,

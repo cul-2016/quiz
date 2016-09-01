@@ -28,7 +28,7 @@ export function joinWebsocketRoom (store, socket) {
         }
     }
 
-    let unsubscribe = store.subscribe(listener); //eslint-disable-line
+    store.subscribe(listener);
     listener();
 
 }
