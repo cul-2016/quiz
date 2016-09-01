@@ -11,10 +11,17 @@ export default function composeHooks (...hooks) {
         (function executeHooksSynchronously (remainingHooks) {
 
             if (!remainingHooks.length) return executeTransition();
+
             let nextHook = remainingHooks[0];
+
             if (nextHook.length >= 3) {
-                nextHook.call(this, nextState, replace, () => {
-                    executeHooksSynchronously(remainingHooks.slice(1));
+                nextHook.call(this, nextState, replace, (callNextHook = true) => {
+
+                    if (callNextHook) {
+                        executeHooksSynchronously(remainingHooks.slice(1));
+                    } else {
+                        executeTransition();
+                    }
                 });
             } else {
                 nextHook.call(this, nextState, replace);

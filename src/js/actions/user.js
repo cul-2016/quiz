@@ -1,4 +1,3 @@
-import { hashHistory } from 'react-router';
 import axios from 'axios';
 
 export const SET_USER_DETAILS = 'SET_USER_DETAILS';
@@ -27,11 +26,6 @@ export function getUserDetails (user_id) {
             axios.get(`/get-user-details?user_id=${user_id}`)
             .then((response) => {
                 dispatch(getUserDetailsSuccess(response.data));
-                if (response.data.is_lecturer) {
-                    hashHistory.push('/dashboard');
-                } else {
-                    hashHistory.push('/dashboard');
-                }
             })
             .catch((error) => {
                 dispatch(getUserDetailsFailure(error));

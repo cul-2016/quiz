@@ -36,7 +36,7 @@ const ShowAnswer = ({ isAnswerShowing, data }) => {
             <div key={ i } className={ classes }>
                 <span>{ `${letter.toUpperCase()}: ` }</span>
                 <span>{ `${data[letter]}` }</span>
-                <span>{ `${data[responsesArray[i]]}`}</span>
+                <span>{ `${+data[responsesArray[i]]}`}</span>
             </div>
         );
 

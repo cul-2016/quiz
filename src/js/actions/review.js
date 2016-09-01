@@ -8,6 +8,8 @@ export const FLIP_IS_ANSWER_SHOWING = 'FLIP_IS_ANSWER_SHOWING';
 
 export const INCREMENT_CURRENT_QUIZ_INDEX = 'INCREMENT_CURRENT_QUIZ_INDEX';
 
+export const CLEAR_REVIEW_STATE = 'CLEAR_REVIEW_STATE';
+
 export function getQuizReview (quiz_id) {
 
     return (dispatch) => {
@@ -45,4 +47,8 @@ export const flipIsAnswerShowing = () => ({
 
 export const incrementCurrentQuizIndex = () => ({
     type: INCREMENT_CURRENT_QUIZ_INDEX
+});
+
+export const clearReviewState = () => ({
+    type: CLEAR_REVIEW_STATE
 });

@@ -22,13 +22,20 @@ import { socketClient } from '../socket';
  * @param {function} callback - (optional) can be used to make the transition block
  */
 export function authenticate (nextState, replace, callback) {
-
+    
     if (!validCookieExists()) {
+
         replace('/');
+        callback(false);
     } else if (!store.getState().user.user_id) {
-        store.dispatch(getUserDetails(getUserID()));
+
+        localStorage.setItem('previousPath', nextState.location.pathname);
+        replace('/app-loading');
+        callback(false);
+    } else {
+
+        callback();
     }
-    callback();
 }
 
 /**
@@ -44,6 +51,24 @@ export function authenticateLecturer (nextState, replace, callback) {
     if (!validCookieExists() || isUserLecturer() === false) {
         replace('/');
     } else if (!loadState() && !store.getState().user.user_id) {
+        store.dispatch(getUserDetails(getUserID()));
+    }
+    callback();
+}
+
+/**
+ * fetches user details.  Redirects  to '/' if they're not authorised
+ * Is used as an onEnter hook for React Router
+ * Matches the signature of a React Router hook: https://github.com/reactjs/react-router/blob/master/docs/API.md#onenternextstate-replace-callback
+ * @param {object} nextState - the next router state
+ * @param {function} replace - function to redirect to another path
+ * @param {function} callback - (optional) can be used to make the transition block
+ */
+export function fetchUserDetails (nextState, replace, callback) {
+
+    if (!validCookieExists()) {
+        replace('/');
+    } else {
         store.dispatch(getUserDetails(getUserID()));
     }
     callback();

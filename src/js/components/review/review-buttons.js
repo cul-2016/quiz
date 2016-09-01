@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
 import classnames from 'classnames';
 
-const ReviewButtons = ({ isAnswerShowing, handleIsAnswerShowing, handleIncrementCurrentQuizIndex, numQuestions, currentQuizIndex }) => {
+const ReviewButtons = ({ isAnswerShowing, handleIsAnswerShowing, handleIncrementCurrentQuizIndex, numQuestions, currentQuizIndex, endReview, params }) => {
     let answerButtonClasses = classnames("button is-large is-success", {
         "display-none": isAnswerShowing
     });
@@ -10,9 +11,14 @@ const ReviewButtons = ({ isAnswerShowing, handleIsAnswerShowing, handleIncrement
         "display-none": !isAnswerShowing || numQuestions === currentQuizIndex + 1
     });
 
-    let finishButtonClasses = classnames("button is-large is-info", {
+    let finishButtonClasses = classnames("finish-button", {
         "display-none": !isAnswerShowing || numQuestions !== currentQuizIndex + 1
     });
+
+    let leaderboardButtonClasses = classnames("leaderboard-button", {
+        "display-none": !isAnswerShowing || numQuestions !== currentQuizIndex + 1
+    });
+
 
     function clickNext () {
         handleIsAnswerShowing();
@@ -22,7 +28,7 @@ const ReviewButtons = ({ isAnswerShowing, handleIsAnswerShowing, handleIncrement
 
 
     return (
-        <div className="column is-8 is-offset-2 has-text-centered">
+        <div className="column is-8 is-offset-2 has-text-centered review-buttons">
 
             <button className={ answerButtonClasses } onClick={ handleIsAnswerShowing }>
                 Answer
@@ -32,9 +38,17 @@ const ReviewButtons = ({ isAnswerShowing, handleIsAnswerShowing, handleIncrement
                 Next
             </button>
 
-            <button className={ finishButtonClasses }>
-                Finish
-            </button>
+            <Link to={`${params.module_id}/lecturer`} className={ finishButtonClasses } onClick={ endReview }>
+                <button className="button is-large is-info">
+                    Finish
+                </button>
+            </Link>
+
+            <Link to={`${params.module_id}/leaderboard`} className={ leaderboardButtonClasses } onClick={ endReview }>
+                <button className="button is-large is-success">
+                    View Leaderboard
+                </button>
+            </Link>
 
         </div>
     );
@@ -45,7 +59,9 @@ ReviewButtons.propTypes = {
     handleIsAnswerShowing: PropTypes.func,
     handleIncrementCurrentQuizIndex: PropTypes.func,
     numQuestions: PropTypes.number,
-    currentQuizIndex: PropTypes.number
+    currentQuizIndex: PropTypes.number,
+    endReview: PropTypes.func,
+    params: PropTypes.object
 };
 
 export default ReviewButtons;
