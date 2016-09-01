@@ -1,8 +1,8 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import rootReducer from './reducers/root-reducer';
-import { saveUserState, loadUserState } from './lib/userState';
-
+import { loadState, saveState } from './lib/localStorageState';
+import throttle from 'lodash/throttle';
 
 export function initStore (initialState) {
 
@@ -16,14 +16,15 @@ export function initStore (initialState) {
     );
 }
 
-const persistedState = loadUserState();
 
+const persistedState = loadState();
 export const store = initStore(persistedState);
 
-store.subscribe(() => {
-    if (store.getState().user.user_id) {
-        saveUserState({
-            user: store.getState().user
-        });
-    }
-});
+
+store.subscribe(throttle(() => {
+    saveState({
+        user: store.getState().user,
+        module: store.getState().module,
+        liveQuiz: store.getState().liveQuiz
+    });
+}, 2000));

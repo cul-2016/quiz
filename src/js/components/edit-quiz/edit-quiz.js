@@ -1,8 +1,28 @@
 import React, { PropTypes } from 'react';
 import Questions from './questions';
 import Nav from '../general/nav';
+import classnames from 'classnames';
 
-const EditQuiz = ({ questions, name, deletedQuestions, username, handleAddQuestion, handleInputChange, handleQuizNameChange, handleEditQuiz, handleDeleteQuestion, params }) => {
+
+const EditQuiz = ({ questions, isUpdatingQuiz, name, deletedQuestions, username, handleAddQuestion, handleInputChange, handleQuizNameChange, handleEditQuiz, handleDeleteQuestion, params }) => {
+
+    const questionsValidation = questions.map((question) => {
+        if (!question.question || !question.a || !question.b || !question.correct_answer){
+            return false;
+        } else {
+            return true;
+        }
+    }).every((elem) => {
+        return elem;
+    });
+
+    const submitClasses = classnames("button is-success save-question", {
+        "is-disabled": !name || questionsValidation === false,
+        "is-loading": isUpdatingQuiz
+    });
+    const quizNameClasses = classnames("help is-danger", {
+        "display-none": name
+    });
 
     return (
             <div>
@@ -15,9 +35,10 @@ const EditQuiz = ({ questions, name, deletedQuestions, username, handleAddQuesti
                     <input
                         className="input"
                         type="text"
-                        value={ name }
+                        value={ name || "" }
                         onChange={ (e) => handleQuizNameChange(e.target.value) }
                         placeholder='Quiz Name'></input>
+                        <span className={ quizNameClasses }>Please enter a Quiz Name</span>
                 </div>
 
                 <Questions
@@ -30,7 +51,7 @@ const EditQuiz = ({ questions, name, deletedQuestions, username, handleAddQuesti
                     <button className="button is-info add-question" onClick={ handleAddQuestion }>
                         Add Question
                     </button>
-                    <button className="button is-success save-question" onClick={ () => handleEditQuiz(params.module_id, params.quiz_id, name, questions, deletedQuestions) }>
+                    <button className={ submitClasses } onClick={ () => handleEditQuiz(params.module_id, params.quiz_id, name, questions, deletedQuestions) }>
                         Save and Exit
                     </button>
                 </div>
@@ -41,6 +62,7 @@ const EditQuiz = ({ questions, name, deletedQuestions, username, handleAddQuesti
 
 EditQuiz.propTypes = {
     questions: PropTypes.array,
+    isUpdatingQuiz: PropTypes.bool,
     name: PropTypes.string,
     username: PropTypes.string,
     deletedQuestions: PropTypes.array,

@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node server/start.js",
     "start:dev": "nodemon server/start.js",
+    "webpack-watch": "webpack --config ./webpack.sohil.config.js --progress --colors --watch",
     "dev": "node ./src/utils/dev-server.js",
     "build": "webpack --config ./webpack.production.config.js --colors --progress",
     "lint": "node_modules/eslint/bin/eslint.js 'src/**/*.@(js|jsx)' 'server/**/*.@(js|jsx)' 'test/**/*.@(js|jsx)'",
@@ -56,6 +57,7 @@
     "inert": "^4.0.1",
     "istanbul": "^1.0.0-alpha.2",
     "json-loader": "^0.5.4",
+    "lodash": "^4.15.0",
     "node-sass": "^3.8.0",
     "pg": "^6.0.1",
     "postcss-loader": "^0.9.1",

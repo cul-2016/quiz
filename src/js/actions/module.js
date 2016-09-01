@@ -2,6 +2,7 @@ import axios from 'axios';
 
 export const OPEN_QUIZ = 'OPEN_QUIZ';
 export const CLOSE_QUIZ = 'CLOSE_QUIZ';
+export const CLEAR_MODULE_STATE = 'CLEAR_MODULE_STATE';
 
 export const GET_MODULE_REQUEST = 'GET_MODULE_REQUEST';
 export const GET_MODULE_SUCCESS = 'GET_MODULE_SUCCESS';
@@ -20,11 +21,15 @@ export const REMOVE_MODULE_MEMBER_FAILURE = 'REMOVE_MODULE_MEMBER_FAILURE';
  ****/
 
 export const openQuiz = () => ( {
-    type: OPEN_QUIZ,
+    type: OPEN_QUIZ
 });
 
 export const closeQuiz = () => ({
-    type: CLOSE_QUIZ,
+    type: CLOSE_QUIZ
+});
+
+export const clearModuleState = () => ({
+    type: CLEAR_MODULE_STATE
 });
 
 

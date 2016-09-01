@@ -26,6 +26,9 @@ export default function module (state = initialState, action ) {
             isQuizOpen: { $set: false }
         });
 
+    case actionsTypes.CLEAR_MODULE_STATE:
+        return initialState;
+
     case actionsTypes.GET_MODULE_REQUEST:
         return update(state, {
             isFetchingModule: { $set: true }

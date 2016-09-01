@@ -5,22 +5,30 @@
  */
 export function joinWebsocketRoom (store, socket) {
 
-    let unsubscribe = store.subscribe(listener);
-
+    let currentModuleID;
     function listener () {
-        let module_id;
-        try {
-            module_id = store.getState().module.module.module_id;
-        } catch (error) {
-            return undefined;
-        }
+        let previousModuleID = currentModuleID;
 
-        if (module_id !== undefined) {
+        const state = store.getState();
 
-            unsubscribe();
-            socket.emit('join_room', module_id, (msg) => {
-                console.log(msg);
-            });
+        currentModuleID = state &&
+            state.module &&
+            state.module.module &&
+            state.module.module.module_id;
+
+        if (previousModuleID !== currentModuleID) {
+
+            if (currentModuleID !== undefined) {
+                socket.emit('join_room', currentModuleID, (msg) => {
+                    console.log(msg);
+                });
+            } else {
+                console.log("you've returned to the dashboard");
+            }
         }
     }
+
+    store.subscribe(listener);
+    listener();
+
 }

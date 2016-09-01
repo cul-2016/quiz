@@ -8,6 +8,7 @@ import { hashHistory } from 'react-router';
 
 const mapStateToProps = (state) => ({
     questions: state.newQuiz.questions,
+    isUpdatingQuiz: state.newQuiz.isUpdatingQuiz,
     name: state.newQuiz.name,
     deletedQuestions: state.newQuiz.deletedQuestions,
     username: state.user.username
@@ -34,7 +35,9 @@ const mapDispatchToProps = (dispatch) => ({
 
     handleEditQuiz: (module_id, quiz_id, quizName, questions, deletedQuestions) => {
         dispatch(updateQuiz(module_id, quiz_id, quizName, questions, deletedQuestions));
-        hashHistory.goBack();
+        setTimeout(() => {
+            hashHistory.goBack();
+        }, 750);
     }
 });
 

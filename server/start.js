@@ -50,6 +50,18 @@ io.on('connection', (socket) => {
         console.log('end of quiz sent'); //eslint-disable-line no-console
         cb('end of quiz sent');
     });
+
+    socket.on('leave_room', (cb) => {
+
+        var roomList = Object.keys(socket.rooms).filter((room) => {
+            return !room.match(/\/#.*/);
+        });
+        roomList.forEach((room) => {
+            socket.leave(room);
+        });
+        cb(`Successfully left room:>>>${roomList}<<< with exception of default room`);
+    });
+
 });
 
 server.start((error) => {

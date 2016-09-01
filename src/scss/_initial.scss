@@ -10,6 +10,12 @@ input {
     background-color: $blue;
 }
 
+.submit-success {
+    background-color: rgba(0, 0, 0, 0.48);
+    color: white;
+    border-radius: 10em;
+}
+
 /* achieves the effect that `.column` used to do */
 .container.narrow, .box.narrow, .section.narrow {
     margin: auto;

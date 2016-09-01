@@ -209,7 +209,7 @@ test('SAVE_RESPONSE_REQUEST works', (t) => {
     };
 
     const actual = reducer(initialState, action);
-    const expected = Object.assign({}, liveQuizState, { isSavingResponse: true });
+    const expected = Object.assign({}, liveQuizState, { isSavingResponse: true, isResponseSubmitted: true });
 
     t.deepEqual(actual, expected);
 });
