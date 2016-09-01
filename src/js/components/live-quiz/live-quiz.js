@@ -3,7 +3,7 @@ import CurrentQuestion from './current-question';
 import LiveQuizButtons from './live-quiz-buttons';
 import classnames from 'classnames';
 import { store } from '../../store';
-import { toggleIsResponseSubmitted } from '../../actions/live-quiz';
+import { toggleMessageVisibility } from '../../actions/live-quiz';
 // import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 // import ReactTransitionGroup from 'react-addons-transition-group';
 
@@ -16,7 +16,7 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex, nextQuestion, isQu
 
     if (isResponseSubmitted) {
         setTimeout(() =>{
-            store.dispatch(toggleIsResponseSubmitted());
+            store.dispatch(toggleMessageVisibility());
         }, 1000);
     }
 

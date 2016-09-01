@@ -107,7 +107,7 @@ export default function liveQuiz (state = initialState, action) {
             response: { $set: action.data }
         });
 
-    case actionsTypes.TOGGLE_IS_RESPONSE_SUBMITTED:
+    case actionsTypes.TOGGLE_MESSAGE_VISIBILITY:
         return update(state, {
             isResponseSubmitted: { $set: false }
         });

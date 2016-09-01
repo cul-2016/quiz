@@ -24,7 +24,7 @@ export const GO_TO_PREVIOUS_QUESTION = 'GO_TO_PREVIOUS_QUESTION';
 
 export const SET_RESPONSE = 'SET_RESPONSE';
 
-export const TOGGLE_IS_RESPONSE_SUBMITTED = 'TOGGLE_IS_RESPONSE_SUBMITTED';
+export const TOGGLE_MESSAGE_VISIBILITY = 'TOGGLE_MESSAGE_VISIBILITY';
 
 /***
  * GET QUIZ QUESTIONS
@@ -172,6 +172,6 @@ export const setResponse = (data) => ({
     data
 });
 
-export const toggleIsResponseSubmitted = () => ({
-    type: TOGGLE_IS_RESPONSE_SUBMITTED
+export const toggleMessageVisibility = () => ({
+    type: TOGGLE_MESSAGE_VISIBILITY
 });
