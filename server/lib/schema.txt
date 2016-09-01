@@ -222,7 +222,7 @@ INSERT INTO trophies (module_id, trophy_name, condition)
 
 INSERT INTO quizzes (module_id, name, is_presented)
     VALUES ('TEST', 'Week 1 Quiz', true),
-           ('TEST', 'Week 2 Quiz', true)
+           ('TEST', 'Week 2 Quiz', true),
            ('TEST', 'Week 3 Quiz', false);
 
 
