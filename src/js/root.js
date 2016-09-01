@@ -10,6 +10,7 @@ import RegisterUserContainer from './containers/register-user';
 import NewQuizContainer from './containers/new-quiz';
 import EditQuizContainer from './containers/edit-quiz';
 
+import AppLoadingContainer from './containers/app-loading';
 
 import ModuleContainer from './containers/module';
 import LecturerLiveQuizContainer from './containers/lecturer-live-quiz';
@@ -59,6 +60,10 @@ const Root = ({ store }) => (
                     onEnter={ hooks.authenticate }
                     path="join-module"
                     component={ StudentJoinModuleContainer } />
+                <Route
+                    onEnter={ hooks.fetchUserDetails }
+                    path="app-loading"
+                    component={ AppLoadingContainer } />
                 <Route
                     onEnter={ composeHooks(hooks.authenticate, hooks.fetchModule) }
                     path=":module_id/lecturer"
