@@ -61,6 +61,17 @@ test('updateQuizName action creator returns the exected action', (t) => {
     t.deepEqual(actual, expected);
 });
 
+test('clearNewQuizState action creator returns the exected action', (t) => {
+
+    t.plan(1);
+    const expected = {
+        type: actions.CLEAR_NEW_QUIZ_STATE,
+    };
+
+    const actual = deepFreeze(actions.clearNewQuizState());
+    t.deepEqual(actual, expected);
+});
+
 // -----
 // SAVING NEW QUIZ
 // -----

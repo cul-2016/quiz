@@ -4,6 +4,7 @@ export const ADD_QUESTION = 'ADD_QUESTION';
 export const DELETE_QUESTION = 'DELETE_QUESTION';
 export const UPDATE_VALUE = 'UPDATE_VALUE';
 export const UPDATE_QUIZ_NAME = 'UPDATE_QUIZ_NAME';
+export const CLEAR_NEW_QUIZ_STATE = 'CLEAR_NEW_QUIZ_STATE';
 
 export const SAVE_QUIZ_REQUEST = 'SAVE_QUIZ_REQUEST';
 export const SAVE_QUIZ_SUCCESS = 'SAVE_QUIZ_SUCCESS';
@@ -38,6 +39,10 @@ export const updateValue = (inputType, value, index) => ({
 export const updateQuizName = (value) => ({
     type: UPDATE_QUIZ_NAME,
     value
+});
+
+export const clearNewQuizState = () => ({
+    type: CLEAR_NEW_QUIZ_STATE
 });
 
 
