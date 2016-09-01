@@ -6,7 +6,7 @@ const AppLoading = ({ userState }) => {
     const previousPath = localStorage.getItem('previousPath');
     if (userState.user_id) {
         hashHistory.push(previousPath);
-        localStorage.setItem('previousPath', null);
+        localStorage.removeItem("previousPath");
     }
 
     return (
