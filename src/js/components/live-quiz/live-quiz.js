@@ -21,7 +21,7 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex, nextQuestion, isQu
     let titleClass = classnames({
         "display-none": !nextQuestionIndex
     });
-    
+
     return (
         <section className="live-quiz container">
             <div className="has-text-centered" >
@@ -48,16 +48,6 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex, nextQuestion, isQu
                             YOU HAVE SUBMITTED THE ANSWER
                         </div>
                     </div>
-                }
-            </div>
-
-            <div className="section">
-                {
-                    isQuizStarted && question &&
-                    <CurrentQuestion
-                        data={ question }
-                        handleSelection={ handleSelection }
-                        response={ response }/>
                 }
             </div>
 
