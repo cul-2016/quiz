@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
+import classnames from 'classnames';
+import normaliseText from '../../lib/normaliseText';
 
 
 const Result = ({ location, score, newTrophies }) => {
@@ -8,16 +10,22 @@ const Result = ({ location, score, newTrophies }) => {
 
     console.log("NEW TROPHIES", newTrophies);
 
+    // newTrophies = [];
     newTrophies = newTrophies || [];
 
     let trophiesToPresent = newTrophies.map((trophy, i) => {
 
         return (
-            <div>
+            <div className="column animated bounceInUp">
                 <i className="fa fa-trophy awarded" />
-                <span key={ i }>{ trophy }</span>
+                <p key={ i }>{ normaliseText(trophy) }</p>
             </div>
         );
+    });
+
+    let scoreClasses = classnames("title score animated bounceInUp", {
+        "large": trophiesToPresent.length === 0,
+        "small": trophiesToPresent.length > 0
     });
 
     return (
@@ -25,19 +33,18 @@ const Result = ({ location, score, newTrophies }) => {
             <div className="hero-body">
                 <div className="container has-text-centered">
                     <h2 className="subtitle">Your score is...</h2>
-                    <h1 className="title score animated bounceInUp">
-                        { score }
-                    </h1>
-
-                    <div>
+                    <div className="columns is-mobile">
                         { trophiesToPresent }
                     </div>
+                    <h1 className={ scoreClasses }>
+                        { score }
+                    </h1>
                 </div>
             </div>
             <div className="hero-foot">
                 <Link to={ `/${module_id}/student` }>
                     <button className="button is-large is-success is-fullwidth">
-                        Back to module
+                        Finish
                     </button>
                 </Link>
             </div>
