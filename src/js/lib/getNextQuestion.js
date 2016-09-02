@@ -11,7 +11,7 @@ export function getNextQuestion (store) {
     let quiz_id = store.getState().liveQuiz.quiz_id;
     let name = store.getState().liveQuiz.name;
 
-    let room = store.getState().module.module.module_id;
+    let room = store.getState().module.module_id;
 
     return {
         questionObj: {

@@ -1,15 +1,22 @@
 import React, { PropTypes } from 'react';
 import normaliseText from '../../lib/normaliseText';
+import classnames from 'classnames';
 
 
-const Trophies = ({ trophies }) => {
+const Trophies = ({ trophies, trophies_awarded }) => {
 
-    const mappedTrophies = trophies.trophy_name.map((name, i) => {
+    trophies = trophies || [];
+
+    let mappedTrophies = trophies.map((name, i) => {
+
+        let trophyClasses = classnames("fa fa-trophy", {
+            "awarded": trophies_awarded[name]
+        });
 
         return (
             <div className="box column has-text-centered" key={ i }>
                 <div className="label">{ normaliseText(name) }</div>
-                <div>{ trophies.condition[i] }</div>
+                <i className={ trophyClasses } />
             </div>
         );
     });
@@ -18,7 +25,6 @@ const Trophies = ({ trophies }) => {
         <div className="section">
             <h4>Trophies</h4>
             <div className="columns">
-
                 { mappedTrophies }
             </div>
         </div>
@@ -26,7 +32,8 @@ const Trophies = ({ trophies }) => {
 };
 
 Trophies.propTypes = {
-    trophies: PropTypes.object.isRequired
+    trophies: PropTypes.array,
+    trophies_awarded: PropTypes.object
 };
 
 export default Trophies;

@@ -43,6 +43,13 @@ bundle.js
 env.sh
 queries.txt
 credentials.md
+public/bundle.js.map
+*.ttf
+*.eot
+*.hot-update.json
+*.woff
+*.woff2
+*.svg
 
 # Fonts
 

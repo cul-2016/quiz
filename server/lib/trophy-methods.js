@@ -30,7 +30,6 @@ function getFirstQuizState (client, user_id, quiz_id, callback) {
 
 function getHighScoreState (client, module_id, percentageScore, callback) {
 
-
     query(client, queries.getHighScoreState, [module_id], (error, result) => {
 
         if (error) {
@@ -51,7 +50,6 @@ function getHighScoreState (client, module_id, percentageScore, callback) {
  */
 
 function getOverallAverageState (client, user_id, module_id, callback) {
-
 
     query(client, queries.getOverallAverageState.data, [user_id, module_id], (error, result) => {
 

@@ -21,14 +21,18 @@ import { socketClient } from '../socket';
  * @param {function} callback - (optional) can be used to make the transition block
  */
 export function authenticate (nextState, replace, callback) {
+
     if (!validCookieExists()) {
+
         replace('/');
         callback(false);
     } else if (!store.getState().user.user_id) {
+
         localStorage.setItem('previousPath', nextState.location.pathname);
         replace('/app-loading');
         callback(false);
     } else {
+
         callback();
     }
 }
@@ -42,7 +46,6 @@ export function authenticate (nextState, replace, callback) {
  * @param {function} callback - (optional) can be used to make the transition block
  */
 export function checkUserRole (nextState, replace, callback) {
-
     if (isUserLecturer() === false) {
         replace('/dashboard');
         callback(false);
@@ -238,8 +241,7 @@ export function fetchLeaderboard (nextState, replace, callback) {
 export function leaveRoom (nextState, replace, callback) {
 
     if (validCookieExists()) {
-        socketClient.emit('leave_room', (msg) => {
-            console.log(msg);
+        socketClient.emit('leave_room', () => {
         });
     }
     callback();

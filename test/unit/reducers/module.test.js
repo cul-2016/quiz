@@ -1,10 +1,10 @@
 import test from 'tape';
-import { module as moduleState } from '../../utils/reducer-fixtures';
+import { initialState as moduleState } from '../../../src/js/reducers/module';
 import { getModuleError as error, getModuleMembersError, removeModuleMember } from '../../utils/action-fixtures';
 import { module as lecturerData,
          getModuleForStudentData as studentData,
          getModuleMembers } from '../../utils/data-fixtures';
-import reducer from '../../../src/js/reducers/module';
+import { module as reducer } from '../../../src/js/reducers/module';
 import deepFreeze from '../../utils/deepFreeze';
 
 //
@@ -29,7 +29,10 @@ test('GET_MODULE_SUCCESS works for a lecturer', (t) => {
 
     t.plan(1);
 
-    const initialState = deepFreeze(moduleState);
+    const initialState = deepFreeze(Object.assign({},
+        moduleState,
+        { isFetchingModule: true }
+    ));
 
     const is_lecturer = true;
     const action = {
@@ -37,12 +40,11 @@ test('GET_MODULE_SUCCESS works for a lecturer', (t) => {
         is_lecturer,
         data: lecturerData
     };
-    const expected = Object.assign({}, moduleState, {
-        isFetchingModule: false,
-        module: lecturerData.module,
-        quizzes: lecturerData.quizzes
-    });
-
+    const expected = Object.assign({},
+        moduleState,
+        lecturerData,
+        { isFetchingModule: false }
+    );
     const result = reducer(initialState, action);
 
     t.deepEqual(result, expected);
@@ -52,7 +54,11 @@ test('GET_MODULE_SUCCESS works for a student', (t) => {
 
     t.plan(1);
 
-    const initialState = deepFreeze(moduleState);
+    const initialState = deepFreeze(Object.assign({},
+        moduleState,
+        studentData,
+        { isFetchingModule: true }
+    ));
 
     const is_lecturer = false;
     const action = {
@@ -60,10 +66,11 @@ test('GET_MODULE_SUCCESS works for a student', (t) => {
         is_lecturer,
         data: studentData
     };
-    const expected = Object.assign({}, moduleState, {
-        isFetchingModule: false,
-        module: studentData
-    });
+    const expected = Object.assign({},
+        moduleState,
+        studentData,
+        { isFetchingModule: false }
+    );
 
     const result = reducer(initialState, action);
 

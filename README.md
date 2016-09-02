@@ -98,4 +98,39 @@ These listeners are located in `src/js/lib/subscriptions.js`.
 
 `fetchDashboard` is registered when the `Dashboard` component is mounted.  It executes when `state.user.is_lecturer !== undefined`
 
-`joinWebsocketRoom` is registered when the `Module` and `StudentModule` components are mounted.  It executes when `state.module.module.module_id !== undefined`.
+`joinWebsocketRoom` is registered when the `Module` and `StudentModule` components are mounted.  It executes when `state.module.module_id !== undefined`.
+
+### Quiz flow
+##### Go to a module's page - you automatically enter that module's socket `room`.
+
+##### Lecturer invites students to a particular quiz
+
+##### `sendQuizInvite` is run, which runs `emitSendQuizInvite`
+* `sendQuizInvite` dispatches three actions:
+    1. `setIntervalID`
+    2. `setQuizDetails`
+    3. `getQuizQuestions`
+
+##### `emitSendQuizInvite` emits the `send_quiz_invite` socket event on an interval
+
+##### `receive_quiz_invite` is received by students
+* `receive_quiz_invite` dispatches:
+    1. `OPEN_QUIZ` --> sets `isQuizOpen` in student state to true
+
+##### Button to the live-quiz page is activated (because `isQuizOpen`)
+
+##### Lecturer starts the quiz
+
+##### `startQuiz` is run, which runs `sendNextQuestion`
+* `startQuiz` dispatches two actions:
+    1. `START_QUIZ` - sets `isQuizStarted` in lecturer state to true
+    2. `GO_TO_NEXT_QUESTION` --> updates `nextQuestionIndex` in lecturer state
+
+##### `emitSendNextQuestion` emits the `send_next_question` socket event
+
+##### `receive_next_question` is received by students
+* One action is dispatched
+    1. `SET_NEXT_QUESTION`
+*  If `!isQuizStarted`, two additional actions are dispatched (before `SET_NEXT_QUESTION`):
+    2. `SET_QUIZ_DETAILS`
+    3. `START_QUIZ`

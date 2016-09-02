@@ -34,7 +34,6 @@ function getModuleForStudent (client, module_id, user_id, callback) {
                 if (error) {
                     throw error;
                 }
-
                 callback(null, data);
             });
         });
