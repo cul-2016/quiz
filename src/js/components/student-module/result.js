@@ -7,10 +7,6 @@ import normaliseText from '../../lib/normaliseText';
 const Result = ({ location, score, newTrophies }) => {
 
     let module_id = location.pathname.split('/')[1];
-
-    console.log("NEW TROPHIES", newTrophies);
-
-    // newTrophies = [];
     newTrophies = newTrophies || [];
 
     let trophiesToPresent = newTrophies.map((trophy, i) => {
