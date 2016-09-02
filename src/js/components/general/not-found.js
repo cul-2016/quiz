@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-class NotFoundComponent extends React.Component {
+class NotFound extends React.Component {
 
     constructor (props) {
         super(props);
@@ -25,4 +25,4 @@ class NotFoundComponent extends React.Component {
     }
 }
 
-export default NotFoundComponent;
+export default NotFound;

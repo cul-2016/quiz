@@ -26,7 +26,7 @@ io.on('connection', (socket) => {
     socket.on('student_joined_quiz', (room, cb) => {
 
         socket.broadcast.to(room).emit('num_participants', socket.adapter.rooms[room].length - 1);
-        cb('Successfully emitted number: >>>' + socket.adapter.rooms[room].length - 1); //eslint-disable-line no-console
+        cb('Successfully emitted number: >>>' + socket.adapter.rooms[room].length - 1);
     });
 
     socket.on('send_quiz_invite', (quizInfo, cb) => {
