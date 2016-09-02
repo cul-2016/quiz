@@ -13,12 +13,13 @@ export function result (state = initialState, action) {
     switch (action.type) {
 
     case actionsTypes.GET_QUIZ_RESULT_REQUEST:
+    
         return update(state, {
             isFetchingResult: { $set: true }
         });
 
     case actionsTypes.GET_QUIZ_RESULT_SUCCESS:
-        
+
         return update(state, {
             isFetchingResult: { $set: false },
             score: { $set: action.data.score.raw },
@@ -26,6 +27,7 @@ export function result (state = initialState, action) {
         });
 
     case actionsTypes.GET_QUIZ_RESULT_FAILURE:
+
         return update(state, {
             isFetchingResult: { $set: false },
             error: { $set: action.error }

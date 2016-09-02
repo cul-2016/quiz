@@ -5,7 +5,7 @@ import { store } from '../store';
 import { startQuiz, endQuiz, goToNextQuestion } from '../actions/live-quiz';
 import { socketClient } from '../socket';
 import { getNextQuestion } from '../lib/getNextQuestion';
-import { sendNextQuestion } from '../lib/sendNextQuestion';
+import { emitSendNextQuestion } from '../lib/emitSendNextQuestion';
 
 
 const mapStateToProps = (state) => {
@@ -26,17 +26,17 @@ const mapDispatchToProps = (dispatch) => ({
 
         let nextQuestion = getNextQuestion(store);
 
-        sendNextQuestion(socketClient, nextQuestion, () => {
+        emitSendNextQuestion(socketClient, nextQuestion, () => {
 
-            dispatch(goToNextQuestion());
             dispatch(startQuiz());
+            dispatch(goToNextQuestion());
         });
     },
     nextQuestion: () => {
 
         let nextQuestion = getNextQuestion(store);
 
-        sendNextQuestion(socketClient, nextQuestion, () => {
+        emitSendNextQuestion(socketClient, nextQuestion, () => {
 
             dispatch(goToNextQuestion());
         });

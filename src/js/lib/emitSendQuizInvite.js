@@ -4,7 +4,7 @@
  * @param {object} quizInfo - object containing quiz information
  */
 
-export default function sendQuizInvite (socketClient, quizInfo) {
+export default function emitSendQuizInvite (socketClient, quizInfo) {
 
     return setInterval(() => {
         socketClient.emit('send_quiz_invite', quizInfo, (msg) => {
