@@ -96,6 +96,20 @@ test('UPDATE_QUIZ_NAME works', (t) => {
     t.deepEqual(result, expected);
 });
 
+test('CLEAR_NEW_QUIZ_STATE works', (t) => {
+
+    t.plan(1);
+    const initialState = deepFreeze(newQuizState);
+    const action = {
+        type: 'CLEAR_NEW_QUIZ_STATE'
+    };
+
+    const expected = newQuizState;
+
+    const result = reducer(initialState, action);
+    t.deepEqual(result, expected);
+});
+
 // -----
 // SAVE QUIZ
 // -----

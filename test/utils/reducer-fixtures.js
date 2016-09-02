@@ -85,7 +85,8 @@ export const liveQuiz = {
     response: undefined,
     nextQuestionIndex: 0,
     isQuizStarted: false,
-    interval_id: undefined
+    interval_id: undefined,
+    numParticipants: 0
 };
 
 export const review = {

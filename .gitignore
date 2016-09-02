@@ -52,3 +52,12 @@ public/bundle.js.map
 *.svg
 
 # Fonts
+
+bundle.js.map
+*.hot-update.js
+*.hot-update.js.map
+*.ttf
+*.woff
+*.woff2
+*.eot
+*.svg

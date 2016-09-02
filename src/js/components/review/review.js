@@ -2,16 +2,28 @@ import React, { PropTypes } from 'react'; //eslint-disable-line no-unused-vars
 import ShowAnswer from './show-answer';
 import ReviewButtons from './review-buttons';
 import Spinner from '../general/spinner';
+import classnames from 'classnames';
 
-const Review = ({ isFetchingReview, question, numQuestions, currentQuizIndex, isAnswerShowing, handleIsAnswerShowing, handleIncrementCurrentQuizIndex, endReview, params }) => {
+const Review = ({ isFetchingReview, question, numQuestions, currentQuizIndex, isAnswerShowing, handleIsAnswerShowing, handleIncrementCurrentQuizIndex, endReview, params, handleGoBack }) => {
+
+    const backButtonClasses = classnames("column", {
+        "display-none": currentQuizIndex === 0
+    });
 
     return (
         <div>
             {
                 isFetchingReview && <Spinner />
             }
-            <div className="has-text-centered" >
+            <div>
+            <div className={ backButtonClasses }>
+                <button onClick={ handleGoBack } className="button is-3">
+                    Back
+                </button>
+            </div>
+            <div className="column has-text-centered" >
                 <h4>Question { currentQuizIndex + 1 }</h4>
+            </div>
             </div>
             {
                 question &&
@@ -40,7 +52,8 @@ Review.propTypes = {
     handleIsAnswerShowing: PropTypes.func.isRequired,
     handleIncrementCurrentQuizIndex: PropTypes.func.isRequired,
     endReview: PropTypes.func.isRequired,
-    params: PropTypes.object.isRequired
+    params: PropTypes.object.isRequired,
+    handleGoBack: PropTypes.func
 };
 
 export default Review;

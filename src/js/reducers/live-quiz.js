@@ -13,7 +13,8 @@ const initialState = {
     response: undefined,
     nextQuestionIndex: 0,
     isQuizStarted: false,
-    interval_id: undefined
+    interval_id: undefined,
+    numParticipants: 0
 };
 
 export default function liveQuiz (state = initialState, action) {
@@ -110,6 +111,11 @@ export default function liveQuiz (state = initialState, action) {
     case actionsTypes.TOGGLE_MESSAGE_VISIBILITY:
         return update(state, {
             isResponseSubmitted: { $set: false }
+        });
+
+    case actionsTypes.UPDATE_NUM_PARTICIPANTS:
+        return update(state, {
+            numParticipants: { $set: action.numParticipants }
         });
 
     default:

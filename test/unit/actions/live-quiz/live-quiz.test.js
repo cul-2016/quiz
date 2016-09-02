@@ -89,3 +89,15 @@ test('setResponse creates the correct action', (t) => {
     const actual = deepFreeze(actions.setResponse(data));
     t.deepEqual(actual, expected);
 });
+
+test('updateNumParticipants creates the correct action', (t) => {
+    t.plan(1);
+    const numParticipants = 10;
+    const expected = {
+        type: actions.UPDATE_NUM_PARTICIPANTS,
+        numParticipants
+    };
+
+    const actual = deepFreeze(actions.updateNumParticipants(numParticipants));
+    t.deepEqual(actual, expected);
+});

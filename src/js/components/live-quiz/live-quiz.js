@@ -6,8 +6,8 @@ import { store } from '../../store';
 import { toggleMessageVisibility } from '../../actions/live-quiz';
 
 
-const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex, nextQuestion, isQuizStarted, submitResponse, isResponseSubmitted, startQuiz, numQuestions, endQuiz, quiz_id, handleSelection, response, name }) => {
-
+const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex, nextQuestion, isQuizStarted, submitResponse, isResponseSubmitted, startQuiz, numQuestions, endQuiz, quiz_id, handleSelection, response, name, numParticipants }) => {
+    console.log(numParticipants);
     let showOnSubmit = classnames("submit-success", {
         "display-none": !isResponseSubmitted
     });
@@ -29,13 +29,18 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex, nextQuestion, isQu
 
                 <h4 className={ titleClass }>Question { nextQuestionIndex }</h4>
             </div>
-
             <div className="section">
                 {
-                    !isQuizStarted &&
+                    !isQuizStarted && !is_lecturer &&
                     <div>
                         Waiting for Quiz to Start
                     </div>
+                }
+                {
+                    !isQuizStarted && is_lecturer &&
+                    <h2>
+                        Number of Participants: { numParticipants }
+                    </h2>
                 }
                 {
                     isQuizStarted && question &&
@@ -48,9 +53,9 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex, nextQuestion, isQu
                             YOU HAVE SUBMITTED THE ANSWER
                         </div>
                     </div>
+
                 }
             </div>
-
             <LiveQuizButtons
                 is_lecturer={ is_lecturer }
                 numQuestions={ numQuestions }
@@ -81,7 +86,8 @@ LiveQuiz.propTypes = {
     quiz_id: PropTypes.number,
     handleSelection: PropTypes.func,
     response: PropTypes.string,
-    name: PropTypes.string
+    name: PropTypes.string,
+    numParticipants: PropTypes.number
 };
 
 export default LiveQuiz;

@@ -19,13 +19,21 @@ io.on('connection', (socket) => {
     socket.on('join_room', (room, cb) => {
 
         socket.join(room);
-        cb('Successfully joined room: ' + room); //eslint-disable-line no-console
+
+        cb('Successfully joined room: >>>' + room);
+    });
+
+    socket.on('student_joined_quiz', (room, cb) => {
+
+        socket.broadcast.to(room).emit('num_participants', socket.adapter.rooms[room].length - 1);
+        cb('Successfully emitted number: >>>' + socket.adapter.rooms[room].length - 1); //eslint-disable-line no-console
     });
 
     socket.on('send_quiz_invite', (quizInfo, cb) => {
 
         var room = quizInfo.room;
         var quiz_id = quizInfo.quiz_id;
+
 
         // broadcast to whole room
         console.log("still sending quiz invite"); //eslint-disable-line no-console

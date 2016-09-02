@@ -21,8 +21,15 @@ const mapStateToProps = (state) => {
     };
 };
 
-const mapDispatchToProps = (dispatch) => ({
-    dispatch
+const mapDispatchToProps = (dispatch) => ({ //eslint-disable-line
+
+    handleJoiningQuiz: (module_id) => {
+
+        socketClient.emit('student_joined_quiz', module_id, (msg) => {
+            console.log(msg);
+        });
+    }
+
 });
 
 

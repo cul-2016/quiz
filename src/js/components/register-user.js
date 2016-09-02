@@ -30,7 +30,7 @@ const RegisterUser = ({ register, handleChange, handleRegisteringUser, location 
         <section className="login hero is-primary is-fullheight">
             <div className="hero-body">
                 <div className="container narrow has-text-centered">
-                    <div className="box">
+                    <div className="box" onKeyDown={ (e) => { if (e.keyCode === 13 && isEmailValid && register.password && register.username) { handleRegisteringUser(register.email, register.username, register.password, is_lecturer); }}}>
                         <h2>
                             Register
                         </h2>
