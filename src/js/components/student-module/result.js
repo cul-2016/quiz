@@ -8,10 +8,15 @@ const Result = ({ location, score, newTrophies }) => {
 
     console.log("NEW TROPHIES", newTrophies);
 
-    let trophiesToPresent = newTrophies.map((trophy) => {
+    newTrophies = newTrophies || [];
+
+    let trophiesToPresent = newTrophies.map((trophy, i) => {
 
         return (
-            <h4>{ trophy }</h4>
+            <div>
+                <i className="fa fa-trophy awarded" />
+                <span key={ i }>{ trophy }</span>
+            </div>
         );
     });
 
