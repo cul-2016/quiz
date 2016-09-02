@@ -6,10 +6,10 @@ import user from './user';
 import login from './login';
 import register from './register';
 import newQuiz from './new-quiz';
-import module from './module';
+import { module } from './module';
 import liveQuiz from './live-quiz';
 import review from './review';
-import result from './result';
+import { result } from './result';
 import quizMembers from './quiz-members';
 import leaderboard from './leaderboard';
 

@@ -38,7 +38,7 @@ socketClient.on('receive_next_question', (questionObj) => {
 });
 
 socketClient.on('receive_end_of_quiz', (quiz_id) => {
-    const module_id = store.getState().module.module.module_id;
+    const module_id = store.getState().module.module_id;
     console.log('received end of quiz notification', quiz_id);
     store.dispatch(endQuiz());
     hashHistory.push(`${module_id}/${quiz_id}/result`);

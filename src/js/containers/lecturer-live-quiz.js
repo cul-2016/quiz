@@ -5,7 +5,7 @@ import { store } from '../store';
 import { startQuiz, endQuiz, goToNextQuestion } from '../actions/live-quiz';
 import { socketClient } from '../socket';
 import { getNextQuestion } from '../lib/getNextQuestion';
-import { sendNextQuestion } from '../lib/sendNextQuestion';
+import { emitSendNextQuestion } from '../lib/emitSendNextQuestion';
 
 
 const mapStateToProps = (state) => {
@@ -26,17 +26,17 @@ const mapDispatchToProps = (dispatch) => ({
 
         let nextQuestion = getNextQuestion(store);
 
-        sendNextQuestion(socketClient, nextQuestion, () => {
+        emitSendNextQuestion(socketClient, nextQuestion, () => {
 
-            dispatch(goToNextQuestion());
             dispatch(startQuiz());
+            dispatch(goToNextQuestion());
         });
     },
     nextQuestion: () => {
 
         let nextQuestion = getNextQuestion(store);
 
-        sendNextQuestion(socketClient, nextQuestion, () => {
+        emitSendNextQuestion(socketClient, nextQuestion, () => {
 
             dispatch(goToNextQuestion());
         });
@@ -44,13 +44,13 @@ const mapDispatchToProps = (dispatch) => ({
     endQuiz: (quiz_id) => {
 
         const intervalID = store.getState().liveQuiz.interval_id;
-        const module_id = store.getState().module.module.module_id;
+        const module_id = store.getState().module.module_id;
         const data = {
             room: module_id,
             quiz_id
         };
-        socketClient.emit('end_of_quiz', data, (msg) => { //eslint-disable-line
-            
+        socketClient.emit('end_of_quiz', data, () => {
+
             clearInterval(intervalID);
             dispatch(endQuiz(quiz_id));
             hashHistory.push(`${module_id}/${quiz_id}/holding-page`);

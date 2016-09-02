@@ -1,7 +1,7 @@
 import test from 'tape';
 import { getQuizResultError as error  } from '../../utils/action-fixtures';
-import { result as resultState } from '../../utils/reducer-fixtures';
-import reducer from '../../../src/js/reducers/result';
+import { initialState as resultState } from '../../../src/js/reducers/result';
+import { result as reducer } from '../../../src/js/reducers/result';
 import deepFreeze from '../../utils/deepFreeze';
 
 
@@ -25,7 +25,11 @@ test('GET_QUIZ_RESULT_SUCCESS works', (t) => {
     t.plan(1);
 
     const data = {
-        score: 4
+        score: {
+            raw: 4,
+            percentage: 60
+        },
+        newTrophyState: [true, false, false, false]
     };
 
     const initialState = deepFreeze(
@@ -41,7 +45,13 @@ test('GET_QUIZ_RESULT_SUCCESS works', (t) => {
     };
 
     const actual = reducer(initialState, action);
-    const expected = Object.assign({}, resultState, { isFetchingResult: false }, data);
+    const expected = Object.assign(
+        {},
+        resultState,
+        { isFetchingResult: false },
+        { score: data.score.raw },
+        { newTrophyState: data.newTrophyState }
+    );
 
     t.deepEqual(actual, expected);
 });

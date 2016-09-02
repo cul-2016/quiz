@@ -2,7 +2,7 @@ import test from 'tape';
 import getNewTrophyState from '../../../server/lib/getNewTrophyState';
 import { testClient } from '../../utils/init';
 
-test("Gets a student's new trophy state", (t) => {
+test("`getNewTrophyState` gets a student's new trophy state", (t) => {
 
     t.plan(1);
 

@@ -2,7 +2,7 @@ import { store } from '../store';
 import validCookieExists from './validCookieExists';
 import { getModule, getModuleMembers } from '../actions/module';
 import { getDashboard } from '../actions/dashboard';
-import { loadUserState } from './userState';
+import { loadState } from './localStorageState';
 import { getUserDetails } from '../actions/user';
 import { getQuizReview } from '../actions/review';
 import { getQuizResult } from '../actions/result';
@@ -22,14 +22,18 @@ import { socketClient } from '../socket';
  * @param {function} callback - (optional) can be used to make the transition block
  */
 export function authenticate (nextState, replace, callback) {
+    
     if (!validCookieExists()) {
+
         replace('/');
         callback(false);
     } else if (!store.getState().user.user_id) {
+
         localStorage.setItem('previousPath', nextState.location.pathname);
         replace('/app-loading');
         callback(false);
     } else {
+
         callback();
     }
 }
@@ -46,7 +50,7 @@ export function authenticateLecturer (nextState, replace, callback) {
 
     if (!validCookieExists() || isUserLecturer() === false) {
         replace('/');
-    } else if (!loadUserState() && !store.getState().user.user_id) {
+    } else if (!loadState() && !store.getState().user.user_id) {
         store.dispatch(getUserDetails(getUserID()));
     }
     callback();
@@ -240,7 +244,7 @@ export function leaveRoom (nextState, replace, callback) {
 
     if (validCookieExists()) {
         socketClient.emit('leave_room', (msg) => {
-            console.log(msg);
+            console.info(msg);
         });
     }
     callback();

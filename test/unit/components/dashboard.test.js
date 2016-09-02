@@ -16,4 +16,4 @@ test('Dashboard renders correctly', (t) => {
     t.ok(expected);
 });
 
-// could add a test for clicking add module button
+//could add a test for clicking add module button

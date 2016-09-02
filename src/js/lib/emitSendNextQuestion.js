@@ -7,10 +7,10 @@
  */
 
 
-export function sendNextQuestion (socketClient, nextQuestion, callback) {
+export function emitSendNextQuestion (socketClient, nextQuestion, callback) {
 
     if (arguments.length !== 3 || typeof socketClient !== 'object' || typeof nextQuestion !== 'object' || typeof callback !== 'function') {
-        throw new Error('`sendNextQuestion`:\n @param {object}: socket.io client\n @param {array}: next question \n @param {function}: callback');
+        throw new Error('`emitSendNextQuestion`:\n @param {object}: socket.io client\n @param {array}: next question \n @param {function}: callback');
     }
 
     socketClient.emit('send_next_question', nextQuestion, () => {
