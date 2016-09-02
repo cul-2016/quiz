@@ -26,6 +26,8 @@ export const SET_RESPONSE = 'SET_RESPONSE';
 
 export const TOGGLE_MESSAGE_VISIBILITY = 'TOGGLE_MESSAGE_VISIBILITY';
 
+export const UPDATE_NUM_PARTICIPANTS = 'UPDATE_NUM_PARTICIPANTS';
+
 /***
  * GET QUIZ QUESTIONS
  ***/
@@ -174,4 +176,9 @@ export const setResponse = (data) => ({
 
 export const toggleMessageVisibility = () => ({
     type: TOGGLE_MESSAGE_VISIBILITY
+});
+
+export const updateNumParticipants = (numParticipants) => ({
+    type: UPDATE_NUM_PARTICIPANTS,
+    numParticipants
 });

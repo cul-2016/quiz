@@ -3,7 +3,7 @@ import io from 'socket.io-client';
 import { store } from './store';
 import { hashHistory } from 'react-router';
 import { openQuiz } from './actions/module';
-import { setQuizDetails, startQuiz, endQuiz, setNextQuestion } from './actions/live-quiz';
+import { setQuizDetails, startQuiz, endQuiz, setNextQuestion, updateNumParticipants } from './actions/live-quiz';
 
 let uri = process.env.DEVELOPMENT ? `${location.protocol}//${location.hostname}:9000` : '';
 export const socketClient = io(uri);
@@ -12,6 +12,12 @@ export const socketClient = io(uri);
 socketClient.on('we have connected', (id) => {
     console.log("We're connected!", id);
     // handle in redux
+});
+
+socketClient.on('num_participants', (numParticipants) => {
+
+    console.log("these number of users", numParticipants);
+    store.dispatch(updateNumParticipants(numParticipants));
 });
 
 socketClient.on('receive_quiz_invite', () => {

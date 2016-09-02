@@ -7,7 +7,8 @@ import Spinner from '../general/spinner';
 
 const StudentModule = ({ location, children, username,
                         isFetchingModule, isQuizOpen,
-                        quiz_id, question, response }) => { //eslint-disable-line no-unused-vars
+                        quiz_id, question, response, //eslint-disable-line no-unused-vars
+                        handleJoiningQuiz, params }) => {
 
 
     let buttonAreaClasses = classnames("section has-text-centered", {
@@ -32,7 +33,7 @@ const StudentModule = ({ location, children, username,
             <div>
                 <Nav username={ username } />
                 <div className={ buttonAreaClasses }>
-                    <Link to={ livePath }>
+                    <Link to={ livePath } onClick={ () => { handleJoiningQuiz(params.module_id); }}>
                         <button className={ buttonClasses }>
                             JOIN THE LIVE QUIZ!
                         </button>
@@ -57,7 +58,9 @@ StudentModule.propTypes = {
     isQuizOpen: PropTypes.bool.isRequired,
     quiz_id: PropTypes.number,
     question: PropTypes.string,
-    response: PropTypes.string
+    response: PropTypes.string,
+    handleJoiningQuiz: PropTypes.func,
+    params: PropTypes.object
 };
 
 export default StudentModule;

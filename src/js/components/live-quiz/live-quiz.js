@@ -8,8 +8,8 @@ import { toggleMessageVisibility } from '../../actions/live-quiz';
 // import ReactTransitionGroup from 'react-addons-transition-group';
 
 
-const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex, nextQuestion, isQuizStarted, submitResponse, isResponseSubmitted, startQuiz, numQuestions, endQuiz, quiz_id, handleSelection, response, name }) => {
-
+const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex, nextQuestion, isQuizStarted, submitResponse, isResponseSubmitted, startQuiz, numQuestions, endQuiz, quiz_id, handleSelection, response, name, numParticipants }) => {
+    console.log(numParticipants);
     let showOnSubmit = classnames("submit-success", {
         "display-none": !isResponseSubmitted
     });
@@ -34,10 +34,16 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex, nextQuestion, isQu
             </div>
                 <div className="section">
                     {
-                        !isQuizStarted &&
+                        !isQuizStarted && !is_lecturer &&
                         <div>
                             Waiting for Quiz to Start
                         </div>
+                    }
+                    {
+                        !isQuizStarted && is_lecturer &&
+                        <h2>
+                            Number of Participants: { numParticipants }
+                        </h2>
                     }
                     {
                         isQuizStarted && question &&
@@ -86,7 +92,8 @@ LiveQuiz.propTypes = {
     quiz_id: PropTypes.number,
     handleSelection: PropTypes.func,
     response: PropTypes.string,
-    name: PropTypes.string
+    name: PropTypes.string,
+    numParticipants: PropTypes.number
 };
 
 export default LiveQuiz;

@@ -256,3 +256,18 @@ test('SAVE_RESPONSE_FAILURE works', (t) => {
 
     t.deepEqual(actual, expected);
 });
+
+test('UPDATE_NUM_PARTICIPANTS works', (t) => {
+
+    t.plan(1);
+    const numParticipants = 10;
+    const initialState = deepFreeze(liveQuizState);
+    const action = {
+        type: 'UPDATE_NUM_PARTICIPANTS',
+        numParticipants
+    };
+    const actual = reducer(initialState, action);
+    const expected = Object.assign({}, liveQuizState, { numParticipants });
+
+    t.deepEqual(actual, expected);
+});

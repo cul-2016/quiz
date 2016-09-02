@@ -16,7 +16,8 @@ const mapStateToProps = (state) => {
         is_lecturer: state.user.is_lecturer,
         isQuizStarted: state.liveQuiz.isQuizStarted,
         quiz_id: state.liveQuiz.quiz_id,
-        name: state.liveQuiz.name
+        name: state.liveQuiz.name,
+        numParticipants: state.liveQuiz.numParticipants
     };
 };
 
@@ -50,7 +51,7 @@ const mapDispatchToProps = (dispatch) => ({
             quiz_id
         };
         socketClient.emit('end_of_quiz', data, (msg) => { //eslint-disable-line
-            
+
             clearInterval(intervalID);
             dispatch(endQuiz(quiz_id));
             hashHistory.push(`${module_id}/${quiz_id}/holding-page`);
