@@ -40,6 +40,12 @@ export default function review (state = initialState, action) {
             currentQuizIndex: { $set: state.currentQuizIndex + 1 }
         });
 
+    case actionsTypes.GO_BACK:
+        return update(state, {
+            currentQuizIndex: { $set: state.currentQuizIndex - 1 },
+            isAnswerShowing: { $set: true }
+        });
+
     case actionsTypes.CLEAR_REVIEW_STATE:
         return initialState;
 
