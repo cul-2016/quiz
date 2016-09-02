@@ -43,5 +43,6 @@ bundle.js
 env.sh
 queries.txt
 credentials.md
+public/bundle.js.map
 
 # Fonts
