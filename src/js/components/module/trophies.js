@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import normaliseLabel from '../../lib/normaliseLabel';
+import normaliseText from '../../lib/normaliseText';
 
 
 const Trophies = ({ trophies }) => {
@@ -8,7 +8,7 @@ const Trophies = ({ trophies }) => {
 
         return (
             <div className="box column has-text-centered" key={ i }>
-                <div className="label">{ normaliseLabel(name) }</div>
+                <div className="label">{ normaliseText(name) }</div>
                 <div>{ trophies.condition[i] }</div>
             </div>
         );

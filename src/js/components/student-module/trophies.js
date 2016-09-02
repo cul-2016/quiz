@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import normaliseLabel from '../../lib/normaliseLabel';
+import normaliseText from '../../lib/normaliseText';
 import classnames from 'classnames';
 
 
@@ -24,7 +24,7 @@ const Trophies = ({ trophies, trophies_awarded }) => { //eslint-disable-line
 
             return (
                 <div className="box column has-text-centered" key={ i }>
-                    <div className="label">{ normaliseLabel(name) }</div>
+                    <div className="label">{ normaliseText(name) }</div>
                     <i className={ trophyClasses } />
                 </div>
             );

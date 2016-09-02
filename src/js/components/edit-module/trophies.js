@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import normaliseLabel from '../../lib/normaliseLabel';
+import normaliseText from '../../lib/normaliseText';
 
 const Trophies = ({ trophies, updateTrophyVals }) => {
 
@@ -7,7 +7,7 @@ const Trophies = ({ trophies, updateTrophyVals }) => {
 
         return (
             <div className="column box is-info has-text-centered" key={ i }>
-                <label className="label">{ normaliseLabel(name) }</label>
+                <label className="label">{ normaliseText(name) }</label>
                 <input
                        type="number"
                        min="1"
