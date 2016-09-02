@@ -21,7 +21,7 @@ const mapStateToProps = (state) => {
     };
 };
 
-const mapDispatchToProps = (dispatch) => ({ //eslint-disable-line
+const mapDispatchToProps = () => ({
 
     handleJoiningQuiz: (module_id) => {
 
