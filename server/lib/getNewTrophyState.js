@@ -13,7 +13,7 @@ var getParticipationState = require('./trophy-methods').getParticipationState;
  * @param {function} callback - a callback function
  */
 
-function getNewTrophyState (client, user_id, module_id, quiz_id, percentageScore, callback) { //eslint-disable-line no-unused-vars
+function getNewTrophyState (client, user_id, module_id, quiz_id, percentageScore, callback) { 
 
     if (arguments.length !== 6) {
         throw new Error("`getNewTrophyState`: Incorrect number of arguments");

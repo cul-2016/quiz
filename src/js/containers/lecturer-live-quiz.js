@@ -49,7 +49,7 @@ const mapDispatchToProps = (dispatch) => ({
             room: module_id,
             quiz_id
         };
-        socketClient.emit('end_of_quiz', data, (msg) => { //eslint-disable-line
+        socketClient.emit('end_of_quiz', data, () => {
 
             clearInterval(intervalID);
             dispatch(endQuiz(quiz_id));

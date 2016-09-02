@@ -3,33 +3,23 @@ import normaliseText from '../../lib/normaliseText';
 import classnames from 'classnames';
 
 
-const Trophies = ({ trophies, trophies_awarded }) => { //eslint-disable-line
+const Trophies = ({ trophies, trophies_awarded }) => {
 
-    let mappedTrophies = [];
+    trophies = trophies || [];
 
-    // trophies_awarded = {
-    //     first_quiz: true,
-    //     high_score: false,
-    //     overall_average: true,
-    //     participation: false
-    // };
+    let mappedTrophies = trophies.map((name, i) => {
 
-    if (trophies) {
-
-        mappedTrophies = trophies.map((name, i) => {
-
-            let trophyClasses = classnames("fa fa-trophy", {
-                "awarded": trophies_awarded[name]
-            });
-
-            return (
-                <div className="box column has-text-centered" key={ i }>
-                    <div className="label">{ normaliseText(name) }</div>
-                    <i className={ trophyClasses } />
-                </div>
-            );
+        let trophyClasses = classnames("fa fa-trophy", {
+            "awarded": trophies_awarded[name]
         });
-    }
+
+        return (
+            <div className="box column has-text-centered" key={ i }>
+                <div className="label">{ normaliseText(name) }</div>
+                <i className={ trophyClasses } />
+            </div>
+        );
+    });
 
     return (
         <div className="section">
