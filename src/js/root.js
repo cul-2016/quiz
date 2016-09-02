@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Router, Route, IndexRoute, IndexRedirect, hashHistory } from 'react-router';
+import { Router, Route, IndexRoute, IndexRedirect, Redirect, hashHistory } from 'react-router';
 import { Provider } from 'react-redux';
 
 import App from './components/app';
@@ -28,6 +28,8 @@ import StudentHistory from './components/student-module/history';
 import StudentFeedback from './components/student-module/feedback';
 import StudentLiveQuizContainer from './containers/student/live-quiz';
 import StudentQuizResultContainer from './containers/student/result';
+
+import NotFoundComponent from './components/general/not-found';
 
 import composeHooks from './lib/composeHooks';
 import * as hooks from './lib/onEnterHooks';
@@ -127,6 +129,8 @@ const Root = ({ store }) => (
                     onEnter={ composeHooks(hooks.authenticate, hooks.checkUserRole, hooks.fetchLeaderboard) }
                     path=":module_id/leaderboard"
                     component={ LeaderboardContainer } />
+                <Route path='/404' component={ NotFoundComponent } />
+                <Redirect from='*' to='/404' />
             </Route>
         </Router>
     </Provider>
