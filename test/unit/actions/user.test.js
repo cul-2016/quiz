@@ -17,6 +17,18 @@ test('setUserDetails creates the correct action', (t) => {
     t.deepEqual(actual2, expected);
 });
 
+test('toggleCookieMessage creates the correct action', (t) => {
+
+    t.plan(1);
+    const expected = {
+        type: actions.TOGGLE_COOKIE_MESSAGE,
+    };
+
+    const actual2 = deepFreeze(actions.toggleCookieMessage());
+    t.deepEqual(actual2, expected);
+});
+
+
 // -----
 // GET_USER_DETAILS
 // -----

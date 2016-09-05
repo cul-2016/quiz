@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { Router, Route, IndexRoute, IndexRedirect, Redirect, hashHistory } from 'react-router';
 import { Provider } from 'react-redux';
 
-import App from './components/app';
+import AppContainer from './containers/app-container';
 import LoginContainer from './containers/login';
 import DashboardContainer from './containers/dashboard';
 import NewModuleContainer from './containers/new-module';
@@ -40,7 +40,7 @@ const Root = ({ store }) => (
 
     <Provider store={ store }>
         <Router history={ hashHistory }>
-            <Route path="/" component={ App }>
+            <Route path="/" component={ AppContainer }>
                 <IndexRoute
                     onEnter={ hooks.shouldUserRedirect }
                     component={ LoginContainer } />

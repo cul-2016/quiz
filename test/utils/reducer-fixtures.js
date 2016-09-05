@@ -1,4 +1,5 @@
 import { trophies } from './data-fixtures';
+import isPopupRequired from '../../src/js/lib/isPopupRequired';
 
 export const dashboard = {
     isFetchingDashboard: false,
@@ -32,6 +33,7 @@ export const user = {
     username: undefined,
     is_lecturer: undefined,
     isFetchingUser: false,
+    cookieMessage: isPopupRequired(),
     error: undefined
 };
 

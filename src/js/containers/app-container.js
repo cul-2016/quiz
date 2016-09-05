@@ -1,12 +1,18 @@
-import React from 'react';
+import { connect } from 'react-redux';
+import App from '../components/app';
+import { toggleCookieMessage } from '../actions/user';
 
-const AppContainer = () => {
+const mapStateToProps = (state) => ({
+    userState: state.user,
+    cookieMessage: state.user.cookieMessage
+});
 
-    return (
-        <div>
-            This is the app container
-        </div>
-    );
-};
+const mapDispatchToProps = (dispatch) => ({
+    handleCookiePopup: () => {
+        document.cookie = "cookie_message=false";
+        dispatch(toggleCookieMessage());
+    }
+});
+const AppContainer = connect(mapStateToProps, mapDispatchToProps)(App);
 
 export default AppContainer;
