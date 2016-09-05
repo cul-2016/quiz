@@ -69,7 +69,7 @@ const RegisterUser = ({ register, handleChange, handleRegisteringUser, location 
 
                         <p>
                             <Link to="/">
-                                <span className="tag is-success">
+                                <span className=" is-success">
                                     Already a user? Please Sign In here
                                 </span>
                             </Link>

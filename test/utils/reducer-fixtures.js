@@ -1,5 +1,5 @@
 import { trophies } from './data-fixtures';
-import isPopupRequired from '../../src/js/lib/isPopupRequired';
+import isPopupRequired from '../../src/js/lib/isPopupRequiredV2';
 
 export const dashboard = {
     isFetchingDashboard: false,

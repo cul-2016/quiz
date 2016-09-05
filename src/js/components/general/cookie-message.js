@@ -24,7 +24,7 @@ const CookieMessage = ({ cookieMessage, handleCookiePopup }) => {
 };
 
 CookieMessage.propTypes = {
-    cookieMessage: PropTypes.bool.isRequired,
+    cookieMessage: PropTypes.bool,
     handleCookiePopup: PropTypes.func.isRequired
 };
 

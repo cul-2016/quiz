@@ -1,7 +1,6 @@
 import update from 'react-addons-update';
 import * as actionsTypes from '../actions/user';
-import isPopupRequired from '../lib/isPopupRequired';
-
+import isPopupRequired from '../lib/isPopupRequiredV2';
 
 const initialState = {
     user_id: undefined,

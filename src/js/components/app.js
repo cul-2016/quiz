@@ -1,12 +1,22 @@
 import React, { PropTypes } from 'react';
 import CookieMessage from './general/cookie-message';
+import ErrorMessage from './general/error-message';
 
-const App = ({ children, location, cookieMessage, handleCookiePopup }) => {
+const App = ({ children, location, error, cookieMessage, handleCookiePopup, handleErrorClearance }) => {
 
     return (
         <div>
         {
-            location.pathname !== '/' &&
+            error &&
+                <div>
+                    { children }
+                    <ErrorMessage
+                    error={ error }
+                    handleErrorClearance={ handleErrorClearance }/>
+                </div>
+        }
+        {
+            !error && location.pathname !== '/' &&
             <div>
                 <CookieMessage
                     cookieMessage={ cookieMessage }
@@ -17,7 +27,7 @@ const App = ({ children, location, cookieMessage, handleCookiePopup }) => {
             </div>
         }
         {
-            location.pathname === '/' &&
+            !error && location.pathname === '/' &&
             <div>
                 { children }
             </div>
@@ -29,8 +39,10 @@ const App = ({ children, location, cookieMessage, handleCookiePopup }) => {
 App.propTypes = {
     children: PropTypes.element.isRequired,
     cookieMessage: PropTypes.bool,
+    error: PropTypes.object,
     handleCookiePopup: PropTypes.func.isRequired,
-    location: PropTypes.object.isRequired
+    location: PropTypes.object.isRequired,
+    handleErrorClearance: PropTypes.func.isRequired
 };
 
 export default App;

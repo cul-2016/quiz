@@ -12,6 +12,9 @@ import review from './review';
 import { result } from './result';
 import quizMembers from './quiz-members';
 import leaderboard from './leaderboard';
+import update from 'react-addons-update';
+
+
 
 const appReducer = combineReducers({
     user,
@@ -30,11 +33,19 @@ const appReducer = combineReducers({
 });
 
 const rootReducer = (state, action) => {
-
     if (action.type === 'LOGOUT') {
 
         state = undefined;
     }
+
+    if (action.type === 'CLEAR_ERROR_FROM_STATE') {
+
+        state = update(state, {
+            [action.reducerState]: { error: { $set: undefined } }
+        });
+
+    }
+
     return appReducer(state, action);
 };
 

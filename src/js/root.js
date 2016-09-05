@@ -48,7 +48,7 @@ const Root = ({ store }) => (
                     path="register-student"
                     component={ RegisterUserContainer } />
                 <Route
-                    path="register-lecturer1000"
+                    path="register-lecturer-invite-only"
                     component={ RegisterUserContainer } />
                 <Route
                     onEnter={ composeHooks(hooks.authenticate, hooks.fetchModuleList, hooks.leaveRoom) }
