@@ -15,6 +15,7 @@ module.exports = {
 
 
             if (error) {
+                console.error(error);
                 return reply(error);
             }
             var mappedQuestions = questions.map((question) => {
@@ -24,6 +25,9 @@ module.exports = {
 
             saveQuestions(client, mappedQuestions, (error, response) => {
                 //reply here.
+                if (error) {
+                    console.error(error);
+                }
                 var verdict = error || response;
                 return reply(verdict);
             });

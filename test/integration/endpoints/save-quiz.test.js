@@ -1,6 +1,6 @@
 import test from 'tape';
 import { server, testClient } from '../../utils/init';
-import { questions as questions } from '../../utils/data-fixtures';
+import { questions } from '../../utils/data-fixtures';
 
 
 test('`save-quiz` endpoint works', (t) => {
@@ -11,7 +11,7 @@ test('`save-quiz` endpoint works', (t) => {
         url: '/save-quiz',
         payload: {
             module_id: 'TEST',
-            quizName: 'Test Quiz',
+            quizName: 'Brand New Quiz',
             questions
         }
     };
@@ -23,23 +23,10 @@ test('`save-quiz` endpoint works', (t) => {
 
         testClient.connect((error, client, done) => {
             if (error) {
-                console.error(error, 'error from deleting lecturer from the database');
+                console.error(error);
             }
-            client.query('DELETE FROM quizzes WHERE module_id = $1 AND name = $2', ['TEST', 'Test Quiz']);
+            client.query('DELETE FROM quizzes WHERE module_id = $1 AND name = $2', ['TEST', 'Brand New Quiz']);
             done();
-            t.end();
         });
-    });
-});
-
-test('deleting recently added quiz from database', (t) => {
-
-    testClient.connect((error, client, done) => {
-        if (error) {
-            console.error(error, 'error from deleting lecturer from the database');
-        }
-        client.query('DELETE FROM quizzes WHERE quiz_id = $1', [3]);
-        done();
-        t.end();
     });
 });
