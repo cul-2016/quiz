@@ -33,7 +33,7 @@ test('TOGGLE_COOKIE_MESSAGE works', (t) => {
         type: 'TOGGLE_COOKIE_MESSAGE'
     };
 
-    const expected = Object.assign({}, userState, { cookieMessage: false });
+    const expected = Object.assign({}, userState, { isCookieAccepted: false });
 
     const result = reducer(initialState, action);
     t.deepEqual(result, expected);

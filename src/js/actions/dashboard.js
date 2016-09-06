@@ -22,7 +22,7 @@ export function getDashboard () {
             })
             .catch((serverError) => {
                 const error = Object.assign({}, serverError, { reducerState: 'dashboard' });
-                console.log(error, 'getmoduleerror<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<');
+
                 dispatch(getDashboardFailure(error));
             });
     };

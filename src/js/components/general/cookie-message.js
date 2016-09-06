@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react';
 import classnames from 'classnames';
 
-const CookieMessage = ({ cookieMessage, handleCookiePopup }) => {
+const CookieMessage = ({ isCookieAccepted, handleCookiePopup }) => {
 
     const cookieDivClasses = classnames({
-        "display-none": !cookieMessage
+        "display-none": !isCookieAccepted
     });
 
     return (
@@ -24,7 +24,7 @@ const CookieMessage = ({ cookieMessage, handleCookiePopup }) => {
 };
 
 CookieMessage.propTypes = {
-    cookieMessage: PropTypes.bool,
+    isCookieAccepted: PropTypes.bool,
     handleCookiePopup: PropTypes.func.isRequired
 };
 

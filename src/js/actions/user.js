@@ -4,7 +4,7 @@ export const SET_USER_DETAILS = 'SET_USER_DETAILS';
 
 export const TOGGLE_COOKIE_MESSAGE = 'TOGGLE_COOKIE_MESSAGE';
 
-export const CLEAR_ERROR_FROM_STATE = 'CLEAR_ERROR_FROM_STATE';
+export const CLEAR_ERROR = 'CLEAR_ERROR';
 
 export const GET_USER_DETAILS_REQUEST = 'GET_USER_DETAILS_REQUEST';
 export const GET_USER_DETAILS_SUCCESS = 'GET_USER_DETAILS_SUCCESS';
@@ -20,8 +20,8 @@ export const toggleCookieMessage = () => ({
     type: TOGGLE_COOKIE_MESSAGE
 });
 
-export const ClearErrorFromState = (reducerState) => ({
-    type: CLEAR_ERROR_FROM_STATE,
+export const clearErrorFromState = (reducerState) => ({
+    type: CLEAR_ERROR,
     reducerState
 });
 

@@ -6,8 +6,8 @@ const ErrorMessage = ({ error, handleErrorClearance }) => {
         <div>
             <div className="error-message">
                 <span className="tag is-danger">
-                Whoops! something went wrong in { error.reducerState } { error.status }
-                <button onClick={ () => handleErrorClearance(error.reducerState) } className="delete"></button>
+                    Whoops! something went wrong in { error.reducerState } { error.status }
+                    <button onClick={ () => handleErrorClearance(error.reducerState) } className="delete"></button>
                 </span>
             </div>
         </div>

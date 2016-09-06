@@ -30,7 +30,7 @@ module.exports = {
                             return reply(userDetails[0])
                             .state('cul_id', userDetails[0].user_id.toString(), { path: "/" })
                             .state('cul_is_lecturer', userDetails[0].is_lecturer.toString(), { path: "/" })
-                            .state('cookie_message', 'true', { path: "/" });
+                            .state('cul_is_cookie_accepted', 'true', { path: "/" });
                         });
                     });
                 });

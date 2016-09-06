@@ -38,7 +38,7 @@ const rootReducer = (state, action) => {
         state = undefined;
     }
 
-    if (action.type === 'CLEAR_ERROR_FROM_STATE') {
+    if (action.type === 'CLEAR_ERROR') {
 
         state = update(state, {
             [action.reducerState]: { error: { $set: undefined } }
