@@ -235,12 +235,36 @@ export const leaderboardData = [
         average: 40,
         module_id: 'TEST',
         user_id: 3,
-        username: 'sohil'
+        username: 'Sohil'
     },
     {
         average: 0,
         module_id: 'TEST',
         user_id: 4,
-        username: 'mina'
+        username: 'Mina'
     }
 ];
+
+
+export const allAverageScoresData = [
+    { user_id: 23, average: 100 },
+    { user_id: 24, average: 100 },
+    { user_id: 21, average: 90 },
+    { user_id: 22, average: 90 },
+    { user_id: 19, average: 80 },
+    { user_id: 20, average: 80 },
+    { user_id: 17, average: 70 },
+    { user_id: 18, average: 70 },
+    { user_id: 15, average: 60 },
+    { user_id: 16, average: 60 },
+    { user_id: 13, average: 50 },
+    { user_id: 14, average: 50 },
+    { user_id: 11, average: 40 },
+    { user_id: 12, average: 40 },
+    { user_id: 9, average: 30 },
+    { user_id: 10, average: 30 },
+    { user_id: 7, average: 20 },
+    { user_id: 8, average: 20 },
+    { user_id: 5, average: 10 },
+    { user_id: 6, average: 10 }
+]; 
