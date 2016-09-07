@@ -2,7 +2,8 @@ import test from 'tape';
 import getPercentileValues from '../../../server/lib/getPercentileValues';
 import { allAverageScoresData as averageScores } from '../../utils/data-fixtures';
 
-test.only('`getPercentileValues` works', (t) => {
+
+test('`getPercentileValues` works', (t) => {
 
     t.plan(1);
 
@@ -15,5 +16,23 @@ test.only('`getPercentileValues` works', (t) => {
             console.error(error);
         }
         t.deepEqual(result, expected);
+    });
+});
+
+test('`getPercentileValues` returns an error if passed empty arrays', (t) => {
+
+    t.plan(4);
+
+    const BOUNDARIES = [10, 25, 50, 90, 100];
+
+    getPercentileValues(averageScores, [], (error, result) => {
+
+        t.ok(error instanceof Error);
+        t.notOk(result);
+    });
+    getPercentileValues([], BOUNDARIES, (error, result) => {
+
+        t.ok(error instanceof Error);
+        t.notOk(result);
     });
 });

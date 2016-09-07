@@ -11,6 +11,10 @@ var quantileSorted = require('simple-statistics').quantileSorted;
 
 function getPercentileValues (averageScores, boundaries, callback) {
 
+    if (!averageScores.length || !boundaries.length) {
+        return callback(new Error('Arguments must be arrays of length > 0'));
+    }
+
     let sample = averageScores.map((elem) => {
         return elem.average;
     });
