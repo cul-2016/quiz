@@ -3,7 +3,7 @@ var quantileSorted = require('simple-statistics').quantileSorted;
 /**
  * A function that returns an array of the lowest student score
  * for each percentile range
- * @param {object} averageScores - the average scores for all students
+ * @param {array} averageScores - the average scores for all students
  * @param {array} boundaries - array of numbers representing the top-end of a percentile range.  E.g. 11%-25% is represented by 25.
  * @param {function} callback - a callback function
  */
