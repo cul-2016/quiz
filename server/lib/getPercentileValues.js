@@ -1,4 +1,4 @@
-var quantileSorted = require('simple-statistics').quantileSorted;
+var quantileSorted = require('simple-statistics').quantileSorted; //http://simplestatistics.org/docs/#quantileSorted
 
 /**
  * A function that returns an array of the lowest student score

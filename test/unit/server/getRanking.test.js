@@ -1,11 +1,11 @@
 import test from 'tape';
 import { testClient } from '../../utils/init';
-import getPercentile from '../../../server/lib/getPercentile';
+import getRanking from '../../../server/lib/getRanking';
 
 // boundary percentile values --> [10, 25, 50, 90, 100]
 // corresponding boundary scores  [95, 80, 55, 15, 10]
 
-test("`getPercentile` correctly ranks students within 1 - 10% percentile", (t) => {
+test("`getRanking` correctly ranks students within 1 - 10% percentile", (t) => {
 
     t.plan(1);
 
@@ -13,7 +13,7 @@ test("`getPercentile` correctly ranks students within 1 - 10% percentile", (t) =
     const user_id = 24; //score: 100
     const expected = 10;
 
-    getPercentile(testClient, user_id, module_id, (error, result) => {
+    getRanking(testClient, user_id, module_id, (error, result) => {
 
         if (error) {
             console.error(error);
@@ -23,7 +23,7 @@ test("`getPercentile` correctly ranks students within 1 - 10% percentile", (t) =
 });
 
 
-test("`getPercentile` correctly ranks students within 11 - 25% percentile", (t) => {
+test("`getRanking` correctly ranks students within 11 - 25% percentile", (t) => {
 
     t.plan(2);
 
@@ -32,14 +32,14 @@ test("`getPercentile` correctly ranks students within 11 - 25% percentile", (t) 
     const user_id_2 = 19; //score: 80
     const expected = 25;
 
-    getPercentile(testClient, user_id_1, module_id, (error, result) => {
+    getRanking(testClient, user_id_1, module_id, (error, result) => {
 
         if (error) {
             console.error(error);
         }
         t.equal(result, expected, 'Value `25` is returned');
     });
-    getPercentile(testClient, user_id_2, module_id, (error, result) => {
+    getRanking(testClient, user_id_2, module_id, (error, result) => {
 
         if (error) {
             console.error(error);
@@ -49,7 +49,7 @@ test("`getPercentile` correctly ranks students within 11 - 25% percentile", (t) 
 });
 
 
-test("`getPercentile` correctly ranks students within 26 - 50% percentile", (t) => {
+test("`getRanking` correctly ranks students within 26 - 50% percentile", (t) => {
 
     t.plan(2);
 
@@ -58,14 +58,14 @@ test("`getPercentile` correctly ranks students within 26 - 50% percentile", (t) 
     const user_id_2 = 15;
     const expected = 50;
 
-    getPercentile(testClient, user_id_1, module_id, (error, result) => {
+    getRanking(testClient, user_id_1, module_id, (error, result) => {
 
         if (error) {
             console.error(error);
         }
         t.equal(result, expected, 'Value `50` is returned');
     });
-    getPercentile(testClient, user_id_2, module_id, (error, result) => {
+    getRanking(testClient, user_id_2, module_id, (error, result) => {
 
         if (error) {
             console.error(error);
@@ -74,7 +74,7 @@ test("`getPercentile` correctly ranks students within 26 - 50% percentile", (t) 
     });
 });
 
-test("`getPercentile` correctly ranks students within 51 - 90% percentile", (t) => {
+test("`getRanking` correctly ranks students within 51 - 90% percentile", (t) => {
 
     t.plan(4);
 
@@ -85,28 +85,28 @@ test("`getPercentile` correctly ranks students within 51 - 90% percentile", (t) 
     const user_id_4 = 7; //score: 20
     const expected = 90;
 
-    getPercentile(testClient, user_id_1, module_id, (error, result) => {
+    getRanking(testClient, user_id_1, module_id, (error, result) => {
 
         if (error) {
             console.error(error);
         }
         t.equal(result, expected, 'Value `90` is returned');
     });
-    getPercentile(testClient, user_id_2, module_id, (error, result) => {
+    getRanking(testClient, user_id_2, module_id, (error, result) => {
 
         if (error) {
             console.error(error);
         }
         t.equal(result, expected, 'Value `90` is returned');
     });
-    getPercentile(testClient, user_id_3, module_id, (error, result) => {
+    getRanking(testClient, user_id_3, module_id, (error, result) => {
 
         if (error) {
             console.error(error);
         }
         t.equal(result, expected, 'Value `90` is returned');
     });
-    getPercentile(testClient, user_id_4, module_id, (error, result) => {
+    getRanking(testClient, user_id_4, module_id, (error, result) => {
 
         if (error) {
             console.error(error);
@@ -115,7 +115,7 @@ test("`getPercentile` correctly ranks students within 51 - 90% percentile", (t) 
     });
 });
 
-test("`getPercentile` correctly ranks students within 91 - 100% percentile", (t) => {
+test("`getRanking` correctly ranks students within 91 - 100% percentile", (t) => {
 
     t.plan(1);
 
@@ -123,7 +123,7 @@ test("`getPercentile` correctly ranks students within 91 - 100% percentile", (t)
     const user_id = 6; //score: 10
     const expected = 100;
 
-    getPercentile(testClient, user_id, module_id, (error, result) => {
+    getRanking(testClient, user_id, module_id, (error, result) => {
 
         if (error) {
             console.error(error);

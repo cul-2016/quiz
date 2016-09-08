@@ -14,7 +14,7 @@ var getBoundaryIndex = require('./getBoundaryIndex');
 
 const BOUNDARIES = [10, 25, 50, 90, 100];
 
-function getPercentile (client, user_id, module_id, callback) {
+function getRanking (client, user_id, module_id, callback) {
 
     // get all average percentage scores in descending order
     getAllAverageScores(client, module_id, (error, allAverageScores) => {
@@ -45,4 +45,4 @@ function getPercentile (client, user_id, module_id, callback) {
     });
 }
 
-module.exports = getPercentile;
+module.exports = getRanking;
