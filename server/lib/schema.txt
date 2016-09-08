@@ -188,25 +188,46 @@ INSERT INTO users (email, password, username)
 INSERT INTO users (email, password, is_lecturer)
     VALUES ('lecturer@city.ac.uk', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true);
 
-
-INSERT INTO users (email, password, username)
-    VALUES ('sohil@city.ac.uk', '$2a$10$UnvUuW91Jh6.zWQi3G/2J.HLDTomSqJHxvBC.TYx/Bj8HZa.AAm4K', 'sohil');
-
-INSERT INTO users (email, password, username)
-    VALUES ('mina@city.ac.uk', '$2a$10$UnvUuW91Jh6.zWQi3G/2J.HLDTomSqJHxvBC.TYx/Bj8HZa.AAm4K', 'mina');
+INSERT INTO users (email, username, password)
+    VALUES ('sohil@city.ac.uk', 'Sohil', '$2a$10$UnvUuW91Jh6.zWQi3G/2J.HLDTomSqJHxvBC.TYx/Bj8HZa.AAm4K'),
+           ('mina@city.ac.uk', 'Mina', '$2a$10$UnvUuW91Jh6.zWQi3G/2J.HLDTomSqJHxvBC.TYx/Bj8HZa.AAm4K'),
+           ('homer@simpsons.com', 'Homer', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
+           ('marge@simpsons.com', 'Marge', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
+           ('lisa@simpsons.com', 'Lisa', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
+           ('bart@simpsons.com', 'Bart', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
+           ('maggie@simpsons.com', 'Maggie', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
+           ('ned@simpsons.com', 'Ned', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
+           ('apu@simpsons.com', 'Apu', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
+           ('smithers@simpsons.com', 'Smithers', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
+           ('mrburns@simpsons.com', 'Mr Burns', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
+           ('revlovejoy@simpsons.com', 'Rev Lovejoy', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
+           ('milhouse@simpsons.com', 'Milhouse', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
+           ('nelson@simpsons.com', 'Nelson', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
+           ('patty@simpsons.com', 'Patty', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
+           ('selma@simpsons.com', 'Selma', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
+           ('comicbookguy@simpsons.com', 'Comic Book Guy', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
+           ('krusty@simpsons.com', 'Krusty', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
+           ('sideshowbob@simpsons.com', 'Sideshow Bob', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
+           ('sideshowmel@simpsons.com', 'Sideshow Mel', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
+           ('drnick@simpsons.com', 'Dr Nick', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
+           ('principalskinner@simpsons.com', 'Principal Skinner', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K');
 
 
 /********* insert module ********/
 
 INSERT INTO modules (module_id, user_id, name)
-    VALUES ( 'TEST', 2, 'test module');
+    VALUES ( 'TEST', 2, 'test module'),
+           ('CENT', 2, 'Percentile');
 
 /********* insert medals ********/
 
 INSERT INTO medals (module_id, medal_name, condition)
     VALUES ('TEST', 'bronze', 39),
            ('TEST', 'silver', 69),
-           ('TEST', 'gold', 100);
+           ('TEST', 'gold', 100),
+           ('CENT', 'bronze', 39),
+           ('CENT', 'silver', 69),
+           ('CENT', 'gold', 100);
 
 /********* insert trophies ********/
 
@@ -214,7 +235,11 @@ INSERT INTO trophies (module_id, trophy_name, condition)
     VALUES ('TEST', 'first_quiz', 1),
            ('TEST', 'high_score', 100),
            ('TEST', 'overall_average', 65),
-           ('TEST', 'participation', 3);
+           ('TEST', 'participation', 3),
+           ('CENT', 'first_quiz', 1),
+           ('CENT', 'high_score', 100),
+           ('CENT', 'overall_average', 65),
+           ('CENT', 'participation', 2);
 
 
 
@@ -223,6 +248,7 @@ INSERT INTO trophies (module_id, trophy_name, condition)
 INSERT INTO quizzes (module_id, name, is_presented)
     VALUES ('TEST', 'Week 1 Quiz', true),
            ('TEST', 'Week 2 Quiz', true),
+           ('CENT', 'Trivia quiz', true),
            ('TEST', 'Week 3 Quiz', false);
 
 
@@ -233,8 +259,19 @@ INSERT INTO questions (quiz_id, question, a, b, c, d, correct_answer)
            (1, 'What is the capital of Croatia?', 'Zagreb', 'Cardiff', 'Edinburgh', 'Doncaster', 'a'),
            (2, 'What is the National Animal of England?', 'Pikachu', 'Whale', 'Lion', 'Doncaster', 'c'),
            (2, 'What is the capital of Tanzania?', 'Zagreb', 'Dodoma', 'Edinburgh', 'Doncaster', 'b'),
-           (3, 'What is the National Animal of England?', 'Pikachu', 'Whale', 'Lion', 'Doncaster', 'c'),
-           (3, 'What is the capital of Tanzania?', 'Zagreb', 'Dodoma', 'Edinburgh', 'Doncaster', 'b');
+           (4, 'What is the National Animal of England?', 'Pikachu', 'Whale', 'Lion', 'Doncaster', 'c'),
+           (4, 'What is the capital of Tanzania?', 'Zagreb', 'Dodoma', 'Edinburgh', 'Doncaster', 'b'),
+
+           (3, 'A phlebotomist extracts what from the human body?', 'Blood', 'Skin', 'Hair', 'Bone', 'a'),
+           (3, 'How many feet are there in a fathom?', '5', '6', '7', '8', 'b'),
+           (3, 'Nariyal is the Indian term for which nut? ', 'Pine nut', 'Monkey nut', 'Coconut', 'Cashew nut', 'c'),
+           (3, 'A couple celebrating their crystal wedding anniversary have been married for how many years?', '5', '8', '10', '15', 'd'),
+           (3, 'Who wrote the book Catch-22?', 'Malorie Blackman', 'Jonathan Franzen', 'Eoin Colfer', 'Joseph Heller', 'd'),
+           (3, 'In which year did Henry VIII become King of England?', '1503', '1506', '1509', '1512', 'c'),
+           (3, 'Port Said is in which North African country?', 'Algeria', 'Egypt', 'Tunisia', 'Libya', 'b'),
+           (3, 'In which film did Roger Moore first play James Bond?', 'Live and Let Die', 'Diamonds Are Forever', 'Dr No', 'You Only Live Twice', 'a'),
+           (3, 'Who composed The Wedding March?', 'Grieg', 'Beethoven', 'Wagner', 'Mendelssohn', 'd'),
+           (3, 'What is Canada''s national animal?' , 'Bear', 'Beaver', 'Racoon', 'Deer', 'b');
 
 /********* insert responses ********/
 
@@ -248,14 +285,144 @@ INSERT INTO responses (user_id, quiz_id, question_id, response)
           (3, 2, 3, 'a'),
           (3, 2, 4, 'b'),
           (4, 1, 1, 'c'),
-          (4, 1, 2, 'c');
+          (4, 1, 2, 'c'),
+          (5, 3, 6, 'a'),
+          (6, 3, 6, 'a'),
+          (7, 3, 6, 'a'),
+          (7, 3, 7, 'b'),
+          (8, 3, 6, 'a'),
+          (8, 3, 7, 'b'),
+          (9, 3, 6, 'a'),
+          (9, 3, 7, 'b'),
+          (9, 3, 8, 'c'),
+          (10, 3, 6, 'a'),
+          (10, 3, 7, 'b'),
+          (10, 3, 8, 'c'),
+          (11, 3, 6, 'a'),
+          (11, 3, 7, 'b'),
+          (11, 3, 8, 'c'),
+          (11, 3, 9, 'd'),
+          (12, 3, 6, 'a'),
+          (12, 3, 7, 'b'),
+          (12, 3, 8, 'c'),
+          (12, 3, 9, 'd'),
+          (13, 3, 6, 'a'),
+          (13, 3, 7, 'b'),
+          (13, 3, 8, 'c'),
+          (13, 3, 9, 'd'),
+          (13, 3, 10, 'd'),
+          (14, 3, 6, 'a'),
+          (14, 3, 7, 'b'),
+          (14, 3, 8, 'c'),
+          (14, 3, 9, 'd'),
+          (14, 3, 10, 'd'),
+          (15, 3, 6, 'a'),
+          (15, 3, 7, 'b'),
+          (15, 3, 8, 'c'),
+          (15, 3, 9, 'd'),
+          (15, 3, 10, 'd'),
+          (15, 3, 11, 'c'),
+          (16, 3, 6, 'a'),
+          (16, 3, 7, 'b'),
+          (16, 3, 8, 'c'),
+          (16, 3, 9, 'd'),
+          (16, 3, 10, 'd'),
+          (16, 3, 11, 'c'),
+          (17, 3, 6, 'a'),
+          (17, 3, 7, 'b'),
+          (17, 3, 8, 'c'),
+          (17, 3, 9, 'd'),
+          (17, 3, 10, 'd'),
+          (17, 3, 11, 'c'),
+          (17, 3, 12, 'b'),
+          (18, 3, 6, 'a'),
+          (18, 3, 7, 'b'),
+          (18, 3, 8, 'c'),
+          (18, 3, 9, 'd'),
+          (18, 3, 10, 'd'),
+          (18, 3, 11, 'c'),
+          (18, 3, 12, 'b'),
+          (19, 3, 6, 'a'),
+          (19, 3, 7, 'b'),
+          (19, 3, 8, 'c'),
+          (19, 3, 9, 'd'),
+          (19, 3, 10, 'd'),
+          (19, 3, 11, 'c'),
+          (19, 3, 12, 'b'),
+          (19, 3, 13, 'a'),
+          (20, 3, 6, 'a'),
+          (20, 3, 7, 'b'),
+          (20, 3, 8, 'c'),
+          (20, 3, 9, 'd'),
+          (20, 3, 10, 'd'),
+          (20, 3, 11, 'c'),
+          (20, 3, 12, 'b'),
+          (20, 3, 13, 'a'),
+          (21, 3, 6, 'a'),
+          (21, 3, 7, 'b'),
+          (21, 3, 8, 'c'),
+          (21, 3, 9, 'd'),
+          (21, 3, 10, 'd'),
+          (21, 3, 11, 'c'),
+          (21, 3, 12, 'b'),
+          (21, 3, 13, 'a'),
+          (21, 3, 14, 'd'),
+          (22, 3, 6, 'a'),
+          (22, 3, 7, 'b'),
+          (22, 3, 8, 'c'),
+          (22, 3, 9, 'd'),
+          (22, 3, 10, 'd'),
+          (22, 3, 11, 'c'),
+          (22, 3, 12, 'b'),
+          (22, 3, 13, 'a'),
+          (22, 3, 14, 'd'),
+          (23, 3, 6, 'a'),
+          (23, 3, 7, 'b'),
+          (23, 3, 8, 'c'),
+          (23, 3, 9, 'd'),
+          (23, 3, 10, 'd'),
+          (23, 3, 11, 'c'),
+          (23, 3, 12, 'b'),
+          (23, 3, 13, 'a'),
+          (23, 3, 14, 'd'),
+          (23, 3, 15, 'b'),
+          (24, 3, 6, 'a'),
+          (24, 3, 7, 'b'),
+          (24, 3, 8, 'c'),
+          (24, 3, 9, 'd'),
+          (24, 3, 10, 'd'),
+          (24, 3, 11, 'c'),
+          (24, 3, 12, 'b'),
+          (24, 3, 13, 'a'),
+          (24, 3, 14, 'd'),
+          (24, 3, 15, 'b');
 
 /********* insert module members ********/
 
 INSERT INTO module_members (module_id, user_id)
    VALUES ('TEST', 1),
           ('TEST', 3),
-          ('TEST', 4);
+          ('TEST', 4),
+          ('CENT', 5),
+          ('CENT', 6),
+          ('CENT', 7),
+          ('CENT', 8),
+          ('CENT', 9),
+          ('CENT', 10),
+          ('CENT', 11),
+          ('CENT', 12),
+          ('CENT', 13),
+          ('CENT', 14),
+          ('CENT', 15),
+          ('CENT', 16),
+          ('CENT', 17),
+          ('CENT', 18),
+          ('CENT', 19),
+          ('CENT', 20),
+          ('CENT', 21),
+          ('CENT', 22),
+          ('CENT', 23),
+          ('CENT', 24);
 
 
 /********* insert scores ********/
@@ -265,6 +432,26 @@ INSERT INTO scores (user_id, quiz_id, score)
           (1, 2, 1),
           (3, 1, 1),
           (3, 2, 1),
-          (4, 1, 0);
+          (4, 1, 0),
+          (5, 3, 1),
+          (6, 3, 1),
+          (7, 3, 2),
+          (8, 3, 2),
+          (9, 3, 3),
+          (10, 3, 3),
+          (11, 3, 4),
+          (12, 3, 4),
+          (13, 3, 5),
+          (14, 3, 5),
+          (15, 3, 6),
+          (16, 3, 6),
+          (17, 3, 7),
+          (18, 3, 7),
+          (19, 3, 8),
+          (20, 3, 8),
+          (21, 3, 9),
+          (22, 3, 9),
+          (23, 3, 10),
+          (24, 3, 10);
 
 COMMIT;

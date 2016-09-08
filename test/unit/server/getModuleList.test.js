@@ -2,10 +2,14 @@ import test from 'tape';
 import getModuleList from '../../../server/lib/getModuleList';
 import { testClient } from '../../utils/init';
 
-test('Gets list of modules for a lecturer', (t) => {
+test('`getModuleList` gets list of modules for a lecturer', (t) => {
 
     t.plan(1);
-    const expectedRows = [{ module_id: 'TEST', name: 'test module' }, { module_id: 'PSY1', name: 'Intro to Psychology' }];
+    const expectedRows = [
+        { module_id: 'TEST', name: 'test module' },
+        { module_id: 'PSY1', name: 'Intro to Psychology' },
+        { module_id: 'CENT', name: 'Percentile' }
+    ];
 
     getModuleList(testClient, '2', true, (error, response) => {
 

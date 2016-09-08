@@ -2,7 +2,7 @@ import test from 'tape';
 import { testClient } from '../../utils/init';
 import deleteQuestions from '../../../server/lib/deleteQuestions';
 
-test('deleting user from module works', (t) => {
+test('`deleteQuestions` works', (t) => {
 
     t.plan(2);
     const expectedError = null;
@@ -15,7 +15,7 @@ test('deleting user from module works', (t) => {
 
         testClient.connect((error, client, done) => {
             if (error) {
-                console.error(error, 'error from deleting lecturer from the database');
+                console.error(error);
             }
             client.query("INSERT INTO questions (quiz_id, question, a, b, c, d, correct_answer) VALUES (2, 'Have I Got News For', 'Her', 'You', 'It', 'Them', 'b')", (error) => {
                 if (error) throw new Error(error);

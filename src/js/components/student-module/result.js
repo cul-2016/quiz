@@ -12,9 +12,9 @@ const Result = ({ location, score, newTrophies }) => {
     let trophiesToPresent = newTrophies.map((trophy, i) => {
 
         return (
-            <div className="column animated bounceInUp">
+            <div key={ i } className="column animated bounceInUp">
                 <i className="fa fa-trophy awarded" />
-                <p key={ i }>{ normaliseText(trophy) }</p>
+                <p>{ normaliseText(trophy) }</p>
             </div>
         );
     });
