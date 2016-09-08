@@ -16,7 +16,16 @@ function getMeanQuizScores (client, module_id, callback) {
         if (error) {
             return callback(error);
         }
-        callback(null, data.rows);
+
+        (function stringToFloat (array, i) {
+
+            if (i === array.length) {
+                return callback(null, array);
+            }
+            array[i].mean_score = parseFloat(array[i].mean_score, 2);
+
+            stringToFloat(array, ++i);
+        })(data.rows, 0);
     });
 }
 
