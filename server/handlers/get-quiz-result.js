@@ -1,5 +1,5 @@
 var client = require('../lib/dbClient');
-var getQuizScore = require('../lib/getQuizScore');
+var calculateQuizScore = require('../lib/calculateQuizScore');
 var setQuizScore = require('../lib/setQuizScore');
 var getNewTrophyState = require('../lib/getNewTrophyState');
 var setNewTrophyState = require('../lib/setNewTrophyState');
@@ -13,7 +13,7 @@ module.exports = {
         var module_id = request.query.module_id;
         var quiz_id = request.query.quiz_id;
 
-        getQuizScore(client, user_id, quiz_id, (error, score) => {
+        calculateQuizScore(client, user_id, quiz_id, (error, score) => {
 
             if (error) {
                 console.error(error);
