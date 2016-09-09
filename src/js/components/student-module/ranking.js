@@ -5,7 +5,6 @@ const Ranking = ({ quizzesCompleted, overallScore }) => {
 
     return (
         <div>
-            RANKING COMPONENT
             {
                 quizzesCompleted === 0 &&
                 <p>

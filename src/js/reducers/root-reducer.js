@@ -13,7 +13,7 @@ import { result } from './result';
 import quizMembers from './quiz-members';
 import leaderboard from './leaderboard';
 import update from 'react-addons-update';
-
+import { feedback } from './feedback';
 
 
 const appReducer = combineReducers({
@@ -29,7 +29,8 @@ const appReducer = combineReducers({
     review,
     result,
     quizMembers,
-    leaderboard
+    leaderboard,
+    feedback
 });
 
 const rootReducer = (state, action) => {
