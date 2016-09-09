@@ -1,16 +1,8 @@
 import update from 'react-addons-update';
 import * as actionsTypes from '../actions/feedback';
-import feedbackQuotes from '../lib/feedback.json';
 
 
 export const initialState = {
-    feedback: {
-        90: feedbackQuotes.top10,
-        75: feedbackQuotes.top11to25,
-        50: feedbackQuotes.top25to50,
-        10: feedbackQuotes.top51to90,
-        0: feedbackQuotes.top91to100
-    },
     quizzesCompleted: undefined,
     overallScore: undefined,
     isFetchingFeedback: false,

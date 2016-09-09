@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import feedbackQuotes from '../lib/feedback.json';
 
 
 const Ranking = ({ quizzesCompleted, overallScore }) => {
@@ -14,31 +15,31 @@ const Ranking = ({ quizzesCompleted, overallScore }) => {
             {
                 overallScore > 90 &&
                 <p>
-                You are a star performer. Your score is in the top 10% of people who are taking part in these quizzes. There is very little advice to give you – keep up the good work!
+                    { feedbackQuotes.top10 }
                 </p>
             }
             {
                 overallScore > 75 && overallScore <= 90 &&
                 <p>
-                    You are doing well – you are in the top 25% of people who are taking part in these quizzes. Good work!
+                    { feedbackQuotes.top11to25 }
                 </p>
             }
             {
                 overallScore > 50 && overallScore <= 75 &&
                 <p>
-                    You are making good progress – your score is in the top half of people who are taking part in these quizzes.
+                { feedbackQuotes.top25to50 }
                 </p>
             }
             {
                 overallScore > 10 && overallScore <= 50 &&
                 <p>
-                    Solid performance – although you are not at the top of the leaderboard, you’re not at the bottom either. You clearly have potential – it might be worth going over the material to make sure you’re completely on top of it.
+                { feedbackQuotes.top51to90 }
                 </p>
             }
             {
                 overallScore > 0 && overallScore <= 10 &&
                 <p>
-                    You’re not getting the best scores on these quizzes. It might help to take some more time to get on top of the material.
+                { feedbackQuotes.top91to100 }
                 </p>
             }
         </div>
