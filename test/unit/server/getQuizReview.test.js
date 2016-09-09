@@ -2,7 +2,7 @@ import test from 'tape';
 import getQuizReview from '../../../server/lib/getQuizReview';
 import { testClient } from '../../utils/init';
 
-test('Gets list of questions for a quiz review', (t) => {
+test('`getQuizReview` gets list of questions for a quiz review', (t) => {
 
     t.plan(1);
     const expectedRows = [

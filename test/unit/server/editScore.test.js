@@ -2,7 +2,7 @@ import test from 'tape';
 import editScore from '../../../server/lib/editScore';
 import { testClient } from '../../utils/init';
 
-test('editing score for a user in a quiz', (t) => {
+test('`editScore` works', (t) => {
     t.plan(2);
     const expectedError = null;
     const expectedCommand = 'UPDATE';
