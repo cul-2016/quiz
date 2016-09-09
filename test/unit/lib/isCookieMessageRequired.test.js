@@ -1,7 +1,7 @@
 import test from 'tape';
 import isCookieMessageRequired from '../../../src/js/lib/isCookieMessageRequired';
 
-test('checking if isCookieMessageRequired returns true', (t) => {
+test('isCookieMessageRequired returns true when cookie is set to true', (t) => {
 
     t.plan(1);
     var expected = true;
@@ -11,7 +11,7 @@ test('checking if isCookieMessageRequired returns true', (t) => {
 });
 
 
-test('checking if isCookieMessageRequired returns false if set to false', (t) => {
+test('isCookieMessageRequired returns false when cookie is set to false', (t) => {
 
     document.cookie = "cul_is_cookie_accepted=false";
     t.plan(1);
@@ -21,7 +21,7 @@ test('checking if isCookieMessageRequired returns false if set to false', (t) =>
     t.deepEqual(expected, actual);
 });
 
-test('checking if isCookieMessageRequired returns true if set to undefined', (t) => {
+test('isCookieMessageRequired returns true when cookie is set to undefined', (t) => {
 
     document.cookie = "cul_is_cookie_accepted=";
     t.plan(1);

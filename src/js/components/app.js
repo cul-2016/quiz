@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import CookieMessage from './general/cookie-message';
 import ErrorMessage from './general/error-message';
 
-const App = ({ children, location, error, isCookieAccepted, handleCookiePopup, handleErrorClearance }) => {
+const App = ({ children, location, error, isCookieAccepted, handleCookieMessage, handleErrorClearance }) => {
 
     return (
         <div>
@@ -20,7 +20,7 @@ const App = ({ children, location, error, isCookieAccepted, handleCookiePopup, h
             <div>
                 <CookieMessage
                     isCookieAccepted={ isCookieAccepted }
-                    handleCookiePopup={ handleCookiePopup } />
+                    handleCookieMessage={ handleCookieMessage } />
                 <div>
                     { children }
                 </div>
@@ -40,7 +40,7 @@ App.propTypes = {
     children: PropTypes.element.isRequired,
     isCookieAccepted: PropTypes.bool,
     error: PropTypes.object,
-    handleCookiePopup: PropTypes.func.isRequired,
+    handleCookieMessage: PropTypes.func.isRequired,
     location: PropTypes.object.isRequired,
     handleErrorClearance: PropTypes.func.isRequired
 };

@@ -88,7 +88,7 @@ test('GET_USER_DETAILS_FAILURE works', (t) => {
         error
     };
 
-    const expected = Object.assign({}, userState, { error: error });
+    const expected = Object.assign({}, userState, { error });
 
     const result = reducer(initialState, action);
 

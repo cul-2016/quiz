@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import classnames from 'classnames';
 
-const CookieMessage = ({ isCookieAccepted, handleCookiePopup }) => {
+const CookieMessage = ({ isCookieAccepted, handleCookieMessage }) => {
 
     const cookieDivClasses = classnames({
         "display-none": !isCookieAccepted
@@ -13,9 +13,9 @@ const CookieMessage = ({ isCookieAccepted, handleCookiePopup }) => {
                 <div className="hero-body">
                     <div className="container has-text-centered">
                         <p>
-                            We use cookies to ensure that we give you the best experience on our website.
+                            This app relies on cookies to work. Please make sure you have cookies enabled.
                         </p>
-                        <button onClick={ handleCookiePopup } className="button has-text-centered"><i className="fa fa-times" /></button>
+                        <button onClick={ handleCookieMessage } className="button has-text-centered"><i className="fa fa-times" /></button>
                     </div>
                 </div>
             </section>
@@ -25,7 +25,7 @@ const CookieMessage = ({ isCookieAccepted, handleCookiePopup }) => {
 
 CookieMessage.propTypes = {
     isCookieAccepted: PropTypes.bool,
-    handleCookiePopup: PropTypes.func.isRequired
+    handleCookieMessage: PropTypes.func.isRequired
 };
 
 export default CookieMessage;

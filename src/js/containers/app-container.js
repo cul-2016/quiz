@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import App from '../components/app';
-import { toggleCookieMessage, clearErrorFromState } from '../actions/user';
+import { toggleCookieMessage, clearError } from '../actions/user';
 import { hashHistory } from 'react-router';
 
 const mapStateToProps = (state) => ({
@@ -10,14 +10,14 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    handleCookiePopup: () => {
+    handleCookieMessage: () => {
         document.cookie = "cul_is_cookie_accepted=false";
         dispatch(toggleCookieMessage());
     },
 
     handleErrorClearance: (reducerState) => {
 
-        dispatch(clearErrorFromState(reducerState));
+        dispatch(clearError(reducerState));
         hashHistory.push('/');
     }
 });

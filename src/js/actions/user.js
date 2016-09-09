@@ -20,7 +20,7 @@ export const toggleCookieMessage = () => ({
     type: TOGGLE_COOKIE_MESSAGE
 });
 
-export const clearErrorFromState = (reducerState) => ({
+export const clearError = (reducerState) => ({
     type: CLEAR_ERROR,
     reducerState
 });
