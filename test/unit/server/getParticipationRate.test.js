@@ -2,7 +2,7 @@ import test from 'tape';
 import getParticipationRate from '../../../server/lib/getParticipationRate';
 import { testClient } from '../../utils/init';
 
-test(`getParticipationRate returns the correct results`, (t) => {
+test('`getParticipationRate` returns the correct results', (t) => {
 
     t.plan(1);
     const module_id = 'TEST';
