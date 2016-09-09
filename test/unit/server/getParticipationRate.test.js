@@ -1,13 +1,15 @@
 import test from 'tape';
-import getParticipationRate from '../../../server/lib/getParticipationRate';
+import getparticipationrate from '../../../server/lib/getparticipationrate';
 import { testClient } from '../../utils/init';
 
-test('getParticipationRate returns the correct results', (t) => {
+test('getparticipationrate returns the correct results', (t) => {
 
     t.plan(1);
+    const module_id = 'TEST';
+    const user_id = 1;
     const expectedRows = { average: 100, participation: '2', totalnumquizzes: '2' };
 
-    getParticipationRate(testClient, 'TEST', 1, (error, response) => {
+    getparticipationrate(testClient, module_id, user_id, (error, response) => {
 
         if (error) {
             console.error(error);

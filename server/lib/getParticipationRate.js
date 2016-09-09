@@ -8,10 +8,10 @@ var queries = require('./queries.json');
  */
 
 
-function getParticipationRate (client, module_id, user_id, callback) {
+function getparticipationrate (client, module_id, user_id, callback) {
 
     var value = [module_id, user_id];
-    query(client, queries.getParticipationRate, value, (error, response) => {
+    query(client, queries.getparticipationrate, value, (error, response) => {
 
         if (error) {
             console.error(error);
@@ -23,4 +23,4 @@ function getParticipationRate (client, module_id, user_id, callback) {
 }
 
 
-module.exports = getParticipationRate;
+module.exports = getparticipationrate;
