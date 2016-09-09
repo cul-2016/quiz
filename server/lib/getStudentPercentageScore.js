@@ -1,6 +1,6 @@
 
 /**
- * Finds and returns a student's average score
+ * Finds and returns a student's average score from an array of all scores
  * @param {number} user_id - user id
  * @param {array} averageScores - the average scores for all students
  * @param {function} callback - a callback function
@@ -8,7 +8,7 @@
 
 
 function getStudentPercentageScore (user_id, allPercentageScores, callback) {
-    console.log(allPercentageScores);
+
     (function search (rows) {
 
         if (!rows.length) {

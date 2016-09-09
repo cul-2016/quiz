@@ -1,5 +1,12 @@
+require('babel-register')({
+    presets: ['es2015', 'stage-0']
+});
 var getMeanQuizScores = require('./getMeanQuizScores');
 var getQuizScores = require('./getQuizScores');
+var getSignedDifference = require('./getSignedDifference');
+var getMinAndMaxValues = require('./getMinAndMaxValues');
+var mapQuizIDToName = require('./mapQuizIDToName');
+var MINIMUM_QUIZZES = 3;
 
 
 /**
@@ -12,14 +19,46 @@ var getQuizScores = require('./getQuizScores');
  */
 
 
-function getBestAndWorstQuiz (client, user_id, module_id, callback) { //eslint-disable-line no-unused-vars
-
+function getBestAndWorstQuiz (client, user_id, module_id, callback) {
     // get this student's scores
-    getQuizScores(client, user_id, module_id, (error, studentScores) => { //eslint-disable-line no-unused-vars
+    getQuizScores(client, user_id, module_id, (error, studentScores) => {
 
-        getMeanQuizScores(client, user_id, module_id, (error, meanScores) => { //eslint-disable-line no-unused-vars
+        if (error) {
+            console.error(error);
+            return callback(error);
+        }
+        if (studentScores.length < MINIMUM_QUIZZES) {
+            return callback(null, null);
+        }
+        // get mean scores for each quiz
+        getMeanQuizScores(client, module_id, (error, meanScores) => {
 
-            // work out difference
+            if (error) {
+                console.error(error);
+                return callback(error);
+            }
+            getSignedDifference(studentScores, meanScores, (error, difference) => {
+
+                if (error) {
+                    console.error(error);
+                    return callback(error);
+                }
+                getMinAndMaxValues(difference, (error, values) => {
+
+                    if (error) {
+                        console.error(error);
+                        return callback(error);
+                    }
+                    mapQuizIDToName(client, values, (error, names) => {
+
+                        if (error) {
+                            console.error(error);
+                            return callback(error);
+                        }
+                        callback(null, names);
+                    });
+                });
+            });
         });
     });
 }
