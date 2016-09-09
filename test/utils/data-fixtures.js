@@ -15,6 +15,11 @@ export const userDetails = {
     is_lecturer: true
 };
 
+export const feedback = {
+    quizzesCompleted: 4,
+    overallScore: 70,
+};
+
 export const dashboardData = [
     {
         module_id: 'CS50',

@@ -20,8 +20,9 @@ export function getDashboard () {
             .then((response) => {
                 dispatch(getDashboardSuccess(response.data));
             })
-            .catch((error) => {
-                console.error(error);
+            .catch((serverError) => {
+                const error = Object.assign({}, serverError, { reducerState: 'dashboard' });
+
                 dispatch(getDashboardFailure(error));
             });
     };

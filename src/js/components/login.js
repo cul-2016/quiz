@@ -53,7 +53,7 @@ const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthentic
                         </button>
                         <p>
                             <Link to="/register-student">
-                                <span className="tag is-success">
+                                <span className=" is-success">
                                     Sign up here
                                 </span>
                             </Link>

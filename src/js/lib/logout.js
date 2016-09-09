@@ -22,6 +22,7 @@ function clearBrowser (callback) {
 
     document.cookie = "cul_id=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
     document.cookie = "cul_is_lecturer=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+    document.cookie = "cul_is_cookie_accepted=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
     localStorage.removeItem("state");
     callback();
 }

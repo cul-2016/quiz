@@ -1,5 +1,6 @@
 import update from 'react-addons-update';
 import * as actionsTypes from '../actions/user';
+import isCookieMessageRequired from '../lib/isCookieMessageRequired';
 
 const initialState = {
     user_id: undefined,
@@ -7,6 +8,7 @@ const initialState = {
     username: undefined,
     is_lecturer: undefined,
     isFetchingUser: false,
+    isCookieAccepted: isCookieMessageRequired(),
     error: undefined
 };
 
@@ -26,6 +28,11 @@ export default function user (state = initialState, action ) {
         return update(state, {
             isFetchingUser: { $set: false },
             error: { $set: action.error }
+        });
+
+    case actionsTypes.TOGGLE_COOKIE_MESSAGE:
+        return update(state, {
+            isCookieAccepted: { $set: false }
         });
 
     default:

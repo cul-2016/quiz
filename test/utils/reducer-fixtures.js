@@ -1,4 +1,5 @@
 import { trophies } from './data-fixtures';
+import isCookieMessageRequired from '../../src/js/lib/isCookieMessageRequired';
 
 export const dashboard = {
     isFetchingDashboard: false,
@@ -32,6 +33,7 @@ export const user = {
     username: undefined,
     is_lecturer: undefined,
     isFetchingUser: false,
+    isCookieAccepted: isCookieMessageRequired(),
     error: undefined
 };
 
