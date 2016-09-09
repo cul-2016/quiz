@@ -2,7 +2,8 @@ var query = require('./query');
 var queries = require('./queries.json');
 
 /**
- * Returns the mean score for each quiz in a module
+ * Returns the mean score for each quiz in a module {array}.
+ * The returned array is in ascending numerical order of user id
  * @param {object} client - database client
  * @param {string} module_id - unique module id
  * @param {function} callback - callback function

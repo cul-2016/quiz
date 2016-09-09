@@ -246,7 +246,7 @@ export const leaderboardData = [
 ];
 
 
-export const allAverageScoresData = [
+export const allPercentageScoresData = [
     { user_id: 23, average: 100 },
     { user_id: 24, average: 100 },
     { user_id: 21, average: 90 },
@@ -267,4 +267,4 @@ export const allAverageScoresData = [
     { user_id: 8, average: 20 },
     { user_id: 5, average: 10 },
     { user_id: 6, average: 10 }
-]; 
+];

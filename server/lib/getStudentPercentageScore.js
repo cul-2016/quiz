@@ -7,8 +7,8 @@
  */
 
 
-function getStudentAverageScore (user_id, allAverageScores, callback) {
-
+function getStudentPercentageScore (user_id, allPercentageScores, callback) {
+    console.log(allPercentageScores);
     (function search (rows) {
 
         if (!rows.length) {
@@ -19,7 +19,7 @@ function getStudentAverageScore (user_id, allAverageScores, callback) {
             return callback(null, rows[0].average);
         }
         search(rows.slice(1));
-    })(allAverageScores);
+    })(allPercentageScores);
 }
 
-module.exports = getStudentAverageScore;
+module.exports = getStudentPercentageScore;

@@ -17,7 +17,6 @@ function getSignedDifference (studentScores, meanScores, callback) {
         if (i === studentScores.length) {
             return callback(null, result);
         }
-        console.log(studentScores);
         result.push({
             quiz_id: studentScores[i].quiz_id,
             difference: studentScores[i].score - meanScores[i].mean_score

@@ -1,6 +1,6 @@
-var getAllAverageScores = require('./getAllAverageScores');
+var getAllPercentageScores = require('./getAllPercentageScores');
 var getPercentileValues = require('./getPercentileValues');
-var getStudentAverageScore = require('./getStudentAverageScore');
+var getStudentPercentageScore = require('./getStudentPercentageScore');
 var getBoundaryIndex = require('./getBoundaryIndex');
 
 /**
@@ -17,18 +17,18 @@ const BOUNDARIES = [10, 25, 50, 90, 100];
 function getRanking (client, user_id, module_id, callback) {
 
     // get all average percentage scores in descending order
-    getAllAverageScores(client, module_id, (error, allAverageScores) => {
+    getAllPercentageScores(client, module_id, (error, allPercentageScores) => {
 
         if (error) {
             return callback(error);
         }
         // get the percentile boundary values
-        getPercentileValues(allAverageScores, BOUNDARIES, (error, values) => {
+        getPercentileValues(allPercentageScores, BOUNDARIES, (error, values) => {
 
             if (error) {
                 return callback(error);
             }
-            getStudentAverageScore(user_id, allAverageScores, (error, studentScore) => {
+            getStudentPercentageScore(user_id, allPercentageScores, (error, studentScore) => {
 
                 if (error) {
                     return callback(error);

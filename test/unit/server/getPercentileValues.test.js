@@ -1,6 +1,6 @@
 import test from 'tape';
 import getPercentileValues from '../../../server/lib/getPercentileValues';
-import { allAverageScoresData as averageScores } from '../../utils/data-fixtures';
+import { allPercentageScoresData as averageScores } from '../../utils/data-fixtures';
 
 
 test('`getPercentileValues` works', (t) => {
