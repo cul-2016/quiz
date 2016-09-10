@@ -1,6 +1,3 @@
-require('babel-register')({
-    presets: ['es2015', 'stage-0']
-});
 var getMeanQuizScores = require('./getMeanQuizScores');
 var getQuizScores = require('./getQuizScores');
 var getSignedDifference = require('./getSignedDifference');
