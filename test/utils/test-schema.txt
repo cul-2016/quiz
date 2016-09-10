@@ -246,7 +246,9 @@ INSERT INTO trophies (module_id, trophy_name, condition)
 INSERT INTO quizzes (module_id, name, is_presented)
     VALUES ('TEST', 'Week 1 Quiz', true),
            ('TEST', 'Week 2 Quiz', true),
-           ('CENT', 'Trivia quiz', true);
+           ('CENT', 'Trivia quiz', true),
+           ('CENT', 'Arbitrary 1', true),
+           ('CENT', 'Arbitrary 2', true);
 
 /********* insert questions ********/
 
@@ -265,7 +267,13 @@ INSERT INTO questions (quiz_id, question, a, b, c, d, correct_answer)
            (3, 'Port Said is in which North African country?', 'Algeria', 'Egypt', 'Tunisia', 'Libya', 'b'),
            (3, 'In which film did Roger Moore first play James Bond?', 'Live and Let Die', 'Diamonds Are Forever', 'Dr No', 'You Only Live Twice', 'a'),
            (3, 'Who composed The Wedding March?', 'Grieg', 'Beethoven', 'Wagner', 'Mendelssohn', 'd'),
-           (3, 'What is Canada''s national animal?' , 'Bear', 'Beaver', 'Racoon', 'Deer', 'b');
+           (3, 'What is Canada''s national animal?' , 'Bear', 'Beaver', 'Racoon', 'Deer', 'b'),
+           (4, 'Life on...', 'Mars', 'Bars', 'Cars', 'Tars', 'a'),
+           (4, 'Will and...', 'Grace', 'Pace', 'Lace', 'Space', 'a'),
+           (4, 'Easy on the...', 'pie', 'sky', 'lie', 'dry', 'a'),
+           (5, 'I''l be there for...', 'you', 'who', 'roo', 'two', 'a'),
+           (5, 'Gotta catch ''em...', 'all', 'Paul', 'Saul', 'Maul', 'a'),
+           (5, 'Total eclipse of the...', 'heart', 'part', 'smart', 'tart', 'a');
 
 /********* insert responses ********/
 
@@ -282,16 +290,28 @@ INSERT INTO responses (user_id, quiz_id, question_id, response)
            (4, 1, 2, 'c'),
            (5, 3, 6, 'a'),
            (6, 3, 6, 'a'),
+           (6, 4, 16, 'a'),
+           (6, 5, 19, 'a'),
            (7, 3, 6, 'a'),
            (7, 3, 7, 'b'),
            (8, 3, 6, 'a'),
            (8, 3, 7, 'b'),
+           (8, 4, 16, 'a'),
+           (8, 4, 17, 'a'),
+           (8, 5, 19, 'a'),
+           (8, 5, 20, 'a'),
            (9, 3, 6, 'a'),
            (9, 3, 7, 'b'),
            (9, 3, 8, 'c'),
            (10, 3, 6, 'a'),
            (10, 3, 7, 'b'),
            (10, 3, 8, 'c'),
+           (10, 4, 16, 'a'),
+           (10, 4, 17, 'a'),
+           (10, 4, 18, 'a'),
+           (10, 5, 19, 'a'),
+           (10, 5, 20, 'a'),
+           (10, 5, 21, 'a'),
            (11, 3, 6, 'a'),
            (11, 3, 7, 'b'),
            (11, 3, 8, 'c'),
@@ -430,8 +450,12 @@ INSERT INTO scores (user_id, quiz_id, score)
            (4, 1, 0),
            (5, 3, 1),
            (6, 3, 1),
+           (6, 4, 1),
+           (6, 5, 1),
            (7, 3, 2),
            (8, 3, 2),
+           (8, 4, 2),
+           (8, 5, 2),
            (9, 3, 3),
            (10, 3, 3),
            (11, 3, 4),

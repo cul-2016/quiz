@@ -4,7 +4,7 @@ import { allPercentageScoresData as expected } from '../../utils/data-fixtures';
 import getAllPercentageScores from '../../../server/lib/getAllPercentageScores';
 
 
-test("`getAllPercentageScores` returns all students' average scores for a module", (t) => {
+test.skip("`getAllPercentageScores` returns all students' average scores for a module", (t) => {
 
     t.plan(2);
     const module_id = 'CENT';
