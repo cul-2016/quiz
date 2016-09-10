@@ -17,14 +17,23 @@ test('SET_USER_DETAILS works', (t) => {
         data
     };
 
-    const expected = {
-        user_id: 1,
-        email: 'test@test.com',
-        username: 'test',
-        is_lecturer: true,
-        isFetchingUser: false,
-        error: undefined
+    const expected = Object.assign({}, userState, data);
+
+    const result = reducer(initialState, action);
+    t.deepEqual(result, expected);
+});
+
+test('TOGGLE_COOKIE_MESSAGE works', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(userState);
+
+    const action = {
+        type: 'TOGGLE_COOKIE_MESSAGE'
     };
+
+    const expected = Object.assign({}, userState, { isCookieAccepted: false });
 
     const result = reducer(initialState, action);
     t.deepEqual(result, expected);
@@ -44,14 +53,8 @@ test('GET_USER_DETAILS_REQUEST works', (t) => {
     const action = {
         type: 'GET_USER_DETAILS_REQUEST',
     };
-    const expected = {
-        user_id: undefined,
-        email: undefined,
-        username: undefined,
-        is_lecturer: undefined,
-        isFetchingUser: true,
-        error: undefined
-    };
+
+    const expected = Object.assign({}, userState, { isFetchingUser: true });
 
     const result = reducer(initialState, action);
     t.deepEqual(result, expected);
@@ -66,14 +69,9 @@ test('GET_USER_DETAILS_SUCCESS works', (t) => {
         type: 'GET_USER_DETAILS_SUCCESS',
         data
     };
-    const expected = {
-        user_id: 1,
-        email: 'test@test.com',
-        username: 'test',
-        is_lecturer: true,
-        isFetchingUser: false,
-        error: undefined
-    };
+
+    const expected = Object.assign({}, userState, data);
+
     const result = reducer(initialState, action);
 
     t.deepEqual(result, expected);
@@ -89,14 +87,9 @@ test('GET_USER_DETAILS_FAILURE works', (t) => {
         type: 'GET_USER_DETAILS_FAILURE',
         error
     };
-    const expected = {
-        user_id: undefined,
-        email: undefined,
-        username: undefined,
-        is_lecturer: undefined,
-        isFetchingUser: false,
-        error: error
-    };
+
+    const expected = Object.assign({}, userState, { error });
+
     const result = reducer(initialState, action);
 
     t.deepEqual(result, expected);

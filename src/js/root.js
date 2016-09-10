@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
-import { Router, Route, IndexRoute, IndexRedirect, hashHistory } from 'react-router';
+import { Router, Route, IndexRoute, IndexRedirect, Redirect, hashHistory } from 'react-router';
 import { Provider } from 'react-redux';
 
-import App from './components/app';
+import AppContainer from './containers/app-container';
 import LoginContainer from './containers/login';
 import DashboardContainer from './containers/dashboard';
 import NewModuleContainer from './containers/new-module';
@@ -29,6 +29,8 @@ import StudentFeedback from './components/student-module/feedback';
 import StudentLiveQuizContainer from './containers/student/live-quiz';
 import StudentQuizResultContainer from './containers/student/result';
 
+import NotFound from './components/general/not-found';
+
 import composeHooks from './lib/composeHooks';
 import * as hooks from './lib/onEnterHooks';
 
@@ -38,7 +40,7 @@ const Root = ({ store }) => (
 
     <Provider store={ store }>
         <Router history={ hashHistory }>
-            <Route path="/" component={ App }>
+            <Route path="/" component={ AppContainer }>
                 <IndexRoute
                     onEnter={ hooks.shouldUserRedirect }
                     component={ LoginContainer } />
@@ -46,14 +48,14 @@ const Root = ({ store }) => (
                     path="register-student"
                     component={ RegisterUserContainer } />
                 <Route
-                    path="register-lecturer1000"
+                    path="register-lecturer-invite-only"
                     component={ RegisterUserContainer } />
                 <Route
                     onEnter={ composeHooks(hooks.authenticate, hooks.fetchModuleList, hooks.leaveRoom) }
                     path="dashboard"
                     component={ DashboardContainer } />
                 <Route
-                    onEnter={ hooks.authenticateLecturer }
+                    onEnter={ composeHooks(hooks.authenticate, hooks.checkUserRole) }
                     path="add-new-module"
                     component={ NewModuleContainer } />
                 <Route
@@ -65,7 +67,7 @@ const Root = ({ store }) => (
                     path="app-loading"
                     component={ AppLoadingContainer } />
                 <Route
-                    onEnter={ composeHooks(hooks.authenticate, hooks.fetchModule) }
+                    onEnter={ composeHooks(hooks.authenticate, hooks.checkUserRole, hooks.fetchModule) }
                     path=":module_id/lecturer"
                     component={ ModuleContainer } />
                 <Route path=":module_id/student" component={ StudentModuleContainer }>
@@ -80,27 +82,27 @@ const Root = ({ store }) => (
                         component={ StudentFeedback } />
                 </Route>
                 <Route
-                    onEnter={ hooks.authenticate }
+                    onEnter={ composeHooks(hooks.authenticate, hooks.checkUserRole) }
                     path=":module_id/new-quiz"
                     component={ NewQuizContainer } />
                 <Route
-                    onEnter={ composeHooks(hooks.authenticate, hooks.fetchQuizDetails) }
+                    onEnter={ composeHooks(hooks.authenticate, hooks.checkUserRole, hooks.fetchQuizDetails) }
                     path=":module_id/:quiz_id/edit-quiz"
                     component={ EditQuizContainer } />
                 <Route
-                    onEnter={ composeHooks(hooks.authenticate, hooks.fetchModuleMembers) }
+                    onEnter={ composeHooks(hooks.authenticate, hooks.checkUserRole, hooks.fetchModuleMembers) }
                     path=":module_id/members"
                     component={ ModuleMembersContainer } />
                 <Route
-                    onEnter={ composeHooks(hooks.authenticate, hooks.fetchQuizMembers) }
+                    onEnter={ composeHooks(hooks.authenticate, hooks.checkUserRole, hooks.fetchQuizMembers) }
                     path=":module_id/:quiz_id/members"
                     component={ QuizMembersContainer } />
                 <Route
-                    onEnter={ hooks.authenticate }
+                    onEnter={ composeHooks(hooks.authenticate, hooks.checkUserRole) }
                     path=":module_id/:quiz_id/:member_key/edit-score"
                     component={ EditScoreContainer } />
                 <Route
-                    onEnter={ hooks.authenticate }
+                    onEnter={ composeHooks(hooks.authenticate, hooks.checkUserRole) }
                     path=":module_id/lecturer/live"
                     component={ LecturerLiveQuizContainer } />
                 <Route
@@ -108,11 +110,11 @@ const Root = ({ store }) => (
                     path=":module_id/student/live"
                     component={ StudentLiveQuizContainer } />
                 <Route
-                    onEnter={ hooks.authenticate }
+                    onEnter={ composeHooks(hooks.authenticate, hooks.checkUserRole) }
                     path=":module_id/:quiz_id/holding-page"
                     component={ HoldingPageComponent } />
                 <Route
-                    onEnter={ composeHooks(hooks.authenticate, hooks.fetchQuizReview) }
+                    onEnter={ composeHooks(hooks.authenticate, hooks.checkUserRole, hooks.fetchQuizReview) }
                     path=":module_id/:quiz_id/review"
                     component={ ReviewContainer } />
                 <Route
@@ -124,9 +126,11 @@ const Root = ({ store }) => (
                     path=":module_id/:quiz_id/history"
                     component={ QuizHistoryContainer } />
                 <Route
-                    onEnter={ composeHooks(hooks.authenticate, hooks.fetchLeaderboard) }
+                    onEnter={ composeHooks(hooks.authenticate, hooks.checkUserRole, hooks.fetchLeaderboard) }
                     path=":module_id/leaderboard"
                     component={ LeaderboardContainer } />
+                <Route path='/404' component={ NotFound } />
+                <Redirect from='*' to='/404' />
             </Route>
         </Router>
     </Provider>

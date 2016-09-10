@@ -2,7 +2,6 @@ import { store } from '../store';
 import validCookieExists from './validCookieExists';
 import { getModule, getModuleMembers } from '../actions/module';
 import { getDashboard } from '../actions/dashboard';
-import { loadState } from './localStorageState';
 import { getUserDetails } from '../actions/user';
 import { getQuizReview } from '../actions/review';
 import { getQuizResult } from '../actions/result';
@@ -22,7 +21,7 @@ import { socketClient } from '../socket';
  * @param {function} callback - (optional) can be used to make the transition block
  */
 export function authenticate (nextState, replace, callback) {
-    
+
     if (!validCookieExists()) {
 
         replace('/');
@@ -39,21 +38,20 @@ export function authenticate (nextState, replace, callback) {
 }
 
 /**
- * Checks if user is authenticated and a lecturer.  Redirects  to '/' if they're not
+ * Checks if user is a lecturer.  Redirects  to '/' if they're not
  * Is used as an onEnter hook for React Router
  * Matches the signature of a React Router hook: https://github.com/reactjs/react-router/blob/master/docs/API.md#onenternextstate-replace-callback
  * @param {object} nextState - the next router state
  * @param {function} replace - function to redirect to another path
  * @param {function} callback - (optional) can be used to make the transition block
  */
-export function authenticateLecturer (nextState, replace, callback) {
-
-    if (!validCookieExists() || isUserLecturer() === false) {
-        replace('/');
-    } else if (!loadState() && !store.getState().user.user_id) {
-        store.dispatch(getUserDetails(getUserID()));
+export function checkUserRole (nextState, replace, callback) {
+    if (isUserLecturer() === false) {
+        replace('/dashboard');
+        callback(false);
+    } else {
+        callback();
     }
-    callback();
 }
 
 /**
@@ -243,8 +241,7 @@ export function fetchLeaderboard (nextState, replace, callback) {
 export function leaveRoom (nextState, replace, callback) {
 
     if (validCookieExists()) {
-        socketClient.emit('leave_room', (msg) => {
-            console.info(msg);
+        socketClient.emit('leave_room', () => {
         });
     }
     callback();

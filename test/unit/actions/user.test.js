@@ -13,9 +13,21 @@ test('setUserDetails creates the correct action', (t) => {
         data
     };
 
-    const actual2 = deepFreeze(actions.setUserDetails(data));
-    t.deepEqual(actual2, expected);
+    const actual = deepFreeze(actions.setUserDetails(data));
+    t.deepEqual(actual, expected);
 });
+
+test('toggleCookieMessage creates the correct action', (t) => {
+
+    t.plan(1);
+    const expected = {
+        type: actions.TOGGLE_COOKIE_MESSAGE,
+    };
+
+    const actual = deepFreeze(actions.toggleCookieMessage());
+    t.deepEqual(actual, expected);
+});
+
 
 // -----
 // GET_USER_DETAILS
@@ -47,8 +59,8 @@ test('getUserRequest creates the correct action', (t) => {
         type: actions.GET_USER_DETAILS_REQUEST,
     };
 
-    const actual2 = deepFreeze(actions.getUserDetailsRequest());
-    t.deepEqual(actual2, expected);
+    const actual = deepFreeze(actions.getUserDetailsRequest());
+    t.deepEqual(actual, expected);
 });
 
 test('getUserDetailsSuccess creates the correct action', (t) => {
@@ -59,8 +71,8 @@ test('getUserDetailsSuccess creates the correct action', (t) => {
         data
     };
 
-    const actual2 = deepFreeze(actions.getUserDetailsSuccess(data));
-    t.deepEqual(actual2, expected);
+    const actual = deepFreeze(actions.getUserDetailsSuccess(data));
+    t.deepEqual(actual, expected);
 });
 
 test('getUserDetailsFailure creates the correct action', (t) => {

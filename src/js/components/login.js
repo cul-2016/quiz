@@ -24,7 +24,7 @@ const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthentic
         <section className="login hero is-primary is-fullheight">
             <div className="hero-body">
                 <div className="container narrow has-text-centered">
-                    <div className="box">
+                    <div className="box" onKeyDown={ (e) => { if (e.keyCode === 13 && isEmailValid && login.password.length !== 0) { handleAuthenticateUser(login.email, login.password); }}}>
                         <h2>Log In</h2>
                         <p className={ userValidation }>
                             <span className="tag is-danger">
@@ -47,12 +47,13 @@ const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthentic
                             onChange={ (e) => handlePasswordChange(e.target.value) }
                             type="password" />
 
-                        <button className={ submitButtonClasses } onClick={ () => handleAuthenticateUser(login.email, login.password) }>
+                        <button className={ submitButtonClasses }
+                                onClick={ () => handleAuthenticateUser(login.email, login.password) }>
                             Login
                         </button>
                         <p>
                             <Link to="/register-student">
-                                <span className="tag is-success">
+                                <span className=" is-success">
                                     Sign up here
                                 </span>
                             </Link>
