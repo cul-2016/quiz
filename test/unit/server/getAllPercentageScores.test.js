@@ -4,7 +4,7 @@ import { allPercentageScoresData as expected } from '../../utils/data-fixtures';
 import getAllPercentageScores from '../../../server/lib/getAllPercentageScores';
 
 
-test.skip("`getAllPercentageScores` returns all students' average scores for a module", (t) => {
+test("`getAllPercentageScores` returns all students' average scores for a module", (t) => {
 
     t.plan(2);
     const module_id = 'CENT';
@@ -23,7 +23,7 @@ test.skip("`getAllPercentageScores` returns all students' average scores for a m
 function isDescendingOrder (array) {
 
     return (function iterate (array, i) {
-
+    
         if (i === array.length - 1) {
             return true;
         }

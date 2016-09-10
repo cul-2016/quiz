@@ -18,7 +18,14 @@ function getAllPercentageScores (client, module_id, callback) {
             console.error(error);
             return callback(error);
         }
-        callback(null, result.rows);
+        (function mapToNum (array, i) {
+            
+            if (i === array.length) {
+                return callback(null, array);
+            }
+            result.rows[i].average = parseFloat(result.rows[i].average);
+            mapToNum(array, ++i);
+        })(result.rows, 0);
     });
 }
 
