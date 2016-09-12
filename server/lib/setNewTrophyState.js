@@ -17,9 +17,8 @@ function setNewTrophyState (client, user_id, module_id, newTrophyState, callback
         acc.push(newTrophyState[trophy]);
         return acc;
     }, []));
-
-    if (!newTrophyState.overall_average) {
-
+    
+    if (!("overall_average" in newTrophyState)) {
         if (queryValues.length !== 5) {
             return callback(new Error("Too few arguments"));
         }

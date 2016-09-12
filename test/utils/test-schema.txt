@@ -79,7 +79,8 @@ CREATE TABLE IF NOT EXISTS responses (
 CREATE TABLE IF NOT EXISTS scores (
     user_id INTEGER NOT NULL,
     quiz_id INTEGER NOT NULL,
-    score INTEGER NOT NULL
+    score INTEGER NOT NULL,
+    PRIMARY KEY (user_id, quiz_id)
 );
 
 /* module_members */

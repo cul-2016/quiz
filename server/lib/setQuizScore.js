@@ -11,7 +11,7 @@ var queries = require('./queries.json');
  */
 
 function setQuizScore (client, user_id, quiz_id, score, callback) {
-
+    console.log(user_id, quiz_id, score, 'inside setQuizScore');
     var values = [user_id, quiz_id, score];
 
     query(client, queries.setQuizScore, values, (error) => {

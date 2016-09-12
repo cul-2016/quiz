@@ -4,7 +4,7 @@ import { testClient } from '../../utils/init';
 import query from '../../../server/lib/query';
 
 
-test("`setQuizScore` sets a student's score for a quiz", (t) => {
+test("`setQuizScore` updates a student's score for a quiz with an existing score", (t) => {
 
     t.plan(1);
 
