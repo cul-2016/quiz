@@ -22,7 +22,7 @@ test("`getBestAndWorstQuiz` returns the names of a student's best and worst quiz
     });
 });
 
-test.skip("`getBestAndWorstQuiz` returns null if student has done fewer than 3 quizzes", (t) => {
+test("`getBestAndWorstQuiz` returns null if student has done fewer than 3 quizzes", (t) => {
 
     t.plan(1);
 

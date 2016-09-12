@@ -7,8 +7,9 @@ test('`getModuleMembers` gets list of students for a given module', (t) => {
     t.plan(1);
     const expectedRows = [
         { email: 'student@city.ac.uk', user_id: 1, username: 'student' },
-        { email: 'sohil@city.ac.uk', user_id: 3, username: 'Sohil' }, 
-        { email: 'mina@city.ac.uk', user_id: 4, username: 'Mina' }];
+        { email: 'sohil@city.ac.uk', user_id: 3, username: 'Sohil' },
+        { email: 'mina@city.ac.uk', user_id: 4, username: 'Mina' }
+    ];
 
     getModuleMembers(testClient, 'TEST', (error, response) => {
 

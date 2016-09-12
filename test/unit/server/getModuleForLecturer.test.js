@@ -6,8 +6,10 @@ import { testClient } from '../../utils/init';
 test('`getModuleForLecturer` returns correct module information', (t) => {
 
     t.plan(1);
-    
-    getModuleForLecturer(testClient, 'TEST', (error, response) => {
+
+    const module_id = 'TEST';
+
+    getModuleForLecturer(testClient, module_id, (error, response) => {
 
         if (error) {
             console.error(error);

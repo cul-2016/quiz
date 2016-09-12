@@ -41,7 +41,15 @@ test('GET_FEEDBACK_SUCCESS works', (t) => {
     };
 
     const actual = reducer(initialState, action);
-    const expected = Object.assign({}, feedbackState, { isFetchingFeedback: false }, { overallScore: data.overallScore, quizzesCompleted: data.quizzesCompleted });
+    const expected = Object.assign(
+                        {},
+                        feedbackState,
+                        { isFetchingFeedback: false },
+                        { ranking: data.ranking,
+                          quizzes: data.quizzes,
+                          participation: data.participation
+                        }
+                    );
 
     t.deepEqual(actual, expected);
 });

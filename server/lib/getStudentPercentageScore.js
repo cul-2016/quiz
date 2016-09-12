@@ -15,7 +15,7 @@ function getStudentPercentageScore (user_id, allPercentageScores, callback) {
             return callback(new Error("Failed to find student's score"));
         }
         if (rows[0].user_id.toString() === user_id.toString()) {
-
+            console.log("found student's % score:", rows[0].average);
             return callback(null, rows[0].average);
         }
         search(rows.slice(1));

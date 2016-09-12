@@ -3,12 +3,14 @@ import validateModuleID from '../../../server/lib/validateModuleID';
 import { testClient } from '../../utils/init';
 
 
-test('validateModuleID returns true for a pre-existing module_id', (t) => {
+test('`validateModuleID` returns true for a pre-existing module_id', (t) => {
 
     t.plan(2);
 
     const expected = true;
-    validateModuleID(testClient, 'TEST', (error, response) => {
+    const module_id = 'TEST';
+
+    validateModuleID(testClient, module_id, (error, response) => {
 
         if (error) {
             console.error(error);
@@ -18,12 +20,14 @@ test('validateModuleID returns true for a pre-existing module_id', (t) => {
     });
 });
 
-test('validateModuleID returns false for a pre-existing module_id', (t) => {
+test('`validateModuleID` returns false for a pre-existing module_id', (t) => {
 
     t.plan(2);
 
     const expected = false;
-    validateModuleID(testClient, 'NEW1', (error, response) => {
+    const module_id = 'NEW1';
+
+    validateModuleID(testClient, module_id, (error, response) => {
 
         if (error) {
             console.error(error);

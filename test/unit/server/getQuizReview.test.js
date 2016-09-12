@@ -34,8 +34,9 @@ test('`getQuizReview` gets list of questions for a quiz review', (t) => {
             d_responses: '0',
             correct_answer: 'a'
         }];
+    const quiz_id = 1;
 
-    getQuizReview(testClient, '1', (error, response) => {
+    getQuizReview(testClient, quiz_id, (error, response) => {
 
         if (error) {
             console.error(error);

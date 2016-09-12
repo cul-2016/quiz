@@ -3,9 +3,12 @@ import getUser from '../../../server/lib/getUser';
 import { testClient } from '../../utils/init';
 import { users as expectedRows } from '../../utils/data-fixtures';
 
-test('getting user details from the database', (t) => {
+test('`getUser` works', (t) => {
+
     t.plan(1);
-    getUser(testClient, 'student@city.ac.uk', (error, response) => {
+    const emailAddress = 'student@city.ac.uk';
+
+    getUser(testClient, emailAddress, (error, response) => {
 
         if (error) {
             console.error(error);

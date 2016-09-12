@@ -16,8 +16,9 @@ export const userDetails = {
 };
 
 export const feedback = {
-    quizzesCompleted: 4,
-    overallScore: 70,
+    ranking: 25,
+    quizzes: ['Week 3 quiz', 'Week 1 quiz'],
+    participation: 50
 };
 
 export const dashboardData = [
@@ -237,7 +238,7 @@ export const leaderboardData = [
         username: 'student'
     },
     {
-        average: 40,
+        average: 60, // average changes from 40 --> 60 by editScore.test
         module_id: 'TEST',
         user_id: 3,
         username: 'Sohil'

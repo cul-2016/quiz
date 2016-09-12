@@ -6,10 +6,10 @@ test("`getNewTrophyState` gets a student's new trophy state", (t) => {
 
     t.plan(1);
 
-    const user_id = 1,
-        module_id = 'TEST',
-        quiz_id = 2,
-        percentageScore = 33;
+    const user_id = 1;
+    const module_id = 'TEST';
+    const quiz_id = 2;
+    const percentageScore = 33;
 
     const expected = [true, false, true, true];
 

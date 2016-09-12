@@ -27,7 +27,7 @@ module.exports = {
             });
         } else {
 
-            getModuleForStudent(client, module_id, user_id, (error, module) => {
+            getModuleForStudent(client, user_id, module_id, (error, module) => {
 
                 var verdict = error || module;
                 reply(verdict);

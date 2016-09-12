@@ -3,8 +3,9 @@ import * as actionsTypes from '../actions/feedback';
 
 
 export const initialState = {
-    quizzesCompleted: undefined,
-    overallScore: undefined,
+    ranking: undefined,
+    quizzes: [],
+    participation: undefined,
     isFetchingFeedback: false,
     error: undefined
 };
@@ -21,8 +22,9 @@ export function feedback (state = initialState, action) {
     case actionsTypes.GET_FEEDBACK_SUCCESS:
         return update(state, {
             isFetchingFeedback: { $set: false },
-            quizzesCompleted: { $set: action.data.quizzesCompleted },
-            overallScore: { $set: action.data.overallScore }
+            ranking: { $set: action.data.ranking },
+            quizzes: { $set: action.data.quizzes },
+            participation: { $set: action.data.participation },
         });
 
     case actionsTypes.GET_FEEDBACK_FAILURE:

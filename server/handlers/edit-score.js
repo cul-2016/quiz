@@ -5,12 +5,14 @@ module.exports = {
     method: 'GET',
     path: '/edit-score',
     handler: (request, reply) => {
-        var quiz_id = request.query.quiz_id;
+
         var user_id = request.query.user_id;
+        var quiz_id = request.query.quiz_id;
         var score = request.query.score;
+
         if (quiz_id !== undefined && user_id !== undefined && score !== undefined) {
 
-            editScore(client, quiz_id, user_id, score, (error, response) => {
+            editScore(client, user_id, quiz_id, score, (error, response) => {
 
                 var verdict = error || response;
                 reply(verdict);

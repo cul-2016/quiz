@@ -78,7 +78,7 @@ test('`getOverallAverageState` awards an eligible student with `overall_average`
 
 test('`getOverallAverageState` does not award an ineligible student with `overall_average` trophy', (t) => {
 
-    const user_id = 3; // this student's overall average is 42%
+    const user_id = 4; // this student's overall average is 0%
     const module_id = 'TEST';
 
     getOverallAverageState(testClient, user_id, module_id, (error, result) => {
