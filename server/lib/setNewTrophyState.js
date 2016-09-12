@@ -12,18 +12,37 @@ var queries = require('./queries.json');
 
 function setNewTrophyState (client, user_id, module_id, newTrophyState, callback) {
 
-    var queryValues = [user_id, module_id].concat(newTrophyState);
 
-    if (queryValues.length !== 6) {
-        return callback(new Error("Too few arguments"));
-    }
-    query(client, queries.setNewTrophyState, queryValues, (error) => {
+    var queryValues = [user_id, module_id].concat(Object.keys(newTrophyState).sort().reduce((acc, trophy) => {
+        acc.push(newTrophyState[trophy]);
+        return acc;
+    }, []));
 
-        if (error) {
-            return callback(error);
+    if (!newTrophyState.overall_average) {
+
+        if (queryValues.length !== 5) {
+            return callback(new Error("Too few arguments"));
         }
-        callback();
-    });
+        query(client, queries.setNewTrophyStateWithoutAverage, queryValues, (error) => {
+
+            if (error) {
+                return callback(error);
+            }
+            return callback();
+        });
+    } else {
+
+        if (queryValues.length !== 6) {
+            return callback(new Error("Too few arguments"));
+        }
+        query(client, queries.setNewTrophyStateWithAverage, queryValues, (error) => {
+
+            if (error) {
+                return callback(error);
+            }
+            return callback();
+        });
+    }
 }
 
 module.exports = setNewTrophyState;

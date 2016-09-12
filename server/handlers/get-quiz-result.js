@@ -13,7 +13,6 @@ module.exports = {
         var user_id = request.query.user_id;
         var module_id = request.query.module_id;
         var quiz_id = request.query.quiz_id;
-
         getIsLastQuiz(client, quiz_id, (error, is_last_quiz) => {
 
             if (error) {
@@ -39,8 +38,11 @@ module.exports = {
                             return reply(error);
                         }
                         setNewTrophyState(client, user_id, module_id, newTrophyState, (error) => {
+                            console.log(error, 'stenewtrophy');
 
                             var verdict = error || { newTrophyState: newTrophyState, score: score };
+                            console.log(verdict);
+
                             reply(verdict);
                         });
                     });

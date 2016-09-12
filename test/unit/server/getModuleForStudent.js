@@ -13,10 +13,10 @@ test('Gets the module for a given student', (t) => {
         module_id: 'TEST',
         name: 'test module',
         trophies_awarded: {
-            first_quiz: false,
-            high_score: false,
+            first_quiz: true,
+            high_score: true,
             overall_average: false,
-            participation: false
+            participation: true
         }
     };
 
