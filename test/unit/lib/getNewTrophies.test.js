@@ -22,7 +22,7 @@ test('getNewTrophies returns null when oldTrophyState and newTrophyState are equ
     t.deepEqual(expected, actual);
 });
 
-test('getNewTrophies returns array when oldTrophyState and newTrophyState are not equal', (t) => {
+test('getNewTrophies returns array when oldTrophyState and newTrophyState are not equal 1', (t) => {
 
     t.plan(1);
     var expected = [
@@ -40,6 +40,29 @@ test('getNewTrophies returns array when oldTrophyState and newTrophyState are no
         high_score: true,
         overall_average: false,
         participation: false
+    };
+    var actual = getNewTrophies(oldTrophyState, newTrophyState);
+
+    t.deepEqual(expected, actual);
+});
+
+test('getNewTrophies returns array when oldTrophyState and newTrophyState are not equal 2', (t) => {
+
+    t.plan(1);
+    var expected = [
+        'overall_average',
+    ];
+    const oldTrophyState = {
+        first_quiz: true,
+        high_score: true,
+        overall_average: false,
+        participation: true
+    };
+    const newTrophyState = {
+        first_quiz: true,
+        high_score: true,
+        overall_average: true,
+        participation: true
     };
     var actual = getNewTrophies(oldTrophyState, newTrophyState);
 
