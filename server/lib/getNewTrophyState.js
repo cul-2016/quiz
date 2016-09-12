@@ -20,7 +20,7 @@ function getNewTrophyState (client, user_id, module_id, quiz_id, percentageScore
         throw new Error("`getNewTrophyState`: Incorrect number of arguments");
     }
 
-    var trophies_awarded = [];
+    var trophies_awarded = {};
 
     getFirstQuizState(client, user_id, quiz_id, (error, first_quiz) => {
 
@@ -28,7 +28,7 @@ function getNewTrophyState (client, user_id, module_id, quiz_id, percentageScore
             console.error(error);
             return callback(error);
         }
-        trophies_awarded.push(first_quiz);
+        trophies_awarded.first_quiz = first_quiz;
 
         getHighScoreState(client, module_id, percentageScore, (error, high_score) => {
 
@@ -36,7 +36,7 @@ function getNewTrophyState (client, user_id, module_id, quiz_id, percentageScore
                 console.error(error);
                 return callback(error);
             }
-            trophies_awarded.push(high_score);
+            trophies_awarded.high_score = high_score;
 
 
 
@@ -46,7 +46,7 @@ function getNewTrophyState (client, user_id, module_id, quiz_id, percentageScore
                     console.error(error);
                     return callback(error);
                 }
-                trophies_awarded.push(participation);
+                trophies_awarded.participation = participation;
 
                 if (is_last_quiz) {
                     getOverallAverageState(client, user_id, module_id, (error, overall_average) => {
@@ -55,7 +55,7 @@ function getNewTrophyState (client, user_id, module_id, quiz_id, percentageScore
                             console.error(error);
                             return callback(error);
                         }
-                        trophies_awarded.push(overall_average);
+                        trophies_awarded.overall_average = overall_average;
 
                         return callback(null, trophies_awarded);
                     });

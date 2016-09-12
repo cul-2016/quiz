@@ -1,23 +1,22 @@
-import isEqual from 'lodash/isEqual';
+import isEqual from 'lodash/isEqual'; //does deep comparison
 
 /**
  * Gets the new trophies for a student
  * Returns an array of trophies, or null
- * @param {object} store - Redux store
+ * @param {object} oldTrophyState - oldTrophyState from module state
+ * @param {object} newTrophyState - newTrophyState from result state
  */
 
-export default function getNewTrophies (store) {
+export default function getNewTrophies (oldTrophyState, newTrophyState) {
 
-    const oldTrophyState = store.getState().module.trophies_awarded;
-    const newTrophyState = store.getState().result.newTrophyState;
-    const trophyNames = Object.keys(store.getState().module.trophies_awarded).sort();
+    const trophyNames = Object.keys(oldTrophyState);
 
     if (isEqual(oldTrophyState, newTrophyState)) {
         return null;
     } else {
-        return newTrophyState.reduce((acc, trophy, i) => {
+        return Object.keys(newTrophyState).reduce((acc, trophy, i) => {
 
-            if (trophy) {
+            if (newTrophyState[trophy]) {
                 acc.push(trophyNames[i]);
             }
             return acc;
