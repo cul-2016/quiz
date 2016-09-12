@@ -10,12 +10,13 @@ var getParticipationState = require('./trophy-methods').getParticipationState;
  * @param {string} module_id - module id
  * @param {number} quiz_id - quiz id
  * @param {number} percentageScore - the student's score as a percentage
+ * @param {boolean} is_last_quiz - if the given quiz is the last quiz
  * @param {function} callback - a callback function
  */
 
-function getNewTrophyState (client, user_id, module_id, quiz_id, percentageScore, callback) { 
+function getNewTrophyState (client, user_id, module_id, quiz_id, percentageScore, is_last_quiz, callback) {
 
-    if (arguments.length !== 6) {
+    if (arguments.length !== 7) {
         throw new Error("`getNewTrophyState`: Incorrect number of arguments");
     }
 
@@ -37,23 +38,30 @@ function getNewTrophyState (client, user_id, module_id, quiz_id, percentageScore
             }
             trophies_awarded.push(high_score);
 
-            getOverallAverageState(client, user_id, module_id, (error, overall_average) => {
+
+
+            getParticipationState(client, user_id, module_id, (error, participation) => {
 
                 if (error) {
                     console.error(error);
                     return callback(error);
                 }
-                trophies_awarded.push(overall_average);
+                trophies_awarded.push(participation);
 
-                getParticipationState(client, user_id, module_id, (error, participation) => {
+                if (is_last_quiz) {
+                    getOverallAverageState(client, user_id, module_id, (error, overall_average) => {
 
-                    if (error) {
-                        console.error(error);
-                        return callback(error);
-                    }
-                    trophies_awarded.push(participation);
-                    callback(null, trophies_awarded);
-                });
+                        if (error) {
+                            console.error(error);
+                            return callback(error);
+                        }
+                        trophies_awarded.push(overall_average);
+
+                        return callback(null, trophies_awarded);
+                    });
+                } else {
+                    return callback(null, trophies_awarded);
+                }
             });
         });
     });
