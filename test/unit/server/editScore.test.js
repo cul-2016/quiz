@@ -27,7 +27,6 @@ test('`editScore` works', (t) => {
             if (error) {
                 throw error;
             }
-            console.log("CHANGED IT BACK!");
             t.equal(error, expectedError, 'error is null, module is saved to db correctly.');
             t.deepEqual(response.command, expectedCommand, 'Correct command of UPDATE, score is edited correctly');
         });

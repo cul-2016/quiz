@@ -25,7 +25,6 @@ function getRanking (client, user_id, module_id, callback) {
             return callback(error);
         }
         // get the percentile boundary values
-        console.log("all % scores:", allPercentageScores);
         getPercentileValues(allPercentageScores, BOUNDARIES, (error, values) => {
 
             if (error) {

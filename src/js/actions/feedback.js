@@ -4,7 +4,7 @@ export const GET_FEEDBACK_REQUEST = 'GET_FEEDBACK_REQUEST';
 export const GET_FEEDBACK_SUCCESS = 'GET_FEEDBACK_SUCCESS';
 export const GET_FEEDBACK_FAILURE = 'GET_FEEDBACK_FAILURE';
 
-export const getFeedback = (module_id, user_id) => {
+export const getFeedback = (user_id, module_id) => {
 
     return (dispatch) => {
 
