@@ -1,7 +1,7 @@
 {
     "joinModule": "INSERT INTO module_members (module_id, user_id) VALUES ($1, $2) ON CONFLICT DO NOTHING;",
     "getModuleForLecturer": {
-        "quizzes": "SELECT quizzes.quiz_id, quizzes.name, quizzes.is_presented, ( SELECT COUNT(DISTINCT(responses.user_id)) AS num_entries FROM responses WHERE responses.quiz_id = quizzes.quiz_id GROUP BY quizzes.quiz_id ), (SELECT COUNT(questions.question_id) AS num_questions FROM questions WHERE questions.quiz_id = quizzes.quiz_id GROUP BY quizzes.quiz_id ) FROM quizzes LEFT JOIN responses ON quizzes.quiz_id = responses.quiz_id WHERE quizzes.module_id = ($1) GROUP BY quizzes.quiz_id ORDER BY quizzes.quiz_id",
+        "quizzes": "SELECT quizzes.quiz_id, quizzes.name, quizzes.is_presented, quizzes.is_last_quiz, ( SELECT COUNT(DISTINCT(responses.user_id)) AS num_entries FROM responses WHERE responses.quiz_id = quizzes.quiz_id GROUP BY quizzes.quiz_id ), (SELECT COUNT(questions.question_id) AS num_questions FROM questions WHERE questions.quiz_id = quizzes.quiz_id GROUP BY quizzes.quiz_id ) FROM quizzes LEFT JOIN responses ON quizzes.quiz_id = responses.quiz_id WHERE quizzes.module_id = ($1) GROUP BY quizzes.quiz_id ORDER BY quizzes.quiz_id",
         "medals": "SELECT medals.medal_name, medals.condition FROM medals WHERE medals.module_id = ($1) ORDER BY condition",
         "trophies": "SELECT trophies.trophy_name, trophies.condition FROM trophies WHERE trophies.module_id = ($1) ORDER BY trophy_name",
         "num_enrolled": "SELECT COUNT(user_id) AS num_enrolled FROM module_members WHERE module_members.module_id = ($1)",

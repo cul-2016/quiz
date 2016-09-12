@@ -93,14 +93,16 @@ export const getModuleForLecturerData = {
             name: 'Week 1 Quiz',
             num_questions: '2',
             num_entries: '3',
-            is_presented: true
+            is_presented: true,
+            is_last_quiz: false
         },
         {
             quiz_id: 2,
             name: 'Week 2 Quiz',
             num_questions: '3',
             num_entries: '2',
-            is_presented: true
+            is_presented: true,
+            is_last_quiz: false
         }
     ]
 };
@@ -140,6 +142,7 @@ export const newQuiz = {
 
 export const getQuizDetailsData = {
     name: 'Old Quiz',
+    is_last_quiz: false,
     questions: [
         {
             question: 'capital of England',
@@ -272,4 +275,4 @@ export const allAverageScoresData = [
     { user_id: 8, average: 20 },
     { user_id: 5, average: 10 },
     { user_id: 6, average: 10 }
-]; 
+];

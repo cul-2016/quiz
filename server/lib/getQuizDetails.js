@@ -17,7 +17,7 @@ function getQuizDetails (client, quiz_id, callback) {
             console.error(error);
             return callback(error);
         }
-        var nameQuery = 'SELECT name FROM quizzes WHERE quiz_id = $1;';
+        var nameQuery = 'SELECT name, is_last_quiz FROM quizzes WHERE quiz_id = $1;';
         query(client, nameQuery, [quiz_id], (error, name) => {
 
             if (error) {
@@ -28,6 +28,7 @@ function getQuizDetails (client, quiz_id, callback) {
             const allData = {
                 name: name.rows[0].name,
                 questions: questions.rows,
+                is_last_quiz: name.rows[0].is_last_quiz
             };
             callback(null, allData);
         });

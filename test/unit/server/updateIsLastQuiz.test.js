@@ -1,17 +1,15 @@
 import test from 'tape';
 import { testClient } from '../../utils/init';
-import updateQuiz from '../../../server/lib/updateQuiz';
+import updateIsLastQuiz from '../../../server/lib/updateIsLastQuiz';
 
-test('updating quiz to database works', (t) => {
+test('updating is_last_quiz to false works', (t) => {
 
     t.plan(2);
     const expectedError = null;
     const expectedCommand = 'UPDATE';
     const quiz_id = 1;
     const module_id = 'TEST';
-    const name = 'Updated Name';
-    const is_last_quiz = true;
-    updateQuiz(testClient, quiz_id, module_id, name, is_last_quiz, (error, response) => {
+    updateIsLastQuiz(testClient, quiz_id, module_id, (error, response) => {
         t.deepEquals(error, expectedError, 'error is null, quiz name updated correctly');
         t.deepEquals(response.command, expectedCommand, 'Correct command of UPDATE');
     });

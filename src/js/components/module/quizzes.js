@@ -11,6 +11,10 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id }) => {
             "fa-times": quiz.is_presented === false
         });
 
+        let is_last_quizClasses = classnames("fa", {
+            "fa-check": quiz.is_last_quiz
+        });
+
         let buttonClass = classnames("button is-success", {
             "display-none": quiz.is_presented
         });
@@ -25,6 +29,7 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id }) => {
                     </Link>
                 </td>
                 <td><i className={ iconClasses } /></td>
+                <td><i className={ is_last_quizClasses } /></td>
                 <td>
                     <Link to={`${location.pathname}/live`}>
                         <span className={ buttonClass }
@@ -55,6 +60,10 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id }) => {
             "display-none": quiz.is_presented
         });
 
+        let is_last_quizClasses = classnames("fa", {
+            "fa-check": quiz.is_last_quiz
+        });
+
 
         return (
             <div key={ index } className="box">
@@ -63,6 +72,7 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id }) => {
                     <div className="column">{`Questions: \n${+quiz.num_questions}`}</div>
                     <div className="column">{`Entries: \n${+quiz.num_entries}`}</div>
                     <div className="column">Presented: <i className={ iconClasses } /></div>
+                    <div className="column">Last Quiz: <i className={ is_last_quizClasses } /></div>
                 </div>
 
                 <Link to={`${location.pathname}/live`}>
@@ -90,6 +100,7 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id }) => {
                         <th># questions</th>
                         <th># entries</th>
                         <th>Presented?</th>
+                        <th>Last Quiz</th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -100,6 +111,7 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id }) => {
                         <th># questions</th>
                         <th># entries</th>
                         <th>Presented?</th>
+                        <th>Last Quiz</th>
                         <th></th>
                         <th></th>
                     </tr>

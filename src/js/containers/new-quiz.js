@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import NewQuiz from '../components/new-quiz/new-quiz';
-import { addQuestion, deleteQuestion, updateValue, updateQuizName, saveQuiz, clearNewQuizState } from '../actions/new-quiz';
+import { addQuestion, deleteQuestion, updateValue, updateQuizName, saveQuiz, clearNewQuizState, toggleIsLastQuiz } from '../actions/new-quiz';
 import { hashHistory } from 'react-router';
 
 
@@ -28,12 +28,16 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(updateQuizName(value));
     },
 
-    handleSaveQuiz: (module_id, quizName, questions) => {
-        dispatch(saveQuiz(module_id, quizName, questions));
+    handleSaveQuiz: (module_id, quizName, questions, is_last_quiz) => {
+        dispatch(saveQuiz(module_id, quizName, questions, is_last_quiz));
         setTimeout(() => {
             hashHistory.goBack();
             dispatch(clearNewQuizState());
         }, 950);
+    },
+
+    handleIsLastQuiz: () => {
+        dispatch(toggleIsLastQuiz());
     }
 });
 

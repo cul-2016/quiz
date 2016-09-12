@@ -9,10 +9,10 @@
   * @param {function} callback - a callback function
   */
 
- function updateQuiz (client, quiz_id, module_id, quizName, callback) {
+ function updateQuiz (client, quiz_id, module_id, quizName, is_last_quiz, callback) {
 
-     var queryText = 'UPDATE quizzes SET name = $1 WHERE quiz_id = $2 AND module_id = $3;';
-     var value = [quizName, quiz_id, module_id];
+     var queryText = 'UPDATE quizzes SET name = $1, is_last_quiz = $4 WHERE quiz_id = $2 AND module_id = $3;';
+     var value = [quizName, quiz_id, module_id, is_last_quiz];
 
      query(client, queryText, value, (error, response) => {
 
