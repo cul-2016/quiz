@@ -38,10 +38,8 @@ module.exports = {
                             return reply(error);
                         }
                         setNewTrophyState(client, user_id, module_id, newTrophyState, (error) => {
-                            console.log(error, 'stenewtrophy');
 
                             var verdict = error || { newTrophyState: newTrophyState, score: score };
-                            console.log(verdict);
 
                             reply(verdict);
                         });
