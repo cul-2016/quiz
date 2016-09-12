@@ -50,7 +50,8 @@ CREATE TABLE IF NOT EXISTS quizzes (
     quiz_id SERIAL PRIMARY KEY,
     module_id CHAR(4),
     name TEXT NOT NULL,
-    is_presented BOOLEAN DEFAULT FALSE NOT NULL
+    is_presented BOOLEAN DEFAULT FALSE NOT NULL,
+    is_last_quiz BOOLEAN DEFAULT FALSE NOT NULL
 );
 
 /* questions */
