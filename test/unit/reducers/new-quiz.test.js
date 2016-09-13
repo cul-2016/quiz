@@ -110,6 +110,19 @@ test('CLEAR_NEW_QUIZ_STATE works', (t) => {
     t.deepEqual(result, expected);
 });
 
+test('TOGGLE_IS_LAST_QUIZ works', (t) => {
+
+    t.plan(1);
+    const initialState = deepFreeze(newQuizState);
+    const action = {
+        type: 'TOGGLE_IS_LAST_QUIZ'
+    };
+
+    const expected = Object.assign({}, newQuizState, { is_last_quiz: true });
+
+    const result = reducer(initialState, action);
+    t.deepEqual(result, expected);
+});
 // -----
 // SAVE QUIZ
 // -----
@@ -232,7 +245,7 @@ test('GET_QUIZ_DETAILS_SUCCESS works', (t) => {
         type: 'GET_QUIZ_DETAILS_SUCCESS',
         data: getQuizDetailsData
     };
-    const expected = Object.assign({}, newQuizState, { isFetchingQuizDetails: false }, {  name: 'Old Quiz',
+    const expected = Object.assign({}, newQuizState, { isFetchingQuizDetails: false }, {  name: 'Old Quiz', is_last_quiz: false,
         questions: [
             {
                 question: 'capital of England',

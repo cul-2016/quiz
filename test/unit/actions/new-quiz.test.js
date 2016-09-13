@@ -72,6 +72,18 @@ test('clearNewQuizState action creator returns the exected action', (t) => {
     t.deepEqual(actual, expected);
 });
 
+
+test('toggleIsLastQuiz action creator returns the expected action', (t) => {
+
+    t.plan(1);
+    const expected = {
+        type: actions.TOGGLE_IS_LAST_QUIZ
+    };
+
+    const actual = deepFreeze(actions.toggleIsLastQuiz());
+    t.deepEqual(actual, expected);
+});
+
 // -----
 // SAVING NEW QUIZ
 // -----

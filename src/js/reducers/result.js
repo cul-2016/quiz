@@ -3,7 +3,7 @@ import * as actionsTypes from '../actions/result';
 
 export const initialState = {
     score: 0,
-    newTrophyState: [],
+    newTrophyState: {},
     isFetchingResult: false,
     error: undefined
 };
@@ -13,7 +13,7 @@ export function result (state = initialState, action) {
     switch (action.type) {
 
     case actionsTypes.GET_QUIZ_RESULT_REQUEST:
-    
+
         return update(state, {
             isFetchingResult: { $set: true }
         });

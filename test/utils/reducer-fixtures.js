@@ -102,6 +102,7 @@ export const review = {
 export const newQuiz = {
     name: undefined,
     questions: [],
+    is_last_quiz: false,
     isSavingQuiz: false,
     isUpdatingQuiz: false,
     isFetchingQuizDetails: false,
@@ -125,6 +126,7 @@ export const newQuizWithQuestion = {
         d: undefined,
         correct_answer: undefined
     }],
+    is_last_quiz: false,
     isSavingQuiz: false,
     isUpdatingQuiz: false,
     isFetchingQuizDetails: false,
@@ -144,6 +146,7 @@ export const editQuizWithQuestion = {
         d: 'd',
         correct_answer: 'a'
     }],
+    is_last_quiz: false,
     isSavingQuiz: false,
     isUpdatingQuiz: false,
     isFetchingQuizDetails: false,

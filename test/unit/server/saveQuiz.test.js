@@ -10,8 +10,13 @@ test('`saveQuiz` returns the quiz id for the saved quiz', (t) => {
     const expected = 7;
     const module_id = 'TEST';
     const name = 'Week 1 Test';
+    const is_last_quiz = true;
 
-    saveQuiz(testClient, module_id, name, (error, response) => {
+    saveQuiz(testClient, module_id, name, is_last_quiz, (error, response) => {
+
+        if (error) {
+            console.error(error);
+        }
         t.deepEqual(response, expected);
     });
 });

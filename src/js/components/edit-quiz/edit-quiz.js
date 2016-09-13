@@ -4,7 +4,7 @@ import Nav from '../general/nav';
 import classnames from 'classnames';
 
 
-const EditQuiz = ({ questions, isUpdatingQuiz, name, deletedQuestions, username, handleAddQuestion, handleInputChange, handleQuizNameChange, handleEditQuiz, handleDeleteQuestion, params }) => {
+const EditQuiz = ({ questions, isUpdatingQuiz, name, is_last_quiz, deletedQuestions, username, handleAddQuestion, handleInputChange, handleQuizNameChange, handleEditQuiz, handleDeleteQuestion, handleIsLastQuiz, params }) => {
 
     const questionsValidation = questions.map((question) => {
         if (!question.question || !question.a || !question.b || !question.correct_answer){
@@ -28,17 +28,30 @@ const EditQuiz = ({ questions, isUpdatingQuiz, name, deletedQuestions, username,
             <div>
                 <Nav username={ username } />
 
-                <div className="column is-6 is-offset-3 has-text-centered">
-                    <label className="label">
-                    Quiz name
-                    </label>
-                    <input
-                        className="input"
-                        type="text"
-                        value={ name || "" }
-                        onChange={ (e) => handleQuizNameChange(e.target.value) }
-                        placeholder='Quiz Name'></input>
-                        <span className={ quizNameClasses }>Please enter a Quiz Name</span>
+                <div className="columns">
+                    <div className="column is-5 is-offset-3 has-text-centered">
+                        <label className="label">
+                        Quiz name
+                        </label>
+                        <input
+                            className="input"
+                            type="text"
+                            value={ name || "" }
+                            onChange={ (e) => handleQuizNameChange(e.target.value) }
+                            placeholder='Quiz Name'></input>
+                            <span className={ quizNameClasses }>Please enter a Quiz Name</span>
+                    </div>
+                    <div className="column is-1 has-text-centered">
+                        <label className="label">
+                        Last Quiz?
+                        </label>
+                        <input
+                            className="column is-1"
+                            type="checkbox"
+                            checked={ is_last_quiz === true }
+                            name="is_last_quiz"
+                            onClick={ handleIsLastQuiz } />
+                    </div>
                 </div>
 
                 <Questions
@@ -51,7 +64,7 @@ const EditQuiz = ({ questions, isUpdatingQuiz, name, deletedQuestions, username,
                     <button className="button is-info add-question" onClick={ handleAddQuestion }>
                         Add Question
                     </button>
-                    <button className={ submitClasses } onClick={ () => handleEditQuiz(params.module_id, params.quiz_id, name, questions, deletedQuestions) }>
+                    <button className={ submitClasses } onClick={ () => handleEditQuiz(params.module_id, params.quiz_id, name, questions, deletedQuestions, is_last_quiz) }>
                         Save and Exit
                     </button>
                 </div>
@@ -64,6 +77,7 @@ EditQuiz.propTypes = {
     questions: PropTypes.array,
     isUpdatingQuiz: PropTypes.bool,
     name: PropTypes.string,
+    is_last_quiz: PropTypes.bool,
     username: PropTypes.string,
     deletedQuestions: PropTypes.array,
     handleAddQuestion: PropTypes.func.isRequired,
@@ -71,6 +85,7 @@ EditQuiz.propTypes = {
     handleQuizNameChange: PropTypes.func.isRequired,
     handleEditQuiz: PropTypes.func.isRequired,
     handleDeleteQuestion: PropTypes.func.isRequired,
+    handleIsLastQuiz: PropTypes.func.isRequired,
     params: PropTypes.object
 };
 

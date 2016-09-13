@@ -9,8 +9,9 @@ test('`getQuizMembers` get list of student participants in a quiz', (t) => {
     const quiz_id = 1;
     const expectedRows = [
         { email: 'student@city.ac.uk', score: 2, user_id: 1, username: 'student' },
-        { email: 'sohil@city.ac.uk', score: 2, user_id: 3, username: 'Sohil' }, // score changed from 1 --> 2 by editScore.test
-        { email: 'mina@city.ac.uk', score: 0, user_id: 4, username: 'Mina' }
+        { email: 'sohil@city.ac.uk', score: 2, user_id: 3, username: 'Sohil' }, // score changed in editScore.test
+        { email: 'mina@city.ac.uk', score: 0, user_id: 4, username: 'Mina' },
+        { email: 'homer@simpsons.com', score: 2, user_id: 5, username: 'Homer' }
     ];
 
     getQuizMembers(testClient, quiz_id, (error, response) => {

@@ -1,4 +1,5 @@
 var client = require('../lib/dbClient');
+var updateIsLastQuiz = require('../lib/updateIsLastQuiz');
 var saveQuiz = require('../lib/saveQuiz');
 var saveQuestions = require('../lib/saveQuestions');
 
@@ -9,9 +10,18 @@ module.exports = {
         var module_id = request.payload.module_id;
         var quizName = request.payload.quizName;
         var questions = request.payload.questions;
+        var is_last_quiz = request.payload.is_last_quiz === true;
 
+        saveQuiz(client, module_id, quizName, is_last_quiz, (error, quiz_id) => {
+            if (is_last_quiz) {
+                updateIsLastQuiz(client, module_id, quiz_id, (error) => {
 
-        saveQuiz(client, module_id, quizName, (error, quiz_id) => {
+                    if (error) {
+                        console.error(error);
+                        return reply(error);
+                    }
+                });
+            }
 
 
             if (error) {
