@@ -22,7 +22,7 @@ test('getNewTrophies returns null when oldTrophyState and newTrophyState are equ
     t.deepEqual(expected, actual);
 });
 
-test('getNewTrophies returns array when oldTrophyState and newTrophyState are not equal 1', (t) => {
+test('getNewTrophies returns array of trophies that have been awarded to the user, where all previous trophies are set to false', (t) => {
 
     t.plan(1);
     var expected = [
@@ -46,7 +46,7 @@ test('getNewTrophies returns array when oldTrophyState and newTrophyState are no
     t.deepEqual(expected, actual);
 });
 
-test('getNewTrophies returns array when oldTrophyState and newTrophyState are not equal 2', (t) => {
+test('getNewTrophies returns array of trophies that have been awarded to the user, where oldTrophyState contains some trophies already', (t) => {
 
     t.plan(1);
     var expected = [

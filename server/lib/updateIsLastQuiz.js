@@ -8,12 +8,12 @@ var query = require('./query');
  * @param {function} callback - a callback function
  */
 
-function updateIsLastQuiz (client, quiz_id, module_id, callback) {
+function updateIsLastQuiz (client, module_id, quiz_id, callback) {
 
-    var queryText = 'UPDATE quizzes SET is_last_quiz = false WHERE quiz_id != $1 AND module_id = $2;';
-    var value = [quiz_id, module_id];
+    var queryText = 'UPDATE quizzes SET is_last_quiz = false WHERE module_id = $1 AND quiz_id != $2;';
+    var values = [module_id, quiz_id];
 
-    query(client, queryText, value, (error, response) => {
+    query(client, queryText, values, (error, response) => {
 
         if (error) {
             return callback(error);

@@ -11,7 +11,7 @@ test('updating quiz to database works', (t) => {
     const module_id = 'TEST';
     const name = 'Updated Name';
     const is_last_quiz = true;
-    updateQuiz(testClient, quiz_id, module_id, name, is_last_quiz, (error, response) => {
+    updateQuiz(testClient, module_id, quiz_id, name, is_last_quiz, (error, response) => {
         t.deepEquals(error, expectedError, 'error is null, quiz name updated correctly');
         t.deepEquals(response.command, expectedCommand, 'Correct command of UPDATE');
     });

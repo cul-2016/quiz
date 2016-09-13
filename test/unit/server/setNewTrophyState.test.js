@@ -73,7 +73,7 @@ test("`setNewTrophyState` sets a student's new trophy state when overall_average
     });
 });
 
-test("`setNewTrophyState` returns an error if newTrophyState is incorrect", (t) => {
+test("`setNewTrophyState` returns an error if newTrophyState does not have the correct number of arguments (i.e. 3 or 4)", (t) => {
 
     t.plan(1);
 

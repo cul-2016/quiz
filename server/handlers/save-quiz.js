@@ -14,7 +14,7 @@ module.exports = {
 
         saveQuiz(client, module_id, quizName, is_last_quiz, (error, quiz_id) => {
             if (is_last_quiz) {
-                updateIsLastQuiz(client, quiz_id, module_id, (error) => {
+                updateIsLastQuiz(client, module_id, quiz_id, (error) => {
 
                     if (error) {
                         console.error(error);

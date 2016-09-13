@@ -2,7 +2,7 @@ import test from 'tape';
 import getIsLastQuiz from '../../../server/lib/getIsLastQuiz';
 import { testClient } from '../../utils/init';
 
-test('Gets is_last_quiz for a given quiz', (t) => {
+test('`getIsLastQuiz` Gets is_last_quiz for a given quiz', (t) => {
 
     t.plan(1);
     const expected = false;

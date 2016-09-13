@@ -2,7 +2,7 @@ import test from 'tape';
 import getNewTrophyState from '../../../server/lib/getNewTrophyState';
 import { testClient } from '../../utils/init';
 
-test("`getNewTrophyState` gets a student's new trophy state when is_last_quiz is set to true", (t) => {
+test("`getNewTrophyState` returns all trophies in state when is_last_quiz is set to true", (t) => {
 
     t.plan(1);
 
@@ -27,7 +27,7 @@ test("`getNewTrophyState` gets a student's new trophy state when is_last_quiz is
     });
 });
 
-test("`getNewTrophyState` gets a student's new trophy state when is_last_quiz is set to false", (t) => {
+test("`getNewTrophyState` returns only first_quiz, high_score & participation in state when is_last_quiz is set to false", (t) => {
 
     t.plan(1);
 

@@ -20,10 +20,10 @@ module.exports = {
 
 
         // update quiz name
-        updateQuiz(client, quiz_id, module_id, quizName, is_last_quiz, (error, quizResponse) => { //eslint-disable-line
+        updateQuiz(client, module_id, quiz_id, quizName, is_last_quiz, (error) => {
 
             if (is_last_quiz) {
-                updateIsLastQuiz(client, quiz_id, module_id, (error) => {
+                updateIsLastQuiz(client, module_id, quiz_id, (error) => {
 
                     if (error) {
                         console.error(error);

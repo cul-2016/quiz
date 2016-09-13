@@ -10,8 +10,8 @@ var query = require('./query');
 
 function getIsLastQuiz (client, quiz_id, callback) {
 
-    var Quizquery = 'SELECT is_last_quiz FROM quizzes WHERE quiz_id = $1;';
-    query(client, Quizquery, [quiz_id], (error, response) => {
+    var quizquery = 'SELECT is_last_quiz FROM quizzes WHERE quiz_id = $1;';
+    query(client, quizquery, [quiz_id], (error, response) => {
 
         if (error) {
             console.error(error);

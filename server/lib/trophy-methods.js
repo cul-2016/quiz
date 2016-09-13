@@ -66,7 +66,7 @@ function getOverallAverageState (client, user_id, module_id, callback) {
                 callback(new Error("Problem with getting overall average data"));
             }
             var threshold = condition.rows[0].condition;
-            console.log(overall_average, threshold, 'inside getOverallAverageState');
+
             callback(null, overall_average >= threshold);
         });
     });
