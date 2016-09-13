@@ -1,7 +1,7 @@
 var query = require('./query');
 
 /**
- * Represents a function that updates is_last_quiz to false for all quizzes except the lastest one
+ * Represents a function that updates is_last_quiz to false for all quizzes except the current quiz that is being saved/updated
  * @param {object} client - postgres database client
  * @param {string} module_id - module_id for the given Quiz
  * @param {number} quiz_id - quiz_id for the given Quiz

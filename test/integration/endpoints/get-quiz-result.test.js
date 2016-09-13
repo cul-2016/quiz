@@ -15,7 +15,10 @@ test('`get-quiz-result` endpoint works when is_last_quiz is false', (t) => {
 
     t.plan(1);
 
-    server.inject('/get-quiz-result?user_id=1&module_id=TEST&quiz_id=1', (response) => {
+    const user_id = 1,
+        module_id = 'TEST',
+        quiz_id = 1;
+    server.inject(`/get-quiz-result?user_id=${user_id}&module_id=${module_id}&quiz_id=${quiz_id}`, (response) => {
         t.equal(response.statusCode, 200, '200 status code');
     });
 });

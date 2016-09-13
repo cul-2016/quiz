@@ -56,11 +56,11 @@ function getNewTrophyState (client, user_id, module_id, quiz_id, percentageScore
                             return callback(error);
                         }
                         trophies_awarded.overall_average = overall_average;
-                        console.log('you should be in here for last quiz', trophies_awarded);
+
                         return callback(null, trophies_awarded);
                     });
                 } else {
-                    console.log('you should not be in here for last quiz', trophies_awarded);
+
                     return callback(null, trophies_awarded);
                 }
             });

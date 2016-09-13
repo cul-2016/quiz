@@ -5,7 +5,7 @@
   * @param {object} client - postgres database client
   * @param {string} module_id - module_id for the given Quiz
   * @param {number} quiz_id - quiz_id for the given Quiz
-  * @params {string} quizName - quizName for the given Quiz
+  * @param {string} quizName - quizName for the given Quiz
   * @param {function} callback - a callback function
   */
 
