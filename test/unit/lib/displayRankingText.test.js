@@ -3,6 +3,13 @@ import { displayRankingText } from '../../../src/js/lib/feedback-methods';
 import text from '../../../src/js/lib/rankingText.json';
 
 
+test('`displayRankingText` returns correct message for students who have no previous quiz data', (t) => {
+
+    t.plan(1);
+    const result = displayRankingText(text, null);
+    t.equal(result, text.noQuizzes);
+});
+
 test('`displayRankingText` returns correct message for students within 1 - 10% percentile', (t) => {
 
     t.plan(1);

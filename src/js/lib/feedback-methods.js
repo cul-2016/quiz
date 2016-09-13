@@ -1,6 +1,10 @@
 
 export function displayRankingText (text, ranking) {
 
+    if (ranking === null) {
+
+        return text.noQuizzes;
+    }
     if (ranking <= 10) {
 
         return text.top10;
