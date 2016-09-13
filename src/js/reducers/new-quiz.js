@@ -4,6 +4,7 @@ import * as actionsTypes from '../actions/new-quiz';
 const initialState = {
     name: undefined,
     questions: [],
+    is_last_quiz: false,
     isSavingQuiz: false,
     isUpdatingQuiz: false,
     isFetchingQuizDetails: false,
@@ -32,6 +33,11 @@ export default function (state = initialState, action) {
 
     case actionsTypes.CLEAR_NEW_QUIZ_STATE:
         return initialState;
+
+    case actionsTypes.TOGGLE_IS_LAST_QUIZ:
+        return update(state, {
+            is_last_quiz: { $set: !state.is_last_quiz }
+        });
 
     case actionsTypes.SAVE_QUIZ_REQUEST:
         return update(state, {
@@ -74,7 +80,8 @@ export default function (state = initialState, action) {
         return update(state, {
             isFetchingQuizDetails: { $set: false },
             name: { $set: action.data.name },
-            questions: { $set: action.data.questions }
+            questions: { $set: action.data.questions },
+            is_last_quiz: { $set: action.data.is_last_quiz }
         });
 
     case actionsTypes.GET_QUIZ_DETAILS_FAILURE:

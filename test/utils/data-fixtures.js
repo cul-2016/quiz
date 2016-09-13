@@ -86,21 +86,23 @@ export const getModuleForLecturerData = {
         ],
         condition: [1, 100, 65, 2]
     },
-    num_enrolled: 3,
+    num_enrolled: 4,
     quizzes: [
         {
             quiz_id: 1,
             name: 'Week 1 Quiz',
             num_questions: '2',
-            num_entries: '3',
-            is_presented: true
+            num_entries: '4',
+            is_presented: true,
+            is_last_quiz: false
         },
         {
             quiz_id: 2,
             name: 'Week 2 Quiz',
             num_questions: '3',
-            num_entries: '2',
-            is_presented: true
+            num_entries: '3',
+            is_presented: true,
+            is_last_quiz: false
         }
     ]
 };
@@ -140,6 +142,7 @@ export const newQuiz = {
 
 export const getQuizDetailsData = {
     name: 'Old Quiz',
+    is_last_quiz: false,
     questions: [
         {
             question: 'capital of England',
@@ -231,20 +234,22 @@ export const getQuizMembers = [{
 
 export const leaderboardData = [
     {
-        average: 60,
-        module_id: 'TEST',
+        average: '66.50',
         user_id: 1,
         username: 'student'
     },
     {
-        average: 40,
-        module_id: 'TEST',
+        average: '66.50',
+        user_id: 5,
+        username: 'Homer'
+    },
+    {
+        average: '41.50',
         user_id: 3,
         username: 'Sohil'
     },
     {
-        average: 0,
-        module_id: 'TEST',
+        average: '0.00',
         user_id: 4,
         username: 'Mina'
     }
@@ -272,4 +277,4 @@ export const allAverageScoresData = [
     { user_id: 8, average: 20 },
     { user_id: 5, average: 10 },
     { user_id: 6, average: 10 }
-]; 
+];

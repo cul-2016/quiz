@@ -4,7 +4,7 @@ import { allAverageScoresData as expected } from '../../utils/data-fixtures';
 import getAllAverageScores from '../../../server/lib/getAllAverageScores';
 
 
-test("`getAllAverageScores` returns all students' average scores for a module", (t) => {
+test.skip("`getAllAverageScores` returns all students' average scores for a module", (t) => {
 
     t.plan(1);
     const module_id = 'CENT';

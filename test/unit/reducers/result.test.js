@@ -29,7 +29,12 @@ test('GET_QUIZ_RESULT_SUCCESS works', (t) => {
             raw: 4,
             percentage: 60
         },
-        newTrophyState: [true, false, false, false]
+        newTrophyState: {
+            first_quiz: true,
+            high_score: false,
+            participation: true,
+            overall_average: true
+        }
     };
 
     const initialState = deepFreeze(

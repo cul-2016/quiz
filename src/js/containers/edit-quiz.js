@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import EditQuiz from '../components/edit-quiz/edit-quiz';
-import { addQuestion, deleteQuestion, updateValue, updateQuizName, updateQuiz, clearNewQuizState } from '../actions/new-quiz';
+import { addQuestion, deleteQuestion, updateValue, updateQuizName, updateQuiz, clearNewQuizState, toggleIsLastQuiz } from '../actions/new-quiz';
 import { hashHistory } from 'react-router';
 
 
@@ -10,6 +10,7 @@ const mapStateToProps = (state) => ({
     questions: state.newQuiz.questions,
     isUpdatingQuiz: state.newQuiz.isUpdatingQuiz,
     name: state.newQuiz.name,
+    is_last_quiz: state.newQuiz.is_last_quiz,
     deletedQuestions: state.newQuiz.deletedQuestions,
     username: state.user.username
 });
@@ -33,12 +34,16 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(updateQuizName(value));
     },
 
-    handleEditQuiz: (module_id, quiz_id, quizName, questions, deletedQuestions) => {
-        dispatch(updateQuiz(module_id, quiz_id, quizName, questions, deletedQuestions));
+    handleEditQuiz: (module_id, quiz_id, quizName, questions, deletedQuestions, is_last_quiz) => {
+        dispatch(updateQuiz(module_id, quiz_id, quizName, questions, deletedQuestions, is_last_quiz));
         setTimeout(() => {
             hashHistory.goBack();
             dispatch(clearNewQuizState());
         }, 950);
+    },
+
+    handleIsLastQuiz: () => {
+        dispatch(toggleIsLastQuiz());
     }
 });
 

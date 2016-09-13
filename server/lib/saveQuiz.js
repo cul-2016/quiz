@@ -4,14 +4,15 @@ var query = require('./query');
  * Represents a function that saves new quiz and returns quiz_id for the saved quiz
  * @param {object} client - postgres database client
  * @param {string} module_id - module_id for the given Quiz
- * @params {string} quizName - quizName for the given Quiz
+ * @param {string} quizName - quizName for the given Quiz
+ * @param {boolean} is_last_quiz - whether the quiz is the last quiz in the module or not
  * @param {function} callback - a callback function
  */
 
-function saveQuiz (client, module_id, quizName, callback) {
+function saveQuiz (client, module_id, quizName, is_last_quiz, callback) {
 
-    var queryText = 'INSERT INTO quizzes (module_id, name) VALUES ($1, $2) RETURNING quiz_id;';
-    var value = [module_id, quizName];
+    var queryText = 'INSERT INTO quizzes (module_id, name, is_last_quiz) VALUES ($1, $2, $3) RETURNING quiz_id;';
+    var value = [module_id, quizName, is_last_quiz];
 
     query(client, queryText, value, (error, response) => {
 

@@ -5,6 +5,7 @@ export const DELETE_QUESTION = 'DELETE_QUESTION';
 export const UPDATE_VALUE = 'UPDATE_VALUE';
 export const UPDATE_QUIZ_NAME = 'UPDATE_QUIZ_NAME';
 export const CLEAR_NEW_QUIZ_STATE = 'CLEAR_NEW_QUIZ_STATE';
+export const TOGGLE_IS_LAST_QUIZ = 'TOGGLE_IS_LAST_QUIZ';
 
 export const SAVE_QUIZ_REQUEST = 'SAVE_QUIZ_REQUEST';
 export const SAVE_QUIZ_SUCCESS = 'SAVE_QUIZ_SUCCESS';
@@ -45,12 +46,16 @@ export const clearNewQuizState = () => ({
     type: CLEAR_NEW_QUIZ_STATE
 });
 
+export const toggleIsLastQuiz = () => ({
+    type: TOGGLE_IS_LAST_QUIZ
+});
+
 
 //
 // SAVE QUIZ ACTIONS
 //
 
-export function saveQuiz (module_id, quizName, questions) {
+export function saveQuiz (module_id, quizName, questions, is_last_quiz) {
 
     return (dispatch) => {
 
@@ -59,7 +64,8 @@ export function saveQuiz (module_id, quizName, questions) {
         const payload = {
             module_id,
             quizName,
-            questions
+            questions,
+            is_last_quiz
         };
         axios.post('/save-quiz', payload)
             .then((response) => {
@@ -94,7 +100,7 @@ export const saveQuizFailure = (error) => ({
 // UPDATE QUIZ ACTIONS
 //
 
-export function updateQuiz (module_id, quiz_id, quizName, questions, deletedQuestions) {
+export function updateQuiz (module_id, quiz_id, quizName, questions, deletedQuestions, is_last_quiz) {
 
     var editedQuestions = questions.filter((question) => {
         if (question.question_id) {
@@ -124,7 +130,8 @@ export function updateQuiz (module_id, quiz_id, quizName, questions, deletedQues
             quizName,
             editedQuestions,
             newQuestions,
-            deletedQuestions
+            deletedQuestions,
+            is_last_quiz
         };
         axios.post('/update-quiz', payload)
             .then(() => {

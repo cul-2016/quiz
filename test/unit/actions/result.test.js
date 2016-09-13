@@ -35,7 +35,15 @@ test('getQuizResultRequest creates the correct action', (t) => {
 test('getQuizResultSuccess creates the correct action', (t) => {
     t.plan(1);
 
-    const data = { score: '2' };
+    const data = {
+        score: '2',
+        newTrophyState: {
+            first_quiz: true,
+            high_score: false,
+            participation: true,
+            overall_average: true
+        } 
+    };
 
     const expected = {
         type: actions.GET_QUIZ_RESULT_SUCCESS,
