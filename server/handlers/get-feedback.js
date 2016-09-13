@@ -1,5 +1,6 @@
 var client = require('../lib/dbClient');
 var getRanking = require('../lib/getRanking');
+var hasStudentSubmitted = require('../lib/hasStudentSubmitted');
 var getBestAndWorstQuiz = require('../lib/getBestAndWorstQuiz');
 var getParticipationRate = require('../lib/getParticipationRate');
 
@@ -16,27 +17,36 @@ module.exports = {
             console.error('user_id and module_id must be defined');
             return reply(new Error('user_id and module_id must be defined'));
         }
-        getRanking(client, user_id, module_id, (error, ranking) => {
+        hasStudentSubmitted(client, user_id, module_id, (error, hasSubmittedBefore) => {
 
             if (error) {
                 return reply(error);
             }
-            getBestAndWorstQuiz(client, user_id, module_id, (error, quizzes) => {
+            if (!hasSubmittedBefore) {
+                return reply(null);
+            }
+            getRanking(client, user_id, module_id, (error, ranking) => {
 
                 if (error) {
                     return reply(error);
                 }
-                getParticipationRate(client, user_id, module_id, (error, participation) => {
+                getBestAndWorstQuiz(client, user_id, module_id, (error, quizzes) => {
 
                     if (error) {
                         return reply(error);
                     }
-                    var data = {
-                        ranking: ranking,
-                        quizzes: quizzes,
-                        participation: participation
-                    };
-                    reply(data);
+                    getParticipationRate(client, user_id, module_id, (error, participation) => {
+
+                        if (error) {
+                            return reply(error);
+                        }
+                        var data = {
+                            ranking: ranking,
+                            quizzes: quizzes,
+                            participation: participation
+                        };
+                        reply(data);
+                    });
                 });
             });
         });
