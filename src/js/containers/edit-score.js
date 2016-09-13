@@ -3,7 +3,7 @@ import EditScore from '../components/edit-score';
 import { updateScore, editScore } from '../actions/quiz-members';
 
 const mapStateToProps = (state) => ({
-    members: state.quizMembers.members,
+    members: state.quizMembers.members
 });
 
 const mapDispatchToProps = (dispatch) => ({
