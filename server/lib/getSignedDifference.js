@@ -9,22 +9,39 @@
 
 function getSignedDifference (studentScores, meanScores, callback) {
 
-    if (studentScores.length !== meanScores.length) {
-        return callback(new Error("student score and mean score arrays must be same length"));
-    }
-
     (function difference (result, i) {
 
         if (i === studentScores.length) {
             return callback(null, result);
         }
-        result.push({
-            quiz_id: studentScores[i].quiz_id,
-            difference: +(studentScores[i].score - meanScores[i].mean_score).toFixed(2),
-        });
+        var quiz_id = studentScores[i].quiz_id;
 
-        difference(result, ++i);
+        findIndex(quiz_id, meanScores, (meanScoreIndex) => {
+
+            if (meanScoreIndex === -1) {
+                return callback(new Error('`getSignedDifference`: student score and mean score arrays are imbalanced'));
+            }
+            result.push({
+                quiz_id: quiz_id,
+                difference: +(studentScores[i].score - meanScores[meanScoreIndex].mean_score).toFixed(2),
+            });
+            difference(result, ++i);
+        });
     })([], 0);
 }
 
 module.exports = getSignedDifference;
+
+function findIndex (quiz_id, meanScores, callback) {
+
+    (function loop (index) {
+
+        if (meanScores[index].quiz_id === quiz_id) {
+            return callback(index);
+        }
+        if (index === meanScores.length) {
+            return callback(-1);
+        }
+        loop(++index);
+    })(0);
+}
