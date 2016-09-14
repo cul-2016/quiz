@@ -283,5 +283,8 @@ export const allPercentageScoresData = [
 
 
 export const studentHistoryData = [
-    { quiz_id: 1, name: 'Week 1 Quiz', score: 2 }
+    { name: 'Trivia quiz', num_questions: '10', quiz_id: 3, score: 2 },
+    { name: 'Arbitrary 1', num_questions: '2', quiz_id: 4, score: 2 },
+    { name: 'Arbitrary 2', num_questions: '2', quiz_id: 5, score: 1 },
+    { name: 'Arbitrary 3', num_questions: '1', quiz_id: 6, score: 1 }
 ];
