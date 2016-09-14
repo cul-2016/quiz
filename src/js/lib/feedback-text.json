@@ -1,0 +1,19 @@
+{
+    "ranking": {
+        "null": "When you take part in quizzes, you’ll get feedback on how you’re doing, and guidance on which areas you might want to focus on for revision.",
+        "top10": "You are a star performer. Your score is in the top 10% of people who are taking part in these quizzes. There is very little advice to give you – keep up the good work!",
+        "top11to25": "You are doing well – you are in the top 25% of people who are taking part in these quizzes. Good work!",
+        "top26to50": "You are making good progress – your score is in the top half of people who are taking part in these quizzes.",
+        "top51to90": "Solid performance – although you are not at the top of the leaderboard, you’re not at the bottom either. You clearly have potential – it might be worth going over the material to make sure you’re completely on top of it.",
+        "top91to100": "You’re not getting the best scores on these quizzes. It might help to take some more time to get on top of the material"
+    },
+    "strengthsWeaknesses": {
+        "null": "As you take more quizzes we will identify those that you are doing particularly well on relative to other people, and those that you are doing less well on."
+    },
+    "participation": {
+        "null": "We haven't run enough quizzes to give you detailed feedback on your participation yet.",
+        "<50": "You’re not taking part in a lot of the quizzes. If you’re playing along in your head but not submitting the answers then that’s great, but if you’re missing some of the quizzes, then you’re putting yourself at a disadvantage. Remember, each time you try to recall information, as you do when you complete a quiz, you make it easier to remember that information later. So you’re helping your learning with each quiz you take.",
+        "50to74": "You're completing over half of the quizzes, which is great, but you're also missing some. The more quizzes you complete, the easier you'll find it remember that information later. So you’re helping your learning with each quiz you take.",
+        ">=75": "It’s great that you’re taking part in most of the quizzes. Each time you try to recall information, as you do when you complete a quiz, you make it easier to remember that information later. So you’re helping your learning with each quiz you take."
+    }
+}
