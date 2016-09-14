@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 
 
-const StudentHistory = ({ history }) => {
+const StudentHistory = ({ history }) => { //eslint-disable-line no-unused-vars
 
     return (
         <div className="box">

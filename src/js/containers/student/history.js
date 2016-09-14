@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import History from '../../components/student-module/history';
 
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state) => ({ //eslint-disable-line no-unused-vars
     // history: state.studentHistory.history
 });
 
