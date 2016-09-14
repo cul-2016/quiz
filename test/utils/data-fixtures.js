@@ -280,3 +280,8 @@ export const allPercentageScoresData = [
     { user_id: 7, average: 20 },
     { user_id: 5, average: 10 }
 ];
+
+
+export const studentHistoryData = [
+    { quiz_id: 1, name: 'Week 1 Quiz', score: 2 }
+];

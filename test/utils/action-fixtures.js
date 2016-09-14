@@ -19,3 +19,4 @@ export const editScoreError = new Error('Failed to edit the score');
 export const getQuizDetailsData = new Error('Failed to get quiz details');
 export const getLeaderboardError = new Error('Failed to get leaderboard');
 export const getFeedbackError = new Error('Failed to get feedback');
+export const genericError = new Error('A generic error occurred');

@@ -6,6 +6,7 @@ export const initialState = {
     ranking: undefined,
     quizzes: undefined,
     participation: undefined,
+    history: undefined,
     isFetchingFeedback: false,
     error: undefined
 };

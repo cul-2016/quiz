@@ -1,7 +1,7 @@
-import React, { PropTypes } from 'react'; //eslint-disable-line no-unused-vars
+import React, { PropTypes } from 'react';
 
 
-const StudentHistory = () => {
+const StudentHistory = ({ history }) => {
 
     return (
         <div className="box">
@@ -11,7 +11,7 @@ const StudentHistory = () => {
 };
 
 StudentHistory.propTypes = {
-
+    history: PropTypes.array
 };
 
 export default StudentHistory;
