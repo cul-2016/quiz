@@ -31,7 +31,7 @@ module.exports = {
                     return reply(error);
                 }
                 getBestAndWorstQuiz(client, user_id, module_id, (error, quizzes) => {
-
+                    
                     if (error) {
                         return reply(error);
                     }

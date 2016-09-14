@@ -7,7 +7,7 @@ test('`displayRankingText` returns correct message for students who have no prev
 
     t.plan(1);
     const result = displayRankingText(text, null);
-    t.equal(result, text.noQuizzes);
+    t.equal(result, text.null);
 });
 
 test('`displayRankingText` returns correct message for students within 1 - 10% percentile', (t) => {

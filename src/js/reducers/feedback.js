@@ -4,7 +4,7 @@ import * as actionsTypes from '../actions/feedback';
 
 export const initialState = {
     ranking: undefined,
-    quizzes: [],
+    quizzes: undefined,
     participation: undefined,
     isFetchingFeedback: false,
     error: undefined
@@ -23,7 +23,7 @@ export function feedback (state = initialState, action) {
         return update(state, {
             isFetchingFeedback: { $set: false },
             ranking: { $set: action.data.ranking },
-            quizzes: { $set: action.data.quizzes || [] },
+            quizzes: { $set: action.data.quizzes },
             participation: { $set: action.data.participation },
         });
 
