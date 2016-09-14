@@ -7,6 +7,10 @@
 
 function getMinAndMaxValues (array, callback) {
 
+    if (!Array.isArray(array)) {
+        return callback(new TypeError('First argument must be an array'));
+    }
+
     return callback(null, [
         array.reduce((prev, curr) => prev.difference < curr.difference ? prev : curr),
         array.reduce((prev, curr) => prev.difference > curr.difference ? prev : curr)
