@@ -41,10 +41,10 @@ const StudentModule = ({ location, children,
                         </button>
                     </Link>
                 </div>
-                <Tabs location={ location } />
 
                 <Trophies trophies={ trophies } trophies_awarded={ trophies_awarded } />
 
+                <Tabs location={ location } />
                 <div className="section">
                     { children }
                 </div>

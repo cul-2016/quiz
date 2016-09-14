@@ -24,7 +24,7 @@ import EditScoreContainer from './containers/edit-score';
 
 import StudentJoinModuleContainer from './containers/student/join-module';
 import StudentModuleContainer from './containers/student/module';
-import StudentHistory from './components/student-module/history';
+import StudentHistoryContainer from './containers/student/history';
 import StudentFeedbackContainer from './containers/student/feedback';
 import StudentLiveQuizContainer from './containers/student/live-quiz';
 import StudentQuizResultContainer from './containers/student/result';
@@ -75,7 +75,7 @@ const Root = ({ store }) => (
                     <Route
                         onEnter={ composeHooks(hooks.authenticate) }
                         path="history"
-                        component={ StudentHistory } />
+                        component={ StudentHistoryContainer } />
                     <Route
                         onEnter={ composeHooks(hooks.authenticate, hooks.fetchModule) }
                         path="feedback"

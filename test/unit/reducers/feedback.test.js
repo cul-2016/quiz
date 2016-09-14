@@ -5,9 +5,6 @@ import { feedback as reducer } from '../../../src/js/reducers/feedback';
 import { feedback as data } from '../../utils/data-fixtures';
 import deepFreeze from '../../utils/deepFreeze';
 
-//
-// GET LEADERBOARD
-//
 
 test('GET_FEEDBACK_REQUEST works', (t) => {
 

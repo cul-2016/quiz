@@ -21,6 +21,7 @@ var GetQuizDetails = require('./handlers/get-quiz-details');
 var UpdateQuiz = require('./handlers/update-quiz');
 var GetLeaderboard = require('./handlers/get-leaderboard');
 var GetFeedback = require('./handlers/get-feedback');
+var GetStudentHistory = require('./handlers/get-student-history');
 
 
 var routes = [
@@ -46,7 +47,8 @@ var routes = [
     GetQuizDetails,
     UpdateQuiz,
     GetLeaderboard,
-    GetFeedback
+    GetFeedback,
+    GetStudentHistory
 ];
 
 module.exports = routes;
