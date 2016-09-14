@@ -1,11 +1,23 @@
 import React, { PropTypes } from 'react';
 
 
-const StudentHistory = ({ history }) => { //eslint-disable-line no-unused-vars
+const StudentHistory = ({ history }) => {
+
+    let mappedHistory = history.map((quiz, i) => {
+        return (
+            <div key={ i }>
+                <div className="box average">
+                    <span>{ quiz.name }</span>
+                    <span>Score: { quiz.score }</span>
+                    <span>out of: { quiz.num_questions }</span>
+                </div>
+            </div>
+        );
+    });
 
     return (
-        <div className="box">
-            Here be the student history
+        <div>
+            { mappedHistory }
         </div>
     );
 };

@@ -14,7 +14,7 @@ const Feedback = ({ ranking, quizzes, participation }) => {
                 { displayRankingText(text, ranking) }
             </div>
             <div className="box">
-                <h3>Your strengths and weaknesses</h3>
+                <h3>How do you compare to other people?</h3>
                 { displayStrengthsWeaknessesText(text, quizzes) }
             </div>
             <div className="box">

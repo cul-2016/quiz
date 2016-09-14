@@ -3,7 +3,7 @@ import * as actionsTypes from '../actions/student-history';
 
 
 export const initialState = {
-    history: undefined,
+    history: [],
     isFetchingStudentHistory: false,
     error: undefined
 };

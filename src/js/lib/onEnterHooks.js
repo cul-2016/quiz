@@ -113,7 +113,7 @@ export function fetchModule (nextState, replace, callback) {
 
         if (is_lecturer === false) {
             store.dispatch(getFeedback(user_id, module_id));
-            // store.dispatch(getStudentHistory(user_id, module_id));
+            store.dispatch(getStudentHistory(user_id, module_id));
         }
     }
     callback();
