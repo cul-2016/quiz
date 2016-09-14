@@ -11,7 +11,8 @@ test('`getMeanQuizScores` returns the mean score for each quiz in a module', (t)
     const expected = [
         { quiz_id: 3, mean_score: 5.5 },
         { quiz_id: 4, mean_score: 1.67 },
-        { quiz_id: 5, mean_score: 1.33 }
+        { quiz_id: 5, mean_score: 1.33 },
+        { quiz_id: 6, mean_score: 1 }
     ];
 
     getMeanQuizScores(testClient, module_id, (error, result) => {

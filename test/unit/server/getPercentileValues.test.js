@@ -8,7 +8,7 @@ test('`getPercentileValues` works', (t) => {
     t.plan(1);
 
     const BOUNDARIES = [10, 25, 50, 90, 100];
-    const expected = [95, 80, 60, 25, 10];
+    const expected = [95, 80, 63.75, 25, 10];
 
     getPercentileValues(averageScores, BOUNDARIES, (error, result) => {
 

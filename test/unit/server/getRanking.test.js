@@ -55,7 +55,7 @@ test("`getRanking` correctly ranks students within 26 - 50% percentile", (t) => 
 
     const module_id = 'CENT';
     const user_id_1 = 17;
-    const user_id_2 = 15;
+    const user_id_2 = 18;
     const expected = 50;
 
     getRanking(testClient, user_id_1, module_id, (error, result) => {
