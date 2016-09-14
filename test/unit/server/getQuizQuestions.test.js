@@ -2,7 +2,7 @@ import test from 'tape';
 import getQuizQuestions from '../../../server/lib/getQuizQuestions';
 import { testClient } from '../../utils/init';
 
-test('Gets list of questions for a quiz_id', (t) => {
+test('`getQuizQuestions` gets list of questions for a quiz', (t) => {
 
     t.plan(1);
     const expectedRows = [
@@ -24,7 +24,9 @@ test('Gets list of questions for a quiz_id', (t) => {
         }
     ];
 
-    getQuizQuestions(testClient, '1', (error, response) => {
+    const quiz_id = 1;
+
+    getQuizQuestions(testClient, quiz_id, (error, response) => {
 
         if (error) {
             console.error(error);

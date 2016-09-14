@@ -6,12 +6,11 @@ test("`getNewTrophyState` returns all trophies in state when is_last_quiz is set
 
     t.plan(1);
 
-    const user_id = 1,
-        module_id = 'TEST',
-        quiz_id = 2,
-        percentageScore = 33,
-        is_last_quiz = true;
-
+    const user_id = 1;
+    const module_id = 'TEST';
+    const quiz_id = 2;
+    const percentageScore = 33;
+    const is_last_quiz = true;
     const expected = {
         first_quiz: true,
         high_score: false,

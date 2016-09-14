@@ -1,6 +1,6 @@
 import test from 'tape';
 import getPercentileValues from '../../../server/lib/getPercentileValues';
-import { allAverageScoresData as averageScores } from '../../utils/data-fixtures';
+import { allPercentageScoresData as averageScores } from '../../utils/data-fixtures';
 
 
 test('`getPercentileValues` works', (t) => {
@@ -8,7 +8,7 @@ test('`getPercentileValues` works', (t) => {
     t.plan(1);
 
     const BOUNDARIES = [10, 25, 50, 90, 100];
-    const expected = [95, 80, 55, 15, 10];
+    const expected = [95, 80, 63.75, 25, 10];
 
     getPercentileValues(averageScores, BOUNDARIES, (error, result) => {
 

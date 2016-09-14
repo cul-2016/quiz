@@ -29,8 +29,11 @@ test('`get-module` endpoint works for a lecturer', (t) => {
 test('`get-module` endpoint works for a student', (t) => {
 
     t.plan(2);
+    const user_id = 1;
+    const module_id = 'TEST';
+    const is_lecturer = false;
 
-    server.inject('/get-module?module_id=TEST&is_lecturer=false&user_id=1', (response) => {
+    server.inject(`/get-module?module_id=${module_id}&is_lecturer=${is_lecturer}&user_id=${user_id}`, (response) => {
 
         const data = response.result;
         t.equal(response.statusCode, 200, '200 status code');

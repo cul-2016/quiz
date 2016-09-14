@@ -4,7 +4,7 @@ import saveModule from '../../../server/lib/saveModule';
 import { medals, trophies } from '../../utils/data-fixtures';
 
 
-test('adding a module to the database works ok', (t) => {
+test('`saveModule` a module to the database works ok', (t) => {
 
     t.plan(2);
     const expectedError = null;
@@ -20,7 +20,7 @@ test('adding a module to the database works ok', (t) => {
     });
 });
 
-test('deleting lecturer from the database', (t) => {
+test('--deleting lecturer from the database--', (t) => {
 
     testClient.connect((error, client, done) => {
 

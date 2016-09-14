@@ -8,6 +8,7 @@
 function getBoundaryIndex (score, range, callback) {
 
     if (score > 100 || score < 0) {
+        console.error("score:", score);
         return callback(new RangeError('Score must be between 0 and 100'));
     }
 

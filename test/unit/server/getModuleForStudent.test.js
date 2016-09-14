@@ -2,7 +2,7 @@ import test from 'tape';
 import getModuleForStudent from '../../../server/lib/getModuleForStudent';
 import { testClient } from '../../utils/init';
 
-test('Gets the module for a given student', (t) => {
+test('`getModuleForStudent` gets module info for a given student', (t) => {
 
     t.plan(1);
     const expectedRows = {
@@ -20,7 +20,10 @@ test('Gets the module for a given student', (t) => {
         }
     };
 
-    getModuleForStudent(testClient, 'TEST', 1, (error, response) => {
+    const user_id = 1;
+    const module_id = 'TEST';
+
+    getModuleForStudent(testClient, user_id, module_id, (error, response) => {
 
         if (error) {
             console.error(error);

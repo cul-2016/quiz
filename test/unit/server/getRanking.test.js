@@ -55,7 +55,7 @@ test("`getRanking` correctly ranks students within 26 - 50% percentile", (t) => 
 
     const module_id = 'CENT';
     const user_id_1 = 17;
-    const user_id_2 = 15;
+    const user_id_2 = 18;
     const expected = 50;
 
     getRanking(testClient, user_id_1, module_id, (error, result) => {
@@ -76,13 +76,12 @@ test("`getRanking` correctly ranks students within 26 - 50% percentile", (t) => 
 
 test("`getRanking` correctly ranks students within 51 - 90% percentile", (t) => {
 
-    t.plan(4);
+    t.plan(3);
 
     const module_id = 'CENT';
     const user_id_1 = 13; //score: 50
     const user_id_2 = 11; //score: 40
     const user_id_3 = 9; //score: 30
-    const user_id_4 = 7; //score: 20
     const expected = 90;
 
     getRanking(testClient, user_id_1, module_id, (error, result) => {
@@ -106,13 +105,6 @@ test("`getRanking` correctly ranks students within 51 - 90% percentile", (t) => 
         }
         t.equal(result, expected, 'Value `90` is returned');
     });
-    getRanking(testClient, user_id_4, module_id, (error, result) => {
-
-        if (error) {
-            console.error(error);
-        }
-        t.equal(result, expected, 'Value `90` is returned');
-    });
 });
 
 test("`getRanking` correctly ranks students within 91 - 100% percentile", (t) => {
@@ -120,7 +112,7 @@ test("`getRanking` correctly ranks students within 91 - 100% percentile", (t) =>
     t.plan(1);
 
     const module_id = 'CENT';
-    const user_id = 6; //score: 10
+    const user_id = 5; //homer - score: 10
     const expected = 100;
 
     getRanking(testClient, user_id, module_id, (error, result) => {

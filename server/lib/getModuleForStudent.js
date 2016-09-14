@@ -10,9 +10,9 @@ var organiseModuleData = require('./organiseModuleData');
  * @param {function} callback - callback function
  */
 
-function getModuleForStudent (client, module_id, user_id, callback) {
+function getModuleForStudent (client, user_id, module_id, callback) {
 
-    query(client, queries.getModuleForStudent.main, [module_id, user_id], (error, main) => {
+    query(client, queries.getModuleForStudent.main, [user_id, module_id], (error, main) => {
 
         if (error) {
             console.error(error);
