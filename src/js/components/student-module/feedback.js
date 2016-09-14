@@ -1,11 +1,12 @@
 import React, { PropTypes } from 'react';
 import rankingText from '../../lib/rankingText.json';
 import { displayRankingText,
-         displayStrengthsWeaknessesText } from '../../lib/feedback-methods';
+         displayStrengthsWeaknessesText,
+         displayParticipationText } from '../../lib/feedback-methods';
 
 
 const Feedback = ({ ranking, quizzes, participation }) => {
-
+    
     return (
         <div>
             <div className="box">
@@ -17,7 +18,8 @@ const Feedback = ({ ranking, quizzes, participation }) => {
                 { displayStrengthsWeaknessesText(quizzes) }
             </div>
             <div className="box">
-                Participation: { participation }
+                <h3>Your participation rate</h3>
+                { displayParticipationText(participation) }
             </div>
         </div>
     );
