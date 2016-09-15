@@ -23,7 +23,6 @@ const Trophies = ({ trophies, updateTrophyVals }) => {
 
     return (
         <div className="section column">
-
             <h3>
                 <i className="fa fa-star" /> Trophies
             </h3>

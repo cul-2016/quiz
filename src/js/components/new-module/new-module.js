@@ -25,30 +25,26 @@ const NewModule = ({ module_id_length, isValidatingModuleID, moduleIDExists,
             <div>
                 <Nav username={ username } />
                 <div className="new-module container">
-                    <h1 className="title is-2 has-text-centered">Add a new module</h1>
+                    <h2 className="has-text-centered"> Add a new module </h2>
+                    <div className="columns">
+                        <Details module_id={ module_id }
+                                 moduleIDExists={ moduleIDExists }
+                                 isValidatingModuleID={ isValidatingModuleID }
+                                 module_id_length={ module_id_length }
+                                 handleCodeInputChange={ handleCodeInputChange }
+                                 handleInputChange={ handleInputChange } />
+                        <Medals medals={ medals }
+                                updateMedalVals={ updateMedalVals }
+                                applyOffset={ applyOffset }/>
 
-                <div className="columns">
-                    <Details module_id={ module_id }
-                             moduleIDExists={ moduleIDExists }
-                             isValidatingModuleID={ isValidatingModuleID }
-                             module_id_length={ module_id_length }
-                             handleCodeInputChange={ handleCodeInputChange }
-                             handleInputChange={ handleInputChange } />
-
-                    <Medals medals={ medals }
-                            updateMedalVals={ updateMedalVals }
-                            applyOffset={ applyOffset }/>
-
-                    <Trophies trophies={ trophies }
-                              updateTrophyVals={ updateTrophyVals }
-                              applyOffset={ applyOffset } />
-                </div>
-
-
+                        <Trophies trophies={ trophies }
+                                  updateTrophyVals={ updateTrophyVals }
+                                  applyOffset={ applyOffset } />
+                    </div>
                     <div className="has-text-centered">
-                    <button className={ validationClasses } onClick={ submit }>
-                        Save module
-                    </button>
+                        <button className={ validationClasses } onClick={ submit }>
+                            Save module
+                        </button>
                     </div>
                 </div>
             </div>

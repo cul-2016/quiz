@@ -22,24 +22,21 @@ const Details = ({ module_id, moduleIDExists, isValidatingModuleID, module_id_le
     return (
         <div className="section column">
             <h3>
-                <i className="fa fa-pencil" /> Module name and code</h3>
+                <i className="fa fa-pencil" /> Module name and code
+            </h3>
 
             <div className="notification is-info has-text-centered">
-
                 <p>Please choose a <strong>unique</strong> code for your module, <strong>4 characters in length</strong>.</p>
                 <p>Students will use this code to join the module and access quizzes.</p>
             </div>
-
             <label className="label">Module name</label>
             <input
                 className="input"
                 name="name"
                 type="text"
                 onChange={ (e) => handleInputChange('name', e.target.value) } />
-
             <label className="label">Code (4 characters long)</label>
             <p className="control has-icon has-icon-right">
-
                 <input
                     className={ moduleIDClasses }
                     value={ module_id }
@@ -50,6 +47,7 @@ const Details = ({ module_id, moduleIDExists, isValidatingModuleID, module_id_le
                 <i className={ iconClasses } />
                 <span className={ moduleIDHelpClasses }> This code already exists.  Please choose another.</span>
             </p>
+            
         </div>
     );
 };

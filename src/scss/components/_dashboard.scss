@@ -1,0 +1,27 @@
+
+.dashboard {
+        p {
+            display: inline;
+            font-size: 1.2em;
+            padding: 0.6em;
+            color: black;
+        }
+        .module{
+            border-bottom: 0.1em rgba(201, 201, 201, 0.4) solid;
+            padding: 0.5em;
+            transition: all .3s ease-in-out;
+        }
+
+        .module:hover {
+            background-color: rgba(201, 201, 201, 0.1);
+            transform: scale(1.05);
+        }
+    }
+
+    .module-header {
+        padding: 0 0.5em;
+
+        label {
+            padding:0.6em;
+        }
+    }
