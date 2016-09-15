@@ -1,17 +1,21 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 
-const Medal = () => {
+const Medal = ({ colour }) => {
 
     return (
         <div className="medal-container">
-            <div className="medal icon--star" />
-
+            <div className={ `medal ${colour}` } />
         </div>
     );
 };
 
+Medal.propTypes = {
+    colour: PropTypes.string.isRequired
+};
+
 export default Medal;
+
 
 /*
 

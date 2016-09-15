@@ -19,7 +19,7 @@ const StudentHistory = ({ history }) => {
                     </span>
                 </td>
                 <td>
-                    <Medal />
+                    <Medal colour="gold" />
                 </td>
             </tr>
         );
