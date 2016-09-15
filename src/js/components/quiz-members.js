@@ -10,16 +10,18 @@ const QuizMembers = ({ members, isFetchingQuizMembers, username, questions, para
 
     let mappedMembers = members.map((member, i) => {
         return (
-            <div key={i} className="box column is-8 is-offset-2">
-                <div className="columns">
-                    <div className="column">
-                        <span>{ member.email }</span>
+            <div key={i} className="column is-8 is-offset-2 ">
+                <div className="columns quiz-members">
+                    <div className="column is-5 email">
+                        <p>{ member.email }</p>
                     </div>
-                    <div className="column">
-                        <h4>{ member.username }</h4>
+                    <div className="column is-3 username">
+                        <p>{ member.username }</p>
                     </div>
-                    <div className="column">
+                    <div className="column is-1 score">
                         <p>{ member.score }</p>
+                    </div>
+                    <div className="column is-2 edit-score-button">
                         <Link to={ `${params.module_id}/${params.quiz_id}/${i}/edit-score` }><button className="button is-warning">Edit Score</button></Link>
                     </div>
                 </div>
@@ -41,14 +43,14 @@ const QuizMembers = ({ members, isFetchingQuizMembers, username, questions, para
                     <h2 className="has-text-centered"> Quiz Members </h2>
                     <div className="column is-8 is-offset-2">
                         <div className="columns">
-                            <div className="column">
+                            <div className="column is-5">
                                 <label className="label">Email</label>
                             </div>
-                            <div className="column">
-                                <label className="label">Username</label>
+                            <div className="column is-3">
+                                <label className="label">Nickname</label>
                             </div>
-                            <div className="column">
-                                <label className="label">score</label>
+                            <div className="column is-3">
+                                <label className="label">Score</label>
                             </div>
                         </div>
                     </div>

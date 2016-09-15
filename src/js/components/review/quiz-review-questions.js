@@ -6,42 +6,41 @@ const QuizReviewQuestions = ({ questions }) => {
 
     let mappedQuestions = questions.map((question, i) => {
 
-        let aClasses = classnames("column is-1 has-text-centered box answer", {
+        let aClasses = classnames("column is-1 answer", {
             "correct_answer": 'a' === question.correct_answer.toLowerCase()
         });
-        let bClasses = classnames("column is-1 has-text-centered box answer", {
+        let bClasses = classnames("column is-1 answer", {
             "correct_answer": 'b' === question.correct_answer.toLowerCase()
         });
-        let cClasses = classnames("column is-1 has-text-centered box answer", {
+        let cClasses = classnames("column is-1 answer", {
             "correct_answer": 'c' === question.correct_answer.toLowerCase()
         });
-        let dClasses = classnames("column is-1 has-text-centered box answer", {
+        let dClasses = classnames("column is-1 answer", {
             "correct_answer": 'd' === question.correct_answer.toLowerCase()
         });
         return (
-            <div key={i} className="columns">
-                <div className="column is-3 is-offset-2 has-text-centered">
-                    <h2>{ question.question}</h2>
-                </div>
-                <div className={ aClasses }>
-                    <p>A</p>
-                    <p>{ question.a }</p>
-                    <p>{ question.a_responses }</p>
-                </div>
-                <div className={ bClasses }>
-                    <p>B</p>
-                    <p>{ question.b }</p>
-                    <p>{ question.b_responses }</p>
-                </div>
-                <div className={ cClasses }>
-                    <p>C</p>
-                    <p>{ question.c }</p>
-                    <p>{ question.c_responses }</p>
-                </div>
-                <div className={ dClasses }>
-                    <p>D</p>
-                    <p>{ question.d }</p>
-                    <p>{ question.d_responses }</p>
+
+            <div key={i} className="column is-8 is-offset-2 quiz-review-questions">
+                <div className="columns">
+                    <div className="column is-6">
+                    <p>{ question.question}</p>
+                    </div>
+                    <div className={ aClasses }>
+                        <p> <span> { question.a } </span> <span>{ question.a_responses } </span></p>
+
+                    </div>
+                    <div className={ bClasses }>
+                        <p> <span> { question.b } </span> <span>{ question.b_responses } </span></p>
+
+                    </div>
+                    <div className={ cClasses }>
+                        <p> <span> { question.c } </span> <span>{ question.c_responses } </span></p>
+
+                    </div>
+                    <div className={ dClasses }>
+                        <p className={ dClasses }> <span> { question.d } </span> <span>{ question.d_responses } </span></p>
+
+                    </div>
                 </div>
             </div>
 
