@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import Medal from '../general/medal';
 
 
 const StudentHistory = ({ history }) => {
@@ -18,7 +19,7 @@ const StudentHistory = ({ history }) => {
                     </span>
                 </td>
                 <td>
-                    The medal
+                    <Medal />
                 </td>
             </tr>
         );
