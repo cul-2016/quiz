@@ -14,6 +14,7 @@ import quizMembers from './quiz-members';
 import leaderboard from './leaderboard';
 import update from 'react-addons-update';
 import { feedback } from './feedback';
+import { studentHistory } from './student-history';
 
 
 const appReducer = combineReducers({
@@ -30,7 +31,8 @@ const appReducer = combineReducers({
     result,
     quizMembers,
     leaderboard,
-    feedback
+    feedback,
+    studentHistory
 });
 
 const rootReducer = (state, action) => {

@@ -2,7 +2,7 @@ import test from 'tape';
 import { testClient } from '../../utils/init';
 import updateQuestions from '../../../server/lib/updateQuestions';
 
-test('updating questions in database works', (t) => {
+test('`updateQuestions` works', (t) => {
 
     t.plan(2);
     const expectedError = null;

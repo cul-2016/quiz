@@ -2,7 +2,7 @@ import test from 'tape';
 import { testClient } from '../../utils/init';
 import saveUser from '../../../server/lib/authentication/saveUser';
 
-test('saving lecturer to database works', (t) => {
+test('`saveUser` successfully saves a lecturer', (t) => {
 
     t.plan(2);
     const expectedError = null; // testing if the error is null so that the client has saved user correctly.
@@ -13,7 +13,7 @@ test('saving lecturer to database works', (t) => {
     });
 });
 
-test('saving student to database works', (t) => {
+test('`saveUser` successfully saves a student', (t) => {
 
     t.plan(2);
     const expectedError = null;
@@ -24,7 +24,7 @@ test('saving student to database works', (t) => {
     });
 });
 
-test('deleting lecturer from the database', (t) => {
+test('---deleting lecturer from the database---', (t) => {
 
     testClient.connect((error, client, done) => {
         if (error) {

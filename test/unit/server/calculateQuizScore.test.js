@@ -1,8 +1,8 @@
 import test from 'tape';
-import getQuizScore from '../../../server/lib/getQuizScore';
+import calculateQuizScore from '../../../server/lib/calculateQuizScore';
 import { testClient } from '../../utils/init';
 
-test("`getQuizScore` gets a student's score for a quiz", (t) => {
+test("`calculateQuizScore` gets a student's score for a quiz", (t) => {
 
     t.plan(1);
 
@@ -13,7 +13,7 @@ test("`getQuizScore` gets a student's score for a quiz", (t) => {
         percentage: 33
     };
 
-    getQuizScore(testClient, user_id, quiz_id, (error, response) => {
+    calculateQuizScore(testClient, user_id, quiz_id, (error, response) => {
 
         if (error) {
             console.error(error);

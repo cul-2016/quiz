@@ -1,5 +1,9 @@
 import { store } from '../store';
+import { socketClient } from '../socket';
 import validCookieExists from './validCookieExists';
+import isUserLecturer from './isUserLecturer';
+import getUserID from './getUserID';
+import { loadState } from './localStorageState';//eslint-disable-line no-unused-vars
 import { getModule, getModuleMembers } from '../actions/module';
 import { getDashboard } from '../actions/dashboard';
 import { getUserDetails } from '../actions/user';
@@ -8,9 +12,9 @@ import { getQuizResult } from '../actions/result';
 import { getQuizMembers } from '../actions/quiz-members';
 import { getQuizDetails } from '../actions/new-quiz';
 import { getLeaderboard } from '../actions/leaderboard';
-import getUserID from './getUserID';
-import isUserLecturer from './isUserLecturer';
-import { socketClient } from '../socket';
+import { getFeedback } from '../actions/feedback';
+import { getStudentHistory } from '../actions/student-history'; //eslint-disable-line no-unused-vars
+
 
 /**
  * Checks if user is authenticated.  Redirects  to '/' if they're not
@@ -46,6 +50,7 @@ export function authenticate (nextState, replace, callback) {
  * @param {function} callback - (optional) can be used to make the transition block
  */
 export function checkUserRole (nextState, replace, callback) {
+
     if (isUserLecturer() === false) {
         replace('/dashboard');
         callback(false);
@@ -103,7 +108,13 @@ export function fetchModule (nextState, replace, callback) {
     let user_id = store.getState().user.user_id;
 
     if (validCookieExists()) {
+
         store.dispatch(getModule(module_id, is_lecturer, user_id));
+
+        if (is_lecturer === false) {
+            store.dispatch(getFeedback(user_id, module_id));
+            store.dispatch(getStudentHistory(user_id, module_id));
+        }
     }
     callback();
 }
@@ -241,8 +252,7 @@ export function fetchLeaderboard (nextState, replace, callback) {
 export function leaveRoom (nextState, replace, callback) {
 
     if (validCookieExists()) {
-        socketClient.emit('leave_room', () => {
-        });
+        socketClient.emit('leave_room', () => {});
     }
     callback();
 }

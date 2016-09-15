@@ -2,7 +2,7 @@ import test from 'tape';
 import { testClient } from '../../utils/init';
 import saveStudentResponse from '../../../server/lib/saveStudentResponse';
 
-test('saving student response works', (t) => {
+test('`saveStudentResponse` works', (t) => {
 
     t.plan(2);
     const expectedError = null;

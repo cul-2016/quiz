@@ -24,7 +24,7 @@ function getModuleList (client, user_id, is_lecturer, callback) {
     query(client, moduleQuery, moduleValue, (error, response) => {
 
         if (error) {
-            console.error(error);
+            console.error("`getModuleList`", error);
             return callback(error);
         }
         callback(null, response.rows);

@@ -2,7 +2,8 @@ import test from 'tape';
 import getQuizDetails from '../../../server/lib/getQuizDetails';
 import { testClient } from '../../utils/init';
 
-test('`getQuizDetails` Gets quiz name and questions for a given quiz', (t) => {
+
+test('`getQuizDetails` gets quiz name and questions for a given quiz', (t) => {
 
     t.plan(1);
     const expectedRows = {
@@ -17,7 +18,8 @@ test('`getQuizDetails` Gets quiz name and questions for a given quiz', (t) => {
                 d: 'Doncaster',
                 question: 'What is the capital of England?',
                 question_id: 1
-            }, {
+            },
+            {
                 a: 'Zagreb',
                 b: 'Cardiff',
                 c: 'Edinburgh',
@@ -25,14 +27,16 @@ test('`getQuizDetails` Gets quiz name and questions for a given quiz', (t) => {
                 d: 'Doncaster',
                 question: 'What is the capital of Croatia?',
                 question_id: 2
-            }]
+            }
+        ]
     };
+    const user_id = 1;
 
-    getQuizDetails(testClient, 1, (error, response) => {
+    getQuizDetails(testClient, user_id, (error, response) => {
 
         if (error) {
             console.error(error);
         }
-        t.deepEquals(response, expectedRows, 'database returns correct quiz Details');
+        t.deepEqual(response, expectedRows, 'database returns correct quiz details');
     });
 });

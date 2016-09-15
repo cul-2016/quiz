@@ -10,8 +10,9 @@ test('`getModuleList` gets list of modules for a lecturer', (t) => {
         { module_id: 'PSY1', name: 'Intro to Psychology' },
         { module_id: 'CENT', name: 'Percentile' }
     ];
+    const user_id = 2;
 
-    getModuleList(testClient, '2', true, (error, response) => {
+    getModuleList(testClient, user_id, true, (error, response) => {
 
         if (error) {
             console.error(error);
@@ -20,12 +21,16 @@ test('`getModuleList` gets list of modules for a lecturer', (t) => {
     });
 });
 
-test('Gets list of modules for a student', (t) => {
+test('`getModuleList` gets list of modules for a student', (t) => {
 
     t.plan(1);
-    const expectedRows = [{ module_id: 'TEST', name: 'test module' }, { module_id: 'PSY1', name: 'Intro to Psychology' }];
+    const expectedRows = [
+        { module_id: 'TEST', name: 'test module' },
+        { module_id: 'PSY1', name: 'Intro to Psychology' }
+    ];
+    const user_id = 1;
 
-    getModuleList(testClient, '1', false, (error, response) => {
+    getModuleList(testClient, user_id, false, (error, response) => {
 
         if (error) {
             console.error(error);

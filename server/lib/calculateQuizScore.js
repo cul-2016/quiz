@@ -10,11 +10,11 @@ var queries = require('./queries.json');
  * @param {function} callback - a callback function
  */
 
-function getQuizScore (client, user_id, quiz_id, callback) {
+function calculateQuizScore (client, user_id, quiz_id, callback) {
 
     var values = [user_id, quiz_id];
 
-    query(client, queries.getQuizScore.score, values, (error, response) => {
+    query(client, queries.calculateQuizScore.score, values, (error, response) => {
 
         if (error) {
             console.error(error);
@@ -22,7 +22,7 @@ function getQuizScore (client, user_id, quiz_id, callback) {
         }
         var score = parseInt(response.rows[0].count, 10);
 
-        query(client, queries.getQuizScore.num_questions, [quiz_id], (error, result) => {
+        query(client, queries.calculateQuizScore.num_questions, [quiz_id], (error, result) => {
 
             if (error) {
                 throw new Error("Problem getting number of questions");
@@ -37,4 +37,4 @@ function getQuizScore (client, user_id, quiz_id, callback) {
     });
 }
 
-module.exports = getQuizScore;
+module.exports = calculateQuizScore;

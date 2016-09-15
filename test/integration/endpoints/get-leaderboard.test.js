@@ -14,8 +14,9 @@ test('`get-leaderboard` endpoint returns error if module_id is undefined', (t) =
 test('`get-leaderboard` endpoint works', (t) => {
 
     t.plan(1);
+    const module_id = 'TEST';
 
-    server.inject('/get-leaderboard?module_id=TEST', (response) => {
+    server.inject(`/get-leaderboard?module_id=${module_id}`, (response) => {
         t.equal(response.statusCode, 200, '200 status code');
     });
 });
