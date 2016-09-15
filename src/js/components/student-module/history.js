@@ -2,16 +2,19 @@ import React, { PropTypes } from 'react';
 import Medal from '../general/medal';
 
 
-const StudentHistory = ({ history }) => {
+const StudentHistory = ({ history, medalConditions }) => {
 
     let mappedHistory = history.map((quiz, i) => {
+
+        let percentageScore = Math.round(quiz.score / quiz.num_questions * 100);
+
         return (
             <tr key={ i }>
-                <td className="subtitle is-4">
+                <td className="subtitle is-5">
                     { quiz.name }
                 </td>
                 <td>
-                    <span className="subtitle is-3">
+                    <span className="subtitle is-4">
                         { `${quiz.score} ` }
                     </span>
                     <span>
@@ -19,7 +22,7 @@ const StudentHistory = ({ history }) => {
                     </span>
                 </td>
                 <td>
-                    <Medal colour="gold" />
+                    <Medal percentageScore={ percentageScore } medalConditions={ medalConditions } />
                 </td>
             </tr>
         );
@@ -36,7 +39,8 @@ const StudentHistory = ({ history }) => {
 };
 
 StudentHistory.propTypes = {
-    history: PropTypes.array
+    history: PropTypes.array,
+    medalConditions: PropTypes.array
 };
 
 export default StudentHistory;

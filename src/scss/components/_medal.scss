@@ -1,22 +1,25 @@
 .medal-container {
     transform: translate(-50%,-50%);
-    width: 50px;
-    height: 50px;
-    border: 1px solid red;
+    width: 30px;
+    height: 30px;
 
-  .medal {
-      width: 50px;
-      height: 50px;
-      border-radius: 100%;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-    //   transform: translate(-50%,-50%);
-      animation: shine 4s ease-in-out infinite;
+    .medal {
+        width: 30px;
+        height: 30px;
+        border-radius: 100%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        animation: shine 4s ease-in-out infinite;
 
-      &.gold {
+        &.gold {
           background-color: $gold;
-      }
-  }
-
+        }
+        &.silver {
+            background-color: $silver;
+        }
+        &.bronze {
+            background-color: $bronze;
+        }
+    }
 }
