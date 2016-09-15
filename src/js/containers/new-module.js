@@ -10,7 +10,10 @@ const mapStateToProps = (state) => ({
     trophies: state.newModule.trophies,
     moduleIDExists: state.newModule.moduleIDExists,
     module_id_length: state.newModule.module_id.length,
-    isValidatingModuleID: state.newModule.isValidatingModuleID
+    isValidatingModuleID: state.newModule.isValidatingModuleID,
+    module_id: state.newModule.module_id,
+    name: state.newModule.name,
+    username: state.user.username,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -21,12 +24,14 @@ const mapDispatchToProps = (dispatch) => ({
     },
 
     handleCodeInputChange: (inputKey, id) => {
+        const upperCaseValue = id.toUpperCase();
 
         if (id.length === 4) {
 
-            dispatch(validateModuleID(id));
+            dispatch(validateModuleID(upperCaseValue));
         }
-        dispatch(updateTextValues(inputKey, id));
+
+        dispatch(updateTextValues(inputKey, upperCaseValue));
     },
 
     updateMedalVals: (medal, value) => {

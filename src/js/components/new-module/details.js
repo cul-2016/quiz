@@ -3,7 +3,7 @@ import classnames from 'classnames';
 
 const REQUIRED_LENGTH = 4;
 
-const Details = ({ moduleIDExists, isValidatingModuleID, module_id_length, handleCodeInputChange, handleInputChange }) => {
+const Details = ({ module_id, moduleIDExists, isValidatingModuleID, module_id_length, handleCodeInputChange, handleInputChange }) => {
 
     const moduleIDClasses = classnames("input", {
         "is-danger": moduleIDExists === true && !isValidatingModuleID && module_id_length === REQUIRED_LENGTH,
@@ -20,7 +20,7 @@ const Details = ({ moduleIDExists, isValidatingModuleID, module_id_length, handl
     });
 
     return (
-        <div className="section average">
+        <div className="section column">
             <h3>
                 <i className="fa fa-pencil" /> Module name and code</h3>
 
@@ -42,6 +42,7 @@ const Details = ({ moduleIDExists, isValidatingModuleID, module_id_length, handl
 
                 <input
                     className={ moduleIDClasses }
+                    value={ module_id }
                     name="module_id"
                     type="text"
                     maxLength="4"
@@ -54,6 +55,7 @@ const Details = ({ moduleIDExists, isValidatingModuleID, module_id_length, handl
 };
 
 Details.propTypes = {
+    module_id: PropTypes.string,
     moduleIDExists: PropTypes.bool,
     isValidatingModuleID: PropTypes.bool.isRequired,
     module_id_length: PropTypes.number.isRequired,
