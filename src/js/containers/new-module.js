@@ -4,13 +4,14 @@ import NewModule from '../components/new-module/new-module';
 import { store } from '../store';
 import { hashHistory } from 'react-router';
 
-
 const mapStateToProps = (state) => ({
     medals: state.newModule.medals,
     trophies: state.newModule.trophies,
     moduleIDExists: state.newModule.moduleIDExists,
-    module_id_length: state.newModule.module_id.length,
-    isValidatingModuleID: state.newModule.isValidatingModuleID
+    isValidatingModuleID: state.newModule.isValidatingModuleID,
+    module_id: state.newModule.module_id,
+    name: state.newModule.name,
+    username: state.user.username,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -21,12 +22,15 @@ const mapDispatchToProps = (dispatch) => ({
     },
 
     handleCodeInputChange: (inputKey, id) => {
+        const REQUIRED_ID_LENGTH = 4;
+        const upperCaseValue = id.toUpperCase();
 
-        if (id.length === 4) {
+        if (id.length === REQUIRED_ID_LENGTH) {
 
-            dispatch(validateModuleID(id));
+            dispatch(validateModuleID(upperCaseValue));
         }
-        dispatch(updateTextValues(inputKey, id));
+
+        dispatch(updateTextValues(inputKey, upperCaseValue));
     },
 
     updateMedalVals: (medal, value) => {

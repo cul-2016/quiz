@@ -1,47 +1,45 @@
 import React, { PropTypes } from 'react';
 import classnames from 'classnames';
 
-const REQUIRED_LENGTH = 4;
+const REQUIRED_ID_LENGTH = 4;
 
-const Details = ({ moduleIDExists, isValidatingModuleID, module_id_length, handleCodeInputChange, handleInputChange }) => {
+const Details = ({ module_id, moduleIDExists, isValidatingModuleID, module_id_length, handleCodeInputChange, handleInputChange }) => {
 
     const moduleIDClasses = classnames("input", {
-        "is-danger": moduleIDExists === true && !isValidatingModuleID && module_id_length === REQUIRED_LENGTH,
-        "is-success": moduleIDExists === false && !isValidatingModuleID && module_id_length === REQUIRED_LENGTH
+        "is-danger": moduleIDExists === true && !isValidatingModuleID && module_id_length === REQUIRED_ID_LENGTH,
+        "is-success": moduleIDExists === false && !isValidatingModuleID && module_id_length === REQUIRED_ID_LENGTH
     });
 
     const iconClasses = classnames("fa", {
-        "fa-warning": moduleIDExists === true && !isValidatingModuleID && module_id_length === REQUIRED_LENGTH,
-        "fa-check": moduleIDExists === false && !isValidatingModuleID && module_id_length === REQUIRED_LENGTH
+        "fa-warning": moduleIDExists === true && !isValidatingModuleID && module_id_length === REQUIRED_ID_LENGTH,
+        "fa-check": moduleIDExists === false && !isValidatingModuleID && module_id_length === REQUIRED_ID_LENGTH
     });
 
     const moduleIDHelpClasses = classnames("help is-white", {
-        "is-danger": moduleIDExists === true && !isValidatingModuleID && module_id_length === REQUIRED_LENGTH
+        "is-danger": moduleIDExists === true && !isValidatingModuleID && module_id_length === REQUIRED_ID_LENGTH
     });
 
     return (
-        <div className="section average">
+        <div className="section column">
             <h3>
-                <i className="fa fa-pencil" /> Module name and code</h3>
+                <i className="fa fa-pencil" /> Module name and code
+            </h3>
 
             <div className="notification is-info has-text-centered">
-
                 <p>Please choose a <strong>unique</strong> code for your module, <strong>4 characters in length</strong>.</p>
                 <p>Students will use this code to join the module and access quizzes.</p>
             </div>
-
             <label className="label">Module name</label>
             <input
                 className="input"
                 name="name"
                 type="text"
                 onChange={ (e) => handleInputChange('name', e.target.value) } />
-
             <label className="label">Code (4 characters long)</label>
             <p className="control has-icon has-icon-right">
-
                 <input
                     className={ moduleIDClasses }
+                    value={ module_id }
                     name="module_id"
                     type="text"
                     maxLength="4"
@@ -49,11 +47,13 @@ const Details = ({ moduleIDExists, isValidatingModuleID, module_id_length, handl
                 <i className={ iconClasses } />
                 <span className={ moduleIDHelpClasses }> This code already exists.  Please choose another.</span>
             </p>
+
         </div>
     );
 };
 
 Details.propTypes = {
+    module_id: PropTypes.string,
     moduleIDExists: PropTypes.bool,
     isValidatingModuleID: PropTypes.bool.isRequired,
     module_id_length: PropTypes.number.isRequired,

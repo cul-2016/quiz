@@ -1,5 +1,22 @@
 .dashboard {
 
+    p {
+        display: inline;
+        font-size: 1.2em;
+        padding: 0.6em;
+        color: black;
+    }
+    .module{
+        border-bottom: 0.1em $grey-opaque-04 solid;
+        padding: 0.5em;
+        transition: all .3s ease-in-out;
+    }
+
+    .module:hover {
+        background-color: $grey-opaque-01;
+        transform: scale(1.02);
+    }
+
     .module-list-item {
         line-height: 5vh;
     }
@@ -12,5 +29,13 @@
 
     .box {
         max-width: 500px;
+    }
+}
+
+.module-header {
+    padding: 0 0.5em;
+
+    label {
+        padding:0.6em;
     }
 }

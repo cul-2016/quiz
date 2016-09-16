@@ -20,11 +20,20 @@ class Dashboard extends React.Component {
             let role = this.props.is_lecturer ? 'lecturer' : 'student';
 
             return (
-                <div className="box narrow" key={ i }>
+                <div className="column is-8 is-offset-2 dashboard" key={ i }>
                     <Link  to={ `${module.module_id}/${role}` } >
-                        <div key={ i }>
-                            { `${module.module_id}: ${module.name}` }
+                    <div className="columns module">
+                        <div className="column is-3">
+                            <p>{module.module_id}</p>
                         </div>
+                        <div className="column is-7">
+                            <p>{module.name}</p>
+                        </div>
+                        <div className="column is-1">
+                            <i className="fa fa-archive" />
+                        </div>
+
+                    </div>
                     </Link>
                 </div>
             );
@@ -32,10 +41,11 @@ class Dashboard extends React.Component {
         return (
             <div className='dashboard'>
                 <Nav username={ this.props.username } />
+                <h2 className="has-text-centered"> Modules </h2>
                 <div className="container">
                     {
                         this.props.is_lecturer &&
-                            <Link className="column is-2 is-offset-8" to="add-new-module">
+                            <Link className="column is-2 is-offset-9" to="add-new-module">
                                 <button className="button is-primary">
                                     Add a new module
                                 </button>
@@ -49,6 +59,18 @@ class Dashboard extends React.Component {
                                 </button>
                             </Link>
                     }
+                    <div className="column is-8 is-offset-2">
+                        <div className="columns module-header">
+                            <div className="column is-3">
+                                <label className="label">ID</label>
+                            </div>
+                            <div className="column is-7">
+                                <label className="label">Name</label>
+                            </div>
+                            <div className="column is-1">
+                            </div>
+                        </div>
+                    </div>
                     <div>
                         { lecturerModules }
                     </div>

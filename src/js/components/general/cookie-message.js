@@ -15,7 +15,12 @@ const CookieMessage = ({ isCookieAccepted, handleCookieMessage }) => {
                         <p>
                             This app relies on cookies to work. Please make sure you have cookies enabled.
                         </p>
-                        <button onClick={ handleCookieMessage } className="button has-text-centered"><i className="fa fa-times" /></button>
+                        <button onClick={ handleCookieMessage } className="button has-text-centered">
+                            <span className="icon">
+                                <i className="fa fa-times" />
+                            </span>
+                            <span> close </span>
+                        </button>
                     </div>
                 </div>
             </section>

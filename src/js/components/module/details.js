@@ -7,17 +7,19 @@ const Details = ({ name, module_id, num_enrolled, trophies, medals }) => {
 
     return (
         <div>
-            <div className="section has-text-centered">
+            <div className="has-text-centered">
 
-                <h2>{ name }</h2>
-                <h5>{ module_id }</h5>
+                <h1>{ name }</h1>
+                <h4>{ module_id }</h4>
                 <Link to={ `${module_id}/members` }>
                 <h5><i className="fa fa-users" /> { `${+num_enrolled} students have registered` }</h5>
                 </Link>
             </div>
 
-            <Trophies trophies={ trophies } />
-            <Medals medals={ medals } />
+            <div className="columns">
+                <Trophies trophies={ trophies } />
+                <Medals medals={ medals } />
+            </div>
         </div>
     );
 };

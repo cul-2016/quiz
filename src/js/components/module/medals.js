@@ -6,7 +6,7 @@ import normaliseText from '../../lib/normaliseText';
 const Medals = ({ medals }) => {
 
     return (
-            <div className="section">
+            <div className="section column">
                 <h4>Medals</h4>
                 <div className="columns has-text-centered">
 

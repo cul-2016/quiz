@@ -2,7 +2,7 @@
 import io from 'socket.io-client';
 import { store } from './store';
 import { hashHistory } from 'react-router';
-import { openQuiz } from './actions/module';
+import { openQuiz, closeQuiz } from './actions/module';
 import { setQuizDetails, startQuiz, endQuiz, setNextQuestion, updateNumParticipants } from './actions/live-quiz';
 
 let uri = process.env.DEVELOPMENT ? `${location.protocol}//${location.hostname}:9000` : '';
@@ -47,6 +47,7 @@ socketClient.on('receive_end_of_quiz', (quiz_id) => {
     const module_id = store.getState().module.module_id;
     console.log('received end of quiz notification', quiz_id);
     store.dispatch(endQuiz());
+    store.dispatch(closeQuiz());
     hashHistory.push(`${module_id}/${quiz_id}/result`);
 });
 

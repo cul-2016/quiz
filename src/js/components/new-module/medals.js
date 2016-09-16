@@ -2,16 +2,13 @@ import React, { PropTypes } from 'react';
 
 const Medals = ({ applyOffset, updateMedalVals, medals }) => {
     return (
-        <div className="new-module-medals section">
+        <div className="section column">
 
             <h3>
                 <i className="fa fa-shield" /> Medals
             </h3>
-
             <div className="columns">
-
                 <div className="column box has-text-centered">
-
                     <label className="label">Bronze</label>
                     <span className="label-inline">0 to </span>
                     <input
@@ -22,15 +19,17 @@ const Medals = ({ applyOffset, updateMedalVals, medals }) => {
                         onChange={ (e) => updateMedalVals('bronze', e.target.value) } />
                     <span className="label-inline">%</span>
                 </div>
+            </div>
 
+            <div className="columns">
                 <div className="column box has-text-centered">
-
                     <label className="label">Silver</label>
                     <span className="inline">{ `${medals[0]} to ${medals[1]} %` }</span>
                 </div>
+            </div>
 
+            <div className="columns">
                 <div className="column box has-text-centered">
-
                     <label className="label">Gold</label>
                     <input
                         name="gold"
