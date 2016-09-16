@@ -1,4 +1,5 @@
 'use strict';
+const webpack = require('webpack');
 
 module.exports = {
     entry: "./src/js/index.js",
@@ -19,7 +20,7 @@ module.exports = {
             },
             {
                 test: /\.(ttf|eot|svg|png)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-                loader: "file-loader?name=[path][name].[hash].[ext]"
+                loader: "file-loader?name=[name].[hash].[ext]"
             },
             {
                 test: /\.s?css$/,
@@ -32,5 +33,12 @@ module.exports = {
                 loader: "json-loader"
             }
         ]
-    }
+    },
+    plugins: [
+        new webpack.DefinePlugin({
+            "process.env": {
+                NODE_ENV: JSON.stringify("production")
+            }
+        })
+    ]
 };
