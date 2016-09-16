@@ -54,13 +54,18 @@ export function module (state = initialState, action ) {
             });
         }
         if (action.is_lecturer == false) {
-            
+
             return update(state, {
                 isFetchingModule: { $set: false },
                 module_id: { $set: action.data.module_id },
                 name: { $set: action.data.name },
                 medals: { $set: action.data.medals },
                 trophies_awarded: { $set: action.data.trophies_awarded }
+            });
+        }
+        if (action.is_test) {
+            return update(state, {
+                trophies_awarded: { $set: action.data }
             });
         }
 

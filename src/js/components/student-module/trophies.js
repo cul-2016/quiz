@@ -9,14 +9,14 @@ const Trophies = ({ trophies, trophies_awarded }) => {
 
     let mappedTrophies = trophies.map((name, i) => {
 
-        let trophyClasses = classnames("fa fa-trophy", {
-            "awarded": trophies_awarded[name]
+        let trophyClasses = classnames("trophy", {
+            "not-awarded": trophies_awarded[name] === false
         });
 
         return (
             <div className="box column has-text-centered" key={ i }>
                 <div className="label">{ normaliseText(name) }</div>
-                <i className={ trophyClasses } />
+                <div className={ trophyClasses } />
             </div>
         );
     });

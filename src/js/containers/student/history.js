@@ -3,7 +3,8 @@ import History from '../../components/student-module/history';
 
 
 const mapStateToProps = (state) => ({
-    history: state.studentHistory.history
+    history: state.studentHistory.history,
+    medalConditions: state.module.medals.condition
 });
 
 
