@@ -38,7 +38,7 @@ const QuizMembers = ({ members, isFetchingQuizMembers, username, questions, para
             !isFetchingQuizMembers && members &&
             <div>
                 <Nav username={ username } />
-                <QuizReviewQuestions questions = { !questions ? [] : questions }/>
+                <QuizReviewQuestions questions = { questions }/>
                 <div>
                     <h2 className="has-text-centered"> Quiz Members </h2>
                     <div className="column is-8 is-offset-2">

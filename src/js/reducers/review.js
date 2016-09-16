@@ -4,7 +4,7 @@ import * as actionsTypes from '../actions/review';
 const initialState = {
     error: undefined,
     isFetchingReview: false,
-    questions: undefined,
+    questions: [],
     currentQuizIndex: 0,
     isAnswerShowing: false,
 };

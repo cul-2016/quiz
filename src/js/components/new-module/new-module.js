@@ -4,8 +4,9 @@ import Medals from './medals';
 import Trophies from './trophies';
 import Nav from '../general/nav';
 import classnames from 'classnames';
+import validateForm from '../../lib/validateForm';
 
-const NewModule = ({ module_id_length, isValidatingModuleID, moduleIDExists,
+const NewModule = ({ isValidatingModuleID, moduleIDExists,
                      medals, trophies, updateMedalVals, updateTrophyVals,
                      handleInputChange, handleCodeInputChange, submit,
                      module_id, username, name }) => {
@@ -17,7 +18,7 @@ const NewModule = ({ module_id_length, isValidatingModuleID, moduleIDExists,
     }
 
     let validationClasses = classnames("button is-success has-text-centered", {
-        "is-disabled": !name || module_id_length !== 4 || moduleIDExists ||  medals[0] === '-' || !medals[1] === '-' || !trophies.condition[0] || !trophies.condition[1] || !trophies.condition[2] || !trophies.condition[3]
+        "is-disabled": validateForm(name, module_id, moduleIDExists, medals, trophies)
     });
 
 
@@ -30,7 +31,7 @@ const NewModule = ({ module_id_length, isValidatingModuleID, moduleIDExists,
                         <Details module_id={ module_id }
                                  moduleIDExists={ moduleIDExists }
                                  isValidatingModuleID={ isValidatingModuleID }
-                                 module_id_length={ module_id_length }
+                                 module_id_length={ module_id.length }
                                  handleCodeInputChange={ handleCodeInputChange }
                                  handleInputChange={ handleInputChange } />
                         <Medals medals={ medals }
@@ -54,7 +55,6 @@ const NewModule = ({ module_id_length, isValidatingModuleID, moduleIDExists,
 NewModule.propTypes = {
     moduleIDExists: PropTypes.bool,
     isValidatingModuleID: PropTypes.bool.isRequired,
-    module_id_length: PropTypes.number.isRequired,
     medals: PropTypes.array.isRequired,
     trophies: PropTypes.object.isRequired,
     updateMedalVals: PropTypes.func.isRequired,
