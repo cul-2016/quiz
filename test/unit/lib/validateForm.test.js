@@ -23,7 +23,7 @@ test('`validateForm` returns false when all information is present and valid', (
     t.equal(result, false);
 });
 
-test('`validateForm` returns true when modileIDExists is true', (t) => {
+test('`validateForm` returns true when moduleIDExists is true', (t) => {
 
     t.plan(1);
     const name = "test quiz",

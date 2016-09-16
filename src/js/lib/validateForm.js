@@ -1,7 +1,10 @@
 /**
  * Validates the form and returns true if everything has been validated, else returns false
- * Returns an object containing the next question (object) and the socket room name (string).
- * @param {object} - store - the redux store
+ * @param {string} - name - the name of the module
+ * @param {string} - module_id - the id for the given module
+ * @param {boolean} - moduleIDExists - boolean value to check whether the module_id exists in the db already
+ * @param {array} - medals - conditions for the medals in the module
+ * @param {object} - trophies - trophy names and conditions for each trophy 
  */
 
 export default function validateForm (name, module_id, moduleIDExists, medals, trophies) {
