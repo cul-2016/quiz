@@ -7,7 +7,6 @@ const EditQuiz = ({ members, params, handleUpdateScore, handleEditScore }) => {
     let module_id = params.module_id;
     let user_id = members[member_key].user_id;
     let score = members[member_key].score;
-
     return (
         <section className="hero is-primary is-fullheight">
             <div className="hero-body">

@@ -15,7 +15,7 @@ const Trophies = ({ trophies }) => {
     });
 
     return (
-        <div className="section">
+        <div className="section column">
             <h4>Trophies</h4>
             <div className="columns">
 

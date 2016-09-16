@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import App from '../components/app';
 import { toggleCookieMessage, clearError } from '../actions/user';
-import { hashHistory } from 'react-router';
+
 
 const mapStateToProps = (state) => ({
     userState: state.user,
@@ -18,7 +18,6 @@ const mapDispatchToProps = (dispatch) => ({
     handleErrorClearance: (reducerState) => {
 
         dispatch(clearError(reducerState));
-        hashHistory.push('/');
     }
 });
 const AppContainer = connect(mapStateToProps, mapDispatchToProps)(App);

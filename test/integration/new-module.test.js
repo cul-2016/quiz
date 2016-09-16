@@ -26,6 +26,10 @@ function handleInputChange (inputKey, value) {
     store.dispatch(updateTextValues(inputKey, value));
 }
 
+function handleCodeInputChange (inputKey, id) {
+    store.dispatch(updateTextValues(inputKey, id));
+}
+
 function submit () {
 
     // data validation should happen here
@@ -51,8 +55,12 @@ test('When lecturer adjusts bronze medal threshold, medal ranges update correctl
     t.plan(1);
 
     const page = renderIntoDocument(<div><NewModule medals={ store.getState().newModule.medals }
+                                                    isValidatingModuleID={ store.getState().newModule.isValidatingModuleID }
+                                                    name={ store.getState().newModule.name }
+                                                    module_id={ store.getState().newModule.module_id }
                                                     submit={ submit }
                                                     handleInputChange={ handleInputChange }
+                                                    handleCodeInputChange={ handleCodeInputChange }
                                                     updateTrophyVals={ updateTrophyVals }
                                                     updateMedalVals={ updateMedalVals }
                                                     trophies={ store.getState().newModule.trophies } /></div> );
@@ -71,6 +79,13 @@ test('When lecturer adjusts gold medal threshold, medal ranges update correctly'
     t.plan(1);
 
     const page = renderIntoDocument(<div><NewModule medals={ store.getState().newModule.medals }
+                                                    isValidatingModuleID={ store.getState().newModule.isValidatingModuleID }
+                                                    name={ store.getState().newModule.name }
+                                                    module_id={ store.getState().newModule.module_id }
+                                                    submit={ submit }
+
+                                                    handleInputChange={ handleInputChange }
+                                                    handleCodeInputChange={ handleCodeInputChange }
                                                     updateTrophyVals={ updateTrophyVals }
                                                     updateMedalVals={ updateMedalVals }
                                                     trophies={ store.getState().newModule.trophies } /></div> );
