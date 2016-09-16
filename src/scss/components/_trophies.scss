@@ -6,3 +6,15 @@
         color: $gold;
     }
 }
+
+.trophy {
+    background-image: url("../../public/trophy.png");
+    width: 130px;
+    height: 130px;
+    background-repeat: no-repeat;
+    margin: 0 auto;
+
+    &.not-awarded {
+        background-image: url("../../public/trophy-not-awarded.png");
+    }
+}
