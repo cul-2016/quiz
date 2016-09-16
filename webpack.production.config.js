@@ -20,7 +20,7 @@ module.exports = {
             },
             {
                 test: /\.(ttf|eot|svg|png)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-                loader: "file-loader?name=[name].[hash].[ext]"
+                loader: "file-loader?name=[name].[hash].[ext]" //http://survivejs.com/webpack/loading-assets/loading-images/
             },
             {
                 test: /\.s?css$/,
