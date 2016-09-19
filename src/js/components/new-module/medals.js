@@ -1,49 +1,82 @@
 import React, { PropTypes } from 'react';
+import classnames from 'classnames';
+import text from '../../lib/newModuleRollovers.json';
 
-const Medals = ({ applyOffset, updateMedalVals, medals }) => {
-    return (
-        <div className="section column">
+class Medals extends React.Component {
 
-            <h3>
-                <i className="fa fa-shield" /> Medals
-            </h3>
-            <div className="columns">
-                <div className="column box has-text-centered">
-                    <label className="label">Bronze</label>
-                    <span className="label-inline">0 to </span>
-                    <input
-                        name="bronze"
-                        type="number"
-                        min="1" max="96"
-                        defaultValue={ applyOffset(medals[0], -1) }
-                        onChange={ (e) => updateMedalVals('bronze', e.target.value) } />
-                    <span className="label-inline">%</span>
+    constructor (props) {
+        super(props);
+        this.state = {
+            medals: false,
+        };
+    }
+
+    toggleRollover (text) {
+        if (text === "medals") {
+            this.setState({
+                medals: !this.state.medals
+            });
+        }
+    }
+
+    render () {
+
+        const toggleClassnamesMedals = classnames("notification container average is-info has-text-centered ", {
+            "display-none": !this.state.medals
+        });
+
+        return (
+            <div className="section column">
+
+                <h3 className="module-section-headers">
+                    <i className="fa fa-shield" /> Medals
+                </h3>
+                <i onClick={ () => { this.toggleRollover("medals");} } className="fa fa-question-circle help-icon" />
+
+                <div className={ toggleClassnamesMedals }>
+                    <p>
+                        { text.medals }
+                    </p>
                 </div>
-            </div>
 
-            <div className="columns">
-                <div className="column box has-text-centered">
-                    <label className="label">Silver</label>
-                    <span className="inline">{ `${medals[0]} to ${medals[1]} %` }</span>
+                <div className="columns">
+                    <div className="column box has-text-centered">
+                        <label className="label">Bronze</label>
+                        <span className="label-inline">0 to </span>
+                        <input
+                            name="bronze"
+                            type="number"
+                            min="1" max="96"
+                            defaultValue={ this.props.applyOffset(this.props.medals[0], -1) }
+                            onChange={ (e) => this.props.updateMedalVals('bronze', e.target.value) } />
+                        <span className="label-inline">%</span>
+                    </div>
                 </div>
-            </div>
 
-            <div className="columns">
-                <div className="column box has-text-centered">
-                    <label className="label">Gold</label>
-                    <input
-                        name="gold"
-                        type="number"
-                        min="4" max="99"
-                        defaultValue={ applyOffset(medals[1], 1) }
-                        onChange={ (e) => updateMedalVals('gold', e.target.value) } />
-                    <span className="label-inline"> to 100%</span>
+                <div className="columns">
+                    <div className="column box has-text-centered">
+                        <label className="label">Silver</label>
+                        <span className="inline">{ `${this.props.medals[0]} to ${this.props.medals[1]} %` }</span>
+                    </div>
                 </div>
-            </div>
 
-        </div>
-    );
-};
+                <div className="columns">
+                    <div className="column box has-text-centered">
+                        <label className="label">Gold</label>
+                        <input
+                            name="gold"
+                            type="number"
+                            min="4" max="99"
+                            defaultValue={ this.props.applyOffset(this.props.medals[1], 1) }
+                            onChange={ (e) => this.props.updateMedalVals('gold', e.target.value) } />
+                        <span className="label-inline"> to 100%</span>
+                    </div>
+                </div>
+
+            </div>
+        );
+    }
+}
 
 Medals.propTypes = {
     applyOffset: PropTypes.func.isRequired,

@@ -9,3 +9,14 @@
     }
 
 }
+
+.module-section-headers {
+    display: inline-block;
+    margin-bottom: 1em;
+    margin-right: 0.2em;
+}
+
+.help-icon:hover {
+    color: $dark-blue;
+    cursor: pointer;
+}

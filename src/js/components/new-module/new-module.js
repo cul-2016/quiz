@@ -1,10 +1,12 @@
 import React, { PropTypes } from 'react';
+import classnames from 'classnames';
 import Details from './details';
 import Medals from './medals';
 import Trophies from './trophies';
 import Nav from '../general/nav';
-import classnames from 'classnames';
 import validateForm from '../../lib/validateForm';
+import text from '../../lib/newModuleRollovers.json';
+
 
 const NewModule = ({ isValidatingModuleID, moduleIDExists,
                      medals, trophies, updateMedalVals, updateTrophyVals,
@@ -27,6 +29,10 @@ const NewModule = ({ isValidatingModuleID, moduleIDExists,
                 <Nav username={ username } />
                 <div className="new-module container">
                     <h2 className="has-text-centered"> Add a new module </h2>
+
+                    <div className="notification container average is-info has-text-centered">
+                        <p> { text.newModule } </p>
+                    </div>
                     <div className="columns">
                         <Details module_id={ module_id }
                                  moduleIDExists={ moduleIDExists }
