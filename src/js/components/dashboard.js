@@ -20,30 +20,25 @@ class Dashboard extends React.Component {
             let role = this.props.is_lecturer ? 'lecturer' : 'student';
 
             return (
-                <div className="dashboard" key={ i }>
-                    <Link  to={ `${module.module_id}/${role}` } >
-                        <div className="module box">
-                            <div className="">
-                                <p>{module.module_id}</p>
-                            </div>
-                            <div className="">
-                                <p>{module.name}</p>
-                            </div>
-                            <div className="">
-                                <i className="fa fa-archive" />
-                            </div>
-                        </div>
-                    </Link>
-                </div>
+                <Link key={ i } to={ `${module.module_id}/${role}` } >
+                    <li className="box level is-mobile">
+                        <label className="level-item">
+                            { module.name }
+                        </label>
+                        <label className="level-item has-text-centered">
+                            <strong>{ module.module_id }</strong>
+                        </label>
+                    </li>
+                </Link>
             );
         });
         return (
-            <div className='dashboard'>
-                <div className="container">
+            <div className="container">
+                <div className="dashboard">
                     <h2 className="has-text-centered"> Modules </h2>
                     {
                         this.props.is_lecturer &&
-                            <Link className="column is-2 is-offset-9" to="add-new-module">
+                            <Link to="add-new-module">
                                 <button className="button is-primary">
                                     Add a new module
                                 </button>
@@ -51,14 +46,15 @@ class Dashboard extends React.Component {
                     }
                     {
                         !this.props.is_lecturer &&
-                            <Link className="column is-2 is-offset-8" to="join-module">
+                            <Link to="join-module">
                                 <button className="button is-primary is-medium">
                                     Join a module
                                 </button>
                             </Link>
                     }
-                    { moduleList }
-
+                    <ul>
+                        { moduleList }
+                    </ul>
                 </div>
             </div>
         );

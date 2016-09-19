@@ -3,32 +3,34 @@
     p {
         display: inline;
         font-size: 1.2em;
-        padding: 0.6em;
         color: black;
     }
-    .module{
-        border-bottom: 0.1em $grey-opaque-04 solid;
-        padding: 0.5em;
+    ul {
+        margin: 0;
+    }
+    li.box {
+        // margin: 0 auto;
+        // border-bottom: 0.1em $grey-opaque-04 solid;
+        // padding: 0.5em;
         transition: all .3s ease-in-out;
+        // max-width: 500px;
+
+        line-height: 50px;
     }
 
-    .module:hover {
+    a {
+        max-width: 500px;
+    }
+
+    li.box:hover {
         background-color: $grey-opaque-01;
         transform: scale(1.02);
-    }
-
-    .module-list-item {
-        line-height: 5vh;
     }
 
     button {
         position: relative;
         left: 0;
         margin-bottom: 20px;
-    }
-
-    .box {
-        max-width: 500px;
     }
 }
 

@@ -318,11 +318,12 @@ table th {
 
 .container {
   position: relative;
+  margin: 0 20px; /* mina */
 }
 
 @media screen and (min-width: 980px) {
   .container {
-    margin: 0 auto;
+    margin: 0 20px;
     max-width: 960px;
   }
   .container.is-fluid {
