@@ -4,7 +4,7 @@ import { toggleCookieMessage, clearError } from '../actions/user';
 
 
 const mapStateToProps = (state) => ({
-    userState: state.user,
+    username: state.user.username,
     isCookieAccepted: state.user.isCookieAccepted,
     error: state.dashboard.error || state.joinModule.error || state.leaderboard.error || state.liveQuiz.error || state.login.error || state.module.error || state.newModule.error || state.newQuiz.error || state.quizMembers.error || state.register.error || state.result.error || state.review.error || state.user.error
 });

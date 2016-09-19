@@ -1,8 +1,8 @@
-import React, { PropTypes } from 'react'; //eslint-disable-line no-unused-vars
+import React, { PropTypes } from 'react';
 import Spinner from '../general/spinner';
-import Nav from '../general/nav';
 
-const Members = ({ members, isFetchingMembers, isRemovingMember, username, handleRemovingMember, location }) => {
+
+const Members = ({ members, isFetchingMembers, isRemovingMember, handleRemovingMember, location }) => {
 
     let module_id = location.pathname.split('/')[1];
     let mappedUsers = members.map((member, i) => {
@@ -29,11 +29,8 @@ const Members = ({ members, isFetchingMembers, isRemovingMember, username, handl
         {
             !isFetchingMembers && members &&
             <div>
-                <Nav username={ username } />
-                <div>
-                    <h2 className="has-text-centered"> Users </h2>
-                    { mappedUsers }
-                </div>
+                <h2 className="has-text-centered"> Users </h2>
+                { mappedUsers }
             </div>
 
         }
@@ -45,7 +42,6 @@ Members.propTypes = {
     members: PropTypes.array,
     isFetchingMembers: PropTypes.bool.isRequired,
     isRemovingMember: PropTypes.bool.isRequired,
-    username: PropTypes.string,
     handleRemovingMember: PropTypes.func.isRequired,
     location: PropTypes.object.isRequired
 };

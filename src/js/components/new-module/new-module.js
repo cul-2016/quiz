@@ -2,14 +2,13 @@ import React, { PropTypes } from 'react';
 import Details from './details';
 import Medals from './medals';
 import Trophies from './trophies';
-import Nav from '../general/nav';
 import classnames from 'classnames';
 import validateForm from '../../lib/validateForm';
 
 const NewModule = ({ isValidatingModuleID, moduleIDExists,
                      medals, trophies, updateMedalVals, updateTrophyVals,
                      handleInputChange, handleCodeInputChange, submit,
-                     module_id, username, name }) => {
+                     module_id, name }) => {
 
 
     function applyOffset (originalValue, offset) {
@@ -24,7 +23,6 @@ const NewModule = ({ isValidatingModuleID, moduleIDExists,
 
     return (
             <div>
-                <Nav username={ username } />
                 <div className="new-module container">
                     <h2 className="has-text-centered"> Add a new module </h2>
                     <div className="columns">
@@ -63,7 +61,6 @@ NewModule.propTypes = {
     handleCodeInputChange: PropTypes.func.isRequired,
     submit: PropTypes.func.isRequired,
     module_id: PropTypes.string,
-    username: PropTypes.string,
     name: PropTypes.string.isRequired
 };
 

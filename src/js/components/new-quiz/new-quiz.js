@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
 import Questions from './questions';
-import Nav from '../general/nav';
 import classnames from 'classnames';
 
-const NewQuiz = ({ newQuiz, handleAddQuestion, handleDeleteQuestion, handleInputChange, handleQuizNameChange, handleSaveQuiz, handleIsLastQuiz, location, username }) => {
+
+const NewQuiz = ({ newQuiz, handleAddQuestion, handleDeleteQuestion, handleInputChange, handleQuizNameChange, handleSaveQuiz, handleIsLastQuiz, location }) => {
 
     const questionsValidation = newQuiz.questions.map((question) => {
         if (!question.question || !question.a || !question.b || !question.correct_answer){
@@ -25,7 +25,6 @@ const NewQuiz = ({ newQuiz, handleAddQuestion, handleDeleteQuestion, handleInput
 
     return (
             <div>
-                <Nav username={ username } />
                 <div className="columns">
                     <div className="column is-5 is-offset-3 has-text-centered">
                         <label className="label">
@@ -80,8 +79,7 @@ NewQuiz.propTypes = {
     handleQuizNameChange: PropTypes.func.isRequired,
     handleSaveQuiz: PropTypes.func.isRequired,
     handleIsLastQuiz: PropTypes.func.isRequired,
-    location: PropTypes.object.isRequired,
-    username: PropTypes.string
+    location: PropTypes.object.isRequired
 };
 
 

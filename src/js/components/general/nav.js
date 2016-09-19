@@ -4,17 +4,25 @@ import classnames from 'classnames';
 import logout from '../../lib/logout';
 
 
-const Nav = ({ username }) => {
+const hideNav = (path) => {
+    return path === "/" || path.match(/live|holding-page|result|review/);
+};
+
+const Nav = ({ location, username }) => {
+
+    let navClasses = classnames("nav has-shadow", {
+        "display-none": hideNav(location.pathname)
+    });
 
     let dashboardClasses = classnames("nav-item is-hidden-mobile", {
-        "is-active": window.location.hash.indexOf("dashboard") > -1
+        "is-active": window.location.hash.indexOf("dashboard") > -1,
     });
 
     return (
-        <nav className="nav has-shadow">
+        <nav className={ navClasses }>
             <div className="nav-left">
                 <p className="nav-item is-brand">
-                    <strong>Welcome,&ensp;</strong>{ username || 'lecturer'}
+                    <strong>Welcome,&ensp;</strong>{ username || 'lecturer' }
                 </p>
             </div>
 
@@ -45,7 +53,8 @@ const Nav = ({ username }) => {
 };
 
 Nav.propTypes = {
-    username: PropTypes.string
+    username: PropTypes.string,
+    location: PropTypes.object
 };
 
 export default Nav;
