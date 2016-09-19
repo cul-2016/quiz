@@ -22,12 +22,18 @@ class Dashboard extends React.Component {
             return (
                 <Link key={ i } to={ `${module.module_id}/${role}` } >
                     <li className="box level is-mobile">
-                        <label className="level-item">
-                            { module.name }
-                        </label>
-                        <label className="level-item has-text-centered">
-                            <strong>{ module.module_id }</strong>
-                        </label>
+                        <div className="level-left">
+
+                            <label className="level-item">
+                                { module.name }
+                            </label>
+                        </div>
+                        <div className="level-right">
+
+                            <label className="level-item has-text-centered">
+                                <strong>{ module.module_id }</strong>
+                            </label>
+                        </div>
                     </li>
                 </Link>
             );
