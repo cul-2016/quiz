@@ -1,5 +1,6 @@
 import test from 'tape';
-import { liveQuiz as liveQuizState, liveQuizError as error  } from '../../utils/reducer-fixtures';
+import { liveQuiz as liveQuizState } from '../../utils/reducer-fixtures';
+import { liveQuizError as error, abortQuizError, endQuizError } from '../../utils/action-fixtures';
 import reducer from '../../../src/js/reducers/live-quiz';
 import { nextQuestion, liveQuizQuestion as questions } from '../../utils/data-fixtures';
 import deepFreeze from '../../utils/deepFreeze';
@@ -268,6 +269,106 @@ test('UPDATE_NUM_PARTICIPANTS works', (t) => {
     };
     const actual = reducer(initialState, action);
     const expected = Object.assign({}, liveQuizState, { numParticipants });
+
+    t.deepEqual(actual, expected);
+});
+
+//
+// END QUIZ
+//
+
+test('END_QUIZ_REQUEST works', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(liveQuizState);
+    const action = {
+        type: 'END_QUIZ_REQUEST',
+    };
+
+    const actual = reducer(initialState, action);
+    const expected = Object.assign({}, liveQuizState, { isEndingQuiz: true });
+
+    t.deepEqual(actual, expected);
+});
+
+test('END_QUIZ_SUCCESS works', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(liveQuizState);
+    const action = {
+        type: 'END_QUIZ_SUCCESS',
+    };
+
+    const actual = reducer(initialState, action);
+    const expected = Object.assign({}, liveQuizState);
+
+    t.deepEqual(actual, expected);
+});
+
+test('END_QUIZ_FAILURE works', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(liveQuizState);
+    const action = {
+        type: 'END_QUIZ_FAILURE',
+        error: endQuizError
+    };
+
+    const actual = reducer(initialState, action);
+    const expected = Object.assign({}, liveQuizState, { error: endQuizError });
+
+    t.deepEqual(actual, expected);
+});
+
+//
+// ABORT QUIZ
+//
+
+test('ABORT_QUIZ_REQUEST works', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(liveQuizState);
+    const action = {
+        type: 'ABORT_QUIZ_REQUEST',
+    };
+
+    const actual = reducer(initialState, action);
+    const expected = Object.assign({}, liveQuizState, { isAbortingQuiz: true });
+
+    t.deepEqual(actual, expected);
+});
+
+test('ABORT_QUIZ_SUCCESS works', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(liveQuizState);
+    const action = {
+        type: 'ABORT_QUIZ_SUCCESS',
+    };
+
+    const actual = reducer(initialState, action);
+    const expected = Object.assign({}, liveQuizState);
+
+    t.deepEqual(actual, expected);
+});
+
+test('ABORT_QUIZ_FAILURE works', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(liveQuizState);
+    const action = {
+        type: 'ABORT_QUIZ_FAILURE',
+        error: abortQuizError
+    };
+
+    const actual = reducer(initialState, action);
+    const expected = Object.assign({}, liveQuizState, { error: abortQuizError });
 
     t.deepEqual(actual, expected);
 });

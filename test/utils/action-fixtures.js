@@ -20,3 +20,5 @@ export const getQuizDetailsData = new Error('Failed to get quiz details');
 export const getLeaderboardError = new Error('Failed to get leaderboard');
 export const getFeedbackError = new Error('Failed to get feedback');
 export const genericError = new Error('A generic error occurred');
+export const abortQuizError = new Error('Failed to Abort the Quiz');
+export const liveQuizError = new Error('Failed to load live Quiz');
