@@ -3,7 +3,7 @@ import Spinner from '../general/spinner';
 import Modal from '../general/modal';
 
 
-class Members extends Component { //eslint-disable-line no-unused-vars
+class Members extends Component {
 
     constructor (props) {
         super(props);
@@ -15,16 +15,16 @@ class Members extends Component { //eslint-disable-line no-unused-vars
     }
 
     showQuizHistory (user_id, module_id) {
+
         this.props.getStudentHistory(user_id, module_id);
-        console.log("something is happening");
         this.setState({
             isModalVisible: true
         });
     }
 
     hideQuizHistory () {
+
         this.props.clearStudentHistory();
-        console.log("hiding");
         this.setState({
             isModalVisible: false
         });
@@ -34,7 +34,7 @@ class Members extends Component { //eslint-disable-line no-unused-vars
 
         let { members, name, isFetchingMembers, isRemovingMember, handleRemovingMember, location, history, medalConditions } = this.props; //eslint-disable-line no-unused-vars
 
-        let module_id = location.pathname.split('/')[1];//eslint-disable-line no-unused-vars
+        let module_id = location.pathname.split('/')[1];
 
         let mappedMembers = members.map((member, i) => {
 
@@ -46,7 +46,7 @@ class Members extends Component { //eslint-disable-line no-unused-vars
                     <td title="Quiz history" className="is-icon" onClick={ () => this.showQuizHistory(member.user_id, module_id) }>
                         <i className="fa fa-list-ol"/>
                     </td>
-                    <td title="Delete student" className="is-icon">
+                    <td title="Delete student" className="is-icon" onClick={ () => this.handleRemovingMember(member.user_id, module_id) }>
                         <i className="fa fa-user-times" />
                     </td>
                 </tr>
@@ -85,15 +85,6 @@ class Members extends Component { //eslint-disable-line no-unused-vars
         );
     }
 }
-
-/*
-<button className="button is-danger" onClick={ () => handleRemovingMember(module_id, member.user_id) }>
-    <span className="icon">
-        <i className="fa fa-times" />
-    </span>
-    <span>Remove User</span>
-</button>
-*/
 
 Members.propTypes = {
     members: PropTypes.array,
