@@ -8,7 +8,8 @@ test('`getModuleList` gets list of modules for a lecturer', (t) => {
     const expectedRows = [
         { module_id: 'TEST', name: 'test module' },
         { module_id: 'PSY1', name: 'Intro to Psychology' },
-        { module_id: 'CENT', name: 'Percentile' }
+        { module_id: 'CENT', name: 'Percentile' },
+        { module_id: 'FAC8', name: 'FAC8' }
     ];
     const user_id = 2;
 
