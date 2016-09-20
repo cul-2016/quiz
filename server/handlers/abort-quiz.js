@@ -8,10 +8,15 @@ module.exports = {
 
         var quiz_id = parseInt(request.query.quiz_id);
 
-        deleteResponses(client, quiz_id, (error, result) => {
+        if (quiz_id !== undefined) {
 
-            var verdict = error || result;
-            reply(verdict);
-        });
+            deleteResponses(client, quiz_id, (error, result) => {
+
+                var verdict = error || result;
+                reply(verdict);
+            });
+        } else {
+            reply(new Error('quiz_id is not defined'));
+        }
     }
 };

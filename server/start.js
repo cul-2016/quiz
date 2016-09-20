@@ -64,8 +64,8 @@ io.on('connection', (socket) => {
         var quiz_id = data.quiz_id;
         socket.broadcast.to(room).emit('receive_abort_quiz', quiz_id);
 
-        console.log('abortion of quiz sent'); //eslint-disable-line no-console
-        cb('abortion of sent');
+        console.log('quiz has been aborted'); //eslint-disable-line no-console
+        cb('quiz has been aborted');
     });
 
     socket.on('leave_room', (cb) => {

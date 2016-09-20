@@ -19,8 +19,17 @@ test('`abort-quiz` endpoint works', (t) => {
     });
 });
 
+test('`abort-quiz` endpoint returns error if quiz_id is undefined', (t) => {
 
-test('`abort-quiz` adding the response back to the db that has been deleted', (t) => {
+    t.plan(1);
+
+    server.inject('/abort-quiz', (response) => {
+        t.equal(response.statusCode, 500, '500 status code');
+    });
+});
+
+
+test('---- adding the response back to the db that has been deleted ------', (t) => {
 
     testClient.connect((error, client, done) => {
         if (error) {
