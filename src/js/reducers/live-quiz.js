@@ -13,6 +13,8 @@ const initialState = {
     response: undefined,
     nextQuestionIndex: 0,
     isQuizStarted: false,
+    isEndingQuiz: false,
+    isAbortingQuiz: false,
     interval_id: undefined,
     numParticipants: 0
 };
@@ -81,6 +83,22 @@ export default function liveQuiz (state = initialState, action) {
             isEndingQuiz: { $set: false },
             error: { $set: action.error }
         });
+
+    case actionsTypes.ABORT_QUIZ_REQUEST:
+        return update(state, {
+            isAbortingQuiz: { $set: true }
+        });
+
+    case actionsTypes.ABORT_QUIZ_SUCCESS:
+        return initialState;
+
+    case actionsTypes.ABORT_QUIZ_FAILURE:
+        return update(state, {
+            isAbortingQuiz: { $set: false },
+            error: { $set: action.error }
+        });
+
+
 
     case actionsTypes.SET_INTERVAL_ID:
         return update(state, {

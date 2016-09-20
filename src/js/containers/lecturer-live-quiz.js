@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { hashHistory } from 'react-router';
 import LiveQuiz from '../components/live-quiz/live-quiz';
 import { store } from '../store';
-import { startQuiz, endQuiz, goToNextQuestion } from '../actions/live-quiz';
+import { startQuiz, endQuiz, goToNextQuestion, abortQuiz } from '../actions/live-quiz';
 import { socketClient } from '../socket';
 import { getNextQuestion } from '../lib/getNextQuestion';
 import { emitSendNextQuestion } from '../lib/emitSendNextQuestion';
@@ -56,6 +56,22 @@ const mapDispatchToProps = (dispatch) => ({
             dispatch(endQuiz(quiz_id));
             hashHistory.push(`${module_id}/${quiz_id}/holding-page`);
         });
+    },
+    handleAbortQuiz: (quiz_id) => {
+
+        const intervalID = store.getState().liveQuiz.interval_id;
+        const module_id = store.getState().module.module_id;
+        const data = {
+            room: module_id,
+            quiz_id
+        };
+        socketClient.emit('abort_quiz', data, () => {
+
+            clearInterval(intervalID);
+            dispatch(abortQuiz(quiz_id));
+            hashHistory.push(`${module_id}/lecturer`);
+        });
+
     }
 });
 

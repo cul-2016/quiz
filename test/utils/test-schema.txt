@@ -261,7 +261,9 @@ INSERT INTO quizzes (module_id, name, is_presented)
            ('CENT', 'Arbitrary 1', true),
            ('CENT', 'Arbitrary 2', true),
            ('CENT', 'Arbitrary 3', true),
-           ('FAC8', 'Best Quiz EVER!', false);
+           ('FAC8', 'Best Quiz EVER!', false),
+           ('FAC8', 'Quiz for testing abort functionality', false);
+
 
 
 /********* insert questions ********/
@@ -296,7 +298,9 @@ INSERT INTO questions (quiz_id, question, a, b, c, d, correct_answer)
            (7, 'Port Said is in which North African country?', 'Algeria', 'Egypt', 'Tunisia', 'Libya', 'b'),
            (7, 'In which film did Roger Moore first play James Bond?', 'Live and Let Die', 'Diamonds Are Forever', 'Dr No', 'You Only Live Twice', 'a'),
            (7, 'Who composed The Wedding March?', 'Grieg', 'Beethoven', 'Wagner', 'Mendelssohn', 'd'),
-           (7, 'What is Canada''s national animal?' , 'Bear', 'Beaver', 'Racoon', 'Deer', 'b');
+           (7, 'What is Canada''s national animal?' , 'Bear', 'Beaver', 'Racoon', 'Deer', 'b'),
+           (8, 'Question for Aborting Quiz?' , 'A', 'B', 'C', 'This one', 'd');
+
 
 /********* insert responses ********/
 
@@ -434,7 +438,8 @@ INSERT INTO responses (user_id, quiz_id, question_id, response)
            (24, 3, 12, 'b'),
            (24, 3, 13, 'a'),
            (24, 3, 14, 'd'),
-           (24, 3, 15, 'b');
+           (24, 3, 15, 'b'),
+           (24, 8, 31, 'b');
 
 
 /********* insert module members ********/

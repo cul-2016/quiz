@@ -59,6 +59,15 @@ io.on('connection', (socket) => {
         cb('end of quiz sent');
     });
 
+    socket.on('abort_quiz', (data, cb) => {
+        var room = data.room;
+        var quiz_id = data.quiz_id;
+        socket.broadcast.to(room).emit('receive_abort_quiz', quiz_id);
+
+        console.log('abortion of quiz sent'); //eslint-disable-line no-console
+        cb('abortion of sent');
+    });
+
     socket.on('leave_room', (cb) => {
 
         var roomList = Object.keys(socket.rooms).filter((room) => {
