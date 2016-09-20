@@ -23,7 +23,7 @@ class Members extends Component { //eslint-disable-line no-unused-vars
     }
 
     hideQuizHistory () {
-        // this.props.clearStudentHistory
+        this.props.clearStudentHistory();
         console.log("hiding");
         this.setState({
             isModalVisible: false
@@ -103,6 +103,7 @@ Members.propTypes = {
     handleRemovingMember: PropTypes.func.isRequired,
     location: PropTypes.object.isRequired,
     getStudentHistory: PropTypes.func.isRequired,
+    clearStudentHistory: PropTypes.func.isRequired,
     history: PropTypes.array.isRequired,
     medalConditions: PropTypes.array
 };
