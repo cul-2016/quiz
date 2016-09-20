@@ -45,6 +45,7 @@ class Dashboard extends React.Component {
                 <a href="whatsapp://send?text=The text to share!" data-action="share/whatsapp/share">Share via Whatsapp</a>
                 <a href="fb://friends" >Share via facebook</a>
                 <a href="sms:&body=this is sohil!">Share via messages</a>
+                <a href="sms:?body=THIS IS MINA">android</a>
                 <div className="container">
                     {
                         this.props.is_lecturer &&
