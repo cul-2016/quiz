@@ -1,20 +1,15 @@
-.fa.fa-trophy {
+.trophies {
 
-    font-size: 6em;
+    .trophy {
+        background-image: url("../../public/trophy.png");
+        background-size: 90px 90px;
+        width: 90px;
+        height: 90px;
+        background-repeat: no-repeat;
+        margin: 0 auto;
 
-    &.awarded {
-        color: $gold;
-    }
-}
-
-.trophy {
-    background-image: url("../../public/trophy.png");
-    width: 130px;
-    height: 130px;
-    background-repeat: no-repeat;
-    margin: 0 auto;
-
-    &.not-awarded {
-        background-image: url("../../public/trophy-not-awarded.png");
+        &.not-awarded {
+            background-image: url("../../public/trophy-not-awarded.png");
+        }
     }
 }

@@ -2,8 +2,7 @@ import { connect } from 'react-redux';
 import Leaderboard from '../components/leaderboard';
 
 const mapStateToProps = (state) => ({
-    leaderboard: state.leaderboard.leaderboard,
-    username: state.user.username
+    leaderboard: state.leaderboard.leaderboard
 });
 
 

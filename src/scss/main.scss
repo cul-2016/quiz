@@ -5,14 +5,15 @@
 @import 'animation/fade.css';
 @import 'animation/pulse';
 @import 'animation/shine';
+@import 'components/cookie-message';
+@import 'components/current-questions';
 @import 'components/login';
 @import 'components/medal';
 @import 'components/nav';
 @import 'components/spinner';
-@import 'components/current-questions';
-@import 'components/add-quiz';
 @import 'components/quiz-review';
 @import 'components/trophies';
+@import 'views/add-quiz';
 @import 'views/dashboard';
 @import 'views/live-quiz';
 @import 'views/module';

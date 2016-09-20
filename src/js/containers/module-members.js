@@ -5,8 +5,7 @@ import { removeModuleMember } from '../actions/module';
 const mapStateToProps = (state) => ({
     members: state.module.members,
     isFetchingMembers: state.module.isFetchingMembers,
-    isRemovingMember: state.module.isRemovingMember,
-    username: state.user.username
+    isRemovingMember: state.module.isRemovingMember
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -1,11 +1,10 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import Spinner from './general/spinner';
-import Nav from './general/nav';
 import QuizReviewQuestions from './review/quiz-review-questions';
 
 
-const QuizMembers = ({ members, isFetchingQuizMembers, username, questions, params }) => {
+const QuizMembers = ({ members, isFetchingQuizMembers, questions, params }) => {
 
 
     let mappedMembers = members.map((member, i) => {
@@ -37,7 +36,6 @@ const QuizMembers = ({ members, isFetchingQuizMembers, username, questions, para
         {
             !isFetchingQuizMembers && members &&
             <div>
-                <Nav username={ username } />
                 <QuizReviewQuestions questions = { questions }/>
                 <div>
                     <h2 className="has-text-centered"> Quiz Members </h2>
@@ -66,7 +64,6 @@ const QuizMembers = ({ members, isFetchingQuizMembers, username, questions, para
 QuizMembers.propTypes = {
     members: PropTypes.array,
     isFetchingQuizMembers: PropTypes.bool,
-    username: PropTypes.string,
     params: PropTypes.object,
     questions: PropTypes.array
 };

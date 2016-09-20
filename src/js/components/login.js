@@ -23,7 +23,7 @@ const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthentic
     return (
         <section className="login hero is-primary is-fullheight">
             <div className="hero-body">
-                <div className="container narrow has-text-centered">
+                <div className="container has-text-centered">
                     <div className="box" onKeyDown={ (e) => { if (e.keyCode === 13 && isEmailValid && login.password.length !== 0) { handleAuthenticateUser(login.email, login.password); }}}>
                         <h2>Log In</h2>
                         <p className={ userValidation }>
