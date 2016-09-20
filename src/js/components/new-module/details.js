@@ -14,16 +14,9 @@ class Details extends React.Component {
     }
 
     toggleRollover (text) {
-        if (text === "name") {
-            this.setState({
-                name: !this.state.name
-            });
-        }
-        if (text === "code") {
-            this.setState({
-                code: !this.state.code
-            });
-        }
+        this.setState({
+            [text]: !this.state[text]
+        });
     }
 
     render () {

@@ -21,25 +21,3 @@
     opacity: 0;
     transition: .5s ease-out all;
 }
-
-.element-fade-in {
-    opacity: 1;
-    animation: fadeIn 1s linear;
-}
-
-.element-fade-out {
-    opacity: 1;
-    animation: fadeOut 1s linear;
-}
-
-@keyframes fadeIn {
-  0% { opacity: 0 }
-  50% { opacity: 0.5 }
-  100% { opacity: 1 }
-}
-
-@keyframes fadeOut {
-  0% { opacity: 1 }
-  50% { opacity: 0.5 }
-  100% { opacity: 0 }
-}

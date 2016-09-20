@@ -12,11 +12,9 @@ class Medals extends React.Component {
     }
 
     toggleRollover (text) {
-        if (text === "medals") {
-            this.setState({
-                medals: !this.state.medals
-            });
-        }
+        this.setState({
+            [text]: !this.state[text]
+        });
     }
 
     render () {
