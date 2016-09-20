@@ -21,7 +21,9 @@ const QuizMembers = ({ members, isFetchingQuizMembers, questions, params }) => {
                         <p>{ member.score }</p>
                     </div>
                     <div className="column is-2 edit-score-button">
-                        <Link to={ `${params.module_id}/${params.quiz_id}/${i}/edit-score` }><button className="button is-warning">Edit Score</button></Link>
+                        <Link to={ `${params.module_id}/${params.quiz_id}/${i}/edit-score` }>
+                            <button className="button is-warning">Edit Score</button>
+                        </Link>
                     </div>
                 </div>
             </div>
