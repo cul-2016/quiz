@@ -44,7 +44,7 @@ class Dashboard extends React.Component {
                 <h2 className="has-text-centered"> Modules </h2>
                 <a href="whatsapp://send?text=The text to share!" data-action="share/whatsapp/share">Share via Whatsapp</a>
                 <a href="fb://friends" >Share via facebook</a>
-                <a href="sms:">Share via messages</a>
+                <a href="sms:&body=this is sohil!">Share via messages</a>
                 <div className="container">
                     {
                         this.props.is_lecturer &&
