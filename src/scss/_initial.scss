@@ -23,6 +23,10 @@ input {
     border-radius: 10em;
 }
 
+.container {
+    margin: 0 auto;
+}
+
 /* achieves the effect that `.column` used to do */
 .container.narrow, .box.narrow, .section.narrow {
     margin: auto;

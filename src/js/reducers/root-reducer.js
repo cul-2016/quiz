@@ -46,7 +46,6 @@ const rootReducer = (state, action) => {
         state = update(state, {
             [action.reducerState]: { error: { $set: undefined } }
         });
-
     }
 
     return appReducer(state, action);
