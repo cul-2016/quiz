@@ -218,7 +218,9 @@ INSERT INTO users (email, username, password)
 INSERT INTO modules (module_id, user_id, name)
     VALUES ('TEST', 2, 'test module'),
            ('PSY1', 2, 'Intro to Psychology'),
-           ('CENT', 2, 'Percentile');
+           ('CENT', 2, 'Percentile'),
+           ('FAC8', 2, 'FAC8');
+
 
 /********* insert medals ********/
 
@@ -228,7 +230,10 @@ INSERT INTO medals (module_id, medal_name, condition)
            ('TEST', 'gold', 100),
            ('CENT', 'bronze', 39),
            ('CENT', 'silver', 69),
-           ('CENT', 'gold', 100);
+           ('CENT', 'gold', 100),
+           ('FAC8', 'bronze', 39),
+           ('FAC8', 'silver', 69),
+           ('FAC8', 'gold', 100);
 
 /********* insert trophies ********/
 
@@ -240,7 +245,11 @@ INSERT INTO trophies (module_id, trophy_name, condition)
            ('CENT', 'first_quiz', 1),
            ('CENT', 'high_score', 100),
            ('CENT', 'overall_average', 65),
-           ('CENT', 'participation', 2);
+           ('CENT', 'participation', 2),
+           ('FAC8', 'first_quiz', 1),
+           ('FAC8', 'high_score', 100),
+           ('FAC8', 'overall_average', 65),
+           ('FAC8', 'participation', 2);
 
 
 /********* insert quizzes ********/
@@ -251,7 +260,9 @@ INSERT INTO quizzes (module_id, name, is_presented)
            ('CENT', 'Trivia quiz', true),
            ('CENT', 'Arbitrary 1', true),
            ('CENT', 'Arbitrary 2', true),
-           ('CENT', 'Arbitrary 3', true);
+           ('CENT', 'Arbitrary 3', true),
+           ('FAC8', 'Best Quiz EVER!', false);
+
 
 /********* insert questions ********/
 
@@ -275,7 +286,17 @@ INSERT INTO questions (quiz_id, question, a, b, c, d, correct_answer)
            (4, 'Will and...', 'Grace', 'Pace', 'Lace', 'Space', 'a'),
            (5, 'I''l be there for...', 'you', 'who', 'roo', 'two', 'a'),
            (5, 'Gotta catch ''em...', 'all', 'Paul', 'Saul', 'Maul', 'a'),
-           (6, 'I can''t get no...', 'sleep', 'deep', 'heat', 'meat', 'a');
+           (6, 'I can''t get no...', 'sleep', 'deep', 'heat', 'meat', 'a'),
+           (7, 'A phlebotomist extracts what from the human body?', 'Blood', 'Skin', 'Hair', 'Bone', 'a'),
+           (7, 'How many feet are there in a fathom?', '5', '6', '7', '8', 'b'),
+           (7, 'Nariyal is the Indian term for which nut? ', 'Pine nut', 'Monkey nut', 'Coconut', 'Cashew nut', 'c'),
+           (7, 'A couple celebrating their crystal wedding anniversary have been married for how many years?', '5', '7', '10', '15', 'd'),
+           (7, 'Who wrote the book Catch-22?', 'Malorie Blackman', 'Jonathan Franzen', 'Eoin Colfer', 'Joseph Heller', 'd'),
+           (7, 'In which year did Henry VIII become King of England?', '1503', '1506', '1509', '1512', 'c'),
+           (7, 'Port Said is in which North African country?', 'Algeria', 'Egypt', 'Tunisia', 'Libya', 'b'),
+           (7, 'In which film did Roger Moore first play James Bond?', 'Live and Let Die', 'Diamonds Are Forever', 'Dr No', 'You Only Live Twice', 'a'),
+           (7, 'Who composed The Wedding March?', 'Grieg', 'Beethoven', 'Wagner', 'Mendelssohn', 'd'),
+           (7, 'What is Canada''s national animal?' , 'Bear', 'Beaver', 'Racoon', 'Deer', 'b');
 
 /********* insert responses ********/
 

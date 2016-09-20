@@ -1,0 +1,15 @@
+{
+    "newModule": "In this section you set up a whole new quiz series – typically one module or series of lectures would have one quiz series, and 3-10 quizzes within the series. The choices you make here will apply to all of the quizzes in this series. Once you have set the quiz series up, you criteria for awarding medals and trophies will be fixed, and can’t be edited later.",
+    "trophy": {
+        "conditions": [
+            "Awarded when the student completes the number of quizzes below. If you plan to run 10 quizzes, submission of 5-7 quizzes is probably a good threshold. If you plan to run 3 quizzes, you might want to make students complete all three quizzes to get this trophy. It doesn’t matter what the student scores for each quiz, only that they take part.",
+            "Awarded at the end of the final quiz, based on the overall percentage score that students have obtained across all quizzes. Bear in mind that most students are likely to miss a quiz or two, and score zero for those quizzes, so don’t set the threshold too high. An overall average of 60% is a good starting point for a fairly straightforward set of quizzes.",
+            "Awarded for score on an individual quiz. If the quiz is fairly straightforward, and doesn’t have more than around 8 questions, you can set it at 100%. If it’s harder or longer, you could reduce the threshold to 90% or 80%.",
+            "Awarded when the student completes the number of quizzes below. It is usually best to keep this at 1, so students receive a trophy when they submit their first quiz. This keeps them motivated."
+        ],
+        "trophies": "Students get virtual trophies for achievement or participation as they progress through the quizzes. Here you can decide what the criteria for awarding trophies should be."
+    },
+    "medals": "Students are awarded gold, silver or bronze medals for achievement on each quiz. You can adjust the scores that students need to get in order to receive particular medal type. If the quizzes are relatively easy, you can increase the thresholds so that it’s not too easy to get gold. If they’re relatively hard, you can decrease the threshold. If you’re not sure, leave them as they are.",
+    "name": "Please give the module a title that makes it easy to recognise for both you and your students. E.g., “First year Macroeconomics”.",
+    "code": "Please choose a four letter or digit code that students can use as a shortcut to register for your quiz series. This needs to be unique, so if the code you choose has been used by someone else, you’ll be prompted to come up with another. For example “MAC1” “P101”."
+}
