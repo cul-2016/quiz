@@ -30,9 +30,18 @@
 }
 
 .module-header {
-    padding: 0 0.5em;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
 
-    label {
-        padding:0.6em;
+    .level-item {        
+        font-weight: 700;
+    }
+
+    .level-item:first-child {
+        text-align: left;
+    }
+    .level-item:nth-child(2) {
+        text-align: right;
     }
 }
