@@ -25,11 +25,11 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex, nextQuestion, isQu
     return (
         <section className="live-quiz container">
             <div className="has-text-centered" >
-                <h3>{ name }</h3>
+                <h1>{ name }</h1>
 
-                <h4 className={ titleClass }>Question { nextQuestionIndex }</h4>
+                <h3 className={ titleClass }>Question { nextQuestionIndex }</h3>
             </div>
-            <div className="section">
+            <div>
                 {
                     !isQuizStarted && !is_lecturer &&
                     <div>
@@ -38,7 +38,7 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex, nextQuestion, isQu
                 }
                 {
                     !isQuizStarted && is_lecturer &&
-                    <h2>
+                    <h2 className="has-text-centered">
                         Number of Participants: { numParticipants }
                     </h2>
                 }
