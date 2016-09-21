@@ -36,7 +36,7 @@ class Trophies extends React.Component {
         let mappedTrophies = this.props.trophies.trophy_name.map((name, i) => {
 
             return (
-                <div className="columns" key={ i }>
+                <div className="new-module-medals columns" key={ i }>
                     <div className="column box is-info has-text-centered">
                         <label className="label module-section-headers">{ normaliseText(name) }</label>
                         <i onClick={ () => { this.toggleRollover(name);} } className="fa fa-question-circle help-icon" />
@@ -47,6 +47,7 @@ class Trophies extends React.Component {
                         </div>
                         <div>
                             <input
+                                   className="input"
                                    type="number"
                                    min="1"
                                    max="100"

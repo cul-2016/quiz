@@ -16,20 +16,13 @@
     }
 
     .new-module-medals, .new-module-trophies {
-        margin-top: 30px;
-        input {
-            display: inline-block;
-            font-size: 18px;
-            text-align: center;
+
+        .input {
+            width: 22%
         }
 
-        span {
-            font-size: 14px;
+        .label-inline {
+            line-height: 32px;
         }
-    }
-
-
-    .new-module-trophies {
-        margin-bottom: 30px;
     }
 }
