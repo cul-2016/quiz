@@ -4,11 +4,14 @@ import { Link } from 'react-router';
 const HoldingPage = ({ params }) => {
 
     return (
-        <div className="hero is-fullheight">
-            HOLDING PAGE ONCE QUIZ HAS BEEN COMPLETED
+        <div className="hero is-fullheight holding-page">
+
 
             <div className="hero-body">
                 <div className="column is-8 is-offset-2 has-text-centered">
+                    <h1>
+                        When you are ready, click the button below to review the quiz with your students
+                    </h1>
                     <Link to={ `${params.module_id}/${params.quiz_id}/review` }>
                         <button className="button is-large is-success">
                             Quiz Review

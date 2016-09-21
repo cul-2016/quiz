@@ -14,7 +14,7 @@
                 font-size: 1.3em;
                 font-weight: 500;
             }
-            span:last-child {
+            span:nth-child(2) {
                 font-size: 1.3em;
                 font-weight: 200;
             }
@@ -35,9 +35,13 @@
             font-size: 2em;
             font-weight: 500;
         }
-        span:last-child {
+        span:nth-child(2) {
             font-size: 2em;
             font-weight: 200;
+        }
+        .num-responses {
+            font-size: 3.5em;
+            font-weight: 700;
         }
     }
 }

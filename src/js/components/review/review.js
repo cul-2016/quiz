@@ -11,19 +11,19 @@ const Review = ({ isFetchingReview, question, numQuestions, currentQuizIndex, is
     });
 
     return (
-        <div>
+        <div className="review container">
             {
                 isFetchingReview && <Spinner />
             }
             <div>
-            <div className={ backButtonClasses }>
-                <button onClick={ handleGoBack } className="button is-3">
-                    Back
-                </button>
-            </div>
-            <div className="column has-text-centered" >
-                <h4>Question { currentQuizIndex + 1 }</h4>
-            </div>
+                <div className={ backButtonClasses }>
+                    <button onClick={ handleGoBack } className="button is-3">
+                        Back
+                    </button>
+                </div>
+                <div className="column has-text-centered" >
+                    <h3>Question { currentQuizIndex + 1 }</h3>
+                </div>
             </div>
             {
                 question &&
