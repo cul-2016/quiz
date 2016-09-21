@@ -1263,7 +1263,7 @@ a.box:active {
 }
 
 .content a:not(.button) {
-  border-bottom: 1px solid #d3d6db;
+  /*border-bottom: 1px solid #d3d6db;*/
 }
 
 .content a:not(.button):visited {
