@@ -32,8 +32,10 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex, nextQuestion, isQu
             <div>
                 {
                     !isQuizStarted && !is_lecturer &&
-                    <div>
-                        Waiting for Quiz to Start
+                    <div className="student-view">
+                        <div className="section has-text-centered">
+                            Get ready! <br/> The quiz will start in a moment.
+                        </div>
                     </div>
                 }
                 {
