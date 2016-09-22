@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Spinner from '../general/spinner';
-import Modal from '../general/modal';
+import Modal from './modal';
 
 
 class Members extends Component {

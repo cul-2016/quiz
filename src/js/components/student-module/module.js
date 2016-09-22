@@ -22,7 +22,7 @@ const StudentModule = ({ location, children,
     });
 
     let url = location.pathname.split('/');
-    let livePath = `/${url[1]}/${url[2]}/live`;
+    let livePath = isQuizOpen ? `/${url[1]}/${url[2]}/live` : '#';
 
     return (
         <div>

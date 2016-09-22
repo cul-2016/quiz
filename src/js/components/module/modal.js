@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
-import StudentHistory from '../student-module/history';
 import classnames from 'classnames';
-import Spinner from './spinner';
+import StudentHistory from '../student-module/history';
+import Spinner from '../general/spinner';
 
 
 const Modal = ({ isVisible, history, medalConditions, hide, username }) => {
