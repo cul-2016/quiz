@@ -29,7 +29,7 @@ const ShowAnswer = ({ isAnswerShowing, data }) => {
 
     let answersWithResponse = answersArray.map((letter, i) => {
 
-        let classes = classnames("box  answer", {
+        let classes = classnames("box answer", {
             "correct_answer": isAnswerShowing && letter === data.correct_answer.toLowerCase()
         });
         return (
