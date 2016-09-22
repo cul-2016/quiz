@@ -51,6 +51,14 @@ socketClient.on('receive_end_of_quiz', (quiz_id) => {
     hashHistory.push(`${module_id}/${quiz_id}/result`);
 });
 
+socketClient.on('receive_abort_quiz', (quiz_id) => {
+    const module_id = store.getState().module.module_id;
+    console.log('received abort quiz notification', quiz_id);
+    store.dispatch(endQuiz());
+    store.dispatch(closeQuiz());
+    hashHistory.push(`${module_id}/student`);
+});
+
 socketClient.on('disconnected', (id) => {
     console.log("We're disconnected", id);
 });

@@ -16,6 +16,10 @@ export const END_QUIZ_REQUEST = 'END_QUIZ_REQUEST';
 export const END_QUIZ_SUCCESS = 'END_QUIZ_SUCCESS';
 export const END_QUIZ_FAILURE = 'END_QUIZ_FAILURE';
 
+export const ABORT_QUIZ_REQUEST = 'ABORT_QUIZ_REQUEST';
+export const ABORT_QUIZ_SUCCESS = 'ABORT_QUIZ_SUCCESS';
+export const ABORT_QUIZ_FAILURE = 'ABORT_QUIZ_FAILURE';
+
 export const SET_INTERVAL_ID = 'SET_INTERVAL_ID';
 export const SET_NEXT_QUESTION = 'SET_NEXT_QUESTION';
 
@@ -148,6 +152,40 @@ export const endQuizSuccess = () => ({
 
 export const endQuizFailure = (error) => ({
     type: END_QUIZ_FAILURE,
+    error
+});
+
+
+/***
+ * ABORT QUIZ
+ ***/
+
+export function abortQuiz (quiz_id) {
+
+    return (dispatch) => {
+
+        dispatch(abortQuizRequest());
+
+        axios.get(`/abort-quiz?quiz_id=${quiz_id}`)
+            .then(() => {
+                dispatch(abortQuizSuccess());
+            })
+            .catch((error) => {
+                dispatch(abortQuizFailure(error));
+            });
+    };
+}
+
+export const abortQuizRequest = () => ({
+    type: ABORT_QUIZ_REQUEST
+});
+
+export const abortQuizSuccess = () => ({
+    type: ABORT_QUIZ_SUCCESS
+});
+
+export const abortQuizFailure = (error) => ({
+    type: ABORT_QUIZ_FAILURE,
     error
 });
 

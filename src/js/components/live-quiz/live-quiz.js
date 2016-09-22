@@ -6,7 +6,7 @@ import { store } from '../../store';
 import { toggleMessageVisibility } from '../../actions/live-quiz';
 
 
-const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex, nextQuestion, isQuizStarted, submitResponse, isResponseSubmitted, startQuiz, numQuestions, endQuiz, quiz_id, handleSelection, response, name, numParticipants }) => {
+const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex, nextQuestion, isQuizStarted, submitResponse, isResponseSubmitted, startQuiz, numQuestions, endQuiz, quiz_id, handleSelection, response, name, numParticipants, handleAbortQuiz }) => {
 
     let showOnSubmit = classnames("submit-success", {
         "display-none": !isResponseSubmitted
@@ -38,9 +38,20 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex, nextQuestion, isQu
                 }
                 {
                     !isQuizStarted && is_lecturer &&
-                    <h2>
-                        Number of Participants: { numParticipants }
-                    </h2>
+                    <div>
+                        <h2>
+                            Number of Participants: { numParticipants }
+                        </h2>
+                        <button onClick={ () => handleAbortQuiz(quiz_id) } className="button is-danger">
+                            Abort Quiz
+                        </button>
+                    </div>
+                }
+                {
+                    isQuizStarted && is_lecturer &&
+                    <button onClick={ () => handleAbortQuiz(quiz_id) } className="button is-danger">
+                        Abort Quiz
+                    </button>
                 }
                 {
                     isQuizStarted && question &&
@@ -87,7 +98,8 @@ LiveQuiz.propTypes = {
     handleSelection: PropTypes.func,
     response: PropTypes.string,
     name: PropTypes.string,
-    numParticipants: PropTypes.number
+    numParticipants: PropTypes.number,
+    handleAbortQuiz: PropTypes.func
 };
 
 export default LiveQuiz;

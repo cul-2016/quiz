@@ -81,12 +81,15 @@ export const liveQuiz = {
     error: undefined,
     isFetchingQuizQuestions: false,
     isSavingResponse: false,
+    isResponseSubmitted: false,
     quiz_id: undefined,
     name: undefined,
     questions: undefined,
     response: undefined,
     nextQuestionIndex: 0,
     isQuizStarted: false,
+    isEndingQuiz: false,
+    isAbortingQuiz: false,
     interval_id: undefined,
     numParticipants: 0
 };
