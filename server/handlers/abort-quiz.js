@@ -6,9 +6,10 @@ module.exports = {
     path: '/abort-quiz',
     handler: (request, reply) => {
 
-        var quiz_id = parseInt(request.query.quiz_id);
+        var quiz_id = request.query.quiz_id;
 
         if (quiz_id !== undefined) {
+            quiz_id = parseInt(quiz_id);
 
             deleteResponses(client, quiz_id, (error, result) => {
 

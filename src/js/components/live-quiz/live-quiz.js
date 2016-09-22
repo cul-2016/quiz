@@ -39,12 +39,12 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex, nextQuestion, isQu
                 {
                     !isQuizStarted && is_lecturer &&
                     <div>
-                    <h2>
-                        Number of Participants: { numParticipants }
-                    </h2>
-                    <button onClick={ () => handleAbortQuiz(quiz_id) } className="button is-danger">
-                        Abort Quiz
-                    </button>
+                        <h2>
+                            Number of Participants: { numParticipants }
+                        </h2>
+                        <button onClick={ () => handleAbortQuiz(quiz_id) } className="button is-danger">
+                            Abort Quiz
+                        </button>
                     </div>
                 }
                 {

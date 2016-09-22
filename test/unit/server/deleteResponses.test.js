@@ -20,8 +20,8 @@ test('`deleteResponses` works', (t) => {
             }
             client.query("SELECT * from responses WHERE quiz_id=8", (error, response) => {
 
-                t.deepEqual(0, response.rows.length);
                 if (error) throw new Error(error);
+                t.deepEqual(0, response.rows.length);
                 done();
             });
         });
