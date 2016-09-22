@@ -2,12 +2,37 @@
 .module {
 
     @media screen and (min-width: 769px) {
-
         .section {
             margin: 30px;
         }
     }
 
+    .button-panel {
+        .button {
+            margin: 0 10px;
+        }
+    }
+
+    .quizzes {
+
+        h3 {
+            display: inline-block;
+            margin: 10px;
+        }
+
+        td {
+            font-weight: 500;
+        }
+
+        ul {
+            border: 1px solid black;
+            list-style: none;
+            min-width: 100px;
+        }
+        li {
+
+        }
+    }
 }
 
 .module-section-headers {

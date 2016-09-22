@@ -1,0 +1,41 @@
+.leaderboard {
+    h1 {
+        margin-bottom: 40px;
+    }
+
+    .leaderboard-header {
+
+        .column {
+            margin: 10px;
+        }
+        margin: 0 3em;
+    }
+
+    .section {
+        box-shadow: 0 7px 30px rgba(62, 9, 11, 0.3);
+        border-radius: 5px;
+    }
+
+    li {
+        line-height: 1.5em;
+
+        &:not(:last-child) {
+            border-bottom: 1px solid $grey-opaque-04;
+        }
+    }
+
+    .rank-number {
+        font-size: 1.2em;
+        text-align: center;
+        color: $dark-blue;
+        font-weight: 700;
+    }
+
+    li div {
+        display: inline;
+    }
+    li div:last-child {
+        position: relative;
+        text-align: right
+    }
+}

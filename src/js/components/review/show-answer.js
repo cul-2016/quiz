@@ -29,14 +29,14 @@ const ShowAnswer = ({ isAnswerShowing, data }) => {
 
     let answersWithResponse = answersArray.map((letter, i) => {
 
-        let classes = classnames("box  answer", {
+        let classes = classnames("box answer", {
             "correct_answer": isAnswerShowing && letter === data.correct_answer.toLowerCase()
         });
         return (
             <div key={ i } className={ classes }>
                 <span>{ `${letter.toUpperCase()}: ` }</span>
                 <span>{ `${data[letter]}` }</span>
-                <span>{ `${+data[responsesArray[i]]}`}</span>
+                <div className="num-responses">{ `${+data[responsesArray[i]]}`}</div>
             </div>
         );
 

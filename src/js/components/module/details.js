@@ -11,10 +11,32 @@ const Details = ({ name, module_id, num_enrolled, trophies, medals }) => {
 
                 <h1>{ name }</h1>
                 <h4>{ module_id }</h4>
+
+                <h5>
+                    <i className="fa fa-users" />
+                    { `${+num_enrolled} students have registered` }
+                </h5>
+            </div>
+
+            <div className="button-panel has-text-centered">
+
                 <Link to={ `${module_id}/members` }>
-                <h5><i className="fa fa-users" /> { `${+num_enrolled} students have registered` }</h5>
+                    <button className="button is-warning">
+                        <span className="icon">
+
+                            <i className="fa fa-cog" />
+                        </span>
+                        <span>Manage students</span>
+                    </button>
+                </Link>
+
+                <Link to={ `${module_id}/leaderboard` }>
+                    <button className="button is-info">
+                        View leaderboard
+                    </button>
                 </Link>
             </div>
+
 
             <div className="columns">
                 <Trophies trophies={ trophies } />

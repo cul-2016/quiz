@@ -7,20 +7,21 @@ const Trophies = ({ trophies }) => {
     const mappedTrophies = trophies.trophy_name.map((name, i) => {
 
         return (
-            <div className="box column has-text-centered" key={ i }>
-                <div className="label">{ normaliseText(name) }</div>
-                <div>{ trophies.condition[i] }</div>
-            </div>
+            <tr className="has-text-centered" key={ i }>
+                <td>{ normaliseText(name) }</td>
+                <td>{ trophies.condition[i] }</td>
+            </tr>
         );
     });
 
     return (
         <div className="section column">
             <h4>Trophies</h4>
-            <div className="columns">
-
-                { mappedTrophies }
-            </div>
+            <table className="table">
+                <tbody>
+                    { mappedTrophies }
+                </tbody>
+            </table>
         </div>
     );
 };

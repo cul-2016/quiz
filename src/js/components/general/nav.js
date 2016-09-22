@@ -41,11 +41,15 @@ const Nav = ({ location, username }) => {
                 </span>
 
                 <span className="nav-item is-hidden-tablet is-active" onClick={ () => hashHistory.push('/dashboard') }>
-                    <i className="fa fa-home"/>
+                    <span className="icon">
+                        <i className="fa fa-home"/>
+                    </span>
                 </span>
 
                 <span className="nav-item is-hidden-tablet is-active" onClick={ logout }>
-                    <i className="fa fa-sign-out" />
+                    <span className="icon is-danger">
+                        <i className="fa fa-sign-out is-danger" />
+                    </span>
                 </span>
             </div>
         </nav>

@@ -24,7 +24,7 @@ class Medals extends React.Component {
         });
 
         return (
-            <div className="section column">
+            <div className="new-module-medals section column">
 
                 <h3 className="module-section-headers">
                     <i className="fa fa-shield" /> Medals
@@ -42,6 +42,7 @@ class Medals extends React.Component {
                         <label className="label">Bronze</label>
                         <span className="label-inline">0 to </span>
                         <input
+                            className="input"
                             name="bronze"
                             type="number"
                             min="1" max="96"
@@ -62,6 +63,7 @@ class Medals extends React.Component {
                     <div className="column box has-text-centered">
                         <label className="label">Gold</label>
                         <input
+                            className="input"
                             name="gold"
                             type="number"
                             min="4" max="99"

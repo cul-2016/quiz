@@ -1,10 +1,27 @@
-.live-quiz {
+.live-quiz, .review {
 
-    .section {
-        background-color: transparent;
+    margin-top: 4em;
+
+    @media screen and (max-width: 768px) {
+        margin-top: 2em;
+
+        h3 {
+            margin-top: 1em !important;
+        }
     }
 
-    .answer {
-        margin: 20px;
+    h3 {
+        font-weight: 500;
+    }
+
+    .start-quiz-button {
+        margin-top: 12em;
+    }
+
+    .student-view {
+        .section {
+            font-size: 3em;
+            margin: auto;
+        }
     }
 }

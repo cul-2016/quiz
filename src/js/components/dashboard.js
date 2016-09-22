@@ -39,8 +39,7 @@ class Dashboard extends React.Component {
             );
         });
         return (
-            <div className="container">
-                <div className="dashboard">
+            <div className="container dashboard">
                     <h2 className="has-text-centered"> Modules </h2>
                     {
                         this.props.is_lecturer &&
@@ -58,10 +57,17 @@ class Dashboard extends React.Component {
                                 </button>
                             </Link>
                     }
+                    <div className="level module-header is-mobile">
+                        <div className="level-item">
+                            Module name
+                        </div>
+                        <div className="level-item">
+                            Module code
+                        </div>
+                    </div>
                     <ul>
                         { moduleList }
                     </ul>
-                </div>
             </div>
         );
     }

@@ -39,11 +39,11 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id }) => {
                     </Link>
                 </td>
                 <td>
-                <Link to={`${module_id}/${quiz.quiz_id}/edit-quiz`}>
-                    <span className={ buttonClass }>
-                        Edit Quiz
-                    </span>
-                </Link>
+                    <Link to={`${module_id}/${quiz.quiz_id}/edit-quiz`}>
+                        <span className={ buttonClass }>
+                            Edit Quiz
+                        </span>
+                    </Link>
                 </td>
             </tr>
         );
@@ -92,7 +92,24 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id }) => {
 
     return (
         <div className="section quizzes">
-            <h4>Quizzes</h4>
+            <div className="level">
+                <div className="level-left">
+                    <h3 className="level-item">Quizzes</h3>
+                </div>
+                <div className="level-right">
+
+                    <Link className="level-item" to={ `${module_id}/new-quiz` } >
+
+                        <button className="button is-info">
+                            <span className="icon">
+                                <i className="fa fa-plus" />
+                            </span>
+                            <span>Add a new quiz</span>
+                        </button>
+                    </Link>
+                </div>
+            </div>
+
             <table className="table is-hidden-mobile">
                 <thead>
                     <tr>
@@ -105,17 +122,6 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id }) => {
                         <th></th>
                     </tr>
                 </thead>
-                <tfoot>
-                    <tr>
-                        <th>Quiz name</th>
-                        <th># questions</th>
-                        <th># entries</th>
-                        <th>Presented?</th>
-                        <th>Last Quiz</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </tfoot>
                 <tbody>
                     { desktopView }
                 </tbody>

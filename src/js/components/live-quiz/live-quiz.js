@@ -25,27 +25,24 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex, nextQuestion, isQu
     return (
         <section className="live-quiz container">
             <div className="has-text-centered" >
-                <h3>{ name }</h3>
+                <h1>{ name }</h1>
 
-                <h4 className={ titleClass }>Question { nextQuestionIndex }</h4>
+                <h3 className={ titleClass }>Question { nextQuestionIndex }</h3>
             </div>
-            <div className="section">
+            <div>
                 {
                     !isQuizStarted && !is_lecturer &&
-                    <div>
-                        Waiting for Quiz to Start
+                    <div className="student-view">
+                        <div className="section has-text-centered">
+                            Get ready! <br/> The quiz will start in a moment.
+                        </div>
                     </div>
                 }
                 {
-                    !isQuizStarted && is_lecturer &&
-                    <div>
-                        <h2>
-                            Number of Participants: { numParticipants }
-                        </h2>
-                        <button onClick={ () => handleAbortQuiz(quiz_id) } className="button is-danger">
-                            Abort Quiz
-                        </button>
-                    </div>
+                    !isQuizStarted && is_lecturer && 
+                    <h2 className="has-text-centered">
+                        Number of Participants: { numParticipants }
+                    </h2>
                 }
                 {
                     isQuizStarted && is_lecturer &&
