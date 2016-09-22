@@ -1,13 +1,12 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import classnames from 'classnames';
-import Nav from '../general/nav';
 import Tabs from './tabs';
 import Spinner from '../general/spinner';
 import Trophies from './trophies';
 
 const StudentModule = ({ location, children,
-                        username, trophies, trophies_awarded,
+                        trophies, trophies_awarded,
                         isFetchingModule, isQuizOpen,
                         quiz_id, question, response, //eslint-disable-line no-unused-vars
                         handleJoiningQuiz, params }) => {
@@ -33,7 +32,6 @@ const StudentModule = ({ location, children,
         {
             !isFetchingModule &&
             <div>
-                <Nav username={ username } />
                 <div className={ buttonAreaClasses }>
                     <Link to={ livePath } onClick={ () => { handleJoiningQuiz(params.module_id); }}>
                         <button className={ buttonClasses }>
@@ -57,7 +55,6 @@ const StudentModule = ({ location, children,
 StudentModule.propTypes = {
     location: PropTypes.object.isRequired,
     children: PropTypes.object,
-    username: PropTypes.string.isRequired,
     trophies: PropTypes.array,
     trophies_awarded: PropTypes.object,
     isFetchingModule: PropTypes.bool.isRequired,

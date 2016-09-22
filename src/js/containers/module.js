@@ -17,8 +17,7 @@ const mapStateToProps = (state) => ({
         num_enrolled: state.module.num_enrolled
     },
     quizzes: state.module.quizzes,
-    isFetchingModule: state.module.isFetchingModule,
-    username: state.user.username
+    isFetchingModule: state.module.isFetchingModule
 });
 
 const mapDispatchToProps = (dispatch) => ({

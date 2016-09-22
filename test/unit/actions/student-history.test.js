@@ -23,7 +23,7 @@ test('getStudentHistory async action creator returns expected action', (t) => {
     t.deepEqual(actual, expected);
 });
 
-test('getStudentHistoryRequest creates the correct action', (t) => {
+test('`getStudentHistoryRequest` creates the correct action', (t) => {
 
     t.plan(1);
 
@@ -34,7 +34,7 @@ test('getStudentHistoryRequest creates the correct action', (t) => {
     t.deepEqual(actual, expected);
 });
 
-test('getStudentHistorySuccess creates the correct action', (t) => {
+test('`getStudentHistorySuccess` creates the correct action', (t) => {
 
     t.plan(1);
 
@@ -46,7 +46,7 @@ test('getStudentHistorySuccess creates the correct action', (t) => {
     t.deepEqual(actual, expected);
 });
 
-test('getStudentHistoryFailure creates the correct action', (t) => {
+test('`getStudentHistoryFailure` creates the correct action', (t) => {
 
     t.plan(1);
 
@@ -55,5 +55,16 @@ test('getStudentHistoryFailure creates the correct action', (t) => {
         error
     };
     const actual = deepFreeze(actions.getStudentHistoryFailure(error));
+    t.deepEqual(actual, expected);
+});
+
+test('`clearStudentHistory` creates the correct action', (t) => {
+
+    t.plan(1);
+
+    const expected = {
+        type: actions.CLEAR_STUDENT_HISTORY
+    };
+    const actual = deepFreeze(actions.clearStudentHistory(error));
     t.deepEqual(actual, expected);
 });

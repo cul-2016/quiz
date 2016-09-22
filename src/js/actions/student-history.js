@@ -3,6 +3,7 @@ import axios from 'axios';
 export const GET_STUDENT_HISTORY_REQUEST = 'GET_STUDENT_HISTORY_REQUEST';
 export const GET_STUDENT_HISTORY_SUCCESS = 'GET_STUDENT_HISTORY_SUCCESS';
 export const GET_STUDENT_HISTORY_FAILURE = 'GET_STUDENT_HISTORY_FAILURE';
+export const CLEAR_STUDENT_HISTORY = 'CLEAR_STUDENT_HISTORY';
 
 export const getStudentHistory = (user_id, module_id) => {
 
@@ -34,4 +35,8 @@ export const getStudentHistorySuccess = (data) => ({
 export const getStudentHistoryFailure = (error) => ({
     type: GET_STUDENT_HISTORY_FAILURE,
     error
+});
+
+export const clearStudentHistory = () => ({
+    type: CLEAR_STUDENT_HISTORY
 });

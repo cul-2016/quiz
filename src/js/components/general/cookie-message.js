@@ -1,29 +1,19 @@
 import React, { PropTypes } from 'react';
 import classnames from 'classnames';
 
+
 const CookieMessage = ({ isCookieAccepted, handleCookieMessage }) => {
 
-    const cookieDivClasses = classnames({
+    const cookieDivClasses = classnames("cookie-message", {
         "display-none": !isCookieAccepted
     });
 
     return (
         <div className={ cookieDivClasses }>
-            <section className="hero is-warning">
-                <div className="hero-body">
-                    <div className="container has-text-centered">
-                        <p>
-                            This app relies on cookies to work. Please make sure you have cookies enabled.
-                        </p>
-                        <button onClick={ handleCookieMessage } className="button has-text-centered">
-                            <span className="icon">
-                                <i className="fa fa-times" />
-                            </span>
-                            <span> close </span>
-                        </button>
-                    </div>
-                </div>
-            </section>
+            <div className="notification is-warning has-text-centered">
+                <button className="delete" onClick={ handleCookieMessage } />
+                This app relies on cookies to work. Please make sure you have cookies enabled.
+            </div>
         </div>
     );
 };

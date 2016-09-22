@@ -1,34 +1,31 @@
 .dashboard {
+    text-align: center;
 
-    p {
-        display: inline;
+    ul {
+        margin: 0 auto;
+        max-width: 600px;
+    }
+    li.box {
         font-size: 1.2em;
-        padding: 0.6em;
         color: black;
-    }
-    .module{
-        border-bottom: 0.1em $grey-opaque-04 solid;
-        padding: 0.5em;
         transition: all .3s ease-in-out;
+        border: 3px solid transparent;
+        line-height: 50px;
     }
 
-    .module:hover {
-        background-color: $grey-opaque-01;
+    a {
+        max-width: 500px;
+    }
+
+    li.box:hover {
         transform: scale(1.02);
-    }
-
-    .module-list-item {
-        line-height: 5vh;
+        border-color: rgba(31,200,219,0.6);
     }
 
     button {
         position: relative;
         left: 0;
         margin-bottom: 20px;
-    }
-
-    .box {
-        max-width: 500px;
     }
 }
 

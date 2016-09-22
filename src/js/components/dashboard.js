@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import { store } from '../store';
 import { clearModuleState } from '../actions/module';
-import Nav from './general/nav';
+
 
 class Dashboard extends React.Component {
 
@@ -15,37 +15,36 @@ class Dashboard extends React.Component {
     }
 
     render () {
-        let lecturerModules = this.props.modules.map((module, i) => {
+        let moduleList = this.props.modules.map((module, i) => {
 
             let role = this.props.is_lecturer ? 'lecturer' : 'student';
 
             return (
-                <div className="column is-8 is-offset-2 dashboard" key={ i }>
-                    <Link  to={ `${module.module_id}/${role}` } >
-                    <div className="columns module">
-                        <div className="column is-3">
-                            <p>{module.module_id}</p>
-                        </div>
-                        <div className="column is-7">
-                            <p>{module.name}</p>
-                        </div>
-                        <div className="column is-1">
-                            <i className="fa fa-archive" />
-                        </div>
+                <Link key={ i } to={ `${module.module_id}/${role}` } >
+                    <li className="box level is-mobile">
+                        <div className="level-left">
 
-                    </div>
-                    </Link>
-                </div>
+                            <label className="level-item">
+                                { module.name }
+                            </label>
+                        </div>
+                        <div className="level-right">
+
+                            <label className="level-item has-text-centered">
+                                <strong>{ module.module_id }</strong>
+                            </label>
+                        </div>
+                    </li>
+                </Link>
             );
         });
         return (
-            <div className='dashboard'>
-                <Nav username={ this.props.username } />
-                <h2 className="has-text-centered"> Modules </h2>
-                <div className="container">
+            <div className="container">
+                <div className="dashboard">
+                    <h2 className="has-text-centered"> Modules </h2>
                     {
                         this.props.is_lecturer &&
-                            <Link className="column is-2 is-offset-9" to="add-new-module">
+                            <Link to="add-new-module">
                                 <button className="button is-primary">
                                     Add a new module
                                 </button>
@@ -53,27 +52,15 @@ class Dashboard extends React.Component {
                     }
                     {
                         !this.props.is_lecturer &&
-                            <Link className="column is-2 is-offset-8" to="join-module">
+                            <Link to="join-module">
                                 <button className="button is-primary is-medium">
                                     Join a module
                                 </button>
                             </Link>
                     }
-                    <div className="column is-8 is-offset-2">
-                        <div className="columns module-header">
-                            <div className="column is-3">
-                                <label className="label">ID</label>
-                            </div>
-                            <div className="column is-7">
-                                <label className="label">Name</label>
-                            </div>
-                            <div className="column is-1">
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        { lecturerModules }
-                    </div>
+                    <ul>
+                        { moduleList }
+                    </ul>
                 </div>
             </div>
         );
@@ -83,7 +70,6 @@ class Dashboard extends React.Component {
 
 Dashboard.propTypes = {
     modules: PropTypes.array.isRequired,
-    username: PropTypes.string,
     is_lecturer: PropTypes.bool.isRequired
 };
 

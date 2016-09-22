@@ -7,25 +7,52 @@ const Trophies = ({ trophies, trophies_awarded }) => {
 
     trophies = trophies || [];
 
-    let mappedTrophies = trophies.map((name, i) => {
+    let mappedTrophiesOdd = trophies.map((name, i) => {
 
         let trophyClasses = classnames("trophy", {
             "not-awarded": trophies_awarded[name] === false
         });
 
-        return (
-            <div className="box column has-text-centered" key={ i }>
-                <div className="label">{ normaliseText(name) }</div>
-                <div className={ trophyClasses } />
-            </div>
-        );
+        if (i % 2 !== 0) {
+
+            return (
+                <div className="box has-text-centered" key={ i }>
+                    <div className="label">{ normaliseText(name) }</div>
+                    <div className={ trophyClasses } />
+                </div>
+            );
+        }
+    });
+
+    let mappedTrophiesEven = trophies.map((name, i) => {
+
+        let trophyClasses = classnames("trophy", {
+            "not-awarded": trophies_awarded[name] === false
+        });
+
+        if (i % 2 === 0) {
+
+            return (
+                <div className="box has-text-centered" key={ i }>
+                    <div className="label">{ normaliseText(name) }</div>
+                    <div className={ trophyClasses } />
+                </div>
+            );
+        }
     });
 
     return (
         <div className="section">
-            <h4>Trophies</h4>
-            <div className="columns">
-                { mappedTrophies }
+            <h3>Your trophies</h3>
+            <div className="is-mobile columns trophies">
+                <div className="column">
+
+                    { mappedTrophiesOdd }
+                </div>
+                <div className="column">
+
+                    { mappedTrophiesEven }
+                </div>
             </div>
         </div>
     );
