@@ -1,0 +1,8 @@
+.quiz-review-questions {
+
+    .question {
+        &:not(:last-child) {
+            border-bottom: 2px solid $grey-opaque-04;
+        }
+    }
+}
