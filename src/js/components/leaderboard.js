@@ -1,7 +1,7 @@
-import React, { PropTypes } from 'react'; 
-import Nav from './general/nav';
+import React, { PropTypes } from 'react';
 
-const Leaderboard = ({ leaderboard, username }) => {
+
+const Leaderboard = ({ leaderboard }) => {
 
     let mappedLeaderboard = leaderboard.map((user, i) => {
         return (
@@ -15,15 +15,13 @@ const Leaderboard = ({ leaderboard, username }) => {
 
     return (
         <div>
-            <Nav username={ username } />
             { mappedLeaderboard }
         </div>
     );
 };
 
 Leaderboard.propTypes = {
-    leaderboard: PropTypes.array.isRequired,
-    username: PropTypes.string
+    leaderboard: PropTypes.array.isRequired
 };
 
 export default Leaderboard;

@@ -4,15 +4,12 @@ import { addQuestion, deleteQuestion, updateValue, updateQuizName, updateQuiz, c
 import { hashHistory } from 'react-router';
 
 
-
-
 const mapStateToProps = (state) => ({
     questions: state.newQuiz.questions,
     isUpdatingQuiz: state.newQuiz.isUpdatingQuiz,
     name: state.newQuiz.name,
     is_last_quiz: state.newQuiz.is_last_quiz,
-    deletedQuestions: state.newQuiz.deletedQuestions,
-    username: state.user.username
+    deletedQuestions: state.newQuiz.deletedQuestions
 });
 
 

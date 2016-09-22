@@ -7,7 +7,7 @@ const Medal = ({ percentageScore, medalConditions }) => {
     let medalClass = classnames("medal", {
         "gold": percentageScore >= medalConditions[1],
         "silver": percentageScore >= medalConditions[0] && percentageScore < medalConditions[1],
-        "bronze": percentageScore < medalConditions[0]
+        "bronze": percentageScore < medalConditions[0] && percentageScore > 0
     });
 
 

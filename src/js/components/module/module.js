@@ -1,12 +1,11 @@
 import React, { PropTypes } from 'react';
-import Nav from '../general/nav';
 import Details from './details';
 import Quizzes from './quizzes';
 import { Link } from 'react-router';
 import Spinner from '../general/spinner';
 
 
-const Module = ({ location, module, quizzes, isFetchingModule, username, sendQuizInvite }) => { // eslint-disable-line no-unused-vars
+const Module = ({ location, module, quizzes, isFetchingModule, sendQuizInvite }) => {
 
     return (
         <div>
@@ -16,7 +15,6 @@ const Module = ({ location, module, quizzes, isFetchingModule, username, sendQui
         {
             !isFetchingModule &&
             <div>
-                <Nav username={ username } />
                 <div className="container module">
 
                     <Link to={ `${module.module_id}/leaderboard` }>
@@ -55,7 +53,6 @@ Module.propTypes = {
     module: PropTypes.object,
     quizzes: PropTypes.array,
     isFetchingModule: PropTypes.bool.isRequired,
-    username: PropTypes.string,
     sendQuizInvite: PropTypes.func.isRequired
 };
 

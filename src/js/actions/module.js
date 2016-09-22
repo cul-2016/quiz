@@ -42,7 +42,7 @@ export const getModule = (module_id, is_lecturer, user_id) => {
 
         dispatch(getModuleRequest());
 
-        axios.get(`get-module?module_id=${module_id}&is_lecturer=${is_lecturer}&user_id=${user_id}`)
+        axios.get(`get-module?is_lecturer=${is_lecturer}&user_id=${user_id}&module_id=${module_id}`)
             .then((response) => {
                 dispatch(getModuleSuccess(is_lecturer, response.data));
             }, (error) => {
@@ -110,12 +110,12 @@ export const getModuleMembersFailure = (error) => ({
 // REMOVE_MODULE_MEMBER actions
 //
 
-export const removeModuleMember = (module_id, user_id) => {
+export const removeModuleMember = (user_id, module_id) => {
     return (dispatch) => {
 
         dispatch(removeModuleMemberRequest());
 
-        axios.get(`remove-module-member?module_id=${module_id}&user_id=${user_id}`)
+        axios.get(`remove-module-member?user_id=${user_id}&module_id=${module_id}`)
             .then(() => {
 
                 dispatch(removeModuleMemberSuccess());

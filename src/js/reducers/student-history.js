@@ -29,6 +29,9 @@ export function studentHistory (state = initialState, action) {
             error: { $set: action.error }
         });
 
+    case actionsTypes.CLEAR_STUDENT_HISTORY:
+        return initialState;
+
     default:
         return state;
     }

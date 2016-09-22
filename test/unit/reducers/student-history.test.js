@@ -73,3 +73,24 @@ test('GET_STUDENT_HISTORY_FAILURE works', (t) => {
 
     t.deepEqual(actual, expected);
 });
+
+test('GET_STUDENT_HISTORY_SUCCESS works', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(
+        Object.assign({},
+            studentHistoryState,
+            { isFetchingStudentHistory: false },
+            { history: data }
+        )
+    );
+    const action = {
+        type: 'CLEAR_STUDENT_HISTORY',
+    };
+
+    const actual = reducer(initialState, action);
+    const expected = Object.assign({}, studentHistoryState);
+
+    t.deepEqual(actual, expected);
+});
