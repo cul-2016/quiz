@@ -33,24 +33,22 @@ class QuizMembers extends Component {
 
         let mappedMembers = members.map((member, i) => {
             return (
-                <div key={i} className="column is-8 is-offset-2 ">
-                    <div className="columns quiz-members">
-                        <div className="column is-5 email">
-                            <p>{ member.email }</p>
-                        </div>
-                        <div className="column is-3 username">
-                            <p>{ member.username }</p>
-                        </div>
-                        <div className="column is-1 score">
-                            <p>{ member.score }</p>
-                        </div>
-                        <div className="column is-2 edit-score-button">
-                            <Link to={ `${params.module_id}/${params.quiz_id}/${i}/edit-score` }>
-                                <button className="button is-warning">Edit Score</button>
-                            </Link>
-                        </div>
-                    </div>
-                </div>
+                <tr key={ i } className="quiz-members">
+                    <td>
+                        <p>{ member.email }</p>
+                    </td>
+                    <td>
+                        <p>{ member.username }</p>
+                    </td>
+                    <td>
+                        <p>{ member.score }</p>
+                    </td>
+                    <td>
+                        <Link to={ `${params.module_id}/${params.quiz_id}/${i}/edit-score` }>
+                            <button className="button is-warning">Edit Score</button>
+                        </Link>
+                    </td>
+                </tr>
             );
         });
 
@@ -62,26 +60,33 @@ class QuizMembers extends Component {
                 {
                     !isFetchingQuizMembers && members &&
                     <div className="quiz-members">
-                        <button className="button" onClick={ () => this.showQuizQuestions() }>
-                            Show quiz questions
-                        </button>
+
                         <QuizMembersModal isVisible={ this.state.isModalVisible } questions={ questions } hide={ this.hideQuizQuestions }/>
-                        <div>
-                            <h2 className="has-text-centered"> Quiz Members </h2>
-                            <div className="column is-8 is-offset-2">
-                                <div className="columns">
-                                    <div className="column is-5">
+                        <h2 className="has-text-centered"> Quiz Members </h2>
+
+                        <div className="has-text-centered">
+                            <button className="button is-info" onClick={ () => this.showQuizQuestions() }>
+                                Show quiz questions
+                            </button>
+                        </div>
+
+                        <div className="section">
+                            <table className="table">
+                                <thead>
+                                    <th>
                                         <label className="label">Email</label>
-                                    </div>
-                                    <div className="column is-3">
+                                    </th>
+                                    <th>
                                         <label className="label">Nickname</label>
-                                    </div>
-                                    <div className="column is-3">
+                                    </th>
+                                    <th colSpan="2">
                                         <label className="label">Score</label>
-                                    </div>
-                                </div>
-                            </div>
-                            { mappedMembers }
+                                    </th>
+                                </thead>
+                                <tbody>
+                                    { mappedMembers }
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 
