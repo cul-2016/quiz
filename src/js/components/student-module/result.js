@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import classnames from 'classnames';
 import normaliseText from '../../lib/normaliseText';
+// import trophy from '../../../public/trophy.png';
 
 
 const Result = ({ location, score, newTrophies }) => {
@@ -13,7 +14,7 @@ const Result = ({ location, score, newTrophies }) => {
 
         return (
             <div key={ i } className="column animated bounceInUp">
-                <i className="fa fa-trophy awarded" />
+                <div className="trophy" />
                 <p>{ normaliseText(trophy) }</p>
             </div>
         );

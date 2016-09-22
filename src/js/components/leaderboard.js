@@ -5,17 +5,27 @@ const Leaderboard = ({ leaderboard }) => {
 
     let mappedLeaderboard = leaderboard.map((user, i) => {
         return (
-                <div className="box narrow" key={ i }>
-                    <div>
-                    { `${user.username}: ${user.average}` }
-                    </div>
-                </div>
+                <li className="columns" key={ i }>
+                        <span className="rank-number column is-1">{ `${i + 9}` }</span>
+                        <div className="column is-7">
+                            <span className="subtitle is-4">{ user.username }</span>
+                        </div>
+                        <div className="column">
+                            <span className="subtitle is-4">{ user.average }</span>
+                        </div>
+                </li>
         );
     });
 
     return (
-        <div>
-            { mappedLeaderboard }
+        <div className="leaderboard container average">
+            <h1 className="has-text-centered">Leaderboard</h1>
+            <div className="section">
+
+                <ol className="">
+                        { mappedLeaderboard }
+                </ol>
+            </div>
         </div>
     );
 };
