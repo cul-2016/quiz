@@ -7,7 +7,7 @@ const ReviewButtons = ({ isAnswerShowing, handleIsAnswerShowing, handleIncrement
         "display-none": isAnswerShowing
     });
 
-    let nextButtonClasses = classnames("button is-large is-info", {
+    let nextButtonClasses = classnames("button is-large is-warning", {
         "display-none": !isAnswerShowing || numQuestions === currentQuizIndex + 1
     });
 
@@ -31,7 +31,7 @@ const ReviewButtons = ({ isAnswerShowing, handleIsAnswerShowing, handleIncrement
         <div className="column is-8 is-offset-2 has-text-centered review-buttons">
 
             <button className={ answerButtonClasses } onClick={ handleIsAnswerShowing }>
-                Answer
+                Reveal correct answer
             </button>
 
             <button className={ nextButtonClasses } onClick={ clickNext }>
@@ -39,13 +39,13 @@ const ReviewButtons = ({ isAnswerShowing, handleIsAnswerShowing, handleIncrement
             </button>
 
             <Link to={`${params.module_id}/lecturer`} className={ finishButtonClasses } onClick={ endReview }>
-                <button className="button is-large is-info">
+                <button className="button is-large is-info is-inverted is-info">
                     Finish
                 </button>
             </Link>
 
             <Link to={`${params.module_id}/leaderboard`} className={ leaderboardButtonClasses } onClick={ endReview }>
-                <button className="button is-large is-success">
+                <button className="button is-large is-success is-inverted is-info">
                     View Leaderboard
                 </button>
             </Link>
