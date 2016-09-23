@@ -4,6 +4,7 @@ import { store } from './store';
 import { hashHistory } from 'react-router';
 import { openQuiz, closeQuiz } from './actions/module';
 import { setQuizDetails, startQuiz, endQuiz, setNextQuestion, updateNumParticipants } from './actions/live-quiz';
+import showNavbar from './lib/showNavbar';
 
 let uri = process.env.DEVELOPMENT ? `${location.protocol}//${location.hostname}:9000` : '';
 export const socketClient = io(uri);
@@ -48,6 +49,7 @@ socketClient.on('receive_end_of_quiz', (quiz_id) => {
     console.log('received end of quiz notification', quiz_id);
     store.dispatch(endQuiz());
     store.dispatch(closeQuiz());
+    showNavbar();
     hashHistory.push(`${module_id}/${quiz_id}/result`);
 });
 
@@ -56,6 +58,7 @@ socketClient.on('receive_abort_quiz', (quiz_id) => {
     console.log('received abort quiz notification', quiz_id);
     store.dispatch(endQuiz());
     store.dispatch(closeQuiz());
+    showNavbar();
     hashHistory.push(`${module_id}/student`);
 });
 
