@@ -13,3 +13,15 @@
         }
     }
 }
+
+.result {
+
+    .trophy {
+        background-image: url("../../public/trophy.png");
+        background-size: 90px 90px;
+        width: 90px;
+        height: 90px;
+        background-repeat: no-repeat;
+        margin: 0 auto;
+    }
+}

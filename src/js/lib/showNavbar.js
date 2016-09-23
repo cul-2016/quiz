@@ -3,7 +3,7 @@
  * @param {event} event - (optional) - event object if function is run by an on click listener
  */
 
-export function showNavbar (event) {
+export default function showNavbar (event) {
 
     if (event) {
         event.preventDefault();

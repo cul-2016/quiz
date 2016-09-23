@@ -5,7 +5,6 @@ import normaliseText from '../../lib/normaliseText';
 import showNavbar from '../../lib/showNavbar';
 
 
-
 const Result = ({ location, score, newTrophies }) => {
 
     let module_id = location.pathname.split('/')[1];
