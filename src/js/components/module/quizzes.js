@@ -20,6 +20,10 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id }) => {
         });
 
         let settingClass = classnames("tag is-warning is-medium settings-tag", {
+            "display-none": !quiz.is_presented
+        });
+
+        let editQuizClass = classnames("tag is-warning is-medium settings-tag", {
             "display-none": quiz.is_presented
         });
 
@@ -32,13 +36,13 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id }) => {
                 <td><i className={ is_last_quizClasses } /></td>
                 <td>
                     <Link to={`${module_id}/${quiz.quiz_id}/edit-quiz`}>
-                        <span className={ settingClass }>
+                        <span title="Edit Quiz" className={ editQuizClass }>
                             <i className="fa fa-edit"></i>
                         </span>
                     </Link>
 
                     <Link to={ `${module_id}/${quiz.quiz_id}/members` }>
-                        <span className={ settingClass }>
+                        <span title="Quiz Admin" className={ settingClass }>
                             <i className="fa fa-cog"></i>
                         </span>
                     </Link>

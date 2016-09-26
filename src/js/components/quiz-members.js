@@ -63,6 +63,16 @@ class QuizMembers extends Component {
 
                         <QuizMembersModal isVisible={ this.state.isModalVisible } questions={ questions } hide={ this.hideQuizQuestions }/>
                         <h2 className="has-text-centered"> Quiz Members </h2>
+                        <div className="column">
+                            <Link to={ `/${this.props.params.module_id}/lecturer` }>
+                                <button className="button is-3 is-light is-inverted">
+                                    <span className="icon">
+                                        <i className="fa fa-chevron-left"></i>
+                                    </span>
+                                    <span>Back to { this.props.params.module_id }</span>
+                                </button>
+                            </Link>
+                        </div>
 
                         <div className="has-text-centered">
                             <button className="button is-info" onClick={ () => this.showQuizQuestions() }>
