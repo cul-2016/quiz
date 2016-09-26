@@ -1,9 +1,10 @@
 import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
 import Questions from './questions';
 import classnames from 'classnames';
 
 
-const NewQuiz = ({ newQuiz, handleAddQuestion, handleDeleteQuestion, handleInputChange, handleQuizNameChange, handleSaveQuiz, handleIsLastQuiz, location }) => {
+const NewQuiz = ({ newQuiz, handleAddQuestion, handleDeleteQuestion, handleInputChange, handleQuizNameChange, handleSaveQuiz, handleIsLastQuiz, location, params }) => {
 
     const questionsValidation = newQuiz.questions.map((question) => {
         if (!question.question || !question.a || !question.b || !question.correct_answer){
@@ -24,7 +25,17 @@ const NewQuiz = ({ newQuiz, handleAddQuestion, handleDeleteQuestion, handleInput
     });
 
     return (
-            <div>
+            <div className="new-quiz">
+                <div className="column is-offset-3">
+                    <Link to={ `/${params.module_id}/lecturer` }>
+                        <button className="button is-3 is-light is-inverted">
+                            <span className="icon">
+                                <i className="fa fa-chevron-left"></i>
+                            </span>
+                            <span>Back to { params.module_id }</span>
+                        </button>
+                    </Link>
+                </div>
                 <div className="columns">
                     <div className="column is-5 is-offset-3 has-text-centered">
                         <label className="label">
@@ -57,7 +68,7 @@ const NewQuiz = ({ newQuiz, handleAddQuestion, handleDeleteQuestion, handleInput
                     handleInputChange={ handleInputChange }
                     handleDeleteQuestion={ handleDeleteQuestion } />
 
-                <div className="column is-8 is-offset-2 has-text-centered">
+                <div className="column is-6 is-offset-3 has-text-centered">
                     <button className="button is-info add-question" onClick={ handleAddQuestion }>
                         Add Question
                     </button>
@@ -79,7 +90,8 @@ NewQuiz.propTypes = {
     handleQuizNameChange: PropTypes.func.isRequired,
     handleSaveQuiz: PropTypes.func.isRequired,
     handleIsLastQuiz: PropTypes.func.isRequired,
-    location: PropTypes.object.isRequired
+    location: PropTypes.object.isRequired,
+    params: PropTypes.object.isRequired
 };
 
 

@@ -16,7 +16,7 @@ const Trophies = ({ trophies }) => {
 
     return (
         <div className="section column">
-            <h4>Trophies</h4>
+            <h3>Trophies</h3>
             <table className="table">
                 <tbody>
                     { mappedTrophies }

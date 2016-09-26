@@ -2,10 +2,15 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import classnames from 'classnames';
 import normaliseText from '../../lib/normaliseText';
-// import trophy from '../../../public/trophy.png';
+
 
 
 const Result = ({ location, score, newTrophies }) => {
+
+    let resetNav = (e) => {
+        e.preventDefault;
+        TweenMax.to('.nav', 0.1, { y: 0 }); //eslint-disable-line no-undef
+    };
 
     let module_id = location.pathname.split('/')[1];
     newTrophies = newTrophies || [];
@@ -40,7 +45,7 @@ const Result = ({ location, score, newTrophies }) => {
             </div>
             <div className="hero-foot">
                 <Link to={ `/${module_id}/student` }>
-                    <button className="button is-large is-success is-fullwidth">
+                    <button onClick={ (e) => { resetNav(e); } }className="button is-large is-success is-fullwidth">
                         Finish
                     </button>
                 </Link>

@@ -24,6 +24,7 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex, nextQuestion, isQu
 
     return (
         <section className="live-quiz container">
+
             <div className="has-text-centered" >
                 <h1>{ name }</h1>
 
@@ -33,13 +34,13 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex, nextQuestion, isQu
                 {
                     !isQuizStarted && !is_lecturer &&
                     <div className="student-view">
-                        <div className="section has-text-centered">
+                        <div className="has-text-centered">
                             Get ready! <br/> The quiz will start in a moment.
                         </div>
                     </div>
                 }
                 {
-                    !isQuizStarted && is_lecturer && 
+                    !isQuizStarted && is_lecturer &&
                     <h2 className="has-text-centered">
                         Number of Participants: { numParticipants }
                     </h2>
@@ -76,7 +77,6 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex, nextQuestion, isQu
                 quiz_id={ quiz_id }
                 response={ response } />
         </section>
-
     );
 };
 

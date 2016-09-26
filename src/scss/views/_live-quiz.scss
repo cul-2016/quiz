@@ -1,16 +1,23 @@
 .live-quiz, .review {
 
-    margin-top: 4em;
+    background-image: -webkit-linear-gradient(309deg, #13bfdf 0%, #42afe3 71%, #53a1eb 100%);
+    background-image: linear-gradient(141deg, #13bfdf 0%, #42afe3 71%, #53a1eb 100%);
+    min-width: 100vw;
+    min-height: 100vh;
+    margin: 0 !important;
+    padding: 2em;
 
     @media screen and (max-width: 768px) {
         margin-top: 2em;
 
         h3 {
+            color: $off-black;
             margin-top: 1em !important;
         }
     }
 
     h3 {
+        color: $off-black;
         font-weight: 500;
     }
 
@@ -19,9 +26,8 @@
     }
 
     .student-view {
-        .section {
-            font-size: 3em;
-            margin: auto;
-        }
+        font-size: 3em;
+        margin: auto;
+        color: white;
     }
 }

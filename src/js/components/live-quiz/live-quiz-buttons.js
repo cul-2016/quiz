@@ -7,11 +7,11 @@ const LiveQuizButtons = ({ is_lecturer, numQuestions, nextQuestionIndex, nextQue
         "display-none": !is_lecturer || isQuizStarted
     });
 
-    let nextButtonClasses = classnames("button is-large is-info", {
+    let nextButtonClasses = classnames("button is-large is-warning", {
         "display-none": !is_lecturer || nextQuestionIndex === 0 || nextQuestionIndex === numQuestions
     });
 
-    let endButtonClasses = classnames("button is-large is-danger", {
+    let endButtonClasses = classnames("button is-large is-success", {
         "display-none": !is_lecturer || nextQuestionIndex !== numQuestions
     });
 

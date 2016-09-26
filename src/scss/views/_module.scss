@@ -1,5 +1,5 @@
-
 .module {
+    padding-top: 2em;
 
     @media screen and (min-width: 769px) {
         .section {
@@ -29,8 +29,8 @@
             list-style: none;
             min-width: 100px;
         }
-        li {
-
+        .settings-tag {
+            margin: 0 0.3em;
         }
     }
 }

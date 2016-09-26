@@ -15,7 +15,15 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id }) => {
             "fa-check": quiz.is_last_quiz
         });
 
-        let buttonClass = classnames("button is-success", {
+        let buttonClass = classnames("tag is-success is-medium", {
+            "display-none": quiz.is_presented
+        });
+
+        let settingClass = classnames("tag is-warning is-medium settings-tag", {
+            "display-none": !quiz.is_presented
+        });
+
+        let editQuizClass = classnames("tag is-warning is-medium settings-tag", {
             "display-none": quiz.is_presented
         });
 
@@ -23,25 +31,27 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id }) => {
             <tr key={ index }>
                 <td>{ quiz.name }</td>
                 <td>{+quiz.num_questions}</td>
-                <td>
-                    <Link to={`${module_id}/${quiz.quiz_id}/members`}>
-                        {+quiz.num_entries}
-                    </Link>
-                </td>
+                <td>{+quiz.num_entries}</td>
                 <td><i className={ iconClasses } /></td>
                 <td><i className={ is_last_quizClasses } /></td>
+                <td>
+                    <Link to={`${module_id}/${quiz.quiz_id}/edit-quiz`}>
+                        <span title="Edit Quiz" className={ editQuizClass }>
+                            <i className="fa fa-edit"></i>
+                        </span>
+                    </Link>
+
+                    <Link to={ `${module_id}/${quiz.quiz_id}/members` }>
+                        <span title="Quiz Admin" className={ settingClass }>
+                            <i className="fa fa-cog"></i>
+                        </span>
+                    </Link>
+                </td>
                 <td>
                     <Link to={`${location.pathname}/live`}>
                         <span className={ buttonClass }
                             onClick={ () => sendQuizInvite(quiz.quiz_id, quiz.name) }>
                             Invite students to quiz
-                        </span>
-                    </Link>
-                </td>
-                <td>
-                    <Link to={`${module_id}/${quiz.quiz_id}/edit-quiz`}>
-                        <span className={ buttonClass }>
-                            Edit Quiz
                         </span>
                     </Link>
                 </td>

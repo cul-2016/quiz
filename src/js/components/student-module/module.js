@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Link } from 'react-router';
+import { hashHistory } from 'react-router';
 import classnames from 'classnames';
 import Tabs from './tabs';
 import Spinner from '../general/spinner';
@@ -16,13 +16,29 @@ const StudentModule = ({ location, children,
         "animated-infinite pulse": isQuizOpen
     });
 
-    let buttonClasses = classnames("button is-medium", {
+    let buttonClasses = classnames("button is-medium button-expand-animation", {
         "is-warning": isQuizOpen,
         "is-disabled": !isQuizOpen
     });
 
+    let handleAnimation = (e, livePath) => {
+        e.preventDefault();
+
+        /* eslint-disable no-undef */
+        const tl = new TimelineMax();
+        tl.add( TweenMax.to('.button-expand-animation', 0.1, { css: { color: 'transparent' } }));
+        tl.add( TweenMax.fromTo('.nav', 0.5, { y: 0 }, { y: -70, ease: Power1.easeOut }) );
+        tl.add( TweenMax.fromTo('.button-expand-animation', 1.0, { scale: 1, backgroundColor: '#fce473' }, { scale: 50, backgroundColor: '#42afe3', ease: Circ.easeIn }));
+        /* eslint-enable */
+        setTimeout( () => {
+            hashHistory.push(livePath);
+            handleJoiningQuiz(params.module_id);
+        }, 1600);
+
+    };
+
     let url = location.pathname.split('/');
-    let livePath = isQuizOpen ? `/${url[1]}/${url[2]}/live` : '#';
+    let livePath = isQuizOpen ? `/${url[1]}/${url[2]}/live` : location.pathname;
 
     return (
         <div>
@@ -33,11 +49,9 @@ const StudentModule = ({ location, children,
             !isFetchingModule &&
             <div>
                 <div className={ buttonAreaClasses }>
-                    <Link to={ livePath } onClick={ () => { handleJoiningQuiz(params.module_id); }}>
-                        <button className={ buttonClasses }>
+                        <button onClick={ (e) => { handleAnimation(e, livePath); }} className={ buttonClasses }>
                             JOIN THE LIVE QUIZ!
                         </button>
-                    </Link>
                 </div>
 
                 <Trophies trophies={ trophies } trophies_awarded={ trophies_awarded } />

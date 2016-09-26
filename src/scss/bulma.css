@@ -4973,7 +4973,8 @@ a.box:active {
   .modal-content, .modal-card {
     margin: 0 auto;
     max-height: calc(100vh - 40px);
-    width: 640px;
+    min-width: 640px;
+    max-width: calc(100vw - 40px); /* added a max width for review modal */
   }
 }
 

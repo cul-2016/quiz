@@ -1,26 +1,6 @@
 .current-question {
     text-align: center;
 
-    @media screen and (max-width: 768px) {
-        h1 {
-            font-weight: 600;
-            font-size: 2em;
-        }
-
-        .answer {
-            padding: 20px;
-
-            span:first-child {
-                font-size: 1.3em;
-                font-weight: 500;
-            }
-            span:nth-child(2) {
-                font-size: 1.3em;
-                font-weight: 200;
-            }
-        }
-    }
-
     h1 {
         font-weight: 600;
         font-size: 3em;
@@ -44,8 +24,28 @@
             font-weight: 700;
         }
     }
+
+    @media screen and (max-width: 768px) {
+        h1 {
+            font-weight: 600;
+            font-size: 2em;
+        }
+
+        .answer {
+            padding: 20px;
+
+            span:first-child {
+                font-size: 1.3em;
+                font-weight: 500;
+            }
+            span:nth-child(2) {
+                font-size: 1.3em;
+                font-weight: 200;
+            }
+        }
+    }
 }
 
 .response {
-    background-color: $dark-blue;
+    background-color: $bulma-is-warning;
 }
