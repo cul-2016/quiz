@@ -59,7 +59,7 @@ class QuizMembers extends Component {
                 }
                 {
                     !isFetchingQuizMembers && members &&
-                    <div className="quiz-members">
+                    <div className="quiz-members container average">
 
                         <QuizMembersModal isVisible={ this.state.isModalVisible } questions={ questions } hide={ this.hideQuizQuestions }/>
                         <h2 className="has-text-centered"> Quiz Members </h2>

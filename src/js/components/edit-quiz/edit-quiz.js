@@ -1,6 +1,9 @@
 import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
 import Questions from './questions';
 import classnames from 'classnames';
+import { store } from '../../store';
+import { clearNewQuizState } from '../../actions/new-quiz';
 
 
 const EditQuiz = ({ questions, isUpdatingQuiz, name, is_last_quiz, deletedQuestions, handleAddQuestion, handleInputChange, handleQuizNameChange, handleEditQuiz, handleDeleteQuestion, handleIsLastQuiz, params }) => {
@@ -24,7 +27,17 @@ const EditQuiz = ({ questions, isUpdatingQuiz, name, is_last_quiz, deletedQuesti
     });
 
     return (
-            <div>
+            <div className="edit-quiz">
+                <div className="column is-offset-3">
+                    <Link to={ `/${params.module_id}/lecturer` }>
+                        <button onClick={ () => store.dispatch(clearNewQuizState()) }className="button is-3 is-light is-inverted">
+                            <span className="icon">
+                                <i className="fa fa-chevron-left"></i>
+                            </span>
+                            <span>Back to { params.module_id }</span>
+                        </button>
+                    </Link>
+                </div>
                 <div className="columns">
                     <div className="column is-5 is-offset-3 has-text-centered">
                         <label className="label">
