@@ -4,7 +4,7 @@ import StudentHistory from '../student-module/history';
 import Spinner from '../general/spinner';
 
 
-const Modal = ({ isVisible, history, medalConditions, hide, username }) => {
+const QuizHistoryModal = ({ isVisible, history, medalConditions, hide, username }) => {
 
     let modalClasses = classnames("modal", {
         "is-active": isVisible
@@ -28,7 +28,7 @@ const Modal = ({ isVisible, history, medalConditions, hide, username }) => {
     );
 };
 
-Modal.propTypes = {
+QuizHistoryModal.propTypes = {
     isVisible: PropTypes.bool.isRequired,
     history: PropTypes.array,
     medalConditions: PropTypes.array,
@@ -36,4 +36,4 @@ Modal.propTypes = {
     username: PropTypes.string.isRequired
 };
 
-export default Modal;
+export default QuizHistoryModal;
