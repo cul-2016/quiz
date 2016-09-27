@@ -6,6 +6,9 @@
 
 export default function emitSendQuizInvite (socketClient, quizInfo) {
 
+    socketClient.emit('send_quiz_invite', quizInfo, (msg) => {
+        console.log(msg);
+    });
     return setInterval(() => {
         socketClient.emit('send_quiz_invite', quizInfo, (msg) => {
             console.log(msg);
