@@ -1,10 +1,11 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { store } from '../store';
 import { clearModuleState } from '../actions/module';
+import classnames from 'classnames';
 
 
-class Dashboard extends React.Component {
+class Dashboard extends Component {
 
     constructor (props) {
         super(props);
@@ -15,9 +16,16 @@ class Dashboard extends React.Component {
     }
 
     render () {
-        let moduleList = this.props.modules.map((module, i) => {
 
-            let role = this.props.is_lecturer ? 'lecturer' : 'student';
+        let { modules, is_lecturer } = this.props;
+
+        let headerClasses = classnames("level module-header is-mobile", {
+            "display-none": modules.length === 0
+        });
+
+        let moduleList = modules.map((module, i) => {
+
+            let role = is_lecturer ? 'lecturer' : 'student';
 
             return (
                 <Link key={ i } to={ `${module.module_id}/${role}` } >
@@ -42,22 +50,33 @@ class Dashboard extends React.Component {
             <div className="container dashboard">
                     <h2 className="has-text-centered"> Modules </h2>
                     {
-                        this.props.is_lecturer &&
+                        is_lecturer &&
                             <Link to="add-new-module">
                                 <button className="button is-primary">
-                                    Add a new module
+                                    <span className="icon">
+                                        <i className="fa fa-plus" />
+                                    </span>
+                                    <span>
+                                        Add a new module
+                                    </span>
                                 </button>
                             </Link>
                     }
                     {
-                        !this.props.is_lecturer &&
+                        !is_lecturer &&
                             <Link to="join-module">
                                 <button className="button is-primary is-medium">
                                     Join a module
                                 </button>
                             </Link>
                     }
-                    <div className="level module-header is-mobile">
+                    {
+                        modules.length === 0 &&
+                            <div className="notification">
+                                Create your first module by clicking the button above.
+                            </div>
+                    }
+                    <div className={ headerClasses }>
                         <div className="level-item">
                             Module name
                         </div>

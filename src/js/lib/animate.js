@@ -1,6 +1,5 @@
 /* eslint-disable no-undef */
 
-
 /**
  * Adds an elastic style animation to a DOM element
  * @param {string} selector - JQuery-style selector for the target DOM element(s)
