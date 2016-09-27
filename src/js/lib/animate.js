@@ -1,8 +1,6 @@
-import 'gsap';
 /* eslint-disable no-undef */
 
 export function elastic (selector) {
-
 
     TweenMax.staggerFrom(
         selector,
@@ -13,6 +11,6 @@ export function elastic (selector) {
             ease: Back.easeOut.config(2, 0.5),
             delay: 1.5, scale: 0
         },
-        0.6
+        0.8
     );
 }
