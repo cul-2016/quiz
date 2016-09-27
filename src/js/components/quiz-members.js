@@ -2,6 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import { Link } from 'react-router';
 import Spinner from './general/spinner';
 import QuizMembersModal from './quiz-members-modal';
+import EditScoreModal from './edit-score-modal';
 import { store } from '../store.js';
 
 class QuizMembers extends Component {
@@ -9,14 +10,32 @@ class QuizMembers extends Component {
     constructor (props) {
         super(props);
         this.state = {
-            isModalVisible: false
+            isModalVisible: false,
+            isEditScoreVisible: false,
+            member_key: undefined
         };
         this.showQuizQuestions = this.showQuizQuestions.bind(this);
         this.hideQuizQuestions = this.hideQuizQuestions.bind(this);
+        this.showEditScore = this.showEditScore.bind(this);
+        this.hideEditScore = this.hideEditScore.bind(this);
+
     }
     showQuizQuestions () {
         this.setState({
             isModalVisible: true
+        });
+    }
+
+    showEditScore (i) {
+        this.setState({
+            member_key: i,
+            isEditScoreVisible: true
+        });
+    }
+
+    hideEditScore () {
+        this.setState({
+            isEditScoreVisible: false
         });
     }
 
@@ -29,7 +48,6 @@ class QuizMembers extends Component {
     getQuizName () {
         let quizzesArray = store.getState().module.quizzes;
         let quiz_id = this.props.params.quiz_id;
-        console.log(quizzesArray, quiz_id);
         return quizzesArray.filter((quiz) => {
             return quiz_id == quiz.quiz_id;
         }).map((quiz) => {
@@ -38,30 +56,27 @@ class QuizMembers extends Component {
     }
 
     render () {
-        let { members, isFetchingQuizMembers, questions, params } = this.props;
+        let { members, isFetchingQuizMembers, questions, params, handleUpdateScore, handleEditScore } = this.props;
         let quizName = this.getQuizName();
-        console.log(quizName);
 
 
 
         let mappedMembers = members.map((member, i) => {
             return (
-                <tr key={ i } className="quiz-members">
-                    <td>
-                        <p>{ member.email }</p>
-                    </td>
-                    <td>
-                        <p>{ member.username }</p>
-                    </td>
-                    <td>
-                        <p>{ member.score }</p>
-                    </td>
-                    <td>
-                        <Link to={ `${params.module_id}/${params.quiz_id}/${i}/edit-score` }>
-                            <button className="button is-warning">Edit Score</button>
-                        </Link>
-                    </td>
-                </tr>
+                    <tr key={ i } className="quiz-members">
+                        <td>
+                            <p>{ member.email }</p>
+                        </td>
+                        <td>
+                            <p>{ member.username }</p>
+                        </td>
+                        <td>
+                            <p>{ member.score }</p>
+                        </td>
+                        <td>
+                                <button className="button is-warning" onClick={ () => this.showEditScore(i) }>Edit Score</button>
+                        </td>
+                    </tr>
             );
         });
 
@@ -73,7 +88,15 @@ class QuizMembers extends Component {
                 {
                     !isFetchingQuizMembers && members &&
                     <div className="quiz-members container average">
-
+                        <EditScoreModal
+                            isVisible={ this.state.isEditScoreVisible }
+                            hide={ this.hideEditScore }
+                            member_key={ this.state.member_key }
+                            members={ store.getState().quizMembers.members }
+                            quiz_id={ params.quiz_id }
+                            module_id={ params.module_id }
+                            handleEditScore={ handleEditScore }
+                            handleUpdateScore={ handleUpdateScore }/>
                         <QuizMembersModal isVisible={ this.state.isModalVisible } questions={ questions } hide={ this.hideQuizQuestions }/>
                         <h2 className="has-text-centered"> Quiz History </h2>
                         <h3 className="has-text-centered"> { quizName } </h3>
@@ -125,7 +148,9 @@ QuizMembers.propTypes = {
     members: PropTypes.array,
     isFetchingQuizMembers: PropTypes.bool,
     params: PropTypes.object,
-    questions: PropTypes.array
+    questions: PropTypes.array,
+    handleEditScore: PropTypes.func,
+    handleUpdateScore: PropTypes.func
 };
 
 export default QuizMembers;
