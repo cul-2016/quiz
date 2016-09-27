@@ -2,7 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import { Link } from 'react-router';
 import Spinner from './general/spinner';
 import QuizMembersModal from './quiz-members-modal';
-
+import { store } from '../store.js';
 
 class QuizMembers extends Component {
 
@@ -14,7 +14,6 @@ class QuizMembers extends Component {
         this.showQuizQuestions = this.showQuizQuestions.bind(this);
         this.hideQuizQuestions = this.hideQuizQuestions.bind(this);
     }
-
     showQuizQuestions () {
         this.setState({
             isModalVisible: true
@@ -28,9 +27,17 @@ class QuizMembers extends Component {
     }
 
     render () {
-
         let { members, isFetchingQuizMembers, questions, params } = this.props;
+        let quizzesObject = store.getState().module.quizzes;
+        let quiz_id = this.props.params.quiz_id;
+        let selectQuiz = Object.keys(quizzesObject).filter((quiz) => {
 
+            return quiz_id == quizzesObject[quiz].quiz_id;
+
+        });
+        let quizName = quizzesObject[selectQuiz].name;
+
+        
         let mappedMembers = members.map((member, i) => {
             return (
                 <tr key={ i } className="quiz-members">
@@ -62,7 +69,8 @@ class QuizMembers extends Component {
                     <div className="quiz-members container average">
 
                         <QuizMembersModal isVisible={ this.state.isModalVisible } questions={ questions } hide={ this.hideQuizQuestions }/>
-                        <h2 className="has-text-centered"> Quiz Members </h2>
+                        <h2 className="has-text-centered"> Quiz History </h2>
+                        <h3 className="has-text-centered"> { quizName } </h3>
                         <div className="column">
                             <Link to={ `/${this.props.params.module_id}/lecturer` }>
                                 <button className="button is-3 is-light is-inverted">
@@ -81,6 +89,7 @@ class QuizMembers extends Component {
                         </div>
 
                         <div className="section">
+                            <h3>Quiz Members</h3>
                             <table className="table">
                                 <thead>
                                     <th>

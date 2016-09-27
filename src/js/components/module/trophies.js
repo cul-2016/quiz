@@ -18,6 +18,12 @@ const Trophies = ({ trophies }) => {
         <div className="section column">
             <h3>Trophies</h3>
             <table className="table">
+                <thead>
+                    <tr>
+                        <th>Trophy for</th>
+                        <th>Condition</th>
+                    </tr>
+                </thead>
                 <tbody>
                     { mappedTrophies }
                 </tbody>
