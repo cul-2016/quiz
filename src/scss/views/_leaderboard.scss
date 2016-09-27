@@ -13,7 +13,11 @@
         .column {
             margin: 10px;
         }
-        margin: 0 3em;
+        margin: 0 0 0 3em;
+
+        .score-header {
+            text-align: right;
+        }
     }
 
     .section {

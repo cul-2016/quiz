@@ -12,7 +12,7 @@ const Leaderboard = ({ leaderboard, params }) => {
                         <span className="subtitle is-4">{ user.username }</span>
                     </div>
                     <div className="column">
-                        <span className="subtitle is-4">{ user.average }</span>
+                        <span className="subtitle is-4">{ Math.round(user.average) }</span>
                     </div>
                 </li>
         );
@@ -37,7 +37,7 @@ const Leaderboard = ({ leaderboard, params }) => {
                         <div className="column is-7 is-offset-1">
                             Nickname
                         </div>
-                        <div className="column">
+                        <div className="column score-header">
                             Average score (%)
                         </div>
                     </div>
