@@ -66,5 +66,3 @@ Result.propTypes = {
     score: PropTypes.number.isRequired,
     newTrophies: PropTypes.array
 };
-
-export default Result;
