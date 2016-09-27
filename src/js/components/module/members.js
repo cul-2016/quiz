@@ -40,18 +40,18 @@ class Members extends Component {
         let mappedMembers = members.map((member, i) => {
 
             return (
-                <tr key={ i } className="">
+                <tr key={ i }>
                     <td>{ member.user_id }</td>
                     <td>{ member.email }</td>
                     <td>{ member.username }</td>
-                    <td title="Quiz history" className="is-icon" onClick={ () => this.showQuizHistory(member.user_id, module_id) }>
-                        <span className="tag is-info is-medium">
-                            <i className="fa fa-list-ol"></i>
+                    <td title="Quiz scores" className="is-icon" onClick={ () => this.showQuizHistory(member.user_id, module_id) }>
+                        <span className="tag is-warning is-medium">
+                            <i className="fa fa-list-ol" />
                         </span>
                     </td>
                     <td title="Delete student" className="is-icon" onClick={ () => this.handleRemovingMember(member.user_id, module_id) }>
                         <span className="tag is-danger is-medium">
-                            <i className="fa fa-user-times"></i>
+                            <i className="fa fa-user-times" />
                         </span>
                     </td>
                 </tr>
