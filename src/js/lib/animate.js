@@ -1,5 +1,11 @@
 /* eslint-disable no-undef */
 
+
+/**
+ * Adds an elastic style animation to a DOM element
+ * @param {string} selector - JQuery-style selector for the target DOM element(s)
+ */
+
 export function elastic (selector) {
 
     TweenMax.staggerFrom(
@@ -15,6 +21,10 @@ export function elastic (selector) {
     );
 }
 
+/**
+ * Adds a fade out/fade in transition to a DOM element
+ * @param {string} selector - JQuery-style selector for the target DOM element(s)
+ */
 
 export function fadeTransition (selector) {
 
