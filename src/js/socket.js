@@ -5,7 +5,7 @@ import { hashHistory } from 'react-router';
 import { openQuiz, closeQuiz } from './actions/module';
 import { setQuizDetails, startQuiz, endQuiz, setNextQuestion, updateNumParticipants } from './actions/live-quiz';
 import showNavbar from './lib/showNavbar';
-import fadeTransition from './lib/fadeTransition';
+import { fadeTransition } from './lib/animate';
 
 let uri = process.env.DEVELOPMENT ? `${location.protocol}//${location.hostname}:9000` : '';
 export const socketClient = io(uri);
@@ -24,6 +24,7 @@ socketClient.on('num_participants', (numParticipants) => {
 socketClient.on('receive_quiz_invite', () => {
 
     console.log("have received quiz invite");
+    
     if (!store.getState().module.isQuizOpen) {
 
         store.dispatch(openQuiz());
@@ -33,7 +34,8 @@ socketClient.on('receive_quiz_invite', () => {
 socketClient.on('receive_next_question', (questionObj) => {
 
     console.log("received next question", questionObj.nextQuestion);
-    fadeTransition();
+
+    fadeTransition('.live-quiz');
     let isQuizStarted = store.getState().liveQuiz.isQuizStarted;
 
     setTimeout(() => {
@@ -50,7 +52,8 @@ socketClient.on('receive_next_question', (questionObj) => {
 socketClient.on('receive_end_of_quiz', (quiz_id) => {
 
     console.log('received end of quiz notification', quiz_id);
-    fadeTransition();
+
+    fadeTransition('.live-quiz');
     const module_id = store.getState().module.module_id;
 
     setTimeout(() => {
@@ -65,6 +68,7 @@ socketClient.on('receive_end_of_quiz', (quiz_id) => {
 socketClient.on('receive_abort_quiz', (quiz_id) => {
 
     console.log('received abort quiz notification', quiz_id);
+
     const module_id = store.getState().module.module_id;
 
     store.dispatch(endQuiz());
