@@ -8,7 +8,7 @@ const Medals = ({ medals }) => {
 
     return (
             <div className="section column">
-                <h4>Medals</h4>
+                <h3>Medals</h3>
                 <table className="table has-text-centered">
                     <tbody>
                         <tr>

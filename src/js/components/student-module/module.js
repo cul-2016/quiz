@@ -16,7 +16,7 @@ const StudentModule = ({ location, children,
         "animated-infinite pulse": isQuizOpen
     });
 
-    let buttonClasses = classnames("button is-medium testing-animation", {
+    let buttonClasses = classnames("button is-medium button-expand-animation", {
         "is-warning": isQuizOpen,
         "is-disabled": !isQuizOpen
     });
@@ -26,9 +26,9 @@ const StudentModule = ({ location, children,
 
         /* eslint-disable no-undef */
         const tl = new TimelineMax();
-        tl.add( TweenMax.to('.testing-animation', 0.1, { css: { color: 'transparent' } }));
+        tl.add( TweenMax.to('.button-expand-animation', 0.1, { css: { color: 'transparent' } }));
         tl.add( TweenMax.fromTo('.nav', 0.5, { y: 0 }, { y: -70, ease: Power1.easeOut }) );
-        tl.add( TweenMax.fromTo('.testing-animation', 1.0, { scale: 1, backgroundColor: '#fce473' }, { scale: 50, backgroundColor: '#42afe3', ease: Circ.easeIn }));
+        tl.add( TweenMax.fromTo('.button-expand-animation', 1.0, { scale: 1, backgroundColor: '#fce473' }, { scale: 50, backgroundColor: '#42afe3', ease: Circ.easeIn }));
         /* eslint-enable */
         setTimeout( () => {
             hashHistory.push(livePath);

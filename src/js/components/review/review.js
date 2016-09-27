@@ -17,8 +17,11 @@ const Review = ({ isFetchingReview, question, numQuestions, currentQuizIndex, is
             }
             <div>
                 <div className={ backButtonClasses }>
-                    <button onClick={ handleGoBack } className="button is-3">
-                        Back
+                    <button onClick={ handleGoBack } className="button is-3 is-light">
+                        <span className="icon">
+                            <i className="fa fa-chevron-left"></i>
+                        </span>
+                        <span>Back</span>
                     </button>
                 </div>
                 <div className="column has-text-centered" >

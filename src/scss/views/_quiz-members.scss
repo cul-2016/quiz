@@ -10,9 +10,14 @@
         font-size: 0.8em;
     }
     .section {
-        max-width: 750px;
         margin: 0 auto;
         margin-top: 2em;
+    }
+
+    .question {
+        h4 {
+            padding-top: 1em;
+        }
     }
 
     .quiz-review-questions {

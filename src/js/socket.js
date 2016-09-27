@@ -5,6 +5,7 @@ import { hashHistory } from 'react-router';
 import { openQuiz, closeQuiz } from './actions/module';
 import { setQuizDetails, startQuiz, endQuiz, setNextQuestion, updateNumParticipants } from './actions/live-quiz';
 import showNavbar from './lib/showNavbar';
+import fadeTransition from './lib/fadeTransition';
 
 let uri = process.env.DEVELOPMENT ? `${location.protocol}//${location.hostname}:9000` : '';
 export const socketClient = io(uri);
@@ -12,7 +13,6 @@ export const socketClient = io(uri);
 
 socketClient.on('we have connected', (id) => {
     console.log("We're connected!", id);
-    // handle in redux
 });
 
 socketClient.on('num_participants', (numParticipants) => {
@@ -33,29 +33,40 @@ socketClient.on('receive_quiz_invite', () => {
 socketClient.on('receive_next_question', (questionObj) => {
 
     console.log("received next question", questionObj.nextQuestion);
-
+    fadeTransition();
     let isQuizStarted = store.getState().liveQuiz.isQuizStarted;
 
-    if (!isQuizStarted) {
+    setTimeout(() => {
+        if (!isQuizStarted) {
 
-        store.dispatch(setQuizDetails(questionObj.quiz_id, questionObj.name));
-        store.dispatch(startQuiz());
-    }
-    store.dispatch(setNextQuestion(questionObj.nextQuestion));
+            store.dispatch(setQuizDetails(questionObj.quiz_id, questionObj.name));
+            store.dispatch(startQuiz());
+        }
+        store.dispatch(setNextQuestion(questionObj.nextQuestion));
+    }, 300);
+
 });
 
 socketClient.on('receive_end_of_quiz', (quiz_id) => {
-    const module_id = store.getState().module.module_id;
+
     console.log('received end of quiz notification', quiz_id);
-    store.dispatch(endQuiz());
-    store.dispatch(closeQuiz());
-    showNavbar();
-    hashHistory.push(`${module_id}/${quiz_id}/result`);
+    fadeTransition();
+    const module_id = store.getState().module.module_id;
+
+    setTimeout(() => {
+        store.dispatch(endQuiz());
+        store.dispatch(closeQuiz());
+        showNavbar();
+        hashHistory.push(`${module_id}/${quiz_id}/result`);
+    }, 400);
+
 });
 
 socketClient.on('receive_abort_quiz', (quiz_id) => {
-    const module_id = store.getState().module.module_id;
+
     console.log('received abort quiz notification', quiz_id);
+    const module_id = store.getState().module.module_id;
+
     store.dispatch(endQuiz());
     store.dispatch(closeQuiz());
     showNavbar();

@@ -1,4 +1,9 @@
 .leaderboard {
+    background-image: -webkit-linear-gradient(309deg, #13bfdf 0%, #42afe3 71%, #53a1eb 100%);
+    background-image: linear-gradient(141deg, #13bfdf 0%, #42afe3 71%, #53a1eb 100%);
+    min-height: 100vh;
+    padding-top: 2em;
+
     h1 {
         margin-bottom: 40px;
     }
@@ -13,7 +18,6 @@
 
     .section {
         box-shadow: 0 7px 30px rgba(62, 9, 11, 0.3);
-        border-radius: 5px;
     }
 
     li {

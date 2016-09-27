@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
 import classnames from 'classnames';
 import Details from './details';
 import Medals from './medals';
@@ -27,7 +28,16 @@ const NewModule = ({ isValidatingModuleID, moduleIDExists,
             <div>
                 <div className="new-module container">
                     <h2 className="has-text-centered"> Add a new module </h2>
-
+                    <div className="column">
+                        <Link to={ `/dashboard` }>
+                            <button className="button is-3 is-light is-inverted">
+                                <span className="icon">
+                                    <i className="fa fa-chevron-left"></i>
+                                </span>
+                                <span>Back to Dashboard</span>
+                            </button>
+                        </Link>
+                    </div>
                     <div className="notification container average is-info has-text-centered">
                         <p> { text.newModule } </p>
                     </div>
