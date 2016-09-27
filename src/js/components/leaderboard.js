@@ -12,7 +12,7 @@ const Leaderboard = ({ leaderboard, params }) => {
                         <span className="subtitle is-4">{ user.username }</span>
                     </div>
                     <div className="column">
-                        <span className="subtitle is-4">{ Math.round(user.average) }</span>
+                        <span className="subtitle is-4">{ parseFloat(user.average) }</span>
                     </div>
                 </li>
         );

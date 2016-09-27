@@ -26,18 +26,24 @@ class QuizMembers extends Component {
         });
     }
 
+    getQuizName () {
+        let quizzesArray = store.getState().module.quizzes;
+        let quiz_id = this.props.params.quiz_id;
+        console.log(quizzesArray, quiz_id);
+        return quizzesArray.filter((quiz) => {
+            return quiz_id == quiz.quiz_id;
+        }).map((quiz) => {
+            return quiz.name;
+        });
+    }
+
     render () {
         let { members, isFetchingQuizMembers, questions, params } = this.props;
-        let quizzesObject = store.getState().module.quizzes;
-        let quiz_id = this.props.params.quiz_id;
-        let selectQuiz = Object.keys(quizzesObject).filter((quiz) => {
+        let quizName = this.getQuizName();
+        console.log(quizName);
 
-            return quiz_id == quizzesObject[quiz].quiz_id;
 
-        });
-        let quizName = quizzesObject[selectQuiz].name;
 
-        
         let mappedMembers = members.map((member, i) => {
             return (
                 <tr key={ i } className="quiz-members">

@@ -21,7 +21,7 @@ const Trophies = ({ trophies }) => {
                 <thead>
                     <tr>
                         <th>Trophy for</th>
-                        <th>Condition</th>
+                        <th>Threshold</th>
                     </tr>
                 </thead>
                 <tbody>

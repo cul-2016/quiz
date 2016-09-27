@@ -14,7 +14,7 @@ const Medals = ({ medals }) => {
                         <tr>
                             <th></th>
                             <th>Medal</th>
-                            <th>Condition</th>
+                            <th>Threshold</th>
                         </tr>
                     </thead>
                     <tbody>

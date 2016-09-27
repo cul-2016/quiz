@@ -25,7 +25,7 @@ const EditQuiz = ({ members, params, handleUpdateScore, handleEditScore }) => {
                                 </Link>
                             </div>
                             <div className="has-text-centered">
-                                <h2 className="login-title">
+                                <h2>
                                   Edit Score
                                 </h2>
                                 <label className="label">Score</label>
