@@ -16,9 +16,9 @@ export default class Result extends Component {
 
         elastic('.trophy-container');
 
-        let { location, score, newTrophies } = this.props;
+        let { score, newTrophies, params } = this.props;
 
-        let module_id = location.pathname.split('/')[1];
+        let module_id = params.module_id;
         newTrophies = newTrophies || [];
 
         let trophiesToPresent = newTrophies.map((trophy, i) => {
@@ -31,8 +31,7 @@ export default class Result extends Component {
             );
         });
 
-        let scoreClasses = classnames("title score", {
-            "animated bounceInUp": true,
+        let scoreClasses = classnames("title score animated bounceInUp", {
             "large": trophiesToPresent.length === 0,
             "small": trophiesToPresent.length > 0
         });
@@ -63,7 +62,7 @@ export default class Result extends Component {
 }
 
 Result.propTypes = {
-    location: PropTypes.object,
+    params: PropTypes.object,
     score: PropTypes.number.isRequired,
     newTrophies: PropTypes.array
 };
