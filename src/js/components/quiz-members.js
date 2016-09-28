@@ -10,7 +10,7 @@ class QuizMembers extends Component {
     constructor (props) {
         super(props);
         this.state = {
-            isModalVisible: false,
+            isQuizQuestionsVisible: false,
             isEditScoreVisible: false,
             member_key: undefined
         };
@@ -22,13 +22,13 @@ class QuizMembers extends Component {
     }
     showQuizQuestions () {
         this.setState({
-            isModalVisible: true
+            isQuizQuestionsVisible: true
         });
     }
 
-    showEditScore (i) {
+    showEditScore (member_key) {
         this.setState({
-            member_key: i,
+            member_key: member_key,
             isEditScoreVisible: true
         });
     }
@@ -41,15 +41,15 @@ class QuizMembers extends Component {
 
     hideQuizQuestions () {
         this.setState({
-            isModalVisible: false
+            isQuizQuestionsVisible: false
         });
     }
 
     getQuizName () {
         let quizzesArray = store.getState().module.quizzes;
-        let quiz_id = this.props.params.quiz_id;
+        let quiz_id = parseInt(this.props.params.quiz_id);
         return quizzesArray.filter((quiz) => {
-            return quiz_id == quiz.quiz_id;
+            return quiz_id === quiz.quiz_id;
         }).map((quiz) => {
             return quiz.name;
         });
@@ -57,7 +57,7 @@ class QuizMembers extends Component {
 
     render () {
         let { members, isFetchingQuizMembers, questions, params, handleUpdateScore, handleEditScore } = this.props;
-        let quizName = this.getQuizName();
+        let quizName = this.getQuizName()[0];
 
 
 
@@ -97,7 +97,7 @@ class QuizMembers extends Component {
                             module_id={ params.module_id }
                             handleEditScore={ handleEditScore }
                             handleUpdateScore={ handleUpdateScore }/>
-                        <QuizMembersModal isVisible={ this.state.isModalVisible } questions={ questions } hide={ this.hideQuizQuestions }/>
+                        <QuizMembersModal isVisible={ this.state.isQuizQuestionsVisible } questions={ questions } hide={ this.hideQuizQuestions }/>
                         <h2 className="has-text-centered"> Quiz History </h2>
                         <h3 className="has-text-centered"> { quizName } </h3>
                         <div className="column">

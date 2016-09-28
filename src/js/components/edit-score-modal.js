@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import classnames from 'classnames';
 
-const EditQuiz = ({ members, member_key, quiz_id, module_id, handleUpdateScore, handleEditScore, hide, isVisible }) => {
+const EditScoreModal = ({ members, member_key, quiz_id, module_id, handleUpdateScore, handleEditScore, hide, isVisible }) => {
 
     let user_id, score, value;
     if (member_key !== undefined) {
@@ -43,7 +43,7 @@ const EditQuiz = ({ members, member_key, quiz_id, module_id, handleUpdateScore, 
     );
 };
 
-EditQuiz.propTypes = {
+EditScoreModal.propTypes = {
     members: PropTypes.array,
     module_id: PropTypes.string,
     quiz_id: PropTypes.string,
@@ -54,4 +54,4 @@ EditQuiz.propTypes = {
     isVisible: PropTypes.bool
 };
 
-export default EditQuiz;
+export default EditScoreModal;
