@@ -40,7 +40,7 @@ class Members extends Component {
     }
 
     showConfirmModal (user_id, module_id, email, username) {
-
+        
         this.setState({
             isConfirmModalVisible: true,
             user_id,
@@ -75,7 +75,7 @@ class Members extends Component {
                     <td>{ member.email }</td>
                     <td>{ member.username }</td>
                     <td title="Quiz scores" className="is-icon" onClick={ () => this.showQuizHistory(member.user_id, module_id) }>
-                        <span className="tag is-warning is-medium">
+                        <span className="tag is-warning quiz-scores is-medium">
                             <i className="fa fa-list-ol" />
                         </span>
                     </td>
@@ -83,7 +83,7 @@ class Members extends Component {
                         title="Delete student"
                         className="is-icon"
                         onClick={ () => this.showConfirmModal(member.user_id, module_id, member.email, member.username) }>
-                        <span className="tag is-danger is-medium">
+                        <span className="tag is-danger delete-student is-medium">
                             <i className="fa fa-user-times" />
                         </span>
                     </td>
@@ -117,7 +117,7 @@ class Members extends Component {
                             isVisible={ this.state.isQuizHistoryVisible }
                             history={ history }
                             hide={ this.hideQuizHistory }
-                            username={ 'Mina' }
+                            username={ this.state.username }
                             medalConditions={ medalConditions } />
 
                         <ConfirmModal

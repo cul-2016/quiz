@@ -7,6 +7,15 @@
 
     .tag.is-medium {
         cursor: pointer;
+
+        &.tag {
+            &.quiz-scores:hover {
+                background-color: $bulma-is-warning-hover;
+            }
+            &.delete-student:hover {
+                background-color: $bulma-is-danger-hover;
+            }
+        }
     }
 
     .modal .modal-content {
