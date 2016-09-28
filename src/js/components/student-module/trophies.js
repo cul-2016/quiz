@@ -42,7 +42,7 @@ const Trophies = ({ trophies, trophies_awarded }) => {
     });
 
     return (
-        <div className="section">
+        <div className="section transparent-background">
             <h3>Your trophies</h3>
             <div className="is-mobile columns trophies">
                 <div className="column">

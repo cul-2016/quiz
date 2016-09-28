@@ -12,7 +12,7 @@ const StudentModule = ({ location, children,
                         handleJoiningQuiz, params }) => {
 
 
-    let buttonAreaClasses = classnames("section has-text-centered", {
+    let buttonAreaClasses = classnames("section has-text-centered transparent-background", {
         "animated-infinite pulse": isQuizOpen
     });
 
@@ -47,7 +47,7 @@ const StudentModule = ({ location, children,
         }
         {
             !isFetchingModule &&
-            <div>
+            <div className="student-module">
                 <div className={ buttonAreaClasses }>
                         <button onClick={ (e) => { handleAnimation(e, livePath); }} className={ buttonClasses }>
                             JOIN THE LIVE QUIZ!

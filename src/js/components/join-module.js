@@ -13,7 +13,7 @@ const JoinModule = ({ module_id, moduleIDExists, handleInputChange, handleJoinMo
     });
 
     return (
-        <section className="hero is-primary is-fullheight">
+        <section className="hero is-primary is-fullheight join-module">
             <div className="hero-body">
                 <div className="container has-text-centered">
                     <div className="columns">
@@ -30,9 +30,11 @@ const JoinModule = ({ module_id, moduleIDExists, handleInputChange, handleJoinMo
                                 type="text"
                                 placeholder="Module Name"
                                 />
-                            <a className={ joinModuleClass } onClick={ () => handleJoinModule() }>
-                                Join Module
-                            </a>
+                            <div>
+                                <a className={ joinModuleClass } onClick={ () => handleJoinModule() }>
+                                    Join Module
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
