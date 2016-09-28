@@ -107,6 +107,7 @@ class QuizMembers extends Component {
 
                         <h2 className="has-text-centered"> Quiz History </h2>
                         <h3 className="has-text-centered"> { quizName } </h3>
+
                         <div className="column">
                             <Link to={ `/${this.props.params.module_id}/lecturer` }>
                                 <button className="button is-3 is-light is-inverted">

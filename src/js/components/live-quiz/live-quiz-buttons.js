@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import classnames from 'classnames';
 
-const LiveQuizButtons = ({ is_lecturer, numQuestions, nextQuestionIndex, nextQuestion, submitResponse, isQuizStarted, startQuiz, endQuiz, quiz_id, response }) => {
+const LiveQuizButtons = ({ is_lecturer, numQuestions, nextQuestionIndex, nextQuestion, submitResponse, isQuizStarted, isSavingResponse, isResponseSubmitted, startQuiz, endQuiz, quiz_id, response }) => {
 
     let startButtonClasses = classnames("button is-large is-success start-quiz-button", {
         "display-none": !is_lecturer || isQuizStarted
@@ -17,7 +17,8 @@ const LiveQuizButtons = ({ is_lecturer, numQuestions, nextQuestionIndex, nextQue
 
     let submitButtonClasses = classnames("button is-large is-success", {
         "display-none": is_lecturer || isQuizStarted === false,
-        "is-disabled": !response
+        "is-disabled": !response,
+        "is-loading": isSavingResponse
     });
 
 
@@ -37,7 +38,7 @@ const LiveQuizButtons = ({ is_lecturer, numQuestions, nextQuestionIndex, nextQue
             </button>
 
             <button className={ submitButtonClasses } onClick={ submitResponse }>
-                Submit answer
+                { isResponseSubmitted ? "Resubmit answer" : "Submit answer" }
             </button>
         </div>
     );
@@ -50,6 +51,8 @@ LiveQuizButtons.propTypes = {
     nextQuestion: PropTypes.func,
     submitResponse: PropTypes.func,
     isQuizStarted: PropTypes.bool,
+    isSavingResponse: PropTypes.bool,
+    isResponseSubmitted: PropTypes.bool,
     startQuiz: PropTypes.func,
     endQuiz: PropTypes.func,
     quiz_id: PropTypes.number,

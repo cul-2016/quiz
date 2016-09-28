@@ -6,10 +6,6 @@ input {
     display: none !important;
 }
 
-.response {
-    background-color: $blue;
-}
-
 .error-message {
     position: fixed;
     bottom: 0;
@@ -21,10 +17,6 @@ input {
     background-color: rgba(0, 0, 0, 0.48);
     color: white;
     border-radius: 10em;
-}
-
-.container {
-    // margin: auto;
 }
 
 /* achieves the effect that `.column` used to do */

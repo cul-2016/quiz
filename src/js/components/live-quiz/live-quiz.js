@@ -2,21 +2,9 @@ import React, { PropTypes } from 'react';
 import CurrentQuestion from './current-question';
 import LiveQuizButtons from './live-quiz-buttons';
 import classnames from 'classnames';
-import { store } from '../../store';
-import { toggleMessageVisibility } from '../../actions/live-quiz';
 
 
-const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex, nextQuestion, isQuizStarted, submitResponse, isResponseSubmitted, startQuiz, numQuestions, endQuiz, quiz_id, handleSelection, response, name, numParticipants, handleAbortQuiz }) => {
-
-    let showOnSubmit = classnames("submit-success", {
-        "display-none": !isResponseSubmitted
-    });
-
-    if (isResponseSubmitted) {
-        setTimeout(() =>{
-            store.dispatch(toggleMessageVisibility());
-        }, 1000);
-    }
+const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex, nextQuestion, isQuizStarted, submitResponse, isResponseSubmitted, isSavingResponse, startQuiz, numQuestions, endQuiz, quiz_id, handleSelection, response, name, numParticipants, handleAbortQuiz }) => {
 
     let titleClass = classnames({
         "display-none": !nextQuestionIndex
@@ -34,8 +22,13 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex, nextQuestion, isQu
                 {
                     !isQuizStarted && !is_lecturer &&
                     <div className="student-view">
-                        <div className="has-text-centered">
-                            Get ready! <br/> The quiz will start in a moment.
+                        <div className="has-text-centered instructions">
+                            Get ready!
+                            <div>The quiz will start in a moment.</div>
+
+                            <div>
+                                During the quiz, you can change your answer as many times as you like, as long as it's before the next question appears. <br />
+                            </div>
                         </div>
                     </div>
                 }
@@ -58,11 +51,7 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex, nextQuestion, isQu
                             data={ question }
                             handleSelection={ handleSelection }
                             response={ response }/>
-                        <div className={ showOnSubmit }>
-                            YOU HAVE SUBMITTED THE ANSWER
-                        </div>
                     </div>
-
                 }
             </div>
             <LiveQuizButtons
@@ -72,6 +61,8 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex, nextQuestion, isQu
                 nextQuestionIndex={ nextQuestionIndex }
                 submitResponse={ submitResponse }
                 isQuizStarted={ isQuizStarted }
+                isSavingResponse={ isSavingResponse }
+                isResponseSubmitted={ isResponseSubmitted }
                 startQuiz={ startQuiz }
                 endQuiz={ endQuiz }
                 quiz_id={ quiz_id }
@@ -88,6 +79,7 @@ LiveQuiz.propTypes = {
     isQuizStarted: PropTypes.bool.isRequired,
     submitResponse: PropTypes.func,
     isResponseSubmitted: PropTypes.bool,
+    isSavingResponse: PropTypes.bool,
     startQuiz: PropTypes.func,
     numQuestions: PropTypes.number,
     endQuiz: PropTypes.func,
