@@ -42,8 +42,8 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id }) => {
                     </Link>
 
                     <Link to={ `${module_id}/${quiz.quiz_id}/members` }>
-                        <span title="Quiz Admin" className={ settingClass }>
-                            <i className="fa fa-cog"></i>
+                        <span title="Quiz History" className={ settingClass }>
+                            <i className="fa fa-history"></i>
                         </span>
                     </Link>
                 </td>

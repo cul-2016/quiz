@@ -10,6 +10,13 @@ const Medals = ({ medals }) => {
             <div className="section column">
                 <h3>Medals</h3>
                 <table className="table has-text-centered">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Medal</th>
+                            <th>Threshold</th>
+                        </tr>
+                    </thead>
                     <tbody>
                         <tr>
                             <td>
