@@ -44,13 +44,13 @@ export default function liveQuiz (state = initialState, action) {
 
     case actionsTypes.SAVE_RESPONSE_REQUEST:
         return update(state, {
-            isSavingResponse: { $set: true },
-            isResponseSubmitted: { $set: true }
+            isSavingResponse: { $set: true }
         });
 
     case actionsTypes.SAVE_RESPONSE_SUCCESS:
         return update(state, {
-            isSavingResponse: { $set: false }
+            isSavingResponse: { $set: false },
+            isResponseSubmitted: { $set: true }
         });
 
     case actionsTypes.SAVE_RESPONSE_FAILURE:
@@ -97,8 +97,6 @@ export default function liveQuiz (state = initialState, action) {
             isAbortingQuiz: { $set: false },
             error: { $set: action.error }
         });
-
-
 
     case actionsTypes.SET_INTERVAL_ID:
         return update(state, {
