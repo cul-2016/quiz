@@ -5,6 +5,7 @@ import QuizMembersModal from './quiz-members-modal';
 import EditScoreModal from './edit-score-modal';
 import { store } from '../store.js';
 
+
 class QuizMembers extends Component {
 
     constructor (props) {
@@ -18,8 +19,8 @@ class QuizMembers extends Component {
         this.hideQuizQuestions = this.hideQuizQuestions.bind(this);
         this.showEditScore = this.showEditScore.bind(this);
         this.hideEditScore = this.hideEditScore.bind(this);
-
     }
+
     showQuizQuestions () {
         this.setState({
             isQuizQuestionsVisible: true
@@ -28,7 +29,7 @@ class QuizMembers extends Component {
 
     showEditScore (member_key) {
         this.setState({
-            member_key: member_key,
+            member_key,
             isEditScoreVisible: true
         });
     }
@@ -48,35 +49,35 @@ class QuizMembers extends Component {
     getQuizName () {
         let quizzesArray = store.getState().module.quizzes;
         let quiz_id = parseInt(this.props.params.quiz_id);
+
         return quizzesArray.filter((quiz) => {
             return quiz_id === quiz.quiz_id;
         }).map((quiz) => {
             return quiz.name;
-        });
+        })[0];
     }
 
     render () {
+
         let { members, isFetchingQuizMembers, questions, params, handleUpdateScore, handleEditScore } = this.props;
-        let quizName = this.getQuizName()[0];
-
-
+        let quizName = this.getQuizName();
 
         let mappedMembers = members.map((member, i) => {
             return (
-                    <tr key={ i } className="quiz-members">
-                        <td>
-                            <p>{ member.email }</p>
-                        </td>
-                        <td>
-                            <p>{ member.username }</p>
-                        </td>
-                        <td>
-                            <p>{ member.score }</p>
-                        </td>
-                        <td>
-                                <button className="button is-warning" onClick={ () => this.showEditScore(i) }>Edit Score</button>
-                        </td>
-                    </tr>
+                <tr key={ i } className="quiz-members">
+                    <td>
+                        <p>{ member.email }</p>
+                    </td>
+                    <td>
+                        <p>{ member.username }</p>
+                    </td>
+                    <td>
+                        <p>{ member.score }</p>
+                    </td>
+                    <td>
+                        <button className="button is-warning" onClick={ () => this.showEditScore(i) }>Edit Score</button>
+                    </td>
+                </tr>
             );
         });
 
@@ -88,6 +89,7 @@ class QuizMembers extends Component {
                 {
                     !isFetchingQuizMembers && members &&
                     <div className="quiz-members container average">
+
                         <EditScoreModal
                             isVisible={ this.state.isEditScoreVisible }
                             hide={ this.hideEditScore }
@@ -97,7 +99,12 @@ class QuizMembers extends Component {
                             module_id={ params.module_id }
                             handleEditScore={ handleEditScore }
                             handleUpdateScore={ handleUpdateScore }/>
-                        <QuizMembersModal isVisible={ this.state.isQuizQuestionsVisible } questions={ questions } hide={ this.hideQuizQuestions }/>
+
+                        <QuizMembersModal
+                            isVisible={ this.state.isQuizQuestionsVisible }
+                            questions={ questions }
+                            hide={ this.hideQuizQuestions }/>
+
                         <h2 className="has-text-centered"> Quiz History </h2>
                         <h3 className="has-text-centered"> { quizName } </h3>
                         <div className="column">
@@ -137,7 +144,6 @@ class QuizMembers extends Component {
                             </table>
                         </div>
                     </div>
-
                 }
             </div>
         );
