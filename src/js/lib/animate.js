@@ -25,7 +25,7 @@ export function elastic (selector) {
  * @param {string} selector - JQuery-style selector for the target DOM element(s)
  */
 
-export function fadeTransition (selector) {
+export function fadeOutThenIn (selector) {
 
     const tl = new TimelineMax();
     tl.add(TweenMax.to(selector, 0.3, { ease: Circ.easeOut, opacity: 0 }));

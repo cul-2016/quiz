@@ -29,5 +29,12 @@
         font-size: 3em;
         margin: auto;
         color: white;
+
+        .instructions {
+            div {
+                margin-top: 10px;
+                font-size: 0.5em;
+            }
+        }
     }
 }

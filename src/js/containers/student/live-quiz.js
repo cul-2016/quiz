@@ -13,7 +13,7 @@ const mapStateToProps = (state) => ({
     name: state.liveQuiz.name
 });
 
-const mapDispatchToProps = (dispatch) => ({ // eslint-disable-line
+const mapDispatchToProps = (dispatch) => ({
 
     submitResponse: () => {
         let data = {
@@ -22,8 +22,7 @@ const mapDispatchToProps = (dispatch) => ({ // eslint-disable-line
             question_id: store.getState().liveQuiz.questions[0].question_id,
             response: store.getState().liveQuiz.response
         };
-        // increment the current question
-        // emit the next question event.
+
         dispatch(saveResponse(data));
     },
     handleSelection: (data) => {
