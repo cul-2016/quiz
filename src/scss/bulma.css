@@ -5664,8 +5664,10 @@ a.panel-block:hover {
 }
 
 .tabs.is-toggle li.is-active a {
-  background-color: #1fc8db;
-  border-color: #1fc8db;
+  /*background-color: #1fc8db;
+  border-color: #1fc8db;*/
+  background-color: #42afe3;
+  border-color: #42afe3;
   color: white;
   z-index: 1;
 }

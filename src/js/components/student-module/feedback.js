@@ -8,7 +8,7 @@ import { displayRankingText,
 const Feedback = ({ ranking, quizzes, participation }) => {
 
     return (
-        <div>
+        <div className="feedback">
             <div className="box">
                 <h3>How well are you doing?</h3>
                 { displayRankingText(text, ranking) }
