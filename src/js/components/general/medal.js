@@ -13,6 +13,7 @@ const Medal = ({ percentageScore, medalConditions }) => {
 
     return (
         <div className="medal-container">
+            <div className="ribbon" />
             <div className={ medalClass } />
         </div>
     );

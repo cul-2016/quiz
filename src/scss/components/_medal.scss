@@ -3,6 +3,15 @@
     width: 30px;
     height: 30px;
 
+    .ribbon {
+        margin-bottom: -10px;
+        margin-left: 24px;
+        margin-top: 7px;
+        width: 12px;
+        height: 20px;
+        background: linear-gradient(to right, #7426cb, #631bb3, #7426cb);
+    }
+
     .medal {
         width: 30px;
         height: 30px;
@@ -14,12 +23,15 @@
 
         &.gold {
           background-color: $gold;
+          border: 2px solid rgba(184, 151, 47, 0.5);
         }
         &.silver {
             background-color: $silver;
+            border: 2px solid rgba(150, 145, 145, 0.5);
         }
         &.bronze {
-            background-color: $bronze;
+            background-color: sienna;
+            border: 2px solid rgba(126, 60, 28, 0.5);
         }
     }
 }
