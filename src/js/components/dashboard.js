@@ -52,7 +52,7 @@ class Dashboard extends Component {
                     {
                         is_lecturer &&
                             <Link to="add-new-module">
-                                <button className="button is-primary">
+                                <button className="button is-info">
                                     <span className="icon">
                                         <i className="fa fa-plus" />
                                     </span>
@@ -65,7 +65,7 @@ class Dashboard extends Component {
                     {
                         !is_lecturer &&
                             <Link to="join-module">
-                                <button className="button is-primary is-medium">
+                                <button className="button is-info is-medium">
                                     Join a module
                                 </button>
                             </Link>
