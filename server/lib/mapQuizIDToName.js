@@ -1,4 +1,4 @@
-var queryNoParams = require('./queryNoParams');
+var query = require('./query');
 var queries = require('./queries.json');
 
 /**
@@ -9,13 +9,13 @@ var queries = require('./queries.json');
  */
 
 
-function mapQuizIDToName (client, array, callback) {
+function mapQuizIDToName (client, array, module_id, callback) {
 
     if (array.length !== 2) {
         return callback(new RangeError("quiz_ids array should be of length 2"));
     }
 
-    queryNoParams(client, queries.mapQuizIDToName, (error, result) => {
+    query(client, queries.mapQuizIDToName, [module_id], (error, result) => {
 
         if (error) {
             return callback(error);

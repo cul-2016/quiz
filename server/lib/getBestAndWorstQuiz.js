@@ -42,12 +42,12 @@ function getBestAndWorstQuiz (client, user_id, module_id, callback) {
                     return callback(error);
                 }
                 getMinAndMaxValues(difference, (error, values) => {
-                    
+
                     if (error) {
                         console.error(error);
                         return callback(error);
                     }
-                    mapQuizIDToName(client, values, (error, names) => {
+                    mapQuizIDToName(client, values, module_id, (error, names) => {
 
                         if (error) {
                             console.error(error);

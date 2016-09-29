@@ -8,15 +8,17 @@ test('`mapQuizIDToName` returns name for each quiz id in an array', (t) => {
     t.plan(1);
 
     const array = [
+        { quiz_id: 1, difference: 8 },
         { quiz_id: 2, difference: 1 },
-        { quiz_id: 3, difference: 8 },
+
     ];
     const expected = [
-        { quiz_id: 2, name: "Week 2 Quiz" },
-        { quiz_id: 3, name: "Trivia quiz" }
+        { quiz_id: 1, name: "Week 1 Quiz" },
+        { quiz_id: 2, name: "Week 2 Quiz" }
     ];
+    const module_id = 'TEST';
 
-    mapQuizIDToName(testClient, array, (error, result) => {
+    mapQuizIDToName(testClient, array, module_id, (error, result) => {
 
         t.deepEqual(result, expected);
     });
@@ -32,21 +34,19 @@ test('`mapQuizIDToName` returns an error for incorrect array length', (t) => {
         { quiz_id: 5, difference: 2 },
         { quiz_id: 1, difference: -9 },
     ];
+    const module_id = 'TEST';
 
-    mapQuizIDToName(testClient, tooLong, (error, result) => {
+    mapQuizIDToName(testClient, tooLong, module_id, (error, result) => {
 
         t.ok(error instanceof Error, 'An error is returned');
         t.notOk(result);
     });
 
     const tooShort = [
-        { quiz_id: 2, difference: 1 },
-        { quiz_id: 3, difference: 8 },
-        { quiz_id: 5, difference: 2 },
-        { quiz_id: 1, difference: -9 },
+        { quiz_id: 1, difference: -9 }
     ];
 
-    mapQuizIDToName(testClient, tooShort, (error, result) => {
+    mapQuizIDToName(testClient, tooShort, module_id, (error, result) => {
 
         t.ok(error instanceof Error, 'An error is returned');
         t.notOk(result);
