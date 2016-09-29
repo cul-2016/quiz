@@ -3,18 +3,18 @@ import Nav from './general/nav';
 import CookieMessage from './general/cookie-message';
 import ErrorMessage from './general/error-message';
 
-const App = ({ children, location, username, error, isCookieAccepted, handleCookieMessage, handleErrorClearance }) => {
-    
+const App = ({ children, location, username, error, isCookieAccepted, handleCookieMessage, handleErrorClearance, is_lecturer }) => {
+
     return (
         <div>
         {
             error &&
                 <div>
-                    <Nav location={ location } username={ username } />
+                    <Nav location={ location } username={ username } is_lecturer={ is_lecturer }  />
                     { children }
                     <ErrorMessage
-                    error={ error }
-                    handleErrorClearance={ handleErrorClearance }/>
+                        error={ error }
+                        handleErrorClearance={ handleErrorClearance }/>
                 </div>
         }
         {
@@ -24,7 +24,7 @@ const App = ({ children, location, username, error, isCookieAccepted, handleCook
                     isCookieAccepted={ isCookieAccepted }
                     handleCookieMessage={ handleCookieMessage } />
                 <div>
-                    <Nav location={ location } username={ username } />
+                    <Nav location={ location } username={ username } is_lecturer={ is_lecturer }  />
                     { children }
                 </div>
             </div>
@@ -32,7 +32,7 @@ const App = ({ children, location, username, error, isCookieAccepted, handleCook
         {
             !error && location.pathname === '/' &&
             <div>
-                <Nav location={ location } username={ username } />
+                <Nav location={ location } username={ username } is_lecturer={ is_lecturer }  />
                 { children }
             </div>
         }
@@ -47,7 +47,8 @@ App.propTypes = {
     error: PropTypes.object,
     handleCookieMessage: PropTypes.func.isRequired,
     location: PropTypes.object.isRequired,
-    handleErrorClearance: PropTypes.func.isRequired
+    handleErrorClearance: PropTypes.func.isRequired,
+    is_lecturer: PropTypes.bool
 };
 
 export default App;

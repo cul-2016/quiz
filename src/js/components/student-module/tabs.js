@@ -5,10 +5,10 @@ import classnames from 'classnames';
 
 const Tabs = ({ location }) => {
 
-    let feedbackClasses = classnames("tabs", {
+    let feedbackClasses = classnames({
         "is-active": location.pathname.indexOf("feedback") > -1
     });
-    let historyClasses = classnames("tabs", {
+    let historyClasses = classnames({
         "is-active": location.pathname.indexOf("history") > -1
     });
     let currentURL = location.pathname.split('/');
@@ -17,7 +17,7 @@ const Tabs = ({ location }) => {
     let historyURL = `/${currentURL[1]}/${currentURL[2]}/history`;
 
     return (
-        <div className="tabs is-boxed">
+        <div className="tabs is-toggle is-fullwidth">
             <ul>
                 <li className={ feedbackClasses }>
                     <Link to={ feedbackURL }>Feedback</Link>
