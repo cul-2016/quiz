@@ -1,0 +1,49 @@
+.leaderboard {
+    background-image: -webkit-linear-gradient(309deg, #13bfdf 0%, #42afe3 71%, #53a1eb 100%);
+    background-image: linear-gradient(141deg, #13bfdf 0%, #42afe3 71%, #53a1eb 100%);
+    min-height: 100vh;
+    padding: 2em 0;
+
+    h1 {
+        margin-bottom: 40px;
+    }
+
+    .leaderboard-header {
+
+        .column {
+            margin: 10px;
+        }
+        margin: 0 0 0 3em;
+
+        .score-header {
+            text-align: right;
+        }
+    }
+
+    .section {
+        box-shadow: 0 7px 30px rgba(62, 9, 11, 0.3);
+    }
+
+    li {
+        line-height: 1.5em;
+
+        &:not(:last-child) {
+            border-bottom: 1px solid $grey-opaque-04;
+        }
+    }
+
+    .rank-number {
+        font-size: 1.2em;
+        text-align: center;
+        color: $dark-blue;
+        font-weight: 700;
+    }
+
+    li div {
+        display: inline;
+    }
+    li div:last-child {
+        position: relative;
+        text-align: right
+    }
+}

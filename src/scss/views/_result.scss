@@ -1,0 +1,11 @@
+.result {
+
+    .hero-body .score {
+        &.large {
+            font-size: 20em;
+        }
+        &.small {
+            font-size: 15em;
+        }
+    }
+}

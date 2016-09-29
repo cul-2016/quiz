@@ -1,0 +1,24 @@
+.module-members {
+    padding-top: 2em;
+
+    section {
+        margin: 0 auto;
+    }
+
+    .tag.is-medium {
+        cursor: pointer;
+
+        &.tag {
+            &.quiz-scores:hover {
+                background-color: $bulma-is-warning-hover;
+            }
+            &.delete-student:hover {
+                background-color: $bulma-is-danger-hover;
+            }
+        }
+    }
+
+    .modal .modal-content {
+        max-height: 80vh;
+    }
+}

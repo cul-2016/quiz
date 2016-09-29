@@ -1,0 +1,37 @@
+
+.quiz-members {
+    padding: 0.5em;
+    h2, h3 {
+        margin-top: 10px !important;
+    }
+    p {
+        display: inline;
+        font-size: 1.2em;
+        padding: 0.6em;
+    }
+    td:first-child {
+        font-size: 0.8em;
+    }
+    .section {
+        margin: 0 auto;
+        margin-top: 2em;
+    }
+
+    .question {
+        h4 {
+            padding-top: 1em;
+        }
+    }
+
+    .quiz-review-questions {
+        .answer {
+            text-align: center;
+            border-radius: 0.5em;
+            font-size: 0.8em;
+        }
+    }
+
+    .show-quiz-questions-button {
+        margin: 10px;
+    }
+}

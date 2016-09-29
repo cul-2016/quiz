@@ -1,0 +1,31 @@
+.new-quiz {
+    padding-top:2em;
+
+    .add-question {
+        margin-right: 5px;
+    }
+
+    .save-question {
+        margin-left: 5px;
+    }
+
+    .radio-button {
+        height: 29px
+    }
+
+    .question {
+
+        padding: 25px;
+        span {
+            margin-left: 20px
+        }
+    }
+
+    .answer-label {
+        line-height: 36px;
+    }
+
+    textarea {
+        margin-bottom: 2em;
+    }
+}

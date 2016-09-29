@@ -1,0 +1,48 @@
+.dashboard {
+    text-align: center;
+    padding-top: 2em;
+
+    ul {
+        margin: 0 auto;
+        max-width: 600px;
+    }
+    li.box {
+        font-size: 1.2em;
+        color: black;
+        transition: all .3s ease-in-out;
+        border: 3px solid transparent;
+        line-height: 50px;
+    }
+
+    a {
+        max-width: 500px;
+    }
+
+    li.box:hover {
+        transform: scale(1.02);
+        border-color: rgba(31,200,219,0.6);
+    }
+
+    button {
+        position: relative;
+        left: 0;
+        margin-bottom: 20px;
+    }
+}
+
+.module-header {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+
+    .level-item {
+        font-weight: 700;
+    }
+
+    .level-item:first-child {
+        text-align: left;
+    }
+    .level-item:nth-child(2) {
+        text-align: right;
+    }
+}

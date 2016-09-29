@@ -1,0 +1,30 @@
+.new-module {
+    padding-top: 2em;
+    
+    .notification {
+        color: white;
+        margin-bottom: 20px;
+    }
+
+    strong {
+        text-decoration: underline;
+    }
+
+    .section:first-of-type {
+        input {
+            margin-bottom: 30px;
+            font-size: 20px;
+        }
+    }
+
+    .new-module-medals, .new-module-trophies {
+
+        .input {
+            width: 22%
+        }
+
+        .label-inline {
+            line-height: 32px;
+        }
+    }
+}

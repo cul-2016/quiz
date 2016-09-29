@@ -1,0 +1,61 @@
+.module {
+    padding-top: 2em;
+
+    @media screen and (min-width: 769px) {
+        .section {
+            margin: 30px;
+        }
+    }
+
+    .button-panel {
+        .button {
+            margin:10px;
+        }
+    }
+
+    .quizzes {
+
+        h3 {
+            display: inline-block;
+            margin: 10px;
+        }
+
+        td {
+            font-weight: 500;
+        }
+
+        ul {
+            border: 1px solid black;
+            list-style: none;
+            min-width: 100px;
+        }
+        .settings-tag {
+            margin: 0 0.3em;
+            &:hover {
+                background-color: $bulma-is-warning-hover;
+            }
+        }
+
+        .settings-link-element {
+            margin: 1em auto;
+        }
+
+        .invite-students-tag:hover {
+            background-color: $bulma-is-success-hover;
+        }
+        .add-quiz-button {
+            margin: 10px;
+        }
+    }
+}
+
+.module-section-headers {
+    display: inline-block;
+    margin-bottom: 1em;
+    margin-right: 0.2em;
+}
+
+.help-icon:hover {
+    color: $dark-blue;
+    cursor: pointer;
+}
