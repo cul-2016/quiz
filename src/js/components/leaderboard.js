@@ -8,7 +8,7 @@ const Leaderboard = ({ leaderboard, params }) => {
         if (i === 0){
             return 1;
         } else if (i !== 0 && user.average === leaderboard[i - 1].average ) {
-            return "";
+            return "=";
         } else {
             return i + 1;
         }
