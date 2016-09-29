@@ -1,6 +1,9 @@
 
 .quiz-members {
     padding: 0.5em;
+    h2, h3 {
+        margin-top: 10px !important;
+    }
     p {
         display: inline;
         font-size: 1.2em;
@@ -26,5 +29,9 @@
             border-radius: 0.5em;
             font-size: 0.8em;
         }
+    }
+
+    .show-quiz-questions-button {
+        margin: 10px;
     }
 }
