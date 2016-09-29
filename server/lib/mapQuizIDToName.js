@@ -1,4 +1,4 @@
-var query = require('./query');
+var queryNoParams = require('./queryNoParams');
 var queries = require('./queries.json');
 
 /**
@@ -15,22 +15,37 @@ function mapQuizIDToName (client, array, callback) {
         return callback(new RangeError("quiz_ids array should be of length 2"));
     }
 
-    (function map (names, i) {
+    queryNoParams(client, queries.mapQuizIDToName, (error, result) => {
 
-        if (i === array.length) {
-            return callback(null, names);
+        if (error) {
+            return callback(error);
         }
-        let quiz_id = array[i].quiz_id;
+        (function map (names, i) {
 
-        query(client, queries.mapQuizIDToName, [quiz_id], (error, result) => {
-
-            if (error) {
-                return callback(error);
+            if (i === array.length) {
+                return callback(null, names);
             }
-            names.push(result.rows[0]);
-            map(names, ++i);
-        });
-    })([], 0);
+            let quiz_id = array[i].quiz_id;
+
+            filterDown(result.rows, quiz_id, (err, row) => {
+
+                names.push(row);
+                map(names, ++i);
+            });
+
+        })([], 0);
+    });
+}
+
+function filterDown (data, quiz_id, callback) {
+
+    (function fltr (data, i) {
+
+        if (quiz_id === data[i].quiz_id) {
+            return callback(null, data[i]);
+        }
+        fltr(data, ++i);
+    })(data, 0);
 }
 
 module.exports = mapQuizIDToName;
