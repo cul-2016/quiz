@@ -15,11 +15,11 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id }) => {
             "fa-check": quiz.is_last_quiz
         });
 
-        let buttonClass = classnames("tag is-success is-medium", {
+        let buttonClass = classnames("tag is-success is-medium invite-students-tag", {
             "display-none": quiz.is_presented
         });
 
-        let settingClass = classnames("tag is-warning is-medium settings-tag", {
+        let quizHistoryClass = classnames("tag is-warning is-medium settings-tag", {
             "display-none": !quiz.is_presented
         });
 
@@ -42,7 +42,7 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id }) => {
                     </Link>
 
                     <Link to={ `${module_id}/${quiz.quiz_id}/members` }>
-                        <span title="Quiz History" className={ settingClass }>
+                        <span title="Quiz History" className={ quizHistoryClass }>
                             <i className="fa fa-history"></i>
                         </span>
                     </Link>

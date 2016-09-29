@@ -23,11 +23,12 @@ class Members extends Component {
         this.hideConfirmModal = this.hideConfirmModal.bind(this);
     }
 
-    showQuizHistory (user_id, module_id) {
+    showQuizHistory (user_id, module_id, username) {
 
         this.props.getStudentHistory(user_id, module_id);
         this.setState({
-            isQuizHistoryVisible: true
+            isQuizHistoryVisible: true,
+            username
         });
     }
 
@@ -35,12 +36,13 @@ class Members extends Component {
 
         this.props.clearStudentHistory();
         this.setState({
-            isQuizHistoryVisible: false
+            isQuizHistoryVisible: false,
+            username: undefined
         });
     }
 
     showConfirmModal (user_id, module_id, email, username) {
-        
+
         this.setState({
             isConfirmModalVisible: true,
             user_id,
@@ -63,8 +65,7 @@ class Members extends Component {
 
     render () {
 
-        let { members, name, isFetchingMembers, isRemovingMember, handleRemovingMember, params, history, medalConditions } = this.props; //eslint-disable-line no-unused-vars
-
+        let { members, name, isFetchingMembers, isRemovingMember, handleRemovingMember, params, history, medalConditions } = this.props; 
         let module_id = params.module_id;
 
         let mappedMembers = members.map((member, i) => {
@@ -74,7 +75,7 @@ class Members extends Component {
                     <td>{ member.user_id }</td>
                     <td>{ member.email }</td>
                     <td>{ member.username }</td>
-                    <td title="Quiz scores" className="is-icon" onClick={ () => this.showQuizHistory(member.user_id, module_id) }>
+                    <td title="Quiz scores" className="is-icon" onClick={ () => this.showQuizHistory(member.user_id, module_id, member.username) }>
                         <span className="tag is-warning quiz-scores is-medium">
                             <i className="fa fa-list-ol" />
                         </span>

@@ -33,7 +33,7 @@ QuizHistoryModal.propTypes = {
     history: PropTypes.array,
     medalConditions: PropTypes.array,
     hide: PropTypes.func.isRequired,
-    username: PropTypes.string.isRequired
+    username: PropTypes.string
 };
 
 export default QuizHistoryModal;
