@@ -4,10 +4,20 @@ import { Link } from 'react-router';
 
 const Leaderboard = ({ leaderboard, params }) => {
 
+    let rankingNumbers = leaderboard.map((user, i) => {
+        if (i === 0){
+            return 1;
+        } else if (i !== 0 && user.average === leaderboard[i - 1].average ) {
+            return "=";
+        } else {
+            return i + 1;
+        }
+    });
+
     let mappedLeaderboard = leaderboard.map((user, i) => {
         return (
                 <li className="columns is-mobile" key={ i }>
-                    <span className="rank-number column is-1">{ `${i + 1}` }</span>
+                    <span className="rank-number column is-1">{ rankingNumbers[i] }</span>
                     <div className="column is-7">
                         <span className="subtitle is-4">{ user.username }</span>
                     </div>

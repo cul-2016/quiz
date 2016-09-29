@@ -81,6 +81,25 @@ class QuizMembers extends Component {
             );
         });
 
+        let mobileView = members.map((member, i) => {
+            return (
+                <div key={ i } className="box">
+                    <div className="columns is-mobile has-text-centered">
+                        <div className="column">{ member.email }</div>
+                        <div className="column">{ member.username }</div>
+                    </div>
+                    <div className="columns is-mobile has-text-centered">
+                        <div className="column"><strong>Score:</strong>{ member.score }</div>
+                    </div>
+                    <div className="columns is-mobile has-text-centered">
+                        <div className="column">
+                            <button className="button is-warning" onClick={ () => this.showEditScore(i) }>Edit Score</button>
+                        </div>
+                    </div>
+                </div>
+            );
+        });
+
         return (
             <div>
                 {
@@ -120,12 +139,12 @@ class QuizMembers extends Component {
                         </div>
 
                         <div className="has-text-centered">
-                            <button className="button is-info" onClick={ () => this.showQuizQuestions() }>
+                            <button className="button is-info show-quiz-questions-button" onClick={ () => this.showQuizQuestions() }>
                                 Show quiz questions
                             </button>
                         </div>
 
-                        <div className="section">
+                        <div className="section is-hidden-mobile">
                             <h3>Quiz Members</h3>
                             <table className="table">
                                 <thead>
@@ -143,6 +162,10 @@ class QuizMembers extends Component {
                                     { mappedMembers }
                                 </tbody>
                             </table>
+                        </div>
+
+                        <div className="is-hidden-tablet">
+                            { mobileView }
                         </div>
                     </div>
                 }

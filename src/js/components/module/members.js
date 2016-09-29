@@ -65,7 +65,7 @@ class Members extends Component {
 
     render () {
 
-        let { members, name, isFetchingMembers, isRemovingMember, handleRemovingMember, params, history, medalConditions } = this.props; 
+        let { members, name, isFetchingMembers, isRemovingMember, handleRemovingMember, params, history, medalConditions } = this.props;
         let module_id = params.module_id;
 
         let mappedMembers = members.map((member, i) => {
@@ -89,6 +89,33 @@ class Members extends Component {
                         </span>
                     </td>
                 </tr>
+            );
+        });
+
+        let mobileView = members.map((member, i) => {
+
+            return (
+                <div key={ i } className="box">
+                    <div className="columns is-mobile has-text-centered">
+                        <div className="column">{ member.email }</div>
+                        <div className="column">{ member.username }</div>
+                    </div>
+                    <div className="columns is-mobile has-text-centered">
+                        <div title="Quiz scores" className="is-icon column" onClick={ () => this.showQuizHistory(member.user_id, module_id, member.username) }>
+                            <span className="tag is-warning quiz-scores is-medium">
+                                <i className="fa fa-list-ol" />
+                            </span>
+                        </div>
+                        <div
+                            title="Delete student"
+                            className="is-icon column"
+                            onClick={ () => this.showConfirmModal(member.user_id, module_id, member.email, member.username) }>
+                            <span className="tag is-danger delete-student is-medium">
+                                <i className="fa fa-user-times" />
+                            </span>
+                        </div>
+                    </div>
+                </div>
             );
         });
 
@@ -130,8 +157,7 @@ class Members extends Component {
                             email={ this.state.email }
                             username={ this.state.username } />
 
-                        <section className="section table-container">
-
+                        <section className="section table-container is-hidden-mobile">
                             <table className="table">
                                 <thead>
                                     <tr>
@@ -146,6 +172,10 @@ class Members extends Component {
                                 </tbody>
                             </table>
                         </section>
+
+                        <div className="is-hidden-tablet">
+                            { mobileView }
+                        </div>
                     </div>
                 </div>
             }

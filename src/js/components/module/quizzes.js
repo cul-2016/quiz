@@ -66,7 +66,11 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id }) => {
             "fa-times": quiz.is_presented === false
         });
 
-        let buttonClass = classnames("button is-success", {
+        let quizHistoryClass = classnames("settings-link-element", {
+            "display-none": !quiz.is_presented
+        });
+
+        let editQuizClass = classnames("settings-link-element", {
             "display-none": quiz.is_presented
         });
 
@@ -81,21 +85,25 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id }) => {
                 <div className="columns is-mobile has-text-centered">
                     <div className="column">{`Questions: \n${+quiz.num_questions}`}</div>
                     <div className="column">{`Entries: \n${+quiz.num_entries}`}</div>
+                </div>
+                <div className="columns is-mobile has-text-centered">
                     <div className="column">Presented: <i className={ iconClasses } /></div>
                     <div className="column">Last Quiz: <i className={ is_last_quizClasses } /></div>
                 </div>
+                <div className="columns is-mobile has-text-centered">
+                    <Link className={ editQuizClass } to={`${module_id}/${quiz.quiz_id}/edit-quiz`}>
+                        <span title="Edit Quiz" className="column tag is-warning is-medium settings-tag">
+                            <i className="fa fa-edit"></i>
+                        </span>
+                    </Link>
 
-                <Link to={`${location.pathname}/live`}>
-                    <button className={ buttonClass }
-                        onClick={ () => sendQuizInvite(quiz.quiz_id, quiz.name) }>
-                        Invite students to quiz
-                    </button>
-                </Link>
-                <Link to={`${module_id}/${quiz.quiz_id}/edit-quiz`}>
-                    <span className={ buttonClass }>
-                        Edit Quiz
-                    </span>
-                </Link>
+                    <Link className={ quizHistoryClass } to={ `${module_id}/${quiz.quiz_id}/members` }>
+                        <span title="Quiz History" className="column tag is-warning is-medium settings-tag">
+                            <i className="fa fa-history"></i>
+                        </span>
+                    </Link>
+                </div>
+
             </div>
         );
     });
@@ -110,7 +118,7 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id }) => {
 
                     <Link className="level-item" to={ `${module_id}/new-quiz` } >
 
-                        <button className="button is-info">
+                        <button className="add-quiz-button button is-info">
                             <span className="icon">
                                 <i className="fa fa-plus" />
                             </span>

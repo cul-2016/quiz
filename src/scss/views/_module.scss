@@ -9,7 +9,7 @@
 
     .button-panel {
         .button {
-            margin: 0 10px;
+            margin:10px;
         }
     }
 
@@ -36,8 +36,15 @@
             }
         }
 
+        .settings-link-element {
+            margin: 1em auto;
+        }
+
         .invite-students-tag:hover {
             background-color: $bulma-is-success-hover;
+        }
+        .add-quiz-button {
+            margin: 10px;
         }
     }
 }
