@@ -49,9 +49,9 @@ const StudentModule = ({ location, children,
             !isFetchingModule &&
             <div className="student-module">
                 <div className={ buttonAreaClasses }>
-                        <button onClick={ (e) => { handleAnimation(e, livePath); }} className={ buttonClasses }>
-                            JOIN THE LIVE QUIZ!
-                        </button>
+                    <button onClick={ (e) => { handleAnimation(e, livePath); }} className={ buttonClasses }>
+                        JOIN THE LIVE QUIZ!
+                    </button>
                 </div>
 
                 <Trophies trophies={ trophies } trophies_awarded={ trophies_awarded } />

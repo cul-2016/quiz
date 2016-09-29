@@ -8,10 +8,11 @@ const hideNav = (path) => {
     return path === "/" || path.match(/live|holding-page|result|review/);
 };
 
-const Nav = ({ location, username }) => {
+const Nav = ({ location, username, is_lecturer }) => {
 
     let navClasses = classnames("nav has-shadow", {
-        "display-none": hideNav(location.pathname)
+        "display-none": hideNav(location.pathname),
+        "student": is_lecturer === false
     });
 
     let dashboardClasses = classnames("nav-item is-hidden-mobile", {
@@ -58,7 +59,8 @@ const Nav = ({ location, username }) => {
 
 Nav.propTypes = {
     username: PropTypes.string,
-    location: PropTypes.object
+    location: PropTypes.object,
+    is_lecturer: PropTypes.bool
 };
 
 export default Nav;
