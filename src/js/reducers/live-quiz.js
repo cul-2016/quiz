@@ -106,7 +106,8 @@ export default function liveQuiz (state = initialState, action) {
     case actionsTypes.SET_NEXT_QUESTION:
         return update(state, {
             questions: { $set: [action.nextQuestion] },
-            response: { $set: undefined }
+            response: { $set: undefined },
+            isResponseSubmitted: { $set: false }
         });
 
     case actionsTypes.GO_TO_NEXT_QUESTION:
@@ -122,11 +123,6 @@ export default function liveQuiz (state = initialState, action) {
     case actionsTypes.SET_RESPONSE:
         return update(state, {
             response: { $set: action.data }
-        });
-
-    case actionsTypes.TOGGLE_MESSAGE_VISIBILITY:
-        return update(state, {
-            isResponseSubmitted: { $set: false }
         });
 
     case actionsTypes.UPDATE_NUM_PARTICIPANTS:

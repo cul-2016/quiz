@@ -76,7 +76,7 @@ test('SET_NEXT_QUESTION works', (t) => {
 
     t.plan(1);
 
-    const initialState = deepFreeze(Object.assign({}, liveQuizState));
+    const initialState = deepFreeze(Object.assign({}, liveQuizState, { isResponseSubmitted: true }));
 
     const action = {
         type: 'SET_NEXT_QUESTION',
@@ -84,7 +84,7 @@ test('SET_NEXT_QUESTION works', (t) => {
     };
 
     const actual = reducer(initialState, action);
-    const expected = Object.assign({}, liveQuizState, { questions: [nextQuestion] });
+    const expected = Object.assign({}, liveQuizState, { isResponseSubmitted: false }, { questions: [nextQuestion] });
 
     t.deepEqual(actual, expected);
 });
