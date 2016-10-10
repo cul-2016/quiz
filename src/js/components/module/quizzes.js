@@ -135,7 +135,7 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id }) => {
                         <th># questions</th>
                         <th># entries</th>
                         <th>Presented?</th>
-                        <th>Last Quiz</th>
+                        <th>Last Quiz?</th>
                         <th></th>
                         <th></th>
                     </tr>
