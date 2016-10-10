@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react';
-import { Link } from 'react-router';
+import { hashHistory } from 'react-router';
 import classnames from 'classnames';
 import normaliseText from '../../lib/normaliseText';
 import showNavbar from '../../lib/showNavbar';
@@ -10,6 +10,13 @@ export default class Result extends Component {
 
     constructor (props) {
         super(props);
+    }
+
+    returnToDashboard (e, path) {
+
+        e.preventDefault();
+        showNavbar(e);
+        hashHistory.push(path);
     }
 
     render () {
@@ -50,11 +57,9 @@ export default class Result extends Component {
                     </div>
                 </div>
                 <div className="hero-foot">
-                    <Link to={ `/${module_id}/student` }>
-                        <button onClick={ (e) => { showNavbar(e); } } className="button is-large is-success is-fullwidth">
-                            Finish
-                        </button>
-                    </Link>
+                    <button onClick={ (e) => { this.returnToDashboard(e, `/${module_id}/student`); } } className="button is-large is-success is-fullwidth">
+                        Finish
+                    </button>
                 </div>
             </div>
         );
