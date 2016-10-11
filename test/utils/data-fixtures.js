@@ -235,23 +235,22 @@ export const getQuizMembers = [{
 
 export const leaderboardData = [
     {
-        average: '66.50',
-        user_id: 1,
-        username: 'student'
+        total_score: 3,
+        user_id: 5,
+        username: 'Homer'
     },
     {
-        average: '66.50',
+        total_score: 3,
         user_id: 3,
         username: 'Sohil'
     },
     {
-        average: '66.50',
-        user_id: 5,
-        username: 'Homer'
+        total_score: 3,
+        user_id: 1,
+        username: 'student'
     },
-
     {
-        average: '0.00',
+        total_score: 0,
         user_id: 4,
         username: 'Mina'
     }

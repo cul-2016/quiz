@@ -12,7 +12,7 @@ function getLeaderboard (client, module_id, callback) {
 
     var moduleValue = [module_id];
 
-    query(client, queries.getLeaderboard, moduleValue, (error, response) => {
+    query(client, queries.getLeaderboard.totalScore, moduleValue, (error, response) => {
 
         if (error) {
             console.error(error);
