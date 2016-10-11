@@ -17,8 +17,6 @@ module.exports = {
         var deletedQuestions = request.payload.deletedQuestions;
         var is_last_quiz = request.payload.is_last_quiz === true;
 
-
-
         // update quiz name
         updateQuiz(client, module_id, quiz_id, quizName, is_last_quiz, (error) => {
 
@@ -35,17 +33,17 @@ module.exports = {
             if (error) {
                 return reply(error);
             }
-            updateQuestions(client, editedQuestions, (error, updateQuestionsResponse) => { //eslint-disable-line
+            updateQuestions(client, editedQuestions, (error) => {
 
                 if (error) {
                     return reply(error);
                 } else if (newQuestions.length !== 0) {
-                    saveQuestions(client, newQuestions, (error, newQuizResponse) => { //eslint-disable-line
+                    saveQuestions(client, newQuestions, (error) => {
 
                         if (error) {
                             return reply(error);
                         } else if (deletedQuestions.length !== 0) {
-                            deleteQuestions(client, deletedQuestions, (error, deleteQuestionsResponse) => { //eslint-disable-line
+                            deleteQuestions(client, deletedQuestions, (error) => {
 
                                 if (error) {
                                     return reply(error);
@@ -58,7 +56,7 @@ module.exports = {
                     });
                 } else {
                     if (deletedQuestions.length !== 0) {
-                        deleteQuestions(client, deletedQuestions, (error, deleteQuestionsResponse) => { //eslint-disable-line
+                        deleteQuestions(client, deletedQuestions, (error) => {
                             if (error) {
                                 return reply(error);
                             }
