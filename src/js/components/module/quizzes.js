@@ -66,6 +66,10 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id }) => {
             "fa-times": quiz.is_presented === false
         });
 
+        let buttonClass = classnames("tag is-success is-medium settings-link-element", {
+            "display-none": quiz.is_presented
+        });
+
         let quizHistoryClass = classnames("settings-link-element", {
             "display-none": !quiz.is_presented
         });
@@ -100,6 +104,15 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id }) => {
                     <Link className={ quizHistoryClass } to={ `${module_id}/${quiz.quiz_id}/members` }>
                         <span title="Quiz History" className="column tag is-warning is-medium settings-tag">
                             <i className="fa fa-history"></i>
+                        </span>
+                    </Link>
+                </div>
+
+                <div className="columns is-mobile has-text-centered">
+                    <Link className={ buttonClass } to={`${location.pathname}/live`}>
+                        <span
+                        onClick={ () => sendQuizInvite(quiz.quiz_id, quiz.name) }>
+                        Invite students to quiz
                         </span>
                     </Link>
                 </div>
