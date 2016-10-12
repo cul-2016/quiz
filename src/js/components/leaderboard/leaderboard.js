@@ -1,30 +1,35 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
+import Trophies from './trophies';
 
 
-const Leaderboard = ({ leaderboard, params }) => {
+const Leaderboard = ({ mainData, medalScores, quiz_id_list, params }) => { //eslint-disable-line no-unused-vars
 
-    let rankingNumbers = leaderboard.map((user, i) => {
+    let rankingNumbers = mainData.map((user, i) => {
         if (i === 0){
             return 1;
-        } else if (user.total_score === leaderboard[i - 1].total_score ) {
+        } else if (user.total_score === mainData[i - 1].total_score ) {
             return "=";
         } else {
             return i + 1;
         }
     });
 
-    let mappedLeaderboard = leaderboard.map((user, i) => {
+    let mappedLeaderboard = mainData.map((user, i) => {
+        console.log(user);
         return (
-                <li className="columns is-mobile" key={ i }>
-                    <span className="rank-number column is-1">{ rankingNumbers[i] }</span>
-                    <div className="column is-7">
-                        <span className="subtitle is-4">{ user.username }</span>
-                    </div>
-                    <div className="column">
-                        <span className="subtitle is-4">{ parseFloat(user.total_score) }</span>
-                    </div>
-                </li>
+            <li className="columns is-mobile" key={ i }>
+                <span className="rank-number column is-1">{ rankingNumbers[i] }</span>
+                <div className="column is-2">
+                    <span className="subtitle is-4">{ user.username }</span>
+                </div>
+                <div className="column is-1">
+                    <span className="subtitle is-4">{ parseFloat(user.total_score) }</span>
+                </div>
+                <div className="column is-2">
+                    <Trophies data={ user } />
+                </div>
+            </li>
         );
     });
 
@@ -44,11 +49,14 @@ const Leaderboard = ({ leaderboard, params }) => {
                 </div>
                 <div className="section average">
                     <div className="leaderboard-header columns is-mobile">
-                        <div className="column is-7 is-offset-1">
+                        <div className="column is-2 is-offset-1">
                             Nickname
                         </div>
-                        <div className="column score-header">
+                        <div className="column is-1 score-header">
                             Average score (%)
+                        </div>
+                        <div className="column">
+                            Trophies
                         </div>
                     </div>
                     <ol>
@@ -61,7 +69,9 @@ const Leaderboard = ({ leaderboard, params }) => {
 };
 
 Leaderboard.propTypes = {
-    leaderboard: PropTypes.array.isRequired,
+    mainData: PropTypes.array,
+    medalScores: PropTypes.array,
+    quiz_id_list: PropTypes.array,
     params: PropTypes.object.isRequired
 };
 

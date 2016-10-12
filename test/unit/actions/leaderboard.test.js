@@ -2,7 +2,11 @@ import test from 'tape';
 import * as actions from '../../../src/js/actions/leaderboard';
 import createThunk from '../../utils/mockThunk';
 import deepFreeze from '../../utils/deepFreeze';
-import { leaderboard } from '../../utils/data-fixtures';
+import {
+    getTotalScoresAndTrophiesData as mainData,
+    getScoresForLeaderboardData as medalScores,
+    getQuizIDListData as quiz_id_list
+ } from '../../utils/data-fixtures';
 import { getLeaderboardError as error } from '../../utils/action-fixtures';
 
 test('getLeaderboard async action creator returns expected action', (t) => {
@@ -35,12 +39,20 @@ test('getLeaderboardRequest creates the correct action', (t) => {
 test('getLeaderboardSuccess creates the correct action', (t) => {
     t.plan(1);
 
-    const expected = {
-        type: actions.GET_LEADERBOARD_SUCCESS,
-        leaderboard
+    const data = {
+        mainData,
+        medalScores,
+        quiz_id_list
     };
 
-    const actual = deepFreeze(actions.getLeaderboardSuccess(leaderboard));
+    const expected = {
+        type: actions.GET_LEADERBOARD_SUCCESS,
+        mainData,
+        medalScores,
+        quiz_id_list
+    };
+
+    const actual = deepFreeze(actions.getLeaderboardSuccess(data));
     t.deepEqual(actual, expected);
 });
 

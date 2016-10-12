@@ -29,9 +29,11 @@ export const getLeaderboardRequest = () => ({
     type: GET_LEADERBOARD_REQUEST
 });
 
-export const getLeaderboardSuccess = (leaderboard) => ({
+export const getLeaderboardSuccess = (data) => ({
     type: GET_LEADERBOARD_SUCCESS,
-    leaderboard
+    mainData: data.mainData,
+    medalScores: data.medalScores,
+    quiz_id_list: data.quiz_id_list
 });
 
 export const getLeaderboardFailure = (error) => ({

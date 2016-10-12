@@ -10,7 +10,7 @@ module.exports = {
         var module_id = request.query.module_id;
         if (module_id !== undefined) {
 
-            getTotalScoresAndTrophies(client, module_id, (error, main) => {
+            getTotalScoresAndTrophies(client, module_id, (error, mainData) => {
 
                 if (error) {
                     return reply(error);
@@ -26,8 +26,8 @@ module.exports = {
                             return reply(error);
                         }
                         reply({
-                            scores: scores,
-                            main: main,
+                            medalScores: scores,
+                            mainData: mainData,
                             quiz_id_list: quiz_id_list
                         });
                     });

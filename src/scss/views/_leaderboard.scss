@@ -42,8 +42,13 @@
     li div {
         display: inline;
     }
-    li div:last-child {
+    li div .trophies {
         position: relative;
-        text-align: right
+        font-size: 1.5em;
+    }
+
+    .fa.fa-trophy.awarded:before {
+        color: $gold;
+        padding: 0 1px;
     }
 }
