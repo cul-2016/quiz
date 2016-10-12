@@ -7,7 +7,7 @@ const Leaderboard = ({ leaderboard, params }) => {
     let rankingNumbers = leaderboard.map((user, i) => {
         if (i === 0){
             return 1;
-        } else if (i !== 0 && user.average === leaderboard[i - 1].average ) {
+        } else if (user.total_score === leaderboard[i - 1].total_score ) {
             return "=";
         } else {
             return i + 1;
@@ -22,7 +22,7 @@ const Leaderboard = ({ leaderboard, params }) => {
                         <span className="subtitle is-4">{ user.username }</span>
                     </div>
                     <div className="column">
-                        <span className="subtitle is-4">{ parseFloat(user.average) }</span>
+                        <span className="subtitle is-4">{ parseFloat(user.total_score) }</span>
                     </div>
                 </li>
         );
