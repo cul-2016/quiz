@@ -11,20 +11,25 @@ var composeUpdateQuestionStatement = require('./composeUpdateQuestionStatement')
 
 function saveQuestions (client, questions, callback) {
 
-    composeUpdateQuestionStatement(questions, (error, builtStatement) => {
-
-        if (error) {
-            return callback(error);
-        }
-
-        preparedQuery(client, builtStatement, (error, response) => {
+    if (questions.length === 0) {
+        return callback(null);
+    } else {        
+        composeUpdateQuestionStatement(questions, (error, builtStatement) => {
 
             if (error) {
                 return callback(error);
             }
-            return callback(null, response);
+
+            preparedQuery(client, builtStatement, (error, response) => {
+
+                if (error) {
+                    return callback(error);
+                }
+                return callback(null, response);
+            });
         });
-    });
+    }
+
 }
 
 module.exports = saveQuestions;
