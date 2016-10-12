@@ -1,5 +1,6 @@
 var getTotalScoresAndTrophies = require('../lib/getTotalScoresAndTrophies');
 var getScoresForLeaderboard = require('../lib/getScoresForLeaderboard');
+var getQuizIDList = require('../lib/getQuizIDList');
 var client = require('../lib/dbClient');
 
 module.exports = {
@@ -19,9 +20,16 @@ module.exports = {
                     if (error) {
                         return reply(error);
                     }
-                    reply({
-                        scores: scores,
-                        main: main
+                    getQuizIDList(client, module_id, (error, quiz_id_list) => {
+
+                        if (error) {
+                            return reply(error);
+                        }
+                        reply({
+                            scores: scores,
+                            main: main,
+                            quiz_id_list: quiz_id_list
+                        });
                     });
                 });
             });
