@@ -37,7 +37,7 @@
     "setNewTrophyStateWithAverage": "UPDATE module_members SET (first_quiz, high_score, overall_average, participation) = ($3, $4, $5, $6) WHERE user_id = $1 AND module_id = $2",
     "setNewTrophyStateWithoutAverage": "UPDATE module_members SET (first_quiz, high_score, participation) = ($3, $4, $5) WHERE user_id = $1 AND module_id = $2",
     "getLeaderboard": {
-        "totalScore": "SELECT scores.user_id, users.username, CAST(SUM(scores.score) AS INTEGER) AS total_score FROM scores JOIN users ON scores.user_id = users.user_id JOIN quizzes ON scores.quiz_id = quizzes.quiz_id WHERE quizzes.module_id = $1 GROUP BY scores.user_id, users.username ORDER BY total_score DESC, users.username;"
+        "main": "SELECT module_members.user_id, username, first_quiz, high_score, overall_average, participation, (SELECT CAST(SUM(scores.score) AS INTEGER) FROM scores JOIN quizzes ON scores.quiz_id = quizzes.quiz_id WHERE quizzes.module_id = $1 AND scores.user_id = module_members.user_id ) AS total_score FROM module_members JOIN users ON module_members.user_id = users.user_id WHERE module_id = $1 ORDER BY total_score DESC, username;"
     },
     "hasStudentSubmitted": "SELECT responses.quiz_id FROM responses JOIN quizzes ON responses.quiz_id = quizzes.quiz_id WHERE user_id = $1 AND module_id = $2;",
     "getStudentHistory": "SELECT quizzes.quiz_id, quizzes.name, scores.score, COUNT(DISTINCT(questions.question_id)) AS num_questions FROM quizzes JOIN questions ON quizzes.quiz_id = questions.quiz_id JOIN scores ON quizzes.quiz_id = scores.quiz_id WHERE scores.user_id = $1 AND quizzes.module_id = $2 GROUP BY quizzes.quiz_id, scores.score, quizzes.name ORDER BY quizzes.quiz_id;",

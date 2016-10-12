@@ -3,7 +3,7 @@ import query from '../../../server/lib/query';
 import { testClient } from '../../utils/init';
 import joinModule from '../../../server/lib/joinModule';
 
-test('`joinModule` adds a student to a module', (t) => {
+test.skip('`joinModule` adds a student to a module', (t) => {
 
     t.plan(2);
 

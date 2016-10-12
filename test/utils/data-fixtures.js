@@ -237,22 +237,38 @@ export const leaderboardData = [
     {
         total_score: 3,
         user_id: 5,
-        username: 'Homer'
+        username: 'Homer',
+        first_quiz: false,
+        high_score: false,
+        overall_average: false,
+        participation: false
     },
     {
         total_score: 3,
         user_id: 3,
-        username: 'Sohil'
+        username: 'Sohil',
+        first_quiz: false,
+        high_score: false,
+        overall_average: false,
+        participation: false
     },
     {
         total_score: 3,
         user_id: 1,
-        username: 'student'
+        username: 'student',
+        first_quiz: true,
+        high_score: true,
+        overall_average: false,
+        participation: true
     },
     {
         total_score: 0,
         user_id: 4,
-        username: 'Mina'
+        username: 'Mina',
+        first_quiz: false,
+        high_score: false,
+        overall_average: false,
+        participation: false
     }
 ];
 
