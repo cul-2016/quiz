@@ -8,6 +8,7 @@ import { joinModuleError } from '../../utils/action-fixtures';
 test('inputChange creates the correct action', (t) => {
 
     t.plan(1);
+
     const value = 'CS50';
     const expected = {
         type: actions.INPUT_CHANGE,
@@ -47,7 +48,9 @@ test('joinModuleRequest creates the correct action', (t) => {
 });
 
 test('joinModuleSuccess creates the correct action', (t) => {
+
     t.plan(1);
+
     const expected = {
         type: actions.JOIN_MODULE_SUCCESS,
     };
@@ -66,5 +69,17 @@ test('joinModuleFailure creates the correct action', (t) => {
     };
 
     const actual = deepFreeze(actions.joinModuleFailure(joinModuleError));
+    t.deepEqual(actual, expected);
+});
+
+test('clearJoinModule creates the correct action', (t) => {
+
+    t.plan(1);
+
+    const expected = {
+        type: actions.CLEAR_JOIN_MODULE,
+    };
+
+    const actual = deepFreeze(actions.clearJoinModule());
     t.deepEqual(actual, expected);
 });

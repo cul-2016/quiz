@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import JoinModule from '../../components/join-module';
-import { inputChange, joinModule } from '../../actions/join-module';
+import { inputChange, joinModule, clearJoinModule } from '../../actions/join-module';
 import { validateModuleID } from '../../actions/new-module';
 import { store } from '../../store';
 
@@ -26,8 +26,8 @@ const mapDispatchToProps = (dispatch) => ({
         const user_id = store.getState().user.user_id;
 
         dispatch(joinModule(module_id, user_id));
+        dispatch(clearJoinModule());
     }
-
 });
 
 const StudentJoinModuleContainer = connect(mapStateToProps, mapDispatchToProps)(JoinModule);

@@ -1,6 +1,8 @@
 import test from 'tape';
-import { joinModule as joinModuleState } from '../../utils/reducer-fixtures';
-import reducer from '../../../src/js/reducers/join-module';
+import {
+    initialState as joinModuleState,
+    joinModule as reducer
+ } from '../../../src/js/reducers/join-module';
 import deepFreeze from '../../utils/deepFreeze';
 import { joinModuleError } from '../../utils/action-fixtures';
 
@@ -64,6 +66,22 @@ test('JOIN_MODULE_FAILURE works', (t) => {
         error: joinModuleError
     };
     const expected = Object.assign({}, joinModuleState, { isJoiningModule: false, error: joinModuleError });
+
+    const result = reducer(initialState, action);
+
+    t.deepEqual(result, expected);
+});
+
+test('CLEAR_JOIN_MODULE works', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(joinModuleState);
+
+    const action = {
+        type: 'CLEAR_JOIN_MODULE',
+    };
+    const expected = Object.assign({}, joinModuleState);
 
     const result = reducer(initialState, action);
 
