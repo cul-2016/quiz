@@ -64,7 +64,7 @@ const Leaderboard = ({ mainData, medalScores, quiz_id_list, medalCondition, para
                             Average score (%)
                         </div>
                         <div className="column">
-                            Trophies
+                            Achievements
                         </div>
                     </div>
                     <ol>
