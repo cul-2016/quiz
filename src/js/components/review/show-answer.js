@@ -26,7 +26,6 @@ const ShowAnswer = ({ isAnswerShowing, data }) => {
     responsesArray.splice(responsesArray.indexOf('d'), 1)
                 .sort();
 
-
     let answersWithResponse = answersArray.map((letter, i) => {
 
         let classes = classnames("box answer", {
