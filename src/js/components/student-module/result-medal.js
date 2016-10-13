@@ -17,7 +17,7 @@ const ResultMedal = ({ score, percentageScore, medalConditions, trophiesToPresen
     });
 
     return (
-        <div className="result-medal">
+        <div className="result-medal animated bounceInUp">
             <div className={ ribbonClass }></div>
             <div className={ medalClass }>
                 <h1 className={ scoreClasses }>
