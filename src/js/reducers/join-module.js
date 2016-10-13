@@ -2,13 +2,13 @@ import update from 'react-addons-update';
 import * as actionsTypes from '../actions/join-module';
 
 
-const initialState = {
+export const initialState = {
     module_id: undefined,
     isJoiningModule: false,
     error: undefined
 };
 
-export default function joinModule (state = initialState, action) {
+export function joinModule (state = initialState, action) {
 
     switch (action.type) {
 
@@ -32,6 +32,9 @@ export default function joinModule (state = initialState, action) {
             isJoiningModule: { $set: false },
             error: { $set: action.error }
         });
+
+    case actionsTypes.CLEAR_JOIN_MODULE:
+        return initialState;
 
     default:
         return state;

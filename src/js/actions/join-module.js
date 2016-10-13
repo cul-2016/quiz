@@ -6,6 +6,7 @@ export const INPUT_CHANGE = 'INPUT_CHANGE';
 export const JOIN_MODULE_REQUEST = 'JOIN_MODULE_REQUEST';
 export const JOIN_MODULE_SUCCESS = 'JOIN_MODULE_SUCCESS';
 export const JOIN_MODULE_FAILURE = 'JOIN_MODULE_FAILURE';
+export const CLEAR_JOIN_MODULE = 'CLEAR_JOIN_MODULE';
 
 
 export const inputChange = (value) => ({
@@ -43,4 +44,8 @@ export const joinModuleSuccess = () => ({
 export const joinModuleFailure = (error) => ({
     type: JOIN_MODULE_FAILURE,
     error
+});
+
+export const clearJoinModule = () => ({
+    type: CLEAR_JOIN_MODULE
 });

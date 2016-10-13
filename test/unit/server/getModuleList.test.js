@@ -7,7 +7,6 @@ test('`getModuleList` gets list of modules for a lecturer', (t) => {
     t.plan(1);
     const expectedRows = [
         { module_id: 'TEST', name: 'test module' },
-        { module_id: 'PSY1', name: 'Intro to Psychology' },
         { module_id: 'CENT', name: 'Percentile' },
         { module_id: 'FAC8', name: 'FAC8' }
     ];
@@ -26,8 +25,7 @@ test('`getModuleList` gets list of modules for a student', (t) => {
 
     t.plan(1);
     const expectedRows = [
-        { module_id: 'TEST', name: 'test module' },
-        { module_id: 'PSY1', name: 'Intro to Psychology' }
+        { module_id: 'TEST', name: 'test module' }
     ];
     const user_id = 1;
 
