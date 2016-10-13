@@ -52,8 +52,6 @@ export default class Result extends Component {
                             medalConditions={ medalConditions }
                             trophiesToPresent={ trophiesToPresent } />
                     </div>
-                </div>
-                <div className="hero-foot">
                     <button onClick={ (e) => { this.returnToDashboard(e, `/${module_id}/student`); } } className="button is-large is-success is-fullwidth">
                         Finish
                     </button>
