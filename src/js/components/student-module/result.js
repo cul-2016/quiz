@@ -1,8 +1,8 @@
 import React, { PropTypes, Component } from 'react';
 import { hashHistory } from 'react-router';
-import classnames from 'classnames';
 import normaliseText from '../../lib/normaliseText';
 import showNavbar from '../../lib/showNavbar';
+import ResultMedals from './result-medals';
 import { elastic } from '../../lib/animate';
 
 
@@ -23,7 +23,7 @@ export default class Result extends Component {
 
         elastic('.trophy-container');
 
-        let { score, newTrophies, params } = this.props;
+        let { score, newTrophies, medalConditions, percentageScore, params } = this.props;
 
         let module_id = params.module_id;
         newTrophies = newTrophies || [];
@@ -38,11 +38,6 @@ export default class Result extends Component {
             );
         });
 
-        let scoreClasses = classnames("title score animated bounceInUp", {
-            "large": trophiesToPresent.length === 0,
-            "small": trophiesToPresent.length > 0
-        });
-
         return (
             <div className="result hero is-info is-bold is-fullheight">
                 <div className="hero-body">
@@ -51,9 +46,11 @@ export default class Result extends Component {
                         <div className="columns is-mobile">
                             { trophiesToPresent }
                         </div>
-                        <h1 className={ scoreClasses }>
-                            { score }
-                        </h1>
+                        <ResultMedals
+                            score={ score }
+                            percentageScore={ percentageScore }
+                            medalConditions={ medalConditions }
+                            trophiesToPresent={ trophiesToPresent } />
                     </div>
                 </div>
                 <div className="hero-foot">
@@ -69,5 +66,7 @@ export default class Result extends Component {
 Result.propTypes = {
     params: PropTypes.object,
     score: PropTypes.number.isRequired,
+    medalConditions: PropTypes.array.isRequired,
+    percentageScore: PropTypes.number.isRequired,
     newTrophies: PropTypes.array
 };

@@ -17,12 +17,17 @@ const RegisterUser = ({ register, handleChange, handleRegisteringUser, location 
     });
 
     let registerButtonClasses = classnames("button is-warning login-button", {
-        "is-disabled": !isEmailValid || !register.password || !register.username,
+        "is-disabled": !isEmailValid || !register.password || !register.username || register.password !== register.confirmPassword,
         "is-loading": register.isRegistering === true
     });
 
     let invalidEmailClasses = classnames("help is-danger", {
         "display-none": register.email.length === 0 || isEmailValid
+    });
+
+    let passwordMatchClasses = classnames("input", {
+        "is-success": register.confirmPassword !== "" && register.password === register.confirmPassword,
+        "is-danger": register.confirmPassword.length >= register.password.length && register.confirmPassword !== register.password
     });
 
     return (
@@ -49,7 +54,7 @@ const RegisterUser = ({ register, handleChange, handleRegisteringUser, location 
                         <span className={ invalidEmailClasses }>This email is invalid</span>
 
 
-                        <label className="label has-text-left">Choose a username</label>
+                        <label className="label has-text-left">Choose a nickname</label>
                         <input
                             className="input"
                             value={ register.username }
@@ -58,9 +63,16 @@ const RegisterUser = ({ register, handleChange, handleRegisteringUser, location 
 
                         <label className="label has-text-left">Choose a password</label>
                         <input
-                            className="input"
+                            className={ passwordMatchClasses }
                             value={ register.password }
                             onChange={ (e) => handleChange("password", e.target.value)}
+                            type="password" />
+
+                        <label className="label has-text-left">Confirm password</label>
+                        <input
+                            className={ passwordMatchClasses }
+                            value={ register.confirmPassword }
+                            onChange={ (e) => handleChange("confirmPassword", e.target.value)}
                             type="password" />
 
                         <button className={ registerButtonClasses } onClick={ () => handleRegisteringUser(register.email, register.username, register.password, is_lecturer) }>
