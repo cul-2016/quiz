@@ -744,10 +744,13 @@ a.box:active {
   border: 1px solid #d3d6db;
   border-radius: 3px;
   color: #222324;
-  display: -webkit-inline-box;
+  /*display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
-  display: inline-flex;
+  display: inline-flex;*/
+  display: -webkit-inline-block;  /* to fix browser compatibility issues (#196) */
+  display: ms-inline-block;
+  display: inline-block;
   font-size: 14px;
   height: 32px;
   -webkit-box-pack: start;
