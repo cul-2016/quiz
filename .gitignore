@@ -40,7 +40,7 @@ dump.rdb
 # Webpack bundle
 bundle.js
 
-env.sh
+*env.sh
 queries.txt
 credentials.md
 public/bundle.js.map

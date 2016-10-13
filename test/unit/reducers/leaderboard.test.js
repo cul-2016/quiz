@@ -1,13 +1,14 @@
 import test from 'tape';
-import { leaderboard as leaderboardState } from '../../utils/reducer-fixtures';
+import { initialState as leaderboardState } from '../../../src/js/reducers/leaderboard';
+import {
+    getTotalScoresAndTrophiesData as mainData,
+    getScoresForLeaderboardData as medalScores,
+    getQuizIDListData as quiz_id_list
+ } from '../../utils/data-fixtures';
 import { getLeaderboardError as error } from '../../utils/action-fixtures';
-import reducer from '../../../src/js/reducers/leaderboard';
-import { leaderboard } from '../../utils/data-fixtures';
+import { leaderboard as reducer } from '../../../src/js/reducers/leaderboard';
 import deepFreeze from '../../utils/deepFreeze';
 
-//
-// GET LEADERBOARD
-//
 
 test('GET_LEADERBOARD_REQUEST works', (t) => {
 
@@ -37,11 +38,18 @@ test('GET_LEADERBOARD_SUCCESS works', (t) => {
     );
     const action = {
         type: 'GET_LEADERBOARD_SUCCESS',
-        leaderboard
+        mainData,
+        medalScores,
+        quiz_id_list
     };
 
     const actual = reducer(initialState, action);
-    const expected = Object.assign({}, leaderboardState, { isFetchingLeaderboard: false }, { leaderboard });
+    const expected = Object.assign(
+        {},
+        leaderboardState,
+        { isFetchingLeaderboard: false },
+        { mainData }, { medalScores }, { quiz_id_list }
+    );
 
     t.deepEqual(actual, expected);
 });
