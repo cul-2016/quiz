@@ -3,7 +3,7 @@ import { hashHistory } from 'react-router';
 import normaliseText from '../../lib/normaliseText';
 import showNavbar from '../../lib/showNavbar';
 import ResultMedal from './result-medal';
-import { elastic } from '../../lib/animate';
+import { elastic, fadeIn } from '../../lib/animate';
 
 
 export default class Result extends Component {
@@ -23,6 +23,7 @@ export default class Result extends Component {
 
         elastic('.trophy-container');
         elastic('.result-medal');
+        fadeIn(".finish-quiz-button");
 
         let { score, newTrophies, medalConditions, percentageScore, params } = this.props;
 
@@ -53,7 +54,7 @@ export default class Result extends Component {
                             medalConditions={ medalConditions }
                             trophiesToPresent={ trophiesToPresent } />
 
-                        <button onClick={ (e) => { this.returnToDashboard(e, `/${module_id}/student`); } } className="button is-large is-success is-fullwidth">
+                        <button onClick={ (e) => { this.returnToDashboard(e, `/${module_id}/student`); } } className="button finish-quiz-button is-large is-success is-fullwidth">
                             Finish
                         </button>
                     </div>
