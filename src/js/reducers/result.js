@@ -3,6 +3,7 @@ import * as actionsTypes from '../actions/result';
 
 export const initialState = {
     score: 0,
+    percentageScore: 0,
     newTrophyState: {},
     isFetchingResult: false,
     error: undefined
@@ -23,6 +24,7 @@ export function result (state = initialState, action) {
         return update(state, {
             isFetchingResult: { $set: false },
             score: { $set: action.data.score.raw },
+            percentageScore: { $set: action.data.score.percentage },
             newTrophyState: { $set: action.data.newTrophyState }
         });
 

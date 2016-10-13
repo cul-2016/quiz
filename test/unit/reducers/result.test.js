@@ -55,6 +55,7 @@ test('GET_QUIZ_RESULT_SUCCESS works', (t) => {
         resultState,
         { isFetchingResult: false },
         { score: data.score.raw },
+        { percentageScore: data.score.percentage },
         { newTrophyState: data.newTrophyState }
     );
 

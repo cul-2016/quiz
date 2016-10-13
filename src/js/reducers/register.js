@@ -5,6 +5,7 @@ const initialState = {
     email: "",
     username: "",
     password: "",
+    confirmPassword: "",
     isRegistering: false,
     error: undefined,
     userIsRegistered: undefined,
