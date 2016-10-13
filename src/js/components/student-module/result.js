@@ -58,6 +58,9 @@ export default class Result extends Component {
                             Finish
                         </button>
                     </div>
+                    <button onClick={ (e) => { this.returnToDashboard(e, `/${module_id}/student`); } } className="button is-large is-success is-fullwidth">
+                        Finish
+                    </button>
                 </div>
             </div>
         );
