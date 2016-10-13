@@ -22,7 +22,7 @@ const JoinModule = ({ module_id, moduleIDExists, handleInputChange, handleJoinMo
                               Join a Module
                             </h2>
                             <label className="label">Module Name</label>
-                            <h6 className="">Please enter the module code your lecturer gave you.</h6>
+                            <h6>Enter the module code your lecturer gave you.</h6>
                             <input
                                 className={ inputClass }
                                 value={ module_id || '' }
