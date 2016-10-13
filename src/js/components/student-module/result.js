@@ -2,7 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import { hashHistory } from 'react-router';
 import normaliseText from '../../lib/normaliseText';
 import showNavbar from '../../lib/showNavbar';
-import ResultMedals from './result-medals';
+import ResultMedal from './result-medal';
 import { elastic } from '../../lib/animate';
 
 
@@ -46,17 +46,15 @@ export default class Result extends Component {
                         <div className="columns is-mobile">
                             { trophiesToPresent }
                         </div>
-                        <ResultMedals
+                        <ResultMedal
                             score={ score }
                             percentageScore={ percentageScore }
                             medalConditions={ medalConditions }
                             trophiesToPresent={ trophiesToPresent } />
+                        <button onClick={ (e) => { this.returnToDashboard(e, `/${module_id}/student`); } } className="button is-large is-success is-fullwidth">
+                            Finish
+                        </button>
                     </div>
-                </div>
-                <div className="hero-foot">
-                    <button onClick={ (e) => { this.returnToDashboard(e, `/${module_id}/student`); } } className="button is-large is-success is-fullwidth">
-                        Finish
-                    </button>
                 </div>
             </div>
         );
