@@ -217,7 +217,6 @@ INSERT INTO users (email, username, password)
 
 INSERT INTO modules (module_id, user_id, name)
     VALUES ('TEST', 2, 'test module'),
-           ('PSY1', 2, 'Intro to Psychology'),
            ('CENT', 2, 'Percentile'),
            ('FAC8', 2, 'FAC8');
 
