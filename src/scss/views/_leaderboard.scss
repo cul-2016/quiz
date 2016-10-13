@@ -14,13 +14,11 @@
             margin: 10px;
         }
         margin: 0 0 0 3em;
-
-        .score-header {
-            text-align: right;
-        }
     }
 
     .section {
+        width: 90%;
+        margin: 0 auto;
         box-shadow: 0 7px 30px rgba(62, 9, 11, 0.3);
     }
 
@@ -42,8 +40,8 @@
     li div {
         display: inline;
     }
-    li div:last-child {
+    li div .trophies {
         position: relative;
-        text-align: right
+        font-size: 1.5em;
     }
 }

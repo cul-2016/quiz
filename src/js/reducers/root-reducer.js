@@ -11,7 +11,7 @@ import liveQuiz from './live-quiz';
 import review from './review';
 import { result } from './result';
 import quizMembers from './quiz-members';
-import leaderboard from './leaderboard';
+import { leaderboard } from './leaderboard';
 import update from 'react-addons-update';
 import { feedback } from './feedback';
 import { studentHistory } from './student-history';

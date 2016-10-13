@@ -2,13 +2,15 @@ import update from 'react-addons-update';
 import * as actionsTypes from '../actions/leaderboard';
 
 
-const initialState = {
-    leaderboard: [],
+export const initialState = {
+    mainData: [],
+    medalScores: [],
+    quiz_id_list: [],
     isFetchingLeaderboard: false,
     error: undefined
 };
 
-export default function quizMembers (state = initialState, action) {
+export function leaderboard (state = initialState, action) {
 
     switch (action.type) {
 
@@ -21,7 +23,9 @@ export default function quizMembers (state = initialState, action) {
 
         return update(state, {
             isFetchingLeaderboard: { $set: false },
-            leaderboard: { $set: action.leaderboard }
+            mainData: { $set: action.mainData },
+            medalScores: { $set: action.medalScores },
+            quiz_id_list: { $set: action.quiz_id_list }
         });
 
 

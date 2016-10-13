@@ -1,0 +1,31 @@
+.leaderboard {
+
+    .medals {
+
+        .fa.fa-circle {
+            padding: 0 2px;
+            font-size: 1.6em;
+            color: $almost-black;
+
+            &.gold:before {
+                color: $gold;
+            }
+            &.silver:before {
+                color: $silver;
+            }
+            &.bronze:before {
+                color: $bronze;
+            }
+        }
+    }
+
+    .fa.fa-trophy {
+        padding: 0 3px;
+        font-size: 1.25em;
+        color: $almost-black;
+
+        &.awarded:before {
+            color: $gold;
+        }
+    }
+}
