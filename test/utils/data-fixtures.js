@@ -239,13 +239,13 @@ export const getQuizIDListData = [
 ];
 
 export const getScoresForLeaderboardData = [
-    { quiz_id: 1, score: 2, user_id: 1 },
-    { quiz_id: 2, score: 1, user_id: 1 },
-    { quiz_id: 1, score: 2, user_id: 3 },
-    { quiz_id: 2, score: 1, user_id: 3 },
-    { quiz_id: 1, score: 0, user_id: 4 },
-    { quiz_id: 1, score: 2, user_id: 5 },
-    { quiz_id: 2, score: 1, user_id: 5 }
+    { quiz_id: 1, percentage_score: 100, user_id: 1 },
+    { quiz_id: 2, percentage_score: 33, user_id: 1 },
+    { quiz_id: 1, percentage_score: 100, user_id: 3 },
+    { quiz_id: 2, percentage_score: 33, user_id: 3 },
+    { quiz_id: 1, percentage_score: 0, user_id: 4 },
+    { quiz_id: 1, percentage_score: 100, user_id: 5 },
+    { quiz_id: 2, percentage_score: 33, user_id: 5 }
 ];
 
 export const getTotalScoresAndTrophiesData = [

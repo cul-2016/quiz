@@ -1,0 +1,19 @@
+.leaderboard {
+
+    .medals {
+
+        .fa.fa-circle {
+            padding: 0 1px;
+
+            &.gold:before {
+                color: $gold;
+            }
+            &.silver:before {
+                color: $silver;
+            }
+            &.bronze:before {
+                color: $bronze;
+            }
+        }
+    }
+}
