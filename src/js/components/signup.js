@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import classnames from 'classnames';
 import { Link } from 'react-router';
 
-const RegisterUser = ({ register, handleChange, handleRegisteringUser, location }) => {
+const Signup = ({ register, handleChange, handleRegisteringUser, location }) => {
 
     let isEmailValid = /.+@.+\..+/.test(register.email);
     let is_lecturer;
@@ -93,11 +93,11 @@ const RegisterUser = ({ register, handleChange, handleRegisteringUser, location 
     );
 };
 
-RegisterUser.propTypes = {
+Signup.propTypes = {
     register: PropTypes.object.isRequired,
     handleChange: PropTypes.func.isRequired,
     handleRegisteringUser: PropTypes.func.isRequired,
     location: PropTypes.object.isRequired
 };
 
-export default RegisterUser;
+export default Signup;
