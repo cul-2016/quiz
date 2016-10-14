@@ -51,6 +51,7 @@
     "bell": "^7.9.1",
     "classnames": "^2.2.5",
     "css-loader": "^0.23.1",
+    "es6-promise": "^4.0.5",
     "eslint": "^3.0.1",
     "file-loader": "^0.9.0",
     "hapi": "^13.5.0",
