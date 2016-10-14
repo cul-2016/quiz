@@ -13,9 +13,9 @@ const JoinModule = ({ module_id, moduleIDExists, handleInputChange, handleJoinMo
     });
 
     return (
-        <section className="hero is-primary is-fullheight join-module">
-            <div className="hero-body">
-                <div className="container has-text-centered">
+        <section className="outer blue-hero join-module">
+            <div className="middle">
+                <div className="container inner has-text-centered">
                     <div className="columns">
                         <div className="box column is-one-third is-offset-one-third">
                             <h2 className="login-title">

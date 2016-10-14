@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import Spinner from './spinner';
 import { hashHistory } from 'react-router';
 
 const AppLoading = ({ userState }) => {
@@ -10,16 +11,7 @@ const AppLoading = ({ userState }) => {
     }
 
     return (
-        <div className="hero is-fullheight">
-            <div className="hero-body">
-                <div className="sk-folding-cube">
-                    <div className="sk-cube1 sk-cube"></div>
-                    <div className="sk-cube2 sk-cube"></div>
-                    <div className="sk-cube4 sk-cube"></div>
-                    <div className="sk-cube3 sk-cube"></div>
-                </div>
-            </div>
-        </div>
+        <Spinner />
     );
 };
 
