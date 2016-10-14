@@ -3,6 +3,11 @@
     position: absolute;
     height: 100%;
     width: 100%;
+
+    &.blue-hero {
+        background-color: #1fc8db;
+        color: white;
+    }
 }
 
 .middle {

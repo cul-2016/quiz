@@ -30,11 +30,15 @@ const Signup = ({ register, handleChange, handleRegisteringUser, location }) => 
         "is-danger": register.confirmPassword.length >= register.password.length && register.confirmPassword !== register.password
     });
 
+    let outerSectionClasses = classnames("login outer", {
+        "blue-hero": is_lecturer === false
+    });
+    console.log(">>>>", outerSectionClasses);
     return (
 
-        <section className="login hero is-primary is-fullheight">
-            <div className="hero-body">
-                <div className="container has-text-centered">
+        <section className={ outerSectionClasses }>
+            <div className="middle">
+                <div className="container inner has-text-centered">
                     <div className="box" onKeyDown={ (e) => { if (e.keyCode === 13 && isEmailValid && register.password && register.username) { handleRegisteringUser(register.email, register.username, register.password, is_lecturer); }}}>
                         <h2>
                             Register
