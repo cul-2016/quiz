@@ -1,6 +1,8 @@
 .join-module {
-    input {
+    input[type='text'],
+    input[type='number'] {
         width: 30%;
         margin-bottom: 1em;
+        font-size: 16px; // to disable iphone auto zoom when input is in focus
     }
 }

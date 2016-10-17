@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import classnames from 'classnames';
 
-const ResultMedals = ({ score, percentageScore, medalConditions, trophiesToPresent }) => {
+const ResultMedal = ({ score, percentageScore, medalConditions, trophiesToPresent }) => {
 
     let scoreClasses = classnames("title score animated bounceInUp", {
         "large": trophiesToPresent.length === 0,
@@ -28,10 +28,10 @@ const ResultMedals = ({ score, percentageScore, medalConditions, trophiesToPrese
     );
 };
 
-ResultMedals.propTypes = {
+ResultMedal.propTypes = {
     score: PropTypes.number.isRequired,
     percentageScore: PropTypes.number.isRequired,
     medalConditions: PropTypes.array.isRequired,
     trophiesToPresent: PropTypes.array.isRequired
 };
-export default ResultMedals;
+export default ResultMedal;

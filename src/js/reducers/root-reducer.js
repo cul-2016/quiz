@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import dashboard from './dashboard';
 import newModule from './new-module';
-import joinModule from './join-module';
+import { joinModule } from './join-module';
 import user from './user';
 import login from './login';
 import register from './register';

@@ -10,33 +10,33 @@
         }
     }
 
-        .ribbon {
-            margin: 0 auto;
-            width: 100px;
-            height: 60px;
-            background: linear-gradient(to right, #7426cb, #631bb3, #7426cb, #7426cb, #631bb3, #7426cb, #7426cb, #631bb3, #7426cb);
+    .ribbon {
+        margin: 0 auto;
+        width: 100px;
+        height: 60px;
+        background: linear-gradient(to right, #7426cb, #631bb3, #7426cb, #7426cb, #631bb3, #7426cb, #7426cb, #631bb3, #7426cb);
+    }
+
+    .medal {
+        width: 200px;
+        height: 200px;
+        margin: 0 auto;
+        border-radius: 100%;
+        position: relative;
+        bottom: 20px;
+        animation: shine 4s ease-in-out infinite;
+
+        &.gold {
+          background-color: $gold;
+          border: 15px solid rgba(184, 151, 47, 0.5);
         }
-
-        .medal {
-            width: 200px;
-            height: 200px;
-            margin: 0 auto;
-            border-radius: 100%;
-            position: relative;
-            bottom: 20px;
-            animation: shine 4s ease-in-out infinite;
-
-            &.gold {
-              background-color: $gold;
-              border: 15px solid rgba(184, 151, 47, 0.5);
-            }
-            &.silver {
-                background-color: $silver;
-                border: 15px solid rgba(150, 145, 145, 0.5);
-            }
-            &.bronze {
-                background-color: sienna;
-                border: 15px solid rgba(126, 60, 28, 0.5);
-            }
+        &.silver {
+            background-color: $silver;
+            border: 15px solid rgba(150, 145, 145, 0.5);
+        }
+        &.bronze {
+            background-color: sienna;
+            border: 15px solid rgba(126, 60, 28, 0.5);
+        }
     }
 }
