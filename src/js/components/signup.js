@@ -33,7 +33,6 @@ const Signup = ({ register, handleChange, handleRegisteringUser, location }) => 
     let outerSectionClasses = classnames("login outer", {
         "blue-hero": is_lecturer === false
     });
-    console.log(">>>>", outerSectionClasses);
     return (
 
         <section className={ outerSectionClasses }>
