@@ -9,9 +9,9 @@ class NotFound extends React.Component {
 
     render () {
         return (
-            <div className="hero is-danger is-fullheight">
-                <div className="hero-body">
-                    <div className="container has-text-centered">
+            <div className="outer red-hero">
+                <div className="middle">
+                    <div className="container inner has-text-centered">
                         <h1 className="title">
                             Oops! Nothing to see here
                         </h1>

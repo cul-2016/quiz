@@ -6,7 +6,7 @@ import AppContainer from './containers/app-container';
 import LoginContainer from './containers/login';
 import DashboardContainer from './containers/dashboard';
 import NewModuleContainer from './containers/new-module';
-import RegisterUserContainer from './containers/register-user';
+import SignupContainer from './containers/signup';
 import NewQuizContainer from './containers/new-quiz';
 import EditQuizContainer from './containers/edit-quiz';
 
@@ -45,10 +45,10 @@ const Root = ({ store }) => (
                     component={ LoginContainer } />
                 <Route
                     path="register-student"
-                    component={ RegisterUserContainer } />
+                    component={ SignupContainer } />
                 <Route
                     path="register-lecturer-invite-only"
-                    component={ RegisterUserContainer } />
+                    component={ SignupContainer } />
                 <Route
                     onEnter={ composeHooks(hooks.authenticate, hooks.fetchModuleList, hooks.leaveRoom) }
                     path="dashboard"
