@@ -21,6 +21,7 @@ const Leaderboard = ({ mainData, medalScores, quiz_id_list, medalCondition, para
         let userScores = medalScores.filter((scoreObj) => {
             return scoreObj.user_id === user.user_id;
         });
+        console.log(userScores);
 
         return (
             <li className="columns is-mobile" key={ i }>
@@ -61,7 +62,7 @@ const Leaderboard = ({ mainData, medalScores, quiz_id_list, medalCondition, para
                             Nickname
                         </div>
                         <div className="column is-1 score-header">
-                            Average score (%)
+                            Total Score
                         </div>
                         <div className="column">
                             Achievements

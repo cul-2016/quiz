@@ -448,6 +448,7 @@ INSERT INTO module_members (module_id, user_id)
            ('TEST', 3),
            ('TEST', 4),
            ('TEST', 5),
+           ('TEST', 11),
            ('CENT', 5),
            ('CENT', 6),
            ('CENT', 7),
