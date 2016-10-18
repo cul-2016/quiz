@@ -21,10 +21,9 @@ const Leaderboard = ({ mainData, medalScores, quiz_id_list, medalCondition, para
         let userScores = medalScores.filter((scoreObj) => {
             return scoreObj.user_id === user.user_id;
         });
-        console.log(userScores);
 
         return (
-            <li className="columns is-mobile" key={ i }>
+            <li className="columns is-desktop" key={ i }>
                 <span className="rank-number column is-1">{ rankingNumbers[i] }</span>
                 <div className="column is-2">
                     <span className="subtitle is-4">{ user.username }</span>
@@ -32,10 +31,10 @@ const Leaderboard = ({ mainData, medalScores, quiz_id_list, medalCondition, para
                 <div className="column is-1">
                     <span className="subtitle is-4">{ parseFloat(user.total_score) }</span>
                 </div>
-                <div className="column is-2">
+                <div className="column is-2 is-hidden-mobile">
                     <Trophies data={ user } />
                 </div>
-                <div className="column">
+                <div className="column is-hidden-mobile">
                     <Medals quiz_id_list={ quiz_id_list } medalCondition={ medalCondition } userScores={ userScores } user_id={ user.user_id } />
                 </div>
             </li>
@@ -57,7 +56,7 @@ const Leaderboard = ({ mainData, medalScores, quiz_id_list, medalCondition, para
                     </Link>
                 </div>
                 <div className="section">
-                    <div className="leaderboard-header columns is-mobile">
+                    <div className="leaderboard-header columns is-hidden-mobile">
                         <div className="column is-2 is-offset-1">
                             Nickname
                         </div>
