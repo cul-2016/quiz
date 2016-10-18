@@ -87,7 +87,7 @@ export const getModuleForLecturerData = {
         ],
         condition: [1, 100, 65, 2]
     },
-    num_enrolled: 4,
+    num_enrolled: 5,
     quizzes: [
         {
             quiz_id: 1,
@@ -275,6 +275,15 @@ export const getTotalScoresAndTrophiesData = [
         high_score: true,
         overall_average: false,
         participation: true
+    },
+    {
+        first_quiz: false,
+        high_score: false,
+        overall_average: false,
+        participation: false,
+        total_score: 0,
+        user_id: 11,
+        username: 'Apu'
     },
     {
         total_score: 0,
