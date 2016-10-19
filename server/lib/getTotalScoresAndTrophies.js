@@ -2,7 +2,7 @@ var query = require('./query');
 var queries = require('./queries.json');
 
 /**
- * Represents a function that fetches the total scores and trophies for a leaderboard
+ * Represents a function that fetches the total scores and trophies for a leaderboard.
  * @param {object} client - postgres database client
  * @param {string} module_id - module id
  * @param {function} callback - a callback function

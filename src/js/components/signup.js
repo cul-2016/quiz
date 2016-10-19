@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import classnames from 'classnames';
 import { Link } from 'react-router';
 
-const RegisterUser = ({ register, handleChange, handleRegisteringUser, location }) => {
+const Signup = ({ register, handleChange, handleRegisteringUser, location }) => {
 
     let isEmailValid = /.+@.+\..+/.test(register.email);
     let is_lecturer;
@@ -30,11 +30,14 @@ const RegisterUser = ({ register, handleChange, handleRegisteringUser, location 
         "is-danger": register.confirmPassword.length >= register.password.length && register.confirmPassword !== register.password
     });
 
+    let outerSectionClasses = classnames("login outer", {
+        "blue-hero": is_lecturer === false
+    });
     return (
 
-        <section className="login hero is-primary is-fullheight">
-            <div className="hero-body">
-                <div className="container has-text-centered">
+        <section className={ outerSectionClasses }>
+            <div className="middle">
+                <div className="container inner has-text-centered">
                     <div className="box" onKeyDown={ (e) => { if (e.keyCode === 13 && isEmailValid && register.password && register.username) { handleRegisteringUser(register.email, register.username, register.password, is_lecturer); }}}>
                         <h2>
                             Register
@@ -93,11 +96,11 @@ const RegisterUser = ({ register, handleChange, handleRegisteringUser, location 
     );
 };
 
-RegisterUser.propTypes = {
+Signup.propTypes = {
     register: PropTypes.object.isRequired,
     handleChange: PropTypes.func.isRequired,
     handleRegisteringUser: PropTypes.func.isRequired,
     location: PropTypes.object.isRequired
 };
 
-export default RegisterUser;
+export default Signup;

@@ -1,0 +1,26 @@
+.outer {
+    display: table;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+
+    &.blue-hero {
+        background-color: #1fc8db;
+        color: white;
+    }
+
+    &.red-hero {
+        background-color: #ed6c63;
+        color: white;
+    }
+}
+
+.middle {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.inner {
+    margin-left: auto;
+    margin-right: auto;
+}

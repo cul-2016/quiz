@@ -4,19 +4,19 @@ import { Link } from 'react-router';
 const HoldingPage = ({ params }) => {
 
     return (
-        <div className="hero is-fullheight holding-page">
-
-
-            <div className="hero-body">
-                <div className="column is-8 is-offset-2 has-text-centered">
-                    <h1>
-                        When you are ready, click the button below to review the quiz with your students.
-                    </h1>
-                    <Link to={ `${params.module_id}/${params.quiz_id}/review` }>
-                        <button className="button is-large is-success">
-                            Review the quiz
-                        </button>
-                    </Link>
+        <div className="hero outer holding-page">
+            <div className="middle">
+                <div className="inner">            
+                    <div className="column is-8 is-offset-2 has-text-centered">
+                        <h1>
+                            When you are ready, click the button below to review the quiz with your students.
+                        </h1>
+                        <Link to={ `${params.module_id}/${params.quiz_id}/review` }>
+                            <button className="button is-large is-success">
+                                Review the quiz
+                            </button>
+                        </Link>
+                    </div>
                 </div>
             </div>
         </div>
