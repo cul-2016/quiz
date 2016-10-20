@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react';
 import classnames from 'classnames';
+import detectIEVersion from '../lib/detectIEVersion';
+
 
 const EditScoreModal = ({ members, member_key, quiz_id, module_id, handleUpdateScore, handleEditScore, hide, isVisible }) => {
 
@@ -14,27 +16,34 @@ const EditScoreModal = ({ members, member_key, quiz_id, module_id, handleUpdateS
         "is-active": isVisible
     });
 
+    let modalOuterClass = classnames({
+        "modal-content-outer": detectIEVersion() === false
+    });
+
     return (
         <div className={ modalClasses }>
             <div className="modal-background" />
-
-            <div className="modal-content section container edit-score-modal">
-                <div className="has-text-centered">
-                    <h2>
-                      Edit Score
-                    </h2>
-                    <label className="label">Score</label>
-                    <input
-                        className="input"
-                        value={ value || '' }
-                        onChange={ (e) => handleUpdateScore(e.target.value, member_key)}
-                        type="number"
-                        placeholder="Module Name"
-                        />
-                    <div>
-                        <button className="button is-warning" onClick={ () => { handleEditScore(module_id, quiz_id, user_id, score); hide(); } }>
-                            Edit Score
-                        </button>
+            <div className={ modalOuterClass }>
+                <div className="modal-content-middle">
+                    <div className="modal-content-inner section container edit-score-modal">
+                        <div className="has-text-centered">
+                            <h2>
+                              Edit Score
+                            </h2>
+                            <label className="label">Score</label>
+                            <input
+                                className="input"
+                                value={ value || '' }
+                                onChange={ (e) => handleUpdateScore(e.target.value, member_key)}
+                                type="number"
+                                placeholder="Module Name"
+                                />
+                            <div>
+                                <button className="button is-warning" onClick={ () => { handleEditScore(module_id, quiz_id, user_id, score); hide(); } }>
+                                    Edit Score
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
