@@ -1,3 +1,8 @@
+body {
+    -ms-overflow-style: none; // issue #218
+    overflow: auto;
+}
+
 .outer, .modal-content-outer {
     display: table;
     position: absolute;
