@@ -18,7 +18,6 @@ const CurrentQuestion = ({ data, response, handleSelection }) => {
         });
         return (
             <div key={ i } className={ classes } onClick={ () => handleSelection && handleSelection(letter) }>
-                <span>{ `${letter.toUpperCase()}: ` }</span>
                 <span>{ `${data[letter]}` }</span>
             </div>
         );

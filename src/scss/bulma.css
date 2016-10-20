@@ -4975,9 +4975,9 @@ a.box:active {
 @media screen and (min-width: 769px) {
   .modal-content, .modal-card {
     margin: 0 auto;
-    max-height: calc(100vh - 40px);
+    max-height: calc(80vh - 40px);
     min-width: 640px;
-    max-width: calc(100vw - 40px); /* added a max width for review modal */
+    max-width: calc(80vw - 40px); /* added a max width for quiz review modal */
   }
 }
 
