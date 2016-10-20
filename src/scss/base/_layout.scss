@@ -1,4 +1,4 @@
-.outer {
+.outer, .modal-content-outer {
     display: table;
     position: absolute;
     height: 100%;
@@ -15,12 +15,19 @@
     }
 }
 
-.middle {
+.middle, .modal-content-middle {
     display: table-cell;
     vertical-align: middle;
 }
 
-.inner {
+.inner, .modal-content-inner {
     margin-left: auto;
     margin-right: auto;
+}
+
+.modal-content-inner {
+    border-radius: 5px;
+    max-height: calc(100vh - 100px);
+    max-width: calc(100vw - 100px);
+    overflow-y: auto;
 }

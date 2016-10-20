@@ -12,9 +12,12 @@ const QuizMembersModal = ({ questions, hide, isVisible }) => {
     return (
         <div className={ modalClasses }>
             <div className="modal-background" />
-
-            <div className="modal-content section container">
-                <QuizReviewQuestions questions={ questions } />
+            <div className="modal-content-outer">
+                <div className="modal-content-middle">
+                    <div className="modal-content-inner  section container">
+                        <QuizReviewQuestions questions={ questions } />
+                    </div>
+                </div>
             </div>
             <button className="modal-close" onClick={ () => hide() } />
         </div>

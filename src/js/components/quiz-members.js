@@ -148,15 +148,17 @@ class QuizMembers extends Component {
                             <h3>Quiz Members</h3>
                             <table className="table">
                                 <thead>
-                                    <th>
-                                        <label className="label">Email</label>
-                                    </th>
-                                    <th>
-                                        <label className="label">Nickname</label>
-                                    </th>
-                                    <th colSpan="2">
-                                        <label className="label">Score</label>
-                                    </th>
+                                    <tr>
+                                        <th>
+                                            <label className="label">Email</label>
+                                        </th>
+                                        <th>
+                                            <label className="label">Nickname</label>
+                                        </th>
+                                        <th colSpan="2">
+                                            <label className="label">Score</label>
+                                        </th>
+                                    </tr>
                                 </thead>
                                 <tbody>
                                     { mappedMembers }
