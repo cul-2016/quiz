@@ -19,7 +19,7 @@ const QuizMembersModal = ({ questions, hide, isVisible }) => {
             <div className="modal-background" />
             <div className={ modalOuterClass }>
                 <div className="modal-content-middle">
-                    <div className="modal-content-inner  section container">
+                    <div className="modal-content-inner section container">
                         <QuizReviewQuestions questions={ questions } />
                     </div>
                 </div>
