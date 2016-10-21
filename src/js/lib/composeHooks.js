@@ -3,7 +3,6 @@
  * @param {function} ...hooks - the functions you want to run serially
  */
 
-
 export default function composeHooks (...hooks) {
 
     return function onEnter (nextState, replace, executeTransition) {

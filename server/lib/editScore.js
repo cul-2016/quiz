@@ -2,7 +2,7 @@ var query = require('./query');
 var queries = require('./queries.json');
 
 /**
- * Represents a function that updates an existing score for a user
+ * Represents a function that updates an existing score for a student
  * @param {object} client - postgres database client
  * @param {number} user_id - user id for a student
  * @param {number} quiz_id - quiz id to which the student will belong to

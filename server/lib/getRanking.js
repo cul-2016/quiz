@@ -3,19 +3,19 @@ var getPercentileValues = require('./getPercentileValues');
 var getStudentPercentageScore = require('./getStudentPercentageScore');
 var getBoundaryIndex = require('./getBoundaryIndex');
 
-/**
- * Calculates a student's percentile rank
- * Returns the upper bound of the student's percentile range
- * e.g. 25 represents the 10% - 25% percentile range
- * Forms part of the data for the `/get-feedback` endpoint
- * @param {object} client - postgres database client
- * @param {number} user_id - user id
- * @param {string} module_id - module id
- * @param {function} callback - a callback function
- */
 
 const BOUNDARIES = [10, 25, 50, 90, 100];
 
+/**
+* Calculates a student's percentile rank
+* Returns the upper bound of the student's percentile range
+* e.g. 25 represents the 10% - 25% percentile range
+* Forms part of the data for the `/get-feedback` endpoint
+* @param {object} client - postgres database client
+* @param {number} user_id - user id
+* @param {string} module_id - module id
+* @param {function} callback - a callback function
+*/
 function getRanking (client, user_id, module_id, callback) {
 
     // get all average percentage scores in descending order

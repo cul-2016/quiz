@@ -1,7 +1,7 @@
 var query = require('./query');
 
 /**
- * Represents a function that fetches a list of users belonging to a module
+ * Represents a function that returns a list of students belonging to a module
  * @param {object} client - postgres database client
  * @param {string} module_id - module id to which all students will belong to
  * @param {function} callback - a callback function

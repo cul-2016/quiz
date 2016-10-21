@@ -1,3 +1,7 @@
+/**
+ * Function that returns serialised state from browser local storage
+ */
+
 export function loadState () {
 
     try {
@@ -11,6 +15,10 @@ export function loadState () {
         return undefined;
     }
 }
+
+/**
+ * Function that saves serialised state to browser local storage
+ */
 
 export function saveState (state) {
     try {

@@ -2,12 +2,11 @@ var preparedQuery = require('./preparedQuery');
 var composeQuestionStatement = require('./composeQuestionStatement');
 
 /**
- * Represents a function that saves new queestions
+ * Represents a function that saves new questions to a quiz
  * @param {object} client - postgres database client
  * @params {array} questions - array of questions
  * @param {function} callback - a callback function
  */
-
 
 function saveQuestions (client, questions, callback) {
 

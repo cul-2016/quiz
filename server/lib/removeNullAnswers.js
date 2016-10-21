@@ -1,5 +1,13 @@
+/**
+ * Represents a function that removes null values from answers array
+ * @param {object} client - postgres database client
+ * @param {string} module_id - module_id
+ * @param {number} user_id - user_id
+ * @param {function} callback - a callback function
+ */
+
 function removeNullAnswers (questions) {
-    
+
     var answerKeys = ['a', 'b', 'c', 'd'];
     for (let i = 0; i < questions.length; i++) {
 

@@ -1,7 +1,7 @@
 var query = require('./query');
 
 /**
- * Fetches a boolean value for whether the quiz is the last quiz for a given module.
+ * Returns a boolean value for whether the quiz is the last quiz for a given module.
  * Returns an object of arrays. Keys: 'name', 'questions'.
  * @param {object} client - database client
  * @param {string} quiz_id - unique quiz id

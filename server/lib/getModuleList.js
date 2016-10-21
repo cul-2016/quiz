@@ -1,7 +1,7 @@
 var query = require('./query');
 
 /**
- * Represents a function that fetches a list of modules belonging to the user
+ * Represents a function that retruns a list of modules belonging to the user
  * For a lecturer, this will return modules they have created.
  * For a student, this will return modules they have joined.
  * @param {object} client - postgres database client
