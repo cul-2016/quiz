@@ -2,7 +2,7 @@ var query = require('./query');
 var queries = require('./queries.json');
 
 /**
- * Represents a function that fetches every score for all the quizzes a student has participated in
+ * Represents a function that returns every score for all the quizzes for every student in a module
  * @param {object} client - postgres database client
  * @param {string} module_id - module id
  * @param {function} callback - a callback function

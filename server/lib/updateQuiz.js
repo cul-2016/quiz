@@ -1,7 +1,7 @@
  var query = require('./query');
 
  /**
-  * Represents a function that updates the quiz
+  * Represents a function that updates the quiz details
   * @param {object} client - postgres database client
   * @param {string} module_id - module_id for the given Quiz
   * @param {number} quiz_id - quiz_id for the given Quiz

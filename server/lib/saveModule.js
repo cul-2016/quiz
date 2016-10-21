@@ -2,6 +2,14 @@ var query = require('./query');
 
 var MEDAL_2_UPPER_BOUND = 100;
 
+/**
+ * Represents a function that saves a new module
+ * @param {object} client - postgres database client
+ * @param {string} module_id - module_id
+ * @param {number} user_id - user_id
+ * @param {function} callback - a callback function
+ */
+
 function saveModule (pool, module_id, user_id, name, medals, trophies, callback) {
 
     var moduleQuery = [

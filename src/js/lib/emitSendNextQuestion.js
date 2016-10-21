@@ -6,7 +6,6 @@
  * @param {function} - callback - callback function
  */
 
-
 export function emitSendNextQuestion (socketClient, nextQuestion, callback) {
 
     if (arguments.length !== 3 || typeof socketClient !== 'object' || typeof nextQuestion !== 'object' || typeof callback !== 'function') {

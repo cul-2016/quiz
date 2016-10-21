@@ -1,8 +1,10 @@
 /**
- * Runs a function that joins the websocket room
+ * Represents a function that joins the websocket room
  * Is registered in Module and StudentModule components
  * @param {object} store - redux store
+ * @param {object} socket - socket io connection
  */
+
 export function joinWebsocketRoom (store, socket) {
 
     let currentModuleID;

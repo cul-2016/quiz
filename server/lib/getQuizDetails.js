@@ -1,7 +1,7 @@
 var query = require('./query');
 
 /**
- * Fetches quiz information from the database.
+ * Returns quiz information from the database.
  * Returns an object of arrays. Keys: 'name', 'questions'.
  * @param {object} client - database client
  * @param {string} quiz_id - unique quiz id

@@ -1,5 +1,5 @@
 /**
- * Returns index of percentile boundary to which a student's score belongs
+ * Returns the index of the percentile to which a student's score belongs
  * @param {number} score - student's score
  * @param {array} range - percentile boundary values in descending order
  * @param {function} callback - callback function

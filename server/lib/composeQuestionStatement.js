@@ -1,5 +1,5 @@
 /**
- * Represents a function that creates the prepared object required to save questions
+ * Represents a function that composes a statement to save (n) number of questions to the database
  * @param {array} rows - array of objects that need to be saved to the database
  * @param {function} callback - a callback function
  */

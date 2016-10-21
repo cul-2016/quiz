@@ -1,7 +1,5 @@
 var query = require('./query');
 var queries = require('./queries.json');
-var mapStringToNumber = require('../utils/mapStringToNumber');
-
 /**
  * Returns, for each student, the average score across all quizzes as a percentage {array}.
  * The returned array is in descending numerical order of average score
@@ -27,3 +25,15 @@ function getAllPercentageScores (client, module_id, callback) {
 }
 
 module.exports = getAllPercentageScores;
+
+function mapStringToNumber (array, callback) {
+
+    (function mapToNum (arr, i) {
+
+        if (i === arr.length) {
+            return callback(null, arr);
+        }
+        arr[i].average = parseFloat(arr[i].average);
+        mapToNum(arr, ++i);
+    })(array, 0);
+}

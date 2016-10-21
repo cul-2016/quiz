@@ -6,7 +6,7 @@ var queries = require('./queries.json');
 var organiseModuleData = require('./organiseModuleData');
 
 /**
- * Fetches module information for a lecturer.
+ * Returns module information for a lecturer.
  * Returns an object of arrays. Keys: 'quizzes', 'medals', 'trophies'.
  * @param {object} client - database client
  * @param {string} module_id - unique module id

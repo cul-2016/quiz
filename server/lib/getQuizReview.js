@@ -3,7 +3,7 @@ var queries = require('./queries.json');
 var removeNullAnswers = require('./removeNullAnswers');
 
 /**
- * Represents a function that fetches a list of questions that belong to a quiz_id along with all the responses for each questions
+ * Represents a function that returns a list of questions that belong to a quiz, along with all the responses for each questions
  * @param {object} client - postgres database client
  * @param {number} quiz_id - quiz id
  * @param {function} callback - a callback function

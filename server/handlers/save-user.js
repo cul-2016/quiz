@@ -1,6 +1,6 @@
 var saveUser = require('../lib/authentication/saveUser');
 var client = require('../lib/dbClient');
-var getUser = require('../lib/getUser');
+var getUserByEmail = require('../lib/getUserByEmail');
 
 var hashPassword = require('../lib/authentication/hashPassword');
 
@@ -13,7 +13,7 @@ module.exports = {
         var is_lecturer = request.payload.is_lecturer;
         var username = request.payload.username || '';
 
-        getUser(client, email, (error, userExists) => {
+        getUserByEmail(client, email, (error, userExists) => {
             if (userExists.length === 1) {
                 return reply(true);
             } else {
@@ -25,7 +25,7 @@ module.exports = {
                         if (error) {
                             return reply(error);
                         }
-                        getUser(client, email, (error, userDetails) => {
+                        getUserByEmail(client, email, (error, userDetails) => {
                             delete userDetails[0].password;
                             return reply(userDetails[0])
                             .state('cul_id', userDetails[0].user_id.toString(), { path: "/" })
