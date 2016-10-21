@@ -57,7 +57,7 @@ const Leaderboard = ({ mainData, medalScores, quiz_id_list, medalCondition, para
                 </div>
                 <div className="section">
                     <div className="leaderboard-header columns is-hidden-mobile">
-                        <div className="column is-4 is-offset-1">
+                        <div className="column is-4 nickname">
                             Nickname
                         </div>
                         <div className="column is-1 score-header">
