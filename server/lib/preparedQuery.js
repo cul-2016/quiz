@@ -1,5 +1,5 @@
 /**
- * Function to query the database
+ * Function to query the database using a prepared query
  * @param {object} pool - database client
  * @param {string} queryText - SQL query
  * @param {array} queryArray - variables for the SQL query

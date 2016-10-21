@@ -1,9 +1,8 @@
 /**
- * Represents a function that deleted the questions from the databases
- * @param {array} rows - array of objects that need to be saved to the database
+ * Represents a function that composes a statement to delete (n) number of questions from the database
+ * @param {array} rows - array of question objects that need to be deleted from the database
  * @param {function} callback - a callback function
  */
-
 
 function composeDeleteQuestionStatement (rows, callback) {
 

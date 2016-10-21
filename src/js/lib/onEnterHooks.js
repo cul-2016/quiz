@@ -3,7 +3,6 @@ import { socketClient } from '../socket';
 import validCookieExists from './validCookieExists';
 import isUserLecturer from './isUserLecturer';
 import getUserID from './getUserID';
-import { loadState } from './localStorageState';//eslint-disable-line no-unused-vars
 import { getModule, getModuleMembers } from '../actions/module';
 import { getDashboard } from '../actions/dashboard';
 import { getUserDetails } from '../actions/user';
@@ -13,7 +12,7 @@ import { getQuizMembers } from '../actions/quiz-members';
 import { getQuizDetails } from '../actions/new-quiz';
 import { getLeaderboard } from '../actions/leaderboard';
 import { getFeedback } from '../actions/feedback';
-import { getStudentHistory } from '../actions/student-history'; //eslint-disable-line no-unused-vars
+import { getStudentHistory } from '../actions/student-history';
 
 
 /**
@@ -24,6 +23,7 @@ import { getStudentHistory } from '../actions/student-history'; //eslint-disable
  * @param {function} replace - function to redirect to another path
  * @param {function} callback - (optional) can be used to make the transition block
  */
+
 export function authenticate (nextState, replace, callback) {
 
     if (!validCookieExists()) {

@@ -2,7 +2,7 @@ var query = require('./query');
 var queries = require('./queries.json');
 
 /**
- * Represents a function that fetches a list of quiz ids in a module
+ * Represents a function that returns a list of quiz ids in a module
  * @param {object} client - postgres database client
  * @param {string} module_id - module id
  * @param {function} callback - a callback function

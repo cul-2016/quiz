@@ -25,7 +25,7 @@ const Leaderboard = ({ mainData, medalScores, quiz_id_list, medalCondition, para
         return (
             <li className="columns is-desktop" key={ i }>
                 <span className="rank-number column is-1">{ rankingNumbers[i] }</span>
-                <div className="column is-2">
+                <div className="column is-3">
                     <span className="subtitle is-4">{ user.username }</span>
                 </div>
                 <div className="column is-1">
@@ -57,7 +57,7 @@ const Leaderboard = ({ mainData, medalScores, quiz_id_list, medalCondition, para
                 </div>
                 <div className="section">
                     <div className="leaderboard-header columns is-hidden-mobile">
-                        <div className="column is-2 is-offset-1">
+                        <div className="column is-4 nickname">
                             Nickname
                         </div>
                         <div className="column is-1 score-header">

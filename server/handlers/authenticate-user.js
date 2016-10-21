@@ -1,5 +1,5 @@
 var validatePassword = require('../lib/authentication/validatePassword');
-var getUser = require('../lib/getUser');
+var getUserByEmail = require('../lib/getUserByEmail');
 var client = require('../lib/dbClient');
 
 module.exports = {
@@ -9,7 +9,7 @@ module.exports = {
         var email = request.payload.email;
         var password = request.payload.password;
 
-        getUser(client, email, (error, userDetails) => {
+        getUserByEmail(client, email, (error, userDetails) => {
             if (error) {
                 reply(error);
             } else if (userDetails.length !== 1) {

@@ -3,5 +3,8 @@
         "include": [ "server", "src" ],
         "includePattern": ".+\\.js(doc)?$",
         "excludePattern": "(^|\\/|\\\\)_"
-    }
+    },
+    "plugins": [
+        "jsdocTags"
+    ]
 }

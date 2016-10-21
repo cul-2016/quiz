@@ -2,7 +2,7 @@ var query = require('./query');
 var queries = require('./queries.json');
 
 /**
- * Represents a function that saves the students response into response table
+ * Represents a function that saves a student's response into response table
  * @param {object} client - postgres database client
  * @param {integer} user_id - user_id of the students
  * @param {integer} quiz_id - quiz_id for the given Quiz
