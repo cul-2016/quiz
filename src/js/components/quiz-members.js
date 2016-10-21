@@ -4,6 +4,7 @@ import Spinner from './general/spinner';
 import QuizMembersModal from './quiz-members-modal';
 import EditScoreModal from './edit-score-modal';
 import { store } from '../store.js';
+import detectIEVersion from '../lib/detectIEVersion';
 
 
 class QuizMembers extends Component {
@@ -58,6 +59,8 @@ class QuizMembers extends Component {
     }
 
     render () {
+
+        console.log("VERSION", detectIEVersion());
 
         let { members, isFetchingQuizMembers, questions, params, handleUpdateScore, handleEditScore } = this.props;
         let quizName = this.getQuizName();
@@ -148,15 +151,17 @@ class QuizMembers extends Component {
                             <h3>Quiz Members</h3>
                             <table className="table">
                                 <thead>
-                                    <th>
-                                        <label className="label">Email</label>
-                                    </th>
-                                    <th>
-                                        <label className="label">Nickname</label>
-                                    </th>
-                                    <th colSpan="2">
-                                        <label className="label">Score</label>
-                                    </th>
+                                    <tr>
+                                        <th>
+                                            <label className="label">Email</label>
+                                        </th>
+                                        <th>
+                                            <label className="label">Nickname</label>
+                                        </th>
+                                        <th colSpan="2">
+                                            <label className="label">Score</label>
+                                        </th>
+                                    </tr>
                                 </thead>
                                 <tbody>
                                     { mappedMembers }

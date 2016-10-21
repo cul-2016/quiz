@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import RegisterUser from '../components/register-user';
+import Signup from '../components/signup';
 import { updateInputField, registeringUser } from '../actions/register';
 
 const mapStateToProps = (state) => ({
@@ -17,6 +17,6 @@ const mapDispatchToProps = (dispatch) => ({
 
 });
 
-const RegisterUserContainer = connect(mapStateToProps, mapDispatchToProps)(RegisterUser);
+const SignupContainer = connect(mapStateToProps, mapDispatchToProps)(Signup);
 
-export default RegisterUserContainer;
+export default SignupContainer;
