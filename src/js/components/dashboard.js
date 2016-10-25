@@ -71,9 +71,15 @@ class Dashboard extends Component {
                             </Link>
                     }
                     {
-                        modules.length === 0 &&
+                        modules.length === 0 && is_lecturer &&
                             <div className="notification">
                                 Create your first module by clicking the button above.
+                            </div>
+                    }
+                    {
+                        modules.length === 0 && !is_lecturer &&
+                            <div className="notification">
+                                Join your first module by clicking the button above.
                             </div>
                     }
                     <div className={ headerClasses }>
