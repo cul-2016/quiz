@@ -1,6 +1,7 @@
 .dashboard {
     text-align: center;
     padding-top: 2em;
+    overflow: hidden; // solves #231
 
     ul {
         margin: 0 auto;

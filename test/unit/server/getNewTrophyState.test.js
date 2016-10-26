@@ -13,7 +13,7 @@ test("`getNewTrophyState` returns all trophies in state when is_last_quiz is set
     const is_last_quiz = true;
     const expected = {
         first_quiz: true,
-        high_score: false,
+        high_score: true,
         participation: true,
         overall_average: true
     };
@@ -38,7 +38,7 @@ test("`getNewTrophyState` returns only first_quiz, high_score & participation in
 
     const expected = {
         first_quiz: true,
-        high_score: false,
+        high_score: true,
         participation: true
     };
 

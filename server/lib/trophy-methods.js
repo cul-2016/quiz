@@ -28,16 +28,23 @@ function getFirstQuizState (client, user_id, quiz_id, callback) {
  * @param {function} callback - a callback function
  */
 
-function getHighScoreState (client, module_id, percentageScore, callback) {
+function getHighScoreState (client, user_id, module_id, percentageScore, callback) {
 
-    query(client, queries.getHighScoreState, [module_id], (error, result) => {
+    query(client, queries.getHighScoreState.getCurrentHighScore, [user_id, module_id], (error, high_score) => {
 
-        if (error) {
-            throw new Error("Problem with getting high score");
+        if (high_score) {
+            return callback(null, true);
+        } else {
+            query(client, queries.getHighScoreState.getCondition, [module_id], (error, result) => {
+
+                if (error) {
+                    throw new Error("Problem with getting high score");
+                }
+                var threshold = result.rows[0].condition;
+
+                callback(null, percentageScore >= threshold);
+            });
         }
-        var threshold = result.rows[0].condition;
-
-        callback(null, percentageScore >= threshold);
     });
 }
 
