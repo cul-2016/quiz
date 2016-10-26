@@ -76,7 +76,7 @@ export function checkModuleOwner (nextState, replace, callback) {
         return module.module_id === module_id;
     });
     if (!lecturerOwnsModule) {
-        replace('/dashboard');
+        replace('/404');
         callback(false);
     } else {
         callback();
