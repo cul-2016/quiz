@@ -66,7 +66,7 @@ const Root = ({ store }) => (
                     path="app-loading"
                     component={ AppLoadingContainer } />
                 <Route
-                    onEnter={ composeHooks(hooks.authenticate, hooks.checkUserRole, hooks.fetchModule) }
+                    onEnter={ composeHooks(hooks.authenticate, hooks.checkUserRole, hooks.fetchModule, hooks.checkModuleOwner) }
                     path=":module_id/lecturer"
                     component={ ModuleContainer } />
                 <Route path=":module_id/student" component={ StudentModuleContainer }>
@@ -81,23 +81,23 @@ const Root = ({ store }) => (
                         component={ StudentFeedbackContainer } />
                 </Route>
                 <Route
-                    onEnter={ composeHooks(hooks.authenticate, hooks.checkUserRole) }
+                    onEnter={ composeHooks(hooks.authenticate, hooks.checkUserRole, hooks.checkModuleOwner) }
                     path=":module_id/new-quiz"
                     component={ NewQuizContainer } />
                 <Route
-                    onEnter={ composeHooks(hooks.authenticate, hooks.checkUserRole, hooks.fetchQuizDetails) }
+                    onEnter={ composeHooks(hooks.authenticate, hooks.checkUserRole, hooks.fetchQuizDetails, hooks.checkModuleOwner) }
                     path=":module_id/:quiz_id/edit-quiz"
                     component={ EditQuizContainer } />
                 <Route
-                    onEnter={ composeHooks(hooks.authenticate, hooks.checkUserRole, hooks.fetchModuleMembers) }
+                    onEnter={ composeHooks(hooks.authenticate, hooks.checkUserRole, hooks.fetchModuleMembers, hooks.checkModuleOwner) }
                     path=":module_id/members"
                     component={ ModuleMembersContainer } />
                 <Route
-                    onEnter={ composeHooks(hooks.authenticate, hooks.checkUserRole, hooks.fetchQuizMembers, hooks.fetchQuizReview) }
+                    onEnter={ composeHooks(hooks.authenticate, hooks.checkUserRole, hooks.fetchQuizMembers, hooks.fetchQuizReview, hooks.checkModuleOwner) }
                     path=":module_id/:quiz_id/members"
                     component={ QuizMembersContainer } />
                 <Route
-                    onEnter={ composeHooks(hooks.authenticate, hooks.checkUserRole) }
+                    onEnter={ composeHooks(hooks.authenticate, hooks.checkUserRole, hooks.checkModuleOwner) }
                     path=":module_id/lecturer/live"
                     component={ LecturerLiveQuizContainer } />
                 <Route
@@ -105,11 +105,11 @@ const Root = ({ store }) => (
                     path=":module_id/student/live"
                     component={ StudentLiveQuizContainer } />
                 <Route
-                    onEnter={ composeHooks(hooks.authenticate, hooks.checkUserRole) }
+                    onEnter={ composeHooks(hooks.authenticate, hooks.checkUserRole, hooks.checkModuleOwner) }
                     path=":module_id/:quiz_id/holding-page"
                     component={ HoldingPageComponent } />
                 <Route
-                    onEnter={ composeHooks(hooks.authenticate, hooks.checkUserRole, hooks.fetchQuizReview) }
+                    onEnter={ composeHooks(hooks.authenticate, hooks.checkUserRole, hooks.fetchQuizReview, hooks.checkModuleOwner) }
                     path=":module_id/:quiz_id/review"
                     component={ ReviewContainer } />
                 <Route
@@ -117,11 +117,11 @@ const Root = ({ store }) => (
                     path=":module_id/:quiz_id/result"
                     component={ StudentQuizResultContainer } />
                 <Route
-                    onEnter={ hooks.authenticate }
+                    onEnter={ composeHooks(hooks.authenticate, hooks.checkModuleOwner) }
                     path=":module_id/:quiz_id/history"
                     component={ QuizHistoryContainer } />
                 <Route
-                    onEnter={ composeHooks(hooks.authenticate, hooks.checkUserRole, hooks.fetchLeaderboard) }
+                    onEnter={ composeHooks(hooks.authenticate, hooks.checkUserRole, hooks.fetchLeaderboard, hooks.checkModuleOwner) }
                     path=":module_id/leaderboard"
                     component={ LeaderboardContainer } />
                 <Route path='/404' component={ NotFound } />
