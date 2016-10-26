@@ -8,6 +8,11 @@ const ConfirmModal = ({ isVisible, hide, removeMember, username, email, user_id,
         "is-active": isVisible
     });
 
+    const removeMembersAndHideModal = (user_id, module_id) => {
+        removeMember(user_id, module_id);
+        hide();
+    };
+
     return (
         <div className={ modalClasses }>
             <div className="modal-background" />
@@ -15,7 +20,7 @@ const ConfirmModal = ({ isVisible, hide, removeMember, username, email, user_id,
                     <div className="modal-content box has-text-centered">
                         <h3>{ `Are you sure you want to delete this student?` }</h3>
                         <p>{ `${email} (${username})` }</p>
-                        <button className="button is-danger" onClick={ () => removeMember(user_id, module_id)  }>
+                        <button className="button is-danger" onClick={ () => removeMembersAndHideModal(user_id, module_id) }>
                             Delete student from module
                         </button>
                     </div>

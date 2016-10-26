@@ -38,8 +38,9 @@ test('`getHighScoreState` awards an eligible student with `high_score` trophy', 
 
     const module_id = 'TEST';
     const percentageScore = 100;
+    const user_id = 1;
 
-    getHighScoreState(testClient, module_id, percentageScore, (error, result) => {
+    getHighScoreState(testClient, user_id, module_id, percentageScore, (error, result) => {
 
         t.plan(2);
 
@@ -48,17 +49,18 @@ test('`getHighScoreState` awards an eligible student with `high_score` trophy', 
     });
 });
 
-test('`getHighScoreState` does not award an ineligible student with `high_score` trophy', (t) => {
+test('`getHighScoreState` does not overwrite a pre-awarded `high_score` trophy', (t) => {
 
     const module_id = 'TEST';
     const percentageScore = 70;
+    const user_id = 1;
 
-    getHighScoreState(testClient, module_id, percentageScore, (error, result) => {
+    getHighScoreState(testClient, user_id, module_id, percentageScore, (error, result) => {
 
         t.plan(2);
 
         t.equal(typeof result, 'boolean', "getHighScoreState returns a Boolean value");
-        t.equal(result, false, 'Trophy not awarded');
+        t.equal(result, true, 'Trophy not awarded');
     });
 });
 

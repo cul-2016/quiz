@@ -4,7 +4,6 @@ import Spinner from './general/spinner';
 import QuizMembersModal from './quiz-members-modal';
 import EditScoreModal from './edit-score-modal';
 import { store } from '../store.js';
-import detectIEVersion from '../lib/detectIEVersion';
 
 
 class QuizMembers extends Component {
@@ -60,7 +59,6 @@ class QuizMembers extends Component {
 
     render () {
 
-        console.log("VERSION", detectIEVersion());
 
         let { members, isFetchingQuizMembers, questions, params, handleUpdateScore, handleEditScore } = this.props;
         let quizName = this.getQuizName();

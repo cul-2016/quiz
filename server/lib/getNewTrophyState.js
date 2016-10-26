@@ -30,7 +30,7 @@ function getNewTrophyState (client, user_id, module_id, quiz_id, percentageScore
         }
         trophies_awarded.first_quiz = first_quiz;
 
-        getHighScoreState(client, module_id, percentageScore, (error, high_score) => {
+        getHighScoreState(client, user_id, module_id, percentageScore, (error, high_score) => {
 
             if (error) {
                 console.error(error);
