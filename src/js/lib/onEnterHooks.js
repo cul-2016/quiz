@@ -59,6 +59,30 @@ export function checkUserRole (nextState, replace, callback) {
     }
 }
 
+
+/**
+ * Checks if module_owner is the same as user_id.  Redirects  to '/dashboard' if they're not
+ * Is used as an onEnter hook for React Router
+ * Matches the signature of a React Router hook: https://github.com/reactjs/react-router/blob/master/docs/API.md#onenternextstate-replace-callback
+ * @param {object} nextState - the next router state
+ * @param {function} replace - function to redirect to another path
+ * @param {function} callback - (optional) can be used to make the transition block
+ */
+export function checkModuleOwner (nextState, replace, callback) {
+    const module_id = nextState.params.module_id;
+    const modulesArray = store.getState().dashboard.data;
+
+    const lecturerOwnsModule = modulesArray.some((module) => {
+        return module.module_id === module_id;
+    });
+    if (!lecturerOwnsModule) {
+        replace('/404');
+        callback(false);
+    } else {
+        callback();
+    }
+}
+
 /**
  * fetches user details.  Redirects  to '/' if they're not authorised
  * Is used as an onEnter hook for React Router
