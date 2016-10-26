@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import classnames from 'classnames';
-import detectIEVersion from '../lib/detectIEVersion';
 
 
 const EditScoreModal = ({ members, member_key, quiz_id, module_id, handleUpdateScore, handleEditScore, hide, isVisible }) => {
@@ -16,14 +15,10 @@ const EditScoreModal = ({ members, member_key, quiz_id, module_id, handleUpdateS
         "is-active": isVisible
     });
 
-    let modalOuterClass = classnames({
-        "modal-content-outer": detectIEVersion() === false
-    });
 
     return (
         <div className={ modalClasses }>
-            <div className="modal-background" />
-            <div className={ modalOuterClass }>
+            <div className="modal-background modal-content-outer">
                 <div className="modal-content-middle">
                     <div className="modal-content-inner section container edit-score-modal">
                         <div className="has-text-centered">
