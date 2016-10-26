@@ -61,7 +61,7 @@ export function checkUserRole (nextState, replace, callback) {
 
 
 /**
- * Checks if module_owner is the same as user_id.  Redirects  to '/dashboard' if they're not
+ * Checks if module_owner is the same as user_id.  Redirects  to '/404' if they're not
  * Is used as an onEnter hook for React Router
  * Matches the signature of a React Router hook: https://github.com/reactjs/react-router/blob/master/docs/API.md#onenternextstate-replace-callback
  * @param {object} nextState - the next router state
