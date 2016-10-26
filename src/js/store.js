@@ -26,6 +26,7 @@ store.subscribe(throttle(() => {
         user: store.getState().user,
         module: store.getState().module,
         liveQuiz: store.getState().liveQuiz,
-        newQuiz: store.getState().newQuiz
+        newQuiz: store.getState().newQuiz,
+        dashboard: store.getState().dashboard
     });
 }, 2000));

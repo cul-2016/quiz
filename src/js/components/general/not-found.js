@@ -16,7 +16,7 @@ class NotFound extends React.Component {
                             Oops! Nothing to see here
                         </h1>
                         <Link to="/dashboard">
-                            <h2 className="subtitle button is-success is-large">Home</h2>
+                            <button className="subtitle button is-success is-large">Dashboard</button>
                         </Link>
                     </div>
                 </div>
