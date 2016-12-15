@@ -24,8 +24,10 @@ test('composeQuestionStatement returns the correctly formatted object', (t) => {
             correct_answer: 'b'
         }];
 
-    const expected = { text: 'INSERT INTO questions (quiz_id, question, a, b, c, d, correct_answer) VALUES ($1, $2, $3, $4, $5, $6, $7), ($8, $9, $10, $11, $12, $13, $14)',
-      values: [1, 'One', 'a', 'b', 'c', 'd', 'a', 1, 'Two', 'a', 'b', 'c', 'd', 'b'] };
+    const expected = {
+        text: 'INSERT INTO questions (quiz_id, question, a, b, c, d, correct_answer) VALUES ($1, $2, $3, $4, $5, $6, $7), ($8, $9, $10, $11, $12, $13, $14)',
+        values: [1, 'One', 'a', 'b', 'c', 'd', 'a', 1, 'Two', 'a', 'b', 'c', 'd', 'b']
+    };
     composeQuestionStatement(arrayQuestions, (error, response) => {
         t.deepEqual(response, expected);
 

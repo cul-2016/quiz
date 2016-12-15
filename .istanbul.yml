@@ -3,7 +3,9 @@ instrumentation:
     root: [ ./src, ./server ]
     extensions: ['.js', '.jsx']
     excludes: [
-        './utils/dev-server.js'
+        'utils/dev-server.js',
+        '**/components/**',
+        '**/containers/**'
     ]
 reporting:
     watermarks:
