@@ -13,7 +13,7 @@
     "postgres": "postgres -D /usr/local/var/postgres",
     "heroku:production:postgres": "heroku pg:psql --app cul-app",
     "heroku:dev:postgres": "heroku pg:psql --app cul-app HEROKU_POSTGRESQL_SILVER",
-    "load-dev-schema": "heroku pg:psql --app cul-app HEROKU_POSTGRESQL_SILVER < ./server/lib/schema.txt",
+    "load-dev-schema": "heroku pg:psql --app cul-app HEROKU_POSTGRESQL_SILVER < ./test/utils/test-schema.txt",
     "coverage": "./node_modules/.bin/babel-node ./node_modules/babel-istanbul/lib/cli.js cover ./node_modules/tape/bin/tape --require ./test/utils/jsdom.js 'test/**/*.@(js|jsx)'",
     "check-coverage": "babel-node ./node_modules/babel-istanbul/lib/cli.js check-coverage",
     "pretest": "node ./test/utils/init.js",
