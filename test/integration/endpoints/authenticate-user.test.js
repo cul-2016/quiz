@@ -15,7 +15,10 @@ test('`authenticate-user` endpoint returns true when password matches', (t) => {
         email: 'lecturer@city.ac.uk',
         is_lecturer: true,
         user_id: 2,
-        username: 'lecturer'
+        username: 'lecturer',
+        is_verified: true,
+        code_expiry: null,
+        verification_code: null
     };
 
     server.inject(options, (response) => {

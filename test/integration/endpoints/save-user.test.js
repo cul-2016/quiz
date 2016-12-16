@@ -52,7 +52,10 @@ test('`save-user` endpoint works when a student registers', (t) => {
             email: 'lecturer@city.ac.uk',
             is_lecturer: true,
             user_id: 2,
-            username: 'lecturer'
+            username: 'lecturer',
+            is_verified: true,
+            code_expiry: null,
+            verification_code: null
         };
 
         server.inject(options, (response) => {
