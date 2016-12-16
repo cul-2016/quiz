@@ -34,14 +34,12 @@ export function registeringUser (email, username, password, is_lecturer) {
 
                 if (response.data === true) {
                     dispatch(userExists());
+                } else if (response.data.emailSent) {
+                    hashHistory.push('/please-verify');
                 } else {
                     dispatch(registeringUserSuccess(true));
                     dispatch(setUserDetails(response.data));
-                    if (response.data.is_lecturer) {
-                        hashHistory.push('/dashboard');
-                    } else {
-                        hashHistory.push('/dashboard');
-                    }
+                    hashHistory.push('/dashboard');
                 }
             }, (error) => {
                 console.error(error, 'error from axios /save-user');
