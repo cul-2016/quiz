@@ -17,7 +17,7 @@
     "coverage": "./node_modules/.bin/babel-node ./node_modules/babel-istanbul/lib/cli.js cover ./node_modules/tape/bin/tape --require ./test/utils/jsdom.js 'test/**/*.@(js|jsx)'",
     "check-coverage": "babel-node ./node_modules/babel-istanbul/lib/cli.js check-coverage",
     "pretest": "node ./test/utils/init.js",
-    "test": "tape -r babel-register --require ./test/utils/jsdom.js 'test/**/*.@(js|jsx)' | tap-spec && codecov -t 85cade74-2f2a-46da-80b8-d2edf65eee7d",
+    "test": "tape -r babel-register --require ./test/utils/jsdom.js 'test/**/*.@(js|jsx)' | tap-spec",
     "postinstall": "webpack --config ./webpack.production.config.js --progress --colors",
     "make-docs": "./node_modules/.bin/jsdoc -c ./conf.json -r"
   },
