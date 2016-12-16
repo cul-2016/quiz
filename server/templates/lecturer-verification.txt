@@ -1,0 +1,6 @@
+Hi {{name}}!
+Thanks so much for joining City University
+
+Happy Quizzing!
+Sohil & Francesco
+http://cul-app.herokuapp.com/
