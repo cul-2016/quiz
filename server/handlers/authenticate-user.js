@@ -10,6 +10,7 @@ module.exports = {
         var password = request.payload.password;
 
         getUserByEmail(client, email, (error, userDetails) => {
+            /* istanbul ignore if */
             if (error) {
                 reply(error);
             } else if (userDetails.length !== 1) {
@@ -17,6 +18,7 @@ module.exports = {
             } else {
                 var hashedPassword = userDetails[0].password;
                 validatePassword(password, hashedPassword, (error, response) => {
+                    /* istanbul ignore if */
                     if (error) {
                         reply(error);
                     }

@@ -13,6 +13,7 @@ module.exports = {
         var is_last_quiz = request.payload.is_last_quiz === true;
 
         saveQuiz(client, module_id, quizName, is_last_quiz, (error, quiz_id) => {
+            /* istanbul ignore if */
             if (error) {
                 console.error(error);
                 return reply(error);
@@ -20,6 +21,7 @@ module.exports = {
             if (questions.length === 0) {
                 if (is_last_quiz) {
                     updateIsLastQuiz(client, module_id, quiz_id, (error) => {
+                        /* istanbul ignore if */
                         if (error) {
                             console.error(error);
                             return reply(error);
@@ -32,7 +34,7 @@ module.exports = {
                     return question;
                 });
                 saveQuestions(client, mappedQuestions, (error, response) => {
-                    //reply here.
+                    /* istanbul ignore if */
                     if (error) {
                         console.error(error);
                     }

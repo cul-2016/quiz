@@ -22,29 +22,29 @@ module.exports = {
 
             if (is_last_quiz) {
                 updateIsLastQuiz(client, module_id, quiz_id, (error) => {
-
+                    /* istanbul ignore if */
                     if (error) {
                         console.error(error);
                         return reply(error);
                     }
                 });
             }
-
+            /* istanbul ignore if */
             if (error) {
                 return reply(error);
             }
             updateQuestions(client, editedQuestions, (error) => {
-
+                /* istanbul ignore if */
                 if (error) {
                     return reply(error);
                 } else if (newQuestions.length !== 0) {
                     saveQuestions(client, newQuestions, (error) => {
-
+                        /* istanbul ignore if */
                         if (error) {
                             return reply(error);
                         } else if (deletedQuestions.length !== 0) {
                             deleteQuestions(client, deletedQuestions, (error) => {
-
+                                /* istanbul ignore if */
                                 if (error) {
                                     return reply(error);
                                 }
@@ -57,6 +57,7 @@ module.exports = {
                 } else {
                     if (deletedQuestions.length !== 0) {
                         deleteQuestions(client, deletedQuestions, (error) => {
+                            /* istanbul ignore if */
                             if (error) {
                                 return reply(error);
                             }

@@ -5,10 +5,10 @@ module.exports =  {
     method: 'GET',
     path: '/verification',
     handler: (request, reply) => {
-
         var verification_code = request.query.code;
 
         verifyCode(client, verification_code, (error, isVerified) => {
+            /* istanbul ignore if */
             if (error) {
                 console.error(error);
                 return reply(error);
