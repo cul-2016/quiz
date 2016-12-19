@@ -5,7 +5,7 @@ import logout from '../../lib/logout';
 
 
 const hideNav = (path) => {
-    return path === "/" || path.match(/live|holding-page|result|review|register-student|please-verify|verified|verification-error/);
+    return path === "/" || path.match(/live|holding-page|result|review|register-student|please-verify|verification/);
 };
 
 const Nav = ({ location, username, is_lecturer }) => {

@@ -14,7 +14,7 @@ test('`verify-user` endpoint returns true and redirects to `please-verify` for n
 
     server.inject(options, (response) => {
         t.equal(response.statusCode, 302, '302 status code (redirect)');
-        t.equal(response.headers.location, '/#/verified-lecturer', 'redirects to correct path');
+        t.equal(response.headers.location, '/#/verification/true', 'redirects to correct path');
     });
 
 });
@@ -32,7 +32,7 @@ test('`verify-user` endpoint returns false and redirects to `verification-error`
 
     server.inject(options, (response) => {
         t.equal(response.statusCode, 302, '302 status code (redirect)');
-        t.equal(response.headers.location, '/#/verification-error', 'redirects to correct path');
+        t.equal(response.headers.location, '/#/verification/false', 'redirects to correct path');
     });
 
 });

@@ -30,7 +30,6 @@ import StudentQuizResultContainer from './containers/student/result';
 
 import VerficationMessageComponent from './components/email-verification/verify-email-message.js';
 import VerifiedComponent from './components/email-verification/verified.js';
-import VerificationErrorComponent from './components/email-verification/verification-error.js';
 
 import NotFound from './components/general/not-found';
 
@@ -57,11 +56,8 @@ const Root = ({ store }) => (
                     path="please-verify"
                     component={ VerficationMessageComponent } />
                 <Route
-                    path="verified-lecturer"
+                    path="verification/:verified"
                     component={ VerifiedComponent } />
-                    <Route
-                        path="verification-error"
-                        component={ VerificationErrorComponent } />
                 <Route
                     onEnter={ composeHooks(hooks.authenticate, hooks.fetchModuleList, hooks.leaveRoom) }
                     path="dashboard"
