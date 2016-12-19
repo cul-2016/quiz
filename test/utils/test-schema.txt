@@ -213,6 +213,8 @@ INSERT INTO users (email, username, password, is_verified)
            ('drnick@simpsons.com', 'Dr Nick', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K', true),
            ('principalskinner@simpsons.com', 'Principal Skinner', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K', true);
 
+INSERT INTO users (email, username, password, is_lecturer, verification_code)
+    VALUES ('verify-lecturer@city.ac.uk', 'verify-lecturer', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, 'testing-verification-code');
 
 
 

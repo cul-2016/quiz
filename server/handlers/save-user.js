@@ -20,6 +20,18 @@ module.exports = {
             if (userExists.length === 1) {
                 return reply(true);
             } else {
+                if (is_lecturer) {
+                    sendEmail({
+                        name: 'lecturer',
+                        email,
+                        verificationLink: `http://localhost:9000/verification?code=${verification_code}`
+                    }, (err) => {
+                        if (err) {
+                            return reply(err);
+                        }
+                        reply({ emailSent: true });
+                    });
+                }
                 hashPassword(password, (error, hashedPassword) => {
                     if (error) {
                         return reply(error);
@@ -28,20 +40,15 @@ module.exports = {
                         if (error) {
                             return reply(error);
                         }
-                        if (is_lecturer) {
-                            sendEmail({
-                                name: 'lecturer',
-                                email,
-                                verificationLink: `http://localhost:9000/verification?code=${verification_code}`
-                            }, (err) => err ? reply(err) : reply({ emailSent: true }));
+                        if (!is_lecturer) {
+                            getUserByEmail(client, email, (error, userDetails) => {
+                                delete userDetails[0].password;
+                                return reply(userDetails[0])
+                                .state('cul_id', userDetails[0].user_id.toString(), { path: "/" })
+                                .state('cul_is_lecturer', userDetails[0].is_lecturer.toString(), { path: "/" })
+                                .state('cul_is_cookie_accepted', 'true', { path: "/" });
+                            });
                         }
-                        getUserByEmail(client, email, (error, userDetails) => {
-                            delete userDetails[0].password;
-                            return reply(userDetails[0])
-                            .state('cul_id', userDetails[0].user_id.toString(), { path: "/" })
-                            .state('cul_is_lecturer', userDetails[0].is_lecturer.toString(), { path: "/" })
-                            .state('cul_is_cookie_accepted', 'true', { path: "/" });
-                        });
                     });
                 });
             }
