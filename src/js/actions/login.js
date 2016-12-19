@@ -40,7 +40,6 @@ export function authenticateUser (email, password) {
 
         axios.post('/authenticate-user', payload)
             .then((response) => {
-                console.log(response);
                 if (response.data.message) {
                     dispatch(incorrectUserDetails(response.data.message));
                 }
