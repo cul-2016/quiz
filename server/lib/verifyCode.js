@@ -12,17 +12,19 @@ function verifyCode (client, verification_code, callback) {
 
     var userQuery = 'SELECT * FROM users WHERE verification_code = $1';
     query(client, userQuery, [verification_code], (error, user) => {
+        const userResult = user.rows && user.rows[0];
+
+        /* istanbul ignore if */
         if (error) {
             console.error(error);
             return callback(error);
         }
-
-        if (!user || user.rows[0].is_verified){
+        else if (!userResult || (userResult.length === 0) || userResult.is_verified) {
             return callback(null, false);
         }
         else {
             const removeVerificationCodeQuery = 'UPDATE users SET (is_verified, verification_code) = ($1, $2) WHERE user_id = $3';
-            const removeVerificationCodeArray = [true, null, user.rows[0].user_id];
+            const removeVerificationCodeArray = [true, null, userResult.user_id];
 
             query(client, removeVerificationCodeQuery, removeVerificationCodeArray, (error) => {
                 if (error) {
@@ -31,7 +33,6 @@ function verifyCode (client, verification_code, callback) {
                 }
                 return callback(error, true);
             });
-
         }
     });
 }

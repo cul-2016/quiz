@@ -3,14 +3,14 @@ var client = require('../lib/dbClient');
 
 module.exports =  {
     method: 'GET',
-    path: 'verification',
+    path: '/verification',
     handler: (request, reply) => {
 
         var verification_code = request.query.code;
-
         // first fetch the code from db.
         verifyCode(client, verification_code, (error, isVerified) => {
             if (error) {
+                console.error(error);
                 return reply(error);
             }
 

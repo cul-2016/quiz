@@ -5,6 +5,7 @@ var ValidateModule = require('./handlers/validate-module');
 var AddNewModule = require('./handlers/add-new-module');
 var SaveUser = require('./handlers/save-user');
 var ValidateUser = require('./handlers/authenticate-user');
+var VerifyLecturer = require('./handlers/verify-user.js');
 var GetUserDetails = require('./handlers/get-user-details');
 var SaveQuiz = require('./handlers/save-quiz');
 var GetQuizQuestions = require('./handlers/get-quiz-questions');
@@ -33,6 +34,7 @@ var routes = [
     AddNewModule,
     SaveUser,
     ValidateUser,
+    VerifyLecturer,
     GetUserDetails,
     SaveQuiz,
     GetQuizQuestions,
