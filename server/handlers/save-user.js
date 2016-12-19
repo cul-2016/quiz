@@ -33,14 +33,16 @@ module.exports = {
                     });
                 }
                 hashPassword(password, (error, hashedPassword) => {
+                    /* istanbul ignore if */
                     if (error) {
                         return reply(error);
                     }
                     saveUser(client, email, hashedPassword, is_lecturer, username, verification_code, (error, result) => { // eslint-disable-line no-unused-vars
+                        /* istanbul ignore if */
                         if (error) {
                             return reply(error);
                         }
-                        if (!is_lecturer) {
+                        else if (!is_lecturer) {
                             getUserByEmail(client, email, (error, userDetails) => {
                                 delete userDetails[0].password;
                                 return reply(userDetails[0])

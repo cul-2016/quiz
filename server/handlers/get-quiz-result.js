@@ -15,25 +15,25 @@ module.exports = {
         var quiz_id = request.query.quiz_id;
 
         getIsLastQuiz(client, quiz_id, (error, is_last_quiz) => {
-
+            /* istanbul ignore if */
             if (error) {
                 console.error(error);
                 return reply(error);
             }
             calculateQuizScore(client, user_id, quiz_id, (error, score) => {
-
+                /* istanbul ignore if */
                 if (error) {
                     console.error(error);
                     return reply(error);
                 }
                 setQuizScore(client, user_id, quiz_id, score.raw, (error) => {
-
+                    /* istanbul ignore if */
                     if (error) {
                         console.error(error);
                         return reply(error);
                     }
                     getNewTrophyState(client, user_id, module_id, quiz_id, score.percentage, is_last_quiz, (error, newTrophyState) => {
-
+                        /* istanbul ignore if */
                         if (error) {
                             console.error(error);
                             return reply(error);

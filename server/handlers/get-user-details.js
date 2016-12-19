@@ -7,6 +7,7 @@ module.exports = {
     handler: (request, reply) => {
         var user_id = request.query.user_id;
         getUserByID(client, user_id, (error, userDetails) => {
+            /* istanbul ignore if */
             if (error) {
                 return reply(error);
             } else {
