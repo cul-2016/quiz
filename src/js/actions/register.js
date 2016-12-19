@@ -41,8 +41,6 @@ export function registeringUser (email, username, password, is_lecturer) {
                     dispatch(setUserDetails(response.data));
                     hashHistory.push('/dashboard');
                 }
-            }, (error) => {
-                console.error(error, 'error from axios /save-user');
             })
             .catch((error) => {
                 dispatch(registeringUserFailure(error));

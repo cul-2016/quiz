@@ -40,9 +40,11 @@ export function authenticateUser (email, password) {
 
         axios.post('/authenticate-user', payload)
             .then((response) => {
-                if (response.data === false) {
-                    dispatch(incorrectUserDetails(false));
-                } else {
+                console.log(response);
+                if (response.data.message) {
+                    dispatch(incorrectUserDetails(response.data.message));
+                }
+                else {
                     dispatch(authenticateUserSuccess(true));
                     dispatch(setUserDetails(response.data));
                     if (response.data.is_lecturer) {

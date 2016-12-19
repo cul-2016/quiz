@@ -222,6 +222,11 @@ INSERT INTO users (email, username, password, is_verified, verification_code)
 INSERT INTO users (email, username, password, is_lecturer, verification_code)
     VALUES ('franzmoro@hotmail.com', 'franz-test-verify', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, 'testing-verification-code-franz');
 
+INSERT INTO users (email, username, password, is_lecturer, is_verified)
+    VALUES ('authenticate-user@city.ac.uk', 'lecturer', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, true);
+
+INSERT INTO users (email, username, password, is_lecturer, is_verified, verification_code)
+    VALUES ('not-authenticated-user@city.ac.uk', 'lecturer', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, false, 'verification-code-for-not-authenticated-user');
 
 
 /********* insert modules ********/
