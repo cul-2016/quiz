@@ -24,7 +24,8 @@ CREATE TABLE IF NOT EXISTS users (
     username TEXT,
     is_verified BOOLEAN DEFAULT FALSE NOT NULL,
     verification_code TEXT,
-    code_expiry TIMESTAMP
+    reset_password_code TEXT,
+    code_expiry BIGINT
 );
 
 /* modules */
@@ -228,6 +229,9 @@ INSERT INTO users (email, username, password, is_lecturer, is_verified)
 INSERT INTO users (email, username, password, is_lecturer, is_verified, verification_code)
     VALUES ('not-authenticated-user@city.ac.uk', 'lecturer', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, false, 'verification-code-for-not-authenticated-user');
 
+
+INSERT INTO users (email, username, password, is_verified)
+    VALUES ('sohilpandya@foundersandcoders.com', 'reset-password-student', '$2a$10$UnvUuW91Jh6.zWQi3G/2J.HLDTomSqJHxvBC.TYx/Bj8HZa.AAm4K', true);
 
 /********* insert modules ********/
 
