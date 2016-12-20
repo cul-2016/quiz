@@ -21,7 +21,7 @@ module.exports = {
             resetPasswordRequestEmail({
                 name: user.username,
                 email: user.email,
-                resetPasswordLink: `localhost:9000/#/reset-password/${resetPasswordLink}`
+                resetPasswordLink: `http://localhost:9000/#/reset-password/${resetPasswordLink}`
             },
                 (error) => {
                     /* istanbul-ignore-if */

@@ -28,7 +28,7 @@ export const resetPassword = (state = initialState, action ) => {
 
     case actionsTypes.RESET_PASSWORD_FAILURE:
         return resetPasswordFailure(state, action);
-        
+
     default:
         return state;
     }
@@ -39,9 +39,8 @@ const composeUpdate  = (field) => (state, action) =>
         [field]: { $set: action.value }
     });
 
-const resetPasswordFailure = (state, action) => {
+const resetPasswordFailure = (state, action) =>
     update(state, {
         isRequesting: { $set: action.value },
         error: { $set: action.error }
     });
-};

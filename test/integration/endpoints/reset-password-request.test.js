@@ -2,7 +2,7 @@ import test from 'tape';
 import { server } from '../../utils/init';
 
 
-test.skip('`reset-password-request` endpoint works', (t) => {
+test('`reset-password-request` endpoint works', (t) => {
 
     t.plan(1);
 

@@ -7,6 +7,7 @@ const ResetPassword = ({ resetPassword, handleEmailChange, handleResetPassword }
     let isEmailEmpty = resetPassword.email.length === 0;
 
     let submitButtonClasses = classnames("button is-warning", {
+        "is-loading": resetPassword.isRequesting === true,
         "is-disabled": !isEmailValid
     });
 
