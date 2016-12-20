@@ -18,7 +18,7 @@ module.exports = {
             return reply(new Error('user_id and module_id must be defined'));
         }
         hasStudentSubmitted(client, user_id, module_id, (error, hasSubmittedBefore) => {
-
+            /* istanbul ignore if */
             if (error) {
                 return reply(error);
             }
@@ -26,17 +26,17 @@ module.exports = {
                 return reply(null);
             }
             getRanking(client, user_id, module_id, (error, ranking) => {
-
+                /* istanbul ignore if */
                 if (error) {
                     return reply(error);
                 }
                 getBestAndWorstQuiz(client, user_id, module_id, (error, quizzes) => {
-                    
+                    /* istanbul ignore if */
                     if (error) {
                         return reply(error);
                     }
                     getParticipationRate(client, user_id, module_id, (error, participation) => {
-
+                        /* istanbul ignore if */
                         if (error) {
                             return reply(error);
                         }

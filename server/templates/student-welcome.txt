@@ -1,0 +1,6 @@
+Hi {{name}}!
+
+Thank you for registering as a student!
+You can access your account via http://cul-app.herokuapp.com/
+
+City University Quiz app http://cul-app.herokuapp.com/

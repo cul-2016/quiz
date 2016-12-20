@@ -36,7 +36,8 @@ export const login = (state = initialState, action ) => {
     case actionsTypes.INCORRECT_USER_DETAILS:
         return update(state, {
             isAuthenticating: { $set: false },
-            userIsAuthenticated: { $set: action.data }
+            userIsAuthenticated: { $set: false },
+            message: { $set: action.data }
         });
 
     default:

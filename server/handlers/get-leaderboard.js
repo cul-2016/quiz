@@ -11,17 +11,17 @@ module.exports = {
         if (module_id !== undefined) {
 
             getTotalScoresAndTrophies(client, module_id, (error, mainData) => {
-
+                /* istanbul ignore if */
                 if (error) {
                     return reply(error);
                 }
                 getScoresForLeaderboard(client, module_id, (error, scores) => {
-
+                    /* istanbul ignore if */
                     if (error) {
                         return reply(error);
                     }
                     getQuizIDList(client, module_id, (error, quiz_id_list) => {
-
+                        /* istanbul ignore if */
                         if (error) {
                             return reply(error);
                         }

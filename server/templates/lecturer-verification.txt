@@ -1,0 +1,6 @@
+Hi {{name}}!
+
+Thank you for registering as a lecturer!
+Before accessing your account, you need to verify your email by clicking on this link {{verificationLink}}
+
+City University Quiz app http://cul-app.herokuapp.com/

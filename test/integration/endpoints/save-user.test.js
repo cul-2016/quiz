@@ -8,9 +8,9 @@ test('`save-user` endpoint works when a lecturer registers', (t) => {
         method: 'POST',
         url: '/save-user',
         payload: {
-            email: 'testinglecturer@city.ac.uk',
+            email: 'franzmoro@hotmail.com',
             password: 'testinglecturer',
-            is_lecturer: true,
+            is_lecturer: true
         }
     };
 
@@ -28,7 +28,7 @@ test('`save-user` endpoint works when a student registers', (t) => {
         method: 'POST',
         url: '/save-user',
         payload: {
-            email: 'testingstudent@city.ac.uk',
+            email: 'sohilpandya1990@gmail.com',
             password: 'testingstudent',
             is_lecturer: false,
             username: 'testingstudent'
@@ -52,7 +52,10 @@ test('`save-user` endpoint works when a student registers', (t) => {
             email: 'lecturer@city.ac.uk',
             is_lecturer: true,
             user_id: 2,
-            username: 'lecturer'
+            username: 'lecturer',
+            is_verified: true,
+            code_expiry: null,
+            verification_code: null
         };
 
         server.inject(options, (response) => {
@@ -71,8 +74,8 @@ test.skip('deleting recently added users from the database', (t) => {
         if (error) {
             console.error(error, 'error from deleting lecturer from the database');
         }
-        client.query('DELETE FROM users WHERE email = $1', ['testinglecturer@city.ac.uk']);
-        client.query('DELETE FROM users WHERE email = $1', ['testingstudent@city.ac.uk']);
+        client.query('DELETE FROM users WHERE email = $1', ['franzmoro@hotmail.com']);
+        client.query('DELETE FROM users WHERE email = $1', ['sohilpandya1990@gmail.com']);
         done();
         t.end();
     });

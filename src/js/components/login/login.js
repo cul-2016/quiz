@@ -28,7 +28,7 @@ const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthentic
                         <h2>Log In</h2>
                         <p className={ userValidation }>
                             <span className="tag is-danger">
-                                Please enter a valid email and password
+                                { login.message } 
                             </span>
                         </p>
                         <label className="label has-text-left">Email</label>

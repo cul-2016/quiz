@@ -21,7 +21,10 @@ CREATE TABLE IF NOT EXISTS users (
     email TEXT NOT NULL UNIQUE,
     password TEXT NOT NULL,
     is_lecturer BOOLEAN DEFAULT FALSE NOT NULL,
-    username TEXT
+    username TEXT,
+    is_verified BOOLEAN DEFAULT FALSE NOT NULL,
+    verification_code TEXT,
+    code_expiry TIMESTAMP
 );
 
 /* modules */
@@ -180,37 +183,50 @@ ALTER TABLE module_members
 
 /********* insert users ********/
 
-INSERT INTO users (email, username, password)
-    VALUES ('student@city.ac.uk', 'student', '$2a$10$UnvUuW91Jh6.zWQi3G/2J.HLDTomSqJHxvBC.TYx/Bj8HZa.AAm4K');
+INSERT INTO users (email, username, password, is_verified)
+    VALUES ('student@city.ac.uk', 'student', '$2a$10$UnvUuW91Jh6.zWQi3G/2J.HLDTomSqJHxvBC.TYx/Bj8HZa.AAm4K', true);
 
-INSERT INTO users (email, username, password, is_lecturer)
-VALUES ('lecturer@city.ac.uk', 'lecturer', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true);
+INSERT INTO users (email, username, password, is_lecturer, is_verified)
+VALUES ('lecturer@city.ac.uk', 'lecturer', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, true);
 
-INSERT INTO users (email, username, password)
-    VALUES ('sohil@city.ac.uk', 'Sohil', '$2a$10$UnvUuW91Jh6.zWQi3G/2J.HLDTomSqJHxvBC.TYx/Bj8HZa.AAm4K'),
-           ('mina@city.ac.uk', 'Mina', '$2a$10$UnvUuW91Jh6.zWQi3G/2J.HLDTomSqJHxvBC.TYx/Bj8HZa.AAm4K'),
-           ('homer@simpsons.com', 'Homer', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
-           ('marge@simpsons.com', 'Marge', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
-           ('lisa@simpsons.com', 'Lisa', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
-           ('bart@simpsons.com', 'Bart', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
-           ('maggie@simpsons.com', 'Maggie', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
-           ('ned@simpsons.com', 'Ned', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
-           ('apu@simpsons.com', 'Apu', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
-           ('smithers@simpsons.com', 'Smithers', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
-           ('mrburns@simpsons.com', 'Mr Burns', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
-           ('revlovejoy@simpsons.com', 'Rev Lovejoy', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
-           ('milhouse@simpsons.com', 'Milhouse', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
-           ('nelson@simpsons.com', 'Nelson', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
-           ('patty@simpsons.com', 'Patty', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
-           ('selma@simpsons.com', 'Selma', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
-           ('comicbookguy@simpsons.com', 'Comic Book Guy', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
-           ('krusty@simpsons.com', 'Krusty', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
-           ('sideshowbob@simpsons.com', 'Sideshow Bob', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
-           ('sideshowmel@simpsons.com', 'Sideshow Mel', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
-           ('drnick@simpsons.com', 'Dr Nick', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
-           ('principalskinner@simpsons.com', 'Principal Skinner', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K');
+INSERT INTO users (email, username, password, is_verified)
+    VALUES ('sohil@city.ac.uk', 'Sohil', '$2a$10$UnvUuW91Jh6.zWQi3G/2J.HLDTomSqJHxvBC.TYx/Bj8HZa.AAm4K', true),
+           ('mina@city.ac.uk', 'Mina', '$2a$10$UnvUuW91Jh6.zWQi3G/2J.HLDTomSqJHxvBC.TYx/Bj8HZa.AAm4K', true),
+           ('homer@simpsons.com', 'Homer', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K', true),
+           ('marge@simpsons.com', 'Marge', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K', true),
+           ('lisa@simpsons.com', 'Lisa', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K', true),
+           ('bart@simpsons.com', 'Bart', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K', true),
+           ('maggie@simpsons.com', 'Maggie', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K', true),
+           ('ned@simpsons.com', 'Ned', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K', true),
+           ('apu@simpsons.com', 'Apu', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K', true),
+           ('smithers@simpsons.com', 'Smithers', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K', true),
+           ('mrburns@simpsons.com', 'Mr Burns', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K', true),
+           ('revlovejoy@simpsons.com', 'Rev Lovejoy', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K', true),
+           ('milhouse@simpsons.com', 'Milhouse', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K', true),
+           ('nelson@simpsons.com', 'Nelson', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K', true),
+           ('patty@simpsons.com', 'Patty', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K', true),
+           ('selma@simpsons.com', 'Selma', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K', true),
+           ('comicbookguy@simpsons.com', 'Comic Book Guy', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K', true),
+           ('krusty@simpsons.com', 'Krusty', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K', true),
+           ('sideshowbob@simpsons.com', 'Sideshow Bob', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K', true),
+           ('sideshowmel@simpsons.com', 'Sideshow Mel', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K', true),
+           ('drnick@simpsons.com', 'Dr Nick', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K', true),
+           ('principalskinner@simpsons.com', 'Principal Skinner', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K', true);
 
+INSERT INTO users (email, username, password, is_lecturer, verification_code)
+    VALUES ('verify-lecturer@city.ac.uk', 'verify-lecturer', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, 'testing-verification-code');
 
+INSERT INTO users (email, username, password, is_verified, verification_code)
+    VALUES ('verify-student@city.ac.uk', 'verify-student', '$2a$10$UnvUuW91Jh6.zWQi3G/2J.HLDTomSqJHxvBC.TYx/Bj8HZa.AAm4K', true, 'reset-password-code');
+
+INSERT INTO users (email, username, password, is_lecturer, verification_code)
+    VALUES ('franzmoro@hotmail.com', 'franz-test-verify', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, 'testing-verification-code-franz');
+
+INSERT INTO users (email, username, password, is_lecturer, is_verified)
+    VALUES ('authenticate-user@city.ac.uk', 'lecturer', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, true);
+
+INSERT INTO users (email, username, password, is_lecturer, is_verified, verification_code)
+    VALUES ('not-authenticated-user@city.ac.uk', 'lecturer', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, false, 'verification-code-for-not-authenticated-user');
 
 
 /********* insert modules ********/
