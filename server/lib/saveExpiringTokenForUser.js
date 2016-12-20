@@ -5,14 +5,14 @@ var query = require('./query');
  * @param {object} client - postgres database client
  * @param {string} email - email for the given user
  * @param {string} reset_password_code - unique code provided when resetting the password
- * @param {timestamp} code_expiry - timestamp of when the code expires
+ * @param {timestamp} expiry_code - timestamp of when the code expires
  * @param {function} callback - a callback function
  */
 
-function saveExpiringTokenForUser (client, email, reset_password_code, code_expiry, callback) {
+function saveExpiringTokenForUser (client, email, reset_password_code, expiry_code, callback) {
 
-    var queryText = 'UPDATE users SET (reset_password_code, code_expiry) = ($1, $2) WHERE email = $3 RETURNING email, username;';
-    var value = [reset_password_code, code_expiry, email];
+    var queryText = 'UPDATE users SET (reset_password_code, expiry_code) = ($1, $2) WHERE email = $3 RETURNING email, username;';
+    var value = [reset_password_code, expiry_code, email];
 
     query(client, queryText, value, (error, response) => {
 

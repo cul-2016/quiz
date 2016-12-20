@@ -8,12 +8,12 @@ test('`saveExpiringTokenForUser` works', (t) => {
     t.plan(3);
     const email = 'student@city.ac.uk';
     const reset_password_code = 'testing-resetting-password-code';
-    const code_expiry = '12345667890';
+    const expiry_code = '12345667890';
     const expected = {
         email: 'student@city.ac.uk',
         username: 'student'
     };
-    saveExpiringTokenForUser(testClient, email, reset_password_code, code_expiry, (error, response) => {
+    saveExpiringTokenForUser(testClient, email, reset_password_code, expiry_code, (error, response) => {
 
         if (error) {
             console.error(error);
@@ -27,9 +27,9 @@ test('`saveExpiringTokenForUser` works', (t) => {
                 t.error(error);
             }
             const expected_reset_password_code = result.rows[0].reset_password_code;
-            const expected_code_expiry = result.rows[0].code_expiry;
+            const expected_expiry_code = result.rows[0].expiry_code;
             t.deepEqual(expected_reset_password_code, reset_password_code, 'password code has been set');
-            t.deepEqual(expected_code_expiry, code_expiry, 'code expiry has been set');
+            t.deepEqual(expected_expiry_code, expiry_code, 'code expiry has been set');
         });
     });
 });

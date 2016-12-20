@@ -10,11 +10,11 @@ module.exports = {
     handler: (request, reply) => {
 
         var email = request.payload.email;
-        var code_expiry = Date.now() + (24 * 60 * 60 * 1000);
+        var expiry_code = Date.now() + (24 * 60 * 60 * 1000);
         var resetPasswordLink = UUID();
 
-        saveExpiringTokenForUser(client, email, resetPasswordLink, code_expiry, (error, user) => {
-            /* istanbul-ignore-if */
+        saveExpiringTokenForUser(client, email, resetPasswordLink, expiry_code, (error, user) => {
+            /* istanbul ignore if */
             if (error) {
                 reply(error);
             }
@@ -24,7 +24,7 @@ module.exports = {
                 resetPasswordLink: `http://localhost:9000/#/reset-password/${resetPasswordLink}`
             },
                 (error) => {
-                    /* istanbul-ignore-if */
+                    /* istanbul ignore if */
                     if (error) {
                         reply(error);
                     }
