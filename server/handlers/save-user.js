@@ -17,6 +17,10 @@ module.exports = {
         var verification_code = is_lecturer ? uuid() : null;
 
         getUserByEmail(client, email, (error, userExists) => {
+            /* istanbul ignore if */
+            if (error) {
+                return reply(error);
+            }
             if (userExists.length === 1) {
                 return reply(true);
             } else {
@@ -44,6 +48,10 @@ module.exports = {
                         }
                         else if (!is_lecturer) {
                             getUserByEmail(client, email, (error, userDetails) => {
+                                /* istanbul ignore if */
+                                if (error) {
+                                    return reply(error);
+                                }
                                 delete userDetails[0].password;
                                 return reply(userDetails[0])
                                 .state('cul_id', userDetails[0].user_id.toString(), { path: "/" })
