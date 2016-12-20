@@ -1,26 +1,27 @@
 import React, { PropTypes } from 'react';
 import classnames from 'classnames';
 
-const ResetPassword = ({ resetPassword, handleEmailChange }) => {
+const ResetPassword = ({ resetPassword, handleEmailChange, handleResetPassword }) => {
 
     let isEmailValid = /.+@.+\..+/.test(resetPassword.email);
+    let isEmailEmpty = resetPassword.email.length === 0;
 
     let submitButtonClasses = classnames("button is-warning", {
         "is-disabled": !isEmailValid
     });
 
     let invalidEmailClasses = classnames("help is-danger", {
-        "display-none": resetPassword.email.length === 0 || isEmailValid
+        "display-none": isEmailEmpty || isEmailValid
     });
 
     return (
         <section className="login outer blue-hero">
             <div className="middle">
                 <div className="container inner has-text-centered">
-                    <div className="box" onKeyDown={ () => {}
-                        //(e) => {
-                        //if (e.keyCode === 13 && isEmailValid && resetPassword.password.length !== 0) {  }
-                        //}
+                    <div className="box" onKeyDown={
+                        (e) => {
+                            if (e.keyCode === 13 && isEmailValid && !isEmailEmpty) { handleResetPassword(resetPassword.email);  }
+                        }
                     }>
                         <h2>Request Password Reset</h2>
                         <label className="label has-text-left">Email</label>
@@ -32,7 +33,7 @@ const ResetPassword = ({ resetPassword, handleEmailChange }) => {
                         <span className={ invalidEmailClasses }>This email is invalid</span>
 
                         <button className={ submitButtonClasses }
-                                onClick={ () => {} }>
+                                onClick={ () => { handleResetPassword(resetPassword.email); } }>
                             Send Email
                         </button>
                     </div>
@@ -44,7 +45,8 @@ const ResetPassword = ({ resetPassword, handleEmailChange }) => {
 
 ResetPassword.propTypes = {
     resetPassword: PropTypes.object.isRequired,
-    handleEmailChange: PropTypes.func.isRequired
+    handleEmailChange: PropTypes.func.isRequired,
+    handleResetPassword: PropTypes.func.isRequired
 };
 
 export default ResetPassword;

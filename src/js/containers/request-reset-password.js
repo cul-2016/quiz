@@ -3,7 +3,8 @@ import RequestResetPassword from '../components/login/request-reset-password.js'
 import {
     updateEmail,
     updatePassword,
-    updateConfirmedPassword
+    updateConfirmedPassword,
+    resetPassword
 } from '../actions/reset-password';
 
 const mapStateToProps = (state) => ({
@@ -20,6 +21,9 @@ const mapDispatchToProps = (dispatch) => ({
     },
     handleConfirmedPasswordChange: (value) => {
         dispatch(updateConfirmedPassword(value));
+    },
+    handleResetPassword: (email) => {
+        dispatch(resetPassword(email));
     }
 });
 

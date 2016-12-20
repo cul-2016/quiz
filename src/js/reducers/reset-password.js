@@ -5,7 +5,9 @@ export const initialState = {
     email: "",
     password: "",
     confirmedPassword: "",
-    token: undefined
+    token: undefined,
+    isRequesting: false,
+    error: undefined
 };
 
 export const resetPassword = (state = initialState, action ) => {
@@ -20,6 +22,13 @@ export const resetPassword = (state = initialState, action ) => {
     case actionsTypes.UPDATE_CONFIRMED_PASSWORD:
         return composeUpdate('confirmedPassword')(state, action);
 
+    case actionsTypes.RESET_PASSWORD_REQUEST:
+    case actionsTypes.RESET_PASSWORD_SUCCESS:
+        return composeUpdate('isRequesting')(state, action);
+
+    case actionsTypes.RESET_PASSWORD_FAILURE:
+        return resetPasswordFailure(state, action);
+        
     default:
         return state;
     }
@@ -29,3 +38,10 @@ const composeUpdate  = (field) => (state, action) =>
     update(state, {
         [field]: { $set: action.value }
     });
+
+const resetPasswordFailure = (state, action) => {
+    update(state, {
+        isRequesting: { $set: action.value },
+        error: { $set: action.error }
+    });
+};
