@@ -1,7 +1,5 @@
 import React, { PropTypes } from 'react';
 import classnames from 'classnames';
-import { Link } from 'react-router';
-
 
 const ResetPasswordForm = ({
     params,
@@ -10,7 +8,7 @@ const ResetPasswordForm = ({
     handleConfirmedPasswordChange,
     handleSubmitNewPassword
 }) => {
-    const { password, confirmedPassword, isRequesting } = resetPassword;
+    const { password, confirmedPassword, isRequesting, error } = resetPassword;
     const { code } = params;
 
     let doPasswordsMatch = (password === confirmedPassword);
@@ -26,6 +24,10 @@ const ResetPasswordForm = ({
         "is-danger": !doPasswordsMatch && !passwordsEmpty
     });
 
+    let errorMessageClass = classnames("help is-danger", {
+        "display-none": !error
+    });
+
     return (
         <section className="login outer blue-hero">
             <div className="middle">
@@ -36,6 +38,7 @@ const ResetPasswordForm = ({
                         }
                     }}>
                         <h2>Reset Password</h2>
+                        <span className={ errorMessageClass }>{ error }</span>
                         <label className="label has-text-left">Password</label>
                         <input
                             className={passwordMatchClasses}

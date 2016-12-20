@@ -24,10 +24,13 @@ export const resetPassword = (state = initialState, action ) => {
 
     case actionsTypes.RESET_PASSWORD_REQUEST:
     case actionsTypes.RESET_PASSWORD_SUCCESS:
+    case actionsTypes.SUBMIT_NEW_PASSWORD_REQUEST:
+    case actionsTypes.SUBMIT_NEW_PASSWORD_SUCCESS:
         return composeUpdate('isRequesting')(state, action);
 
     case actionsTypes.RESET_PASSWORD_FAILURE:
-        return resetPasswordFailure(state, action);
+    case actionsTypes.SUBMIT_NEW_PASSWORD_FAILURE:
+        return requestFailure(state, action);
 
     default:
         return state;
@@ -39,7 +42,7 @@ const composeUpdate  = (field) => (state, action) =>
         [field]: { $set: action.value }
     });
 
-const resetPasswordFailure = (state, action) =>
+const requestFailure = (state, action) =>
     update(state, {
         isRequesting: { $set: action.value },
         error: { $set: action.error }

@@ -9,6 +9,9 @@ export const RESET_PASSWORD_REQUEST = 'RESET_PASSWORD_REQUEST';
 export const RESET_PASSWORD_SUCCESS = 'RESET_PASSWORD_SUCCESS';
 export const RESET_PASSWORD_FAILURE = 'RESET_PASSWORD_FAILURE';
 
+export const SUBMIT_NEW_PASSWORD_REQUEST = 'SUBMIT_NEW_PASSWORD_REQUEST';
+export const SUBMIT_NEW_PASSWORD_SUCCESS = 'SUBMIT_NEW_PASSWORD_SUCCESS';
+export const SUBMIT_NEW_PASSWORD_FAILURE = 'SUBMIT_NEW_PASSWORD_FAILURE';
 
 const basicUpdate = (type) => (value) => ({ type, value });
 
@@ -44,6 +47,39 @@ export const resetPasswordSuccess = () => ({
 
 export const resetPasswordFailure = (error) => ({
     type: RESET_PASSWORD_FAILURE,
+    value: false,
+    error
+});
+
+
+export const submitNewPassword = (password, code) => dispatch => {
+
+    dispatch(submitPasswordRequest());
+
+    axios.post('/submit-new-password', { password, code })
+    .then(res => {
+        const errorMessage = res.data.message;
+        if (errorMessage) {
+            dispatch(submitNewPasswordFailure(errorMessage));
+        } else {
+            dispatch(submitNewPasswordSuccess());
+            hashHistory.push('/');
+        }
+    })
+    .catch(() => {
+        dispatch(submitNewPasswordFailure('Sorry, something went wrong!'));
+    });
+};
+export const submitPasswordRequest = () => ({
+    type: SUBMIT_NEW_PASSWORD_REQUEST,
+    value: true
+});
+export const submitNewPasswordSuccess = () => ({
+    type: SUBMIT_NEW_PASSWORD_SUCCESS,
+    value: false
+});
+export const submitNewPasswordFailure = (error) => ({
+    type: SUBMIT_NEW_PASSWORD_FAILURE,
     value: false,
     error
 });
