@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import { Link } from 'react-router';
 
 
-const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthenticateUser }) => {
+const ResetPassword = ({ login, handleEmailChange, handlePasswordChange, handleAuthenticateUser }) => {
 
     let isEmailValid = /.+@.+\..+/.test(login.email);
 
@@ -49,12 +49,19 @@ const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthentic
 
                         <button className={ submitButtonClasses }
                                 onClick={ () => handleAuthenticateUser(login.email, login.password) }>
-                            Login
+                            ResetPassword
                         </button>
                         <p>
                             <Link to="/register-student">
-                                <span className=" is-success">
+                                <span>
                                     Sign up here
+                                </span>
+                            </Link>
+                        </p>
+                        <p>
+                            <Link to="/forgotten-password">
+                                <span>
+                                    Forgotten password
                                 </span>
                             </Link>
                         </p>
@@ -65,11 +72,11 @@ const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthentic
     );
 };
 
-Login.propTypes = {
+ResetPassword.propTypes = {
     login: PropTypes.object.isRequired,
     handleEmailChange: PropTypes.func.isRequired,
     handlePasswordChange: PropTypes.func.isRequired,
     handleAuthenticateUser: PropTypes.func.isRequired
 };
 
-export default Login;
+export default ResetPassword;
