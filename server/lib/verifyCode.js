@@ -27,6 +27,7 @@ function verifyCode (client, verification_code, callback) {
             const removeVerificationCodeArray = [true, null, userResult.user_id];
 
             query(client, removeVerificationCodeQuery, removeVerificationCodeArray, (error) => {
+                /* istanbul ignore if */
                 if (error) {
                     console.error(error);
                     return callback(error);
