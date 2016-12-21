@@ -31,7 +31,6 @@ export function registeringUser (email, username, password, is_lecturer) {
 
         axios.post('/save-user', payload)
             .then((response) => {
-
                 if (response.data === true) {
                     dispatch(userExists());
                 } else if (response.data.emailSent) {
