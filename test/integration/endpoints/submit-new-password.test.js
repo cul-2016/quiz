@@ -14,7 +14,8 @@ test('`submit-new-password` endpoint returns an error message when expiry_code h
     };
 
     server.inject(options, (response) => {
-        t.ok(/expired/.test(response.result), 'expiry_code has expired');
+
+        t.ok(/expired/.test(response.result.message), 'expiry_code has expired');
     });
 });
 
