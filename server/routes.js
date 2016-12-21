@@ -25,6 +25,7 @@ var GetLeaderboard = require('./handlers/get-leaderboard');
 var GetFeedback = require('./handlers/get-feedback');
 var GetStudentHistory = require('./handlers/get-student-history');
 var AbortQuiz = require('./handlers/abort-quiz');
+var SubmitNewPassword = require('./handlers/submit-new-password');
 
 
 var routes = [
@@ -54,7 +55,8 @@ var routes = [
     GetLeaderboard,
     GetFeedback,
     GetStudentHistory,
-    AbortQuiz
+    AbortQuiz,
+    SubmitNewPassword
 ];
 
 module.exports = routes;

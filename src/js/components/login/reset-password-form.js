@@ -10,7 +10,6 @@ const ResetPasswordForm = ({
 }) => {
     const { password, confirmedPassword, isRequesting, error } = resetPassword;
     const { code } = params;
-
     let doPasswordsMatch = (password === confirmedPassword);
     let passwordsEmpty = password.length === 0 || confirmedPassword.length === 0;
 

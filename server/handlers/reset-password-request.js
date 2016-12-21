@@ -16,7 +16,7 @@ module.exports = {
         saveExpiringTokenForUser(client, email, resetPasswordLink, expiry_code, (error, user) => {
             /* istanbul ignore if */
             if (error) {
-                reply(error);
+                return reply(error);
             }
             resetPasswordRequestEmail({
                 name: user.username,

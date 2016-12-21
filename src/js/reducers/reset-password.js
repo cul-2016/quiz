@@ -25,8 +25,9 @@ export const resetPassword = (state = initialState, action ) => {
     case actionsTypes.RESET_PASSWORD_REQUEST:
     case actionsTypes.RESET_PASSWORD_SUCCESS:
     case actionsTypes.SUBMIT_NEW_PASSWORD_REQUEST:
-    case actionsTypes.SUBMIT_NEW_PASSWORD_SUCCESS:
         return composeUpdate('isRequesting')(state, action);
+    case actionsTypes.SUBMIT_NEW_PASSWORD_SUCCESS:
+        return initialState;
 
     case actionsTypes.RESET_PASSWORD_FAILURE:
     case actionsTypes.SUBMIT_NEW_PASSWORD_FAILURE:

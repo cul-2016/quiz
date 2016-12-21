@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { hashHistory } from 'react-router';
+import { logout } from './login';
 
 export const UPDATE_EMAIL = 'UPDATE_EMAIL';
 export const UPDATE_PASSWORD = 'UPDATE_PASSWORD';
@@ -63,6 +64,7 @@ export const submitNewPassword = (password, code) => dispatch => {
             dispatch(submitNewPasswordFailure(errorMessage));
         } else {
             dispatch(submitNewPasswordSuccess());
+            dispatch(logout());
             hashHistory.push('/');
         }
     })

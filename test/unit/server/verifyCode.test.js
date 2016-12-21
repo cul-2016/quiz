@@ -35,7 +35,7 @@ test(' `verifyCode` returns true if the user code matches the one in the databas
 test(' `verifyCode` return false if the user has already been verified (and has a reset password code)', (t) => {
     t.plan(1);
 
-    const verification_code = 'reset-password-code';
+    const verification_code = 'reset-verification-code';
     const expected = false;
 
     verifyCode(testClient, verification_code, (error, response) => {

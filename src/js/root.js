@@ -56,7 +56,7 @@ const Root = ({ store }) => (
                     path="reset-password-email-sent"
                     component={ RequestEmailSentComponent } />
                 <Route
-                    path="reset-password/:resetPasswordCode"
+                    path="reset-password/:code"
                     component={ ResetPasswordFormContainer } />
                 <Route
                     path="register-student"

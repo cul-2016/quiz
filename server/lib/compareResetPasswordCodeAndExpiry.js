@@ -13,7 +13,7 @@
      var value = [reset_password_code];
 
      query(client, queryText, value, (error, response) => {
-
+         /* istanbul ignore if */
          if (error) {
              console.error(error);
              return callback(error);

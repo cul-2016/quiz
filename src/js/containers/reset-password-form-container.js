@@ -18,8 +18,8 @@ const mapDispatchToProps = (dispatch) => ({
     handleConfirmedPasswordChange: (value) => {
         dispatch(updateConfirmedPassword(value));
     },
-    handleSubmitNewPassword: (email) => {
-        dispatch(submitNewPassword(email));
+    handleSubmitNewPassword: (email, code) => {
+        dispatch(submitNewPassword(email, code));
     }
 });
 
