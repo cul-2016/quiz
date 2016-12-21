@@ -21,11 +21,11 @@ export const updatePassword = basicUpdate(UPDATE_PASSWORD);
 export const updateConfirmedPassword = basicUpdate(UPDATE_CONFIRMED_PASSWORD);
 
 
-export const resetPassword = (value) => (dispatch) => {
+export const resetPassword = (email) => (dispatch) => {
 
     dispatch(resetPasswordRequest());
 
-    axios.post(`/reset-password-request`, { email: value })
+    axios.post(`/reset-password-request`, { email })
         .then(() => {
             dispatch(resetPasswordSuccess());
             hashHistory.push('/reset-password-email-sent');
