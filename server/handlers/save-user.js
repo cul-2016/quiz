@@ -30,6 +30,7 @@ module.exports = {
                         email,
                         verificationLink: `http://localhost:9000/verification?code=${verification_code}`
                     }, (err) => {
+                        /* istanbul ignore if */
                         if (err) {
                             return reply(err);
                         }
