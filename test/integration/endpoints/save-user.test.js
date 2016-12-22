@@ -1,23 +1,45 @@
 import test from 'tape';
 import { server, testClient } from '../../utils/init';
 
-test('`save-user` endpoint works when a lecturer registers', (t) => {
+test('`save-user` endpoint: new lecturer registration --> verification email', (t) => {
 
     t.plan(2);
     const options = {
         method: 'POST',
         url: '/save-user',
         payload: {
-            email: 'testinglecturer@city.ac.uk',
+            email: 'franzmoro@hotmail.com',
             password: 'testinglecturer',
-            is_lecturer: true,
+            is_lecturer: true
+        }
+    };
+
+    server.inject(options, (response) => {
+        t.equal(response.statusCode, 200, '200 status code');
+
+        const actual = response.result;
+        const expected = { emailSent: true };
+        t.deepEqual(actual, expected, 'Sent verification email');
+    });
+});
+
+test('`save-user` endpoint: existing user registration --> reply true', (t) => {
+
+    t.plan(2);
+    const options = {
+        method: 'POST',
+        url: '/save-user',
+        payload: {
+            email: 'franzmoro@hotmail.com',
+            password: 'testinglecturer',
+            is_lecturer: true
         }
     };
 
     server.inject(options, (response) => {
 
         t.equal(response.statusCode, 200, '200 status code');
-        t.ok(response.result, 'Get data back');
+        t.equal(response.result, true, 'Get true back');
     });
 });
 
@@ -52,7 +74,10 @@ test('`save-user` endpoint works when a student registers', (t) => {
             email: 'lecturer@city.ac.uk',
             is_lecturer: true,
             user_id: 2,
-            username: 'lecturer'
+            username: 'lecturer',
+            is_verified: true,
+            code_expiry: null,
+            verification_code: null
         };
 
         server.inject(options, (response) => {
@@ -71,7 +96,7 @@ test.skip('deleting recently added users from the database', (t) => {
         if (error) {
             console.error(error, 'error from deleting lecturer from the database');
         }
-        client.query('DELETE FROM users WHERE email = $1', ['testinglecturer@city.ac.uk']);
+        client.query('DELETE FROM users WHERE email = $1', ['franzmoro@hotmail.com']);
         client.query('DELETE FROM users WHERE email = $1', ['testingstudent@city.ac.uk']);
         done();
         t.end();

@@ -13,11 +13,11 @@
     "postgres": "postgres -D /usr/local/var/postgres",
     "heroku:production:postgres": "heroku pg:psql --app cul-app",
     "heroku:dev:postgres": "heroku pg:psql --app cul-app HEROKU_POSTGRESQL_SILVER",
-    "load-dev-schema": "heroku pg:psql --app cul-app HEROKU_POSTGRESQL_SILVER < ./server/lib/schema.txt",
+    "load-dev-schema": "heroku pg:psql --app cul-app HEROKU_POSTGRESQL_SILVER < ./test/utils/test-schema.txt",
     "coverage": "./node_modules/.bin/babel-node ./node_modules/babel-istanbul/lib/cli.js cover ./node_modules/tape/bin/tape --require ./test/utils/jsdom.js 'test/**/*.@(js|jsx)'",
     "check-coverage": "babel-node ./node_modules/babel-istanbul/lib/cli.js check-coverage",
     "pretest": "node ./test/utils/init.js",
-    "test": "tape -r babel-register --require ./test/utils/jsdom.js 'test/**/*.@(js|jsx)' | tap-spec && codecov -t 85cade74-2f2a-46da-80b8-d2edf65eee7d",
+    "test": "tape -r babel-register --require ./test/utils/jsdom.js 'test/**/*.@(js|jsx)' | tap-spec",
     "postinstall": "webpack --config ./webpack.production.config.js --progress --colors",
     "make-docs": "./node_modules/.bin/jsdoc -c ./conf.json -r"
   },
@@ -74,11 +74,13 @@
     "redux": "^3.5.2",
     "redux-thunk": "^2.1.0",
     "sass-loader": "^4.0.0",
+    "sendemail": "^2.6.0",
     "simple-statistics": "^2.1.0",
     "socket.io": "^1.4.8",
     "socket.io-client": "^1.4.8",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
+    "uuid": "^3.0.1",
     "webpack": "^1.13.1"
   },
   "devDependencies": {
@@ -87,6 +89,7 @@
     "ghooks": "^1.3.2",
     "jsdoc": "^3.4.0",
     "jsdom": "^9.4.1",
+    "sinon": "^1.17.6",
     "tap-spec": "^4.1.1",
     "tape": "^4.6.0",
     "webpack-dev-server": "^1.14.1"

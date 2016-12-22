@@ -28,6 +28,9 @@ import StudentFeedbackContainer from './containers/student/feedback';
 import StudentLiveQuizContainer from './containers/student/live-quiz';
 import StudentQuizResultContainer from './containers/student/result';
 
+import VerficationMessageComponent from './components/email-verification/verify-email-message.js';
+import VerifiedComponent from './components/email-verification/verified.js';
+
 import NotFound from './components/general/not-found';
 
 import composeHooks from './lib/composeHooks';
@@ -49,6 +52,12 @@ const Root = ({ store }) => (
                 <Route
                     path="register-lecturer-invite-only"
                     component={ SignupContainer } />
+                <Route
+                    path="please-verify"
+                    component={ VerficationMessageComponent } />
+                <Route
+                    path="verification/:verified"
+                    component={ VerifiedComponent } />
                 <Route
                     onEnter={ composeHooks(hooks.authenticate, hooks.fetchModuleList, hooks.leaveRoom) }
                     path="dashboard"

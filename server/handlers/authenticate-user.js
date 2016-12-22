@@ -10,18 +10,23 @@ module.exports = {
         var password = request.payload.password;
 
         getUserByEmail(client, email, (error, userDetails) => {
+            /* istanbul ignore if */
             if (error) {
                 reply(error);
             } else if (userDetails.length !== 1) {
-                reply(false);
+                reply({ message: "sorry, this user does not exist" });
             } else {
                 var hashedPassword = userDetails[0].password;
                 validatePassword(password, hashedPassword, (error, response) => {
+                    /* istanbul ignore if */
                     if (error) {
                         reply(error);
                     }
                     else if (!response) {
-                        reply(false);
+                        reply({ message: "please enter a valid email or password" });
+                    }
+                    else if (!userDetails[0].is_verified) {
+                        reply({ message: "user is not verified" });
                     }
                     else {
                         delete userDetails[0].password;

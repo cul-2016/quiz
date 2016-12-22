@@ -40,16 +40,13 @@ export function authenticateUser (email, password) {
 
         axios.post('/authenticate-user', payload)
             .then((response) => {
-                if (response.data === false) {
-                    dispatch(incorrectUserDetails(false));
-                } else {
-                    dispatch(authenticateUserSuccess(true));
+                if (response.data.message) {
+                    dispatch(incorrectUserDetails(response.data.message));
+                }
+                else {
+                    dispatch(authenticateUserSuccess());
                     dispatch(setUserDetails(response.data));
-                    if (response.data.is_lecturer) {
-                        hashHistory.push('/dashboard');
-                    } else {
-                        hashHistory.push('/dashboard');
-                    }
+                    hashHistory.push('/dashboard');
                 }
             })
             .catch((error) => {
@@ -62,9 +59,8 @@ export const authenticateUserRequest = () => ({
     type: AUTHENTICATE_USER_REQUEST
 });
 
-export const authenticateUserSuccess = (data) => ({
-    type: AUTHENTICATE_USER_SUCCESS,
-    data
+export const authenticateUserSuccess = () => ({
+    type: AUTHENTICATE_USER_SUCCESS
 });
 
 export const authenticateUserFailure = (error) => ({

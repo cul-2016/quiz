@@ -4,7 +4,10 @@ export const users = [
         email: 'student@city.ac.uk',
         password: '$2a$10$UnvUuW91Jh6.zWQi3G/2J.HLDTomSqJHxvBC.TYx/Bj8HZa.AAm4K',
         is_lecturer: false,
-        username: 'student'
+        username: 'student',
+        is_verified: true,
+        code_expiry: null,
+        verification_code: null
     }
 ];
 
@@ -12,7 +15,10 @@ export const userDetails = {
     user_id: 1,
     email: 'test@test.com',
     username: 'test',
-    is_lecturer: true
+    is_lecturer: true,
+    is_verified: true,
+    code_expiry: null,
+    verification_code: null
 };
 
 export const feedback = {
