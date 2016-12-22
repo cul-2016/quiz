@@ -15,7 +15,7 @@ function saveExpiringTokenForUser (client, email, reset_password_code, expiry_co
     var value = [reset_password_code, expiry_code, email];
 
     query(client, queryText, value, (error, response) => {
-
+        /* istanbul ignore if */
         if (error) {
             return callback(error);
         }
