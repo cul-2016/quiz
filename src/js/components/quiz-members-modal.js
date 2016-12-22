@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import classnames from 'classnames';
-import QuizReviewQuestions from './review/quiz-review-questions';
+import QuizReviewLecturer from './review/quiz-review-lecturer';
 
 
 const QuizMembersModal = ({ questions, hide, isVisible }) => {
@@ -15,7 +15,7 @@ const QuizMembersModal = ({ questions, hide, isVisible }) => {
             <div className="modal-background modal-content-outer">
                 <div className="modal-content-middle">
                     <div className="modal-content-inner section container">
-                        <QuizReviewQuestions questions={ questions } />
+                        <QuizReviewLecturer questions={ questions } />
                     </div>
                 </div>
             </div>
