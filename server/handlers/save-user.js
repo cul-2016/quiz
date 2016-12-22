@@ -43,6 +43,7 @@ module.exports = {
                         name: username,
                         email
                     }, (err) => {
+                        /* istanbul ignore if */
                         if (err) {
                             return reply(error);
                         }
