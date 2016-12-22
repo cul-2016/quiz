@@ -5,9 +5,9 @@ test('`verify-user` endpoint returns true and redirects to `please-verify` for n
     t.plan(2);
     const options = {
         method: 'GET',
-        url: '/verification?code=testing-verification-code-franz',
+        url: '/verification?code=testing-verification-code-lecturer',
         payload: {
-            email: 'franzmoro@hotmail.com',
+            email: 'verification@email.com',
             password: 'testinglecturer',
         }
     };
