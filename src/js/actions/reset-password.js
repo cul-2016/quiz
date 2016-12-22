@@ -26,9 +26,15 @@ export const resetPassword = (email) => (dispatch) => {
     dispatch(resetPasswordRequest());
 
     axios.post(`/reset-password-request`, { email })
-        .then(() => {
-            dispatch(resetPasswordSuccess());
-            hashHistory.push('/reset-password-email-sent');
+        .then((response) => {
+            const message = response.data.message;
+            if (message) {
+                dispatch(resetPasswordFailure(message));
+            }
+            else {
+                dispatch(resetPasswordSuccess());
+                hashHistory.push('/reset-password-email-sent');
+            }
         })
         .catch((error) => {
             dispatch(resetPasswordFailure(error));

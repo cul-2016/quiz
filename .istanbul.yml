@@ -4,6 +4,7 @@ instrumentation:
     extensions: ['.js', '.jsx']
     excludes: [
         'utils/dev-server.js',
+        '**/lib/onEnterHooks.js',
         '**/components/**',
         '**/containers/**'
     ]
