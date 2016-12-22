@@ -18,7 +18,6 @@ function updatePassword (client, reset_password_code, hashedPassword, callback) 
         if (error) {
             return callback(error);
         }
-        console.log('you have updated user password');
         return callback(null, true);
     });
 }
