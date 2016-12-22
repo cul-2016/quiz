@@ -103,7 +103,7 @@ test('registeringUser async action creator: verification email sent', (t) => {
             type: actions.REGISTERING_USER_REQUEST
         };
         t.deepEqual(actual, expected, 'flags request');
-        t.ok(spyHashHistory.calledWith('/please-verify'), 'flags a "user exists message"');
+        t.ok(spyHashHistory.calledWith('/please-verify'), 'redirects to "please-verify"');
         sandbox.restore();
     }, 300);
 

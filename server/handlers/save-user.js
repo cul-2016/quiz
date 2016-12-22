@@ -31,6 +31,7 @@ module.exports = {
                         email,
                         verificationLink: `http://localhost:9000/verification?code=${verification_code}`
                     }, (err) => {
+                        /* istanbul ignore if */
                         if (err) {
                             return reply(err);
                         }
@@ -42,6 +43,7 @@ module.exports = {
                         name: username,
                         email
                     }, (err) => {
+                        /* istanbul ignore if */
                         if (err) {
                             return reply(error);
                         }

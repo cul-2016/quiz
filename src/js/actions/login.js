@@ -37,13 +37,9 @@ export function authenticateUser (email, password) {
                     dispatch(incorrectUserDetails(response.data.message));
                 }
                 else {
-                    dispatch(authenticateUserSuccess(true));
+                    dispatch(authenticateUserSuccess());
                     dispatch(setUserDetails(response.data));
-                    if (response.data.is_lecturer) {
-                        hashHistory.push('/dashboard');
-                    } else {
-                        hashHistory.push('/dashboard');
-                    }
+                    hashHistory.push('/dashboard');
                 }
             })
             .catch((error) => {
@@ -56,9 +52,8 @@ export const authenticateUserRequest = () => ({
     type: AUTHENTICATE_USER_REQUEST
 });
 
-export const authenticateUserSuccess = (data) => ({
-    type: AUTHENTICATE_USER_SUCCESS,
-    data
+export const authenticateUserSuccess = () => ({
+    type: AUTHENTICATE_USER_SUCCESS
 });
 
 export const authenticateUserFailure = (error) => ({

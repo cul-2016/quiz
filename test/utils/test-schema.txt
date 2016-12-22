@@ -221,7 +221,7 @@ INSERT INTO users (email, username, password, is_verified, verification_code)
     VALUES ('verify-student@city.ac.uk', 'verify-student', '$2a$10$UnvUuW91Jh6.zWQi3G/2J.HLDTomSqJHxvBC.TYx/Bj8HZa.AAm4K', true, 'reset-verification-code');
 
 INSERT INTO users (email, username, password, is_lecturer, verification_code)
-    VALUES ('franzmoro@hotmail.com', 'franz-test-verify', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, 'testing-verification-code-franz');
+    VALUES ('verification@email.com', 'lecturer-test-verify', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, 'testing-verification-code-lecturer');
 
 INSERT INTO users (email, username, password, is_lecturer, is_verified)
     VALUES ('authenticate-user@city.ac.uk', 'lecturer', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, true);
