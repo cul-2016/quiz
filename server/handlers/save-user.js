@@ -1,6 +1,7 @@
 var uuid = require('uuid/v1');
 var saveUser = require('../lib/authentication/saveUser');
-var sendEmail = require('../lib/email/lecturer-verification-email.js');
+var verifyLecturerEmail = require('../lib/email/lecturer-verification-email');
+var studentWelcomeEmail = require('../lib/email/student-welcome-email');
 var client = require('../lib/dbClient');
 var getUserByEmail = require('../lib/getUserByEmail');
 
@@ -25,7 +26,7 @@ module.exports = {
                 return reply(true);
             } else {
                 if (is_lecturer) {
-                    sendEmail({
+                    verifyLecturerEmail({
                         name: 'lecturer',
                         email,
                         verificationLink: `http://localhost:9000/verification?code=${verification_code}`
@@ -35,6 +36,17 @@ module.exports = {
                             return reply(err);
                         }
                         reply({ emailSent: true });
+                    });
+                }
+                if (!is_lecturer) {
+                    studentWelcomeEmail({
+                        name: username,
+                        email
+                    }, (err) => {
+                        /* istanbul ignore if */
+                        if (err) {
+                            return reply(error);
+                        }
                     });
                 }
                 hashPassword(password, (error, hashedPassword) => {
