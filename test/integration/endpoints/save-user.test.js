@@ -1,7 +1,29 @@
 import test from 'tape';
 import { server, testClient } from '../../utils/init';
 
-test('`save-user` endpoint works when a lecturer registers', (t) => {
+test('`save-user` endpoint: new lecturer registration --> verification email', (t) => {
+
+    t.plan(2);
+    const options = {
+        method: 'POST',
+        url: '/save-user',
+        payload: {
+            email: 'franzmoro@hotmail.com',
+            password: 'testinglecturer',
+            is_lecturer: true
+        }
+    };
+
+    server.inject(options, (response) => {
+        t.equal(response.statusCode, 200, '200 status code');
+
+        const actual = response.result;
+        const expected = { emailSent: true };
+        t.deepEqual(actual, expected, 'Sent verification email');
+    });
+});
+
+test('`save-user` endpoint: existing user registration --> reply true', (t) => {
 
     t.plan(2);
     const options = {
@@ -17,7 +39,7 @@ test('`save-user` endpoint works when a lecturer registers', (t) => {
     server.inject(options, (response) => {
 
         t.equal(response.statusCode, 200, '200 status code');
-        t.ok(response.result, 'Get data back');
+        t.equal(response.result, true, 'Get true back');
     });
 });
 
