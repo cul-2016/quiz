@@ -19,20 +19,23 @@ const ResetPassword = ({ resetPassword, handleEmailChange, handleResetPassword }
         "display-none": !resetPassword.error
     });
 
+    const submitOnEnter = (e) => {
+        if (e.keyCode === 13 && isEmailValid && !isEmailEmpty) {
+            handleResetPassword(resetPassword.email);
+        }
+    };
+
     return (
         <section className="login outer blue-hero">
             <div className="middle">
                 <div className="container inner has-text-centered">
-                    <div className="box" onKeyDown={
-                        (e) => {
-                            if (e.keyCode === 13 && isEmailValid && !isEmailEmpty) { handleResetPassword(resetPassword.email);  }
-                        }
-                    }>
+                    <div className="box">
                         <h2>Request Password Reset</h2>
                         <span className={ errorMessageClass }>{ resetPassword.error }</span>
 
                         <label className="label has-text-left">Email</label>
                         <input
+                            onKeyDown={ submitOnEnter }
                             className="input"
                             value={ resetPassword.email }
                             onChange={ e => handleEmailChange(e.target.value) }
