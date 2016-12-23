@@ -23,6 +23,7 @@ import HoldingPageComponent from './components/holding-page';
 import ReviewContainer from './containers/review';
 import ModuleMembersContainer from './containers/module-members';
 import QuizMembersContainer from './containers/quiz-members';
+import ReviewQuizStudentContainer from './containers/student/quiz-review.js';
 
 import StudentJoinModuleContainer from './containers/student/join-module';
 import StudentModuleContainer from './containers/student/module';
@@ -50,12 +51,14 @@ const Root = ({ store }) => (
                     onEnter={ hooks.shouldUserRedirect }
                     component={ LoginContainer } />
                 <Route
+                    onEnter={ hooks.clearState }
                     path="request-reset-password"
                     component={ RequestResetPasswordContainer } />
                 <Route
                     path="reset-password-email-sent"
                     component={ RequestEmailSentComponent } />
                 <Route
+                    onEnter={ hooks.clearState }
                     path="reset-password/:code"
                     component={ ResetPasswordFormContainer } />
                 <Route
@@ -101,6 +104,10 @@ const Root = ({ store }) => (
                         path="feedback"
                         component={ StudentFeedbackContainer } />
                 </Route>
+                <Route
+                    onEnter={ composeHooks(hooks.fetchQuizReview) }
+                    path=":module_id/student/history/:quiz_id"
+                    component={ ReviewQuizStudentContainer } />
                 <Route
                     onEnter={ composeHooks(hooks.authenticate, hooks.checkUserRole, hooks.checkModuleOwner) }
                     path=":module_id/new-quiz"

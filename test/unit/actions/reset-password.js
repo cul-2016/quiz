@@ -91,9 +91,10 @@ test('resetPassword: success --> redirect to "email sent" message', t => {
 
     const email = 'test@test.com';
     const { dispatch, queue } = createThunk();
-
     const sandbox = createSandbox();
-    const successPromise = new Promise(resolve => resolve());
+    const successPromise = new Promise(resolve => resolve({
+        data: true
+    }));
     sandbox.stub(axios, 'post').returns(successPromise);
 
     const hashHistorySpy = sandbox.spy(hashHistory, 'push');
@@ -117,6 +118,46 @@ test('resetPassword: success --> redirect to "email sent" message', t => {
             'request success has been flagged'
         );
         t.ok(hashHistorySpy.calledWith('/reset-password-email-sent'), 'redirects to "email sent" view');
+        sandbox.restore();
+    }, 300);
+});
+
+test('resetPassword: failure --> custom error that email does not exist', t => {
+
+    t.plan(2);
+
+    const email = 'test@test.com';
+    const { dispatch, queue } = createThunk();
+    const sandbox = createSandbox();
+
+    const customError = {
+        message: 'Sorry the email does not exist'
+    };
+    const successPromise = new Promise(resolve => resolve({
+        data: customError
+    }));
+    sandbox.stub(axios, 'post').returns(successPromise);
+
+    dispatch(actions.resetPassword(email));
+
+    setTimeout(() => {
+        t.deepEqual(
+            queue.shift(),
+            {
+                type: actions.RESET_PASSWORD_REQUEST,
+                value: true
+            },
+            'request has been flagged'
+        );
+        t.deepEqual(
+            queue.shift(),
+            {
+                type: actions.RESET_PASSWORD_FAILURE,
+                value: false,
+                error: customError.message
+            },
+            'failure has been flagged'
+        );
         sandbox.restore();
     }, 300);
 });

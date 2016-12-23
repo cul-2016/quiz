@@ -26,26 +26,23 @@ export const resetPassword = (email) => (dispatch) => {
     dispatch(resetPasswordRequest());
 
     axios.post(`/reset-password-request`, { email })
-        .then(() => {
-            dispatch(resetPasswordSuccess());
-            hashHistory.push('/reset-password-email-sent');
+        .then((response) => {
+            const message = response.data.message;
+            if (message) {
+                dispatch(resetPasswordFailure(message));
+            }
+            else {
+                dispatch(resetPasswordSuccess());
+                hashHistory.push('/reset-password-email-sent');
+            }
         })
         .catch((error) => {
             dispatch(resetPasswordFailure(error));
         });
 };
 
-
-export const resetPasswordRequest = () => ({
-    type: RESET_PASSWORD_REQUEST,
-    value: true
-});
-
-export const resetPasswordSuccess = () => ({
-    type: RESET_PASSWORD_SUCCESS,
-    value: false
-});
-
+export const resetPasswordRequest = () => basicUpdate(RESET_PASSWORD_REQUEST)(true);
+export const resetPasswordSuccess = () => basicUpdate(RESET_PASSWORD_SUCCESS)(false);
 export const resetPasswordFailure = (error) => ({
     type: RESET_PASSWORD_FAILURE,
     value: false,
@@ -72,14 +69,9 @@ export const submitNewPassword = (password, code) => dispatch => {
         dispatch(submitNewPasswordFailure('Sorry, something went wrong!'));
     });
 };
-export const submitPasswordRequest = () => ({
-    type: SUBMIT_NEW_PASSWORD_REQUEST,
-    value: true
-});
-export const submitNewPasswordSuccess = () => ({
-    type: SUBMIT_NEW_PASSWORD_SUCCESS,
-    value: false
-});
+
+export const submitPasswordRequest = () => basicUpdate(SUBMIT_NEW_PASSWORD_REQUEST)(true);
+export const submitNewPasswordSuccess = () => basicUpdate(SUBMIT_NEW_PASSWORD_SUCCESS)(false);
 export const submitNewPasswordFailure = (error) => ({
     type: SUBMIT_NEW_PASSWORD_FAILURE,
     value: false,

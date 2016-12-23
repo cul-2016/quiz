@@ -10,7 +10,6 @@ module.exports = {
         var code = request.payload.code;
         var password = request.payload.password;
 
-        console.log(code);
         compareResetPasswordCodeAndExpiry(client, code, (error, result) => {
             /* istanbul ignore if */
             if (error) {

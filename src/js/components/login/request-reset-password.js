@@ -15,6 +15,10 @@ const ResetPassword = ({ resetPassword, handleEmailChange, handleResetPassword }
         "display-none": isEmailEmpty || isEmailValid
     });
 
+    let errorMessageClass = classnames("help is-danger", {
+        "display-none": !resetPassword.error
+    });
+
     return (
         <section className="login outer blue-hero">
             <div className="middle">
@@ -25,6 +29,8 @@ const ResetPassword = ({ resetPassword, handleEmailChange, handleResetPassword }
                         }
                     }>
                         <h2>Request Password Reset</h2>
+                        <span className={ errorMessageClass }>{ resetPassword.error }</span>
+
                         <label className="label has-text-left">Email</label>
                         <input
                             className="input"

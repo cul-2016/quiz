@@ -13,7 +13,7 @@ import { getQuizDetails } from '../actions/new-quiz';
 import { getLeaderboard } from '../actions/leaderboard';
 import { getFeedback } from '../actions/feedback';
 import { getStudentHistory } from '../actions/student-history';
-
+import { logout } from '../actions/login';
 
 /**
  * Checks if user is authenticated.  Redirects  to '/' if they're not
@@ -278,5 +278,19 @@ export function leaveRoom (nextState, replace, callback) {
     if (validCookieExists()) {
         socketClient.emit('leave_room', () => {});
     }
+    callback();
+}
+
+/**
+ * leaves all the socket rooms the user is part of.  Is used as an onEnter hook for React Router
+ * Matches the signature of a React Router hook: https://github.com/reactjs/react-router/blob/master/docs/API.md#onenternextstate-replace-callback
+ * @param {object} nextState - the next router state
+ * @param {function} replace - function to redirect to another path
+ * @param {function} callback - (optional) can be used to make the transition block
+ */
+
+export function clearState (nextState, replace, callback) {
+
+    store.dispatch(logout());
     callback();
 }
