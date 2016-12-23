@@ -6,8 +6,9 @@ export const users = [
         is_lecturer: false,
         username: 'student',
         is_verified: true,
-        code_expiry: null,
-        verification_code: null
+        expiry_code: null,
+        verification_code: null,
+        reset_password_code: null
     }
 ];
 
@@ -17,7 +18,7 @@ export const userDetails = {
     username: 'test',
     is_lecturer: true,
     is_verified: true,
-    code_expiry: null,
+    expiry_code: null,
     verification_code: null
 };
 

@@ -12,16 +12,9 @@ export const AUTHENTICATE_USER_FAILURE = 'AUTHENTICATE_USER_FAILURE';
 export const LOGOUT = 'LOGOUT';
 export const INCORRECT_USER_DETAILS = 'INCORRECT_USER_DETAILS';
 
-
-export const updateEmail = (value) => ({
-    type: UPDATE_EMAIL,
-    value
-});
-
-export const updatePassword = (value) => ({
-    type: UPDATE_PASSWORD,
-    value
-});
+const basicUpdate = (type) => (value) => ({ type, value });
+export const updateEmail = basicUpdate(UPDATE_EMAIL);
+export const updatePassword = basicUpdate(UPDATE_PASSWORD);
 
 // -----
 // AUTHENTICATE USER

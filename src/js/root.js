@@ -4,6 +4,9 @@ import { Provider } from 'react-redux';
 
 import AppContainer from './containers/app-container';
 import LoginContainer from './containers/login';
+import RequestResetPasswordContainer from './containers/request-reset-password.js';
+import RequestEmailSentComponent from './components/login/reset-password-email-sent.js';
+import ResetPasswordFormContainer from './containers/reset-password-form-container.js';
 import DashboardContainer from './containers/dashboard';
 import NewModuleContainer from './containers/new-module';
 import SignupContainer from './containers/signup';
@@ -46,6 +49,17 @@ const Root = ({ store }) => (
                 <IndexRoute
                     onEnter={ hooks.shouldUserRedirect }
                     component={ LoginContainer } />
+                <Route
+                    onEnter={ hooks.clearState }
+                    path="request-reset-password"
+                    component={ RequestResetPasswordContainer } />
+                <Route
+                    path="reset-password-email-sent"
+                    component={ RequestEmailSentComponent } />
+                <Route
+                    onEnter={ hooks.clearState }
+                    path="reset-password/:code"
+                    component={ ResetPasswordFormContainer } />
                 <Route
                     path="register-student"
                     component={ SignupContainer } />

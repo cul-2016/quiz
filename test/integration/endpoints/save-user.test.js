@@ -76,8 +76,9 @@ test('`save-user` endpoint works when a student registers', (t) => {
             user_id: 2,
             username: 'lecturer',
             is_verified: true,
-            code_expiry: null,
-            verification_code: null
+            expiry_code: null,
+            verification_code: null,
+            reset_password_code: null
         };
 
         server.inject(options, (response) => {

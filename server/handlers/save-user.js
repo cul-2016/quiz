@@ -29,7 +29,7 @@ module.exports = {
                     verifyLecturerEmail({
                         name: 'lecturer',
                         email,
-                        verificationLink: `http://localhost:9000/verification?code=${verification_code}`
+                        verificationLink: `${process.env.SERVER_ROUTE}/verification?code=${verification_code}`
                     }, (err) => {
                         /* istanbul ignore if */
                         if (err) {

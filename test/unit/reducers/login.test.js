@@ -1,7 +1,10 @@
 import test from 'tape';
 import * as states from '../../utils/reducer-fixtures';
 import { authenticateUserError as error } from '../../utils/action-fixtures';
-import reducer from '../../../src/js/reducers/login';
+import {
+    initialState as loginState,
+    login as reducer
+}  from '../../../src/js/reducers/login';
 import deepFreeze from '../../utils/deepFreeze';
 
 
@@ -9,7 +12,7 @@ test('UPDATE_EMAIL works when user enters a value', (t) => {
 
     t.plan(1);
 
-    const initialState = deepFreeze(states.login);
+    const initialState = deepFreeze(loginState);
 
     const email = 'test@city.ac.uk';
     const action = {
@@ -17,7 +20,7 @@ test('UPDATE_EMAIL works when user enters a value', (t) => {
         value: email
     };
 
-    const expected = Object.assign({}, states.login, { email });
+    const expected = Object.assign({}, loginState, { email });
 
 
     const result = reducer(initialState, action);
@@ -28,7 +31,7 @@ test('UPDATE_PASSWORD works when user enters a value', (t) => {
 
     t.plan(1);
 
-    const initialState = deepFreeze(states.login);
+    const initialState = deepFreeze(loginState);
 
     const password = 'testpassword';
     const action = {
@@ -36,7 +39,7 @@ test('UPDATE_PASSWORD works when user enters a value', (t) => {
         value: password
     };
 
-    const expected = Object.assign({}, states.login, { password });
+    const expected = Object.assign({}, loginState, { password });
 
     const result = reducer(initialState, action);
     t.deepEqual(result, expected);
@@ -46,13 +49,13 @@ test('AUTHENTICATE_USER_REQUEST works', (t) => {
 
     t.plan(1);
 
-    const initialState = deepFreeze(states.login);
+    const initialState = deepFreeze(loginState);
 
     const action = {
         type: 'AUTHENTICATE_USER_REQUEST',
     };
 
-    const expected = Object.assign({}, states.login, { isAuthenticating: true });
+    const expected = Object.assign({}, loginState, { isAuthenticating: true });
 
     const result = reducer(initialState, action);
     t.deepEqual(result, expected);
@@ -65,7 +68,7 @@ test('AUTHENTICATE_USER_SUCCESS works', (t) => {
     const initialState = deepFreeze(
         Object.assign(
             {},
-            states.login,
+            loginState,
             { isAuthenticating: true }
         )
     );
@@ -75,7 +78,7 @@ test('AUTHENTICATE_USER_SUCCESS works', (t) => {
         type: 'AUTHENTICATE_USER_SUCCESS',
         data
     };
-    const expected = Object.assign({}, states.login, { isAuthenticating: false });
+    const expected = Object.assign({}, loginState, { isAuthenticating: false });
 
     const result = reducer(initialState, action);
 
@@ -89,7 +92,7 @@ test('AUTHENTICATE_USER_FAILURE works', (t) => {
     const initialState = deepFreeze(
         Object.assign(
             {},
-            states.login,
+            loginState,
             { isAuthenticating: true }
         )
     );
@@ -99,7 +102,7 @@ test('AUTHENTICATE_USER_FAILURE works', (t) => {
         error
     };
 
-    const expected = Object.assign({}, states.login, { isAuthenticating: false }, { error });
+    const expected = Object.assign({}, loginState, { isAuthenticating: false }, { error });
     const result = reducer(initialState, action);
 
     t.deepEqual(result, expected);
@@ -112,7 +115,7 @@ test.skip('LOGOUT works', (t) => {
     const initialState = deepFreeze(
         Object.assign({},
             { user: Object.assign({}, states.user, { user_id: 10 }) },
-            { login: Object.assign({}, states.login, { email: "testing@email.com" }) },
+            { login: Object.assign({}, loginState, { email: "testing@email.com" }) },
             { dashboard: Object.assign({}, states.dashboard, { data: 'some arbitrary data' }) }
         )
     );
@@ -123,7 +126,7 @@ test.skip('LOGOUT works', (t) => {
 
     const expected = Object.assign({},
         { user: Object.assign({}, states.user) },
-        { login: Object.assign({}, states.login) },
+        { login: Object.assign({}, loginState) },
         { dashboard: Object.assign({}, states.dashboard) }
     );
     const result = reducer(initialState, action);

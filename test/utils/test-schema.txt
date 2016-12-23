@@ -24,7 +24,8 @@ CREATE TABLE IF NOT EXISTS users (
     username TEXT,
     is_verified BOOLEAN DEFAULT FALSE NOT NULL,
     verification_code TEXT,
-    code_expiry TIMESTAMP
+    reset_password_code TEXT,
+    expiry_code BIGINT
 );
 
 /* modules */
@@ -217,7 +218,7 @@ INSERT INTO users (email, username, password, is_lecturer, verification_code)
     VALUES ('verify-lecturer@city.ac.uk', 'verify-lecturer', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, 'testing-verification-code');
 
 INSERT INTO users (email, username, password, is_verified, verification_code)
-    VALUES ('verify-student@city.ac.uk', 'verify-student', '$2a$10$UnvUuW91Jh6.zWQi3G/2J.HLDTomSqJHxvBC.TYx/Bj8HZa.AAm4K', true, 'reset-password-code');
+    VALUES ('verify-student@city.ac.uk', 'verify-student', '$2a$10$UnvUuW91Jh6.zWQi3G/2J.HLDTomSqJHxvBC.TYx/Bj8HZa.AAm4K', true, 'reset-verification-code');
 
 INSERT INTO users (email, username, password, is_lecturer, verification_code)
     VALUES ('verification@email.com', 'lecturer-test-verify', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, 'testing-verification-code-lecturer');
@@ -228,6 +229,21 @@ INSERT INTO users (email, username, password, is_lecturer, is_verified)
 INSERT INTO users (email, username, password, is_lecturer, is_verified, verification_code)
     VALUES ('not-authenticated-user@city.ac.uk', 'lecturer', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, false, 'verification-code-for-not-authenticated-user');
 
+INSERT INTO users (email, username, password, is_verified, reset_password_code, expiry_code)
+    VALUES ('sohilpandya@foundersandcoders.com', 'reset-password-student', '$2a$10$UnvUuW91Jh6.zWQi3G/2J.HLDTomSqJHxvBC.TYx/Bj8HZa.AAm4K', true, 'reset-password-code-does not matter', 1490893097275);
+
+/*** User with a future timestamp for resetting password ***/
+INSERT INTO users (email, username, password, is_verified, reset_password_code, expiry_code)
+    VALUES ('validexpiry@city.ac.uk', 'valid-password-expiry', '$2a$10$UnvUuW91Jh6.zWQi3G/2J.HLDTomSqJHxvBC.TYx/Bj8HZa.AAm4K', true, 'reset-password-code', 1490893097275);
+
+/*** User with an expired timestamp for resetting the password ***/
+INSERT INTO users (email, username, password, is_verified, reset_password_code, expiry_code)
+    VALUES ('expiredpassword@city.ac.uk', 'expired-password', '$2a$10$UnvUuW91Jh6.zWQi3G/2J.HLDTomSqJHxvBC.TYx/Bj8HZa.AAm4K', true, 'reset-password-code-2', 1482166876770);
+
+
+/*** User for resetting pasword endpoint test ***/
+INSERT INTO users (email, username, password, is_verified, reset_password_code, expiry_code)
+    VALUES ('reset-password-endpoint@city.ac.uk', 'reset-password', '$2a$10$UnvUuW91Jh6.zWQi3G/2J.HLDTomSqJHxvBC.TYx/Bj8HZa.AAm4K', true, 'reset-password-code-endpoint', 1741536250477);
 
 /********* insert modules ********/
 

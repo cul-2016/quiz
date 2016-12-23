@@ -53,8 +53,15 @@ const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthentic
                         </button>
                         <p>
                             <Link to="/register-student">
-                                <span className=" is-success">
+                                <span>
                                     Sign up here
+                                </span>
+                            </Link>
+                        </p>
+                        <p>
+                            <Link to="/request-reset-password">
+                                <span>
+                                    Forgotten password
                                 </span>
                             </Link>
                         </p>

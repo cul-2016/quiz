@@ -7,6 +7,7 @@ var SaveUser = require('./handlers/save-user');
 var ValidateUser = require('./handlers/authenticate-user');
 var VerifyLecturer = require('./handlers/verify-user.js');
 var GetUserDetails = require('./handlers/get-user-details');
+var ResetPasswordRequest = require('./handlers/reset-password-request.js');
 var SaveQuiz = require('./handlers/save-quiz');
 var GetQuizQuestions = require('./handlers/get-quiz-questions');
 var JoinModule = require('./handlers/join-module');
@@ -24,6 +25,7 @@ var GetLeaderboard = require('./handlers/get-leaderboard');
 var GetFeedback = require('./handlers/get-feedback');
 var GetStudentHistory = require('./handlers/get-student-history');
 var AbortQuiz = require('./handlers/abort-quiz');
+var SubmitNewPassword = require('./handlers/submit-new-password');
 
 
 var routes = [
@@ -36,6 +38,7 @@ var routes = [
     ValidateUser,
     VerifyLecturer,
     GetUserDetails,
+    ResetPasswordRequest,
     SaveQuiz,
     GetQuizQuestions,
     JoinModule,
@@ -52,7 +55,8 @@ var routes = [
     GetLeaderboard,
     GetFeedback,
     GetStudentHistory,
-    AbortQuiz
+    AbortQuiz,
+    SubmitNewPassword
 ];
 
 module.exports = routes;

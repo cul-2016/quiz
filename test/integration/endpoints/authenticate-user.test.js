@@ -17,8 +17,9 @@ test('`authenticate-user` endpoint returns true when password matches', (t) => {
         user_id: 28,
         username: 'lecturer',
         is_verified: true,
-        code_expiry: null,
-        verification_code: null
+        expiry_code: null,
+        verification_code: null,
+        reset_password_code: null
     };
 
     server.inject(options, (response) => {
