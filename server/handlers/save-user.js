@@ -16,6 +16,35 @@ module.exports = {
         var is_lecturer = request.payload.is_lecturer;
         var username = request.payload.username || '';
         var verification_code = is_lecturer ? uuid() : null;
+        var validEmailMessage = { message: 'Please enter a valid email address' };
+
+        const saveUserFlow = () => {
+            hashPassword(password, (error, hashedPassword) => {
+                /* istanbul ignore if */
+                if (error) {
+                    return reply(error);
+                }
+                saveUser(client, email, hashedPassword, is_lecturer, username, verification_code, (error, result) => { // eslint-disable-line no-unused-vars
+                    /* istanbul ignore if */
+                    if (error) {
+                        return reply(error);
+                    }
+                    else if (!is_lecturer) {
+                        getUserByEmail(client, email, (error, userDetails) => {
+                            /* istanbul ignore if */
+                            if (error) {
+                                return reply(error);
+                            }
+                            delete userDetails[0].password;
+                            return reply(userDetails[0])
+                                .state('cul_id', userDetails[0].user_id.toString(), { path: "/" })
+                                .state('cul_is_lecturer', userDetails[0].is_lecturer.toString(), { path: "/" })
+                                .state('cul_is_cookie_accepted', 'true', { path: "/" });
+                        });
+                    }
+                });
+            });
+        };
 
         getUserByEmail(client, email, (error, userExists) => {
             /* istanbul ignore if */
@@ -23,7 +52,7 @@ module.exports = {
                 return reply(error);
             }
             if (userExists.length === 1) {
-                return reply(true);
+                return reply({ message: 'user exists' });
             } else {
                 if (is_lecturer) {
                     verifyLecturerEmail({
@@ -33,47 +62,28 @@ module.exports = {
                     }, (err) => {
                         /* istanbul ignore if */
                         if (err) {
-                            return reply(err);
+                            // no tests as we do not want to get the bounce on Amazon SES
+                            return reply(validEmailMessage);
+                        } else {
+                            saveUserFlow();
+                            return reply({ emailSent: true });
                         }
-                        reply({ emailSent: true });
+
                     });
                 }
-                if (!is_lecturer) {
+                else {
                     studentWelcomeEmail({
                         name: username,
                         email
                     }, (err) => {
                         /* istanbul ignore if */
                         if (err) {
-                            return reply(error);
+                            return reply(validEmailMessage);
+                        } else {
+                            saveUserFlow();
                         }
                     });
                 }
-                hashPassword(password, (error, hashedPassword) => {
-                    /* istanbul ignore if */
-                    if (error) {
-                        return reply(error);
-                    }
-                    saveUser(client, email, hashedPassword, is_lecturer, username, verification_code, (error, result) => { // eslint-disable-line no-unused-vars
-                        /* istanbul ignore if */
-                        if (error) {
-                            return reply(error);
-                        }
-                        else if (!is_lecturer) {
-                            getUserByEmail(client, email, (error, userDetails) => {
-                                /* istanbul ignore if */
-                                if (error) {
-                                    return reply(error);
-                                }
-                                delete userDetails[0].password;
-                                return reply(userDetails[0])
-                                .state('cul_id', userDetails[0].user_id.toString(), { path: "/" })
-                                .state('cul_is_lecturer', userDetails[0].is_lecturer.toString(), { path: "/" })
-                                .state('cul_is_cookie_accepted', 'true', { path: "/" });
-                            });
-                        }
-                    });
-                });
             }
         });
     }

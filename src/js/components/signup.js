@@ -1,20 +1,17 @@
 import React, { PropTypes } from 'react';
 import classnames from 'classnames';
 import { Link } from 'react-router';
+import isEmail from 'validator/lib/isEmail';
 
 const Signup = ({ register, handleChange, handleRegisteringUser, location }) => {
 
-    let isEmailValid = /.+@.+\..+/.test(register.email);
+    let isEmailValid = isEmail(register.email);
     let is_lecturer;
     if (location.pathname === '/register-student') {
         is_lecturer = false;
     } else {
         is_lecturer = true;
     }
-
-    let userExists = classnames({
-        "display-none": register.userExists !== true
-    });
 
     let registerButtonClasses = classnames("button is-warning login-button", {
         "is-disabled": !isEmailValid || !register.password || !register.username || register.password !== register.confirmPassword,
@@ -49,11 +46,11 @@ const Signup = ({ register, handleChange, handleRegisteringUser, location }) => 
                         <h2>
                             Register
                         </h2>
-                        <p className={ userExists }>
+                        { register.error &&
                             <span className="tag is-danger">
-                                This email already exists. Follow link below to sign in
+                                { register.error }
                             </span>
-                        </p>
+                        }
 
                         <label className="label has-text-left">Email address</label>
                         <input

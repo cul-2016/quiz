@@ -28,17 +28,6 @@ test('updateInputField action creator returns expected action', (t) => {
     t.deepEqual(actual2, expected);
 });
 
-test('UserExists action creator returns expected action', (t) => {
-
-    t.plan(1);
-
-    const expected = {
-        type: actions.USER_EXISTS
-    };
-    const actual = deepFreeze(actions.userExists());
-    t.deepEqual(actual, expected);
-});
-
 // -----
 // REGISTERING USER
 // -----
@@ -52,8 +41,9 @@ test('registeringUser async action creator: user exists', (t) => {
     let is_lecturer = true;
     const { dispatch, queue } = createThunk();
 
+    const mockResponse = { data: { message: 'user already exists' } };
     const userExistsPromise = new Promise((resolve) => {
-        resolve({ data: true });
+        resolve(mockResponse);
     });
     const sandbox = createSandbox();
     sandbox.stub(axios, 'post').returns(userExistsPromise);
@@ -70,7 +60,42 @@ test('registeringUser async action creator: user exists', (t) => {
 
         actual = queue.shift();
         expected = {
-            type: actions.USER_EXISTS
+            type: actions.REGISTERING_USER_FAILURE,
+            error: mockResponse.data.message
+        };
+        t.deepEqual(actual, expected, 'flags a "user exists message"');
+        sandbox.restore();
+    }, 300);
+
+});
+
+test('registeringUser async action creator: axios failure', (t) => {
+
+    t.plan(2);
+    let email = 'test@test.com';
+    let username = 'testing';
+    let password = 'testing';
+    let is_lecturer = true;
+    const { dispatch, queue } = createThunk();
+
+    const axiosFailurePromise = new Promise((resolve, reject) => reject());
+    const sandbox = createSandbox();
+    sandbox.stub(axios, 'post').returns(axiosFailurePromise);
+
+    dispatch(actions.registeringUser(email, username, password, is_lecturer));
+
+    setTimeout(() => {
+
+        let actual = queue.shift();
+        let expected = {
+            type: actions.REGISTERING_USER_REQUEST
+        };
+        t.deepEqual(actual, expected, 'flags request');
+
+        actual = queue.shift();
+        expected = {
+            type: actions.REGISTERING_USER_FAILURE,
+            error: 'Sorry, something went wrong'
         };
         t.deepEqual(actual, expected, 'flags a "user exists message"');
         sandbox.restore();
