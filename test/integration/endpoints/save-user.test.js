@@ -23,14 +23,14 @@ test('`save-user` endpoint: new lecturer registration --> verification email', (
     });
 });
 
-test('`save-user` endpoint: existing user registration --> reply true', (t) => {
+test('`save-user` endpoint: existing user registration --> user exists message', (t) => {
 
     t.plan(2);
     const options = {
         method: 'POST',
         url: '/save-user',
         payload: {
-            email: 'franzmoro@hotmail.com',
+            email: 'lecturer@city.ac.uk',
             password: 'testinglecturer',
             is_lecturer: true
         }
@@ -39,7 +39,7 @@ test('`save-user` endpoint: existing user registration --> reply true', (t) => {
     server.inject(options, (response) => {
 
         t.equal(response.statusCode, 200, '200 status code');
-        t.equal(response.result, true, 'Get true back');
+        t.deepEqual(response.result, { message: 'user exists' }, 'email has been sent');
     });
 });
 

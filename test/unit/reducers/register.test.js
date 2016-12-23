@@ -27,27 +27,6 @@ test('UPDATE_INPUT_FIELD works', (t) => {
     t.deepEqual(result, expected);
 });
 
-test('USER_EXISTS works', (t) => {
-
-    t.plan(1);
-
-    const initialState = deepFreeze(registerState);
-    const action = {
-        type: 'USER_EXISTS'
-    };
-    const expected = {
-        email: "",
-        username: "",
-        password: "",
-        isRegistering: false,
-        error: undefined,
-        userIsRegistered: undefined,
-        userExists: true
-    };
-    const result = reducer(initialState, action);
-    t.deepEqual(result, expected);
-});
-
 // -----
 // REGISTERING USER
 // -----
