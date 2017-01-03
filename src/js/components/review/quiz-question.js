@@ -3,22 +3,25 @@ import classnames from 'classnames';
 
 const Question = ({ idx, question, is_lecturer, showAnswer }) => {
     const { isAnswerShowing } = question;
+    const showButton = !isAnswerShowing && !is_lecturer;
+    const showCorrectAnswer = is_lecturer || isAnswerShowing;
+
     let aClasses = classnames("column answer box", {
-        "correct_answer": isAnswerShowing &&
+        "correct_answer": showCorrectAnswer &&
             'a' === question.correct_answer.toLowerCase()
     });
     let bClasses = classnames("column answer box", {
-        "correct_answer": isAnswerShowing &&
+        "correct_answer": showCorrectAnswer &&
             'b' === question.correct_answer.toLowerCase()
     });
     let cClasses = classnames("column answer box", {
         "display-none": question.c === undefined,
-        "correct_answer": isAnswerShowing &&
+        "correct_answer": showCorrectAnswer &&
             'c' === question.correct_answer.toLowerCase()
     });
     let dClasses = classnames("column answer box", {
         "display-none": question.d === undefined,
-        "correct_answer": isAnswerShowing &&
+        "correct_answer": showCorrectAnswer &&
             'd' === question.correct_answer.toLowerCase()
     });
 
@@ -26,9 +29,9 @@ const Question = ({ idx, question, is_lecturer, showAnswer }) => {
         <div key={idx} className="question">
             <h4 className="title is-5 has-text-centered">
                 { `${idx + 1}. ${question.question}` }
-                { !isAnswerShowing &&
-                    <button onClick={ () => showAnswer(idx) }>Show Answer</button>
-                }
+                { showButton && <button onClick={ () => showAnswer(idx) }>
+                    Show Answer
+                </button>}
             </h4>
 
 
