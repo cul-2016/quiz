@@ -64,3 +64,21 @@ export const showAnswer = idx => ({
     type: SHOW_ANSWER,
     idx
 });
+
+export function getQuizDetailsStudent (quiz_id, user_id) {
+
+    return (dispatch) => {
+
+        dispatch(getQuizReviewRequest());
+
+        axios.get(`/get-quiz-details-student?quiz_id=${quiz_id}&user_id=${user_id}`)
+            .then((response) => {
+                dispatch(getQuizReviewSuccess(response.data));
+            }, (error) => {
+                console.error(error, 'error from axios /get-quiz-questions');
+            })
+            .catch((error) => {
+                dispatch(getQuizReviewFailure(error));
+            });
+    };
+}
