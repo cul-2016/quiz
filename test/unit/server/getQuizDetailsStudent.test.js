@@ -1,41 +1,34 @@
 import test from 'tape';
-import getQuizDetails from '../../../server/lib/getQuizDetails';
+import getQuizDetailsStudent from '../../../server/lib/getQuizDetailsStudent';
 import { testClient } from '../../utils/init';
 
 
-test('`getQuizDetails` gets quiz name and questions for a given quiz', (t) => {
+test('`getQuizDetailsStudent` gets questions, answers and student answers for a given quiz', (t) => {
 
     t.plan(1);
-    const expectedRows = {
-        name: 'Week 1 Quiz',
-        is_last_quiz: false,
-        questions: [
-            {
-                a: 'London',
-                b: 'Cardiff',
-                c: 'Edinburgh',
-                correct_answer: 'a',
-                d: 'Doncaster',
-                question: 'What is the capital of England?',
-                question_id: 1
-            },
-            {
-                a: 'Zagreb',
-                b: 'Cardiff',
-                c: 'Edinburgh',
-                correct_answer: 'a',
-                d: 'Doncaster',
-                question: 'What is the capital of Croatia?',
-                question_id: 2
-            }
-        ]
-    };
     const user_id = 1;
-
-    getQuizDetails(testClient, user_id, (error, response) => {
-
+    const quiz_id = 2;
+    const expectedRows = [{
+        question: 'What is the National Animal of England?',
+        a: 'Pikachu',
+        b: 'Whale',
+        c: 'Lion',
+        d: 'Doncaster',
+        correct_answer: 'c',
+        response: 'b'
+    }, {
+        question: 'What is the capital of Tanzania?',
+        a: 'Zagreb',
+        b: 'Dodoma',
+        c: 'Edinburgh',
+        d: 'Doncaster',
+        correct_answer: 'b',
+        response: 'b'
+    }];
+    getQuizDetailsStudent(testClient, quiz_id, user_id, (error, response) => {
         if (error) {
             console.error(error);
+            t.error(error, 'should not have errored!');
         }
         t.deepEqual(response, expectedRows, 'database returns correct quiz details');
     });

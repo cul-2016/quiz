@@ -11,20 +11,19 @@ var query = require('./query');
 function getQuizDetailsStudent (client, quiz_id, user_id, callback) {
 
     const questionsQuery = [
-        'SELECT questions.question_id, questions.question,',
+        'SELECT questions.question,',
         'questions.a, questions.b, questions.c, questions.d,',
-        'questions.correct_answer, responses.response, quizzes.name',
+        'questions.correct_answer, responses.response',
         'FROM questions JOIN responses ON',
         'questions.quiz_id = $1 AND',
         'responses.user_id = $2 AND',
         'questions.quiz_id = responses.quiz_id AND',
         'questions.question_id = responses.question_id',
-        'JOIN quizzes ON quizzes.quiz_id = $1',
         'ORDER BY questions.question_id;'
     ].join(' ');
 
     query(client, questionsQuery, [quiz_id, user_id], (error, questions) => {
-
+        /* istanbul ignore if */
         if (error) {
             console.error(error);
             return callback(error);
