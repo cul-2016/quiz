@@ -65,20 +65,14 @@ export const showAnswer = idx => ({
     idx
 });
 
-export function getQuizDetailsStudent (quiz_id, user_id) {
+export const getQuizDetailsStudent = (quiz_id, user_id) => dispatch => {
 
-    return (dispatch) => {
+    dispatch(getQuizReviewRequest());
 
-        dispatch(getQuizReviewRequest());
-
-        axios.get(`/get-quiz-details-student?quiz_id=${quiz_id}&user_id=${user_id}`)
-            .then((response) => {
-                dispatch(getQuizReviewSuccess(response.data));
-            }, (error) => {
-                console.error(error, 'error from axios /get-quiz-questions');
-            })
-            .catch((error) => {
-                dispatch(getQuizReviewFailure(error));
-            });
-    };
-}
+    axios.get(`/get-quiz-details-student?quiz_id=${quiz_id}&user_id=${user_id}`)
+    .then((response) => {
+        dispatch(getQuizReviewSuccess(response.data));
+    }).catch((error) => {
+        dispatch(getQuizReviewFailure(error));
+    });
+};
