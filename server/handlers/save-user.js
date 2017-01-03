@@ -56,7 +56,6 @@ module.exports = {
             } else {
                 if (is_lecturer) {
                     verifyLecturerEmail({
-                        name: 'lecturer',
                         email,
                         verificationLink: `${process.env.SERVER_ROUTE}/verification?code=${verification_code}`
                     }, (err) => {
