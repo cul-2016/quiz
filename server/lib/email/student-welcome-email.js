@@ -1,6 +1,6 @@
 var sendEmail   = require('sendemail'); // no api key
 
-module.exports = ({ name, email, verificationLink }, cb) => {
+module.exports = ({ name, email }, cb) => {
     var person = {
         name,
         email,

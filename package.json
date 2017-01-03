@@ -81,6 +81,7 @@
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
     "uuid": "^3.0.1",
+    "validator": "^6.2.0",
     "webpack": "^1.13.1"
   },
   "devDependencies": {

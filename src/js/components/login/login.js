@@ -1,11 +1,12 @@
 import React, { PropTypes } from 'react';
 import classnames from 'classnames';
 import { Link } from 'react-router';
+import isEmail from 'validator/lib/isEmail';
 
 
 const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthenticateUser }) => {
 
-    let isEmailValid = /.+@.+\..+/.test(login.email);
+    let isEmailValid = isEmail(login.email);
 
     let userValidation = classnames({
         "display-none": login.userIsAuthenticated !== false
@@ -28,7 +29,7 @@ const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthentic
                         <h2>Log In</h2>
                         <p className={ userValidation }>
                             <span className="tag is-danger">
-                                { login.message } 
+                                { login.message }
                             </span>
                         </p>
                         <label className="label has-text-left">Email</label>

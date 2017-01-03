@@ -18,12 +18,8 @@ export default function register (state = initialState, action ) {
 
     case actionsTypes.UPDATE_INPUT_FIELD:
         return update(state, {
-            [action.inputKey]: { $set: action.value }
-        });
-
-    case actionsTypes.USER_EXISTS:
-        return update(state, {
-            userExists: { $set: true }
+            [action.inputKey]: { $set: action.value },
+            error: { $set: undefined }
         });
 
     case actionsTypes.REGISTERING_USER_REQUEST:
