@@ -5,6 +5,7 @@ var query = require('./query');
  * Returns an object of arrays. Keys: 'name', 'questions'.
  * @param {object} client - database client
  * @param {string} quiz_id - unique quiz id
+ * @param {string} user_id - unique user id
  * @param {function} callback - callback function
  */
 
