@@ -27,25 +27,29 @@ const ResetPasswordForm = ({
         "display-none": !error
     });
 
+    const submitOnEnter = (e) => {
+        if (e.keyCode === 13 && doPasswordsMatch) {
+            handleSubmitNewPassword(password, code);
+        }
+    };
+
     return (
         <section className="login outer blue-hero">
             <div className="middle">
                 <div className="container inner has-text-centered">
-                    <div className="box" onKeyDown={ (e) => {
-                        if (e.keyCode === 13 && doPasswordsMatch) {
-                            handleSubmitNewPassword(password, code);
-                        }
-                    }}>
+                    <div className="box">
                         <h2>Reset Password</h2>
                         <span className={ errorMessageClass }>{ error }</span>
                         <label className="label has-text-left">Password</label>
                         <input
+                            onKeyDown={ submitOnEnter }
                             className={passwordMatchClasses}
                             value={ password }
                             onChange={ (e) => handlePasswordChange(e.target.value) }
                             type="password" />
                         <label className="label has-text-left">Confirm Password</label>
                         <input
+                            onKeyDown={ submitOnEnter }
                             className={passwordMatchClasses}
                             value={ confirmedPassword }
                             onChange={ (e) => handleConfirmedPasswordChange(e.target.value) }

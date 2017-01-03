@@ -21,11 +21,17 @@ const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthentic
         "display-none": login.email.length === 0 || isEmailValid
     });
 
+    const submitOnEnter = (e) => {
+        if (e.keyCode === 13 && isEmailValid && login.password.length !== 0) {
+            handleAuthenticateUser(login.email, login.password);
+        }
+    };
+
     return (
         <section className="login outer blue-hero">
             <div className="middle">
                 <div className="container inner has-text-centered">
-                    <div className="box" onKeyDown={ (e) => { if (e.keyCode === 13 && isEmailValid && login.password.length !== 0) { handleAuthenticateUser(login.email, login.password); }}}>
+                    <div className="box">
                         <h2>Log In</h2>
                         <p className={ userValidation }>
                             <span className="tag is-danger">
@@ -34,6 +40,7 @@ const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthentic
                         </p>
                         <label className="label has-text-left">Email</label>
                         <input
+                            onKeyDown={ submitOnEnter }
                             className="input"
                             value={ login.username }
                             onChange={ (e) => handleEmailChange(e.target.value)}
@@ -43,6 +50,7 @@ const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthentic
 
                         <label className="label has-text-left">Password</label>
                         <input
+                            onKeyDown={ submitOnEnter }
                             className="input"
                             value={ login.password }
                             onChange={ (e) => handlePasswordChange(e.target.value) }

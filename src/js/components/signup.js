@@ -30,12 +30,19 @@ const Signup = ({ register, handleChange, handleRegisteringUser, location }) => 
     let outerSectionClasses = classnames("login outer", {
         "blue-hero": is_lecturer === false
     });
+
+    const submitOnEnter = (e) => {
+        if (e.keyCode === 13 && isEmailValid && register.password && register.username) {
+            handleRegisteringUser(register.email, register.username, register.password, is_lecturer);
+        }
+    };
+
     return (
 
         <section className={ outerSectionClasses }>
             <div className="middle">
                 <div className="container inner has-text-centered">
-                    <div className="box" onKeyDown={ (e) => { if (e.keyCode === 13 && isEmailValid && register.password && register.username) { handleRegisteringUser(register.email, register.username, register.password, is_lecturer); }}}>
+                    <div className="box">
                         <h2>
                             Register
                         </h2>
@@ -47,6 +54,7 @@ const Signup = ({ register, handleChange, handleRegisteringUser, location }) => 
 
                         <label className="label has-text-left">Email address</label>
                         <input
+                            onKeyDown={ submitOnEnter }
                             className="input"
                             value={ register.email }
                             onChange={ (e) => handleChange("email", e.target.value) }
@@ -56,6 +64,7 @@ const Signup = ({ register, handleChange, handleRegisteringUser, location }) => 
 
                         <label className="label has-text-left">Choose a nickname</label>
                         <input
+                            onKeyDown={ submitOnEnter }
                             className="input"
                             value={ register.username }
                             onChange={ (e) => handleChange("username", e.target.value)}
@@ -63,6 +72,7 @@ const Signup = ({ register, handleChange, handleRegisteringUser, location }) => 
 
                         <label className="label has-text-left">Choose a password</label>
                         <input
+                            onKeyDown={ submitOnEnter }
                             className={ passwordMatchClasses }
                             value={ register.password }
                             onChange={ (e) => handleChange("password", e.target.value)}
@@ -70,6 +80,7 @@ const Signup = ({ register, handleChange, handleRegisteringUser, location }) => 
 
                         <label className="label has-text-left">Confirm password</label>
                         <input
+                            onKeyDown={ submitOnEnter }
                             className={ passwordMatchClasses }
                             value={ register.confirmPassword }
                             onChange={ (e) => handleChange("confirmPassword", e.target.value)}
