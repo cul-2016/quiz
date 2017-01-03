@@ -79,3 +79,16 @@ test('incrementCurrentQuizIndex creates the correct action', (t) => {
     const actual = deepFreeze(actions.incrementCurrentQuizIndex());
     t.deepEqual(actual, expected);
 });
+
+test('show answer creates the correct action', (t) => {
+
+    t.plan(1);
+
+    const idx = 1;
+    const expected = {
+        type: actions.SHOW_ANSWER,
+        idx
+    };
+    const actual = deepFreeze(actions.showAnswer(idx));
+    t.deepEqual(actual, expected);
+});
