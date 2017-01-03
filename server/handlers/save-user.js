@@ -73,7 +73,7 @@ module.exports = {
                 }
                 else {
                     studentWelcomeEmail({
-                        name: username,
+                        username,
                         email
                     }, (err) => {
                         /* istanbul ignore if */

@@ -1,8 +1,8 @@
 var sendEmail   = require('sendemail'); // no api key
 
-module.exports = ({ name, email }, cb) => {
+module.exports = ({ username, email }, cb) => {
     var person = {
-        name,
+        username,
         email,
         subject: "Welcome to City Uni :)"
     };
