@@ -36,7 +36,8 @@ test('GET_QUIZ_REVIEW_SUCCESS works', (t) => {
         )
     );
     const action = {
-        type: 'GET_QUIZ_REVIEW_SUCCESS'
+        type: 'GET_QUIZ_REVIEW_SUCCESS',
+        questions
     };
 
     const actual = reducer(initialState, action);
