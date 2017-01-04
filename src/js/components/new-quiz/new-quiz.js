@@ -5,13 +5,14 @@ import classnames from 'classnames';
 
 
 const NewQuiz = ({
-    newQuiz: { name, questions, is_last_quiz, isSavingQuiz },
+    newQuiz: { name, questions, is_last_quiz, isSavingQuiz, isSurvey },
     handleAddQuestion,
     handleDeleteQuestion,
     handleInputChange,
     handleQuizNameChange,
     handleSaveQuiz,
     handleIsLastQuiz,
+    handleIsSurvey,
     location,
     params
 }) => {
@@ -58,11 +59,19 @@ const NewQuiz = ({
                     <div className="column is-1 has-text-centered">
                         <label className="label">Last Quiz?</label>
                         <input
-                            className="column is-1"
+                            className="column is-half"
                             type="checkbox"
-                            checked={ is_last_quiz === true }
+                            checked={ is_last_quiz }
                             name="is_last_quiz"
                             onClick={ handleIsLastQuiz }
+                            />
+                        <label className="label">Survey?</label>
+                        <input
+                            className="column is-half"
+                            type="checkbox"
+                            checked={ isSurvey }
+                            name="is_survey"
+                            onClick={ handleIsSurvey }
                             />
                     </div>
                 </div>
@@ -100,6 +109,7 @@ NewQuiz.propTypes = {
     handleQuizNameChange: PropTypes.func.isRequired,
     handleSaveQuiz: PropTypes.func.isRequired,
     handleIsLastQuiz: PropTypes.func.isRequired,
+    handleIsSurvey: PropTypes.func.isRequired,
     location: PropTypes.object.isRequired,
     params: PropTypes.object.isRequired
 };
