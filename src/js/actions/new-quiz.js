@@ -6,6 +6,7 @@ export const UPDATE_VALUE = 'UPDATE_VALUE';
 export const UPDATE_QUIZ_NAME = 'UPDATE_QUIZ_NAME';
 export const CLEAR_NEW_QUIZ_STATE = 'CLEAR_NEW_QUIZ_STATE';
 export const TOGGLE_IS_LAST_QUIZ = 'TOGGLE_IS_LAST_QUIZ';
+export const TOGGLE_IS_SURVEY = 'TOGGLE_IS_SURVEY';
 
 export const SAVE_QUIZ_REQUEST = 'SAVE_QUIZ_REQUEST';
 export const SAVE_QUIZ_SUCCESS = 'SAVE_QUIZ_SUCCESS';
@@ -48,6 +49,11 @@ export const clearNewQuizState = () => ({
 
 export const toggleIsLastQuiz = () => ({
     type: TOGGLE_IS_LAST_QUIZ
+});
+
+export const toggleIsSurvey = (e) => ({
+    type: TOGGLE_IS_SURVEY,
+    isSurvey: e.target.checked
 });
 
 
