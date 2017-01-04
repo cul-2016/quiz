@@ -181,7 +181,8 @@ Quizzes.propTypes = {
     location: PropTypes.object.isRequired,
     quizzes: PropTypes.array.isRequired,
     sendQuizInvite: PropTypes.func.isRequired,
-    module_id: PropTypes.string.isRequired
+    module_id: PropTypes.string.isRequired,
+    isSurvey: PropTypes.bool
 };
 
 export default Quizzes;
