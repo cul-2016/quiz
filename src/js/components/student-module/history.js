@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import Medal from '../general/medal';
 
 
-const StudentHistory = ({ params, history, medalConditions }) => {
+const StudentHistory = ({ params = {}, history, medalConditions }) => {
     const { module_id } = params;
     let mappedHistory = history.map((quiz, i) => {
 

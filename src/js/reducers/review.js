@@ -46,6 +46,15 @@ export default function review (state = initialState, action) {
             isAnswerShowing: { $set: true }
         });
 
+    case actionsTypes.SHOW_ANSWER:
+        return update(state, {
+            questions: { $set: state.questions.map((el, idx) =>
+                idx === action.idx
+                    ? { ...el, isAnswerShowing: true }
+                    : el
+            ) }
+        });
+
     case actionsTypes.CLEAR_REVIEW_STATE:
         return initialState;
 

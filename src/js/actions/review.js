@@ -11,6 +11,7 @@ export const INCREMENT_CURRENT_QUIZ_INDEX = 'INCREMENT_CURRENT_QUIZ_INDEX';
 export const CLEAR_REVIEW_STATE = 'CLEAR_REVIEW_STATE';
 
 export const GO_BACK = 'GO_BACK';
+export const SHOW_ANSWER = 'SHOW_ANSWER';
 
 export function getQuizReview (quiz_id) {
 
@@ -57,4 +58,9 @@ export const clearReviewState = () => ({
 
 export const goBack = () => ({
     type: GO_BACK
+});
+
+export const showAnswer = idx => ({
+    type: SHOW_ANSWER,
+    idx
 });

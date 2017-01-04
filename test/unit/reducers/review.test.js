@@ -1,9 +1,11 @@
 import test from 'tape';
+import diff from 'deep-diff';
+
 import { review as reviewState } from '../../utils/reducer-fixtures';
 import { getQuizReviewError as error } from '../../utils/action-fixtures';
 
 import reducer from '../../../src/js/reducers/review';
-import { reviewQuestion as questions } from '../../utils/data-fixtures';
+import { reviewQuestions as questions } from '../../utils/data-fixtures';
 import deepFreeze from '../../utils/deepFreeze';
 
 test('GET_QUIZ_REVIEW_REQUEST works', (t) => {
@@ -16,6 +18,7 @@ test('GET_QUIZ_REVIEW_REQUEST works', (t) => {
     };
 
     const actual = reducer(initialState, action);
+
     const expected = Object.assign({}, reviewState, { isFetchingReview: true });
 
     t.deepEqual(actual, expected);
@@ -33,7 +36,8 @@ test('GET_QUIZ_REVIEW_SUCCESS works', (t) => {
         )
     );
     const action = {
-        type: 'GET_QUIZ_REVIEW_SUCCESS'
+        type: 'GET_QUIZ_REVIEW_SUCCESS',
+        questions
     };
 
     const actual = reducer(initialState, action);
@@ -123,4 +127,32 @@ test('INCREMENT_CURRENT_QUIZ_INDEX works', (t) => {
     const expected = Object.assign({}, reviewState, { currentQuizIndex: 1 });
 
     t.deepEqual(actual, expected);
+});
+
+test('SHOW_ANSWER works', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(
+        Object.assign(
+            {},
+            { ...reviewState, questions }
+        )
+    );
+
+    const idx = 1;
+    const action = {
+        type: 'SHOW_ANSWER',
+        idx
+    };
+    const newState = reducer(initialState, action);
+
+    const actual = diff(newState, initialState);
+
+    const expected = [{
+        kind: 'D',
+        path: ['questions', 1, 'isAnswerShowing'],
+        lhs: true
+    }];
+    t.deepEqual(actual, expected, 'updated only question at index');
 });

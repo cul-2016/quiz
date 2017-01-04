@@ -1,6 +1,9 @@
-Hi {{name}}!
+Thank you for registering to take part in quizzes!
+You can access your account via this link: http://cul-app.herokuapp.com/
 
-Thank you for registering as a student!
-You can access your account via http://cul-app.herokuapp.com/
+You are registered with the following details:
 
-City University Quiz app http://cul-app.herokuapp.com/
+    - email: {{email}}
+    - username: {{username}}
+
+http://cul-app.herokuapp.com/City University Quiz app

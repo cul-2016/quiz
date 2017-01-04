@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import Question from './quiz-question.js';
 
-const QuizReviewStudent = ({ review }) =>
+const QuizReviewStudent = ({ review, showAnswer }) =>
     <div>
         {
             review.questions.map((question, idx) =>
@@ -9,7 +9,8 @@ const QuizReviewStudent = ({ review }) =>
                     key: `student-question-${idx}`,
                     question,
                     idx,
-                    is_lecturer: false
+                    is_lecturer: false,
+                    showAnswer
                 }}/>
             )
         }
@@ -17,7 +18,8 @@ const QuizReviewStudent = ({ review }) =>
 ;
 
 QuizReviewStudent.propTypes = {
-    review: PropTypes.object
+    review: PropTypes.object,
+    showAnswer: PropTypes.func.isRequired
 };
 
 export default QuizReviewStudent;
