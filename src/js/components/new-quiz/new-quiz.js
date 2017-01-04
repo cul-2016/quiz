@@ -78,6 +78,7 @@ const NewQuiz = ({
 
                 <Questions
                     questions={ questions }
+                    isSurvey={ isSurvey }
                     handleInputChange={ handleInputChange }
                     handleDeleteQuestion={ handleDeleteQuestion }
                     />
