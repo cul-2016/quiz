@@ -1,10 +1,15 @@
 import test from 'tape';
-import { newQuiz as newQuizState } from '../../utils/reducer-fixtures';
-import { newQuizWithQuestion as newQuizStateWithQuestion, editQuizWithQuestion as editQuizWithQuestionState } from '../../utils/reducer-fixtures';
+import {
+    initialState as newQuizState,
+    newQuiz as reducer
+} from '../../../src/js/reducers/new-quiz.js';
+import {
+    newQuizWithQuestion as newQuizStateWithQuestion,
+    editQuizWithQuestion as editQuizWithQuestionState
+} from '../../utils/reducer-fixtures';
 import { getQuizDetailsData } from '../../utils/data-fixtures';
 
 import { saveQuizError as error, getQuizDetailsError } from '../../utils/action-fixtures';
-import reducer from '../../../src/js/reducers/new-quiz';
 import deepFreeze from '../../utils/deepFreeze';
 
 test('ADD_QUESTION works', (t) => {

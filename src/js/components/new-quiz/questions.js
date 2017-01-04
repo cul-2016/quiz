@@ -66,6 +66,7 @@ const Option = ({ question, value, idx, isSurvey }) =>
 
 Questions.propTypes = {
     questions: PropTypes.array.isRequired,
+    isSurvey: PropTypes.bool,
     handleInputChange: PropTypes.func.isRequired,
     handleDeleteQuestion: PropTypes.func.isRequired
 };

@@ -1,7 +1,7 @@
 import update from 'react-addons-update';
 import * as actionsTypes from '../actions/new-quiz';
 
-const initialState = {
+export const initialState = {
     name: undefined,
     questions: [],
     is_last_quiz: false,
@@ -13,7 +13,7 @@ const initialState = {
     deletedQuestions: []
 };
 
-export default function (state = initialState, action) {
+export function newQuiz (state = initialState, action) {
 
     switch (action.type) {
 
