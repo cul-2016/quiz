@@ -1,8 +1,6 @@
 import React, { PropTypes } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-
-const Questions = ({ questions, handleInputChange, handleDeleteQuestion }) => {
 const RadioButton = ({ question, value, idx, handleInputChange }) => <input { ...{
     type: "radio",
     className: "radio column is-1 radio-button",
@@ -30,6 +28,8 @@ const Option = ({ question, value, idx, isSurvey }) =>
             { isSurvey && <RadioButton {...{ question, value, idx }}/> }
         </div>
     </div>;
+
+const Questions = ({ questions, handleInputChange, handleDeleteQuestion, isSurvey }) => {
 
     const transitionOptions = {
         transitionName: "fade",
