@@ -18,14 +18,16 @@ const InputChanger = ({ question, idx, handleInputChange }) => <input { ...{
     placeholder: 'a'
 } } />;
 
-const Option = ({ question, value, idx, isSurvey }) =>
+const Option = ({ question, value, idx, isSurvey, handleInputChange }) =>
     <div className="control is-horizontal">
         <div className="control-label answer-label">
             <label className="label">{ value.toUpperCase() }</label>
         </div>
         <div className="control">
-            <InputChanger {...{ question, value, idx }}/>
-            { isSurvey && <RadioButton {...{ question, value, idx }}/> }
+            <InputChanger {...{ question, value, idx, handleInputChange }}/>
+            { isSurvey &&
+                <RadioButton {...{ question, value, idx, handleInputChange }}/>
+            }
         </div>
     </div>;
 
@@ -39,13 +41,15 @@ const Questions = ({ questions, handleInputChange, handleDeleteQuestion, isSurve
 
     let mappedQuestions = questions.map((question, i) => {
         return (
-            <div key={ i } className="column is-6 is-offset-3 question box">
+            <div key={ `question-${i}` } className="column is-6 is-offset-3 question box">
 
                 <label className="label"> Question { i + 1 }</label>
                 <textarea className="textarea" type="text" value={ question.question } onChange={ (e) => handleInputChange('question', e.target.value, i) } placeholder='question'></textarea>
 
-                { ['a', 'b', 'c', 'd'].map(value =>
-                    <Option { ...{ question, value, idx: i, isSurvey, handleInputChange }} />
+                { ['a', 'b', 'c', 'd'].map((value, idx) =>
+                    <Option { ...{ key: `option-${idx}`,
+                        question, value, idx: i, isSurvey, handleInputChange
+                    }} />
                 ) }
 
                 <button className="button is-danger" onClick={ () => { handleDeleteQuestion(i); } }> Delete Question </button>
@@ -72,20 +76,20 @@ Questions.propTypes = {
 };
 
 RadioButton.propTypes = {
-    question: PropTypes.string,
+    question: PropTypes.object,
     value: PropTypes.string.isRequired,
     idx: PropTypes.number.isRequired,
     handleInputChange: PropTypes.func.isRequired
 };
 
 InputChanger.propTypes = {
-    question: PropTypes.string,
+    question: PropTypes.object,
     idx: PropTypes.number.isRequired,
     handleInputChange: PropTypes.func.isRequired
 };
 
 Option.propTypes = {
-    question: PropTypes.string,
+    question: PropTypes.object,
     value: PropTypes.string.isRequired,
     idx: PropTypes.number.isRequired,
     isSurvey: PropTypes.bool,
