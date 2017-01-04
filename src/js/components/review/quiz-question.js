@@ -7,24 +7,26 @@ const Question = ({ idx, question, is_lecturer, showAnswer }) => {
     const showButton = !isAnswerShowing && !is_lecturer;
     const showAnswers = is_lecturer || isAnswerShowing;
     const answerIsWrong = showAnswers && correct_answer !== response;
+    const showWrongAnswer = value => !is_lecturer && response && answerIsWrong
+        && value === response.toLowerCase();
 
     let aClasses = classnames("column answer box", {
         "correct_answer": showAnswers && 'a' === correct_answer.toLowerCase(),
-        "wrong_answer": response && answerIsWrong && 'a' === response.toLowerCase()
+        "wrong_answer": showWrongAnswer('a')
     });
     let bClasses = classnames("column answer box", {
         "correct_answer": showAnswers && 'b' === correct_answer.toLowerCase(),
-        "wrong_answer": response && answerIsWrong && 'b' === response.toLowerCase()
+        "wrong_answer": showWrongAnswer('b')
     });
     let cClasses = classnames("column answer box", {
         "display-none": question.c === undefined,
         "correct_answer": showAnswers && 'c' === correct_answer.toLowerCase(),
-        "wrong_answer": response && answerIsWrong && 'c' === response.toLowerCase()
+        "wrong_answer": showWrongAnswer('c')
     });
     let dClasses = classnames("column answer box", {
         "display-none": question.d === undefined,
         "correct_answer": showAnswers && 'd' === correct_answer.toLowerCase(),
-        "wrong_answer": response && answerIsWrong && 'd' === response.toLowerCase()
+        "wrong_answer": showWrongAnswer('d')
     });
 
     return (
