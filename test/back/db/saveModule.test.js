@@ -1,5 +1,5 @@
 const test = require('tape');
-const { testClient } = require('../../utils/init');
+const { pool } = require('../../utils/init');
 const saveModule = require('../../../server/lib/saveModule');
 const { medals, trophies } = require('../../utils/data-fixtures');
 
@@ -12,7 +12,7 @@ test('`saveModule` a module to the database works ok', (t) => {
     const user_id = 1;
     const name = "Test Module";
 
-    saveModule(testClient, module_id, user_id, name, medals, trophies, (error, response) => {
+    saveModule(pool, module_id, user_id, name, medals, trophies, (error, response) => {
 
         t.equal(error, expectedError, 'error is null, module is saved to db correctly.');
         t.deepEqual(response.command, expectedCommand, 'Correct command of INSERT, module is saved to db correctly');
@@ -21,7 +21,7 @@ test('`saveModule` a module to the database works ok', (t) => {
 
 test('--deleting lecturer from the database--', (t) => {
 
-    testClient.connect((error, client, done) => {
+    pool.connect((error, client, done) => {
 
         if (error) {
             console.error(error, 'error from deleting module from the database');

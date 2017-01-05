@@ -1,6 +1,6 @@
 const test = require('tape');
 const editScore = require('../../../server/lib/editScore');
-const { testClient } = require('../../utils/init');
+const { pool } = require('../../utils/init');
 const query = require('../../../server/lib/query');
 const queries = require('../../../server/lib/queries.json');
 
@@ -16,12 +16,12 @@ test('`editScore` works', (t) => {
     const score = 2;
     const originalScore = 1; // reset the value after test
 
-    editScore(testClient, user_id, quiz_id, score, (error, response) => {
+    editScore(pool, user_id, quiz_id, score, (error, response) => {
 
         if (error) {
             console.error(error);
         }
-        query(testClient, queries.editScore, [user_id, quiz_id, originalScore], (error) => {
+        query(pool, queries.editScore, [user_id, quiz_id, originalScore], (error) => {
 
             if (error) {
                 throw error;

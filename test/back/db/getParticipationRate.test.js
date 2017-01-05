@@ -1,6 +1,6 @@
 const test = require('tape');
 const getParticipationRate = require('../../../server/lib/getParticipationRate');
-const { testClient } = require('../../utils/init');
+const { pool } = require('../../utils/init');
 
 test('`getParticipationRate` returns null for a student with fewer than 4 quiz submissions', (t) => {
 
@@ -9,7 +9,7 @@ test('`getParticipationRate` returns null for a student with fewer than 4 quiz s
     const user_id = 1;
     const module_id = 'TEST';
 
-    getParticipationRate(testClient, user_id, module_id, (error, response) => {
+    getParticipationRate(pool, user_id, module_id, (error, response) => {
 
         if (error) {
             console.error(error);
@@ -26,7 +26,7 @@ test('`getParticipationRate` returns rate for a student with at least 4 quiz sub
     const module_id = 'CENT';
     const expected = 100;
 
-    getParticipationRate(testClient, user_id, module_id, (error, response) => {
+    getParticipationRate(pool, user_id, module_id, (error, response) => {
 
         if (error) {
             console.error(error);

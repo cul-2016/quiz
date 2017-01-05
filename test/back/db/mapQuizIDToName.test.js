@@ -1,6 +1,6 @@
 const test = require('tape');
 const mapQuizIDToName = require('../../../server/lib/mapQuizIDToName');
-const { testClient } = require('../../utils/init');
+const { pool } = require('../../utils/init');
 
 test('`mapQuizIDToName` returns name for each quiz id in an array', (t) => {
 
@@ -17,7 +17,7 @@ test('`mapQuizIDToName` returns name for each quiz id in an array', (t) => {
     ];
     const module_id = 'TEST';
 
-    mapQuizIDToName(testClient, array, module_id, (error, result) => {
+    mapQuizIDToName(pool, array, module_id, (error, result) => {
 
         t.deepEqual(result, expected);
     });
@@ -35,7 +35,7 @@ test('`mapQuizIDToName` returns an error for incorrect array length', (t) => {
     ];
     const module_id = 'TEST';
 
-    mapQuizIDToName(testClient, tooLong, module_id, (error, result) => {
+    mapQuizIDToName(pool, tooLong, module_id, (error, result) => {
 
         t.ok(error instanceof Error, 'An error is returned');
         t.notOk(result);
@@ -45,7 +45,7 @@ test('`mapQuizIDToName` returns an error for incorrect array length', (t) => {
         { quiz_id: 1, difference: -9 }
     ];
 
-    mapQuizIDToName(testClient, tooShort, module_id, (error, result) => {
+    mapQuizIDToName(pool, tooShort, module_id, (error, result) => {
 
         t.ok(error instanceof Error, 'An error is returned');
         t.notOk(result);

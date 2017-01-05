@@ -1,5 +1,5 @@
 const test = require('tape');
-const { testClient } = require('../../utils/init');
+const { pool } = require('../../utils/init');
 const saveQuiz = require('../../../server/lib/saveQuiz');
 
 test('`saveQuiz` returns the quiz id for the saved quiz', (t) => {
@@ -11,7 +11,7 @@ test('`saveQuiz` returns the quiz id for the saved quiz', (t) => {
     const name = 'Week 1 Test';
     const is_last_quiz = true;
 
-    saveQuiz(testClient, module_id, name, is_last_quiz, (error, response) => {
+    saveQuiz(pool, module_id, name, is_last_quiz, (error, response) => {
 
         if (error) {
             console.error(error);

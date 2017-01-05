@@ -1,7 +1,7 @@
 const test = require('tape');
 const getModuleForLecturer = require('../../../server/lib/getModuleForLecturer');
 const expected = require('../../utils/data-fixtures').getModuleForLecturerData;
-const { testClient } = require('../../utils/init');
+const { pool } = require('../../utils/init');
 
 test('`getModuleForLecturer` returns correct module information', (t) => {
 
@@ -9,7 +9,7 @@ test('`getModuleForLecturer` returns correct module information', (t) => {
 
     const module_id = 'TEST';
 
-    getModuleForLecturer(testClient, module_id, (error, response) => {
+    getModuleForLecturer(pool, module_id, (error, response) => {
 
         if (error) {
             console.error(error);

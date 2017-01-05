@@ -1,6 +1,6 @@
 const test = require('tape');
 const getBestAndWorstQuiz = require('../../../server/lib/getBestAndWorstQuiz');
-const { testClient } = require('../../utils/init');
+const { pool } = require('../../utils/init');
 
 test("`getBestAndWorstQuiz` returns the names of a student's best and worst quiz", (t) => {
 
@@ -12,7 +12,7 @@ test("`getBestAndWorstQuiz` returns the names of a student's best and worst quiz
         { quiz_id: 3, name: 'Trivia quiz' }, // -4.5
         { quiz_id: 5, name: 'Arbitrary 2' } // -0.34
     ];
-    getBestAndWorstQuiz(testClient, user_id, module_id, (error, result) => {
+    getBestAndWorstQuiz(pool, user_id, module_id, (error, result) => {
 
         if (error) {
             console.error(error);
@@ -28,7 +28,7 @@ test("`getBestAndWorstQuiz` returns null if student has done fewer than 3 quizze
     const user_id = 1;
     const module_id = 'TEST';
 
-    getBestAndWorstQuiz(testClient, user_id, module_id, (error, result) => {
+    getBestAndWorstQuiz(pool, user_id, module_id, (error, result) => {
 
         t.equal(result, null, "null is returned");
     });

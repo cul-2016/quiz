@@ -1,6 +1,6 @@
 const test = require('tape');
 const getQuizScores = require('../../../server/lib/getQuizScores');
-const { testClient } = require('../../utils/init');
+const { pool } = require('../../utils/init');
 
 test('`getQuizScores` returns the scores for any quizzes a student has taken', (t) => {
 
@@ -11,7 +11,7 @@ test('`getQuizScores` returns the scores for any quizzes a student has taken', (
         { quiz_id: 2, score: 1 }
     ];
 
-    getQuizScores(testClient, user_id, module_id, (error, result) => {
+    getQuizScores(pool, user_id, module_id, (error, result) => {
 
         t.plan(1);
         t.deepEqual(result, expected);

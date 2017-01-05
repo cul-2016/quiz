@@ -1,6 +1,6 @@
 const test = require('tape');
 const validateModuleID = require('../../../server/lib/validateModuleID');
-const { testClient } = require('../../utils/init');
+const { pool } = require('../../utils/init');
 
 test('`validateModuleID` returns true for a pre-existing module_id', (t) => {
 
@@ -9,7 +9,7 @@ test('`validateModuleID` returns true for a pre-existing module_id', (t) => {
     const expected = true;
     const module_id = 'TEST';
 
-    validateModuleID(testClient, module_id, (error, response) => {
+    validateModuleID(pool, module_id, (error, response) => {
 
         if (error) {
             console.error(error);
@@ -26,7 +26,7 @@ test('`validateModuleID` returns false for a pre-existing module_id', (t) => {
     const expected = false;
     const module_id = 'NEW1';
 
-    validateModuleID(testClient, module_id, (error, response) => {
+    validateModuleID(pool, module_id, (error, response) => {
 
         if (error) {
             console.error(error);

@@ -1,5 +1,5 @@
 const test = require('tape');
-const { testClient } = require('../../utils/init');
+const { pool } = require('../../utils/init');
 const saveStudentResponse = require('../../../server/lib/saveStudentResponse');
 
 test('`saveStudentResponse` works', (t) => {
@@ -12,7 +12,7 @@ test('`saveStudentResponse` works', (t) => {
     const question_id = 1;
     const response = 'c';
 
-    saveStudentResponse(testClient, user_id, quiz_id, question_id, response, (error, response) => {
+    saveStudentResponse(pool, user_id, quiz_id, question_id, response, (error, response) => {
         t.equal(error, expectedError, 'error is null, response is saved to db correctly.');
         t.deepEqual(response.command, expectedCommand, 'Correct command of INSERT, response is saved to db correctly');
     });

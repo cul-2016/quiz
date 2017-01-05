@@ -1,5 +1,5 @@
 const test = require('tape');
-const { testClient } = require('../../utils/init');
+const { pool } = require('../../utils/init');
 const updateQuestions = require('../../../server/lib/updateQuestions');
 
 test('`updateQuestions` works', (t) => {
@@ -30,7 +30,7 @@ test('`updateQuestions` works', (t) => {
         }
     ];
 
-    updateQuestions(testClient, editedQuestions, (error, response) => {
+    updateQuestions(pool, editedQuestions, (error, response) => {
         t.deepEquals(error, expectedError, 'error is null, quiz name updated correctly');
         t.deepEquals(response.command, expectedCommand, 'Correct command of UPDATE');
     });

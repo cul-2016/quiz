@@ -1,6 +1,6 @@
 const test = require('tape');
 const getUserByID = require('../../../server/lib/getUserByID');
-const { testClient } = require('../../utils/init');
+const { pool } = require('../../utils/init');
 const expectedRows = require('../../utils/data-fixtures').users;
 
 test('`getUserByID` works', (t) => {
@@ -8,7 +8,7 @@ test('`getUserByID` works', (t) => {
     t.plan(1);
     const user_id = 1;
 
-    getUserByID(testClient, user_id, (error, response) => {
+    getUserByID(pool, user_id, (error, response) => {
 
         if (error) {
             console.error(error);

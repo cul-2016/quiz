@@ -14,7 +14,7 @@ tape('simulateAuth returns a token', (t) => {
         console.log(token);
         t.ok(token);
     });
-})
+});
 
 tape.onFinish(() => {
     redisCli.quit();

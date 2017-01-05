@@ -1,6 +1,6 @@
 const test = require('tape');
 const getMeanQuizScores = require('../../../server/lib/getMeanQuizScores');
-const { testClient } = require('../../utils/init');
+const { pool } = require('../../utils/init');
 
 test('`getMeanQuizScores` returns the mean score for each quiz in a module', (t) => {
 
@@ -14,7 +14,7 @@ test('`getMeanQuizScores` returns the mean score for each quiz in a module', (t)
         { quiz_id: 6, mean_score: 1 }
     ];
 
-    getMeanQuizScores(testClient, module_id, (error, result) => {
+    getMeanQuizScores(pool, module_id, (error, result) => {
 
 
         if (error) {

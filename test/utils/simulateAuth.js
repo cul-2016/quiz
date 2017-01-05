@@ -8,11 +8,11 @@ const simulateAuth = (server) => () => {
                 email: 'lecturer@city.ac.uk',
                 password: 'testinglecturer',
             }
-        }
+        };
         server.inject(options, (response) => {
             resolve(response.headers.authorization);
         });
     });
-}
+};
 
 module.exports = simulateAuth;

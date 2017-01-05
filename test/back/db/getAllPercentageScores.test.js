@@ -1,5 +1,5 @@
 const test = require('tape');
-const { testClient } = require('../../utils/init');
+const { pool } = require('../../utils/init');
 const expected = require('../../utils/data-fixtures').allPercentageScoresData;
 const getAllPercentageScores = require('../../../server/lib/getAllPercentageScores');
 
@@ -8,7 +8,7 @@ test("`getAllPercentageScores` returns all students' average scores for a module
     t.plan(2);
     const module_id = 'CENT';
 
-    getAllPercentageScores(testClient, module_id, (error, result) => {
+    getAllPercentageScores(pool, module_id, (error, result) => {
 
         if (error) {
             console.error(error);

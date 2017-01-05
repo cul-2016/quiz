@@ -1,6 +1,6 @@
 const test = require('tape');
 const getNewTrophyState = require('../../../server/lib/getNewTrophyState');
-const { testClient } = require('../../utils/init');
+const { pool } = require('../../utils/init');
 
 test("`getNewTrophyState` returns all trophies in state when is_last_quiz is set to true", (t) => {
 
@@ -17,7 +17,7 @@ test("`getNewTrophyState` returns all trophies in state when is_last_quiz is set
         participation: true,
         overall_average: true
     };
-    getNewTrophyState(testClient, user_id, module_id, quiz_id, percentageScore, is_last_quiz, (error, response) => {
+    getNewTrophyState(pool, user_id, module_id, quiz_id, percentageScore, is_last_quiz, (error, response) => {
 
         if (error) {
             console.error(error);
@@ -42,7 +42,7 @@ test("`getNewTrophyState` returns only first_quiz, high_score & participation in
         participation: true
     };
 
-    getNewTrophyState(testClient, user_id, module_id, quiz_id, percentageScore, is_last_quiz, (error, response) => {
+    getNewTrophyState(pool, user_id, module_id, quiz_id, percentageScore, is_last_quiz, (error, response) => {
 
         if (error) {
             console.error(error);

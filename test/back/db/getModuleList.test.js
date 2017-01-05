@@ -1,6 +1,6 @@
 const test = require('tape');
 const getModuleList = require('../../../server/lib/getModuleList');
-const { testClient } = require('../../utils/init');
+const { pool } = require('../../utils/init');
 
 test('`getModuleList` gets list of modules for a lecturer', (t) => {
 
@@ -12,7 +12,7 @@ test('`getModuleList` gets list of modules for a lecturer', (t) => {
     ];
     const user_id = 2;
 
-    getModuleList(testClient, user_id, true, (error, response) => {
+    getModuleList(pool, user_id, true, (error, response) => {
 
         if (error) {
             console.error(error);
@@ -29,7 +29,7 @@ test('`getModuleList` gets list of modules for a student', (t) => {
     ];
     const user_id = 1;
 
-    getModuleList(testClient, user_id, false, (error, response) => {
+    getModuleList(pool, user_id, false, (error, response) => {
 
         if (error) {
             console.error(error);

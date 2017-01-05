@@ -1,49 +1,69 @@
 const test = require('tape');
-const { testClient } = require('../../utils/init');
-const compareResetPasswordCodeAndExpiry = require('../../../server/lib/compareResetPasswordCodeAndExpiry');
-
+const calculateQuizScore = require('../../../server/lib/calculateQuizScore.js');
+const pool = require('../../../server/lib/dbClient.js');
+const redisCli = require('../../utils/configureRedis.js');
+const initDb = require('../../utils/initDb.js')(pool, redisCli);
+const compareResetPasswordCodeAndExpiry = require('../../../server/lib/compareResetPasswordCodeAndExpiry.js');
 
 test('`compareResetPasswordCodeAndExpiry` returns true when the expiry code and reset token exist', (t) => {
 
     t.plan(1);
-    let reset_password_code = 'reset-password-code';
-    let expected = true;
 
-    compareResetPasswordCodeAndExpiry(testClient, reset_password_code, (error, response) => {
+    initDb()
+  .then(() => {
+      let reset_password_code = 'reset-password-code';
+      let expected = true;
 
-        if (error) {
-            t.error(error);
-        }
-        t.deepEqual(response, expected);
-    });
+      compareResetPasswordCodeAndExpiry(pool, reset_password_code, (error, response) => {
+
+          if (error) {
+              t.error(error);
+          }
+          t.deepEqual(response, expected);
+      });
+  });
 });
 
 test('`compareResetPasswordCodeAndExpiry` returns error message that the reset code has not been found', (t) => {
 
     t.plan(1);
-    let reset_password_code = 'reset-password-code-fake';
-    let expected = { message: "Sorry, your reset request has not been found" };
 
-    compareResetPasswordCodeAndExpiry(testClient, reset_password_code, (error, response) => {
+    initDb()
+  .then(() => {
+      let reset_password_code = 'reset-password-code-fake';
+      let expected = { message: "Sorry, your reset request has not been found" };
 
-        if (error) {
-            t.error(error);
-        }
-        t.deepEqual(response, expected);
-    });
+      compareResetPasswordCodeAndExpiry(pool, reset_password_code, (error, response) => {
+
+          if (error) {
+              t.error(error);
+          }
+          t.deepEqual(response, expected);
+      });
+  });
 });
 
 test('`compareResetPasswordCodeAndExpiry` returns an error message that the expiry code has expired', (t) => {
 
     t.plan(1);
-    let reset_password_code = 'reset-password-code-2';
-    let expected = { message: "Sorry, your reset password link has expired, please submit another reset request" };
 
-    compareResetPasswordCodeAndExpiry(testClient, reset_password_code, (error, response) => {
+    initDb()
+  .then(() => {
+      let reset_password_code = 'reset-password-code-2';
+      let expected = { message: "Sorry, your reset password link has expired, please submit another reset request" };
 
-        if (error) {
-            console.error(error);
-        }
-        t.deepEqual(response, expected);
-    });
+      compareResetPasswordCodeAndExpiry(pool, reset_password_code, (error, response) => {
+
+          if (error) {
+              console.error(error);
+          }
+          t.deepEqual(response, expected);
+      });
+  });
 });
+
+test.onFinish(() => {
+    redisCli.quit();
+    pool.end();
+});
+

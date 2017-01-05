@@ -1,6 +1,6 @@
 const test = require('tape');
 const saveExpiringTokenForUser = require('../../../server/lib/saveExpiringTokenForUser');
-const { testClient } = require('../../utils/init');
+const { pool } = require('../../utils/init');
 const query = require('../../../server/lib/query');
 
 test('`saveExpiringTokenForUser` works', (t) => {
@@ -13,7 +13,7 @@ test('`saveExpiringTokenForUser` works', (t) => {
         email: 'student@city.ac.uk',
         username: 'student'
     };
-    saveExpiringTokenForUser(testClient, email, reset_password_code, expiry_code, (error, response) => {
+    saveExpiringTokenForUser(pool, email, reset_password_code, expiry_code, (error, response) => {
 
         if (error) {
             console.error(error);
@@ -22,7 +22,7 @@ test('`saveExpiringTokenForUser` works', (t) => {
 
         const queryText = 'SELECT * FROM users WHERE email = $1';
         const userEmail = [email];
-        query(testClient, queryText, userEmail, (error, result) => {
+        query(pool, queryText, userEmail, (error, result) => {
             if (error) {
                 t.error(error);
             }

@@ -1,6 +1,6 @@
 const test = require('tape');
 const getQuizQuestions = require('../../../server/lib/getQuizQuestions');
-const { testClient } = require('../../utils/init');
+const { pool } = require('../../utils/init');
 
 test('`getQuizQuestions` gets list of questions for a quiz', (t) => {
 
@@ -26,7 +26,7 @@ test('`getQuizQuestions` gets list of questions for a quiz', (t) => {
 
     const quiz_id = 1;
 
-    getQuizQuestions(testClient, quiz_id, (error, response) => {
+    getQuizQuestions(pool, quiz_id, (error, response) => {
 
         if (error) {
             console.error(error);

@@ -1,6 +1,6 @@
 const test = require('tape');
 const getModuleMembers = require('../../../server/lib/getModuleMembers');
-const { testClient } = require('../../utils/init');
+const { pool } = require('../../utils/init');
 
 test('`getModuleMembers` gets list of students for a given module', (t) => {
 
@@ -12,7 +12,7 @@ test('`getModuleMembers` gets list of students for a given module', (t) => {
         { email: 'homer@simpsons.com', user_id: 5, username: 'Homer' },
         { email: 'apu@simpsons.com', user_id: 11, username: 'Apu' }
     ];
-    getModuleMembers(testClient, 'TEST', (error, response) => {
+    getModuleMembers(pool, 'TEST', (error, response) => {
 
         if (error) {
             console.error(error);

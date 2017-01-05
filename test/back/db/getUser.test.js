@@ -1,6 +1,6 @@
 const test = require('tape');
 const getUserByEmail = require('../../../server/lib/getUserByEmail');
-const { testClient } = require('../../utils/init');
+const { pool } = require('../../utils/init');
 const expectedRows = require('../../utils/data-fixtures').users;
 
 test('`getUserByEmail` works', (t) => {
@@ -8,7 +8,7 @@ test('`getUserByEmail` works', (t) => {
     t.plan(1);
     const emailAddress = 'student@city.ac.uk';
 
-    getUserByEmail(testClient, emailAddress, (error, response) => {
+    getUserByEmail(pool, emailAddress, (error, response) => {
 
         if (error) {
             console.error(error);

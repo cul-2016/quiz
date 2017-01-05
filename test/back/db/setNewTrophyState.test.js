@@ -1,7 +1,7 @@
 const test = require('tape');
 const setNewTrophyState = require('../../../server/lib/setNewTrophyState');
 const query = require('../../../server/lib/query');
-const { testClient } = require('../../utils/init');
+const { pool } = require('../../utils/init');
 
 test("`setNewTrophyState` sets a student's new trophy state when overall_average is present", (t) => {
 
@@ -23,14 +23,14 @@ test("`setNewTrophyState` sets a student's new trophy state when overall_average
         participation: true
     };
 
-    setNewTrophyState(testClient, user_id, module_id, newTrophyState, (error) => {
+    setNewTrophyState(pool, user_id, module_id, newTrophyState, (error) => {
 
         if (error) {
             console.error(error);
         }
         var testQuery = "SELECT first_quiz, high_score, overall_average, participation FROM module_members WHERE user_id = $1 AND module_id = $2;";
 
-        query(testClient, testQuery, [user_id, module_id], (error, result) => {
+        query(pool, testQuery, [user_id, module_id], (error, result) => {
             if (error) {
                 console.error(error);
             }
@@ -57,14 +57,14 @@ test("`setNewTrophyState` sets a student's new trophy state when overall_average
         participation: true
     };
 
-    setNewTrophyState(testClient, user_id, module_id, newTrophyState, (error) => {
+    setNewTrophyState(pool, user_id, module_id, newTrophyState, (error) => {
 
         if (error) {
             console.error(error);
         }
         var testQuery = "SELECT first_quiz, high_score, participation FROM module_members WHERE user_id = $1 AND module_id = $2;";
 
-        query(testClient, testQuery, [user_id, module_id], (error, result) => {
+        query(pool, testQuery, [user_id, module_id], (error, result) => {
             if (error) {
                 console.error(error);
             }
@@ -83,7 +83,7 @@ test("`setNewTrophyState` returns an error if newTrophyState does not have the c
         first_quiz: true,
     };
 
-    setNewTrophyState(testClient, user_id, module_id, newTrophyState, (error) => {
+    setNewTrophyState(pool, user_id, module_id, newTrophyState, (error) => {
 
         if (error) {
             console.error(error);

@@ -1,5 +1,5 @@
 const test = require('tape');
-const { testClient } = require('../../utils/init');
+const { pool } = require('../../utils/init');
 const deleteQuestions = require('../../../server/lib/deleteQuestions');
 
 test('`deleteQuestions` works', (t) => {
@@ -9,11 +9,11 @@ test('`deleteQuestions` works', (t) => {
     const expectedCommand = 'DELETE';
     const question_id = [5];
 
-    deleteQuestions(testClient, question_id, (error, response) => {
+    deleteQuestions(pool, question_id, (error, response) => {
         t.equal(error, expectedError, 'error is null, question is deleted from the db correctly.');
         t.deepEqual(response.command, expectedCommand, 'Correct command of DELETE, question is deleted from quiz');
 
-        testClient.connect((error, client, done) => {
+        pool.connect((error, client, done) => {
             if (error) {
                 console.error(error);
             }
