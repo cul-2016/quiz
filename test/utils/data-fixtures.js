@@ -255,33 +255,30 @@ const getScoresForLeaderboardData = [
 
 const getTotalScoresAndTrophiesData = [
     {
+        first_quiz: false,
+        high_score: false,
+        overall_average: false,
+        participation: false,
         total_score: 3,
         user_id: 5,
-        username: 'Homer',
+        username: 'Homer'
+    }, {
         first_quiz: false,
         high_score: false,
         overall_average: false,
-        participation: false
-    },
-    {
-        total_score: 3,
-        user_id: 3,
-        username: 'Sohil',
-        first_quiz: false,
-        high_score: false,
-        overall_average: false,
-        participation: false
-    },
-    {
+        participation: false,
         total_score: 3,
         user_id: 1,
-        username: 'student',
-        first_quiz: true,
-        high_score: true,
+        username: 'student'
+    }, {
+        first_quiz: false,
+        high_score: false,
         overall_average: false,
-        participation: true
-    },
-    {
+        participation: false,
+        total_score: 2,
+        user_id: 3,
+        username: 'Sohil'
+    }, {
         first_quiz: false,
         high_score: false,
         overall_average: false,
@@ -289,15 +286,14 @@ const getTotalScoresAndTrophiesData = [
         total_score: 0,
         user_id: 11,
         username: 'Apu'
-    },
-    {
-        total_score: 0,
-        user_id: 4,
-        username: 'Mina',
+    }, {
         first_quiz: false,
         high_score: false,
         overall_average: false,
-        participation: false
+        participation: false,
+        total_score: 0,
+        user_id: 4, 
+        username: 'Mina'
     }
 ];
 

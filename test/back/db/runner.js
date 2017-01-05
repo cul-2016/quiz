@@ -28,7 +28,7 @@ require('./getQuizScores.test.js');
 require('./getRanking.test.js');
 require('./getScoresForLeaderboard.test.js');
 require('./getSignedDifference.test.js');
-// require('./getStudentHistory.test.js');
+require('./getStudentHistory.test.js');
 require('./getStudentPercentageScore.test.js');
 require('./getTotalScoresAndTrophies.test.js');
 require('./getUser.test.js');
