@@ -25,7 +25,7 @@ const Option = ({ question, value, idx, isSurvey, handleInputChange }) =>
         </div>
         <div className="control">
             <InputChanger {...{ question, value, idx, handleInputChange }}/>
-            { isSurvey &&
+            { !isSurvey &&
                 <RadioButton {...{ question, value, idx, handleInputChange }}/>
             }
         </div>
