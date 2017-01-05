@@ -31,10 +31,9 @@ function getFirstQuizState (client, user_id, quiz_id, callback) {
 function getHighScoreState (client, user_id, module_id, percentageScore, callback) {
 
     query(client, queries.getHighScoreState.getCurrentHighScore, [user_id, module_id], (error, result1) => {
-        
         if (error) {
             return callback(new Error("Problem with getting high score"));
-        }    
+        }
         var high_score = result1.rows[0].high_score;
 
         if (high_score) {
