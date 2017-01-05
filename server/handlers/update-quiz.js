@@ -9,19 +9,18 @@ module.exports = {
     method: 'POST',
     path: '/update-quiz',
     handler: (request, reply) => {
-        var module_id = request.payload.module_id;
-        var quiz_id = request.payload.quiz_id;
-        var quizName = request.payload.quizName;
-        var editedQuestions = request.payload.editedQuestions;
-        var newQuestions = request.payload.newQuestions;
-        var deletedQuestions = request.payload.deletedQuestions;
-        var is_last_quiz = request.payload.is_last_quiz === true;
+        const {
+            module_id, quiz_id, survey_id, name, editedQuestions, newQuestions,
+            deletedQuestions, is_last_quiz = false
+        } = request.payload;
 
+        const isSurvey = Boolean(survey_id);
+        const quizIdOrSurveyId = isSurvey ? quiz_id : survey_id;
         // update quiz name
-        updateQuiz(client, module_id, quiz_id, quizName, is_last_quiz, (error) => {
+        updateQuiz(client, module_id, quizIdOrSurveyId, name, is_last_quiz, (error) => {
 
             if (is_last_quiz) {
-                updateIsLastQuiz(client, module_id, quiz_id, (error) => {
+                updateIsLastQuiz(client, module_id, quizIdOrSurveyId, (error) => {
                     /* istanbul ignore if */
                     if (error) {
                         console.error(error);
@@ -36,11 +35,13 @@ module.exports = {
             updateQuestions(client, editedQuestions, (error) => {
                 /* istanbul ignore if */
                 if (error) {
+                    console.error(error);
                     return reply(error);
                 } else if (newQuestions.length !== 0) {
-                    saveQuestions(client, newQuestions, (error) => {
+                    saveQuestions(client, quizIdOrSurveyId, newQuestions, { isSurvey }, (error) => {
                         /* istanbul ignore if */
                         if (error) {
+                            console.error(error);
                             return reply(error);
                         } else if (deletedQuestions.length !== 0) {
                             deleteQuestions(client, deletedQuestions, (error) => {

@@ -8,9 +8,9 @@ var composeQuestionStatement = require('./composeQuestionStatement');
  * @param {function} callback - a callback function
  */
 
-function saveQuestions (client, questions, callback) {
+function saveQuestions (client, id, questions, { isSurvey }, callback) {
 
-    composeQuestionStatement(questions, (error, builtStatement) => {
+    composeQuestionStatement(id, questions, { isSurvey }, (error, builtStatement) => {
 
         if (error) {
             return callback(error);

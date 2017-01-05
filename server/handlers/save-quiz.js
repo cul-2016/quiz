@@ -1,6 +1,7 @@
 var client = require('../lib/dbClient');
 var updateIsLastQuiz = require('../lib/updateIsLastQuiz');
 var saveQuiz = require('../lib/saveQuiz');
+var saveSurvey = require('../lib/saveSurvey');
 var saveQuestions = require('../lib/saveQuestions');
 
 module.exports = {
@@ -8,28 +9,13 @@ module.exports = {
     path: '/save-quiz',
     handler: (request, reply) => {
         const {
-            module_id, quizName, questions, isSurvey, is_last_quiz = false
+            module_id, name, questions, isSurvey, is_last_quiz = false
         } = request.payload;
 
-        if (isSurvey) {
-            // perform save survey query
-            // saveQuestionsFlow(client, quiz_id);
-        } else {
-            saveQuiz(client, module_id, quizName, is_last_quiz, (error, quiz_id) => {
-                /* istanbul ignore if */
-                if (error) {
-                    console.error(error);
-                    return reply(error);
-                } else {
-                    saveQuestionsFlow(client, quiz_id);
-                }
-            });
-        }
-        
-        const saveQuestionsFlow = (client, quiz_id) => {
+        const saveQuestionsFlow = (client, id, { isSurvey }) => {
             if (questions.length === 0) {
-                if (is_last_quiz) {
-                    updateIsLastQuiz(client, module_id, quiz_id, (error) => {
+                if (!isSurvey && is_last_quiz) {
+                    updateIsLastQuiz(client, module_id, id, (error) => {
                         /* istanbul ignore if */
                         if (error) {
                             console.error(error);
@@ -38,11 +24,7 @@ module.exports = {
                     });
                 }
             } else {
-                var mappedQuestions = questions.map((question) => {
-                    question.quiz_id = quiz_id;
-                    return question;
-                });
-                saveQuestions(client, mappedQuestions, (error, response) => {
+                saveQuestions(client, id, questions, { isSurvey }, (error, response) => {
                     /* istanbul ignore if */
                     if (error) {
                         console.error(error);
@@ -52,5 +34,21 @@ module.exports = {
                 });
             }
         };
+
+        const saveQuestionsCb = ({ isSurvey }) => (error, id) => {
+            /* istanbul ignore if */
+            if (error) {
+                console.error(error);
+                return reply(error);
+            } else {
+                saveQuestionsFlow(client, id, { isSurvey });
+            }
+        };
+
+        if (isSurvey) {
+            saveSurvey(client, module_id, name, saveQuestionsCb({ isSurvey: true }));
+        } else {
+            saveQuiz(client, module_id, name, is_last_quiz, saveQuestionsCb({ isSurvey: false }));
+        }
     }
 };
