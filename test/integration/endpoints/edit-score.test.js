@@ -41,7 +41,7 @@ test('`edit-score` endpoint returns error if score is undefined', (t) => {
 
 test('`edit-score` endpoint works', (t) => {
 
-    t.plan(1);
+    t.plan(2);
 
     const user_id = 3;
     const quiz_id = 1;
@@ -50,6 +50,13 @@ test('`edit-score` endpoint works', (t) => {
     server.inject(`/edit-score?quiz_id=1&user_id=${user_id}&score=${score}`, (response) => {
         t.equal(response.statusCode, 200, '200 status code');
 
-        query(testClient, queries.editScore, [user_id, quiz_id, score]);
+        query(testClient, queries.editScore, [user_id, quiz_id, score], err => {
+            if (err) {
+                console.error(err);
+                t.error('should not have errored');
+            } else {
+                t.pass('no error');
+            }
+        });
     });
 });
