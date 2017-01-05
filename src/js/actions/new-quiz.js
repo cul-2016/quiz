@@ -80,6 +80,7 @@ export function saveQuiz (module_id, quizName, questions, is_last_quiz) {
             .catch((error) => {
                 dispatch(saveQuizFailure(error));
             });
+
     };
 }
 
