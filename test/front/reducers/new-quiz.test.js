@@ -128,6 +128,22 @@ test('TOGGLE_IS_LAST_QUIZ works', (t) => {
     const result = reducer(initialState, action);
     t.deepEqual(result, expected);
 });
+
+test.only('TOGGLE_IS_SURVEY works', (t) => {
+
+    t.plan(1);
+    const initialState = deepFreeze(newQuizState);
+    const isSurvey = true;
+    const action = {
+        type: 'TOGGLE_IS_SURVEY',
+        isSurvey
+    };
+
+    const expected = Object.assign({}, newQuizState, { isSurvey });
+
+    const result = reducer(initialState, action);
+    t.deepEqual(result, expected);
+});
 // -----
 // SAVE QUIZ
 // -----
