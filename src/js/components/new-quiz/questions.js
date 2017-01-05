@@ -7,14 +7,14 @@ const RadioButton = ({ question, value, idx, handleInputChange }) => <input { ..
     checked: question.correct_answer === value,
     name: idx,
     value: value,
-    onClick: (e) => handleInputChange('correct_answer', e.target.value, idx)
+    onChange: (e) => handleInputChange('correct_answer', e.target.value, idx)
 } } />;
 
-const InputChanger = ({ question, idx, handleInputChange }) => <input { ...{
+const InputChanger = ({ question, value, idx, handleInputChange }) => <input { ...{
     type: "text",
     className: "input column is-9",
-    value: question.a || "",
-    onChange: (e) => handleInputChange('a', e.target.value, idx),
+    value: question[value] || "",
+    onChange: (e) => handleInputChange(value, e.target.value, idx),
     placeholder: 'a'
 } } />;
 
@@ -84,6 +84,7 @@ RadioButton.propTypes = {
 
 InputChanger.propTypes = {
     question: PropTypes.object,
+    value: PropTypes.string.isRequired,
     idx: PropTypes.number.isRequired,
     handleInputChange: PropTypes.func.isRequired
 };

@@ -63,7 +63,7 @@ const NewQuiz = ({
                             type="checkbox"
                             checked={ is_last_quiz }
                             name="is_last_quiz"
-                            onClick={ handleIsLastQuiz }
+                            onChange={ handleIsLastQuiz }
                             />
                         <label className="label">Survey?</label>
                         <input
@@ -71,7 +71,7 @@ const NewQuiz = ({
                             type="checkbox"
                             checked={ isSurvey }
                             name="is_survey"
-                            onClick={ handleIsSurvey }
+                            onChange={ handleIsSurvey }
                             />
                     </div>
                 </div>
