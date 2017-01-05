@@ -18,6 +18,11 @@
     "check-coverage": "babel-node ./node_modules/babel-istanbul/lib/cli.js check-coverage",
     "pretest": "node ./test/utils/init.js",
     "test": "tape -r babel-register --require ./test/utils/jsdom.js 'test/**/*.@(js|jsx)' | tap-spec",
+    "test:front": "tape -r babel-register --require ./test/utils/jsdom.js 'test/front/runner.js' | tap-spec",
+    "test:front:watch": "nodemon -w src -w test/front -x 'npm run test:front'",
+    "test:back": "tape test/back/runner.js | tap-spec",
+    "test:back:watch": "nodemon -w server -w test/back -x 'npm run test:back'",
+    "test:all": "npm run test:front && npm run test:back",
     "postinstall": "webpack --config ./webpack.production.config.js --progress --colors",
     "make-docs": "./node_modules/.bin/jsdoc -c ./conf.json -r"
   },
