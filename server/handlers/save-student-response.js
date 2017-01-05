@@ -9,11 +9,11 @@ module.exports = {
             user_id, quiz_id = null, survey_id = null, question_id, response: studentResponse
         } = request.payload;
 
-        const checkNoUndefined = el => el !== undefined;
+        const checkExists = el => el !== undefined && el !== null;
 
         if (
-            [user_id, question_id, studentResponse].every(checkNoUndefined) ||
-            [quiz_id, survey_id].some(checkNoUndefined)
+            [user_id, question_id, studentResponse].every(checkExists) &&
+            [quiz_id, survey_id].some(checkExists)
         ) {
             user_id = parseInt(user_id);
             quiz_id = quiz_id && parseInt(quiz_id);
