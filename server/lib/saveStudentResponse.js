@@ -18,6 +18,7 @@ function saveStudentResponse (client, user_id, quiz_id, question_id, response, c
     query(client, queries.saveStudentResponse, value, (error, response) => {
 
         if (error) {
+            console.error(error);
             return callback(error);
         }
         return callback(null, response);

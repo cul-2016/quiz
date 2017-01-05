@@ -14,6 +14,10 @@ module.exports = {
             quiz_id = parseInt(quiz_id);
             question_id = parseInt(question_id);
             saveStudentResponse(client, user_id, quiz_id, question_id, studentResponse, (error, response) => {
+                /* istanbul ignore if */
+                if (error) {
+                    console.error(error);
+                }
                 var verdict = error || response;
                 reply(verdict);
             });

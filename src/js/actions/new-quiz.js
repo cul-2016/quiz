@@ -61,11 +61,27 @@ export const toggleIsSurvey = (e) => ({
 // SAVE QUIZ ACTIONS
 //
 
+<<<<<<< HEAD
 export function saveQuiz (module_id, quizName, questions, is_last_quiz) {
+=======
+export const saveQuiz = (
+    module_id, name, questions, is_last_quiz, isSurvey
+) => dispatch => {
+>>>>>>> refinements
 
     return (dispatch) => {
 
+<<<<<<< HEAD
         dispatch(saveQuizRequest());
+=======
+    const payload = {
+        module_id,
+        name,
+        questions,
+        is_last_quiz,
+        isSurvey
+    };
+>>>>>>> refinements
 
         const payload = {
             module_id,
