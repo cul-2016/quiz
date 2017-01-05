@@ -85,3 +85,21 @@ test('`save-student-response` endpoint works again (survey)', (t) => {
         t.ok(response.result, 'Get data back');
     });
 });
+
+test('`save-student-response` endpoint missing params (no id)', (t) => {
+    t.plan(1);
+
+    const options = {
+        method: 'POST',
+        url: '/save-student-response',
+        payload: {
+            user_id: 5,
+            question_id: 34,
+            response: 'c'
+        }
+    };
+
+    server.inject(options, (response) => {
+        t.equal(response.statusCode, 500, 'provides error when there are no params');
+    });
+});
