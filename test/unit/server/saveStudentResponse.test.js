@@ -9,10 +9,11 @@ test('`saveStudentResponse` works', (t) => {
     const expectedCommand = 'INSERT';
     const user_id = 1;
     const quiz_id = 1;
+    const survey_id = null;
     const question_id = 1;
     const response = 'c';
 
-    saveStudentResponse(testClient, user_id, quiz_id, question_id, response, (error, response) => {
+    saveStudentResponse(testClient, user_id, quiz_id, survey_id, question_id, response, (error, response) => {
         if (error) {
             console.error(error);
             t.error('should not have errored');
