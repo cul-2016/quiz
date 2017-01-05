@@ -1,28 +1,33 @@
 const test = require('tape');
 const getNewTrophyState = require('../../../server/lib/getNewTrophyState');
-const { pool } = require('../../utils/init');
+const pool = require('../../../server/lib/dbClient.js');
+const redisCli = require('../../utils/configureRedis.js');
+const initDb = require('../../utils/initDb.js')(pool, redisCli);
 
 test("`getNewTrophyState` returns all trophies in state when is_last_quiz is set to true", (t) => {
 
     t.plan(1);
 
-    const user_id = 1;
-    const module_id = 'TEST';
-    const quiz_id = 2;
-    const percentageScore = 33;
-    const is_last_quiz = true;
-    const expected = {
-        first_quiz: true,
-        high_score: true,
-        participation: true,
-        overall_average: true
-    };
-    getNewTrophyState(pool, user_id, module_id, quiz_id, percentageScore, is_last_quiz, (error, response) => {
+    initDb()
+    .then(() => {
+        const user_id = 1;
+        const module_id = 'TEST';
+        const quiz_id = 2;
+        const percentageScore = 33;
+        const is_last_quiz = true;
+        const expected = {
+            first_quiz: true,
+            high_score: false,
+            participation: true,
+            overall_average: true
+        };
+        getNewTrophyState(pool, user_id, module_id, quiz_id, percentageScore, is_last_quiz, (error, response) => {
 
-        if (error) {
-            console.error(error);
-        }
-        t.deepEqual(response, expected, 'returns the new trophy state');
+            if (error) {
+                console.error(error);
+            }
+            t.deepEqual(response, expected, 'returns the new trophy state');
+        });
     });
 });
 
@@ -38,7 +43,7 @@ test("`getNewTrophyState` returns only first_quiz, high_score & participation in
 
     const expected = {
         first_quiz: true,
-        high_score: true,
+        high_score: false,
         participation: true
     };
 
@@ -50,3 +55,10 @@ test("`getNewTrophyState` returns only first_quiz, high_score & participation in
         t.deepEqual(response, expected, 'returns the new trophy state');
     });
 });
+
+test.onFinish(() => {
+    redisCli.quit();
+    pool.end();
+});
+
+

@@ -1,19 +1,33 @@
 const test = require('tape');
 const getScoresForLeaderboard = require('../../../server/lib/getScoresForLeaderboard');
-const { pool } = require('../../utils/init');
-const expected = require('../../utils/data-fixtures').getScoresForLeaderboardData;
+const expected = require('../../utils/data-fixtures.js').getScoresForLeaderboardData;
+const pool = require('../../../server/lib/dbClient.js');
+const redisCli = require('../../utils/configureRedis.js');
+const initDb = require('../../utils/initDb.js')(pool, redisCli);
 
 test('`getScoresForLeaderboard` works', (t) => {
 
     t.plan(1);
 
-    const module_id = 'TEST';
+    initDb()
+    .then(() => {
 
-    getScoresForLeaderboard(pool, module_id, (error, response) => {
+        const module_id = 'TEST';
 
-        if (error) {
-            console.error(error);
-        }
-        t.deepEqual(response, expected, 'database returns all scores for all quizzes for each student');
+        getScoresForLeaderboard(pool, module_id, (error, response) => {
+
+            if (error) {
+                console.error(error);
+            }
+            t.deepEqual(response, expected, 'database returns all scores for all quizzes for each student');
+        });
+
     });
 });
+
+test.onFinish(() => {
+    redisCli.quit();
+    pool.end();
+});
+
+

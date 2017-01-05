@@ -246,7 +246,7 @@ const getQuizIDListData = [
 const getScoresForLeaderboardData = [
     { quiz_id: 1, percentage_score: 100, user_id: 1 },
     { quiz_id: 2, percentage_score: 33, user_id: 1 },
-    { quiz_id: 1, percentage_score: 100, user_id: 3 },
+    { quiz_id: 1, percentage_score: 50, user_id: 3 },
     { quiz_id: 2, percentage_score: 33, user_id: 3 },
     { quiz_id: 1, percentage_score: 0, user_id: 4 },
     { quiz_id: 1, percentage_score: 100, user_id: 5 },
