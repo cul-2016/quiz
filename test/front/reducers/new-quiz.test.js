@@ -129,7 +129,7 @@ test('TOGGLE_IS_LAST_QUIZ works', (t) => {
     t.deepEqual(result, expected);
 });
 
-test.only('TOGGLE_IS_SURVEY works', (t) => {
+test('TOGGLE_IS_SURVEY works', (t) => {
 
     t.plan(1);
     const initialState = deepFreeze(newQuizState);
