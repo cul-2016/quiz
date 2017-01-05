@@ -19,7 +19,7 @@ const NewQuiz = ({
 
     const questionsValidation = questions.map((questionObj) => {
         const { question, a, b, correct_answer } = questionObj;
-        return Boolean(question && a && b && correct_answer);
+        return Boolean(question && a && b && (correct_answer || isSurvey));
     }).every((elem) => elem);
 
     const submitClasses = classnames("button is-success save-question", {
