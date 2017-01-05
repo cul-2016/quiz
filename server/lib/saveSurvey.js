@@ -15,7 +15,7 @@ function saveSurvey (client, module_id, name, callback) {
     var value = [module_id, name];
 
     query(client, queryText, value, (error, response) => {
-
+        /* istanbul ignore if */
         if (error) {
             return callback(error);
         }

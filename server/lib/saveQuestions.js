@@ -11,7 +11,7 @@ var composeQuestionStatement = require('./composeQuestionStatement');
 function saveQuestions (client, id, questions, { isSurvey }, callback) {
 
     composeQuestionStatement(id, questions, { isSurvey }, (error, builtStatement) => {
-
+        /* istanbul ignore if */
         if (error) {
             return callback(error);
         }

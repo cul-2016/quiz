@@ -17,7 +17,7 @@ function saveStudentResponse (client, user_id, quiz_id, survey_id, question_id, 
     var value = [user_id, quiz_id, survey_id, question_id, response];
 
     query(client, queries.saveStudentResponse, value, (error, response) => {
-
+        /* istanbul ignore if */
         if (error) {
             console.error(error);
             return callback(error);
