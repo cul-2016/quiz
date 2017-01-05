@@ -57,14 +57,6 @@ const NewQuiz = ({
                             </span>
                     </div>
                     <div className="column is-1 has-text-centered">
-                        <label className="label">Last Quiz?</label>
-                        <input
-                            className="column is-half"
-                            type="checkbox"
-                            checked={ is_last_quiz }
-                            name="is_last_quiz"
-                            onChange={ handleIsLastQuiz }
-                            />
                         <label className="label">Survey?</label>
                         <input
                             className="column is-half"
@@ -72,8 +64,18 @@ const NewQuiz = ({
                             checked={ isSurvey }
                             name="is_survey"
                             onChange={ handleIsSurvey }
-                            />
+                        />
                     </div>
+                    { !isSurvey && <div className="column is-1 has-text-centered">
+                        <label className="label">Last Quiz?</label>
+                        <input
+                            className="column is-half"
+                            type="checkbox"
+                            checked={ is_last_quiz }
+                            name="is_last_quiz"
+                            onChange={ handleIsLastQuiz }
+                        />
+                    </div> }
                 </div>
 
                 <Questions
