@@ -62,14 +62,14 @@ export const toggleIsSurvey = (e) => ({
 //
 
 export const saveQuiz = (
-    module_id, quizName, questions, is_last_quiz, isSurvey
+    module_id, name, questions, is_last_quiz, isSurvey
 ) => dispatch => {
 
     dispatch(saveQuizRequest());
 
     const payload = {
         module_id,
-        quizName,
+        name,
         questions,
         is_last_quiz,
         isSurvey
