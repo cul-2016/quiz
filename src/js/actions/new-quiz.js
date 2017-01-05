@@ -61,32 +61,27 @@ export const toggleIsSurvey = (e) => ({
 // SAVE QUIZ ACTIONS
 //
 
-export function saveQuiz (module_id, quizName, questions, is_last_quiz) {
+export const saveQuiz = (
+    module_id, quizName, questions, is_last_quiz, isSurvey
+) => dispatch => {
 
-    return (dispatch) => {
+    dispatch(saveQuizRequest());
 
-        dispatch(saveQuizRequest());
-
-        const payload = {
-            module_id,
-            quizName,
-            questions,
-            is_last_quiz
-        };
-        axios.post('/save-quiz', payload)
-            .then((response) => {
-
-                //what should be returned.
-                dispatch(saveQuizSuccess(response));
-
-            }, (error) => {
-                console.error(error, 'error from axios /save-quiz');
-            })
-            .catch((error) => {
-                dispatch(saveQuizFailure(error));
-            });
+    const payload = {
+        module_id,
+        quizName,
+        questions,
+        is_last_quiz,
+        isSurvey
     };
-}
+
+    axios.post('/save-quiz', payload)
+    .then((response) => {
+        dispatch(saveQuizSuccess(response));
+    }).catch((error) => {
+        dispatch(saveQuizFailure(error));
+    });
+};
 
 export const saveQuizRequest = () => ({
     type: SAVE_QUIZ_REQUEST

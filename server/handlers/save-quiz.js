@@ -7,17 +7,26 @@ module.exports = {
     method: 'POST',
     path: '/save-quiz',
     handler: (request, reply) => {
-        var module_id = request.payload.module_id;
-        var quizName = request.payload.quizName;
-        var questions = request.payload.questions;
-        var is_last_quiz = request.payload.is_last_quiz === true;
+        const {
+            module_id, quizName, questions, isSurvey, is_last_quiz = false
+        } = request.payload;
 
-        saveQuiz(client, module_id, quizName, is_last_quiz, (error, quiz_id) => {
-            /* istanbul ignore if */
-            if (error) {
-                console.error(error);
-                return reply(error);
-            }
+        if (isSurvey) {
+            // perform save survey query
+            // saveQuestionsFlow(client, quiz_id);
+        } else {
+            saveQuiz(client, module_id, quizName, is_last_quiz, (error, quiz_id) => {
+                /* istanbul ignore if */
+                if (error) {
+                    console.error(error);
+                    return reply(error);
+                } else {
+                    saveQuestionsFlow(client, quiz_id);
+                }
+            });
+        }
+        
+        const saveQuestionsFlow = (client, quiz_id) => {
             if (questions.length === 0) {
                 if (is_last_quiz) {
                     updateIsLastQuiz(client, module_id, quiz_id, (error) => {
@@ -42,6 +51,6 @@ module.exports = {
                     return reply(verdict);
                 });
             }
-        });
+        };
     }
 };

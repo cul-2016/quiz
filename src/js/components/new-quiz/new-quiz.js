@@ -94,7 +94,8 @@ const NewQuiz = ({
                             location.pathname.split('/')[1],
                             name,
                             questions,
-                            is_last_quiz
+                            is_last_quiz,
+                            isSurvey
                         ) }>
                         Save and Exit
                     </button>
