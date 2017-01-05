@@ -5,6 +5,7 @@ import { Link } from 'react-router';
 const Quizzes = ({ location, quizzes, sendQuizInvite, module_id, isSurvey }) => {
 
     const surveyOrQuiz = isSurvey ? 'survey' : 'quiz';
+    const surveyIdOrQuizId = isSurvey ? 'survey_id' : 'quiz_id';
     const surveyOrQuizCapitalized = isSurvey ? 'Survey' : 'Quiz';
     const surveyOrQuizPluralCapitalized = isSurvey ? 'Surveys' : 'Quizzes';
 
@@ -39,13 +40,13 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id, isSurvey }) => 
                 <td><i className={ iconClasses } /></td>
                 <td><i className={ is_last_quizClasses } /></td>
                 <td>
-                    <Link to={`${module_id}/${quiz.quiz_id}/edit-quiz`}>
+                    <Link to={`${module_id}/${quiz[surveyIdOrQuizId]}/edit-${surveyOrQuiz}`}>
                         <span title="Edit Quiz" className={ editQuizClass }>
                             <i className="fa fa-edit"></i>
                         </span>
                     </Link>
 
-                    <Link to={ `${module_id}/${quiz.quiz_id}/members` }>
+                    <Link to={ `${module_id}/${quiz[surveyIdOrQuizId]}/members` }>
                         <span title="Quiz History" className={ quizHistoryClass }>
                             <i className="fa fa-history"></i>
                         </span>
@@ -54,7 +55,7 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id, isSurvey }) => 
                 <td>
                     <Link to={`${location.pathname}/live`}>
                         <span className={ buttonClass }
-                            onClick={ () => sendQuizInvite(quiz.quiz_id, quiz.name) }>
+                            onClick={ () => sendQuizInvite(quiz[surveyIdOrQuizId], quiz.name) }>
                             Invite students to { surveyOrQuiz }
                         </span>
                     </Link>
@@ -103,13 +104,13 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id, isSurvey }) => 
                     }
                 </div>
                 <div className="columns is-mobile has-text-centered">
-                    <Link className={ editQuizClass } to={`${module_id}/${quiz.quiz_id}/edit-quiz`}>
+                    <Link className={ editQuizClass } to={`${module_id}/${quiz[surveyIdOrQuizId]}/edit-quiz`}>
                         <span title="Edit Quiz" className="column tag is-warning is-medium settings-tag">
                             <i className="fa fa-edit"></i>
                         </span>
                     </Link>
 
-                    <Link className={ quizHistoryClass } to={ `${module_id}/${quiz.quiz_id}/members` }>
+                    <Link className={ quizHistoryClass } to={ `${module_id}/${quiz[surveyIdOrQuizId]}/members` }>
                         <span title="Quiz History" className="column tag is-warning is-medium settings-tag">
                             <i className="fa fa-history"></i>
                         </span>
@@ -119,7 +120,7 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id, isSurvey }) => 
                 <div className="columns is-mobile has-text-centered">
                     <Link className={ buttonClass } to={`${location.pathname}/live`}>
                         <span
-                        onClick={ () => sendQuizInvite(quiz.quiz_id, quiz.name) }>
+                        onClick={ () => sendQuizInvite(quiz[surveyIdOrQuizId], quiz.name) }>
                         Invite students to { surveyOrQuiz }
                         </span>
                     </Link>
