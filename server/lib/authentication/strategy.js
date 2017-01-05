@@ -1,9 +1,9 @@
 exports.register = (server, options, next) => {
     const validate = (decoded, request, callback) => {
-        if (!request.state.cul_id) {
+        if (!decoded.user_details.user_id) {
             return callback(new Error('undefined' + request.state, false));
         }
-        client.getAsync(request.state.cul_id)
+        server.app.redisCli.getAsync(decoded.user_details.user_id)
             .then((res) => {
                 res === decoded.uid
                 ? callback(null, true)
