@@ -8,6 +8,7 @@ import { getQuizDetailsData } from '../../utils/data-fixtures';
 import { questions } from '../../utils/data-fixtures';
 import deepFreeze from '../../utils/deepFreeze';
 import { saveQuizError as error, getQuizDetailsError } from '../../utils/action-fixtures';
+import { initialState } from '../../../src/js/reducers/new-quiz.js';
 
 const createSandbox = sinon.sandbox.create;
 
@@ -104,7 +105,7 @@ test('saveQuiz async action: success', (t) => {
     const successPromise = new Promise((resolve) => resolve(successResponse));
     sandbox.stub(axios, 'post').returns(successPromise);
 
-    const { dispatch, queue } = createThunk();
+    const { dispatch, queue } = createThunk({ newQuiz: initialState });
     dispatch(actions.saveQuiz(module_id, quizName, questions, false, false));
 
     setTimeout(() => {
@@ -139,7 +140,7 @@ test('saveQuiz async action: failure', (t) => {
     const failurePromise = new Promise((_, reject) => reject(failureResponse));
     sandbox.stub(axios, 'post').returns(failurePromise);
 
-    const { dispatch, queue } = createThunk();
+    const { dispatch, queue } = createThunk({ newQuiz: initialState });
     dispatch(actions.saveQuiz(module_id, quizName, questions, false, false));
 
     setTimeout(() => {
@@ -213,7 +214,7 @@ test('updateQuiz async action creator returns expected action', (t) => {
     let quiz_id = 1;
     let quizName = 'week 1';
     let actual;
-    const { dispatch, queue } = createThunk();
+    const { dispatch, queue } = createThunk({ newQuiz: initialState });
     dispatch(actions.updateQuiz(module_id, quiz_id, quizName, questions));
 
     [{ ...actual }] = queue;
