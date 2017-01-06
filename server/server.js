@@ -1,6 +1,6 @@
-var Hapi = require('hapi');
-var plugins = require('./plugins');
-var routes = require('./routes');
+const Hapi = require('hapi');
+const plugins = require('./plugins.js');
+const assert = require('assert');
 
 const server = new Hapi.Server();
 
@@ -13,8 +13,11 @@ server.connection({
 server.register(plugins, (error) => {
     assert(!error, error);
 
+    server.route({
+        method: 'get',
+        path: '/{all*}',
+        handler: { directory: { path: 'public' } }
     });
 });
 
-    server.route(routes);
 module.exports = server;
