@@ -1,6 +1,6 @@
 const Inert = require('inert');
 const JWT = require('hapi-auth-jwt2');
-const Redis = require('./plugins/redis.js');
+const Database = require('./plugins/database.js');
 const Strategy = require('./plugins/strategy.js');
 const Auth = require('./plugins/authenticate-user.js');
 const modules = require('./plugins/modules.js');
@@ -10,7 +10,7 @@ const misc = require('./plugins/misc.js');
 
 const plugins = [
     Inert,
-    Redis,
+    Database,
     JWT,
     Strategy,
     Auth,
