@@ -7,6 +7,12 @@ bluebird.promisifyAll(redis.RedisClient.prototype);
 bluebird.promisifyAll(redis.Multi.prototype);
 
 exports.register = (server, options, next) => {
+    // TODO: refactor this into just a simple config object
+    // This object can then be placed in the root and used by test/utils/dbClient.js
+    // and then we won't have this repeated code
+    // do after all tests and are implemented
+    // and we can test it runs on heroku and circle
+
     const config = { max: '20', idleTimeoutMillis: 3000 };
 
     if (env.CIRCLE_CI || env.TESTING) {
@@ -22,35 +28,13 @@ exports.register = (server, options, next) => {
         });
     }
     
+    server.app.pool = new pg.Pool(config);
+
     server.app.redisCli = redis.createClient({
         host: '127.0.0.1',
         port: 6379,
         db: env.CIRCLE_CI ? 1 : env.TESTING ? 2 : 0
     });
-
-// if (process.env.CIRCLE_CI) {
-//     config = {
-//         database: 'circle_test'
-//     };
-// } else if (process.env.TESTING) {
-//     config = {
-//         database: 'testing'
-//     };
-// } else {
-//     config = {
-//         user: process.env.DATABASE_USER,
-//         password: process.env.DATABASE_PASSWORD,
-//         host: process.env.DATABASE_HOST,
-//         port: process.env.DATABASE_PORT,
-//         database: process.env.DATABASE_NAME,
-//         ssl: true
-//     };
-// }
-// 
-// config.max = '20';
-// config.idleTimeoutMillis = 3000;
-
-    server.app.pool = new pg.Pool(config);
 
     next();
 }

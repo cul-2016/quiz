@@ -1,2 +1,2 @@
-// require('./initDb.test.js');
+require('./initDb.test.js');
 require('./simulateAuth.test.js');
