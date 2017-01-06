@@ -1,21 +1,20 @@
 const test = require('tape');
-const { server } = require('../../utils/init');
+const server = require('../../../server/server.js');
 
 test(' / endpoint works!', (t) => {
+    if (!process.env.TESTING) {
+        throw new Error("Please set the testing environment variables!");
+    }
 
     t.plan(1);
 
-    if (!process.env.TESTING) {
-        throw new Error("Please set the testing environment variables!");
-    } else {
-        const options = {
-            method: 'GET',
-            url: '/'
-        };
+    const options = {
+        method: 'GET',
+        url: '/'
+    };
 
-        server.inject(options, (response) => {
+    server.inject(options, (response) => {
 
-            t.ok(response.payload.indexOf('<title>Quiz App</title>') > -1, "index page loads correctly!");
-        });
-    }
+        t.ok(response.payload.indexOf('<title>Quiz App</title>') > -1, "index page loads correctly!");
+    });
 });
