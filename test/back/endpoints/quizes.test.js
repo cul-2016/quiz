@@ -26,7 +26,6 @@ const {
     { url: '/get-quiz-details?quiz_id=1' },
     { url: '/update-quiz', method: 'post', payload: updateQuizOptionsPayload }
 ].forEach((endpoint) => {
-
     test(endpoint.url + ' endpoint works', (t) => {
         t.plan(1);
 
@@ -47,6 +46,29 @@ const {
         });
     });
 
+    test(endpoint.url + ' endpoint returns 401 due to fake token', (t) => {
+        t.plan(1);
+
+        initDb()
+        .then(() => simulateAuth())
+        .then((token) => {
+            const fakeToken = token.substring(token.length - 5);
+            const options = {
+                method: endpoint.method || 'get',
+                url: endpoint.url,
+                payload: endpoint.payload,
+                headers: { Authorization: fakeToken }
+            };
+
+            return server.inject(options);
+        })
+        .then((response) => {
+            t.equal(response.statusCode, 401, '401 status code for ' + endpoint.url);
+        });
+    });
+
+
+
     test(endpoint.url + ' endpoint returns 401 if authorization header isn\'t provided', (t) => {
 
         t.plan(1);
@@ -62,6 +84,7 @@ const {
             t.equal(response.statusCode, 401, '401 status code');
         });
     });
+
 });
 
 test.onFinish(() => {
