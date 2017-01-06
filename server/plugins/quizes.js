@@ -17,6 +17,7 @@ const deleteQuestions = require('../lib/deleteQuestions.js');
 const deleteResponses = require('../lib/deleteResponses.js');
 const getQuizDetails = require('../lib/getQuizDetails.js');
 const editScore = require('../lib/editScore.js');
+const getQuizDetailsStudent = require('../lib/getQuizDetailsStudent');
 
 exports.register = (server, options, next) => {
     const pool = server.app.pool;
@@ -310,6 +311,25 @@ exports.register = (server, options, next) => {
                     deleteResponses(pool, quiz_id, (error, result) => {
 
                         var verdict = error || result;
+                        reply(verdict);
+                    });
+                } else {
+                    reply(new Error('quiz_id is not defined'));
+                }
+            }
+        },
+        {
+            method: 'GET',
+            path: '/get-quiz-details-student',
+            handler: (request, reply) => {
+
+                let { query: { quiz_id, user_id } } = request;
+
+                if ([quiz_id, user_id].indexOf(undefined) === -1) {
+
+                    quiz_id = parseInt(quiz_id, 10);
+                    getQuizDetailsStudent(pool, quiz_id, user_id, (error, quizDetails) => {
+                        var verdict = error || quizDetails;
                         reply(verdict);
                     });
                 } else {

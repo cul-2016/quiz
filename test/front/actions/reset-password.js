@@ -5,7 +5,7 @@ import createThunk from '../../utils/mockThunk';
 // modules that get stubbed with sinon
 import axios from 'axios';
 import { hashHistory } from 'react-router';
-const createSandbox = () => sinon.sandbox.create();
+const createSandbox = sinon.sandbox.create;
 
 import * as actions from '../../../src/js/actions/reset-password';
 import * as loginActions from '../../../src/js/actions/login';

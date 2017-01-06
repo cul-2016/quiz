@@ -172,7 +172,20 @@ const questions = [
     }
 ];
 
-const reviewQuestions = [
+
+export const questionsAnswers = [
+    {
+        question: 'capital of England',
+        a: 'London',
+        b: 'Tokyo',
+        c: 'New York',
+        d: 'Paris',
+        correct_answer: 'a',
+        response: 'b'
+    }
+];
+
+export const reviewQuestions = [
     {
         quiz_id: 1,
         question_id: 1,

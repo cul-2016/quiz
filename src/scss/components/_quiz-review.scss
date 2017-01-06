@@ -2,6 +2,9 @@
 .correct_answer {
     background-color: $green;
 }
+.wrong_answer {
+    background-color: $bulma-is-danger;
+}
 
 .review-buttons {
     .finish-button {

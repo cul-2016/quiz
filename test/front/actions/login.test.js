@@ -9,7 +9,7 @@ import { authenticateUserError as error } from '../../utils/action-fixtures';
 import axios from 'axios';
 import { hashHistory } from 'react-router';
 
-const createSandbox = () => sinon.sandbox.create();
+const createSandbox = sinon.sandbox.create;
 
 
 test('updateEmail creates the correct action', (t) => {

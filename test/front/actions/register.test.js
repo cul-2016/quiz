@@ -10,7 +10,7 @@ import axios from 'axios';
 import { hashHistory } from 'react-router';
 
 
-const createSandbox = () => sinon.sandbox.create();
+const createSandbox = sinon.sandbox.create;
 
 test('updateInputField action creator returns expected action', (t) => {
 
