@@ -1,7 +1,7 @@
 const test = require('tape');
 const getStudentPercentageScore = require('../../../server/lib/getStudentPercentageScore');
 const { allPercentageScoresData } = require('../../utils/data-fixtures');
-const pool = require('../../../server/lib/dbClient.js');
+const pool = require('../../utils/dbClient.js');
 const redisCli = require('../../utils/configureRedis.js');
 const initDb = require('../../utils/initDb.js')(pool, redisCli);
 

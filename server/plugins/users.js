@@ -3,7 +3,6 @@ const saveUser = require('../lib/authentication/saveUser.js');
 const verifyLecturerEmail = require('../lib/email/lecturer-verification-email.js');
 const verifyCode = require('../lib/verifyCode.js');
 const studentWelcomeEmail = require('../lib/email/student-welcome-email.js');
-const client = require('../lib/dbClient.js');
 const getUserByEmail = require('../lib/getUserByEmail.js');
 const getUserByID = require('../lib/getUserByID.js');
 const hashPassword = require('../lib/authentication/hashPassword.js');
@@ -13,10 +12,12 @@ const resetPasswordRequestEmail = require('../lib/email/reset-password-request-e
 const saveExpiringTokenForUser = require('../lib/saveExpiringTokenForUser');
 
 exports.register = (server, options, next) => {
+    const pool = server.app.pool;
     server.route([
         {
             method: 'POST',
             path: '/save-user',
+            config: { auth: false },
             handler: (request, reply) => {
                 var email = request.payload.email;
                 var password = request.payload.password;
@@ -31,13 +32,13 @@ exports.register = (server, options, next) => {
                         if (error) {
                             return reply(error);
                         }
-                        saveUser(client, email, hashedPassword, is_lecturer, username, verification_code, (error, result) => { // eslint-disable-line no-unused-vars
+                        saveUser(pool, email, hashedPassword, is_lecturer, username, verification_code, (error, result) => { // eslint-disable-line no-unused-vars
                             /* istanbul ignore if */
                             if (error) {
                                 return reply(error);
                             }
                             else if (!is_lecturer) {
-                                getUserByEmail(client, email, (error, userDetails) => {
+                                getUserByEmail(pool, email, (error, userDetails) => {
                                     /* istanbul ignore if */
                                     if (error) {
                                         return reply(error);
@@ -53,7 +54,7 @@ exports.register = (server, options, next) => {
                     });
                 };
 
-                getUserByEmail(client, email, (error, userExists) => {
+                getUserByEmail(pool, email, (error, userExists) => {
                     /* istanbul ignore if */
                     if (error) {
                         return reply(error);
@@ -97,10 +98,11 @@ exports.register = (server, options, next) => {
         {
             method: 'GET',
             path: '/verification',
+            config: { auth: false },
             handler: (request, reply) => {
                 var verification_code = request.query.code;
 
-                verifyCode(client, verification_code, (error, isVerified) => {
+                verifyCode(pool, verification_code, (error, isVerified) => {
                     /* istanbul ignore if */
                     if (error) {
                         console.error(error);
@@ -120,7 +122,7 @@ exports.register = (server, options, next) => {
             path: '/get-user-details',
             handler: (request, reply) => {
                 var user_id = request.query.user_id;
-                getUserByID(client, user_id, (error, userDetails) => {
+                getUserByID(pool, user_id, (error, userDetails) => {
                     /* istanbul ignore if */
                     if (error) {
                         return reply(error);
@@ -134,6 +136,7 @@ exports.register = (server, options, next) => {
         {
             method: 'POST',
             path: '/reset-password-request',
+            config: { auth: false },
             handler: (request, reply) => {
 
                 var email = request.payload.email;
@@ -142,13 +145,13 @@ exports.register = (server, options, next) => {
 
 
                 // check for a user in the db
-                getUserByEmail(client, email, (error, response) => {
+                getUserByEmail(pool, email, (error, response) => {
                     /* istanbul ignore if */
                     if (error) {
                         return reply(error);
                     }
                     if (response.length > 0) {
-                        saveExpiringTokenForUser(client, email, resetPasswordLink, expiry_code, (error, user) => {
+                        saveExpiringTokenForUser(pool, email, resetPasswordLink, expiry_code, (error, user) => {
                             /* istanbul ignore if */
                             if (error) {
                                 return reply(error);
@@ -179,11 +182,12 @@ exports.register = (server, options, next) => {
         {
             method: 'POST',
             path: '/submit-new-password',
+            config: { auth: false },
             handler: (request, reply) => {
                 var code = request.payload.code;
                 var password = request.payload.password;
 
-                compareResetPasswordCodeAndExpiry(client, code, (error, result) => {
+                compareResetPasswordCodeAndExpiry(pool, code, (error, result) => {
                     /* istanbul ignore if */
                     if (error) {
                         return reply(error);
@@ -197,7 +201,7 @@ exports.register = (server, options, next) => {
                             if (error) {
                                 return reply(error);
                             }
-                            updatePassword(client, code, hashedPassword, (error, response) => {
+                            updatePassword(pool, code, hashedPassword, (error, response) => {
                                 /* istanbul ignore if */
                                 if (error) {
                                     return reply(error);

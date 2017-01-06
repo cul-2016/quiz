@@ -1,5 +1,5 @@
-var pg = require('pg');
-var config;
+const pg = require('pg');
+let config;
 
 if (process.env.CIRCLE_CI) {
     config = {
@@ -23,6 +23,4 @@ if (process.env.CIRCLE_CI) {
 config.max = '20';
 config.idleTimeoutMillis = 3000;
 
-var pool = new pg.Pool(config);
-
-module.exports = pool;
+module.exports = new pg.Pool(config);

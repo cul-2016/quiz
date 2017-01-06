@@ -1,4 +1,4 @@
-const client = require('../lib/dbClient.js');
+const saveStudentResponse = require('../lib/saveStudentResponse');
 const updateIsLastQuiz = require('../lib/updateIsLastQuiz.js');
 const saveQuiz = require('../lib/saveQuiz.js');
 const saveQuestions = require('../lib/saveQuestions.js');
@@ -19,7 +19,29 @@ const getQuizDetails = require('../lib/getQuizDetails.js');
 const editScore = require('../lib/editScore.js');
 
 exports.register = (server, options, next) => {
+    const pool = server.app.pool;
     server.route([
+        {
+            method: 'POST',
+            path: '/save-student-response',
+            handler: (request, reply) => {
+                var user_id = request.payload.user_id;
+                var quiz_id = request.payload.quiz_id;
+                var question_id = request.payload.question_id;
+                var response = request.payload.response;
+                if (user_id !== undefined && quiz_id !== undefined && question_id !== undefined && response !== undefined) {
+                    user_id = parseInt(user_id);
+                    quiz_id = parseInt(quiz_id);
+                    question_id = parseInt(question_id);
+                    saveStudentResponse(pool, user_id, quiz_id, question_id, response, (error, response) => {
+                        var verdict = error || response;
+                        reply(verdict);
+                    });
+                } else {
+                    reply(new Error('one of the required querystrings is not defined'));
+                }
+            }
+        },
         {
             method: 'POST',
             path: '/save-quiz',
@@ -27,7 +49,7 @@ exports.register = (server, options, next) => {
                 const { module_id, quizName, questions } = request.payload;
                 const is_last_quiz = request.payload.is_last_quiz === true;
 
-                saveQuiz(client, module_id, quizName, is_last_quiz, (error, quiz_id) => {
+                saveQuiz(pool, module_id, quizName, is_last_quiz, (error, quiz_id) => {
                     /* istanbul ignore if */
                     if (error) {
                         console.error(error);
@@ -35,7 +57,7 @@ exports.register = (server, options, next) => {
                     }
                     if (questions.length === 0) {
                         if (is_last_quiz) {
-                            updateIsLastQuiz(client, module_id, quiz_id, (error) => {
+                            updateIsLastQuiz(pool, module_id, quiz_id, (error) => {
                                 /* istanbul ignore if */
                                 if (error) {
                                     console.error(error);
@@ -48,7 +70,7 @@ exports.register = (server, options, next) => {
                             question.quiz_id = quiz_id;
                             return question;
                         });
-                        saveQuestions(client, mappedQuestions, (error, response) => {
+                        saveQuestions(pool, mappedQuestions, (error, response) => {
                             /* istanbul ignore if */
                             if (error) {
                                 console.error(error);
@@ -68,7 +90,7 @@ exports.register = (server, options, next) => {
                 if (quiz_id !== undefined) {
 
                     quiz_id = parseInt(quiz_id, 10);
-                    getQuizQuestions(client, quiz_id, (error, questions) => {
+                    getQuizQuestions(pool, quiz_id, (error, questions) => {
 
                         var verdict = error || questions;
                         reply(verdict);
@@ -85,7 +107,7 @@ exports.register = (server, options, next) => {
 
                 var quiz_id = request.payload.quiz_id;
 
-                setQuizToPresented(client, quiz_id, (error, result) => {
+                setQuizToPresented(pool, quiz_id, (error, result) => {
 
                     var verdict = error || result;
                     reply(verdict);
@@ -101,31 +123,31 @@ exports.register = (server, options, next) => {
                 var module_id = request.query.module_id;
                 var quiz_id = request.query.quiz_id;
 
-                getIsLastQuiz(client, quiz_id, (error, is_last_quiz) => {
+                getIsLastQuiz(pool, quiz_id, (error, is_last_quiz) => {
                     /* istanbul ignore if */
                     if (error) {
                         console.error(error);
                         return reply(error);
                     }
-                    calculateQuizScore(client, user_id, quiz_id, (error, score) => {
+                    calculateQuizScore(pool, user_id, quiz_id, (error, score) => {
                         /* istanbul ignore if */
                         if (error) {
                             console.error(error);
                             return reply(error);
                         }
-                        setQuizScore(client, user_id, quiz_id, score.raw, (error) => {
+                        setQuizScore(pool, user_id, quiz_id, score.raw, (error) => {
                             /* istanbul ignore if */
                             if (error) {
                                 console.error(error);
                                 return reply(error);
                             }
-                            getNewTrophyState(client, user_id, module_id, quiz_id, score.percentage, is_last_quiz, (error, newTrophyState) => {
+                            getNewTrophyState(pool, user_id, module_id, quiz_id, score.percentage, is_last_quiz, (error, newTrophyState) => {
                                 /* istanbul ignore if */
                                 if (error) {
                                     console.error(error);
                                     return reply(error);
                                 }
-                                setNewTrophyState(client, user_id, module_id, newTrophyState, (error) => {
+                                setNewTrophyState(pool, user_id, module_id, newTrophyState, (error) => {
 
                                     var verdict = error || { newTrophyState: newTrophyState, score: score };
 
@@ -145,7 +167,7 @@ exports.register = (server, options, next) => {
                 if (quiz_id !== undefined) {
 
                     quiz_id = parseInt(quiz_id, 10);
-                    getQuizReview(client, quiz_id, (error, module) => {
+                    getQuizReview(pool, quiz_id, (error, module) => {
 
                         var verdict = error || module;
                         reply(verdict);
@@ -163,7 +185,7 @@ exports.register = (server, options, next) => {
                 if (quiz_id !== undefined) {
 
                     quiz_id = parseInt(quiz_id, 10);
-                    getQuizMembers(client, quiz_id, (error, users) => {
+                    getQuizMembers(pool, quiz_id, (error, users) => {
                         var verdict = error || users;
                         reply(verdict);
                     });
@@ -183,7 +205,7 @@ exports.register = (server, options, next) => {
 
                 if (quiz_id !== undefined && user_id !== undefined && score !== undefined) {
 
-                    editScore(client, user_id, quiz_id, score, (error, response) => {
+                    editScore(pool, user_id, quiz_id, score, (error, response) => {
 
                         var verdict = error || response;
                         reply(verdict);
@@ -201,7 +223,7 @@ exports.register = (server, options, next) => {
                 if (quiz_id !== undefined) {
 
                     quiz_id = parseInt(quiz_id, 10);
-                    getQuizDetails(client, quiz_id, (error, quizDetails) => {
+                    getQuizDetails(pool, quiz_id, (error, quizDetails) => {
                         var verdict = error || quizDetails;
                         reply(verdict);
                     });
@@ -223,10 +245,10 @@ exports.register = (server, options, next) => {
                 var is_last_quiz = request.payload.is_last_quiz === true;
 
                 // update quiz name
-                updateQuiz(client, module_id, quiz_id, quizName, is_last_quiz, (error) => {
+                updateQuiz(pool, module_id, quiz_id, quizName, is_last_quiz, (error) => {
 
                     if (is_last_quiz) {
-                        updateIsLastQuiz(client, module_id, quiz_id, (error) => {
+                        updateIsLastQuiz(pool, module_id, quiz_id, (error) => {
                             /* istanbul ignore if */
                             if (error) {
                                 console.error(error);
@@ -238,17 +260,17 @@ exports.register = (server, options, next) => {
                     if (error) {
                         return reply(error);
                     }
-                    updateQuestions(client, editedQuestions, (error) => {
+                    updateQuestions(pool, editedQuestions, (error) => {
                         /* istanbul ignore if */
                         if (error) {
                             return reply(error);
                         } else if (newQuestions.length !== 0) {
-                            saveQuestions(client, newQuestions, (error) => {
+                            saveQuestions(pool, newQuestions, (error) => {
                                 /* istanbul ignore if */
                                 if (error) {
                                     return reply(error);
                                 } else if (deletedQuestions.length !== 0) {
-                                    deleteQuestions(client, deletedQuestions, (error) => {
+                                    deleteQuestions(pool, deletedQuestions, (error) => {
                                         /* istanbul ignore if */
                                         if (error) {
                                             return reply(error);
@@ -261,7 +283,7 @@ exports.register = (server, options, next) => {
                             });
                         } else {
                             if (deletedQuestions.length !== 0) {
-                                deleteQuestions(client, deletedQuestions, (error) => {
+                                deleteQuestions(pool, deletedQuestions, (error) => {
                                     /* istanbul ignore if */
                                     if (error) {
                                         return reply(error);
@@ -285,7 +307,7 @@ exports.register = (server, options, next) => {
                 if (quiz_id !== undefined) {
                     quiz_id = parseInt(quiz_id);
 
-                    deleteResponses(client, quiz_id, (error, result) => {
+                    deleteResponses(pool, quiz_id, (error, result) => {
 
                         var verdict = error || result;
                         reply(verdict);

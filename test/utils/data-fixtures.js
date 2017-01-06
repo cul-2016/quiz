@@ -76,7 +76,7 @@ const quizzes = [
 
 const _module = Object.assign({}, newModule, { quizzes });
 
-const getModuleForLecturerData = {
+const expectedLecturer = {
     module_id: 'TEST',
     name: 'test module',
     medals: {
@@ -113,7 +113,7 @@ const getModuleForLecturerData = {
     ]
 };
 
-const getModuleForStudentData = {
+const expectedStudent = {
 
     module_id: 'TEST',
     name: 'test module',
@@ -371,8 +371,8 @@ module.exports = {
     newModule,
     quizzes,
     module: _module,
-    getModuleForLecturerData,
-    getModuleForStudentData,
+    expectedLecturer,
+    expectedStudent,
     newQuiz,
     getQuizDetailsData,
     questions,
