@@ -1,6 +1,6 @@
 const test = require('tape');
 const validateModuleID = require('../../../server/lib/validateModuleID');
-const pool = require('../../../server/lib/dbClient.js');
+const pool = require('../../utils/dbClient.js');
 const redisCli = require('../../utils/configureRedis.js');
 const initDb = require('../../utils/initDb.js')(pool, redisCli);
 test('`validateModuleID` returns true for a pre-existing module_id', (t) => {

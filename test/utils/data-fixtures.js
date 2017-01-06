@@ -76,7 +76,7 @@ const quizzes = [
 
 const _module = Object.assign({}, newModule, { quizzes });
 
-const getModuleForLecturerData = {
+const expectedLecturer = {
     module_id: 'TEST',
     name: 'test module',
     medals: {
@@ -113,7 +113,7 @@ const getModuleForLecturerData = {
     ]
 };
 
-const getModuleForStudentData = {
+const expectedStudent = {
 
     module_id: 'TEST',
     name: 'test module',
@@ -329,6 +329,38 @@ const studentHistoryData = [
     { name: 'Arbitrary 3', num_questions: '1', quiz_id: 6, score: 1 }
 ];
 
+const updateQuizOptionsPayload = {
+    module_id: 'TEST',
+    quiz_id: 1,
+    quizName: 'Week 1 Quiz',
+    editedQuestions:
+    [
+        {
+            question_id: 2,
+            question: 'What is the capital of Croatia?',
+            a: 'Zagreb',
+            b: 'Cardiff',
+            c: 'Edinburgh',
+            d: 'Doncaster',
+            correct_answer: 'a',
+            quiz_id: '1'
+        },
+        {
+            question_id: 1,
+            question: 'What is the capital of England?',
+            a: 'London',
+            b: 'Cardiff',
+            c: 'Edinburgh',
+            d: 'Doncaster',
+            correct_answer: 'a',
+            quiz_id: '1'
+        }
+    ],
+    newQuestions: [],
+    deletedQuestions: []
+};
+
+
 module.exports = {
     users,
     userDetails,
@@ -339,8 +371,8 @@ module.exports = {
     newModule,
     quizzes,
     module: _module,
-    getModuleForLecturerData,
-    getModuleForStudentData,
+    expectedLecturer,
+    expectedStudent,
     newQuiz,
     getQuizDetailsData,
     questions,
@@ -353,5 +385,6 @@ module.exports = {
     getScoresForLeaderboardData,
     getTotalScoresAndTrophiesData,
     allPercentageScoresData,
-    studentHistoryData
+    studentHistoryData,
+    updateQuizOptionsPayload
 };

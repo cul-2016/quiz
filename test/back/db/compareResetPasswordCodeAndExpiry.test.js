@@ -1,6 +1,6 @@
 const test = require('tape');
 const calculateQuizScore = require('../../../server/lib/calculateQuizScore.js');
-const pool = require('../../../server/lib/dbClient.js');
+const pool = require('../../utils/dbClient.js');
 const redisCli = require('../../utils/configureRedis.js');
 const initDb = require('../../utils/initDb.js')(pool, redisCli);
 const compareResetPasswordCodeAndExpiry = require('../../../server/lib/compareResetPasswordCodeAndExpiry.js');

@@ -1,7 +1,5 @@
-var Server = require('./server.js');
+var server = require('./server.js');
 var socket = require('socket.io');
-
-var server = Server.init(process.env.PORT || 9000);
 
 var io = socket(server.listener);
 io.on('connection', (socket) => {

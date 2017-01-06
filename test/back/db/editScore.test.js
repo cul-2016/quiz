@@ -2,7 +2,7 @@ const test = require('tape');
 const editScore = require('../../../server/lib/editScore');
 const query = require('../../../server/lib/query');
 const queries = require('../../../server/lib/queries.json');
-const pool = require('../../../server/lib/dbClient.js');
+const pool = require('../../utils/dbClient.js');
 const redisCli = require('../../utils/configureRedis.js');
 const initDb = require('../../utils/initDb.js')(pool, redisCli);
 

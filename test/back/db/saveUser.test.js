@@ -1,7 +1,7 @@
 const uuid = require('uuid');
 const test = require('tape');
 const saveUser = require('../../../server/lib/authentication/saveUser');
-const pool = require('../../../server/lib/dbClient.js');
+const pool = require('../../utils/dbClient.js');
 const redisCli = require('../../utils/configureRedis.js');
 const initDb = require('../../utils/initDb.js')(pool, redisCli);
 

@@ -1,6 +1,6 @@
 const tape = require('tape');
 const redisCli = require('../configureRedis.js');
-const pool = require('../../../server/lib/dbClient.js');
+const pool = require('../../utils/dbClient.js');
 const initDb = require('../initDb.js')(pool, redisCli);
 
 tape('flush db clears pg database', (t) => {

@@ -1,7 +1,7 @@
 const test = require('tape');
 const getTotalScoresAndTrophies = require('../../../server/lib/getTotalScoresAndTrophies');
 const expected = require('../../utils/data-fixtures').getTotalScoresAndTrophiesData;
-const pool = require('../../../server/lib/dbClient.js');
+const pool = require('../../utils/dbClient.js');
 const redisCli = require('../../utils/configureRedis.js');
 const initDb = require('../../utils/initDb.js')(pool, redisCli);
 
