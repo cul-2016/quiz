@@ -1,14 +1,14 @@
-const getModuleList = require('../lib/getModuleList');
-const getModuleForLecturer = require('../lib/getModuleForLecturer');
-const getModuleForStudent = require('../lib/getModuleForStudent');
-const validateModuleID = require('../lib/validateModuleID');
-const saveModule = require('../lib/saveModule');
-const getModuleMembers = require('../lib/getModuleMembers');
-const removeModuleMember = require('../lib/removeModuleMember');
-const joinModule = require('../lib/joinModule');
-const client = require('../lib/dbClient');
+const getModuleList = require('../lib/getModuleList.js');
+const getModuleForLecturer = require('../lib/getModuleForLecturer.js');
+const getModuleForStudent = require('../lib/getModuleForStudent.js');
+const validateModuleID = require('../lib/validateModuleID.js');
+const saveModule = require('../lib/saveModule.js');
+const getModuleMembers = require('../lib/getModuleMembers.js');
+const removeModuleMember = require('../lib/removeModuleMember.js');
+const joinModule = require('../lib/joinModule.js');
 
 exports.register = (server, options, next) => {
+    const pool = server.app.pool;
     server.route([
         {
             method: 'GET',
@@ -19,7 +19,7 @@ exports.register = (server, options, next) => {
                 if (is_lecturer !== undefined) {
 
                     is_lecturer = is_lecturer.toLowerCase() === "true";
-                    getModuleList(client, user_id, is_lecturer, (error, modules) => {
+                    getModuleList(pool, user_id, is_lecturer, (error, modules) => {
                         var verdict = error || modules;
                         reply(verdict);
                     });
@@ -45,14 +45,14 @@ exports.register = (server, options, next) => {
 
                 if (is_lecturer === 'true') {
 
-                    getModuleForLecturer(client, request.query.module_id, (error, module) => {
+                    getModuleForLecturer(pool, request.query.module_id, (error, module) => {
 
                         var verdict = error || module;
                         reply(verdict);
                     });
                 } else {
 
-                    getModuleForStudent(client, user_id, module_id, (error, module) => {
+                    getModuleForStudent(pool, user_id, module_id, (error, module) => {
 
                         var verdict = error || module;
                         reply(verdict);
@@ -65,7 +65,7 @@ exports.register = (server, options, next) => {
             path: '/validate-module',
             handler: (request, reply) => {
                 var module_id = request.query.module_id;
-                validateModuleID(client, module_id, (error, exists) => {
+                validateModuleID(pool, module_id, (error, exists) => {
 
                     var verdict = error || exists;
                     reply(verdict);
@@ -80,7 +80,7 @@ exports.register = (server, options, next) => {
                 var user_id = request.query.user_id;
                 var data = request.payload;
                 
-                saveModule(client, data.module_id, user_id, data.name, data.medals, data.trophies, (error, result) => {
+                saveModule(pool, data.module_id, user_id, data.name, data.medals, data.trophies, (error, result) => {
 
                     var verdict = error || result;
                     reply(verdict);
@@ -97,7 +97,7 @@ exports.register = (server, options, next) => {
                 if (module_id !== undefined && user_id !== undefined) {
 
                     user_id = parseInt(user_id);
-                    joinModule(client, module_id, user_id, (error, result) => {
+                    joinModule(pool, module_id, user_id, (error, result) => {
 
                         var verdict = error || result;
                         reply(verdict);
@@ -114,7 +114,7 @@ exports.register = (server, options, next) => {
                 var module_id = request.query.module_id;
                 if (module_id !== undefined) {
 
-                    getModuleMembers(client, module_id, (error, users) => {
+                    getModuleMembers(pool, module_id, (error, users) => {
                         var verdict = error || users;
                         reply(verdict);
                     });
@@ -132,7 +132,7 @@ exports.register = (server, options, next) => {
                 if (module_id !== undefined && user_id !== undefined) {
 
                     user_id = parseInt(user_id);
-                    removeModuleMember(client, module_id, user_id, (error, modules) => {
+                    removeModuleMember(pool, module_id, user_id, (error, modules) => {
                         var verdict = error || modules;
                         reply(verdict);
                     });

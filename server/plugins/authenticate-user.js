@@ -1,10 +1,11 @@
 const validatePassword = require('../lib/authentication/validatePassword');
 const getUserByEmail = require('../lib/getUserByEmail');
-const client = require('../lib/dbClient');
 const uuid = require('uuid/v1');
 const JWT = require('jsonwebtoken');
 
 exports.register = (server, options, next) => {
+    const pool = server.app.pool;
+
     server.route({
         method: 'POST',
         path: '/authenticate-user',
@@ -15,7 +16,7 @@ exports.register = (server, options, next) => {
             const email = request.payload.email;
             const password = request.payload.password;
 
-            getUserByEmail(client, email, (error, userDetails) => {
+            getUserByEmail(pool, email, (error, userDetails) => {
                 /* istanbul ignore if */
                 if (error) {
                     reply(error);

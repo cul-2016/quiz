@@ -7,9 +7,10 @@ const hasStudentSubmitted = require('../lib/hasStudentSubmitted');
 const getBestAndWorstQuiz = require('../lib/getBestAndWorstQuiz');
 const getParticipationRate = require('../lib/getParticipationRate');
 const getStudentHistory = require('../lib/getStudentHistory.js');
-const client = require('../lib/dbClient');
 
 exports.register = (server, options, next) => {
+    const pool = server.app.pool;
+
     server.route([
         {
             method: 'POST',
@@ -23,7 +24,7 @@ exports.register = (server, options, next) => {
                     user_id = parseInt(user_id);
                     quiz_id = parseInt(quiz_id);
                     question_id = parseInt(question_id);
-                    saveStudentResponse(client, user_id, quiz_id, question_id, response, (error, response) => {
+                    saveStudentResponse(pool, user_id, quiz_id, question_id, response, (error, response) => {
                         var verdict = error || response;
                         reply(verdict);
                     });
@@ -39,17 +40,17 @@ exports.register = (server, options, next) => {
                 var module_id = request.query.module_id;
                 if (module_id !== undefined) {
 
-                    getTotalScoresAndTrophies(client, module_id, (error, mainData) => {
+                    getTotalScoresAndTrophies(pool, module_id, (error, mainData) => {
                         /* istanbul ignore if */
                         if (error) {
                             return reply(error);
                         }
-                        getScoresForLeaderboard(client, module_id, (error, scores) => {
+                        getScoresForLeaderboard(pool, module_id, (error, scores) => {
                             /* istanbul ignore if */
                             if (error) {
                                 return reply(error);
                             }
-                            getQuizIDList(client, module_id, (error, quiz_id_list) => {
+                            getQuizIDList(pool, module_id, (error, quiz_id_list) => {
                                 /* istanbul ignore if */
                                 if (error) {
                                     return reply(error);
@@ -79,7 +80,7 @@ exports.register = (server, options, next) => {
                     console.error('user_id and module_id must be defined');
                     return reply(new Error('user_id and module_id must be defined'));
                 }
-                hasStudentSubmitted(client, user_id, module_id, (error, hasSubmittedBefore) => {
+                hasStudentSubmitted(pool, user_id, module_id, (error, hasSubmittedBefore) => {
                     /* istanbul ignore if */
                     if (error) {
                         return reply(error);
@@ -87,17 +88,17 @@ exports.register = (server, options, next) => {
                     if (!hasSubmittedBefore) {
                         return reply(null);
                     }
-                    getRanking(client, user_id, module_id, (error, ranking) => {
+                    getRanking(pool, user_id, module_id, (error, ranking) => {
                         /* istanbul ignore if */
                         if (error) {
                             return reply(error);
                         }
-                        getBestAndWorstQuiz(client, user_id, module_id, (error, quizzes) => {
+                        getBestAndWorstQuiz(pool, user_id, module_id, (error, quizzes) => {
                             /* istanbul ignore if */
                             if (error) {
                                 return reply(error);
                             }
-                            getParticipationRate(client, user_id, module_id, (error, participation) => {
+                            getParticipationRate(pool, user_id, module_id, (error, participation) => {
                                 /* istanbul ignore if */
                                 if (error) {
                                     return reply(error);
@@ -126,7 +127,7 @@ exports.register = (server, options, next) => {
                     return reply(new Error('module_id and user_id must be defined'));
                 }
 
-                getStudentHistory(client, user_id, module_id, (error, history) => {
+                getStudentHistory(pool, user_id, module_id, (error, history) => {
                     var verdict = error || history;
                     reply(verdict);
                 });

@@ -1,7 +1,7 @@
 const test = require('tape');
 const server = require('../../../server/server.js');
 const simulateAuth = require('../../utils/simulateAuth.js')(server);
-const pool = require('../../../server/lib/dbClient.js');
+const pool = require('../../utils/dbClient.js');
 const redisCli = server.app.redisCli;
 const initDb = require('../../utils/initDb.js')(pool, redisCli);
 

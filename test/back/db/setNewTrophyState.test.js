@@ -1,7 +1,7 @@
 const test = require('tape');
 const setNewTrophyState = require('../../../server/lib/setNewTrophyState');
 const query = require('../../../server/lib/query');
-const pool = require('../../../server/lib/dbClient.js');
+const pool = require('../../utils/dbClient.js');
 const redisCli = require('../../utils/configureRedis.js');
 const initDb = require('../../utils/initDb.js')(pool, redisCli);
 

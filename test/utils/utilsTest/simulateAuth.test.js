@@ -2,7 +2,7 @@ const tape = require('tape');
 const server = require('../initServer.js');
 const simulateAuth = require('../simulateAuth.js')(server);
 const redisCli = server.app.redisCli;
-const pool = require('../../../server/lib/dbClient.js');
+const pool = require('../../utils/dbClient.js');
 const initDb = require('../initDb.js')(pool, redisCli);
 
 

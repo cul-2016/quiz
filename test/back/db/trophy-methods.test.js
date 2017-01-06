@@ -3,7 +3,7 @@ const { getFirstQuizState,
          getHighScoreState,
          getOverallAverageState,
          getParticipationState } = require('../../../server/lib/trophy-methods');
-const pool = require('../../../server/lib/dbClient.js');
+const pool = require('../../utils/dbClient.js');
 const redisCli = require('../../utils/configureRedis.js');
 const initDb = require('../../utils/initDb.js')(pool, redisCli);
 

@@ -1,6 +1,6 @@
 const test = require('tape');
 const mapQuizIDToName = require('../../../server/lib/mapQuizIDToName');
-const pool = require('../../../server/lib/dbClient.js');
+const pool = require('../../utils/dbClient.js');
 const redisCli = require('../../utils/configureRedis.js');
 const initDb = require('../../utils/initDb.js')(pool, redisCli);
 

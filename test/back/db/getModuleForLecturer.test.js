@@ -1,7 +1,7 @@
 const test = require('tape');
 const getModuleForLecturer = require('../../../server/lib/getModuleForLecturer');
 const expected = require('../../utils/data-fixtures').getModuleForLecturerData;
-const pool = require('../../../server/lib/dbClient.js');
+const pool = require('../../utils/dbClient.js');
 const redisCli = require('../../utils/configureRedis.js');
 const initDb = require('../../utils/initDb.js')(pool, redisCli);
 
