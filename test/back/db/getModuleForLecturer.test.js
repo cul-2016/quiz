@@ -1,6 +1,6 @@
 const test = require('tape');
 const getModuleForLecturer = require('../../../server/lib/getModuleForLecturer');
-const expected = require('../../utils/data-fixtures').getModuleForLecturerData;
+const expected = require('../../utils/data-fixtures').expectedLecturer;
 const pool = require('../../utils/dbClient.js');
 const redisCli = require('../../utils/configureRedis.js');
 const initDb = require('../../utils/initDb.js')(pool, redisCli);
@@ -28,4 +28,3 @@ test.onFinish(() => {
     redisCli.quit();
     pool.end();
 });
-

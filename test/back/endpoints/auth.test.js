@@ -18,9 +18,6 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
 
 // authentication checks
 [
-    // static files
-    { url: '/' },
-
     // module endpoint tests
     { url: '/add-new-module?user_id=1', method: 'post', payload: newModule },
     { url: '/get-module-members?module_id=TEST' },
@@ -53,7 +50,7 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
         .then(() => simulateAuth())
         .then((token) => {
             const faketoken = token.substring(token.length - 5);
-        
+
             const options = {
                 method: endpoint.method || 'get',
                 url: endpoint.url,
@@ -74,7 +71,7 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
         initDb()
         .then(() => simulateAuth())
         .then((token) => {
-        
+
             const options = {
                 method: endpoint.method || 'get',
                 url: endpoint.url,
@@ -101,7 +98,7 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
                 payload: endpoint.payload,
             };
 
-            return server.inject(options)
+            return server.inject(options);
         })
         .then((response) => {
             t.equal(response.statusCode, 401, '401 status code for ' + endpoint.url);
@@ -111,6 +108,8 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
 
 // no auth endpoints
 [
+    // static files
+    { url: '/' },
     { url: '/authenticate-user', method: 'post', payload: lecturerCreds },
     { url: '/save-user', method: 'post', payload: franzCreds },
     { url: '/submit-new-password', method: 'post', payload: { code: 'reset-password-code-2', password: 'testing' } },
@@ -124,8 +123,8 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
 
         server.inject(options, (response) => {
             if (response.statusCode === 302) {
-              t.equal(response.statusCode, 302, endpoint.url + ' doesnt require authentication');
-              return 
+                t.equal(response.statusCode, 302, endpoint.url + ' doesnt require authentication');
+                return;
             }
             t.equal(response.statusCode, 200, endpoint.url + ' doesnt require authentication');
         });

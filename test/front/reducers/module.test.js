@@ -2,7 +2,7 @@ import test from 'tape';
 import { initialState as moduleState } from '../../../src/js/reducers/module';
 import { getModuleError as error, getModuleMembersError, removeModuleMember } from '../../utils/action-fixtures';
 import { module as lecturerData,
-         getModuleForStudentData as studentData,
+         expectedStudent as studentData,
          getModuleMembers } from '../../utils/data-fixtures';
 import { module as reducer } from '../../../src/js/reducers/module';
 import deepFreeze from '../../utils/deepFreeze';

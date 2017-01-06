@@ -16,6 +16,7 @@ server.register(plugins, (error) => {
     server.route({
         method: 'get',
         path: '/{all*}',
+        config: { auth: false },
         handler: { directory: { path: 'public' } }
     });
 });

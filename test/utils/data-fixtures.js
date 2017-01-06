@@ -292,7 +292,7 @@ const getTotalScoresAndTrophiesData = [
         overall_average: false,
         participation: false,
         total_score: 0,
-        user_id: 4, 
+        user_id: 4,
         username: 'Mina'
     }
 ];
