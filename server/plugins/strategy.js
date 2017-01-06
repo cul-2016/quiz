@@ -1,7 +1,7 @@
 exports.register = (server, options, next) => {
     const validate = (decoded, request, callback) => {
         if (!decoded.user_details.user_id) {
-            return callback(new Error('undefined' + request.state, false));
+            return callback(null, false);
         }
         server.app.redisCli.getAsync(decoded.user_details.user_id)
             .then((res) => {
@@ -9,10 +9,11 @@ exports.register = (server, options, next) => {
                 ? callback(null, true)
                 : callback(null, false);
             })
+            /* istanbul ignore next */
             .catch((error) => {
                 callback(error, false);
             });
-    }
+    };
 
     server.auth.strategy('strategy', 'jwt', {
         key: 'secret',

@@ -1,20 +1,10 @@
 const test = require('tape');
 const server = require('../../../server/server.js');
-const simulateAuth = require('../../utils/simulateAuth.js')(server);
 const pool = require('../../utils/dbClient.js');
 const redisCli = server.app.redisCli;
 const initDb = require('../../utils/initDb.js')(pool, redisCli);
 
-const {
-    questions,
-    updateQuizOptionsPayload,
-    newModule,
-    expectedStudent,
-    expectedLecturer
-} = require('../../utils/data-fixtures.js');
-
 const lecturerCreds = { email: 'authenticate-user@city.ac.uk', password: 'testinglecturer' };
-const verificationCreds = { email: 'verification@email.com', password: 'testinglecturer' };
 const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer', is_lecturer: true };
 
 if (!process.env.TESTING) {
@@ -84,11 +74,7 @@ test('/ endpoint works returns the correct payload', (t) => {
     {
         method: 'post',
         url: '/save-user',
-        payload: {
-            email: 'franzmoro@hotmail.com',
-            password: 'testinglecturer',
-            is_lecturer: true
-        },
+        payload: franzCreds,
         expected: {
             emailSent: true
         }
@@ -120,7 +106,7 @@ test('/ endpoint works returns the correct payload', (t) => {
             is_lecturer: false,
             is_verified: true,
             reset_password_code: null,
-            user_id: 35,
+            user_id: 34,
             username: 'testingstudent',
             verification_code: null
         }

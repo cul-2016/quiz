@@ -42,7 +42,7 @@ tape('initDb clears the redis database', (t) => {
         t.equal(keys.length, 0, 'redis db is cleared by initDb', 'KYiiYb5Ofc');
         t.end();
     })
-    .catch((err) => t.error(error));
+    .catch((err) => t.error(err));
 });
 
 tape.onFinish(() => {

@@ -36,7 +36,7 @@ const isDescendingOrder = (array) => {
         }
         return iterate(array, ++i);
     })(array, 0);
-}
+};
 
 test.onFinish(() => {
     redisCli.quit();

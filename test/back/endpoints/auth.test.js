@@ -43,13 +43,35 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
     // user tests
     { url: '/get-user-details?user_id=1' }
 ].forEach((endpoint) => {
+    test(endpoint.url + ' endpoint returns 401 due to user_id not defined in decoded token', (t) => {
+        t.plan(1);
+
+        initDb()
+        .then(() => simulateAuth())
+        .then(() => {
+            const faketoken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2RldGFpbHMiOnsiZW1haWwiOiJsZWN0dXJlckBjaXR5LmFjLnVrIiwiaXNfbGVjdHVyZXIiOnRydWUsInVzZXJuYW1lIjoibGVjdHVyZXIiLCJpc192ZXJpZmllZCI6dHJ1ZSwidmVyaWZpY2F0aW9uX2NvZGUiOm51bGwsInJlc2V0X3Bhc3N3b3JkX2NvZGUiOm51bGwsImV4cGlyeV9jb2RlIjpudWxsfSwidWlkIjoiNTQ3NmYyMzAtZDQzNy0xMWU2LThmMDYtOGRmNTk1ZjYyYmIzIiwiaWF0IjoxNDgzNzI0NDc4fQ.iNGYZZtYuBLo8Qbf1NnApt4qNMoczpWw991yIzdraxE';
+
+            const options = {
+                method: endpoint.method || 'get',
+                url: endpoint.url,
+                payload: endpoint.payload,
+                headers: { Authorization: faketoken }
+            };
+
+            return server.inject(options);
+        })
+        .then((response) => {
+            t.equal(response.statusCode, 401, '401 status code for ' + endpoint.url);
+        });
+    });
+
     test(endpoint.url + ' endpoint returns 401 due to fake token', (t) => {
         t.plan(1);
 
         initDb()
         .then(() => simulateAuth())
-        .then((token) => {
-            const faketoken = token.substring(token.length - 5);
+        .then(() => {
+            const faketoken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2RldGFpbHMiOnsidXNlcl9pZCI6MiwiZW1haWwiOiJsZWN0dXJlckBjaXR5LmFjLnVrIiwiaXNfbGVjdHVyZXIiOnRydWUsInVzZXJuYW1lIjoibGVjdHVyZXIiLCJpc192ZXJpZmllZCI6dHJ1ZSwidmVyaWZpY2F0aW9uX2NvZGUiOm51bGwsInJlc2V0X3Bhc3N3b3JkX2NvZGUiOm51bGwsImV4cGlyeV9jb2RlIjpudWxsfSwidWlkIjoiODhiZjI2ZDAtZDQzNi0xMWU2LWFkYjAtZWQxZmMzc29oaWwiLCJpYXQiOjE0ODM3MjQxMzZ9.eIUlEMiXltreNapzBhDwbQjfF0YwWPqFE5qCyxS51aE';
 
             const options = {
                 method: endpoint.method || 'get',

@@ -10,12 +10,12 @@ test('composeDeleteQuestionStatement returns the correctly formatted object', (t
     initDb()
     .then(() => {
     
-      const deletedQuestions = [1, 2];
-      const expected = { text: 'DELETE FROM questions WHERE question_id IN ($1, $2);', values: [1, 2] };
+        const deletedQuestions = [1, 2];
+        const expected = { text: 'DELETE FROM questions WHERE question_id IN ($1, $2);', values: [1, 2] };
 
-      composeDeleteQuestionStatement(deletedQuestions, (error, response) => {
-          t.deepEqual(response, expected);
-      });
+        composeDeleteQuestionStatement(deletedQuestions, (error, response) => {
+            t.deepEqual(response, expected);
+        });
 
     });
 });

@@ -10,7 +10,6 @@ tape('simulateAuth returns a token', (t) => {
     initDb()
     .then(() => simulateAuth())
     .then((token) => {
-        console.log(token);
         t.ok(token);
     });
 });

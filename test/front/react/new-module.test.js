@@ -65,7 +65,7 @@ test('When lecturer adjusts bronze medal threshold, medal ranges update correctl
                                                     updateMedalVals={ updateMedalVals }
                                                     trophies={ store.getState().newModule.trophies } /></div> );
 
-    const bronzeInput = ReactDOM.findDOMNode(page).querySelector('input[name="bronze"]');
+    const bronzeInput = ReactDOM.findDOMNode(page).querySelector('input[name="bronze"]'); // eslint-disable-line
     bronzeInput.value = 40;
     Simulate.change(bronzeInput);
 
@@ -90,7 +90,7 @@ test('When lecturer adjusts gold medal threshold, medal ranges update correctly'
                                                     updateMedalVals={ updateMedalVals }
                                                     trophies={ store.getState().newModule.trophies } /></div> );
 
-    const goldInput = ReactDOM.findDOMNode(page).querySelector('input[name="gold"]');
+    const goldInput = ReactDOM.findDOMNode(page).querySelector('input[name="gold"]'); // eslint-disable-line
     goldInput.value = 77;
     Simulate.change(goldInput);
 
