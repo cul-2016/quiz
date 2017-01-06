@@ -1,3 +1,4 @@
+const saveStudentResponse = require('../lib/saveStudentResponse');
 const updateIsLastQuiz = require('../lib/updateIsLastQuiz.js');
 const saveQuiz = require('../lib/saveQuiz.js');
 const saveQuestions = require('../lib/saveQuestions.js');
@@ -20,6 +21,27 @@ const editScore = require('../lib/editScore.js');
 exports.register = (server, options, next) => {
     const pool = server.app.pool;
     server.route([
+        {
+            method: 'POST',
+            path: '/save-student-response',
+            handler: (request, reply) => {
+                var user_id = request.payload.user_id;
+                var quiz_id = request.payload.quiz_id;
+                var question_id = request.payload.question_id;
+                var response = request.payload.response;
+                if (user_id !== undefined && quiz_id !== undefined && question_id !== undefined && response !== undefined) {
+                    user_id = parseInt(user_id);
+                    quiz_id = parseInt(quiz_id);
+                    question_id = parseInt(question_id);
+                    saveStudentResponse(pool, user_id, quiz_id, question_id, response, (error, response) => {
+                        var verdict = error || response;
+                        reply(verdict);
+                    });
+                } else {
+                    reply(new Error('one of the required querystrings is not defined'));
+                }
+            }
+        },
         {
             method: 'POST',
             path: '/save-quiz',

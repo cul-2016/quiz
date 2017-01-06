@@ -1,5 +1,5 @@
 const Hapi = require('hapi');
-const plugins = require('./plugins.js');
+const plugins = require('./plugins/index.js');
 const assert = require('assert');
 
 const server = new Hapi.Server();
