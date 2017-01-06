@@ -17,6 +17,7 @@ exports.register = (server, options, next) => {
         {
             method: 'POST',
             path: '/save-user',
+            config: { auth: false },
             handler: (request, reply) => {
                 var email = request.payload.email;
                 var password = request.payload.password;
@@ -97,6 +98,7 @@ exports.register = (server, options, next) => {
         {
             method: 'GET',
             path: '/verification',
+            config: { auth: false },
             handler: (request, reply) => {
                 var verification_code = request.query.code;
 
@@ -134,6 +136,7 @@ exports.register = (server, options, next) => {
         {
             method: 'POST',
             path: '/reset-password-request',
+            config: { auth: false },
             handler: (request, reply) => {
 
                 var email = request.payload.email;
@@ -179,6 +182,7 @@ exports.register = (server, options, next) => {
         {
             method: 'POST',
             path: '/submit-new-password',
+            config: { auth: false },
             handler: (request, reply) => {
                 var code = request.payload.code;
                 var password = request.payload.password;
