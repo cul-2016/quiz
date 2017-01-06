@@ -105,7 +105,7 @@ const Root = ({ store }) => (
                         component={ StudentFeedbackContainer } />
                 </Route>
                 <Route
-                    onEnter={ composeHooks(hooks.fetchQuizReview) }
+                    onEnter={ composeHooks(hooks.fetchQuizDetailsStudent) }
                     path=":module_id/student/history/:quiz_id"
                     component={ ReviewQuizStudentContainer } />
                 <Route

@@ -64,3 +64,15 @@ export const showAnswer = idx => ({
     type: SHOW_ANSWER,
     idx
 });
+
+export const getQuizDetailsStudent = (quiz_id, user_id) => dispatch => {
+
+    dispatch(getQuizReviewRequest());
+
+    axios.get(`/get-quiz-details-student?quiz_id=${quiz_id}&user_id=${user_id}`)
+    .then((response) => {
+        dispatch(getQuizReviewSuccess(response.data));
+    }).catch((error) => {
+        dispatch(getQuizReviewFailure(error));
+    });
+};

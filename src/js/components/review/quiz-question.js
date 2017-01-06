@@ -2,27 +2,31 @@ import React, { PropTypes } from 'react';
 import classnames from 'classnames';
 
 const Question = ({ idx, question, is_lecturer, showAnswer }) => {
-    const { isAnswerShowing } = question;
+
+    const { isAnswerShowing, response, correct_answer } = question;
     const showButton = !isAnswerShowing && !is_lecturer;
-    const showCorrectAnswer = is_lecturer || isAnswerShowing;
+    const showAnswers = is_lecturer || isAnswerShowing;
+    const answerIsWrong = showAnswers && correct_answer !== response;
+    const showWrongAnswer = value => !is_lecturer && response && answerIsWrong
+        && value === response.toLowerCase();
 
     let aClasses = classnames("column answer box", {
-        "correct_answer": showCorrectAnswer &&
-            'a' === question.correct_answer.toLowerCase()
+        "correct_answer": showAnswers && 'a' === correct_answer.toLowerCase(),
+        "wrong_answer": showWrongAnswer('a')
     });
     let bClasses = classnames("column answer box", {
-        "correct_answer": showCorrectAnswer &&
-            'b' === question.correct_answer.toLowerCase()
+        "correct_answer": showAnswers && 'b' === correct_answer.toLowerCase(),
+        "wrong_answer": showWrongAnswer('b')
     });
     let cClasses = classnames("column answer box", {
         "display-none": question.c === undefined,
-        "correct_answer": showCorrectAnswer &&
-            'c' === question.correct_answer.toLowerCase()
+        "correct_answer": showAnswers && 'c' === correct_answer.toLowerCase(),
+        "wrong_answer": showWrongAnswer('c')
     });
     let dClasses = classnames("column answer box", {
         "display-none": question.d === undefined,
-        "correct_answer": showCorrectAnswer &&
-            'd' === question.correct_answer.toLowerCase()
+        "correct_answer": showAnswers && 'd' === correct_answer.toLowerCase(),
+        "wrong_answer": showWrongAnswer('d')
     });
 
     return (

@@ -20,6 +20,7 @@ var RemoveModuleMember = require('./handlers/remove-module-member');
 var GetQuizMembers = require('./handlers/get-quiz-members');
 var EditScore = require('./handlers/edit-score');
 var GetQuizDetails = require('./handlers/get-quiz-details');
+var GetQuizDetailsStudent = require('./handlers/get-quiz-details-student');
 var UpdateQuiz = require('./handlers/update-quiz');
 var GetLeaderboard = require('./handlers/get-leaderboard');
 var GetFeedback = require('./handlers/get-feedback');
@@ -51,6 +52,7 @@ var routes = [
     GetQuizMembers,
     EditScore,
     GetQuizDetails,
+    GetQuizDetailsStudent,
     UpdateQuiz,
     GetLeaderboard,
     GetFeedback,

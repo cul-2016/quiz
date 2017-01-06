@@ -10,6 +10,7 @@ import { getQuizReview } from '../actions/review';
 import { getQuizResult } from '../actions/result';
 import { getQuizMembers } from '../actions/quiz-members';
 import { getQuizDetails } from '../actions/new-quiz';
+import { getQuizDetailsStudent } from '../actions/review';
 import { getLeaderboard } from '../actions/leaderboard';
 import { getFeedback } from '../actions/feedback';
 import { getStudentHistory } from '../actions/student-history';
@@ -242,6 +243,17 @@ export function fetchQuizDetails (nextState, replace, callback) {
 
         const quiz_id = nextState.params.quiz_id;
         store.dispatch(getQuizDetails(quiz_id));
+    }
+    callback();
+}
+
+export function fetchQuizDetailsStudent (nextState, replace, callback) {
+
+    if (validCookieExists()) {
+        const quiz_id = nextState.params.quiz_id;
+        const user_id = store.getState().user.user_id;
+
+        store.dispatch(getQuizDetailsStudent(quiz_id, user_id));
     }
     callback();
 }
