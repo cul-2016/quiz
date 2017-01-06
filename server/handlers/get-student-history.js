@@ -1,5 +1,5 @@
-var client = require('../lib/dbClient');
-var getStudentHistory = require('../lib/getStudentHistory');
+var client = require('../lib/dbClient.js');
+var getStudentHistory = require('../lib/getStudentHistory.js');
 
 
 module.exports = {

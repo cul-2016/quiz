@@ -1,5 +1,5 @@
 var client = require('../lib/dbClient');
-var setQuizToPresented = require('../lib/setQuizToPresented');
+var setQuizToPresented = require('../lib/setQuizToPresented.js');
 
 module.exports = {
     method: 'POST',

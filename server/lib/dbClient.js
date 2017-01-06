@@ -1,5 +1,6 @@
 var pg = require('pg');
 var config;
+
 if (process.env.CIRCLE_CI) {
     config = {
         database: 'circle_test'

@@ -1,16 +1,14 @@
-var client = require('../lib/dbClient');
-var updateIsLastQuiz = require('../lib/updateIsLastQuiz');
-var saveQuiz = require('../lib/saveQuiz');
-var saveQuestions = require('../lib/saveQuestions');
+const client = require('../lib/dbClient.js');
+const updateIsLastQuiz = require('../lib/updateIsLastQuiz.js');
+const saveQuiz = require('../lib/saveQuiz.js');
+const saveQuestions = require('../lib/saveQuestions.js');
 
 module.exports = {
     method: 'POST',
     path: '/save-quiz',
     handler: (request, reply) => {
-        var module_id = request.payload.module_id;
-        var quizName = request.payload.quizName;
-        var questions = request.payload.questions;
-        var is_last_quiz = request.payload.is_last_quiz === true;
+        const { module_id, quizName, questions } = request.payload;
+        const is_last_quiz = request.payload.is_last_quiz === true;
 
         saveQuiz(client, module_id, quizName, is_last_quiz, (error, quiz_id) => {
             /* istanbul ignore if */
