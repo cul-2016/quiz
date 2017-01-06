@@ -5,22 +5,19 @@ var Hapi = require('hapi');
 var plugins = require('./plugins');
 var routes = require('./routes');
 
-exports.init = (port) => {
+const server = new Hapi.Server();
 
-    var server = new Hapi.Server();
+server.connection({
+    host: "0.0.0.0",
+    port: process.env.PORT || 9000,
+    routes: { cors: true }
+});
 
-    server.connection({
-        host: "0.0.0.0",
-        port: port,
-        routes: { cors: true }
+server.register(plugins, (error) => {
+    assert(!error, error);
+
     });
-
-    server.register(plugins, (error) => {
-        if (error) {
-            console.error(error);
-        }
-    });
+});
 
     server.route(routes);
-    return server;
-};
+module.exports = server;
