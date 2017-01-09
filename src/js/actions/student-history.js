@@ -14,8 +14,6 @@ export const getStudentHistory = (module_id) => {
         axios.get(`get-student-history?module_id=${module_id}`)
             .then((response) => {
                 dispatch(getStudentHistorySuccess(response.data));
-            }, (error) => {
-                console.error(error, 'error from /get-student-history');
             })
             .catch((error) => {
                 dispatch(getStudentHistoryFailure(error));

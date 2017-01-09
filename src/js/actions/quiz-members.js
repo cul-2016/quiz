@@ -25,8 +25,6 @@ export const getQuizMembers = (quiz_id) => {
             .then((response) => {
 
                 dispatch(getQuizMembersSuccess(response.data));
-            }, (error) => {
-                console.error(error, 'error from server');
             })
             .catch((error) => {
                 dispatch(getQuizMembersFailure(error));
