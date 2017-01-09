@@ -37,7 +37,7 @@ export function getUserDetails (user_id) {
         dispatch(getUserDetailsRequest());
 
         if (user_id) {
-            axios.get(`/get-user-details?user_id=${user_id}`)
+            axios.get(`/get-user-details`)
             .then((response) => {
                 dispatch(getUserDetailsSuccess(response.data));
             })

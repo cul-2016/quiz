@@ -11,7 +11,7 @@ export function getQuizResult (user_id, module_id, quiz_id) {
 
         dispatch(getQuizResultRequest());
 
-        axios.get(`/get-quiz-result?user_id=${user_id}&module_id=${module_id}&quiz_id=${quiz_id}`)
+        axios.get(`/get-quiz-result?module_id=${module_id}&quiz_id=${quiz_id}`)
             .then((response) => {
                 dispatch(getQuizResultSuccess(response.data));
             })
