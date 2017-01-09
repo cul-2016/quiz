@@ -24,7 +24,7 @@ exports.register = (server, options, next) => {
             method: 'GET',
             path: '/get-leaderboard',
             handler: (request, reply) => {
-                var module_id = request.query.module_id;
+                const module_id = request.query.module_id;
                 if (module_id !== undefined) {
 
                     getTotalScoresAndTrophies(pool, module_id, (error, mainData) => {
@@ -91,7 +91,7 @@ exports.register = (server, options, next) => {
                                     if (error) {
                                         return reply(error);
                                     }
-                                    var data = {
+                                    const data = {
                                         ranking: ranking,
                                         quizzes: quizzes,
                                         participation: participation
@@ -117,7 +117,7 @@ exports.register = (server, options, next) => {
                     }
 
                     getStudentHistory(pool, user_id, module_id, (error, history) => {
-                        var verdict = error || history;
+                        const verdict = error || history;
                         reply(verdict);
                     });
                 });
@@ -149,17 +149,14 @@ exports.register = (server, options, next) => {
                     const module_id = request.query.module_id,
                         is_lecturer = decoded.user_details.is_lecturer,
                         user_id = decoded.user_details.user_id;
-
-                    if (is_lecturer === 'true') {
+                    if (is_lecturer) {
                         getModuleForLecturer(pool, request.query.module_id, (error, module) => {
-                            var verdict = error || module;
-                            console.log(verdict, "Lecturer");
+                            const verdict = error || module;
                             reply(verdict);
                         });
                     } else {
                         getModuleForStudent(pool, user_id, module_id, (error, module) => {
-                            var verdict = error || module;
-                            console.log(verdict, 'STUDENT');
+                            const verdict = error || module;
                             reply(verdict);
                         });
                     }
@@ -170,10 +167,10 @@ exports.register = (server, options, next) => {
             method: 'GET',
             path: '/validate-module',
             handler: (request, reply) => {
-                var module_id = request.query.module_id;
+                const module_id = request.query.module_id;
                 validateModuleID(pool, module_id, (error, exists) => {
 
-                    var verdict = error || exists;
+                    const verdict = error || exists;
                     reply(verdict);
                 });
             }
@@ -182,14 +179,14 @@ exports.register = (server, options, next) => {
             method: 'POST',
             path: '/add-new-module',
             handler: (request, reply) => {
+                jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
+                    const user_id = decoded.user_details.user_id;
+                    const data = request.payload;
 
-                var user_id = request.query.user_id;
-                var data = request.payload;
-
-                saveModule(pool, data.module_id, user_id, data.name, data.medals, data.trophies, (error, result) => {
-
-                    var verdict = error || result;
-                    reply(verdict);
+                    saveModule(pool, data.module_id, user_id, data.name, data.medals, data.trophies, (error, result) => {
+                        const verdict = error || result;
+                        reply(verdict);
+                    });
                 });
             }
         },
@@ -197,31 +194,32 @@ exports.register = (server, options, next) => {
             method: 'get',
             path: '/join-module',
             handler: (request, reply) => {
+                jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
 
-                var module_id = request.query.module_id;
-                var user_id = request.query.user_id;
-                if (module_id !== undefined && user_id !== undefined) {
+                    const module_id = request.query.module_id;
+                    let user_id = decoded.user_details.user_id;
+                    if (module_id !== undefined) {
 
-                    user_id = parseInt(user_id);
-                    joinModule(pool, module_id, user_id, (error, result) => {
-
-                        var verdict = error || result;
-                        reply(verdict);
-                    });
-                } else {
-                    reply(new Error('module_id or user_id is not defined'));
-                }
+                        user_id = parseInt(user_id);
+                        joinModule(pool, module_id, user_id, (error, result) => {
+                            const verdict = error || result;
+                            reply(verdict);
+                        });
+                    } else {
+                        reply(new Error('module_id is not defined'));
+                    }
+                });
             }
         },
         {
             method: 'GET',
             path: '/get-module-members',
             handler: (request, reply) => {
-                var module_id = request.query.module_id;
-                if (module_id !== undefined) {
+                const module_id = request.query.module_id;
 
+                if (module_id !== undefined) {
                     getModuleMembers(pool, module_id, (error, users) => {
-                        var verdict = error || users;
+                        const verdict = error || users;
                         reply(verdict);
                     });
                 } else {
@@ -233,18 +231,21 @@ exports.register = (server, options, next) => {
             method: 'GET',
             path: '/remove-module-member',
             handler: (request, reply) => {
-                var module_id = request.query.module_id;
-                var user_id = request.query.user_id;
-                if (module_id !== undefined && user_id !== undefined) {
+                jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
+                    const module_id = request.query.module_id;
+                    let user_id = decoded.user_details.user_id;
 
-                    user_id = parseInt(user_id);
-                    removeModuleMember(pool, module_id, user_id, (error, modules) => {
-                        var verdict = error || modules;
-                        reply(verdict);
-                    });
-                } else {
-                    reply(new Error('module_id or user_id is not defined'));
-                }
+                    if (module_id !== undefined) {
+                        user_id = parseInt(user_id);
+
+                        removeModuleMember(pool, module_id, user_id, (error, modules) => {
+                            const verdict = error || modules;
+                            reply(verdict);
+                        });
+                    } else {
+                        reply(new Error('module_id is not defined'));
+                    }
+                });
             }
         }
     ]);

@@ -18,13 +18,13 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
 // authentication checks
 [
     // module endpoint tests
-    { url: '/add-new-module?user_id=1', method: 'post', payload: newModule },
+    { url: '/add-new-module', method: 'post', payload: newModule },
     { url: '/get-module-members?module_id=TEST' },
     { url: '/get-module?module_id=TEST' },
     { url: '/get-module-list' },
-    { url: '/remove-module-member?module_id=TEST&user_id=2' },
+    { url: '/remove-module-member?module_id=TEST' },
     { url: '/validate-module?module_id=TEST' },
-    { url: '/join-module?module_id=FAC8&user_id=7' },
+    { url: '/join-module?module_id=FAC8' },
     { url: '/get-leaderboard?module_id=TEST' },
     { url: '/get-feedback?module_id=TEST' },
     { url: '/get-student-history?module_id=TEST' },

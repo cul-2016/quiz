@@ -1,7 +1,7 @@
 const test = require('tape');
 const server = require('../../../server/server.js');
 const simulateAuthStudents = require('../../utils/simulateAuthStudents.js')(server);
-const simulateAuth = require('../../utils/simulateAuthStudents.js')(server);
+const simulateAuth = require('../../utils/simulateAuth.js')(server);
 const pool = require('../../utils/dbClient.js');
 const redisCli = server.app.redisCli;
 const initDb = require('../../utils/initDb.js')(pool, redisCli);
@@ -136,21 +136,20 @@ test('/ endpoint works returns the correct payload', (t) => {
     {
         method: 'get',
         url: '/get-module-list',
-        expected: [{ module_id: 'TEST', name: 'test module' }]
+        expected: [{ module_id: 'TEST', name: 'test module' }, { module_id: 'CENT', name: 'Percentile' }, { module_id: 'FAC8', name: 'FAC8' }]
     },
     {
         method: 'get',
         url: '/get-module?module_id=TEST',
-        expected: { medals: { condition: [39, 69], medal_name: ['bronze', 'silver', 'gold'] }, module_id: 'TEST', name: 'test module', trophies_awarded: { first_quiz: false, high_score: false, overall_average: false, participation: false } }
+        expected: { medals: { condition: [39, 69], medal_name: ['bronze', 'silver', 'gold'] }, module_id: 'TEST', name: 'test module', num_enrolled: 5, quizzes: [{ is_last_quiz: false, is_presented: true, name: 'Week 1 Quiz', num_entries: '4', num_questions: '2', quiz_id: 1 }, { is_last_quiz: false, is_presented: true, name: 'Week 2 Quiz', num_entries: '3', num_questions: '3', quiz_id: 2 }], trophies: { condition: [1, 100, 65, 2], trophy_name: ['first_quiz', 'high_score', 'overall_average', 'participation'] } }
     }
 ].forEach((endpoint) => {
-    test(endpoint.url + ' endpoint returns true when password matches', (t) => {
+    test(endpoint.url + ' endpoint returns expected payload', (t) => {
         t.plan(1);
 
         initDb()
         .then(() => simulateAuth())
         .then((token) => {
-            console.log(token);
             const options = {
                 method: endpoint.method,
                 url: endpoint.url,
@@ -185,7 +184,7 @@ test('/ endpoint works returns the correct payload', (t) => {
     {
         method: 'get',
         url: '/get-module?module_id=TEST',
-        expected: [{ module_id: 'TEST', name: 'test module' }]
+        expected: { medals: { condition: [39, 69], medal_name: ['bronze', 'silver', 'gold'] }, module_id: 'TEST', name: 'test module', trophies_awarded: { first_quiz: false, high_score: false, overall_average: false, participation: false } }
     }
 ].forEach((endpoint) => {
     test(endpoint.url + ' endpoint returns correct payload', (t) => {

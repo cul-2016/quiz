@@ -10,7 +10,6 @@ const simulateAuth = (server) => () => {
             }
         };
         server.inject(options, (response) => {
-            console.log(response.headers.authorization, 'you have set the auth for lecturers');
             resolve(response.headers.authorization);
         });
     });

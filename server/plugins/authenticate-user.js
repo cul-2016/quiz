@@ -41,7 +41,6 @@ exports.register = (server, options, next) => {
 
                             client.setAsync(userDetails[0].user_id.toString(), uid)
                                 .then(() => {
-                                    console.log(userDetails[0], 'USER WHEN AUTHENTICATING');
                                     const userObject = { user_details: userDetails[0], uid: uid };
                                     const token = JWT.sign(userObject, process.env.JWT_SECRET);
                                     const options = { path: "/", isSecure: false, isHttpOnly: false };

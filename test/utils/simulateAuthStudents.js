@@ -1,4 +1,4 @@
-const simulateAuth = (server) => () => {
+const simulateAuthStudents = (server) => () => {
 
     return new Promise((resolve) => {
         const options = {
@@ -15,4 +15,4 @@ const simulateAuth = (server) => () => {
     });
 };
 
-module.exports = simulateAuth;
+module.exports = simulateAuthStudents;
