@@ -1,0 +1,163 @@
+const test = require('tape');
+const server = require('../../../server/server.js');
+const simulateAuth = require('../../utils/simulateAuth.js')(server);
+const pool = require('../../utils/dbClient.js');
+const redisCli = server.app.redisCli;
+const initDb = require('../../utils/initDb.js')(pool, redisCli);
+
+const {
+    questions,
+    updateQuizOptionsPayload,
+    newModule
+} = require('../../utils/data-fixtures.js');
+
+const lecturerCreds = { email: 'authenticate-user@city.ac.uk', password: 'testinglecturer' };
+const verificationCreds = { email: 'verification@email.com', password: 'testinglecturer' };
+const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer', is_lecturer: true };
+
+// authentication checks
+[
+    // module endpoint tests
+    { url: '/add-new-module?user_id=1', method: 'post', payload: newModule },
+    { url: '/get-module-members?module_id=TEST' },
+    { url: '/get-module?module_id=TEST&is_lecturer=true' },
+    { url: '/get-module-list?user_id=2&is_lecturer=true' },
+    { url: '/get-module-list?user_id=1&is_lecturer=false' },
+    { url: '/remove-module-member?module_id=TEST&user_id=2' },
+    { url: '/validate-module?module_id=TEST' },
+    { url: '/join-module?module_id=FAC8&user_id=7' },
+    { url: '/get-leaderboard?module_id=TEST' },
+    { url: '/get-feedback?module_id=TEST&user_id=1' },
+    { url: '/get-student-history?module_id=TEST&user_id=1' },
+
+    // quiz tests
+    { url: '/abort-quiz?quiz_id=8' },
+    { url: '/save-quiz', method: 'post', payload: { module_id: 'TEST', quizName: 'Brand New Quiz', questions } },
+    { url: '/save-student-response', method: 'post', payload: { user_id: '1', quiz_id: '1', question_id: '1', response: 'a' } },
+    { url: '/get-quiz-questions?quiz_id=1' },
+    { url: '/end-quiz', method: 'post', payload: { quiz_id: 8 } },
+    { url: '/get-quiz-result?user_id=1&module_id=TEST&quiz_id=1' },
+    { url: '/get-quiz-review?quiz_id=1' },
+    { url: '/get-quiz-members?quiz_id=1' },
+    { url: '/edit-score?quiz_id=1&user_id=3&score=2' },
+    { url: '/get-quiz-details?quiz_id=1' },
+    { url: '/update-quiz', method: 'post', payload: updateQuizOptionsPayload },
+    { url: '/get-quiz-details-student?user_id=1&quiz_id=1' },
+
+    // user tests
+    { url: '/get-user-details?user_id=1' }
+].forEach((endpoint) => {
+    test(endpoint.url + ' endpoint returns 401 due to user_id not defined in decoded token', (t) => {
+        t.plan(1);
+
+        initDb()
+        .then(() => simulateAuth())
+        .then(() => {
+            const faketoken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2RldGFpbHMiOnsiZW1haWwiOiJsZWN0dXJlckBjaXR5LmFjLnVrIiwiaXNfbGVjdHVyZXIiOnRydWUsInVzZXJuYW1lIjoibGVjdHVyZXIiLCJpc192ZXJpZmllZCI6dHJ1ZSwidmVyaWZpY2F0aW9uX2NvZGUiOm51bGwsInJlc2V0X3Bhc3N3b3JkX2NvZGUiOm51bGwsImV4cGlyeV9jb2RlIjpudWxsfSwidWlkIjoiNTQ3NmYyMzAtZDQzNy0xMWU2LThmMDYtOGRmNTk1ZjYyYmIzIiwiaWF0IjoxNDgzNzI0NDc4fQ.iNGYZZtYuBLo8Qbf1NnApt4qNMoczpWw991yIzdraxE';
+
+            const options = {
+                method: endpoint.method || 'get',
+                url: endpoint.url,
+                payload: endpoint.payload,
+                headers: { Authorization: faketoken }
+            };
+
+            return server.inject(options);
+        })
+        .then((response) => {
+            t.equal(response.statusCode, 401, '401 status code for ' + endpoint.url);
+        });
+    });
+
+    test(endpoint.url + ' endpoint returns 401 due to fake token', (t) => {
+        t.plan(1);
+
+        initDb()
+        .then(() => simulateAuth())
+        .then(() => {
+            const faketoken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2RldGFpbHMiOnsidXNlcl9pZCI6MiwiZW1haWwiOiJsZWN0dXJlckBjaXR5LmFjLnVrIiwiaXNfbGVjdHVyZXIiOnRydWUsInVzZXJuYW1lIjoibGVjdHVyZXIiLCJpc192ZXJpZmllZCI6dHJ1ZSwidmVyaWZpY2F0aW9uX2NvZGUiOm51bGwsInJlc2V0X3Bhc3N3b3JkX2NvZGUiOm51bGwsImV4cGlyeV9jb2RlIjpudWxsfSwidWlkIjoiODhiZjI2ZDAtZDQzNi0xMWU2LWFkYjAtZWQxZmMzc29oaWwiLCJpYXQiOjE0ODM3MjQxMzZ9.eIUlEMiXltreNapzBhDwbQjfF0YwWPqFE5qCyxS51aE';
+
+            const options = {
+                method: endpoint.method || 'get',
+                url: endpoint.url,
+                payload: endpoint.payload,
+                headers: { Authorization: faketoken }
+            };
+
+            return server.inject(options);
+        })
+        .then((response) => {
+            t.equal(response.statusCode, 401, '401 status code for ' + endpoint.url);
+        });
+    });
+
+    test(endpoint.url + ' authentication works', (t) => {
+        t.plan(1);
+
+        initDb()
+        .then(() => simulateAuth())
+        .then((token) => {
+
+            const options = {
+                method: endpoint.method || 'get',
+                url: endpoint.url,
+                payload: endpoint.payload,
+                headers: { Authorization: token }
+            };
+
+            return server.inject(options);
+        })
+        .then((response) => {
+            t.equal(response.statusCode, 200, '200 status code');
+        });
+    });
+
+    test(endpoint.url + ' endpoint returns 401 if no Authorization header is present', (t) => {
+        t.plan(1);
+
+        initDb()
+        .then(() => {
+
+            const options = {
+                method: endpoint.method || 'get',
+                url: endpoint.url,
+                payload: endpoint.payload,
+            };
+
+            return server.inject(options);
+        })
+        .then((response) => {
+            t.equal(response.statusCode, 401, '401 status code for ' + endpoint.url);
+        });
+    });
+});
+
+// no auth endpoints
+[
+    // static files
+    { url: '/' },
+    { url: '/authenticate-user', method: 'post', payload: lecturerCreds },
+    { url: '/save-user', method: 'post', payload: franzCreds },
+    { url: '/submit-new-password', method: 'post', payload: { code: 'reset-password-code-2', password: 'testing' } },
+    { url: '/reset-password-request', method: 'post', payload: { email: 'sohilpandya@foundersandcoders.com' } },
+    { url: '/verification?code=testing-verification-code-lecturer', method: 'get', payload: verificationCreds }
+].forEach((endpoint) => {
+    test('`authenticate-user` endpoint returns true when password matches', (t) => {
+        t.plan(1);
+
+        const options = endpoint;
+
+        server.inject(options, (response) => {
+            if (response.statusCode === 302) {
+                t.equal(response.statusCode, 302, endpoint.url + ' doesnt require authentication');
+                return;
+            }
+            t.equal(response.statusCode, 200, endpoint.url + ' doesnt require authentication');
+        });
+    });
+});
+
+test.onFinish(() => {
+    redisCli.quit();
+    pool.end();
+});
