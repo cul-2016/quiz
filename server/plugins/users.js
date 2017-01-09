@@ -10,6 +10,7 @@ const compareResetPasswordCodeAndExpiry = require('../lib/compareResetPasswordCo
 const updatePassword = require('../lib/updatePassword.js');
 const resetPasswordRequestEmail = require('../lib/email/reset-password-request-email');
 const saveExpiringTokenForUser = require('../lib/saveExpiringTokenForUser');
+const jwt = require('jsonwebtoken');
 
 exports.register = (server, options, next) => {
     const pool = server.app.pool;
@@ -121,15 +122,17 @@ exports.register = (server, options, next) => {
             method: 'GET',
             path: '/get-user-details',
             handler: (request, reply) => {
-                var user_id = request.query.user_id;
-                getUserByID(pool, user_id, (error, userDetails) => {
-                    /* istanbul ignore if */
-                    if (error) {
-                        return reply(error);
-                    } else {
-                        delete userDetails[0].password;
-                        return reply(userDetails[0]);
-                    }
+                jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
+                    const user_id = decoded.user_details.user_id;
+                    getUserByID(pool, user_id, (error, userDetails) => {
+                        /* istanbul ignore if */
+                        if (error) {
+                            return reply(error);
+                        } else {
+                            delete userDetails[0].password;
+                            return reply(userDetails[0]);
+                        }
+                    });
                 });
             }
         },
@@ -222,4 +225,3 @@ exports.register = (server, options, next) => {
 };
 
 exports.register.attributes = { pkg: { name: 'users' } };
-

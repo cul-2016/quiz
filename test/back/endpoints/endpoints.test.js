@@ -142,6 +142,11 @@ test('/ endpoint works returns the correct payload', (t) => {
         method: 'get',
         url: '/get-module?module_id=TEST',
         expected: { medals: { condition: [39, 69], medal_name: ['bronze', 'silver', 'gold'] }, module_id: 'TEST', name: 'test module', num_enrolled: 5, quizzes: [{ is_last_quiz: false, is_presented: true, name: 'Week 1 Quiz', num_entries: '4', num_questions: '2', quiz_id: 1 }, { is_last_quiz: false, is_presented: true, name: 'Week 2 Quiz', num_entries: '3', num_questions: '3', quiz_id: 2 }], trophies: { condition: [1, 100, 65, 2], trophy_name: ['first_quiz', 'high_score', 'overall_average', 'participation'] } }
+    },
+    {
+        method: 'get',
+        url: '/get-user-details',
+        expected: { email: 'lecturer@city.ac.uk', expiry_code: null, is_lecturer: true, is_verified: true, reset_password_code: null, user_id: 2, username: 'lecturer', verification_code: null }
     }
 ].forEach((endpoint) => {
     test(endpoint.url + ' endpoint returns expected payload', (t) => {
@@ -185,6 +190,11 @@ test('/ endpoint works returns the correct payload', (t) => {
         method: 'get',
         url: '/get-module?module_id=TEST',
         expected: { medals: { condition: [39, 69], medal_name: ['bronze', 'silver', 'gold'] }, module_id: 'TEST', name: 'test module', trophies_awarded: { first_quiz: false, high_score: false, overall_average: false, participation: false } }
+    },
+    {
+        method: 'get',
+        url: '/get-user-details',
+        expected: { email: 'student@city.ac.uk', expiry_code: null, is_lecturer: false, is_verified: true, reset_password_code: null, user_id: 1, username: 'student', verification_code: null }
     }
 ].forEach((endpoint) => {
     test(endpoint.url + ' endpoint returns correct payload', (t) => {
