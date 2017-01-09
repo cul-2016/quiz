@@ -21,7 +21,7 @@ const mapDispatchToProps = (dispatch) => ({
 
     getStudentHistory: (user_id, module_id) => {
 
-        dispatch(getStudentHistory(user_id, module_id));
+        dispatch(getStudentHistory(module_id));
     },
 
     clearStudentHistory: () => {

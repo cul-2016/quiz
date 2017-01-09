@@ -23,12 +23,14 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
     { url: '/get-module?module_id=TEST&is_lecturer=true' },
     { url: '/get-module-list?user_id=2&is_lecturer=true' },
     { url: '/get-module-list?user_id=1&is_lecturer=false' },
+    { url: '/get-module?module_id=TEST' },
+    { url: '/get-module-list' },
     { url: '/remove-module-member?module_id=TEST&user_id=2' },
     { url: '/validate-module?module_id=TEST' },
     { url: '/join-module?module_id=FAC8&user_id=7' },
     { url: '/get-leaderboard?module_id=TEST' },
-    { url: '/get-feedback?module_id=TEST&user_id=1' },
-    { url: '/get-student-history?module_id=TEST&user_id=1' },
+    { url: '/get-feedback?module_id=TEST' },
+    { url: '/get-student-history?module_id=TEST' },
 
     // quiz tests
     { url: '/abort-quiz?quiz_id=8' },
@@ -102,7 +104,7 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
                 method: endpoint.method || 'get',
                 url: endpoint.url,
                 payload: endpoint.payload,
-                headers: { Authorization: token }
+                headers: { Authorization: token, cookie: 'token=' + token },
             };
 
             return server.inject(options);
