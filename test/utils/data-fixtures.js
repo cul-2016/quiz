@@ -1,4 +1,4 @@
-export const users = [
+const users = [
     {
         user_id: 1,
         email: 'student@city.ac.uk',
@@ -12,7 +12,7 @@ export const users = [
     }
 ];
 
-export const userDetails = {
+const userDetails = {
     user_id: 1,
     email: 'test@test.com',
     username: 'test',
@@ -22,20 +22,20 @@ export const userDetails = {
     verification_code: null
 };
 
-export const feedback = {
+const feedback = {
     ranking: 25,
     quizzes: ['Week 3 quiz', 'Week 1 quiz'],
     participation: 50
 };
 
-export const dashboardData = [
+const dashboardData = [
     {
         module_id: 'CS50',
         name: 'Intro to Computer Science'
     }
 ];
 
-export const medals = {
+const medals = {
     medal_name: [
         "bronze",
         "silver",
@@ -44,7 +44,7 @@ export const medals = {
     condition: [39, 69]
 };
 
-export const trophies = {
+const trophies = {
     trophy_name: [
         "participation",
         "overall_average",
@@ -54,10 +54,10 @@ export const trophies = {
     condition: [3, 60, 100, 1]
 };
 
-export const newModule = Object.assign({}, dashboardData[0], { medals }, { trophies });
+const newModule = Object.assign({}, dashboardData[0], { medals }, { trophies });
 
 
-export const quizzes = [
+const quizzes = [
     {
         quiz_id: 2,
         name: 'Pop quiz',
@@ -74,11 +74,9 @@ export const quizzes = [
     }
 ];
 
-export const module = Object.assign({}, newModule, { quizzes });
+const _module = Object.assign({}, newModule, { quizzes });
 
-
-export const getModuleForLecturerData = {
-
+const expectedLecturer = {
     module_id: 'TEST',
     name: 'test module',
     medals: {
@@ -115,7 +113,7 @@ export const getModuleForLecturerData = {
     ]
 };
 
-export const getModuleForStudentData = {
+const expectedStudent = {
 
     module_id: 'TEST',
     name: 'test module',
@@ -132,7 +130,7 @@ export const getModuleForStudentData = {
 };
 
 
-export const newQuiz = {
+const newQuiz = {
     name: undefined,
     questions: [
         {
@@ -148,7 +146,7 @@ export const newQuiz = {
     error: undefined
 };
 
-export const getQuizDetailsData = {
+const getQuizDetailsData = {
     name: 'Old Quiz',
     is_last_quiz: false,
     questions: [
@@ -163,7 +161,7 @@ export const getQuizDetailsData = {
     ]
 };
 
-export const questions = [
+const questions = [
     {
         question: 'capital of England',
         a: 'London',
@@ -174,7 +172,7 @@ export const questions = [
     }
 ];
 
-export const questionsAnswers = [
+const questionsAnswers = [
     {
         question: 'capital of England',
         a: 'London',
@@ -186,7 +184,7 @@ export const questionsAnswers = [
     }
 ];
 
-export const reviewQuestions = [
+const reviewQuestions = [
     {
         quiz_id: 1,
         question_id: 1,
@@ -217,7 +215,7 @@ export const reviewQuestions = [
     }
 ];
 
-export const liveQuizQuestions = [
+const liveQuizQuestions = [
     {
         question_id: 1,
         question: 'capital of England',
@@ -228,7 +226,7 @@ export const liveQuizQuestions = [
     }
 ];
 
-export const nextQuestion = {
+const nextQuestion = {
     quiz_id: 1,
     nextQuestion: {
         question_id: 1,
@@ -240,62 +238,59 @@ export const nextQuestion = {
     }
 };
 
-export const getModuleMembers = [{
+const getModuleMembers = [{
     email: 'student@city.ac.uk',
     user_id: 1,
     username: 'student'
 }];
 
-export const getQuizMembers = [{
+const getQuizMembers = [{
     user_id: 1,
     quiz_id: 1,
     score: 5
 }];
 
-export const getQuizIDListData = [
+const getQuizIDListData = [
     { quiz_id: 1 },
     { quiz_id: 2 }
 ];
 
-export const getScoresForLeaderboardData = [
+const getScoresForLeaderboardData = [
     { quiz_id: 1, percentage_score: 100, user_id: 1 },
     { quiz_id: 2, percentage_score: 33, user_id: 1 },
-    { quiz_id: 1, percentage_score: 100, user_id: 3 },
+    { quiz_id: 1, percentage_score: 50, user_id: 3 },
     { quiz_id: 2, percentage_score: 33, user_id: 3 },
     { quiz_id: 1, percentage_score: 0, user_id: 4 },
     { quiz_id: 1, percentage_score: 100, user_id: 5 },
     { quiz_id: 2, percentage_score: 33, user_id: 5 }
 ];
 
-export const getTotalScoresAndTrophiesData = [
+const getTotalScoresAndTrophiesData = [
     {
+        first_quiz: false,
+        high_score: false,
+        overall_average: false,
+        participation: false,
         total_score: 3,
         user_id: 5,
-        username: 'Homer',
+        username: 'Homer'
+    }, {
         first_quiz: false,
         high_score: false,
         overall_average: false,
-        participation: false
-    },
-    {
-        total_score: 3,
-        user_id: 3,
-        username: 'Sohil',
-        first_quiz: false,
-        high_score: false,
-        overall_average: false,
-        participation: false
-    },
-    {
+        participation: false,
         total_score: 3,
         user_id: 1,
-        username: 'student',
-        first_quiz: true,
-        high_score: true,
+        username: 'student'
+    }, {
+        first_quiz: false,
+        high_score: false,
         overall_average: false,
-        participation: true
-    },
-    {
+        participation: false,
+        total_score: 2,
+        user_id: 3,
+        username: 'Sohil'
+    }, {
         first_quiz: false,
         high_score: false,
         overall_average: false,
@@ -303,20 +298,19 @@ export const getTotalScoresAndTrophiesData = [
         total_score: 0,
         user_id: 11,
         username: 'Apu'
-    },
-    {
-        total_score: 0,
-        user_id: 4,
-        username: 'Mina',
+    }, {
         first_quiz: false,
         high_score: false,
         overall_average: false,
-        participation: false
+        participation: false,
+        total_score: 0,
+        user_id: 4,
+        username: 'Mina'
     }
 ];
 
 
-export const allPercentageScoresData = [
+const allPercentageScoresData = [
     { user_id: 23, average: 100 },
     { user_id: 24, average: 100 },
     { user_id: 21, average: 90 },
@@ -340,9 +334,70 @@ export const allPercentageScoresData = [
 ];
 
 
-export const studentHistoryData = [
+const studentHistoryData = [
     { name: 'Trivia quiz', num_questions: '10', quiz_id: 3, score: 2 },
     { name: 'Arbitrary 1', num_questions: '2', quiz_id: 4, score: 2 },
     { name: 'Arbitrary 2', num_questions: '2', quiz_id: 5, score: 1 },
     { name: 'Arbitrary 3', num_questions: '1', quiz_id: 6, score: 1 }
 ];
+
+const updateQuizOptionsPayload = {
+    module_id: 'TEST',
+    quiz_id: 1,
+    quizName: 'Week 1 Quiz',
+    editedQuestions:
+    [
+        {
+            question_id: 2,
+            question: 'What is the capital of Croatia?',
+            a: 'Zagreb',
+            b: 'Cardiff',
+            c: 'Edinburgh',
+            d: 'Doncaster',
+            correct_answer: 'a',
+            quiz_id: '1'
+        },
+        {
+            question_id: 1,
+            question: 'What is the capital of England?',
+            a: 'London',
+            b: 'Cardiff',
+            c: 'Edinburgh',
+            d: 'Doncaster',
+            correct_answer: 'a',
+            quiz_id: '1'
+        }
+    ],
+    newQuestions: [],
+    deletedQuestions: []
+};
+
+
+module.exports = {
+    users,
+    userDetails,
+    feedback,
+    dashboardData,
+    medals,
+    trophies,
+    newModule,
+    quizzes,
+    module: _module,
+    expectedLecturer,
+    expectedStudent,
+    newQuiz,
+    getQuizDetailsData,
+    questions,
+    reviewQuestions,
+    liveQuizQuestions,
+    nextQuestion,
+    getModuleMembers,
+    getQuizMembers,
+    getQuizIDListData,
+    getScoresForLeaderboardData,
+    getTotalScoresAndTrophiesData,
+    allPercentageScoresData,
+    studentHistoryData,
+    updateQuizOptionsPayload,
+    questionsAnswers,
+};

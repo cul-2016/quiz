@@ -4,6 +4,8 @@ dependencies:
 machine:
   node:
     version: 6.9.1
+  services:
+    - redis
 database:
   override:
     - psql -U ubuntu circle_test < ./test/utils/test-schema.txt
