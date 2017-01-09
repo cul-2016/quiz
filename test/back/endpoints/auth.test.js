@@ -15,7 +15,6 @@ const lecturerCreds = { email: 'authenticate-user@city.ac.uk', password: 'testin
 const verificationCreds = { email: 'verification@email.com', password: 'testinglecturer' };
 const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer', is_lecturer: true };
 
-
 // authentication checks
 [
     // module endpoint tests
@@ -27,10 +26,14 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
     { url: '/remove-module-member?module_id=TEST&user_id=2' },
     { url: '/validate-module?module_id=TEST' },
     { url: '/join-module?module_id=FAC8&user_id=7' },
+    { url: '/get-leaderboard?module_id=TEST' },
+    { url: '/get-feedback?module_id=TEST&user_id=1' },
+    { url: '/get-student-history?module_id=TEST&user_id=1' },
 
     // quiz tests
     { url: '/abort-quiz?quiz_id=8' },
     { url: '/save-quiz', method: 'post', payload: { module_id: 'TEST', quizName: 'Brand New Quiz', questions } },
+    { url: '/save-student-response', method: 'post', payload: { user_id: '1', quiz_id: '1', question_id: '1', response: 'a' } },
     { url: '/get-quiz-questions?quiz_id=1' },
     { url: '/end-quiz', method: 'post', payload: { quiz_id: 8 } },
     { url: '/get-quiz-result?user_id=1&module_id=TEST&quiz_id=1' },
