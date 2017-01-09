@@ -16,7 +16,7 @@ exports.register = (server, options, next) => {
     };
 
     server.auth.strategy('strategy', 'jwt', {
-        key: 'secret',
+        key: process.env.JWT_SECRET,
         validateFunc: validate,
         verifyOptions: {
             algorithms: ['HS256']

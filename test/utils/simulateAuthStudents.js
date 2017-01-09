@@ -5,12 +5,11 @@ const simulateAuth = (server) => () => {
             url: '/authenticate-user',
             method: 'POST',
             payload: {
-                email: 'lecturer@city.ac.uk',
-                password: 'testinglecturer',
+                email: 'student@city.ac.uk',
+                password: 'testingstudent',
             }
         };
         server.inject(options, (response) => {
-            console.log(response.headers.authorization, 'you have set the auth for lecturers');
             resolve(response.headers.authorization);
         });
     });

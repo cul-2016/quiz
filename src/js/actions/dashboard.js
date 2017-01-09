@@ -1,6 +1,4 @@
 import axios from 'axios';
-import getUserID from '../lib/getUserID';
-import isUserLecturer from '../lib/isUserLecturer';
 
 export const GET_DASHBOARD_REQUEST = 'GET_DASHBOARD_REQUEST';
 export const GET_DASHBOARD_SUCCESS = 'GET_DASHBOARD_SUCCESS';
@@ -12,11 +10,7 @@ export function getDashboard () {
     return (dispatch) => {
 
         dispatch(getDashboardRequest());
-
-        let userID = getUserID();
-        let is_lecturer = isUserLecturer();
-
-        axios.get(`/get-module-list?user_id=${userID}&is_lecturer=${is_lecturer}`)
+        axios.get(`/get-module-list`)
             .then((response) => {
                 dispatch(getDashboardSuccess(response.data));
             })

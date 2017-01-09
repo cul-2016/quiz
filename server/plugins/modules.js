@@ -14,6 +14,7 @@ const hasStudentSubmitted = require('../lib/hasStudentSubmitted');
 const getBestAndWorstQuiz = require('../lib/getBestAndWorstQuiz');
 const getParticipationRate = require('../lib/getParticipationRate');
 const getStudentHistory = require('../lib/getStudentHistory.js');
+const jwt = require('jsonwebtoken');
 
 exports.register = (server, options, next) => {
     const pool = server.app.pool;
@@ -58,43 +59,45 @@ exports.register = (server, options, next) => {
             method: 'GET',
             path: '/get-feedback',
             handler: (request, reply) => {
+                jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
+                    if (error) { return reply(error); }
 
-                var user_id = request.query.user_id;
-                var module_id = request.query.module_id;
+                    const user_id = decoded.user_details.user_id;
+                    const module_id = request.query.module_id;
 
-                if (!user_id || !module_id) {
-                    console.error('user_id and module_id must be defined');
-                    return reply(new Error('user_id and module_id must be defined'));
-                }
-                hasStudentSubmitted(pool, user_id, module_id, (error, hasSubmittedBefore) => {
-                    /* istanbul ignore if */
-                    if (error) {
-                        return reply(error);
+                    if (!module_id) {
+                        return reply(new Error('module_id must be defined'));
                     }
-                    if (!hasSubmittedBefore) {
-                        return reply(null);
-                    }
-                    getRanking(pool, user_id, module_id, (error, ranking) => {
+                    hasStudentSubmitted(pool, user_id, module_id, (error, hasSubmittedBefore) => {
                         /* istanbul ignore if */
                         if (error) {
                             return reply(error);
                         }
-                        getBestAndWorstQuiz(pool, user_id, module_id, (error, quizzes) => {
+                        if (!hasSubmittedBefore) {
+                            return reply(null);
+                        }
+                        getRanking(pool, user_id, module_id, (error, ranking) => {
                             /* istanbul ignore if */
                             if (error) {
                                 return reply(error);
                             }
-                            getParticipationRate(pool, user_id, module_id, (error, participation) => {
+                            getBestAndWorstQuiz(pool, user_id, module_id, (error, quizzes) => {
                                 /* istanbul ignore if */
                                 if (error) {
                                     return reply(error);
                                 }
-                                var data = {
-                                    ranking: ranking,
-                                    quizzes: quizzes,
-                                    participation: participation
-                                };
-                                reply(data);
+                                getParticipationRate(pool, user_id, module_id, (error, participation) => {
+                                    /* istanbul ignore if */
+                                    if (error) {
+                                        return reply(error);
+                                    }
+                                    var data = {
+                                        ranking: ranking,
+                                        quizzes: quizzes,
+                                        participation: participation
+                                    };
+                                    reply(data);
+                                });
                             });
                         });
                     });
@@ -105,68 +108,62 @@ exports.register = (server, options, next) => {
             method: 'GET',
             path: '/get-student-history',
             handler: (request, reply) => {
+                jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
+                    const user_id = decoded.user_details.user_id;
+                    const module_id = request.query.module_id;
 
-                var user_id = request.query.user_id;
-                var module_id = request.query.module_id;
+                    if (!module_id) {
+                        return reply(new Error('module_id must be defined'));
+                    }
 
-                if (!module_id || !user_id) {
-                    return reply(new Error('module_id and user_id must be defined'));
-                }
-
-                getStudentHistory(pool, user_id, module_id, (error, history) => {
-                    var verdict = error || history;
-                    reply(verdict);
+                    getStudentHistory(pool, user_id, module_id, (error, history) => {
+                        var verdict = error || history;
+                        reply(verdict);
+                    });
                 });
+
             }
         },
         {
             method: 'GET',
             path: '/get-module-list',
             handler: (request, reply) => {
-                var user_id = request.query.user_id;
-                var is_lecturer = request.query.is_lecturer;
-                if (is_lecturer !== undefined) {
+                jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
+                    if (error) { return reply(error); }
 
-                    is_lecturer = is_lecturer.toLowerCase() === "true";
+                    const user_id = decoded.user_details.user_id;
+                    const is_lecturer = decoded.user_details.is_lecturer;
                     getModuleList(pool, user_id, is_lecturer, (error, modules) => {
-                        var verdict = error || modules;
+                        const verdict = error || modules;
                         reply(verdict);
                     });
-                } else {
-                    reply(new Error('is_lecturer is not defined'));
-                }
+                });
             }
         },
         {
             method: 'GET',
             path: '/get-module',
             handler: (request, reply) => {
+                jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
 
-                let module_id = request.query.module_id,
-                    is_lecturer = request.query.is_lecturer,
-                    user_id = request.query.user_id;
+                    const module_id = request.query.module_id,
+                        is_lecturer = decoded.user_details.is_lecturer,
+                        user_id = decoded.user_details.user_id;
 
-                if (is_lecturer === undefined) {
-                    const error = new Error("`is_lecturer` must be defined");
-                    console.error(error);
-                    return reply(error);
-                }
-
-                if (is_lecturer === 'true') {
-
-                    getModuleForLecturer(pool, request.query.module_id, (error, module) => {
-
-                        var verdict = error || module;
-                        reply(verdict);
-                    });
-                } else {
-
-                    getModuleForStudent(pool, user_id, module_id, (error, module) => {
-
-                        var verdict = error || module;
-                        reply(verdict);
-                    });
-                }
+                    if (is_lecturer === 'true') {
+                        getModuleForLecturer(pool, request.query.module_id, (error, module) => {
+                            var verdict = error || module;
+                            console.log(verdict, "Lecturer");
+                            reply(verdict);
+                        });
+                    } else {
+                        getModuleForStudent(pool, user_id, module_id, (error, module) => {
+                            var verdict = error || module;
+                            console.log(verdict, 'STUDENT');
+                            reply(verdict);
+                        });
+                    }
+                });
             }
         },
         {
@@ -188,7 +185,7 @@ exports.register = (server, options, next) => {
 
                 var user_id = request.query.user_id;
                 var data = request.payload;
-                
+
                 saveModule(pool, data.module_id, user_id, data.name, data.medals, data.trophies, (error, result) => {
 
                     var verdict = error || result;
@@ -256,4 +253,3 @@ exports.register = (server, options, next) => {
 };
 
 exports.register.attributes = { pkg: { name: 'modules' } };
-

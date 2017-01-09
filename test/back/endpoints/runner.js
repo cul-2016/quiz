@@ -1,2 +1,2 @@
 require('./endpoints.test.js');
-require('./auth.test.js');
+// require('./auth.test.js');

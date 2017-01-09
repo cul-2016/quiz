@@ -25,7 +25,7 @@ class Members extends Component {
 
     showQuizHistory (user_id, module_id, username) {
 
-        this.props.getStudentHistory(user_id, module_id);
+        this.props.getStudentHistory(module_id);
         this.setState({
             isQuizHistoryVisible: true,
             username
