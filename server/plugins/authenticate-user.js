@@ -9,9 +9,7 @@ exports.register = (server, options, next) => {
     server.route({
         method: 'POST',
         path: '/authenticate-user',
-        config: {
-            auth: false
-        },
+        config: { auth: false },
         handler: (request, reply) => {
             const email = request.payload.email;
             const password = request.payload.password;
@@ -45,13 +43,13 @@ exports.register = (server, options, next) => {
                                 .then(() => {
                                     const userObject = { user_details: userDetails[0], uid: uid };
                                     const token = JWT.sign(userObject, 'secret');
-
+                                    const options = { path: "/", isSecure: false, isHttpOnly: false };
                                     reply(userDetails[0])
                                         .header("Authorization", token)
-                                        .state('cul_id', userDetails[0].user_id.toString(), { path: "/" })
-                                        .state('token', token, { path: "/" })
-                                        .state('cul_is_lecturer', userDetails[0].is_lecturer.toString(), { path: "/" })
-                                        .state('cul_is_cookie_accepted', 'true', { path: "/" });
+                                        .state('cul_id', userDetails[0].user_id.toString(), options)
+                                        .state('token', token, options)
+                                        .state('cul_is_lecturer', userDetails[0].is_lecturer.toString(), options)
+                                        .state('cul_is_cookie_accepted', 'true', options);
                                 })
                                 .catch((err) => reply(err));
                         }
