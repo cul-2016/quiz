@@ -20,6 +20,9 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
     // module endpoint tests
     { url: '/add-new-module', method: 'post', payload: newModule },
     { url: '/get-module-members?module_id=TEST' },
+    { url: '/get-module?module_id=TEST&is_lecturer=true' },
+    { url: '/get-module-list?user_id=2&is_lecturer=true' },
+    { url: '/get-module-list?user_id=1&is_lecturer=false' },
     { url: '/get-module?module_id=TEST' },
     { url: '/get-module-list' },
     { url: '/remove-module-member?module_id=TEST' },

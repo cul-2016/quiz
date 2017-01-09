@@ -254,3 +254,4 @@ exports.register = (server, options, next) => {
 };
 
 exports.register.attributes = { pkg: { name: 'modules' } };
+
