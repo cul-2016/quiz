@@ -322,7 +322,6 @@ exports.register = (server, options, next) => {
             method: 'GET',
             path: '/get-quiz-details-student',
             handler: (request, reply) => {
-
                 let { query: { quiz_id, user_id } } = request;
 
                 if ([quiz_id, user_id].indexOf(undefined) === -1) {

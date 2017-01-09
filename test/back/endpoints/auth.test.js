@@ -39,7 +39,7 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
     { url: '/edit-score?quiz_id=1&user_id=3&score=2' },
     { url: '/get-quiz-details?quiz_id=1' },
     { url: '/update-quiz', method: 'post', payload: updateQuizOptionsPayload },
-    { url: '/get-quiz-details-student?user_id=1' },
+    { url: '/get-quiz-details-student?user_id=1&quiz_id=1' },
 
     // user tests
     { url: '/get-user-details?user_id=1' }

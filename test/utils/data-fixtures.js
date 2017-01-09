@@ -172,8 +172,7 @@ const questions = [
     }
 ];
 
-
-export const questionsAnswers = [
+const questionsAnswers = [
     {
         question: 'capital of England',
         a: 'London',
@@ -185,7 +184,7 @@ export const questionsAnswers = [
     }
 ];
 
-export const reviewQuestions = [
+const reviewQuestions = [
     {
         quiz_id: 1,
         question_id: 1,
@@ -399,5 +398,6 @@ module.exports = {
     getTotalScoresAndTrophiesData,
     allPercentageScoresData,
     studentHistoryData,
-    updateQuizOptionsPayload
+    updateQuizOptionsPayload,
+    questionsAnswers,
 };

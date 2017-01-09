@@ -106,7 +106,7 @@ test('/ endpoint works returns the correct payload', (t) => {
             is_lecturer: false,
             is_verified: true,
             reset_password_code: null,
-            user_id: 34,
+            user_id: 35,
             username: 'testingstudent',
             verification_code: null
         }
