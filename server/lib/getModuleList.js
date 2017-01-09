@@ -1,4 +1,4 @@
-var query = require('./query');
+var query = require('./query.js');
 
 /**
  * Represents a function that retruns a list of modules belonging to the user

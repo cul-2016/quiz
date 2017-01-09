@@ -40,7 +40,7 @@ import NotFound from './components/general/not-found';
 import composeHooks from './lib/composeHooks';
 import * as hooks from './lib/onEnterHooks';
 
-import { store } from './store';
+import { store } from './store'; // eslint-disable-line
 
 const Root = ({ store }) => (
 
