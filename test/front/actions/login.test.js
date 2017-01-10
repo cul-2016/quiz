@@ -137,8 +137,8 @@ test('authenticateUser async action: FAILURE', (t) => {
             {
                 type: actions.AUTHENTICATE_USER_FAILURE,
                 error: {
-                  response: { status: 500 },
-                  message: 'Sorry, something went wrong!'
+                    response: { status: 500 },
+                    message: 'Sorry, something went wrong!'
                 }
             },
             'flags request failure with custom error message'

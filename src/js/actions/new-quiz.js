@@ -69,16 +69,9 @@ export function saveQuiz (module_id, quizName, questions, is_last_quiz) {
         };
         request.post(dispatch)('/save-quiz', payload)
             .then((response) => {
-
-                //what should be returned.
                 dispatch(saveQuizSuccess(response));
-
             })
             .catch((error) => {
-                if (error.response.status === 401) {
-                    dispatch(logout());
-                    hashHistory.push('/');
-                }
                 dispatch(saveQuizFailure(error));
             });
     };

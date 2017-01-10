@@ -19,7 +19,7 @@ export const getLeaderboard = (module_id) => (dispatch) => {
         .catch((error) => {
             dispatch(getLeaderboardFailure(error));
         });
-}
+};
 
 
 export const getLeaderboardRequest = () => ({

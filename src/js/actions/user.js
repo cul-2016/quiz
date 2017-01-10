@@ -39,7 +39,7 @@ export const getUserDetails = (user_id) =>(dispatch) => {
             dispatch(getUserDetailsFailure(error));
         });
     }
-}
+};
 
 
 export const getUserDetailsRequest = () => ({

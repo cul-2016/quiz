@@ -171,7 +171,7 @@ test('resetPassword: failure --> error message', t => {
     const customError = {
         response: { status: 500 },
         message: 'Sorry, something went wrong!'
-    }
+    };
 
     const sandbox = createSandbox();
     const failurePromise = new Promise((resolve, reject) => reject(customError));
@@ -194,8 +194,8 @@ test('resetPassword: failure --> error message', t => {
                 type: actions.RESET_PASSWORD_FAILURE,
                 value: false,
                 error: {
-                  response: { status: 500 },
-                  message: 'Sorry, something went wrong!'
+                    response: { status: 500 },
+                    message: 'Sorry, something went wrong!'
                 }
             },
             'request failure has been flagged'
@@ -214,7 +214,7 @@ test('submitNewPassword: server failure --> something went wrong message', t => 
     const err = {
         response: { status: 500 },
         message: 'sorry, something went wrong!'
-    }
+    };
 
     const sandbox = createSandbox();
     const failurePromise = new Promise((resolve, reject) => reject(err));

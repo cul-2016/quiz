@@ -74,7 +74,7 @@ test('registeringUser async action creator: axios failure', (t) => {
     const customError = {
         response: { status: 500 },
         message: 'Sorry, something went wrong!'
-    }
+    };
     const { dispatch, queue } = createThunk();
 
     const axiosFailurePromise = Promise.reject(customError);

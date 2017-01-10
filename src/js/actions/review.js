@@ -24,7 +24,7 @@ export const getQuizReview = (quiz_id) => (dispatch) => {
         .catch((error) => {
             dispatch(getQuizReviewFailure(error));
         });
-}
+};
 
 
 export const getQuizReviewRequest = () => ({
