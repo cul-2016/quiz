@@ -65,7 +65,7 @@ export const showAnswer = idx => ({
     idx
 });
 
-export const getQuizDetailsStudent = (quiz_id, user_id) => dispatch => {
+export const getQuizDetailsStudent = (quiz_id) => dispatch => {
 
     dispatch(getQuizReviewRequest());
 

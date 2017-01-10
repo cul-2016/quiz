@@ -14,7 +14,7 @@ export const inputChange = (value) => ({
     value
 });
 
-export function joinModule (module_id, user_id) {
+export function joinModule (module_id) {
 
     return (dispatch) => {
 

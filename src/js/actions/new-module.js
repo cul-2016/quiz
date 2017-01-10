@@ -1,5 +1,4 @@
 import axios from 'axios';
-import getUserID from '../lib/getUserID';
 export const VALIDATE_MODULE_ID_REQUEST = 'VALIDATE_MODULE_ID_REQUEST';
 export const VALIDATE_MODULE_ID_SUCCESS = 'VALIDATE_MODULE_ID_SUCCESS';
 export const VALIDATE_MODULE_ID_FAILURE = 'VALIDATE_MODULE_ID_FAILURE';
@@ -74,15 +73,10 @@ export const addNewModule = (data) => {
     return (dispatch) => {
 
         dispatch(addNewModuleRequest());
-        const user_id = getUserID();
         axios.post(`/add-new-module`, data)
             .then((response) => {
 
                 dispatch(addNewModuleSuccess(response.data));
-            }, (serverError) => {
-
-                console.error("Server error:", serverError);
-                dispatch(addNewModuleFailure(serverError));
             })
             .catch((error) => {
 

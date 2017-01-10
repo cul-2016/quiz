@@ -251,9 +251,8 @@ export function fetchQuizDetailsStudent (nextState, replace, callback) {
 
     if (validCookieExists()) {
         const quiz_id = nextState.params.quiz_id;
-        const user_id = store.getState().user.user_id;
 
-        store.dispatch(getQuizDetailsStudent(quiz_id, user_id));
+        store.dispatch(getQuizDetailsStudent(quiz_id));
     }
     callback();
 }

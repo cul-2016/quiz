@@ -23,9 +23,8 @@ const mapDispatchToProps = (dispatch) => ({
     },
     handleJoinModule: () => {
         let module_id = store.getState().joinModule.module_id;
-        const user_id = store.getState().user.user_id;
 
-        dispatch(joinModule(module_id, user_id));
+        dispatch(joinModule(module_id));
         dispatch(clearJoinModule());
     }
 });

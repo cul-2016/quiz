@@ -1,6 +1,7 @@
 const test = require('tape');
 const server = require('../../../server/server.js');
 const simulateAuth = require('../../utils/simulateAuth.js')(server);
+const simulateAuthStudents = require('../../utils/simulateAuthStudents.js')(server);
 const pool = require('../../utils/dbClient.js');
 const redisCli = server.app.redisCli;
 const initDb = require('../../utils/initDb.js')(pool, redisCli);
@@ -15,7 +16,7 @@ const lecturerCreds = { email: 'authenticate-user@city.ac.uk', password: 'testin
 const verificationCreds = { email: 'verification@email.com', password: 'testinglecturer' };
 const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer', is_lecturer: true };
 
-// authentication checks
+// authentication checks for Lecturers
 [
     // module endpoint tests
     { url: '/add-new-module', method: 'post', payload: newModule },
@@ -38,13 +39,12 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
     { url: '/save-student-response', method: 'post', payload: { user_id: '1', quiz_id: '1', question_id: '1', response: 'a' } },
     { url: '/get-quiz-questions?quiz_id=1' },
     { url: '/end-quiz', method: 'post', payload: { quiz_id: 8 } },
-    { url: '/get-quiz-result?user_id=1&module_id=TEST&quiz_id=1' },
     { url: '/get-quiz-review?quiz_id=1' },
     { url: '/get-quiz-members?quiz_id=1' },
-    { url: '/edit-score?quiz_id=1&user_id=3&score=2' },
+    { url: '/edit-score?quiz_id=1&score=2' },
     { url: '/get-quiz-details?quiz_id=1' },
     { url: '/update-quiz', method: 'post', payload: updateQuizOptionsPayload },
-    { url: '/get-quiz-details-student?user_id=1&quiz_id=1' },
+    { url: '/get-quiz-details-student?quiz_id=1' },
 
     // user tests
     { url: '/get-user-details' }
@@ -133,6 +133,98 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
         });
     });
 });
+
+
+// authentication checks for Students
+[
+    { url: '/get-quiz-result?module_id=TEST&quiz_id=1' }
+].forEach((endpoint) => {
+    test(endpoint.url + ' endpoint returns 401 due to user_id not defined in decoded token', (t) => {
+        t.plan(1);
+
+        initDb()
+        .then(() => simulateAuthStudents())
+        .then(() => {
+            const faketoken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2RldGFpbHMiOnsiZW1haWwiOiJsZWN0dXJlckBjaXR5LmFjLnVrIiwiaXNfbGVjdHVyZXIiOnRydWUsInVzZXJuYW1lIjoibGVjdHVyZXIiLCJpc192ZXJpZmllZCI6dHJ1ZSwidmVyaWZpY2F0aW9uX2NvZGUiOm51bGwsInJlc2V0X3Bhc3N3b3JkX2NvZGUiOm51bGwsImV4cGlyeV9jb2RlIjpudWxsfSwidWlkIjoiNTQ3NmYyMzAtZDQzNy0xMWU2LThmMDYtOGRmNTk1ZjYyYmIzIiwiaWF0IjoxNDgzNzI0NDc4fQ.iNGYZZtYuBLo8Qbf1NnApt4qNMoczpWw991yIzdraxE';
+
+            const options = {
+                method: endpoint.method || 'get',
+                url: endpoint.url,
+                payload: endpoint.payload,
+                headers: { Authorization: faketoken }
+            };
+
+            return server.inject(options);
+        })
+        .then((response) => {
+            t.equal(response.statusCode, 401, '401 status code for ' + endpoint.url);
+        });
+    });
+
+    test(endpoint.url + ' endpoint returns 401 due to fake token', (t) => {
+        t.plan(1);
+
+        initDb()
+        .then(() => simulateAuthStudents())
+        .then(() => {
+            const faketoken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2RldGFpbHMiOnsidXNlcl9pZCI6MiwiZW1haWwiOiJsZWN0dXJlckBjaXR5LmFjLnVrIiwiaXNfbGVjdHVyZXIiOnRydWUsInVzZXJuYW1lIjoibGVjdHVyZXIiLCJpc192ZXJpZmllZCI6dHJ1ZSwidmVyaWZpY2F0aW9uX2NvZGUiOm51bGwsInJlc2V0X3Bhc3N3b3JkX2NvZGUiOm51bGwsImV4cGlyeV9jb2RlIjpudWxsfSwidWlkIjoiODhiZjI2ZDAtZDQzNi0xMWU2LWFkYjAtZWQxZmMzc29oaWwiLCJpYXQiOjE0ODM3MjQxMzZ9.eIUlEMiXltreNapzBhDwbQjfF0YwWPqFE5qCyxS51aE';
+
+            const options = {
+                method: endpoint.method || 'get',
+                url: endpoint.url,
+                payload: endpoint.payload,
+                headers: { Authorization: faketoken }
+            };
+
+            return server.inject(options);
+        })
+        .then((response) => {
+            t.equal(response.statusCode, 401, '401 status code for ' + endpoint.url);
+        });
+    });
+
+    test(endpoint.url + ' authentication works', (t) => {
+        t.plan(1);
+
+        initDb()
+        .then(() => simulateAuthStudents())
+        .then((token) => {
+
+            const options = {
+                method: endpoint.method || 'get',
+                url: endpoint.url,
+                payload: endpoint.payload,
+                headers: { Authorization: token, cookie: 'token=' + token },
+            };
+
+            return server.inject(options);
+        })
+        .then((response) => {
+            t.equal(response.statusCode, 200, '200 status code');
+        });
+    });
+
+    test(endpoint.url + ' endpoint returns 401 if no Authorization header is present', (t) => {
+        t.plan(1);
+
+        initDb()
+        .then(() => {
+
+            const options = {
+                method: endpoint.method || 'get',
+                url: endpoint.url,
+                payload: endpoint.payload,
+            };
+
+            return server.inject(options);
+        })
+        .then((response) => {
+            t.equal(response.statusCode, 401, '401 status code for ' + endpoint.url);
+        });
+    });
+});
+
+
 
 // no auth endpoints
 [

@@ -29,16 +29,14 @@ exports.register = (server, options, next) => {
             method: 'POST',
             path: '/save-student-response',
             handler: (request, reply) => {
-                const { quiz_id, question_id, response } = request.payload;
-
                 jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
-                    if (error) {
-                        return reply(error);
-                    }
+                    /* istanbul ignore if */
+                    if (error) { return reply(error); }
 
+                    const { quiz_id, question_id, response } = request.payload;
                     const { user_id } = decoded.user_details;
 
-                    if (user_id !== undefined && quiz_id !== undefined && question_id !== undefined && response !== undefined) {
+                    if (quiz_id !== undefined && question_id !== undefined && response !== undefined) {
                         const parsed_user_id = parseInt(user_id);
                         const parsed_quiz_id = parseInt(quiz_id);
                         const parsed_question_id = parseInt(question_id);
@@ -59,7 +57,6 @@ exports.register = (server, options, next) => {
             handler: (request, reply) => {
                 const { module_id, quizName, questions } = request.payload;
                 const is_last_quiz = request.payload.is_last_quiz === true;
-
                 saveQuiz(pool, module_id, quizName, is_last_quiz, (error, quiz_id) => {
                     /* istanbul ignore if */
                     if (error) {
@@ -129,17 +126,13 @@ exports.register = (server, options, next) => {
             method: 'GET',
             path: '/get-quiz-result',
             handler: (request, reply) => {
-
-                const { module_id, quiz_id } = request.query;
-
                 jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
+                    /* istanbul ignore if */
+                    if (error) { return reply(error); }
+
+                    const { module_id, quiz_id } = request.query;
                     const { user_id } = decoded.user_details;
 
-                    /* istanbul ignore if */
-                    if (error) {
-                        console.error(error);
-                        return reply(error);
-                    }
                     getIsLastQuiz(pool, quiz_id, (error, is_last_quiz) => {
                         /* istanbul ignore if */
                         if (error) {
@@ -218,21 +211,22 @@ exports.register = (server, options, next) => {
             method: 'GET',
             path: '/edit-score',
             handler: (request, reply) => {
-                const { quiz_id, score } = request.query;
+                jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
+                    /* istanbul ignore if */
+                    if (error) { return reply(error); }
 
-                if (quiz_id !== undefined && user_id !== undefined && score !== undefined) {
-                    jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
-                        const { user_id } = decoded.user_details;
+                    const { quiz_id, score } = request.query;
+                    const { user_id } = decoded.user_details;
+                    if (quiz_id !== undefined && score !== undefined) {
 
                         editScore(pool, user_id, quiz_id, score, (error, response) => {
-
                             const verdict = error || response;
                             reply(verdict);
                         });
-                    });
-                } else {
-                    reply(new Error('quiz_id || user_id || score is not defined'));
-                }
+                    } else {
+                        reply(new Error('quiz_id || user_id || score is not defined'));
+                    }
+                });
             }
         },
         {
@@ -344,12 +338,14 @@ exports.register = (server, options, next) => {
             method: 'GET',
             path: '/get-quiz-details-student',
             handler: (request, reply) => {
-                const { quiz_id } = request.query;
-
                 jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
+                    /* istanbul ignore if */
+                    if (error) { return reply(error); }
+
+                    const { quiz_id } = request.query;
                     const { user_id } = decoded.user_details;
 
-                    if (quiz_id !== undefined && user_id !== undefined) {
+                    if (quiz_id !== undefined) {
 
                         const parsed_quiz_id = parseInt(quiz_id, 10);
                         getQuizDetailsStudent(pool, parsed_quiz_id, user_id, (error, quizDetails) => {

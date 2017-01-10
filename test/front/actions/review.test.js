@@ -103,7 +103,6 @@ test('getQuizDetailsStudent: success', t => {
 
     const { dispatch, queue } = createThunk();
     const quiz_id = 1;
-    const user_id = 1;
 
     const sandbox = createSandbox();
     const successPromise = new Promise(resolve => resolve(
@@ -111,7 +110,7 @@ test('getQuizDetailsStudent: success', t => {
     ));
     sandbox.stub(axios, 'get').returns(successPromise);
 
-    dispatch(actions.getQuizDetailsStudent(quiz_id, user_id));
+    dispatch(actions.getQuizDetailsStudent(quiz_id));
 
     setTimeout(() => {
         t.deepEqual(
@@ -137,13 +136,12 @@ test('getQuizDetailsStudent: failure', t => {
 
     const { dispatch, queue } = createThunk();
     const quiz_id = 1;
-    const user_id = 1;
 
     const sandbox = createSandbox();
     const successPromise = new Promise((resolve, reject) => reject('error'));
     sandbox.stub(axios, 'get').returns(successPromise);
 
-    dispatch(actions.getQuizDetailsStudent(quiz_id, user_id));
+    dispatch(actions.getQuizDetailsStudent(quiz_id));
 
     setTimeout(() => {
         t.deepEqual(
