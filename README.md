@@ -36,6 +36,7 @@ export AWS_REGION=us-west-2
 export AWS_ACCESS_KEY_ID=AKIAIZPZU54DWCTA42PQ
 export AWS_SECRET_ACCESS_KEY=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
 export SERVER_ROUTE=http://localhost:9000
+export JWT_SECRET=secret
 ```
 and run `source local.env`
  - Start the server with: `npm start`
@@ -79,6 +80,7 @@ export AWS_REGION=us-west-2
 export AWS_ACCESS_KEY_ID=AKIAIZPZU54DWCTA42PQ
 export AWS_SECRET_ACCESS_KEY=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
 export SERVER_ROUTE=http://localhost:9000
+export JWT_SECRET=secret
 ```
 
 To setup the database schema on HEROKU, use the following command:
