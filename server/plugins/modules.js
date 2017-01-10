@@ -60,6 +60,7 @@ exports.register = (server, options, next) => {
             path: '/get-feedback',
             handler: (request, reply) => {
                 jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
+                    /* istanbul ignore if */
                     if (error) { return reply(error); }
 
                     const user_id = decoded.user_details.user_id;
@@ -109,6 +110,9 @@ exports.register = (server, options, next) => {
             path: '/get-student-history',
             handler: (request, reply) => {
                 jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
+                    /* istanbul ignore if */
+                    if (error) { return reply(error); }
+
                     const user_id = decoded.user_details.user_id;
                     const module_id = request.query.module_id;
 
@@ -129,6 +133,7 @@ exports.register = (server, options, next) => {
             path: '/get-module-list',
             handler: (request, reply) => {
                 jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
+                    /* istanbul ignore if */
                     if (error) { return reply(error); }
 
                     const user_id = decoded.user_details.user_id;
@@ -145,6 +150,8 @@ exports.register = (server, options, next) => {
             path: '/get-module',
             handler: (request, reply) => {
                 jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
+                    /* istanbul ignore if */
+                    if (error) { return reply(error); }
 
                     const module_id = request.query.module_id,
                         is_lecturer = decoded.user_details.is_lecturer,
@@ -180,6 +187,8 @@ exports.register = (server, options, next) => {
             path: '/add-new-module',
             handler: (request, reply) => {
                 jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
+                    /* istanbul ignore if */
+                    if (error) { return reply(error); }
                     const user_id = decoded.user_details.user_id;
                     const data = request.payload;
 
@@ -195,6 +204,8 @@ exports.register = (server, options, next) => {
             path: '/join-module',
             handler: (request, reply) => {
                 jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
+                    /* istanbul ignore if */
+                    if (error) { return reply(error); }
 
                     const module_id = request.query.module_id;
                     let user_id = decoded.user_details.user_id;
@@ -232,6 +243,9 @@ exports.register = (server, options, next) => {
             path: '/remove-module-member',
             handler: (request, reply) => {
                 jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
+                    /* istanbul ignore if */
+                    if (error) { return reply(error); }
+
                     const module_id = request.query.module_id;
                     let user_id = decoded.user_details.user_id;
 
@@ -254,4 +268,3 @@ exports.register = (server, options, next) => {
 };
 
 exports.register.attributes = { pkg: { name: 'modules' } };
-

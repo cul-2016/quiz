@@ -13,7 +13,7 @@ exports.register = (server, options, next) => {
         handler: (request, reply) => {
             const email = request.payload.email;
             const password = request.payload.password;
-
+            console.log(email, password);
             getUserByEmail(pool, email, (error, userDetails) => {
                 /* istanbul ignore if */
                 if (error) {
@@ -62,4 +62,3 @@ exports.register = (server, options, next) => {
 };
 
 exports.register.attributes = { pkg: { name: 'auth' } };
-
