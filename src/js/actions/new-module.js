@@ -75,7 +75,7 @@ export const addNewModule = (data) => {
 
         dispatch(addNewModuleRequest());
         const user_id = getUserID();
-        axios.post(`/add-new-module?user_id=${user_id}`, data)
+        axios.post(`/add-new-module`, data)
             .then((response) => {
 
                 dispatch(addNewModuleSuccess(response.data));

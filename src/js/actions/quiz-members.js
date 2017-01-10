@@ -25,8 +25,6 @@ export const getQuizMembers = (quiz_id) => {
             .then((response) => {
 
                 dispatch(getQuizMembersSuccess(response.data));
-            }, (error) => {
-                console.error(error, 'error from server');
             })
             .catch((error) => {
                 dispatch(getQuizMembersFailure(error));
@@ -57,7 +55,7 @@ export const editScore = (module_id, quiz_id, user_id, score) => {
 
         dispatch(editScoreRequest());
 
-        axios.get(`edit-score?quiz_id=${quiz_id}&user_id=${user_id}&score=${score}`)
+        axios.get(`edit-score?quiz_id=${quiz_id}&score=${score}`)
             .then(() => {
 
                 dispatch(editScoreSuccess());

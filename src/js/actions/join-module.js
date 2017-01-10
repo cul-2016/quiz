@@ -19,7 +19,7 @@ export function joinModule (module_id, user_id) {
     return (dispatch) => {
 
         dispatch(joinModuleRequest());
-        axios.get(`/join-module?module_id=${module_id}&user_id=${user_id}`)
+        axios.get(`/join-module?module_id=${module_id}`)
             .then(() => {
 
                 dispatch(joinModuleSuccess());
