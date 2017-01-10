@@ -1,26 +1,20 @@
-import axios from 'axios';
-import { hashHistory } from 'react-router';
-import { logout } from './login.js';
+import request from '../lib/request.js';
+
 export const GET_DASHBOARD_REQUEST = 'GET_DASHBOARD_REQUEST';
 export const GET_DASHBOARD_SUCCESS = 'GET_DASHBOARD_SUCCESS';
 export const GET_DASHBOARD_FAILURE = 'GET_DASHBOARD_FAILURE';
-
 
 export function getDashboard () {
 
     return (dispatch) => {
 
         dispatch(getDashboardRequest());
-        axios.get(`/get-module-list`)
+        request.get(dispatch)(`/get-module-list`)
             .then((response) => {
                 dispatch(getDashboardSuccess(response.data));
             })
             .catch((serverError) => {
                 const error = Object.assign({}, serverError, { reducerState: 'dashboard' });
-                if (serverError.response.status === 401) {
-                    dispatch(logout());
-                    hashHistory.push('/');
-                }
                 dispatch(getDashboardFailure(error));
             });
     };

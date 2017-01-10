@@ -1,4 +1,4 @@
-import axios from 'axios';
+import request from '../lib/request.js';
 import { hashHistory } from 'react-router';
 import { setUserDetails } from './user';
 
@@ -31,7 +31,7 @@ export function authenticateUser (email, password) {
             password
         };
 
-        axios.post('/authenticate-user', payload)
+        request.post(dispatch)('/authenticate-user', payload)
             .then((response) => {
                 if (response.data.message) {
                     dispatch(incorrectUserDetails(response.data.message));

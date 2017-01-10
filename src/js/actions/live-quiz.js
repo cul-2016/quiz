@@ -1,6 +1,4 @@
-import axios from 'axios';
-import { hashHistory } from 'react-router';
-import { logout } from './login.js';
+import request from '../lib/request.js';
 
 export const GET_QUIZ_QUESTIONS_REQUEST = 'GET_QUIZ_QUESTIONS_REQUEST';
 export const GET_QUIZ_QUESTIONS_SUCCESS = 'GET_QUIZ_QUESTIONS_SUCCESS';
@@ -44,15 +42,11 @@ export function getQuizQuestions (quiz_id) {
 
         dispatch(getQuizQuestionsRequest());
 
-        axios.get(`/get-quiz-questions?quiz_id=${quiz_id}`)
+        request.get(dispatch)(`/get-quiz-questions?quiz_id=${quiz_id}`)
             .then((response) => {
                 dispatch(getQuizQuestionsSuccess(response.data));
             })
             .catch((error) => {
-                if (error.response.status === 401) {
-                    dispatch(logout());
-                    hashHistory.push('/');
-                }
                 dispatch(getQuizQuestionsFailure(error));
             });
     };
@@ -83,15 +77,11 @@ export function saveResponse (data) {
 
         dispatch(saveResponseRequest());
 
-        axios.post(`/save-student-response`, data)
+        request.post(dispatch)(`/save-student-response`, data)
             .then(() => {
                 dispatch(saveResponseSuccess());
             })
             .catch((error) => {
-                if (error.response.status === 401) {
-                    dispatch(logout());
-                    hashHistory.push('/');
-                }
                 dispatch(saveResponseFailure(error));
             });
     };
@@ -140,17 +130,13 @@ export function endQuiz (quiz_id) {
 
         dispatch(endQuizRequest());
 
-        let payload = { quiz_id };
+        const payload = { quiz_id };
 
-        axios.post(`/end-quiz`, payload)
+        request.post(dispatch)(`/end-quiz`, payload)
             .then(() => {
                 dispatch(endQuizSuccess());
             })
             .catch((error) => {
-                if (error.response.status === 401) {
-                    dispatch(logout());
-                    hashHistory.push('/');
-                }
                 dispatch(endQuizFailure(error));
             });
     };
@@ -180,15 +166,11 @@ export function abortQuiz (quiz_id) {
 
         dispatch(abortQuizRequest());
 
-        axios.get(`/abort-quiz?quiz_id=${quiz_id}`)
+        request.get(dispatch)(`/abort-quiz?quiz_id=${quiz_id}`)
             .then(() => {
                 dispatch(abortQuizSuccess());
             })
             .catch((error) => {
-                if (error.response.status === 401) {
-                    dispatch(logout());
-                    hashHistory.push('/');
-                }
                 dispatch(abortQuizFailure(error));
             });
     };

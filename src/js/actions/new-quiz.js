@@ -1,6 +1,4 @@
-import axios from 'axios';
-import { hashHistory } from 'react-router';
-import { logout } from './login.js';
+import request from '../lib/request.js';
 
 export const ADD_QUESTION = 'ADD_QUESTION';
 export const DELETE_QUESTION = 'DELETE_QUESTION';
@@ -69,7 +67,7 @@ export function saveQuiz (module_id, quizName, questions, is_last_quiz) {
             questions,
             is_last_quiz
         };
-        axios.post('/save-quiz', payload)
+        request.post(dispatch)('/save-quiz', payload)
             .then((response) => {
 
                 //what should be returned.
@@ -137,17 +135,13 @@ export function updateQuiz (module_id, quiz_id, quizName, questions, deletedQues
             deletedQuestions,
             is_last_quiz
         };
-        axios.post('/update-quiz', payload)
+        request.post(dispatch)('/update-quiz', payload)
             .then(() => {
 
                 dispatch(updateQuizSuccess());
 
             })
             .catch((error) => {
-                if (error.response.status === 401) {
-                    dispatch(logout());
-                    hashHistory.push('/');
-                }
                 dispatch(updateQuizFailure(error));
             });
     };
@@ -176,16 +170,11 @@ export function getQuizDetails (quiz_id) {
 
         dispatch(getQuizDetailsRequest());
 
-        axios.get(`/get-quiz-details?quiz_id=${quiz_id}`)
+        request.get(dispatch)(`/get-quiz-details?quiz_id=${quiz_id}`)
             .then((response) => {
                 dispatch(getQuizDetailsSuccess(response.data));
-
             })
             .catch((error) => {
-                if (error.response.status === 401) {
-                    dispatch(logout());
-                    hashHistory.push('/');
-                }
                 dispatch(getQuizDetailsFailure(error));
             });
     };

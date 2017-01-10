@@ -1,4 +1,4 @@
-import axios from 'axios';
+import request from '../lib/request.js';
 import { hashHistory } from 'react-router';
 import { setUserDetails } from './user';
 
@@ -28,7 +28,7 @@ export function registeringUser (email, username, password, is_lecturer) {
             is_lecturer
         };
 
-        axios.post('/save-user', payload)
+        request.post(dispatch)('/save-user', payload)
             .then((response) => {
                 if (response.data.message) {
                     dispatch(registeringUserFailure(response.data.message));

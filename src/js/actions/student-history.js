@@ -1,29 +1,21 @@
-import axios from 'axios';
-import { hashHistory } from 'react-router';
-import { logout } from './login.js';
+import request from '../lib/request.js';
+
 export const GET_STUDENT_HISTORY_REQUEST = 'GET_STUDENT_HISTORY_REQUEST';
 export const GET_STUDENT_HISTORY_SUCCESS = 'GET_STUDENT_HISTORY_SUCCESS';
 export const GET_STUDENT_HISTORY_FAILURE = 'GET_STUDENT_HISTORY_FAILURE';
 export const CLEAR_STUDENT_HISTORY = 'CLEAR_STUDENT_HISTORY';
 
-export const getStudentHistory = (module_id) => {
+export const getStudentHistory = (module_id) => (dispatch) => {
 
-    return (dispatch) => {
+    dispatch(getStudentHistoryRequest());
 
-        dispatch(getStudentHistoryRequest());
-
-        axios.get(`get-student-history?module_id=${module_id}`)
-            .then((response) => {
-                dispatch(getStudentHistorySuccess(response.data));
-            })
-            .catch((error) => {
-                if (error.response.status === 401) {
-                    dispatch(logout());
-                    hashHistory.push('/');
-                }
-                dispatch(getStudentHistoryFailure(error));
-            });
-    };
+    request.get(dispatch)(`get-student-history?module_id=${module_id}`)
+        .then((response) => {
+            dispatch(getStudentHistorySuccess(response.data));
+        })
+        .catch((error) => {
+            dispatch(getStudentHistoryFailure(error));
+        });
 };
 
 export const getStudentHistoryRequest = () => ({

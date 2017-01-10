@@ -1,6 +1,5 @@
-import axios from 'axios';
+import request from '../lib/request.js';
 import { hashHistory } from 'react-router';
-import { logout } from './login.js';
 
 export const INPUT_CHANGE = 'INPUT_CHANGE';
 
@@ -20,17 +19,13 @@ export function joinModule (module_id) {
     return (dispatch) => {
 
         dispatch(joinModuleRequest());
-        axios.get(`/join-module?module_id=${module_id}`)
+        request.get(dispatch)(`/join-module?module_id=${module_id}`)
             .then(() => {
 
                 dispatch(joinModuleSuccess());
                 hashHistory.push('/dashboard');
             })
             .catch((error) => {
-                if (error.response.status === 401) {
-                    dispatch(logout());
-                    hashHistory.push('/');
-                }
                 dispatch(joinModuleFailure(error));
             });
     };

@@ -1,6 +1,5 @@
-import axios from 'axios';
-import { hashHistory } from 'react-router';
-import { logout } from './login.js';
+import request from '../lib/request.js';
+
 export const SET_USER_DETAILS = 'SET_USER_DETAILS';
 
 export const TOGGLE_COOKIE_MESSAGE = 'TOGGLE_COOKIE_MESSAGE';
@@ -27,30 +26,19 @@ export const clearError = (reducerState) => ({
 });
 
 
-// -----
-// GET_USER_DETAILS
-// -----
+export const getUserDetails = (user_id) =>(dispatch) => {
 
-export function getUserDetails (user_id) {
+    dispatch(getUserDetailsRequest());
 
-    return (dispatch) => {
-
-        dispatch(getUserDetailsRequest());
-
-        if (user_id) {
-            axios.get(`/get-user-details`)
-            .then((response) => {
-                dispatch(getUserDetailsSuccess(response.data));
-            })
-            .catch((error) => {
-                if (error.response.status === 401) {
-                    dispatch(logout());
-                    hashHistory.push('/');
-                }
-                dispatch(getUserDetailsFailure(error));
-            });
-        }
-    };
+    if (user_id) {
+        request.get(dispatch)(`/get-user-details`)
+        .then((response) => {
+            dispatch(getUserDetailsSuccess(response.data));
+        })
+        .catch((error) => {
+            dispatch(getUserDetailsFailure(error));
+        });
+    }
 }
 
 

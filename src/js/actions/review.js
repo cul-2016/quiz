@@ -1,6 +1,4 @@
-import axios from 'axios';
-import { hashHistory } from 'react-router';
-import { logout } from './login.js';
+import request from '../lib/request.js';
 
 export const GET_QUIZ_REVIEW_REQUEST = 'GET_QUIZ_REVIEW_REQUEST';
 export const GET_QUIZ_REVIEW_SUCCESS = 'GET_QUIZ_REVIEW_SUCCESS';
@@ -15,24 +13,17 @@ export const CLEAR_REVIEW_STATE = 'CLEAR_REVIEW_STATE';
 export const GO_BACK = 'GO_BACK';
 export const SHOW_ANSWER = 'SHOW_ANSWER';
 
-export function getQuizReview (quiz_id) {
+export const getQuizReview = (quiz_id) => (dispatch) => {
 
-    return (dispatch) => {
+    dispatch(getQuizReviewRequest());
 
-        dispatch(getQuizReviewRequest());
-
-        axios.get(`/get-quiz-review?quiz_id=${quiz_id}`)
-            .then((response) => {
-                dispatch(getQuizReviewSuccess(response.data));
-            })
-            .catch((error) => {
-                if (error.response.status === 401) {
-                    dispatch(logout());
-                    hashHistory.push('/');
-                }
-                dispatch(getQuizReviewFailure(error));
-            });
-    };
+    request.get(dispatch)(`/get-quiz-review?quiz_id=${quiz_id}`)
+        .then((response) => {
+            dispatch(getQuizReviewSuccess(response.data));
+        })
+        .catch((error) => {
+            dispatch(getQuizReviewFailure(error));
+        });
 }
 
 
@@ -75,14 +66,10 @@ export const getQuizDetailsStudent = (quiz_id) => dispatch => {
 
     dispatch(getQuizReviewRequest());
 
-    axios.get(`/get-quiz-details-student?quiz_id=${quiz_id}`)
+    request.get(dispatch)(`/get-quiz-details-student?quiz_id=${quiz_id}`)
     .then((response) => {
         dispatch(getQuizReviewSuccess(response.data));
     }).catch((error) => {
-        if (error.response.status === 401) {
-            dispatch(logout());
-            hashHistory.push('/');
-        }
         dispatch(getQuizReviewFailure(error));
     });
 };

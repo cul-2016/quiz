@@ -168,8 +168,11 @@ test('resetPassword: failure --> error message', t => {
 
     const email = 'test@test.com';
     const { dispatch, queue } = createThunk();
+    const customError = {
+        response: { status: 500 },
+        message: 'Sorry, something went wrong!'
+    }
 
-    const customError = { message: 'there has beeen an errro!' };
     const sandbox = createSandbox();
     const failurePromise = new Promise((resolve, reject) => reject(customError));
     sandbox.stub(axios, 'post').returns(failurePromise);
@@ -190,7 +193,10 @@ test('resetPassword: failure --> error message', t => {
             {
                 type: actions.RESET_PASSWORD_FAILURE,
                 value: false,
-                error: customError
+                error: {
+                  response: { status: 500 },
+                  message: 'Sorry, something went wrong!'
+                }
             },
             'request failure has been flagged'
         );
@@ -203,12 +209,15 @@ test('submitNewPassword: server failure --> something went wrong message', t => 
 
     t.plan(2);
 
-
     const password = 'new-password';
     const code = 'reset-password-code';
+    const err = {
+        response: { status: 500 },
+        message: 'sorry, something went wrong!'
+    }
 
     const sandbox = createSandbox();
-    const failurePromise = new Promise((resolve, reject) => reject());
+    const failurePromise = new Promise((resolve, reject) => reject(err));
     sandbox.stub(axios, 'post').returns(failurePromise);
 
     const { dispatch, queue } = createThunk();
