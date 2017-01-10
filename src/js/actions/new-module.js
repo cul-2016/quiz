@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { hashHistory } from 'react-router';
+import { logout } from './login.js';
 export const VALIDATE_MODULE_ID_REQUEST = 'VALIDATE_MODULE_ID_REQUEST';
 export const VALIDATE_MODULE_ID_SUCCESS = 'VALIDATE_MODULE_ID_SUCCESS';
 export const VALIDATE_MODULE_ID_FAILURE = 'VALIDATE_MODULE_ID_FAILURE';
@@ -26,6 +28,10 @@ export const validateModuleID = (id) => {
             dispatch(validateModuleIDSuccess(response.data));
         })
         .catch((error) => {
+            if (error.response.status === 401) {
+                dispatch(logout());
+                hashHistory.push('/');
+            }
             dispatch(validateModuleIDFailure(error));
         });
     };
@@ -75,11 +81,13 @@ export const addNewModule = (data) => {
         dispatch(addNewModuleRequest());
         axios.post(`/add-new-module`, data)
             .then((response) => {
-
                 dispatch(addNewModuleSuccess(response.data));
             })
             .catch((error) => {
-
+                if (error.response.status === 401) {
+                    dispatch(logout());
+                    hashHistory.push('/');
+                }
                 console.error("General error", error);
                 dispatch(addNewModuleFailure(error));
             });

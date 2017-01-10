@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { hashHistory } from 'react-router';
+import { logout } from './login.js';
 
 export const GET_QUIZ_MEMBERS_REQUEST = 'GET_QUIZ_MEMBERS_REQUEST';
 export const GET_QUIZ_MEMBERS_SUCCESS = 'GET_QUIZ_MEMBERS_SUCCESS';
@@ -27,6 +28,10 @@ export const getQuizMembers = (quiz_id) => {
                 dispatch(getQuizMembersSuccess(response.data));
             })
             .catch((error) => {
+                if (error.response.status === 401) {
+                    dispatch(logout());
+                    hashHistory.push('/');
+                }
                 dispatch(getQuizMembersFailure(error));
             });
     };
@@ -61,10 +66,12 @@ export const editScore = (module_id, quiz_id, user_id, score) => {
                 dispatch(editScoreSuccess());
                 //forward back to members area
                 hashHistory.push(`${module_id}/${quiz_id}/members`);
-            }, (error) => {
-                console.error(error, 'error from server');
             })
             .catch((error) => {
+                if (error.response.status === 401) {
+                    dispatch(logout());
+                    hashHistory.push('/');
+                }
                 dispatch(editScoreFailure(error));
             });
     };

@@ -40,14 +40,15 @@ exports.register = (server, options, next) => {
 
                             client.setAsync(userDetails[0].user_id.toString(), uid)
                                 .then(() => {
+
+                                    const twoWeeks = 60 * 60 * 24 * 14;
+                                    client.expire(userDetails[0].user_id.toString(), twoWeeks);
                                     const userObject = { user_details: userDetails[0], uid: uid };
                                     const token = JWT.sign(userObject, process.env.JWT_SECRET);
                                     const options = { path: "/", isSecure: false, isHttpOnly: false };
                                     reply(userDetails[0])
                                         .header("Authorization", token)
-                                        .state('cul_id', userDetails[0].user_id.toString(), options)
                                         .state('token', token, options)
-                                        .state('cul_is_lecturer', userDetails[0].is_lecturer.toString(), options)
                                         .state('cul_is_cookie_accepted', 'true', options);
                                 })
                                 .catch((err) => reply(err));

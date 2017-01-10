@@ -9,7 +9,7 @@ const ConfirmModal = ({ isVisible, hide, removeMember, username, email, user_id,
     });
 
     const removeMembersAndHideModal = (user_id, module_id) => {
-        removeMember(user_id, module_id);
+        removeMember(module_id);
         hide();
     };
 

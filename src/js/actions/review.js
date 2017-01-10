@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { hashHistory } from 'react-router';
+import { logout } from './login.js';
 
 export const GET_QUIZ_REVIEW_REQUEST = 'GET_QUIZ_REVIEW_REQUEST';
 export const GET_QUIZ_REVIEW_SUCCESS = 'GET_QUIZ_REVIEW_SUCCESS';
@@ -24,6 +26,10 @@ export function getQuizReview (quiz_id) {
                 dispatch(getQuizReviewSuccess(response.data));
             })
             .catch((error) => {
+                if (error.response.status === 401) {
+                    dispatch(logout());
+                    hashHistory.push('/');
+                }
                 dispatch(getQuizReviewFailure(error));
             });
     };
@@ -73,6 +79,10 @@ export const getQuizDetailsStudent = (quiz_id) => dispatch => {
     .then((response) => {
         dispatch(getQuizReviewSuccess(response.data));
     }).catch((error) => {
+        if (error.response.status === 401) {
+            dispatch(logout());
+            hashHistory.push('/');
+        }
         dispatch(getQuizReviewFailure(error));
     });
 };

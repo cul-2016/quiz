@@ -1,5 +1,6 @@
 import axios from 'axios';
-
+import { hashHistory } from 'react-router';
+import { logout } from './login.js';
 export const SET_USER_DETAILS = 'SET_USER_DETAILS';
 
 export const TOGGLE_COOKIE_MESSAGE = 'TOGGLE_COOKIE_MESSAGE';
@@ -42,6 +43,10 @@ export function getUserDetails (user_id) {
                 dispatch(getUserDetailsSuccess(response.data));
             })
             .catch((error) => {
+                if (error.response.status === 401) {
+                    dispatch(logout());
+                    hashHistory.push('/');
+                }
                 dispatch(getUserDetailsFailure(error));
             });
         }

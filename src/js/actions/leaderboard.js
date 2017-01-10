@@ -1,5 +1,6 @@
 import axios from 'axios';
-
+import { hashHistory } from 'react-router';
+import { logout } from './login.js';
 export const GET_LEADERBOARD_REQUEST = 'GET_LEADERBOARD_REQUEST';
 export const GET_LEADERBOARD_SUCCESS = 'GET_LEADERBOARD_SUCCESS';
 export const GET_LEADERBOARD_FAILURE = 'GET_LEADERBOARD_FAILURE';
@@ -19,6 +20,10 @@ export function getLeaderboard (module_id) {
                 dispatch(getLeaderboardSuccess(response.data));
             })
             .catch((error) => {
+                if (error.response.status === 401) {
+                    dispatch(logout());
+                    hashHistory.push('/');
+                }
                 dispatch(getLeaderboardFailure(error));
             });
     };

@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { hashHistory } from 'react-router';
+import { logout } from './login.js';
 
 export const OPEN_QUIZ = 'OPEN_QUIZ';
 export const CLOSE_QUIZ = 'CLOSE_QUIZ';
@@ -37,18 +39,22 @@ export const clearModuleState = () => ({
 // GET MODULE actions
 //
 
-export const getModule = (module_id, is_lecturer, user_id) => {
+export const getModule = (module_id, is_lecturer) => {
     return (dispatch) => {
 
         dispatch(getModuleRequest());
 
-        axios.get(`get-module?is_lecturer=${is_lecturer}&user_id=${user_id}&module_id=${module_id}`)
+        axios.get(`get-module?is_lecturer=${is_lecturer}&module_id=${module_id}`)
             .then((response) => {
                 dispatch(getModuleSuccess(is_lecturer, response.data));
             }, (error) => {
                 console.error(error, 'error from server');
             })
             .catch((error) => {
+                if (error.response.status === 401) {
+                    dispatch(logout());
+                    hashHistory.push('/');
+                }
                 dispatch(getModuleFailure(error));
             });
     };
@@ -86,6 +92,10 @@ export const getModuleMembers = (module_id) => {
                 console.error(error, 'error from server');
             })
             .catch((error) => {
+                if (error.response.status === 401) {
+                    dispatch(logout());
+                    hashHistory.push('/');
+                }
                 dispatch(getModuleMembersFailure(error));
             });
     };
@@ -110,20 +120,22 @@ export const getModuleMembersFailure = (error) => ({
 // REMOVE_MODULE_MEMBER actions
 //
 
-export const removeModuleMember = (user_id, module_id) => {
+export const removeModuleMember = (module_id) => {
     return (dispatch) => {
 
         dispatch(removeModuleMemberRequest());
 
-        axios.get(`remove-module-member?user_id=${user_id}&module_id=${module_id}`)
+        axios.get(`remove-module-member?module_id=${module_id}`)
             .then(() => {
 
                 dispatch(removeModuleMemberSuccess());
                 dispatch(getModuleMembers(module_id));
-            }, (error) => {
-                console.error(error, 'error from server');
             })
             .catch((error) => {
+                if (error.response.status === 401) {
+                    dispatch(logout());
+                    hashHistory.push('/');
+                }
                 dispatch(removeModuleMemberFailure(error));
             });
     };

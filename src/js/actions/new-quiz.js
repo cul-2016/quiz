@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { hashHistory } from 'react-router';
+import { logout } from './login.js';
 
 export const ADD_QUESTION = 'ADD_QUESTION';
 export const DELETE_QUESTION = 'DELETE_QUESTION';
@@ -73,10 +75,12 @@ export function saveQuiz (module_id, quizName, questions, is_last_quiz) {
                 //what should be returned.
                 dispatch(saveQuizSuccess(response));
 
-            }, (error) => {
-                console.error(error, 'error from axios /save-quiz');
             })
             .catch((error) => {
+                if (error.response.status === 401) {
+                    dispatch(logout());
+                    hashHistory.push('/');
+                }
                 dispatch(saveQuizFailure(error));
             });
     };
@@ -138,10 +142,12 @@ export function updateQuiz (module_id, quiz_id, quizName, questions, deletedQues
 
                 dispatch(updateQuizSuccess());
 
-            }, (error) => {
-                console.error(error, 'error from axios /update-quiz');
             })
             .catch((error) => {
+                if (error.response.status === 401) {
+                    dispatch(logout());
+                    hashHistory.push('/');
+                }
                 dispatch(updateQuizFailure(error));
             });
     };
@@ -174,10 +180,12 @@ export function getQuizDetails (quiz_id) {
             .then((response) => {
                 dispatch(getQuizDetailsSuccess(response.data));
 
-            }, (error) => {
-                console.error(error, 'error from axios /get-quiz-questions');
             })
             .catch((error) => {
+                if (error.response.status === 401) {
+                    dispatch(logout());
+                    hashHistory.push('/');
+                }
                 dispatch(getQuizDetailsFailure(error));
             });
     };

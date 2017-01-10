@@ -1,5 +1,6 @@
 import axios from 'axios';
-
+import { hashHistory } from 'react-router';
+import { logout } from './login.js';
 export const GET_STUDENT_HISTORY_REQUEST = 'GET_STUDENT_HISTORY_REQUEST';
 export const GET_STUDENT_HISTORY_SUCCESS = 'GET_STUDENT_HISTORY_SUCCESS';
 export const GET_STUDENT_HISTORY_FAILURE = 'GET_STUDENT_HISTORY_FAILURE';
@@ -16,6 +17,10 @@ export const getStudentHistory = (module_id) => {
                 dispatch(getStudentHistorySuccess(response.data));
             })
             .catch((error) => {
+                if (error.response.status === 401) {
+                    dispatch(logout());
+                    hashHistory.push('/');
+                }
                 dispatch(getStudentHistoryFailure(error));
             });
     };

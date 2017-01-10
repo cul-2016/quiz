@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { hashHistory } from 'react-router';
+import { logout } from './login.js';
 
 export const INPUT_CHANGE = 'INPUT_CHANGE';
 
@@ -24,10 +25,12 @@ export function joinModule (module_id) {
 
                 dispatch(joinModuleSuccess());
                 hashHistory.push('/dashboard');
-            }, (error) => {
-                console.error(error, 'error from axios /join-module');
             })
             .catch((error) => {
+                if (error.response.status === 401) {
+                    dispatch(logout());
+                    hashHistory.push('/');
+                }
                 dispatch(joinModuleFailure(error));
             });
     };

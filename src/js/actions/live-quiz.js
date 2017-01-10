@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { hashHistory } from 'react-router';
+import { logout } from './login.js';
 
 export const GET_QUIZ_QUESTIONS_REQUEST = 'GET_QUIZ_QUESTIONS_REQUEST';
 export const GET_QUIZ_QUESTIONS_SUCCESS = 'GET_QUIZ_QUESTIONS_SUCCESS';
@@ -47,6 +49,10 @@ export function getQuizQuestions (quiz_id) {
                 dispatch(getQuizQuestionsSuccess(response.data));
             })
             .catch((error) => {
+                if (error.response.status === 401) {
+                    dispatch(logout());
+                    hashHistory.push('/');
+                }
                 dispatch(getQuizQuestionsFailure(error));
             });
     };
@@ -82,6 +88,10 @@ export function saveResponse (data) {
                 dispatch(saveResponseSuccess());
             })
             .catch((error) => {
+                if (error.response.status === 401) {
+                    dispatch(logout());
+                    hashHistory.push('/');
+                }
                 dispatch(saveResponseFailure(error));
             });
     };
@@ -137,6 +147,10 @@ export function endQuiz (quiz_id) {
                 dispatch(endQuizSuccess());
             })
             .catch((error) => {
+                if (error.response.status === 401) {
+                    dispatch(logout());
+                    hashHistory.push('/');
+                }
                 dispatch(endQuizFailure(error));
             });
     };
@@ -171,6 +185,10 @@ export function abortQuiz (quiz_id) {
                 dispatch(abortQuizSuccess());
             })
             .catch((error) => {
+                if (error.response.status === 401) {
+                    dispatch(logout());
+                    hashHistory.push('/');
+                }
                 dispatch(abortQuizFailure(error));
             });
     };
