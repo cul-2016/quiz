@@ -1,4 +1,4 @@
-var preparedQuery = require('./preparedQuery');
+var preparedQuery = require('./preparedQuery.js');
 var composeDeleteQuestionStatement = require('./composeDeleteQuestionStatement');
 
 /**

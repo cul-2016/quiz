@@ -1,10 +1,9 @@
-var getMeanQuizScores = require('./getMeanQuizScores');
-var getQuizScores = require('./getQuizScores');
-var getSignedDifference = require('./getSignedDifference');
-var getMinAndMaxValues = require('./getMinAndMaxValues');
-var mapQuizIDToName = require('./mapQuizIDToName');
+var getMeanQuizScores = require('./getMeanQuizScores.js');
+var getQuizScores = require('./getQuizScores.js');
+var getSignedDifference = require('./getSignedDifference.js');
+var getMinAndMaxValues = require('./getMinAndMaxValues.js');
+var mapQuizIDToName = require('./mapQuizIDToName.js');
 var MINIMUM_QUIZZES = 3;
-
 
 /**
  * Returns an object with a student's best and worst quiz
