@@ -183,7 +183,7 @@ test('/ endpoint works returns the correct payload', (t) => {
     },
     {
         method: 'get',
-        url: '/get-student-history?module_id=TEST',
+        url: '/get-student-history?module_id=TEST&user_id=1',
         expected: [{ name: 'Week 1 Quiz', num_questions: '2', quiz_id: 1, score: 2 }, { name: 'Week 2 Quiz', num_questions: '3', quiz_id: 2, score: 1 }]
     },
     {

@@ -31,7 +31,7 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
     { url: '/join-module?module_id=FAC8' },
     { url: '/get-leaderboard?module_id=TEST' },
     { url: '/get-feedback?module_id=TEST' },
-    { url: '/get-student-history?module_id=TEST' },
+    { url: '/get-student-history?module_id=TEST&user_id=1' },
 
     // quiz tests
     { url: '/abort-quiz?quiz_id=8' },

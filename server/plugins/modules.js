@@ -109,23 +109,17 @@ exports.register = (server, options, next) => {
             method: 'GET',
             path: '/get-student-history',
             handler: (request, reply) => {
-                jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
-                    /* istanbul ignore if */
-                    if (error) { return reply(error); }
 
-                    const { user_id } = decoded.user_details;
-                    const { module_id } = request.query;
+                const { module_id, user_id } = request.query;
 
-                    if (!module_id) {
-                        return reply(new Error('module_id must be defined'));
-                    }
-
-                    getStudentHistory(pool, user_id, module_id, (error, history) => {
-                        const verdict = error || history;
-                        reply(verdict);
-                    });
+                if (!module_id) {
+                    return reply(new Error('module_id must be defined'));
+                }
+                const parsed_user_id = parseInt(user_id, 10);
+                getStudentHistory(pool, parsed_user_id, module_id, (error, history) => {
+                    const verdict = error || history;
+                    reply(verdict);
                 });
-
             }
         },
         {
@@ -240,22 +234,18 @@ exports.register = (server, options, next) => {
             method: 'GET',
             path: '/remove-module-member',
             handler: (request, reply) => {
-                jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
-                    /* istanbul ignore if */
-                    if (error) { return reply(error); }
 
-                    const { module_id } = request.query;
-                    const { user_id } = decoded.user_details;
+                const { module_id, user_id } = request.query;
 
-                    if (module_id !== undefined) {
-                        removeModuleMember(pool, module_id, user_id, (error, modules) => {
-                            const verdict = error || modules;
-                            reply(verdict);
-                        });
-                    } else {
-                        reply(new Error('module_id is not defined'));
-                    }
-                });
+                if (module_id !== undefined && user_id !== undefined) {
+                    const parsed_user_id = parseInt(user_id, 10);
+                    removeModuleMember(pool, module_id, parsed_user_id, (error, modules) => {
+                        const verdict = error || modules;
+                        reply(verdict);
+                    });
+                } else {
+                    reply(new Error('module_id is not defined'));
+                }
             }
         }
     ]);
