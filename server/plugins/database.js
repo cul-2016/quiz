@@ -30,7 +30,7 @@ exports.register = (server, options, next) => {
     
     server.app.pool = new pg.Pool(config);
 
-    server.app.redisCli = redis.createClient({
+    server.app.redisCli = redis.createClient(env.REDISCLOUD_URL || {
         host: '127.0.0.1',
         port: 6379,
         db: env.CIRCLE_CI ? 1 : env.TESTING ? 2 : 0
