@@ -17,14 +17,14 @@ const getStudentHistory = require('../lib/getStudentHistory.js');
 const jwt = require('jsonwebtoken');
 
 exports.register = (server, options, next) => {
-    const pool = server.app.pool;
+    const { pool } = server.app;
 
     server.route([
         {
             method: 'GET',
             path: '/get-leaderboard',
             handler: (request, reply) => {
-                const module_id = request.query.module_id;
+                const { module_id } = request.query;
                 if (module_id !== undefined) {
 
                     getTotalScoresAndTrophies(pool, module_id, (error, mainData) => {
@@ -63,8 +63,8 @@ exports.register = (server, options, next) => {
                     /* istanbul ignore if */
                     if (error) { return reply(error); }
 
-                    const user_id = decoded.user_details.user_id;
-                    const module_id = request.query.module_id;
+                    const { user_id } = decoded.user_details;
+                    const { module_id } = request.query;
 
                     if (!module_id) {
                         return reply(new Error('module_id must be defined'));
@@ -113,8 +113,8 @@ exports.register = (server, options, next) => {
                     /* istanbul ignore if */
                     if (error) { return reply(error); }
 
-                    const user_id = decoded.user_details.user_id;
-                    const module_id = request.query.module_id;
+                    const { user_id } = decoded.user_details;
+                    const { module_id } = request.query;
 
                     if (!module_id) {
                         return reply(new Error('module_id must be defined'));
@@ -136,8 +136,7 @@ exports.register = (server, options, next) => {
                     /* istanbul ignore if */
                     if (error) { return reply(error); }
 
-                    const user_id = decoded.user_details.user_id;
-                    const is_lecturer = decoded.user_details.is_lecturer;
+                    const { user_id, is_lecturer } = decoded.user_details;
                     getModuleList(pool, user_id, is_lecturer, (error, modules) => {
                         const verdict = error || modules;
                         reply(verdict);
@@ -153,11 +152,11 @@ exports.register = (server, options, next) => {
                     /* istanbul ignore if */
                     if (error) { return reply(error); }
 
-                    const module_id = request.query.module_id,
-                        is_lecturer = decoded.user_details.is_lecturer,
-                        user_id = decoded.user_details.user_id;
+                    const { module_id } = request.query,
+                    const { is_lecturer, user_id } = decoded.user_details,
+
                     if (is_lecturer) {
-                        getModuleForLecturer(pool, request.query.module_id, (error, module) => {
+                        getModuleForLecturer(pool, module_id, (error, module) => {
                             const verdict = error || module;
                             reply(verdict);
                         });
@@ -174,7 +173,7 @@ exports.register = (server, options, next) => {
             method: 'GET',
             path: '/validate-module',
             handler: (request, reply) => {
-                const module_id = request.query.module_id;
+                const { module_id } = request.query;
                 validateModuleID(pool, module_id, (error, exists) => {
 
                     const verdict = error || exists;
@@ -189,10 +188,10 @@ exports.register = (server, options, next) => {
                 jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
                     /* istanbul ignore if */
                     if (error) { return reply(error); }
-                    const user_id = decoded.user_details.user_id;
-                    const data = request.payload;
+                    const { user_id } = decoded.user_details;
+                    const { module_id, user_id, name, medals, trophies } = request.payload;
 
-                    saveModule(pool, data.module_id, user_id, data.name, data.medals, data.trophies, (error, result) => {
+                    saveModule(pool, module_id, user_id, name, medals, trophies, (error, result) => {
                         const verdict = error || result;
                         reply(verdict);
                     });
@@ -207,11 +206,10 @@ exports.register = (server, options, next) => {
                     /* istanbul ignore if */
                     if (error) { return reply(error); }
 
-                    const module_id = request.query.module_id;
-                    let user_id = decoded.user_details.user_id;
+                    const { module_id } = request.query;
+                    const { user_id } = decoded.user_details;
                     if (module_id !== undefined) {
 
-                        user_id = parseInt(user_id);
                         joinModule(pool, module_id, user_id, (error, result) => {
                             const verdict = error || result;
                             reply(verdict);
@@ -226,7 +224,7 @@ exports.register = (server, options, next) => {
             method: 'GET',
             path: '/get-module-members',
             handler: (request, reply) => {
-                const module_id = request.query.module_id;
+                const { module_id } = request.query;
 
                 if (module_id !== undefined) {
                     getModuleMembers(pool, module_id, (error, users) => {
@@ -246,12 +244,10 @@ exports.register = (server, options, next) => {
                     /* istanbul ignore if */
                     if (error) { return reply(error); }
 
-                    const module_id = request.query.module_id;
-                    let user_id = decoded.user_details.user_id;
+                    const { module_id } = request.query;
+                    const { user_id } = decoded.user_details;
 
                     if (module_id !== undefined) {
-                        user_id = parseInt(user_id);
-
                         removeModuleMember(pool, module_id, user_id, (error, modules) => {
                             const verdict = error || modules;
                             reply(verdict);

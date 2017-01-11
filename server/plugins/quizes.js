@@ -322,7 +322,7 @@ exports.register = (server, options, next) => {
                 const { quiz_id } = request.query;
 
                 if (quiz_id !== undefined) {
-                    const parsed_quiz_id = parseInt(quiz_id);
+                    const parsed_quiz_id = parseInt(quiz_id, 10);
 
                     deleteResponses(pool, parsed_quiz_id, (error, result) => {
 
