@@ -1,4 +1,4 @@
-import axios from 'axios';
+import request from '../lib/request.js';
 
 export const GET_QUIZ_RESULT_REQUEST = 'GET_QUIZ_RESULT_REQUEST';
 export const GET_QUIZ_RESULT_SUCCESS = 'GET_QUIZ_RESULT_SUCCESS';
@@ -11,7 +11,7 @@ export function getQuizResult (user_id, module_id, quiz_id) {
 
         dispatch(getQuizResultRequest());
 
-        axios.get(`/get-quiz-result?user_id=${user_id}&module_id=${module_id}&quiz_id=${quiz_id}`)
+        request.get(dispatch)(`/get-quiz-result?module_id=${module_id}&quiz_id=${quiz_id}`)
             .then((response) => {
                 dispatch(getQuizResultSuccess(response.data));
             })

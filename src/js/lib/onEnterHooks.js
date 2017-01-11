@@ -1,7 +1,6 @@
 import { store } from '../store';
 import { socketClient } from '../socket';
 import validCookieExists from './validCookieExists';
-import isUserLecturer from './isUserLecturer';
 import getUserID from './getUserID';
 import { getModule, getModuleMembers } from '../actions/module';
 import { getDashboard } from '../actions/dashboard';
@@ -52,7 +51,7 @@ export function authenticate (nextState, replace, callback) {
  */
 export function checkUserRole (nextState, replace, callback) {
 
-    if (isUserLecturer() === false) {
+    if (store.getState().user.is_lecturer === false) {
         replace('/dashboard');
         callback(false);
     } else {
@@ -130,15 +129,14 @@ export function fetchModule (nextState, replace, callback) {
     // get user's role
     let module_id = nextState.params.module_id;
     let is_lecturer = store.getState().user.is_lecturer;
-    let user_id = store.getState().user.user_id;
 
     if (validCookieExists()) {
 
-        store.dispatch(getModule(module_id, is_lecturer, user_id));
+        store.dispatch(getModule(module_id, is_lecturer));
 
         if (is_lecturer === false) {
-            store.dispatch(getFeedback(user_id, module_id));
-            store.dispatch(getStudentHistory(user_id, module_id));
+            store.dispatch(getFeedback(module_id));
+            store.dispatch(getStudentHistory(module_id));
         }
     }
     callback();
@@ -251,9 +249,8 @@ export function fetchQuizDetailsStudent (nextState, replace, callback) {
 
     if (validCookieExists()) {
         const quiz_id = nextState.params.quiz_id;
-        const user_id = store.getState().user.user_id;
 
-        store.dispatch(getQuizDetailsStudent(quiz_id, user_id));
+        store.dispatch(getQuizDetailsStudent(quiz_id));
     }
     callback();
 }

@@ -10,21 +10,19 @@ const compareResetPasswordCodeAndExpiry = require('../lib/compareResetPasswordCo
 const updatePassword = require('../lib/updatePassword.js');
 const resetPasswordRequestEmail = require('../lib/email/reset-password-request-email');
 const saveExpiringTokenForUser = require('../lib/saveExpiringTokenForUser');
+const jwt = require('jsonwebtoken');
 
 exports.register = (server, options, next) => {
-    const pool = server.app.pool;
+    const { pool } = server.app;
     server.route([
         {
             method: 'POST',
             path: '/save-user',
             config: { auth: false },
             handler: (request, reply) => {
-                var email = request.payload.email;
-                var password = request.payload.password;
-                var is_lecturer = request.payload.is_lecturer;
-                var username = request.payload.username || '';
-                var verification_code = is_lecturer ? uuid() : null;
-                var validEmailMessage = { message: 'Please enter a valid email address' };
+                const { email, password, is_lecturer, username = '' } = request.payload;
+                const verification_code = is_lecturer ? uuid() : null;
+                const validEmailMessage = { message: 'Please enter a valid email address' };
 
                 const saveUserFlow = () => {
                     hashPassword(password, (error, hashedPassword) => {
@@ -43,11 +41,27 @@ exports.register = (server, options, next) => {
                                     if (error) {
                                         return reply(error);
                                     }
-                                    delete userDetails[0].password;
-                                    return reply(userDetails[0])
-                                        .state('cul_id', userDetails[0].user_id.toString(), { path: "/" })
-                                        .state('cul_is_lecturer', userDetails[0].is_lecturer.toString(), { path: "/" })
-                                        .state('cul_is_cookie_accepted', 'true', { path: "/" });
+                                    else {
+                                        delete userDetails[0].password;
+
+                                        const uid = uuid();
+                                        const { redisCli } = server.app;
+
+                                        redisCli.setAsync(userDetails[0].user_id.toString(), uid)
+                                            .then(() => {
+
+                                                const twoWeeks = 60 * 60 * 24 * 14;
+                                                redisCli.expire(userDetails[0].user_id.toString(), twoWeeks);
+                                                const userObject = { user_details: userDetails[0], uid: uid };
+                                                const token = jwt.sign(userObject, process.env.JWT_SECRET);
+                                                const options = { path: "/", isSecure: false, isHttpOnly: false };
+                                                reply(userDetails[0])
+                                                    .header("Authorization", token)
+                                                    .state('token', token, options)
+                                                    .state('cul_is_cookie_accepted', 'true', options);
+                                            })
+                                            .catch((err) => reply(err));
+                                    }
                                 });
                             }
                         });
@@ -100,9 +114,9 @@ exports.register = (server, options, next) => {
             path: '/verification',
             config: { auth: false },
             handler: (request, reply) => {
-                var verification_code = request.query.code;
+                const { code } = request.query;
 
-                verifyCode(pool, verification_code, (error, isVerified) => {
+                verifyCode(pool, code, (error, isVerified) => {
                     /* istanbul ignore if */
                     if (error) {
                         console.error(error);
@@ -121,15 +135,17 @@ exports.register = (server, options, next) => {
             method: 'GET',
             path: '/get-user-details',
             handler: (request, reply) => {
-                var user_id = request.query.user_id;
-                getUserByID(pool, user_id, (error, userDetails) => {
-                    /* istanbul ignore if */
-                    if (error) {
-                        return reply(error);
-                    } else {
-                        delete userDetails[0].password;
-                        return reply(userDetails[0]);
-                    }
+                jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
+                    const { user_id } = decoded.user_details;
+                    getUserByID(pool, user_id, (error, userDetails) => {
+                        /* istanbul ignore if */
+                        if (error) {
+                            return reply(error);
+                        } else {
+                            delete userDetails[0].password;
+                            return reply(userDetails[0]);
+                        }
+                    });
                 });
             }
         },
@@ -139,9 +155,9 @@ exports.register = (server, options, next) => {
             config: { auth: false },
             handler: (request, reply) => {
 
-                var email = request.payload.email;
-                var expiry_code = Date.now() + (24 * 60 * 60 * 1000);
-                var resetPasswordLink = uuid();
+                const { email } = request.payload;
+                const expiry_code = Date.now() + (24 * 60 * 60 * 1000);
+                const resetPasswordLink = uuid();
 
 
                 // check for a user in the db
@@ -151,15 +167,15 @@ exports.register = (server, options, next) => {
                         return reply(error);
                     }
                     if (response.length > 0) {
-                        saveExpiringTokenForUser(pool, email, resetPasswordLink, expiry_code, (error, user) => {
+                        saveExpiringTokenForUser(pool, email, resetPasswordLink, expiry_code, (error, { name, email }) => {
                             /* istanbul ignore if */
                             if (error) {
                                 return reply(error);
                             }
 
                             resetPasswordRequestEmail({
-                                name: user.username,
-                                email: user.email,
+                                name,
+                                email,
                                 resetPasswordLink: `${process.env.SERVER_ROUTE}/#/reset-password/${resetPasswordLink}`
                             },
                             (error) => {
@@ -184,8 +200,7 @@ exports.register = (server, options, next) => {
             path: '/submit-new-password',
             config: { auth: false },
             handler: (request, reply) => {
-                var code = request.payload.code;
-                var password = request.payload.password;
+                const { code, password } = request.payload;
 
                 compareResetPasswordCodeAndExpiry(pool, code, (error, result) => {
                     /* istanbul ignore if */
@@ -222,4 +237,3 @@ exports.register = (server, options, next) => {
 };
 
 exports.register.attributes = { pkg: { name: 'users' } };
-

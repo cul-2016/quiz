@@ -1,28 +1,20 @@
-import axios from 'axios';
-import getUserID from '../lib/getUserID';
-import isUserLecturer from '../lib/isUserLecturer';
+import request from '../lib/request.js';
 
 export const GET_DASHBOARD_REQUEST = 'GET_DASHBOARD_REQUEST';
 export const GET_DASHBOARD_SUCCESS = 'GET_DASHBOARD_SUCCESS';
 export const GET_DASHBOARD_FAILURE = 'GET_DASHBOARD_FAILURE';
-
 
 export function getDashboard () {
 
     return (dispatch) => {
 
         dispatch(getDashboardRequest());
-
-        let userID = getUserID();
-        let is_lecturer = isUserLecturer();
-
-        axios.get(`/get-module-list?user_id=${userID}&is_lecturer=${is_lecturer}`)
+        request.get(dispatch)(`/get-module-list`)
             .then((response) => {
                 dispatch(getDashboardSuccess(response.data));
             })
             .catch((serverError) => {
                 const error = Object.assign({}, serverError, { reducerState: 'dashboard' });
-
                 dispatch(getDashboardFailure(error));
             });
     };

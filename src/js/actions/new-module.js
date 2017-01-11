@@ -1,5 +1,5 @@
-import axios from 'axios';
-import getUserID from '../lib/getUserID';
+import request from '../lib/request.js';
+
 export const VALIDATE_MODULE_ID_REQUEST = 'VALIDATE_MODULE_ID_REQUEST';
 export const VALIDATE_MODULE_ID_SUCCESS = 'VALIDATE_MODULE_ID_SUCCESS';
 export const VALIDATE_MODULE_ID_FAILURE = 'VALIDATE_MODULE_ID_FAILURE';
@@ -11,25 +11,17 @@ export const ADD_NEW_MODULE_SUCCESS = 'ADD_NEW_MODULE_SUCCESS';
 export const ADD_NEW_MODULE_FAILURE = 'ADD_NEW_MODULE_FAILURE';
 
 
-/***
- * Validate module id
- ***/
+export const validateModuleID = (id) => (dispatch) => {
 
+    dispatch(validateModuleIDRequest());
 
-export const validateModuleID = (id) => {
-
-    return (dispatch) => {
-
-        dispatch(validateModuleIDRequest());
-
-        axios.get(`/validate-module?module_id=${id}`)
-        .then((response) => {
-            dispatch(validateModuleIDSuccess(response.data));
-        })
-        .catch((error) => {
-            dispatch(validateModuleIDFailure(error));
-        });
-    };
+    request.get(dispatch)(`/validate-module?module_id=${id}`)
+    .then((response) => {
+        dispatch(validateModuleIDSuccess(response.data));
+    })
+    .catch((error) => {
+        dispatch(validateModuleIDFailure(error));
+    });
 };
 
 export const validateModuleIDRequest = () => ({
@@ -74,19 +66,11 @@ export const addNewModule = (data) => {
     return (dispatch) => {
 
         dispatch(addNewModuleRequest());
-        const user_id = getUserID();
-        axios.post(`/add-new-module?user_id=${user_id}`, data)
+        request.post(dispatch)(`/add-new-module`, data)
             .then((response) => {
-
                 dispatch(addNewModuleSuccess(response.data));
-            }, (serverError) => {
-
-                console.error("Server error:", serverError);
-                dispatch(addNewModuleFailure(serverError));
             })
             .catch((error) => {
-
-                console.error("General error", error);
                 dispatch(addNewModuleFailure(error));
             });
     };

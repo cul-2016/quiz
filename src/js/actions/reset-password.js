@@ -1,4 +1,4 @@
-import axios from 'axios';
+import request from '../lib/request.js';
 import { hashHistory } from 'react-router';
 import { logout } from './login';
 
@@ -25,7 +25,7 @@ export const resetPassword = (email) => (dispatch) => {
 
     dispatch(resetPasswordRequest());
 
-    axios.post(`/reset-password-request`, { email })
+    request.post(dispatch)(`/reset-password-request`, { email })
         .then((response) => {
             const message = response.data.message;
             if (message) {
@@ -54,7 +54,7 @@ export const submitNewPassword = (password, code) => dispatch => {
 
     dispatch(submitPasswordRequest());
 
-    axios.post('/submit-new-password', { password, code })
+    request.post(dispatch)('/submit-new-password', { password, code })
     .then(res => {
         const errorMessage = res.data.message;
         if (errorMessage) {

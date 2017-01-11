@@ -28,23 +28,18 @@ test('updateInputField action creator returns expected action', (t) => {
     t.deepEqual(actual2, expected);
 });
 
-// -----
-// REGISTERING USER
-// -----
-
 test('registeringUser async action creator: user exists', (t) => {
 
     t.plan(2);
-    let email = 'test@test.com';
-    let username = 'testing';
-    let password = 'testing';
-    let is_lecturer = true;
+    const email = 'test@test.com';
+    const username = 'testing';
+    const password = 'testing';
+    const is_lecturer = true;
     const { dispatch, queue } = createThunk();
 
     const mockResponse = { data: { message: 'user already exists' } };
-    const userExistsPromise = new Promise((resolve) => {
-        resolve(mockResponse);
-    });
+    const userExistsPromise = Promise.resolve(mockResponse);
+
     const sandbox = createSandbox();
     sandbox.stub(axios, 'post').returns(userExistsPromise);
 
@@ -72,13 +67,17 @@ test('registeringUser async action creator: user exists', (t) => {
 test('registeringUser async action creator: axios failure', (t) => {
 
     t.plan(2);
-    let email = 'test@test.com';
-    let username = 'testing';
-    let password = 'testing';
-    let is_lecturer = true;
+    const email = 'test@test.com';
+    const username = 'testing';
+    const password = 'testing';
+    const is_lecturer = true;
+    const customError = {
+        response: { status: 500 },
+        message: 'Sorry, something went wrong!'
+    };
     const { dispatch, queue } = createThunk();
 
-    const axiosFailurePromise = new Promise((resolve, reject) => reject());
+    const axiosFailurePromise = Promise.reject(customError);
     const sandbox = createSandbox();
     sandbox.stub(axios, 'post').returns(axiosFailurePromise);
 
@@ -87,9 +86,8 @@ test('registeringUser async action creator: axios failure', (t) => {
     setTimeout(() => {
 
         let actual = queue.shift();
-        let expected = {
-            type: actions.REGISTERING_USER_REQUEST
-        };
+        let expected = { type: actions.REGISTERING_USER_REQUEST };
+
         t.deepEqual(actual, expected, 'flags request');
 
         actual = queue.shift();

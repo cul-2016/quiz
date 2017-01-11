@@ -114,10 +114,11 @@ test('authenticateUser async action: FAILURE', (t) => {
 
     t.plan(2);
 
-    const customError = { error: 'error message' };
-    const failurePromise = new Promise((resolve, reject) =>
-        reject(customError)
-    );
+    const customError = {
+        response: { status: 500 },
+        message: 'Sorry, something went wrong!'
+    };
+    const failurePromise = Promise.reject(customError);
 
     const sandbox = createSandbox();
     sandbox.stub(axios, 'post').returns(failurePromise);
@@ -135,7 +136,10 @@ test('authenticateUser async action: FAILURE', (t) => {
             queue.shift(),
             {
                 type: actions.AUTHENTICATE_USER_FAILURE,
-                error: customError
+                error: {
+                    response: { status: 500 },
+                    message: 'Sorry, something went wrong!'
+                }
             },
             'flags request failure with custom error message'
         );

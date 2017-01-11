@@ -1,6 +1,7 @@
 import test from 'tape';
 import sinon from 'sinon';
 import * as actions from '../../../src/js/actions/review';
+import { LOGOUT } from '../../../src/js/actions/login.js';
 import createThunk from '../../utils/mockThunk';
 import deepFreeze from '../../utils/deepFreeze';
 import { reviewQuestions as questions, questionsAnswers } from '../../utils/data-fixtures';
@@ -103,7 +104,6 @@ test('getQuizDetailsStudent: success', t => {
 
     const { dispatch, queue } = createThunk();
     const quiz_id = 1;
-    const user_id = 1;
 
     const sandbox = createSandbox();
     const successPromise = new Promise(resolve => resolve(
@@ -111,7 +111,7 @@ test('getQuizDetailsStudent: success', t => {
     ));
     sandbox.stub(axios, 'get').returns(successPromise);
 
-    dispatch(actions.getQuizDetailsStudent(quiz_id, user_id));
+    dispatch(actions.getQuizDetailsStudent(quiz_id));
 
     setTimeout(() => {
         t.deepEqual(
@@ -137,13 +137,12 @@ test('getQuizDetailsStudent: failure', t => {
 
     const { dispatch, queue } = createThunk();
     const quiz_id = 1;
-    const user_id = 1;
 
     const sandbox = createSandbox();
-    const successPromise = new Promise((resolve, reject) => reject('error'));
+    const successPromise = new Promise((resolve, reject) => reject({ message: 'error', response: { status: 500 } }));
     sandbox.stub(axios, 'get').returns(successPromise);
 
-    dispatch(actions.getQuizDetailsStudent(quiz_id, user_id));
+    dispatch(actions.getQuizDetailsStudent(quiz_id));
 
     setTimeout(() => {
         t.deepEqual(
@@ -156,9 +155,39 @@ test('getQuizDetailsStudent: failure', t => {
             queue.shift(),
             {
                 type: actions.GET_QUIZ_REVIEW_FAILURE,
-                error: 'error'
+                error: { message: 'error', response: { status: 500 } },
             },
-            'flags failure'
+            'flags failure for a server 500 error'
+        );
+        sandbox.restore();
+    }, 300);
+});
+
+test('getQuizDetailsStudent: failure', t => {
+    t.plan(2);
+
+    const { dispatch, queue } = createThunk();
+    const quiz_id = 1;
+
+    const sandbox = createSandbox();
+    const successPromise = new Promise((resolve, reject) => reject({ message: 'error', response: { status: 401 } }));
+    sandbox.stub(axios, 'get').returns(successPromise);
+
+    dispatch(actions.getQuizDetailsStudent(quiz_id));
+
+    setTimeout(() => {
+        t.deepEqual(
+            queue.shift(),
+            { type: actions.GET_QUIZ_REVIEW_REQUEST },
+            'flags request'
+        );
+
+        t.deepEqual(
+            queue.shift(),
+            {
+                type: LOGOUT,
+            },
+            'flags failure for a unauthenticated 401 error'
         );
         sandbox.restore();
     }, 300);

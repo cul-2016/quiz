@@ -1,4 +1,4 @@
-import axios from 'axios';
+import request from '../lib/request.js';
 
 export const ADD_QUESTION = 'ADD_QUESTION';
 export const DELETE_QUESTION = 'DELETE_QUESTION';
@@ -67,14 +67,9 @@ export function saveQuiz (module_id, quizName, questions, is_last_quiz) {
             questions,
             is_last_quiz
         };
-        axios.post('/save-quiz', payload)
+        request.post(dispatch)('/save-quiz', payload)
             .then((response) => {
-
-                //what should be returned.
                 dispatch(saveQuizSuccess(response));
-
-            }, (error) => {
-                console.error(error, 'error from axios /save-quiz');
             })
             .catch((error) => {
                 dispatch(saveQuizFailure(error));
@@ -133,13 +128,11 @@ export function updateQuiz (module_id, quiz_id, quizName, questions, deletedQues
             deletedQuestions,
             is_last_quiz
         };
-        axios.post('/update-quiz', payload)
+        request.post(dispatch)('/update-quiz', payload)
             .then(() => {
 
                 dispatch(updateQuizSuccess());
 
-            }, (error) => {
-                console.error(error, 'error from axios /update-quiz');
             })
             .catch((error) => {
                 dispatch(updateQuizFailure(error));
@@ -170,12 +163,9 @@ export function getQuizDetails (quiz_id) {
 
         dispatch(getQuizDetailsRequest());
 
-        axios.get(`/get-quiz-details?quiz_id=${quiz_id}`)
+        request.get(dispatch)(`/get-quiz-details?quiz_id=${quiz_id}`)
             .then((response) => {
                 dispatch(getQuizDetailsSuccess(response.data));
-
-            }, (error) => {
-                console.error(error, 'error from axios /get-quiz-questions');
             })
             .catch((error) => {
                 dispatch(getQuizDetailsFailure(error));

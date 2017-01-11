@@ -19,28 +19,36 @@ const getQuizDetails = require('../lib/getQuizDetails.js');
 const editScore = require('../lib/editScore.js');
 const getQuizDetailsStudent = require('../lib/getQuizDetailsStudent');
 
+const jwt = require('jsonwebtoken');
+
 exports.register = (server, options, next) => {
     const pool = server.app.pool;
+
     server.route([
         {
             method: 'POST',
             path: '/save-student-response',
             handler: (request, reply) => {
-                var user_id = request.payload.user_id;
-                var quiz_id = request.payload.quiz_id;
-                var question_id = request.payload.question_id;
-                var response = request.payload.response;
-                if (user_id !== undefined && quiz_id !== undefined && question_id !== undefined && response !== undefined) {
-                    user_id = parseInt(user_id);
-                    quiz_id = parseInt(quiz_id);
-                    question_id = parseInt(question_id);
-                    saveStudentResponse(pool, user_id, quiz_id, question_id, response, (error, response) => {
-                        var verdict = error || response;
-                        reply(verdict);
-                    });
-                } else {
-                    reply(new Error('one of the required querystrings is not defined'));
-                }
+                jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
+                    /* istanbul ignore if */
+                    if (error) { return reply(error); }
+
+                    const { quiz_id, question_id, response } = request.payload;
+                    const { user_id } = decoded.user_details;
+
+                    if (quiz_id !== undefined && question_id !== undefined && response !== undefined) {
+                        const parsed_user_id = parseInt(user_id);
+                        const parsed_quiz_id = parseInt(quiz_id);
+                        const parsed_question_id = parseInt(question_id);
+                        saveStudentResponse(pool, parsed_user_id, parsed_quiz_id, parsed_question_id, response, (error, response) => {
+                            const verdict = error || response;
+                            reply(verdict);
+                        });
+                    } else {
+                        reply(new Error('one of the required querystrings is not defined'));
+                    }
+                });
+
             }
         },
         {
@@ -49,7 +57,6 @@ exports.register = (server, options, next) => {
             handler: (request, reply) => {
                 const { module_id, quizName, questions } = request.payload;
                 const is_last_quiz = request.payload.is_last_quiz === true;
-
                 saveQuiz(pool, module_id, quizName, is_last_quiz, (error, quiz_id) => {
                     /* istanbul ignore if */
                     if (error) {
@@ -67,7 +74,7 @@ exports.register = (server, options, next) => {
                             });
                         }
                     } else {
-                        var mappedQuestions = questions.map((question) => {
+                        const mappedQuestions = questions.map((question) => {
                             question.quiz_id = quiz_id;
                             return question;
                         });
@@ -76,7 +83,7 @@ exports.register = (server, options, next) => {
                             if (error) {
                                 console.error(error);
                             }
-                            var verdict = error || response;
+                            const verdict = error || response;
                             return reply(verdict);
                         });
                     }
@@ -87,13 +94,14 @@ exports.register = (server, options, next) => {
             method: 'GET',
             path: '/get-quiz-questions',
             handler: (request, reply) => {
-                var quiz_id = request.query.quiz_id;
+                const { quiz_id } = request.query;
+
                 if (quiz_id !== undefined) {
 
-                    quiz_id = parseInt(quiz_id, 10);
-                    getQuizQuestions(pool, quiz_id, (error, questions) => {
+                    const parsed_quiz_id = parseInt(quiz_id, 10);
+                    getQuizQuestions(pool, parsed_quiz_id, (error, questions) => {
 
-                        var verdict = error || questions;
+                        const verdict = error || questions;
                         reply(verdict);
                     });
                 } else {
@@ -105,12 +113,11 @@ exports.register = (server, options, next) => {
             method: 'POST',
             path: '/end-quiz',
             handler: (request, reply) => {
-
-                var quiz_id = request.payload.quiz_id;
+                const { quiz_id } = request.payload;
 
                 setQuizToPresented(pool, quiz_id, (error, result) => {
 
-                    var verdict = error || result;
+                    const verdict = error || result;
                     reply(verdict);
                 });
             }
@@ -119,40 +126,43 @@ exports.register = (server, options, next) => {
             method: 'GET',
             path: '/get-quiz-result',
             handler: (request, reply) => {
-
-                var user_id = request.query.user_id;
-                var module_id = request.query.module_id;
-                var quiz_id = request.query.quiz_id;
-
-                getIsLastQuiz(pool, quiz_id, (error, is_last_quiz) => {
+                jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
                     /* istanbul ignore if */
-                    if (error) {
-                        console.error(error);
-                        return reply(error);
-                    }
-                    calculateQuizScore(pool, user_id, quiz_id, (error, score) => {
+                    if (error) { return reply(error); }
+
+                    const { module_id, quiz_id } = request.query;
+                    const { user_id } = decoded.user_details;
+
+                    getIsLastQuiz(pool, quiz_id, (error, is_last_quiz) => {
                         /* istanbul ignore if */
                         if (error) {
                             console.error(error);
                             return reply(error);
                         }
-                        setQuizScore(pool, user_id, quiz_id, score.raw, (error) => {
+                        calculateQuizScore(pool, user_id, quiz_id, (error, score) => {
                             /* istanbul ignore if */
                             if (error) {
                                 console.error(error);
                                 return reply(error);
                             }
-                            getNewTrophyState(pool, user_id, module_id, quiz_id, score.percentage, is_last_quiz, (error, newTrophyState) => {
+                            setQuizScore(pool, user_id, quiz_id, score.raw, (error) => {
                                 /* istanbul ignore if */
                                 if (error) {
                                     console.error(error);
                                     return reply(error);
                                 }
-                                setNewTrophyState(pool, user_id, module_id, newTrophyState, (error) => {
+                                getNewTrophyState(pool, user_id, module_id, quiz_id, score.percentage, is_last_quiz, (error, newTrophyState) => {
+                                    /* istanbul ignore if */
+                                    if (error) {
+                                        console.error(error);
+                                        return reply(error);
+                                    }
+                                    setNewTrophyState(pool, user_id, module_id, newTrophyState, (error) => {
 
-                                    var verdict = error || { newTrophyState: newTrophyState, score: score };
+                                        const verdict = error || { newTrophyState: newTrophyState, score: score };
 
-                                    reply(verdict);
+                                        reply(verdict);
+                                    });
                                 });
                             });
                         });
@@ -164,13 +174,14 @@ exports.register = (server, options, next) => {
             method: 'GET',
             path: '/get-quiz-review',
             handler: (request, reply) => {
-                var quiz_id = request.query.quiz_id;
+                const { quiz_id } = request.query;
+
                 if (quiz_id !== undefined) {
 
-                    quiz_id = parseInt(quiz_id, 10);
-                    getQuizReview(pool, quiz_id, (error, module) => {
+                    const parsed_quiz_id = parseInt(quiz_id, 10);
+                    getQuizReview(pool, parsed_quiz_id, (error, module) => {
 
-                        var verdict = error || module;
+                        const verdict = error || module;
                         reply(verdict);
                     });
                 } else {
@@ -182,12 +193,13 @@ exports.register = (server, options, next) => {
             method: 'GET',
             path: '/get-quiz-members',
             handler: (request, reply) => {
-                var quiz_id = request.query.quiz_id;
+                const { quiz_id } = request.query;
+
                 if (quiz_id !== undefined) {
 
-                    quiz_id = parseInt(quiz_id, 10);
-                    getQuizMembers(pool, quiz_id, (error, users) => {
-                        var verdict = error || users;
+                    const parsed_quiz_id = parseInt(quiz_id, 10);
+                    getQuizMembers(pool, parsed_quiz_id, (error, users) => {
+                        const verdict = error || users;
                         reply(verdict);
                     });
                 } else {
@@ -199,33 +211,34 @@ exports.register = (server, options, next) => {
             method: 'GET',
             path: '/edit-score',
             handler: (request, reply) => {
+                jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
+                    /* istanbul ignore if */
+                    if (error) { return reply(error); }
 
-                var user_id = request.query.user_id;
-                var quiz_id = request.query.quiz_id;
-                var score = request.query.score;
+                    const { quiz_id, score } = request.query;
+                    const { user_id } = decoded.user_details;
+                    if (quiz_id !== undefined && score !== undefined) {
 
-                if (quiz_id !== undefined && user_id !== undefined && score !== undefined) {
-
-                    editScore(pool, user_id, quiz_id, score, (error, response) => {
-
-                        var verdict = error || response;
-                        reply(verdict);
-                    });
-                } else {
-                    reply(new Error('quiz_id || user_id || score is not defined'));
-                }
+                        editScore(pool, user_id, quiz_id, score, (error, response) => {
+                            const verdict = error || response;
+                            reply(verdict);
+                        });
+                    } else {
+                        reply(new Error('quiz_id || user_id || score is not defined'));
+                    }
+                });
             }
         },
         {
             method: 'GET',
             path: '/get-quiz-details',
             handler: (request, reply) => {
-                var quiz_id = request.query.quiz_id;
+                const { quiz_id } = request.query;
                 if (quiz_id !== undefined) {
 
-                    quiz_id = parseInt(quiz_id, 10);
-                    getQuizDetails(pool, quiz_id, (error, quizDetails) => {
-                        var verdict = error || quizDetails;
+                    const parsed_quiz_id = parseInt(quiz_id, 10);
+                    getQuizDetails(pool, parsed_quiz_id, (error, quizDetails) => {
+                        const verdict = error || quizDetails;
                         reply(verdict);
                     });
                 } else {
@@ -237,16 +250,22 @@ exports.register = (server, options, next) => {
             method: 'POST',
             path: '/update-quiz',
             handler: (request, reply) => {
-                var module_id = request.payload.module_id;
-                var quiz_id = request.payload.quiz_id;
-                var quizName = request.payload.quizName;
-                var editedQuestions = request.payload.editedQuestions;
-                var newQuestions = request.payload.newQuestions;
-                var deletedQuestions = request.payload.deletedQuestions;
-                var is_last_quiz = request.payload.is_last_quiz === true;
+                const {
+                  module_id,
+                  quiz_id,
+                  quizName,
+                  editedQuestions,
+                  newQuestions,
+                  deletedQuestions
+                } = request.payload;
+                const is_last_quiz = request.payload.is_last_quiz === true;
 
                 // update quiz name
                 updateQuiz(pool, module_id, quiz_id, quizName, is_last_quiz, (error) => {
+                    /* istanbul ignore if */
+                    if (error) {
+                        return reply(error);
+                    }
 
                     if (is_last_quiz) {
                         updateIsLastQuiz(pool, module_id, quiz_id, (error) => {
@@ -257,10 +276,7 @@ exports.register = (server, options, next) => {
                             }
                         });
                     }
-                    /* istanbul ignore if */
-                    if (error) {
-                        return reply(error);
-                    }
+
                     updateQuestions(pool, editedQuestions, (error) => {
                         /* istanbul ignore if */
                         if (error) {
@@ -303,14 +319,14 @@ exports.register = (server, options, next) => {
             path: '/abort-quiz',
             handler: (request, reply) => {
 
-                var quiz_id = request.query.quiz_id;
+                const { quiz_id } = request.query;
 
                 if (quiz_id !== undefined) {
-                    quiz_id = parseInt(quiz_id);
+                    const parsed_quiz_id = parseInt(quiz_id, 10);
 
-                    deleteResponses(pool, quiz_id, (error, result) => {
+                    deleteResponses(pool, parsed_quiz_id, (error, result) => {
 
-                        var verdict = error || result;
+                        const verdict = error || result;
                         reply(verdict);
                     });
                 } else {
@@ -322,18 +338,24 @@ exports.register = (server, options, next) => {
             method: 'GET',
             path: '/get-quiz-details-student',
             handler: (request, reply) => {
-                let { query: { quiz_id, user_id } } = request;
+                jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
+                    /* istanbul ignore if */
+                    if (error) { return reply(error); }
 
-                if ([quiz_id, user_id].indexOf(undefined) === -1) {
+                    const { quiz_id } = request.query;
+                    const { user_id } = decoded.user_details;
 
-                    quiz_id = parseInt(quiz_id, 10);
-                    getQuizDetailsStudent(pool, quiz_id, user_id, (error, quizDetails) => {
-                        var verdict = error || quizDetails;
-                        reply(verdict);
-                    });
-                } else {
-                    reply(new Error('quiz_id is not defined'));
-                }
+                    if (quiz_id !== undefined) {
+
+                        const parsed_quiz_id = parseInt(quiz_id, 10);
+                        getQuizDetailsStudent(pool, parsed_quiz_id, user_id, (error, quizDetails) => {
+                            const verdict = error || quizDetails;
+                            reply(verdict);
+                        });
+                    } else {
+                        reply(new Error('quiz_id is not defined'));
+                    }
+                });
             }
         }
     ]);

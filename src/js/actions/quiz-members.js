@@ -1,4 +1,4 @@
-import axios from 'axios';
+import request from '../lib/request.js';
 import { hashHistory } from 'react-router';
 
 export const GET_QUIZ_MEMBERS_REQUEST = 'GET_QUIZ_MEMBERS_REQUEST';
@@ -12,21 +12,14 @@ export const EDIT_SCORE_FAILURE = 'EDIT_SCORE_FAILURE';
 
 export const UPDATE_SCORE = 'UPDATE_SCORE';
 
-//
-// GET QUIZ MEMBERS actions
-//
-
 export const getQuizMembers = (quiz_id) => {
     return (dispatch) => {
 
         dispatch(getQuizMembersRequest());
 
-        axios.get(`get-quiz-members?quiz_id=${quiz_id}`)
+        request.get(dispatch)(`get-quiz-members?quiz_id=${quiz_id}`)
             .then((response) => {
-
                 dispatch(getQuizMembersSuccess(response.data));
-            }, (error) => {
-                console.error(error, 'error from server');
             })
             .catch((error) => {
                 dispatch(getQuizMembersFailure(error));
@@ -48,23 +41,17 @@ export const getQuizMembersFailure = (error) => ({
     error
 });
 
-//
-// EDIT SCORE actions
-//
-
 export const editScore = (module_id, quiz_id, user_id, score) => {
     return (dispatch) => {
 
         dispatch(editScoreRequest());
 
-        axios.get(`edit-score?quiz_id=${quiz_id}&user_id=${user_id}&score=${score}`)
+        request.get(dispatch)(`edit-score?quiz_id=${quiz_id}&score=${score}`)
             .then(() => {
 
                 dispatch(editScoreSuccess());
                 //forward back to members area
                 hashHistory.push(`${module_id}/${quiz_id}/members`);
-            }, (error) => {
-                console.error(error, 'error from server');
             })
             .catch((error) => {
                 dispatch(editScoreFailure(error));
@@ -84,10 +71,6 @@ export const editScoreFailure = (error) => ({
     type: EDIT_SCORE_FAILURE,
     error
 });
-
-//
-//
-//
 
 export const updateScore = (score, member_key) => ({
     type: UPDATE_SCORE,
