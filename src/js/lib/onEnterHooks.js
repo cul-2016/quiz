@@ -1,7 +1,6 @@
 import { store } from '../store';
 import { socketClient } from '../socket';
 import validCookieExists from './validCookieExists';
-import getUserID from './getUserID';
 import { getModule, getModuleMembers } from '../actions/module';
 import { getDashboard } from '../actions/dashboard';
 import { getUserDetails } from '../actions/user';
@@ -96,7 +95,7 @@ export function fetchUserDetails (nextState, replace, callback) {
     if (!validCookieExists()) {
         replace('/');
     } else {
-        store.dispatch(getUserDetails(getUserID()));
+        store.dispatch(getUserDetails());
     }
     callback();
 }

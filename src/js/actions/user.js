@@ -26,19 +26,18 @@ export const clearError = (reducerState) => ({
 });
 
 
-export const getUserDetails = (user_id) =>(dispatch) => {
+export const getUserDetails = () =>(dispatch) => {
 
     dispatch(getUserDetailsRequest());
 
-    if (user_id) {
-        request.get(dispatch)(`/get-user-details`)
-        .then((response) => {
-            dispatch(getUserDetailsSuccess(response.data));
-        })
-        .catch((error) => {
-            dispatch(getUserDetailsFailure(error));
-        });
-    }
+    request.get(dispatch)(`/get-user-details`)
+    .then((response) => {
+        dispatch(getUserDetailsSuccess(response.data));
+    })
+    .catch((error) => {
+        dispatch(getUserDetailsFailure(error));
+    });
+
 };
 
 
