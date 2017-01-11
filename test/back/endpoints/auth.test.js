@@ -254,6 +254,51 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
     });
 });
 
+
+// Returns 500 Error
+[
+    // module endpoint tests
+    { url: '/get-module-members' },
+    { url: '/get-module' },
+    { url: '/get-module' },
+    { url: '/remove-module-member' },
+    { url: '/validate-module' },
+    { url: '/join-module' },
+    { url: '/get-leaderboard' },
+    { url: '/get-feedback' },
+    { url: '/get-student-history' },
+
+    // quiz tests
+    { url: '/abort-quiz' },
+    { url: '/get-quiz-questions' },
+    { url: '/get-quiz-review' },
+    { url: '/get-quiz-members' },
+    { url: '/edit-score' },
+    { url: '/get-quiz-details' },
+    { url: '/get-quiz-details-student' }
+].forEach((endpoint) => {
+    test( endpoint.url + ' endpoint return 500', (t) => {
+        t.plan(1);
+
+        initDb()
+        .then(() => simulateAuth())
+        .then((token) => {
+
+            const options = {
+                method: endpoint.method || 'get',
+                url: endpoint.url,
+                payload: endpoint.payload,
+                headers: { Authorization: token, cookie: 'token=' + token },
+            };
+
+            return server.inject(options);
+        })
+        .then((response) => {
+            t.equal(response.statusCode, 500, '500status code: missing params ');
+        });
+    });
+});
+
 test.onFinish(() => {
     redisCli.quit();
     pool.end();

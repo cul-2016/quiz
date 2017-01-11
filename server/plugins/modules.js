@@ -168,6 +168,10 @@ exports.register = (server, options, next) => {
             path: '/validate-module',
             handler: (request, reply) => {
                 const { module_id } = request.query;
+
+                if (!module_id) {
+                    return reply(new Error('module_id must be defined'));
+                }
                 validateModuleID(pool, module_id, (error, exists) => {
 
                     const verdict = error || exists;
