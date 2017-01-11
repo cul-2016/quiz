@@ -1,6 +1,7 @@
 // configuring the server object
 const Inert = require('inert');
 const JWT = require('hapi-auth-jwt2');
+const https = require('hapi-require-https');
 const Database = require('./database.js');
 const Strategy = require('./strategy.js');
 const Auth = require('./authenticate-user.js');
@@ -12,8 +13,9 @@ const quizes = require('./quizes.js');
 
 const plugins = [
     Inert,
-    Database,
     JWT,
+    https,
+    Database,
     Strategy,
     Auth,
 
