@@ -112,7 +112,7 @@ exports.register = (server, options, next) => {
 
                 const { module_id, user_id } = request.query;
 
-                if (!module_id) {
+                if (!module_id || !user_id) {
                     return reply(new Error('module_id must be defined'));
                 }
                 const parsed_user_id = parseInt(user_id, 10);
