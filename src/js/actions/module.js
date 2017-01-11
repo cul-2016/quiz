@@ -16,10 +16,6 @@ export const REMOVE_MODULE_MEMBER_REQUEST = 'REMOVE_MODULE_MEMBER_REQUEST';
 export const REMOVE_MODULE_MEMBER_SUCCESS = 'REMOVE_MODULE_MEMBER_SUCCESS';
 export const REMOVE_MODULE_MEMBER_FAILURE = 'REMOVE_MODULE_MEMBER_FAILURE';
 
-/****
- * OPEN/CLOSE QUIZ
- ****/
-
 export const openQuiz = () => ( {
     type: OPEN_QUIZ
 });
@@ -31,11 +27,6 @@ export const closeQuiz = () => ({
 export const clearModuleState = () => ({
     type: CLEAR_MODULE_STATE
 });
-
-
-//
-// GET MODULE actions
-//
 
 export const getModule = (module_id, is_lecturer) => {
     return (dispatch) => {
@@ -67,10 +58,6 @@ export const getModuleFailure = (error) => ({
     error
 });
 
-//
-// GET MODULE MEMBERS actions
-//
-
 export const getModuleMembers = (module_id) => {
     return (dispatch) => {
 
@@ -100,17 +87,12 @@ export const getModuleMembersFailure = (error) => ({
     error
 });
 
-
-//
-// REMOVE_MODULE_MEMBER actions
-//
-
-export const removeModuleMember = (module_id) => {
+export const removeModuleMember = (user_id, module_id) => {
     return (dispatch) => {
 
         dispatch(removeModuleMemberRequest());
 
-        request.get(dispatch)(`remove-module-member?module_id=${module_id}`)
+        request.get(dispatch)(`remove-module-member?user_id=${user_id}&module_id=${module_id}`)
             .then(() => {
                 dispatch(removeModuleMemberSuccess());
                 dispatch(getModuleMembers(module_id));

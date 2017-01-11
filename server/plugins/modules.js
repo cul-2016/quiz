@@ -152,8 +152,8 @@ exports.register = (server, options, next) => {
                     /* istanbul ignore if */
                     if (error) { return reply(error); }
 
-                    const { module_id } = request.query,
-                    const { is_lecturer, user_id } = decoded.user_details,
+                    const { module_id } = request.query;
+                    const { is_lecturer, user_id } = decoded.user_details;
 
                     if (is_lecturer) {
                         getModuleForLecturer(pool, module_id, (error, module) => {
@@ -189,7 +189,7 @@ exports.register = (server, options, next) => {
                     /* istanbul ignore if */
                     if (error) { return reply(error); }
                     const { user_id } = decoded.user_details;
-                    const { module_id, user_id, name, medals, trophies } = request.payload;
+                    const { module_id, name, medals, trophies } = request.payload;
 
                     saveModule(pool, module_id, user_id, name, medals, trophies, (error, result) => {
                         const verdict = error || result;

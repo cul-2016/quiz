@@ -14,9 +14,9 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
 
-    handleRemovingMember: (module_id) => {
+    handleRemovingMember: (user_id, module_id) => {
 
-        dispatch(removeModuleMember(module_id));
+        dispatch(removeModuleMember(user_id, module_id));
     },
 
     getStudentHistory: (user_id, module_id) => {

@@ -26,7 +26,7 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
     { url: '/get-module-list?user_id=1&is_lecturer=false' },
     { url: '/get-module?module_id=TEST' },
     { url: '/get-module-list' },
-    { url: '/remove-module-member?module_id=TEST' },
+    { url: '/remove-module-member?user_id=1&module_id=TEST' },
     { url: '/validate-module?module_id=TEST' },
     { url: '/join-module?module_id=FAC8' },
     { url: '/get-leaderboard?module_id=TEST' },
