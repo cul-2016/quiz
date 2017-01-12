@@ -136,6 +136,7 @@ exports.register = (server, options, next) => {
             path: '/get-user-details',
             handler: (request, reply) => {
                 jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
+                    console.log(decoded, '<<<<<<<<<<<<');
                     const { user_id } = decoded.user_details;
                     getUserByID(pool, user_id, (error, userDetails) => {
                         /* istanbul ignore if */
