@@ -93,24 +93,34 @@ const expectedLecturer = {
         condition: [1, 100, 65, 2]
     },
     num_enrolled: 5,
-    quizzes: [
-        {
-            quiz_id: 1,
-            name: 'Week 1 Quiz',
-            num_questions: '2',
-            num_entries: '4',
-            is_presented: true,
-            is_last_quiz: false
-        },
-        {
-            quiz_id: 2,
-            name: 'Week 2 Quiz',
-            num_questions: '3',
-            num_entries: '3',
-            is_presented: true,
-            is_last_quiz: false
-        }
-    ]
+    quizzes: [{
+        quiz_id: 1,
+        name: 'Week 1 Quiz',
+        num_questions: '2',
+        num_entries: '4',
+        is_presented: true,
+        is_last_quiz: false
+    }, {
+        quiz_id: 2,
+        name: 'Week 2 Quiz',
+        num_questions: '3',
+        num_entries: '3',
+        is_presented: true,
+        is_last_quiz: false
+    }],
+    surveys: [{
+        survey_id: 1,
+        name: 'Week 1 Survey',
+        is_presented: true,
+        num_entries: '4',
+        num_questions: '2'
+    }, {
+        survey_id: 2,
+        name: 'Week 2 Survey',
+        is_presented: true,
+        num_entries: '4',
+        num_questions: '2'
+    }]
 };
 
 const expectedStudent = {
@@ -344,7 +354,7 @@ const studentHistoryData = [
 const updateQuizOptionsPayload = {
     module_id: 'TEST',
     quiz_id: 1,
-    quizName: 'Week 1 Quiz',
+    name: 'Week 1 Quiz',
     editedQuestions:
     [
         {
@@ -369,7 +379,8 @@ const updateQuizOptionsPayload = {
         }
     ],
     newQuestions: [],
-    deletedQuestions: []
+    deletedQuestions: [],
+    is_last_quiz: false
 };
 
 

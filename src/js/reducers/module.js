@@ -10,6 +10,7 @@ export const initialState = {
     trophies_awarded: undefined,
     members: [],
     quizzes: undefined,
+    surveys: undefined,
     error: undefined,
     isFetchingModule: false,
     isFetchingMembers: false,
@@ -50,7 +51,8 @@ export function module (state = initialState, action ) {
                 medals: { $set: action.data.medals },
                 trophies: { $set: action.data.trophies },
                 num_enrolled: { $set: action.data.num_enrolled },
-                quizzes: { $set: action.data.quizzes }
+                quizzes: { $set: action.data.quizzes },
+                surveys: { $set: action.data.surveys }
             });
         }
         if (action.is_lecturer == false) {
