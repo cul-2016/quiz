@@ -4,6 +4,7 @@ DROP TABLE IF EXISTS modules CASCADE;
 DROP TABLE IF EXISTS medals CASCADE;
 DROP TABLE IF EXISTS trophies CASCADE;
 DROP TABLE IF EXISTS quizzes CASCADE;
+DROP TABLE IF EXISTS surveys CASCADE;
 DROP TABLE IF EXISTS questions CASCADE;
 DROP TABLE IF EXISTS responses CASCADE;
 DROP TABLE IF EXISTS scores CASCADE;
@@ -11,6 +12,7 @@ DROP TABLE IF EXISTS module_members CASCADE;
 
 DROP SEQUENCE IF EXISTS user_id_seq;
 DROP SEQUENCE IF EXISTS quiz_id_seq;
+DROP SEQUENCE IF EXISTS survey_id_seq;
 DROP SEQUENCE IF EXISTS question_id_seq;
 
 /********* create tables ********/
@@ -58,25 +60,35 @@ CREATE TABLE IF NOT EXISTS quizzes (
     is_last_quiz BOOLEAN DEFAULT FALSE NOT NULL
 );
 
+/* surveys */
+CREATE TABLE IF NOT EXISTS surveys (
+    survey_id SERIAL PRIMARY KEY,
+    module_id CHAR(4),
+    name TEXT NOT NULL,
+    is_presented BOOLEAN DEFAULT FALSE NOT NULL
+);
+
 /* questions */
 CREATE TABLE IF NOT EXISTS questions (
     question_id SERIAL PRIMARY KEY,
-    quiz_id INTEGER NOT NULL,
+    quiz_id INTEGER,
+    survey_id INTEGER,
     question TEXT NOT NULL,
     a TEXT NOT NULL,
     b TEXT NOT NULL,
     c TEXT,
     d TEXT,
-    correct_answer CHAR(1) NOT NULL
+    correct_answer CHAR(1)
 );
 
 /* responses */
 CREATE TABLE IF NOT EXISTS responses (
     user_id INTEGER NOT NULL,
-    quiz_id INTEGER NOT NULL,
+    quiz_id INTEGER,
+    survey_id INTEGER,
     question_id INTEGER NOT NULL,
     response CHAR(1) NOT NULL,
-    PRIMARY KEY (user_id, quiz_id, question_id)
+    PRIMARY KEY (user_id, question_id)
 );
 
 /* scores */
@@ -129,11 +141,24 @@ ALTER TABLE quizzes
     REFERENCES modules (module_id)
     ON DELETE CASCADE;
 
+/* surveys */
+ALTER TABLE surveys
+    ADD CONSTRAINT surveys_to_modules_fk
+    FOREIGN KEY (module_id)
+    REFERENCES modules (module_id)
+    ON DELETE CASCADE;
+
 /* questions */
 ALTER TABLE questions
     ADD CONSTRAINT questions_to_quizzes_fk
     FOREIGN KEY (quiz_id)
     REFERENCES quizzes (quiz_id)
+    ON DELETE CASCADE;
+
+ALTER TABLE questions
+    ADD CONSTRAINT questions_to_surveys_fk
+    FOREIGN KEY (survey_id)
+    REFERENCES surveys (survey_id)
     ON DELETE CASCADE;
 
 /* responses */
@@ -147,6 +172,12 @@ ALTER TABLE responses
     ADD CONSTRAINT responses_to_quizzes_fk
     FOREIGN KEY (quiz_id)
     REFERENCES quizzes (quiz_id)
+    ON DELETE CASCADE;
+
+ALTER TABLE responses
+    ADD CONSTRAINT responses_to_surveys_fk
+    FOREIGN KEY (survey_id)
+    REFERENCES surveys (survey_id)
     ON DELETE CASCADE;
 
 ALTER TABLE responses
@@ -295,9 +326,17 @@ INSERT INTO quizzes (module_id, name, is_presented)
            ('FAC8', 'Best Quiz EVER!', false),
            ('FAC8', 'Quiz for testing abort functionality', false);
 
+INSERT INTO surveys (module_id, name, is_presented)
+    VALUES ('TEST', 'Week 1 Survey', true),
+           ('TEST', 'Week 2 Survey', true),
+           ('CENT', 'Arbitrary Survey 1', true),
+           ('CENT', 'Arbitrary Survey 2', true),
+           ('CENT', 'Arbitrary Survey 3', true),
+           ('FAC8', 'Best Survey EVER!', false),
+           ('FAC8', 'Survey for testing abort functionality', false);
 
 
-/********* insert questions ********/
+/********* insert quiz questions ********/
 
 INSERT INTO questions (quiz_id, question, a, b, c, d, correct_answer)
     VALUES (1, 'What is the capital of England?', 'London', 'Cardiff', 'Edinburgh', 'Doncaster', 'a'),
@@ -332,8 +371,7 @@ INSERT INTO questions (quiz_id, question, a, b, c, d, correct_answer)
            (7, 'What is Canada''s national animal?' , 'Bear', 'Beaver', 'Racoon', 'Deer', 'b'),
            (8, 'Question for Aborting Quiz?' , 'A', 'B', 'C', 'This one', 'd');
 
-
-/********* insert responses ********/
+/********* insert quiz responses ********/
 
 INSERT INTO responses (user_id, quiz_id, question_id, response)
     VALUES (1, 1, 1, 'a'),
@@ -471,6 +509,37 @@ INSERT INTO responses (user_id, quiz_id, question_id, response)
            (24, 3, 14, 'd'),
            (24, 3, 15, 'b'),
            (24, 8, 31, 'b');
+
+
+/********* insert survey questions ********/
+
+INSERT INTO questions (survey_id, question, a, b, c, d)
+   VALUES (1, 'How do you feel about this module?', 'Bad', 'Not interested', 'Good', 'Mind blown'),
+          (1, 'Would you recommend this lecturer?', 'No', 'Yes', null, null),
+          (2, 'This module engages you. Do you agree?', 'Strongly Disagree', 'Disagree', 'Agree', 'Strongly agree'),
+          (2, 'DELETE this question in deleteQuestions test?', 'Strongly Disagree', 'Disagree', 'Agree', 'Strongly agree'),
+          (3, 'Do you like this survey?', 'Strongly Disagree', 'Disagree', 'Agree', 'Strongly agree');
+
+/********* insert survey responses ********/
+
+INSERT INTO responses (user_id, survey_id, question_id, response)
+    VALUES (1, 1, 32, 'a'),
+           (2, 1, 32, 'a'),
+           (3, 1, 32, 'c'),
+           (4, 1, 32, 'd'),
+
+           (1, 1, 33, 'a'),
+           (2, 1, 33, 'b'),
+           (3, 1, 33, 'b'),
+
+           (1, 2, 34, 'a'),
+           (2, 2, 34, 'b'),
+           (3, 2, 34, 'b'),
+           (4, 2, 34, 'c'),
+
+           (1, 2, 35, 'a'),
+           (2, 2, 35, 'a'),
+           (3, 2, 35, 'd');
 
 
 /********* insert module members ********/
