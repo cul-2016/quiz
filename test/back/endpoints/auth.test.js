@@ -18,7 +18,7 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
 
 // authentication checks for Lecturers
 [
-    // module endpoint tests
+// module endpoint tests
     { url: '/add-new-module', method: 'post', payload: newModule },
     { url: '/get-module-members?module_id=TEST' },
     { url: '/get-module?module_id=TEST&is_lecturer=true' },
@@ -33,7 +33,7 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
     { url: '/get-feedback?module_id=TEST' },
     { url: '/get-student-history?module_id=TEST&user_id=1' },
 
-    // quiz tests
+// quiz tests
     { url: '/abort-quiz?quiz_id=8' },
     { url: '/save-quiz', method: 'post', payload: { module_id: 'TEST', quizName: 'Brand New Quiz', questions } },
     { url: '/save-student-response', method: 'post', payload: { user_id: '1', quiz_id: '1', question_id: '1', response: 'a' } },
@@ -46,10 +46,10 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
     { url: '/update-quiz', method: 'post', payload: updateQuizOptionsPayload },
     { url: '/get-quiz-details-student?quiz_id=1' },
 
-    // user tests
+// user tests
     { url: '/get-user-details' },
 
-    // authenticate-user plugin
+// authenticate-user plugin
     { url: '/logout', method: 'post' }
 ].forEach((endpoint) => {
     test(endpoint.url + ' endpoint returns 401 due to user_id not defined in decoded token', (t) => {
@@ -228,10 +228,8 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
 });
 
 
-
 // no auth endpoints
 [
-    // static files
     { url: '/' },
     { url: '/authenticate-user', method: 'post', payload: lecturerCreds },
     { url: '/save-user', method: 'post', payload: franzCreds },
@@ -239,7 +237,7 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
     { url: '/reset-password-request', method: 'post', payload: { email: 'sohilpandya@foundersandcoders.com' } },
     { url: '/verification?code=testing-verification-code-lecturer', method: 'get', payload: verificationCreds }
 ].forEach((endpoint) => {
-    test('`authenticate-user` endpoint returns true when password matches', (t) => {
+    test('`' + endpoint.url + '` endpoint returns true when password matches', (t) => {
         t.plan(1);
 
         const options = endpoint;
@@ -250,51 +248,6 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
                 return;
             }
             t.equal(response.statusCode, 200, endpoint.url + ' doesnt require authentication');
-        });
-    });
-});
-
-
-// Returns 500 Error
-[
-    // module endpoint tests
-    { url: '/get-module-members' },
-    { url: '/get-module' },
-    { url: '/get-module' },
-    { url: '/remove-module-member' },
-    { url: '/validate-module' },
-    { url: '/join-module' },
-    { url: '/get-leaderboard' },
-    { url: '/get-feedback' },
-    { url: '/get-student-history' },
-
-    // quiz tests
-    { url: '/abort-quiz' },
-    { url: '/get-quiz-questions' },
-    { url: '/get-quiz-review' },
-    { url: '/get-quiz-members' },
-    { url: '/edit-score' },
-    { url: '/get-quiz-details' },
-    { url: '/get-quiz-details-student' }
-].forEach((endpoint) => {
-    test( endpoint.url + ' endpoint return 500', (t) => {
-        t.plan(1);
-
-        initDb()
-        .then(() => simulateAuth())
-        .then((token) => {
-
-            const options = {
-                method: endpoint.method || 'get',
-                url: endpoint.url,
-                payload: endpoint.payload,
-                headers: { Authorization: token, cookie: 'token=' + token },
-            };
-
-            return server.inject(options);
-        })
-        .then((response) => {
-            t.equal(response.statusCode, 500, '500status code: missing params ');
         });
     });
 });
