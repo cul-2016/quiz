@@ -2,6 +2,7 @@ const validatePassword = require('../lib/authentication/validatePassword');
 const getUserByEmail = require('../lib/getUserByEmail');
 const uuid = require('uuid/v1');
 const jwt = require('jsonwebtoken');
+const Joi = require('joi');
 
 exports.register = (server, options, next) => {
     const pool = server.app.pool;
@@ -10,7 +11,15 @@ exports.register = (server, options, next) => {
         {
             method: 'POST',
             path: '/authenticate-user',
-            config: { auth: false },
+            config: {
+                auth: false,
+                validate: {
+                    payload: {
+                        email: Joi.string().email().required(),
+                        password: Joi.string().required()
+                    }
+                }
+            },
             handler: (request, reply) => {
                 const email = request.payload.email;
                 const password = request.payload.password;
@@ -74,6 +83,7 @@ exports.register = (server, options, next) => {
             }
         }
     ]);
+
     next();
 };
 
