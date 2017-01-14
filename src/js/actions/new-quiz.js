@@ -61,29 +61,13 @@ export const toggleIsSurvey = (e) => ({
 // SAVE QUIZ ACTIONS
 //
 
-<<<<<<< HEAD
-export function saveQuiz (module_id, quizName, questions, is_last_quiz) {
-=======
 export const saveQuiz = (
-<<<<<<< HEAD
-    module_id, name, questions, is_last_quiz, isSurvey
-) => dispatch => {
->>>>>>> refinements
-=======
     module_id, name, questions, is_last_quiz
 ) => (dispatch, getState) => {
->>>>>>> save quiz works (integrated)
 
-    return (dispatch) => {
+    dispatch(saveQuizRequest());
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-        dispatch(saveQuizRequest());
-=======
-=======
     const isSurvey = getState().newQuiz.isSurvey;
-
->>>>>>> save quiz works (integrated)
     const payload = {
         module_id,
         name,
@@ -91,24 +75,14 @@ export const saveQuiz = (
         is_last_quiz,
         isSurvey
     };
->>>>>>> refinements
-
-        const payload = {
-            module_id,
-            quizName,
-            questions,
-            is_last_quiz
-        };
-        request.post(dispatch)('/save-quiz', payload)
-            .then((response) => {
-                dispatch(saveQuizSuccess(response));
-            })
-            .catch((error) => {
-                dispatch(saveQuizFailure(error));
-            });
-
-    };
-}
+    request.post(dispatch)('/save-quiz', payload)
+        .then((response) => {
+            dispatch(saveQuizSuccess(response));
+        })
+        .catch((error) => {
+            dispatch(saveQuizFailure(error));
+        });
+};
 
 export const saveQuizRequest = () => ({
     type: SAVE_QUIZ_REQUEST

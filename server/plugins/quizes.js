@@ -1,6 +1,7 @@
 const saveStudentResponse = require('../lib/saveStudentResponse');
 const updateIsLastQuiz = require('../lib/updateIsLastQuiz.js');
 const saveQuiz = require('../lib/saveQuiz.js');
+const saveSurvey = require('../lib/saveSurvey');
 const saveQuestions = require('../lib/saveQuestions.js');
 const getQuizQuestions = require('../lib/getQuizQuestions');
 const setQuizToPresented = require('../lib/setQuizToPresented.js');
@@ -33,15 +34,31 @@ exports.register = (server, options, next) => {
                     /* istanbul ignore if */
                     if (error) { return reply(error); }
 
-                    const { quiz_id, question_id, response } = request.payload;
-                    const { user_id } = decoded.user_details;
+                    //questions about the following
+                    // unsure as to where we are getting the survey_id from
+                    // response: studentResponse, payload already gives it to us as response.
 
-                    if (quiz_id !== undefined && question_id !== undefined && response !== undefined) {
-                        const parsed_user_id = parseInt(user_id);
-                        const parsed_quiz_id = parseInt(quiz_id);
-                        const parsed_question_id = parseInt(question_id);
-                        saveStudentResponse(pool, parsed_user_id, parsed_quiz_id, parsed_question_id, response, (error, response) => {
-                            const verdict = error || response;
+                    const { user_id } = decoded.user_details;
+                    let {
+                        quiz_id = null, survey_id = null, question_id, response: studentResponse
+                    } = request.payload;
+
+                    const checkExists = el => el !== undefined && el !== null;
+
+                    if (
+                        [user_id, question_id, studentResponse].every(checkExists) &&
+                        [quiz_id, survey_id].some(checkExists)
+                    ) {
+                        quiz_id = quiz_id && parseInt(quiz_id);
+                        survey_id = survey_id && parseInt(survey_id);
+
+                        question_id = parseInt(question_id);
+                        saveStudentResponse(pool, user_id, quiz_id, survey_id, question_id, studentResponse, (error, response) => {
+                            /* istanbul ignore if */
+                            if (error) {
+                                console.error(error);
+                            }
+                            var verdict = error || response;
                             reply(verdict);
                         });
                     } else {
@@ -55,17 +72,12 @@ exports.register = (server, options, next) => {
             method: 'POST',
             path: '/save-quiz',
             handler: (request, reply) => {
-                const { module_id, quizName, questions } = request.payload;
-                const is_last_quiz = request.payload.is_last_quiz === true;
-                saveQuiz(pool, module_id, quizName, is_last_quiz, (error, quiz_id) => {
-                    /* istanbul ignore if */
-                    if (error) {
-                        console.error(error);
-                        return reply(error);
-                    }
+                const { module_id, name, questions, isSurvey, is_last_quiz = false } = request.payload;
+
+                const saveQuestionsFlow = (pool, id, { isSurvey }) => {
                     if (questions.length === 0) {
-                        if (is_last_quiz) {
-                            updateIsLastQuiz(pool, module_id, quiz_id, (error) => {
+                        if (!isSurvey && is_last_quiz) {
+                            updateIsLastQuiz(pool, module_id, id, (error) => {
                                 /* istanbul ignore if */
                                 if (error) {
                                     console.error(error);
@@ -74,20 +86,32 @@ exports.register = (server, options, next) => {
                             });
                         }
                     } else {
-                        const mappedQuestions = questions.map((question) => {
-                            question.quiz_id = quiz_id;
-                            return question;
-                        });
-                        saveQuestions(pool, mappedQuestions, (error, response) => {
+                        saveQuestions(pool, id, questions, { isSurvey }, (error, response) => {
                             /* istanbul ignore if */
                             if (error) {
                                 console.error(error);
                             }
-                            const verdict = error || response;
+                            var verdict = error || response;
                             return reply(verdict);
                         });
                     }
-                });
+                };
+
+                const saveQuestionsCb = ({ isSurvey }) => (error, id) => {
+                    /* istanbul ignore if */
+                    if (error) {
+                        console.error(error);
+                        return reply(error);
+                    } else {
+                        saveQuestionsFlow(pool, id, { isSurvey });
+                    }
+                };
+
+                if (isSurvey) {
+                    saveSurvey(pool, module_id, name, saveQuestionsCb({ isSurvey: true }));
+                } else {
+                    saveQuiz(pool, module_id, name, is_last_quiz, saveQuestionsCb({ isSurvey: false }));
+                }
             }
         },
         {
@@ -218,8 +242,9 @@ exports.register = (server, options, next) => {
                     const { quiz_id, score } = request.query;
                     const { user_id } = decoded.user_details;
                     if (quiz_id !== undefined && score !== undefined) {
-
-                        editScore(pool, user_id, quiz_id, score, (error, response) => {
+                        const parsed_quiz_id = parseInt(quiz_id, 10);
+                        const parsed_score = parseInt(quiz_id, 10);
+                        editScore(pool, user_id, parsed_quiz_id, parsed_score, (error, response) => {
                             const verdict = error || response;
                             reply(verdict);
                         });
@@ -251,24 +276,20 @@ exports.register = (server, options, next) => {
             path: '/update-quiz',
             handler: (request, reply) => {
                 const {
-                  module_id,
-                  quiz_id,
-                  quizName,
-                  editedQuestions,
-                  newQuestions,
-                  deletedQuestions
+                  module_id, quiz_id, survey_id, name, editedQuestions, newQuestions, deletedQuestions, is_last_quiz
                 } = request.payload;
-                const is_last_quiz = request.payload.is_last_quiz === true;
+                const isSurvey = Boolean(survey_id);
+                const quizIdOrSurveyId = survey_id || quiz_id;
 
                 // update quiz name
-                updateQuiz(pool, module_id, quiz_id, quizName, is_last_quiz, (error) => {
+                updateQuiz(pool, module_id, quizIdOrSurveyId, name, is_last_quiz, (error) => {
                     /* istanbul ignore if */
                     if (error) {
                         return reply(error);
                     }
 
                     if (is_last_quiz) {
-                        updateIsLastQuiz(pool, module_id, quiz_id, (error) => {
+                        updateIsLastQuiz(pool, module_id, quizIdOrSurveyId, (error) => {
                             /* istanbul ignore if */
                             if (error) {
                                 console.error(error);
@@ -282,7 +303,7 @@ exports.register = (server, options, next) => {
                         if (error) {
                             return reply(error);
                         } else if (newQuestions.length !== 0) {
-                            saveQuestions(pool, newQuestions, (error) => {
+                            saveQuestions(pool, quizIdOrSurveyId, newQuestions, { isSurvey }, (error) => {
                                 /* istanbul ignore if */
                                 if (error) {
                                     return reply(error);
@@ -292,10 +313,10 @@ exports.register = (server, options, next) => {
                                         if (error) {
                                             return reply(error);
                                         }
-                                        return reply('made it to the end');
+                                        return reply('deleted Questions Worked: made it to the end');
                                     });
                                 } else {
-                                    return reply('made it to the end');
+                                    return reply(' Saved Edited Questions: made it to the end');
                                 }
                             });
                         } else {
@@ -305,7 +326,7 @@ exports.register = (server, options, next) => {
                                     if (error) {
                                         return reply(error);
                                     }
-                                    return reply('made it to the end');
+                                    return reply('deleted Questions when deletedQuestions.length !== 0: made it to the end');
                                 });
                             }
                             return reply(true);

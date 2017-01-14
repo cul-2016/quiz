@@ -354,7 +354,7 @@ const studentHistoryData = [
 const updateQuizOptionsPayload = {
     module_id: 'TEST',
     quiz_id: 1,
-    quizName: 'Week 1 Quiz',
+    name: 'Week 1 Quiz',
     editedQuestions:
     [
         {
@@ -379,7 +379,8 @@ const updateQuizOptionsPayload = {
         }
     ],
     newQuestions: [],
-    deletedQuestions: []
+    deletedQuestions: [],
+    is_last_quiz: false
 };
 
 

@@ -136,8 +136,11 @@ test('saveQuiz async action: failure', (t) => {
     let quizName = 'week 1';
 
     const sandbox = createSandbox();
-    const failureResponse = 'error';
-    const failurePromise = new Promise((_, reject) => reject(failureResponse));
+    const failureResponse = {
+        response: { status: 500 },
+        message: 'Sorry, something went wrong!'
+    };
+    const failurePromise = Promise.reject(failureResponse);
     sandbox.stub(axios, 'post').returns(failurePromise);
 
     const { dispatch, queue } = createThunk({ newQuiz: initialState });
