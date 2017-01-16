@@ -19,69 +19,34 @@ postgres --version
  - Install the dependencies: `npm install`
  - In two different terminal windows ensure you have a postgres server running with:
  `npm run postgres` and a redis server running with: `redis-server`
- - Set up your local environment variables in a file called: `local.env` as follows:
+ - Set up your local environment variables in a file called: `config.env` as follows:
  
-/* local.env */ 
+/* config.env */ 
 ```bash
 #!/bin/sh
-unset PORT
-export DATABASE_USER=ikffzptaajtdjy
-export DATABASE_PASSWORD=19b80f79c8a4ed423108b83374d0bab81da82bd045f3484c1411075fd102b4fe
-export DATABASE_HOST=ec2-54-228-235-185.eu-west-1.compute.amazonaws.com
+export DATABASE_USER=<db_user>
+export DATABASE_PASSWORD=<db_password>
+export DATABASE_HOST=<aws_host>
 export DATABASE_PORT=5432
-export DATABASE_NAME=d70gfmrid1vean
+export DATABASE_NAME=<database_name>
 export TEMPLATE_DIRECTORY=./server/templates
 export SENDER_EMAIL_ADDRESS=quiz.cityuni@gmail.com
 export AWS_REGION=us-west-2
-export AWS_ACCESS_KEY_ID=AKIAIZPZU54DWCTA42PQ
-export AWS_SECRET_ACCESS_KEY=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
+export AWS_ACCESS_KEY_ID=<aws_access_key>
+export AWS_SECRET_ACCESS_KEY=<aws_secret_access_key>
 export SERVER_ROUTE=http://localhost:9000
-export JWT_SECRET=secret
+export JWT_SECRET=<secret>
 ```
-and run `source local.env`
  - Start the server with: `npm start`
- - Visit `http://localhost:9001` to get started
+ - Visit `http://localhost:9000` to get started
  
 ## Testing
  
  - Ensure all of the above except for the last two points
- - Also you should set up another environment vaible file called `testing.env` with the following:
- 
- /* testing.env */
- ```bash
-#!/bin/sh
-unset PORT
-export PORT=9001
-export TESTING=true
-export TEMPLATE_DIRECTORY=./server/templates
-export SENDER_EMAIL_ADDRESS=<sender-email>
-export AWS_REGION=us-west-2
-export AWS_ACCESS_KEY_ID=<aws-access-key-id>
-export AWS_SECRET_ACCESS_KEY=<aws-secret-access-key>
-export SERVER_ROUTE=http://localhost:9000
-export JWT_SECRET=secret
-```
  - Then run `npm test`
  - You can check code coverage locally with `npm run coverage`
  
 ## Deployment
- 
-```bash
-#!/bin/sh
-unset PORT
-export DATABASE_USER=ikffzptaajtdjy
-export DATABASE_PASSWORD=19b80f79c8a4ed423108b83374d0bab81da82bd045f3484c1411075fd102b4fe
-export DATABASE_HOST=ec2-54-228-235-185.eu-west-1.compute.amazonaws.com
-export DATABASE_PORT=5432
-export DATABASE_NAME=d70gfmrid1vean
-export TEMPLATE_DIRECTORY=./server/templates
-export SENDER_EMAIL_ADDRESS=quiz.cityuni@gmail.com
-export AWS_REGION=us-west-2
-export AWS_ACCESS_KEY_ID=AKIAIZPZU54DWCTA42PQ
-export AWS_SECRET_ACCESS_KEY=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
-export SERVER_ROUTE=http://localhost:9000
-export JWT_SECRET=secret
-```
 
 To setup the database schema on HEROKU, use the following command:
 ```bash

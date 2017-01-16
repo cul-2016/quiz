@@ -10,7 +10,7 @@ const lecturerCreds = { email: 'authenticate-user@city.ac.uk', password: 'testin
 const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer', is_lecturer: true };
 
 if (!process.env.TESTING) {
-    throw new Error("Please set the testing environment variables!");
+    throw new Error("Please set the testing environment variable!");
 }
 
 test('/ endpoint works returns the correct payload', (t) => {
