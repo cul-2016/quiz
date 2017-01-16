@@ -17,6 +17,7 @@ const mapStateToProps = (state) => ({
         num_enrolled: state.module.num_enrolled
     },
     quizzes: state.module.quizzes,
+    surveys: state.module.surveys,
     isFetchingModule: state.module.isFetchingModule
 });
 

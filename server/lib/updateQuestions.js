@@ -9,11 +9,11 @@ var composeUpdateQuestionStatement = require('./composeUpdateQuestionStatement')
  */
 
 
-function saveQuestions (client, questions, callback) {
+function updateQuestions (client, questions, callback) {
 
     if (questions.length === 0) {
         return callback(null);
-    } else {        
+    } else {
         composeUpdateQuestionStatement(questions, (error, builtStatement) => {
 
             if (error) {
@@ -32,4 +32,4 @@ function saveQuestions (client, questions, callback) {
 
 }
 
-module.exports = saveQuestions;
+module.exports = updateQuestions;

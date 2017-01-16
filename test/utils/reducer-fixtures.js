@@ -102,17 +102,6 @@ export const review = {
     isAnswerShowing: false,
 };
 
-export const newQuiz = {
-    name: undefined,
-    questions: [],
-    is_last_quiz: false,
-    isSavingQuiz: false,
-    isUpdatingQuiz: false,
-    isFetchingQuizDetails: false,
-    error: undefined,
-    deletedQuestions: []
-};
-
 export const joinModule = {
     module_id: undefined,
     isJoiningModule: false,
@@ -121,6 +110,7 @@ export const joinModule = {
 
 export const newQuizWithQuestion = {
     name: undefined,
+    isSurvey: false,
     questions: [{
         question: undefined,
         a: undefined,
@@ -139,6 +129,7 @@ export const newQuizWithQuestion = {
 
 export const editQuizWithQuestion = {
     name: undefined,
+    isSurvey: false,
     questions: [{
         quiz_id: 1,
         question_id: 1,

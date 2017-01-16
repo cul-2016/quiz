@@ -22,7 +22,8 @@
     "test:back": "node_modules/.bin/tape test/back/runner.js | tap-spec",
     "test:back:watch": "nodemon -w server -w test/back -x 'npm run test:back'",
     "postinstall": "webpack --config ./webpack.production.config.js --progress --colors",
-    "make-docs": "./node_modules/.bin/jsdoc -c ./conf.json -r"
+    "make-docs": "./node_modules/.bin/jsdoc -c ./conf.json -r",
+    "debug": "node --inspect --debug-brk"
   },
   "repository": {
     "type": "git",

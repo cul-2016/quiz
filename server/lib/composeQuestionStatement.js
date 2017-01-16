@@ -4,14 +4,21 @@
  * @param {function} callback - a callback function
  */
 
-function composeQuestionStatement (rows, callback) {
+function composeQuestionStatement (id, rows, { isSurvey }, callback) {
 
     var params = [];
     var chunks = [];
+    const quizIdOrSurveyId = isSurvey ? 'survey_id' : 'quiz_id';
+
     for (var i = 0; i < rows.length; i++) {
         var row = rows[i];
+        if (isSurvey) {
+            row.survey_id = id;
+        } else {
+            row.quiz_id = id;
+        }
         var valueClause = [];
-        params.push(row.quiz_id);
+        params.push(row[quizIdOrSurveyId]);
         valueClause.push('$' + params.length);
         params.push(row.question);
         valueClause.push('$' + params.length);
@@ -23,13 +30,14 @@ function composeQuestionStatement (rows, callback) {
         valueClause.push('$' + params.length);
         params.push(row.d);
         valueClause.push('$' + params.length);
-        params.push(row.correct_answer);
+        // nullify correct_answer for surveys
+        params.push(isSurvey ? null : row.correct_answer);
         valueClause.push('$' + params.length);
         chunks.push('(' + valueClause.join(', ') + ')');
     }
 
     callback(null, {
-        text: 'INSERT INTO questions (quiz_id, question, a, b, c, d, correct_answer) VALUES ' + chunks.join(', '),
+        text: `INSERT INTO questions (${quizIdOrSurveyId}, question, a, b, c, d, correct_answer) VALUES ` + chunks.join(', '),
         values: params
     });
 

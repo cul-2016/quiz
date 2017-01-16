@@ -46,7 +46,8 @@ function organiseModuleData (is_lecturer, module_id, data, callback) {
                     parseInt(data.trophies[3].condition, 10),
                 ]
             },
-            quizzes: data.quizzes
+            quizzes: data.quizzes,
+            surveys: data.surveys
         };
     } else {
 
