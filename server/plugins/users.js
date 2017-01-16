@@ -10,15 +10,28 @@ const compareResetPasswordCodeAndExpiry = require('../lib/compareResetPasswordCo
 const updatePassword = require('../lib/updatePassword.js');
 const resetPasswordRequestEmail = require('../lib/email/reset-password-request-email');
 const saveExpiringTokenForUser = require('../lib/saveExpiringTokenForUser');
+
 const jwt = require('jsonwebtoken');
+const Joi = require('joi');
 
 exports.register = (server, options, next) => {
-    const { pool } = server.app;
+    const { pool, redisCli } = server.app;
+
     server.route([
         {
             method: 'POST',
             path: '/save-user',
-            config: { auth: false },
+            config: {
+                auth: false,
+                validate: {
+                    payload: {
+                        email: Joi.string().email().required(),
+                        password: Joi.string().required(),
+                        is_lecturer: Joi.boolean().strict().required(),
+                        username: Joi.string()
+                    }
+                }
+            },
             handler: (request, reply) => {
                 const { email, password, is_lecturer, username = '' } = request.payload;
                 const verification_code = is_lecturer ? uuid() : null;
@@ -45,7 +58,6 @@ exports.register = (server, options, next) => {
                                         delete userDetails[0].password;
 
                                         const uid = uuid();
-                                        const { redisCli } = server.app;
 
                                         redisCli.setAsync(userDetails[0].user_id.toString(), uid)
                                             .then(() => {
@@ -112,7 +124,14 @@ exports.register = (server, options, next) => {
         {
             method: 'GET',
             path: '/verification',
-            config: { auth: false },
+            config: {
+                auth: false,
+                validate: {
+                    query: {
+                        code: Joi.string().required()
+                    }
+                }
+            },
             handler: (request, reply) => {
                 const { code } = request.query;
 
@@ -136,7 +155,6 @@ exports.register = (server, options, next) => {
             path: '/get-user-details',
             handler: (request, reply) => {
                 jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
-                    console.log(decoded, '<<<<<<<<<<<<');
                     const { user_id } = decoded.user_details;
                     getUserByID(pool, user_id, (error, userDetails) => {
                         /* istanbul ignore if */
@@ -153,13 +171,18 @@ exports.register = (server, options, next) => {
         {
             method: 'POST',
             path: '/reset-password-request',
-            config: { auth: false },
+            config: {
+                auth: false,
+                validate: {
+                    payload: {
+                        email: Joi.string().email()
+                    }
+                }
+            },
             handler: (request, reply) => {
-
                 const { email } = request.payload;
                 const expiry_code = Date.now() + (24 * 60 * 60 * 1000);
                 const resetPasswordLink = uuid();
-
 
                 // check for a user in the db
                 getUserByEmail(pool, email, (error, response) => {
@@ -185,21 +208,27 @@ exports.register = (server, options, next) => {
                                     reply(error);
                                 }
                                 return reply(true);
-                            }
-                        );
+                            });
                         });
                     }
                     else {
                         return reply({ message: 'Sorry the email does not exist' });
                     }
                 });
-
             }
         },
         {
             method: 'POST',
             path: '/submit-new-password',
-            config: { auth: false },
+            config: {
+                auth: false,
+                validate: {
+                    payload: {
+                        code: Joi.string().required(),
+                        password: Joi.string().required()
+                    }
+                }
+            },
             handler: (request, reply) => {
                 const { code, password } = request.payload;
 
