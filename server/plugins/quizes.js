@@ -63,6 +63,7 @@ exports.register = (server, options, next) => {
                         response,
                         (error, response) => {
                             const verdict = error || response;
+
                             reply(verdict);
                         }
                     );
