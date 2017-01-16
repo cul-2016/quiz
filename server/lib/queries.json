@@ -2,6 +2,7 @@
     "joinModule": "INSERT INTO module_members (module_id, user_id) VALUES ($1, $2) ON CONFLICT DO NOTHING;",
     "getModuleForLecturer": {
         "quizzes": "SELECT quizzes.quiz_id, quizzes.name, quizzes.is_presented, quizzes.is_last_quiz, ( SELECT COUNT(DISTINCT(responses.user_id)) AS num_entries FROM responses WHERE responses.quiz_id = quizzes.quiz_id GROUP BY quizzes.quiz_id ), (SELECT COUNT(questions.question_id) AS num_questions FROM questions WHERE questions.quiz_id = quizzes.quiz_id GROUP BY quizzes.quiz_id ) FROM quizzes LEFT JOIN responses ON quizzes.quiz_id = responses.quiz_id WHERE quizzes.module_id = ($1) GROUP BY quizzes.quiz_id ORDER BY quizzes.quiz_id",
+        "surveys": "SELECT surveys.survey_id, surveys.name, surveys.is_presented, ( SELECT COUNT(DISTINCT(responses.user_id)) AS num_entries FROM responses WHERE responses.survey_id = surveys.survey_id GROUP BY surveys.survey_id ), (SELECT COUNT(questions.question_id) AS num_questions FROM questions WHERE questions.survey_id = surveys.survey_id GROUP BY surveys.survey_id ) FROM surveys LEFT JOIN responses ON surveys.survey_id = responses.survey_id WHERE surveys.module_id = ($1) GROUP BY surveys.survey_id ORDER BY surveys.survey_id",
         "medals": "SELECT medals.medal_name, medals.condition FROM medals WHERE medals.module_id = ($1) ORDER BY condition",
         "trophies": "SELECT trophies.trophy_name, trophies.condition FROM trophies WHERE trophies.module_id = ($1) ORDER BY trophy_name",
         "num_enrolled": "SELECT COUNT(user_id) AS num_enrolled FROM module_members WHERE module_members.module_id = ($1)",
@@ -18,11 +19,11 @@
         "score": "SELECT COUNT(CASE WHEN responses.response = questions.correct_answer THEN 1 END) FROM responses JOIN questions ON questions.question_id = responses.question_id WHERE responses.user_id = ($1) AND responses.quiz_id = ($2);",
         "num_questions": "SELECT COUNT(question_id) FROM questions WHERE quiz_id = ($1);"
     },
-    "saveStudentResponse": "INSERT INTO responses (user_id, quiz_id, question_id, response) VALUES ($1, $2, $3, $4) ON CONFLICT (user_id, quiz_id, question_id) DO UPDATE SET response = $4 WHERE (responses.user_id, responses.quiz_id, responses.question_id) = ($1, $2, $3);",
+    "saveStudentResponse": "INSERT INTO responses (user_id, quiz_id, survey_id, question_id, response) VALUES ($1, $2, $3, $4, $5) ON CONFLICT (user_id, question_id) DO UPDATE SET response = $5 WHERE (responses.user_id, responses.question_id) = ($1, $4);",
     "getFirstQuizState": "SELECT DISTINCT(user_id) FROM responses WHERE user_id = ($1) AND quiz_id = ($2);",
     "getHighScoreState": {
         "getCondition": "SELECT condition FROM trophies WHERE module_id = $1 AND trophy_name = 'high_score';",
-        "getCurrentHighScore": "SELECT high_score FROM module_members WHERE user_id= $1 AND module_id= $2;" 
+        "getCurrentHighScore": "SELECT high_score FROM module_members WHERE user_id= $1 AND module_id= $2;"
     },
     "getOverallAverageState": {
         "data": "SELECT ROUND(AVG(percentage_score)) AS overall_average FROM (SELECT quiz_id, CAST(score AS FLOAT) / CAST(num_questions AS FLOAT) * 100 as percentage_score FROM (SELECT scores.quiz_id AS quiz_id, scores.score AS score, COUNT(questions.question) AS num_questions FROM scores JOIN questions ON questions.quiz_id = scores.quiz_id JOIN quizzes ON quizzes.quiz_id = scores.quiz_id WHERE scores.user_id = ($1) AND quizzes.module_id = ($2) GROUP BY scores.quiz_id, scores.score ORDER BY scores.quiz_id) AS quiz_scores) AS averages;",

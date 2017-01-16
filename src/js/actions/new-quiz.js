@@ -6,6 +6,7 @@ export const UPDATE_VALUE = 'UPDATE_VALUE';
 export const UPDATE_QUIZ_NAME = 'UPDATE_QUIZ_NAME';
 export const CLEAR_NEW_QUIZ_STATE = 'CLEAR_NEW_QUIZ_STATE';
 export const TOGGLE_IS_LAST_QUIZ = 'TOGGLE_IS_LAST_QUIZ';
+export const TOGGLE_IS_SURVEY = 'TOGGLE_IS_SURVEY';
 
 export const SAVE_QUIZ_REQUEST = 'SAVE_QUIZ_REQUEST';
 export const SAVE_QUIZ_SUCCESS = 'SAVE_QUIZ_SUCCESS';
@@ -50,32 +51,38 @@ export const toggleIsLastQuiz = () => ({
     type: TOGGLE_IS_LAST_QUIZ
 });
 
+export const toggleIsSurvey = (e) => ({
+    type: TOGGLE_IS_SURVEY,
+    isSurvey: e.target.checked
+});
+
 
 //
 // SAVE QUIZ ACTIONS
 //
 
-export function saveQuiz (module_id, quizName, questions, is_last_quiz) {
+export const saveQuiz = (
+    module_id, name, questions, is_last_quiz
+) => (dispatch, getState) => {
 
-    return (dispatch) => {
+    dispatch(saveQuizRequest());
 
-        dispatch(saveQuizRequest());
-
-        const payload = {
-            module_id,
-            quizName,
-            questions,
-            is_last_quiz
-        };
-        request.post(dispatch)('/save-quiz', payload)
-            .then((response) => {
-                dispatch(saveQuizSuccess(response));
-            })
-            .catch((error) => {
-                dispatch(saveQuizFailure(error));
-            });
+    const isSurvey = getState().newQuiz.isSurvey;
+    const payload = {
+        module_id,
+        name,
+        questions,
+        is_last_quiz,
+        isSurvey
     };
-}
+    request.post(dispatch)('/save-quiz', payload)
+        .then((response) => {
+            dispatch(saveQuizSuccess(response));
+        })
+        .catch((error) => {
+            dispatch(saveQuizFailure(error));
+        });
+};
 
 export const saveQuizRequest = () => ({
     type: SAVE_QUIZ_REQUEST

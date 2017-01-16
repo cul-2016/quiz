@@ -8,13 +8,17 @@ const initDb = (pool, redisCli) => () => {
             if (error) {
                 throw new Error(error);
             }
-            var schema = fs.readFileSync(__dirname + '/test-schema.txt', 'utf8');
+            const schema = fs.readFileSync(
+                __dirname + '/test-schema.txt', 'utf8'
+            );
 
             client.query(schema, (error) => {
                 done();
+
                 if (error) {
                     return reject(error);
                 }
+
                 redisCli.flushall(resolve);
             });
         });

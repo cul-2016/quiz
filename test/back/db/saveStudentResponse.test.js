@@ -9,17 +9,21 @@ test('`saveStudentResponse` works', (t) => {
     t.plan(2);
 
     initDb()
-    .then(() => {        
-        const expectedError = null;
+    .then(() => {
         const expectedCommand = 'INSERT';
         const user_id = 1;
         const quiz_id = 1;
+        const survey_id = null;
         const question_id = 1;
         const response = 'c';
 
-        saveStudentResponse(pool, user_id, quiz_id, question_id, response, (error, response) => {
-            t.equal(error, expectedError, 'error is null, response is saved to db correctly.');
-            t.deepEqual(response.command, expectedCommand, 'Correct command of INSERT, response is saved to db correctly');
+        saveStudentResponse(pool, user_id, quiz_id, survey_id, question_id, response, (error, response) => {
+            if (error) {
+                t.error('should not have errored');
+            } else {
+                t.pass('error is null, response is saved to db correctly.');
+                t.deepEqual(response.command, expectedCommand, 'Correct command of INSERT, response is saved to db correctly');
+            }
         });
     });
 });

@@ -10,7 +10,7 @@ const lecturerCreds = { email: 'authenticate-user@city.ac.uk', password: 'testin
 const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer', is_lecturer: true };
 
 if (!process.env.TESTING) {
-    throw new Error("Please set the testing environment variables!");
+    throw new Error("Please set the testing environment variable!");
 }
 
 test('/ endpoint works returns the correct payload', (t) => {
@@ -141,7 +141,7 @@ test('/ endpoint works returns the correct payload', (t) => {
     {
         method: 'get',
         url: '/get-module?module_id=TEST',
-        expected: { medals: { condition: [39, 69], medal_name: ['bronze', 'silver', 'gold'] }, module_id: 'TEST', name: 'test module', num_enrolled: 5, quizzes: [{ is_last_quiz: false, is_presented: true, name: 'Week 1 Quiz', num_entries: '4', num_questions: '2', quiz_id: 1 }, { is_last_quiz: false, is_presented: true, name: 'Week 2 Quiz', num_entries: '3', num_questions: '3', quiz_id: 2 }], trophies: { condition: [1, 100, 65, 2], trophy_name: ['first_quiz', 'high_score', 'overall_average', 'participation'] } }
+        expected: { medals: { condition: [39, 69], medal_name: ['bronze', 'silver', 'gold'] }, module_id: 'TEST', name: 'test module', num_enrolled: 5, quizzes: [{ is_last_quiz: false, is_presented: true, name: 'Week 1 Quiz', num_entries: '4', num_questions: '2', quiz_id: 1 }, { is_last_quiz: false, is_presented: true, name: 'Week 2 Quiz', num_entries: '3', num_questions: '3', quiz_id: 2 }], surveys: [{ is_presented: true, name: 'Week 1 Survey', num_entries: '4', num_questions: '2', survey_id: 1 }, { is_presented: true, name: 'Week 2 Survey', num_entries: '4', num_questions: '2', survey_id: 2 }], trophies: { condition: [1, 100, 65, 2], trophy_name: ['first_quiz', 'high_score', 'overall_average', 'participation'] } }
     },
     {
         method: 'get',
