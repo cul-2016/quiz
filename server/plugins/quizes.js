@@ -4,6 +4,7 @@ const saveQuiz = require('../lib/saveQuiz.js');
 const saveSurvey = require('../lib/saveSurvey');
 const saveQuestions = require('../lib/saveQuestions.js');
 const getQuizQuestions = require('../lib/getQuizQuestions');
+const getSurveyQuestions = require('../lib/getSurveyQuestions');
 const setQuizToPresented = require('../lib/setQuizToPresented.js');
 const calculateQuizScore = require('../lib/calculateQuizScore.js');
 const getIsLastQuiz = require('../lib/getIsLastQuiz.js');
@@ -17,6 +18,7 @@ const updateQuestions = require('../lib/updateQuestions.js');
 const deleteQuestions = require('../lib/deleteQuestions.js');
 const deleteResponses = require('../lib/deleteResponses.js');
 const getQuizDetails = require('../lib/getQuizDetails.js');
+const getSurveyDetails = require('../lib/getSurveyDetails.js');
 const editScore = require('../lib/editScore.js');
 const getQuizDetailsStudent = require('../lib/getQuizDetailsStudent');
 
@@ -118,18 +120,21 @@ exports.register = (server, options, next) => {
             method: 'GET',
             path: '/get-quiz-questions',
             handler: (request, reply) => {
-                const { quiz_id } = request.query;
-
+                const { quiz_id, survey_id } = request.query;
                 if (quiz_id !== undefined) {
-
                     const parsed_quiz_id = parseInt(quiz_id, 10);
-                    getQuizQuestions(pool, parsed_quiz_id, (error, questions) => {
-
-                        const verdict = error || questions;
+                    getQuizQuestions(pool, parsed_quiz_id, (error, quizQuestions) => {
+                        const verdict = error || quizQuestions;
+                        reply(verdict);
+                    });
+                } else if (survey_id !== undefined) {
+                    const parsed_survey_id = parseInt(survey_id, 10);
+                    getSurveyQuestions(pool, parsed_survey_id, (error, surveyQuestions) => {
+                        const verdict = error || surveyQuestions;
                         reply(verdict);
                     });
                 } else {
-                    reply(new Error('quiz_id is not defined'));
+                    reply(new Error('quiz_id and survey_id is not defined'));
                 }
             }
         },
@@ -258,16 +263,21 @@ exports.register = (server, options, next) => {
             method: 'GET',
             path: '/get-quiz-details',
             handler: (request, reply) => {
-                const { quiz_id } = request.query;
+                const { quiz_id, survey_id } = request.query;
                 if (quiz_id !== undefined) {
-
                     const parsed_quiz_id = parseInt(quiz_id, 10);
                     getQuizDetails(pool, parsed_quiz_id, (error, quizDetails) => {
                         const verdict = error || quizDetails;
                         reply(verdict);
                     });
+                } else if (survey_id !== undefined) {
+                    const parsed_survey_id = parseInt(survey_id, 10);
+                    getSurveyDetails(pool, parsed_survey_id, (error, surveyDetails) => {
+                        const verdict = error || surveyDetails;
+                        reply(verdict);
+                    });
                 } else {
-                    reply(new Error('quiz_id is not defined'));
+                    reply(new Error('quiz_id and survey_id is not defined'));
                 }
             }
         },

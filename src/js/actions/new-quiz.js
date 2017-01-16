@@ -102,7 +102,7 @@ export const saveQuizFailure = (error) => ({
 // UPDATE QUIZ ACTIONS
 //
 
-export function updateQuiz (module_id, quiz_id, quizName, questions, deletedQuestions, is_last_quiz) {
+export function updateQuiz (module_id, quiz_id, survey_id, name, questions, deletedQuestions, is_last_quiz) {
 
     var editedQuestions = questions.filter((question) => {
         if (question.question_id) {
@@ -129,7 +129,8 @@ export function updateQuiz (module_id, quiz_id, quizName, questions, deletedQues
         const payload = {
             module_id,
             quiz_id,
-            quizName,
+            survey_id,
+            name,
             editedQuestions,
             newQuestions,
             deletedQuestions,
@@ -164,13 +165,14 @@ export const updateQuizFailure = (error) => ({
 // GET QUIZ DETAILS ACTIONS
 //
 
-export function getQuizDetails (quiz_id) {
+export function getQuizDetails (quiz_id, survey_id) {
 
     return (dispatch) => {
 
         dispatch(getQuizDetailsRequest());
 
-        request.get(dispatch)(`/get-quiz-details?quiz_id=${quiz_id}`)
+
+        request.get(dispatch)(`/get-quiz-details?${ quiz_id ? `quiz_id=${quiz_id}` : `survey_id=${survey_id}` }`)
             .then((response) => {
                 dispatch(getQuizDetailsSuccess(response.data));
             })

@@ -36,13 +36,13 @@ export const UPDATE_NUM_PARTICIPANTS = 'UPDATE_NUM_PARTICIPANTS';
  * GET QUIZ QUESTIONS
  ***/
 
-export function getQuizQuestions (quiz_id) {
+export function getQuizQuestions (quiz_id, survey_id) {
 
     return (dispatch) => {
 
         dispatch(getQuizQuestionsRequest());
 
-        request.get(dispatch)(`/get-quiz-questions?quiz_id=${quiz_id}`)
+        request.get(dispatch)(`/get-quiz-questions?${ quiz_id ? `quiz_id=${quiz_id}` : `survey_id=${survey_id}` }`)
             .then((response) => {
                 dispatch(getQuizQuestionsSuccess(response.data));
             })

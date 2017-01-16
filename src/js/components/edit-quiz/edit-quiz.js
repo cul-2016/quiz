@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
-import Questions from './questions';
+import Questions from '../new-quiz/questions';
 import classnames from 'classnames';
 import { store } from '../../store';
 import { clearNewQuizState } from '../../actions/new-quiz';
@@ -8,16 +8,11 @@ import { clearNewQuizState } from '../../actions/new-quiz';
 
 const EditQuiz = ({ questions, isUpdatingQuiz, name, is_last_quiz, deletedQuestions, handleAddQuestion, handleInputChange, handleQuizNameChange, handleEditQuiz, handleDeleteQuestion, handleIsLastQuiz, params }) => {
 
-    const questionsValidation = questions.map((question) => {
-        if (!question.question || !question.a || !question.b || !question.correct_answer){
-            return false;
-        } else {
-            return true;
-        }
-    }).every((elem) => {
-        return elem;
-    });
-
+    const isSurvey = params.survey_id ? true : false;
+    const questionsValidation = questions.map((questionObj) => {
+        const { question, a, b, correct_answer } = questionObj;
+        return Boolean(question && a && b && (correct_answer || isSurvey));
+    }).every((elem) => elem);
     const submitClasses = classnames("button is-success save-question", {
         "is-disabled": !name || questionsValidation === false,
         "is-loading": isUpdatingQuiz
@@ -25,7 +20,6 @@ const EditQuiz = ({ questions, isUpdatingQuiz, name, is_last_quiz, deletedQuesti
     const quizNameClasses = classnames("help is-danger", {
         "display-none": name
     });
-
     return (
             <div className="edit-quiz">
                 <div className="column is-offset-3">
@@ -40,41 +34,52 @@ const EditQuiz = ({ questions, isUpdatingQuiz, name, is_last_quiz, deletedQuesti
                 </div>
                 <div className="columns">
                     <div className="column is-5 is-offset-3 has-text-centered">
-                        <label className="label">
-                        Quiz name
-                        </label>
+                            { isSurvey &&
+                                <label className="label">
+                                    Survey Name
+                                </label>
+                            }
+                            { !isSurvey &&
+                                <label className="label">
+                                    Quiz Name
+                                </label>
+                            }
                         <input
                             className="input"
                             type="text"
                             value={ name || "" }
                             onChange={ (e) => handleQuizNameChange(e.target.value) }
-                            placeholder='Quiz Name'></input>
-                            <span className={ quizNameClasses }>Please enter a Quiz Name</span>
+                            placeholder={ isSurvey ? `Survey Name` : `Quiz Name`}></input>
+                        <span className={ quizNameClasses }>Please enter a { isSurvey ? `Survey` : `Quiz`} Name</span>
                     </div>
                     <div className="column is-1 has-text-centered">
-                        <label className="label">
-                        Last Quiz?
-                        </label>
-                        <input
-                            className="column is-1"
-                            type="checkbox"
-                            checked={ is_last_quiz === true }
-                            name="is_last_quiz"
-                            onClick={ handleIsLastQuiz } />
+                        {
+                            !isSurvey &&
+                            <div>
+                                <label className="label">
+                                    Last Quiz?
+                                </label>
+                                <input
+                                    className="column is-1"
+                                    type="checkbox"
+                                    checked={ is_last_quiz === true }
+                                    name="is_last_quiz"
+                                    onClick={ handleIsLastQuiz } />
+                            </div>
+                        }
                     </div>
                 </div>
-
                 <Questions
                     questions={ questions }
+                    isSurvey={ isSurvey }
                     handleInputChange={ handleInputChange }
-                    deletedQuestions={ deletedQuestions }
-                    handleDeleteQuestion={ handleDeleteQuestion } />
-
+                    handleDeleteQuestion={ handleDeleteQuestion }
+                    />
                 <div className="column is-8 is-offset-2 has-text-centered">
                     <button className="button is-info add-question" onClick={ handleAddQuestion }>
                         Add Question
                     </button>
-                    <button className={ submitClasses } onClick={ () => handleEditQuiz(params.module_id, params.quiz_id, name, questions, deletedQuestions, is_last_quiz) }>
+                    <button className={ submitClasses } onClick={ () => handleEditQuiz(params.module_id, params.quiz_id, params.survey_id, name, questions, deletedQuestions, is_last_quiz) }>
                         Save and Exit
                     </button>
                 </div>

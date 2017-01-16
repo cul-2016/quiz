@@ -23,17 +23,18 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
 
-    sendQuizInvite: (quiz_id, name) => {
-
+    sendQuizInvite: (quiz_id, survey_id, name) => {
+        const quizIdOrSurveyId = quiz_id || survey_id;
         let quizInfo = {
             room: store.getState().module.module_id,
-            quiz_id
+            quiz_id: quizIdOrSurveyId
         };
+        console.log(quiz_id);
 
         const interval_id = emitSendQuizInvite(socketClient, quizInfo);
         dispatch(setIntervalID(interval_id));
-        dispatch(setQuizDetails(quiz_id, name));
-        dispatch(getQuizQuestions(quiz_id));
+        dispatch(setQuizDetails(quizIdOrSurveyId, name));
+        dispatch(getQuizQuestions(quiz_id, survey_id));
     }
 });
 

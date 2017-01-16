@@ -41,11 +41,13 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
     { url: '/save-student-response', method: 'post', payload: { user_id: 1, quiz_id: 2, question_id: 3, response: 'a' } },
     { url: '/save-student-response', method: 'post', payload: { user_id: 5, survey_id: 3, question_id: 36, response: 'a' } },
     { url: '/get-quiz-questions?quiz_id=1' },
+    { url: '/get-quiz-questions?survey_id=1' },
     { url: '/end-quiz', method: 'post', payload: { quiz_id: 8 } },
     { url: '/get-quiz-review?quiz_id=1' },
     { url: '/get-quiz-members?quiz_id=1' },
     { url: '/edit-score?quiz_id=1&score=2&quiz_id=1' },
     { url: '/get-quiz-details?quiz_id=1' },
+    { url: '/get-quiz-details?survey_id=1' },
     { url: '/update-quiz', method: 'post', payload: updateQuizOptionsPayload },
     { url: '/get-quiz-details-student?quiz_id=1' },
 

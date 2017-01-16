@@ -41,7 +41,7 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id, isSurvey }) => 
                 <td><i className={ is_last_quizClasses } /></td>
                 <td>
                     <Link to={`${module_id}/${quiz[surveyIdOrQuizId]}/edit-${surveyOrQuiz}`}>
-                        <span title="Edit Quiz" className={ editQuizClass }>
+                        <span title={`Edit ${surveyOrQuiz}`} className={ editQuizClass }>
                             <i className="fa fa-edit"></i>
                         </span>
                     </Link>
@@ -55,7 +55,7 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id, isSurvey }) => 
                 <td>
                     <Link to={`${location.pathname}/live`}>
                         <span className={ buttonClass }
-                            onClick={ () => sendQuizInvite(quiz[surveyIdOrQuizId], quiz.name) }>
+                            onClick={ () => sendQuizInvite(quiz.quiz_id, quiz.survey_id, quiz.name) }>
                             Invite students to { surveyOrQuiz }
                         </span>
                     </Link>

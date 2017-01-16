@@ -215,10 +215,11 @@ test('updateQuiz async action creator returns expected action', (t) => {
     t.plan(1);
     let module_id = 'TEST';
     let quiz_id = 1;
+    let survey_id = 1;
     let quizName = 'week 1';
     let actual;
     const { dispatch, queue } = createThunk({ newQuiz: initialState });
-    dispatch(actions.updateQuiz(module_id, quiz_id, quizName, questions));
+    dispatch(actions.updateQuiz(module_id, quiz_id, survey_id, quizName, questions));
 
     [{ ...actual }] = queue;
 
