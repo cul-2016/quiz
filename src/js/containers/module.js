@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
-import Module from '../components/module/module';
+import Module from '../components/module/module.js';
 import { socketClient } from '../socket';
 import { store } from '../store.js';
 import { joinWebsocketRoom } from '../lib/subscriptions';
 import emitSendQuizInvite from '../lib/emitSendQuizInvite';
-import { setIntervalID, getQuizQuestions, setQuizDetails } from '../actions/live-quiz';
+import { setIntervalID, getQuizQuestions, setQuizDetails } from '../actions/live-quiz.js';
 
 joinWebsocketRoom(store, socketClient);
 
@@ -23,7 +23,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
 
-    sendQuizInvite: (quiz_id, survey_id, name) => {
+    sendQuizInvite: (quiz_id, survey_id, name, review = false) => {
         const quizIdOrSurveyId = quiz_id || survey_id;
         let quizInfo = {
             room: store.getState().module.module_id,
@@ -33,7 +33,7 @@ const mapDispatchToProps = (dispatch) => ({
 
         const interval_id = emitSendQuizInvite(socketClient, quizInfo);
         dispatch(setIntervalID(interval_id));
-        dispatch(setQuizDetails(quizIdOrSurveyId, name));
+        dispatch(setQuizDetails(quizIdOrSurveyId, name, review));
         dispatch(getQuizQuestions(quiz_id, survey_id));
     }
 });
