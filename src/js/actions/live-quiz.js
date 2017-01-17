@@ -32,6 +32,8 @@ export const TOGGLE_MESSAGE_VISIBILITY = 'TOGGLE_MESSAGE_VISIBILITY';
 
 export const UPDATE_NUM_PARTICIPANTS = 'UPDATE_NUM_PARTICIPANTS';
 
+export const SET_IS_SURVEY = 'SET_IS_SURVEY';
+
 /***
  * GET QUIZ QUESTIONS
  ***/
@@ -124,13 +126,13 @@ export const setIntervalID = (interval_id) => ({
  * END QUIZ
  ***/
 
-export function endQuiz (quiz_id) {
+export function endQuiz (id, isSurvey) {
 
     return (dispatch) => {
 
         dispatch(endQuizRequest());
 
-        const payload = { quiz_id };
+        const payload = { id, isSurvey };
 
         request.post(dispatch)(`/end-quiz`, payload)
             .then(() => {
@@ -219,4 +221,9 @@ export const toggleMessageVisibility = () => ({
 export const updateNumParticipants = (numParticipants) => ({
     type: UPDATE_NUM_PARTICIPANTS,
     numParticipants
+});
+
+export const setIsSurvey = (quiz_id, survey_id) => ({
+    type: SET_IS_SURVEY,
+    isSurvey: survey_id ? true : false
 });

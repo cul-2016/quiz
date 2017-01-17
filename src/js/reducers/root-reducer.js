@@ -8,7 +8,7 @@ import { resetPassword } from './reset-password.js';
 import register from './register';
 import { newQuiz } from './new-quiz';
 import { module } from './module';
-import liveQuiz from './live-quiz';
+import { liveQuiz } from './live-quiz';
 import review from './review';
 import { result } from './result';
 import quizMembers from './quiz-members';
