@@ -101,3 +101,16 @@ test('updateNumParticipants creates the correct action', (t) => {
     const actual = deepFreeze(actions.updateNumParticipants(numParticipants));
     t.deepEqual(actual, expected);
 });
+
+test('setIsSurvey creates the correct action', (t) => {
+    t.plan(1);
+    let quiz_id;
+    const survey_id = 1;
+    const expected = {
+        type: actions.SET_IS_SURVEY,
+        isSurvey: true
+    };
+
+    const actual = deepFreeze(actions.setIsSurvey(quiz_id, survey_id));
+    t.deepEqual(actual, expected);
+});

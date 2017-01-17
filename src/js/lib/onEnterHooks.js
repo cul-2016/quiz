@@ -166,8 +166,9 @@ export function fetchModuleList (nextState, replace, callback) {
 export function fetchQuizReview (nextState, replace, callback) {
 
     if (validCookieExists()) {
+        const isSurvey = store.getState().liveQuiz.isSurvey;
         const quiz_id = nextState.params.quiz_id;
-        store.dispatch(getQuizReview(quiz_id));
+        store.dispatch(getQuizReview(quiz_id, isSurvey));
     }
     callback();
 }

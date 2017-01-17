@@ -5,15 +5,15 @@ const saveSurvey = require('../lib/saveSurvey');
 const saveQuestions = require('../lib/saveQuestions.js');
 const getQuizQuestions = require('../lib/getQuizQuestions');
 const getSurveyQuestions = require('../lib/getSurveyQuestions');
-const setQuizToPresented = require('../lib/setQuizToPresented.js');
+const setQuizOrSurveyToPresented = require('../lib/setQuizOrSurveyToPresented.js');
 const calculateQuizScore = require('../lib/calculateQuizScore.js');
 const getIsLastQuiz = require('../lib/getIsLastQuiz.js');
 const setQuizScore = require('../lib/setQuizScore.js');
 const getNewTrophyState = require('../lib/getNewTrophyState.js');
 const setNewTrophyState = require('../lib/setNewTrophyState.js');
-const getQuizReview = require('../lib/getQuizReview.js');
+const getReview = require('../lib/getReview.js');
 const getQuizMembers = require('../lib/getQuizMembers.js');
-const updateQuiz = require('../lib/updateQuiz.js');
+const updateQuizOrSurvey = require('../lib/updateQuizOrSurvey.js');
 const updateQuestions = require('../lib/updateQuestions.js');
 const deleteQuestions = require('../lib/deleteQuestions.js');
 const deleteResponses = require('../lib/deleteResponses.js');
@@ -142,9 +142,9 @@ exports.register = (server, options, next) => {
             method: 'POST',
             path: '/end-quiz',
             handler: (request, reply) => {
-                const { quiz_id } = request.payload;
+                const { id, isSurvey } = request.payload;
 
-                setQuizToPresented(pool, quiz_id, (error, result) => {
+                setQuizOrSurveyToPresented(pool, id, isSurvey, (error, result) => {
 
                     const verdict = error || result;
                     reply(verdict);
@@ -201,15 +201,14 @@ exports.register = (server, options, next) => {
         },
         {
             method: 'GET',
-            path: '/get-quiz-review',
+            path: '/get-review',
             handler: (request, reply) => {
-                const { quiz_id } = request.query;
+                const { id, isSurvey } = request.query;
+                if (id !== undefined && isSurvey !== undefined) {
+                    const parsed_isSurvey = isSurvey === "true";
+                    const parsed_id = parseInt(id, 10);
 
-                if (quiz_id !== undefined) {
-
-                    const parsed_quiz_id = parseInt(quiz_id, 10);
-                    getQuizReview(pool, parsed_quiz_id, (error, module) => {
-
+                    getReview(pool, parsed_id, parsed_isSurvey, (error, module) => {
                         const verdict = error || module;
                         reply(verdict);
                     });
@@ -290,9 +289,8 @@ exports.register = (server, options, next) => {
                 } = request.payload;
                 const isSurvey = Boolean(survey_id);
                 const quizIdOrSurveyId = survey_id || quiz_id;
-
                 // update quiz name
-                updateQuiz(pool, module_id, quizIdOrSurveyId, name, is_last_quiz, (error) => {
+                updateQuizOrSurvey(pool, module_id, quiz_id, survey_id, name, is_last_quiz, (error) => {
                     /* istanbul ignore if */
                     if (error) {
                         return reply(error);

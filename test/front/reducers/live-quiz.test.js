@@ -1,7 +1,6 @@
 import test from 'tape';
-import { liveQuiz as liveQuizState } from '../../utils/reducer-fixtures';
 import { liveQuizError as error, abortQuizError, endQuizError } from '../../utils/action-fixtures';
-import reducer from '../../../src/js/reducers/live-quiz';
+import { initialState as liveQuizState, liveQuiz as reducer } from '../../../src/js/reducers/live-quiz';
 import { nextQuestion, liveQuizQuestion as questions } from '../../utils/data-fixtures';
 import deepFreeze from '../../utils/deepFreeze';
 
@@ -269,6 +268,20 @@ test('UPDATE_NUM_PARTICIPANTS works', (t) => {
     };
     const actual = reducer(initialState, action);
     const expected = Object.assign({}, liveQuizState, { numParticipants });
+
+    t.deepEqual(actual, expected);
+});
+
+test('SET_IS_SURVEY works', (t) => {
+
+    t.plan(1);
+    const initialState = deepFreeze(liveQuizState);
+    const action = {
+        type: 'SET_IS_SURVEY',
+        isSurvey: true
+    };
+    const actual = reducer(initialState, action);
+    const expected = Object.assign({}, liveQuizState, { isSurvey: true });
 
     t.deepEqual(actual, expected);
 });

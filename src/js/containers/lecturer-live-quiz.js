@@ -47,6 +47,7 @@ const mapDispatchToProps = (dispatch) => ({
 
         const intervalID = store.getState().liveQuiz.interval_id;
         const module_id = store.getState().module.module_id;
+        const isSurvey = store.getState().liveQuiz.isSurvey;
         const data = {
             room: module_id,
             quiz_id
@@ -54,7 +55,7 @@ const mapDispatchToProps = (dispatch) => ({
         socketClient.emit('end_of_quiz', data, () => {
 
             clearInterval(intervalID);
-            dispatch(endQuiz(quiz_id));
+            dispatch(endQuiz(quiz_id, isSurvey));
             hashHistory.push(`${module_id}/${quiz_id}/holding-page`);
         });
     },

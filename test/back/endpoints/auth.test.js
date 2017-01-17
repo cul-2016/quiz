@@ -43,7 +43,8 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
     { url: '/get-quiz-questions?quiz_id=1' },
     { url: '/get-quiz-questions?survey_id=1' },
     { url: '/end-quiz', method: 'post', payload: { quiz_id: 8 } },
-    { url: '/get-quiz-review?quiz_id=1' },
+    { url: '/get-review?id=1&isSurvey=false' },
+    { url: '/get-review?id=1&isSurvey=true' },
     { url: '/get-quiz-members?quiz_id=1' },
     { url: '/edit-score?quiz_id=1&score=2&quiz_id=1' },
     { url: '/get-quiz-details?quiz_id=1' },
@@ -276,7 +277,7 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
     // quiz tests
     { url: '/abort-quiz' },
     { url: '/get-quiz-questions' },
-    { url: '/get-quiz-review' },
+    { url: '/get-review' },
     { url: '/get-quiz-members' },
     { url: '/edit-score' },
     { url: '/get-quiz-details' },
