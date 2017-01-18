@@ -6,7 +6,8 @@ import { updateScore, editScore } from '../actions/quiz-members';
 const mapStateToProps = (state) => ({
     members: state.quizMembers.members,
     isFetchingQuizMembers: state.quizMembers.isFetchingQuizMembers,
-    questions: state.review.questions
+    questions: state.review.questions,
+    isSurvey: state.liveQuiz.isSurvey
 });
 
 const mapDispatchToProps = (dispatch) => ({

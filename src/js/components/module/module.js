@@ -4,7 +4,7 @@ import Quizzes from './quizzes';
 const  Surveys = Quizzes;
 import Spinner from '../general/spinner';
 
-const Module = ({ location, module, quizzes, surveys, isFetchingModule, sendQuizInvite }) => {
+const Module = ({ location, module, quizzes, surveys, isFetchingModule, sendQuizInvite, handleSetIsSurvey }) => {
 
     return (
         <div>
@@ -25,13 +25,15 @@ const Module = ({ location, module, quizzes, surveys, isFetchingModule, sendQuiz
                     <Quizzes quizzes={ quizzes }
                         location={ location }
                         sendQuizInvite={ sendQuizInvite }
-                        module_id={ module.module_id }/>
+                        module_id={ module.module_id }
+                        handleSetIsSurvey={ handleSetIsSurvey }/>
 
                     <Surveys quizzes={ surveys }
                         isSurvey={ true }
                         location={ location }
                         sendQuizInvite={ sendQuizInvite }
-                        module_id={ module.module_id }/>
+                        module_id={ module.module_id }
+                        handleSetIsSurvey={ handleSetIsSurvey }/>
                 </div>
             </div>
         }
@@ -45,7 +47,8 @@ Module.propTypes = {
     quizzes: PropTypes.array,
     surveys: PropTypes.array,
     isFetchingModule: PropTypes.bool.isRequired,
-    sendQuizInvite: PropTypes.func.isRequired
+    sendQuizInvite: PropTypes.func.isRequired,
+    handleSetIsSurvey: PropTypes.func.isRequired
 };
 
 Module.defaultProps = {

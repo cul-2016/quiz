@@ -12,12 +12,12 @@ export const EDIT_SCORE_FAILURE = 'EDIT_SCORE_FAILURE';
 
 export const UPDATE_SCORE = 'UPDATE_SCORE';
 
-export const getQuizMembers = (quiz_id) => {
+export const getQuizMembers = (id, isSurvey) => {
     return (dispatch) => {
 
         dispatch(getQuizMembersRequest());
 
-        request.get(dispatch)(`get-quiz-members?quiz_id=${quiz_id}`)
+        request.get(dispatch)(`get-quiz-members?id=${id}&isSurvey=${isSurvey}`)
             .then((response) => {
                 dispatch(getQuizMembersSuccess(response.data));
             })

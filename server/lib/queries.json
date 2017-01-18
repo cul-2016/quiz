@@ -20,7 +20,8 @@
         "score": "SELECT COUNT(CASE WHEN responses.response = questions.correct_answer THEN 1 END) FROM responses JOIN questions ON questions.question_id = responses.question_id WHERE responses.user_id = ($1) AND responses.quiz_id = ($2);",
         "num_questions": "SELECT COUNT(question_id) FROM questions WHERE quiz_id = ($1);"
     },
-    "saveStudentResponse": "INSERT INTO responses (user_id, quiz_id, survey_id, question_id, response) VALUES ($1, $2, $3, $4, $5) ON CONFLICT (user_id, question_id) DO UPDATE SET response = $5 WHERE (responses.user_id, responses.question_id) = ($1, $4);",
+    "saveStudentResponseQuiz": "INSERT INTO responses (user_id, quiz_id, question_id, response) VALUES ($1, $2, $3, $4) ON CONFLICT (user_id, question_id) DO UPDATE SET response = $4 WHERE (responses.user_id, responses.question_id) = ($1, $3);",
+    "saveStudentResponseSurvey": "INSERT INTO responses (user_id, survey_id, question_id, response) VALUES ($1, $2, $3, $4) ON CONFLICT (user_id, question_id) DO UPDATE SET response = $4 WHERE (responses.user_id, responses.question_id) = ($1, $3);",
     "getFirstQuizState": "SELECT DISTINCT(user_id) FROM responses WHERE user_id = ($1) AND quiz_id = ($2);",
     "getHighScoreState": {
         "getCondition": "SELECT condition FROM trophies WHERE module_id = $1 AND trophy_name = 'high_score';",
