@@ -10,7 +10,7 @@ test('`saveSurvey` returns the survey id for the saved survey', (t) => {
 
     initDb()
     .then(() => {
-        const expected = 9;
+        const expected = 8;
         const module_id = 'TEST';
         const name = 'New test survey';
 

@@ -117,6 +117,10 @@ const Root = ({ store }) => (
                     path=":module_id/:quiz_id/edit-quiz"
                     component={ EditQuizContainer } />
                 <Route
+                    onEnter={ composeHooks(hooks.authenticate, hooks.checkUserRole, hooks.fetchQuizDetails, hooks.checkModuleOwner) }
+                    path=":module_id/:survey_id/edit-survey"
+                    component={ EditQuizContainer } />
+                <Route
                     onEnter={ composeHooks(hooks.authenticate, hooks.checkUserRole, hooks.fetchModuleMembers, hooks.checkModuleOwner) }
                     path=":module_id/members"
                     component={ ModuleMembersContainer } />

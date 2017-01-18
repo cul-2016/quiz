@@ -31,8 +31,8 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(updateQuizName(value));
     },
 
-    handleEditQuiz: (module_id, quiz_id, quizName, questions, deletedQuestions, is_last_quiz) => {
-        dispatch(updateQuiz(module_id, quiz_id, quizName, questions, deletedQuestions, is_last_quiz));
+    handleEditQuiz: (module_id, quiz_id, survey_id, quizName, questions, deletedQuestions, is_last_quiz) => {
+        dispatch(updateQuiz(module_id, quiz_id, survey_id, quizName, questions, deletedQuestions, is_last_quiz));
         setTimeout(() => {
             hashHistory.goBack();
             dispatch(clearNewQuizState());

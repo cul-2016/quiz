@@ -38,14 +38,18 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
     { url: '/save-quiz', method: 'post', payload: { module_id: 'TEST', name: 'Brand New Quiz', isSurvey: false, questions } },
     { url: '/save-quiz', method: 'post', payload: { module_id: 'TEST', name: 'Brand New Survey', isSurvey: true, questions } },
     { url: '/save-quiz', method: 'post', payload: { module_id: 'TEST', name: 'Brand New Quiz', questions } },
-    { url: '/save-student-response', method: 'post', payload: { user_id: 1, quiz_id: 2, question_id: 3, response: 'a' } },
-    { url: '/save-student-response', method: 'post', payload: { user_id: 5, survey_id: 3, question_id: 36, response: 'a' } },
+    { url: '/save-student-response', method: 'post', payload: { user_id: 1, id: 1, isSurvey: true, question_id: 3, response: 'a' } },
+    { url: '/save-student-response', method: 'post', payload: { user_id: 5, id: 1, isSurvey: false, question_id: 36, response: 'a' } },
     { url: '/get-quiz-questions?quiz_id=1' },
+    { url: '/get-quiz-questions?survey_id=1' },
     { url: '/end-quiz', method: 'post', payload: { quiz_id: 8 } },
-    { url: '/get-quiz-review?quiz_id=1' },
-    { url: '/get-quiz-members?quiz_id=1' },
+    { url: '/get-review?id=1&isSurvey=false' },
+    { url: '/get-review?id=1&isSurvey=true' },
+    { url: '/get-quiz-members?id=1&isSurvey=true' },
+    { url: '/get-quiz-members?id=1&isSurvey=false' },
     { url: '/edit-score?quiz_id=1&score=2&quiz_id=1' },
     { url: '/get-quiz-details?quiz_id=1' },
+    { url: '/get-quiz-details?survey_id=1' },
     { url: '/update-quiz', method: 'post', payload: updateQuizOptionsPayload },
     { url: '/get-quiz-details-student?quiz_id=1' },
 
@@ -274,13 +278,11 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
     // quiz tests
     { url: '/abort-quiz' },
     { url: '/get-quiz-questions' },
-    { url: '/get-quiz-review' },
+    { url: '/get-review' },
     { url: '/get-quiz-members' },
     { url: '/edit-score' },
     { url: '/get-quiz-details' },
-    { url: '/get-quiz-details-student' },
-    { url: '/save-student-response', method: 'post', payload: { user_id: 5, question_id: 34, response: 'c' } },
-
+    { url: '/get-quiz-details-student' }
 ].forEach((endpoint) => {
     test( endpoint.url + ' endpoint return 500', (t) => {
         t.plan(1);
