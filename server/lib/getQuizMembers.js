@@ -1,18 +1,23 @@
-var query = require('./query');
+const query = require('./query');
 
 /**
  * Represents a function that returns a list of students belonging to a quiz
  * @param {object} client - postgres database client
- * @param {number} quiz_id - quiz id to which all students will belong to
+ * @param {number} id - quiz or survey id to which all students will belong to
+ * @param {boolean} isSurvey - Boolean value for isSurvey
  * @param {function} callback - a callback function
  */
 
-function getQuizMembers (client, quiz_id, callback) {
+function getQuizMembers (client, id, isSurvey, callback) {
+    let getQuizMembersQuery;
+    const idArray = [id];
 
-    var moduleQuery = 'SELECT scores.user_id, users.username, users.email, scores.score FROM scores INNER JOIN users ON scores.user_id = users.user_id WHERE quiz_id = $1 ORDER BY users.email;';
-    var moduleValue = [quiz_id];
-
-    query(client, moduleQuery, moduleValue, (error, response) => {
+    if (!isSurvey) {
+        getQuizMembersQuery = 'SELECT scores.user_id, users.username, users.email, scores.score FROM scores INNER JOIN users ON scores.user_id = users.user_id WHERE quiz_id = $1 ORDER BY users.email;';
+    } else {
+        getQuizMembersQuery = 'SELECT DISTINCT responses.user_id, users.username, users.email FROM responses INNER JOIN users ON responses.user_id = users.user_id WHERE survey_id=$1;';
+    }
+    query(client, getQuizMembersQuery, idArray, (error, response) => {
 
         if (error) {
             console.error(error);

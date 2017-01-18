@@ -60,7 +60,7 @@ class QuizMembers extends Component {
     render () {
 
 
-        let { members, isFetchingQuizMembers, questions, params, handleUpdateScore, handleEditScore } = this.props;
+        let { members, isFetchingQuizMembers, questions, params, handleUpdateScore, handleEditScore, isSurvey } = this.props;
         let quizName = this.getQuizName();
 
         let mappedMembers = members.map((member, i) => {
@@ -72,12 +72,17 @@ class QuizMembers extends Component {
                     <td>
                         <p>{ member.username }</p>
                     </td>
-                    <td>
-                        <p>{ member.score }</p>
-                    </td>
-                    <td>
-                        <button className="button is-warning" onClick={ () => this.showEditScore(i) }>Edit Score</button>
-                    </td>
+                    {
+                        !isSurvey &&
+                        <div>
+                            <td>
+                                <p>{ member.score }</p>
+                            </td>
+                            <td>
+                                <button className="button is-warning" onClick={ () => this.showEditScore(i) }>Edit Score</button>
+                            </td>
+                        </div>
+                    }
                 </tr>
             );
         });
@@ -89,14 +94,19 @@ class QuizMembers extends Component {
                         <div className="column">{ member.email }</div>
                         <div className="column">{ member.username }</div>
                     </div>
-                    <div className="columns is-mobile has-text-centered">
-                        <div className="column"><strong>Score:</strong>{ member.score }</div>
-                    </div>
-                    <div className="columns is-mobile has-text-centered">
-                        <div className="column">
-                            <button className="button is-warning" onClick={ () => this.showEditScore(i) }>Edit Score</button>
+                    {
+                        !isSurvey &&
+                        <div>
+                            <div className="columns is-mobile has-text-centered">
+                                <div className="column"><strong>Score:</strong>{ member.score }</div>
+                            </div>
+                            <div className="columns is-mobile has-text-centered">
+                                <div className="column">
+                                    <button className="button is-warning" onClick={ () => this.showEditScore(i) }>Edit Score</button>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    }
                 </div>
             );
         });
@@ -156,9 +166,12 @@ class QuizMembers extends Component {
                                         <th>
                                             <label className="label">Nickname</label>
                                         </th>
-                                        <th colSpan="2">
-                                            <label className="label">Score</label>
-                                        </th>
+                                        {
+                                            !isSurvey &&
+                                            <th colSpan="2">
+                                                <label className="label">Score</label>
+                                            </th>
+                                        }
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -183,7 +196,8 @@ QuizMembers.propTypes = {
     params: PropTypes.object,
     questions: PropTypes.array,
     handleEditScore: PropTypes.func,
-    handleUpdateScore: PropTypes.func
+    handleUpdateScore: PropTypes.func,
+    isSurvey: PropTypes.bool
 };
 
 export default QuizMembers;

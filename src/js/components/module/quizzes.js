@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import classnames from 'classnames';
 import { Link } from 'react-router';
 
-const Quizzes = ({ location, quizzes, sendQuizInvite, module_id, isSurvey }) => {
+const Quizzes = ({ location, quizzes, sendQuizInvite, module_id, isSurvey, handleSetIsSurvey }) => {
 
     const surveyOrQuiz = isSurvey ? 'survey' : 'quiz';
     const surveyIdOrQuizId = isSurvey ? 'survey_id' : 'quiz_id';
@@ -46,7 +46,7 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id, isSurvey }) => 
                         </span>
                     </Link>
 
-                    <Link to={ `${module_id}/${quiz[surveyIdOrQuizId]}/members` }>
+                    <Link onClick={ () => handleSetIsSurvey(quiz.quiz_id, quiz.survey_id) } to={ `${module_id}/${quiz[surveyIdOrQuizId]}/members` }>
                         <span title="Quiz History" className={ quizHistoryClass }>
                             <i className="fa fa-history"></i>
                         </span>
@@ -110,7 +110,7 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id, isSurvey }) => 
                         </span>
                     </Link>
 
-                    <Link className={ quizHistoryClass } to={ `${module_id}/${quiz[surveyIdOrQuizId]}/members` }>
+                    <Link onClick={ () => handleSetIsSurvey(quiz.quiz_id, quiz.survey_id) } className={ quizHistoryClass } to={ `${module_id}/${quiz[surveyIdOrQuizId]}/members` }>
                         <span title="Quiz History" className="column tag is-warning is-medium settings-tag">
                             <i className="fa fa-history"></i>
                         </span>
@@ -183,7 +183,8 @@ Quizzes.propTypes = {
     quizzes: PropTypes.array.isRequired,
     sendQuizInvite: PropTypes.func.isRequired,
     module_id: PropTypes.string.isRequired,
-    isSurvey: PropTypes.bool
+    isSurvey: PropTypes.bool,
+    handleSetIsSurvey: PropTypes.func.isRequired
 };
 
 export default Quizzes;

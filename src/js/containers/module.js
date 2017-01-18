@@ -36,6 +36,10 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(setQuizDetails(quizIdOrSurveyId, name));
         dispatch(getQuizQuestions(quiz_id, survey_id));
         dispatch(setIsSurvey(quiz_id, survey_id));
+    },
+
+    handleSetIsSurvey: (quiz_id, survey_id) => {
+        dispatch(setIsSurvey(quiz_id, survey_id));
     }
 });
 

@@ -7,7 +7,7 @@ const QuizReviewLecturer = ({ questions }) => {
         return ( <Question
             key={ `lecturer-question-${i}` }
             idx={ i }
-            question={ question }
+            question={ { ...question, correct_answer: question.correct_answer || '' } }
             is_lecturer={ true }
         /> );
     });
