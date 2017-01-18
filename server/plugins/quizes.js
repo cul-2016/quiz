@@ -122,7 +122,6 @@ exports.register = (server, options, next) => {
             },
             handler: (request, reply) => {
                 const { quiz_id, survey_id } = request.query;
-
                 if (quiz_id !== undefined) {
                     const parsed_quiz_id = parseInt(quiz_id, 10);
                     getQuizQuestions(pool, parsed_quiz_id, (error, quizQuestions) => {
@@ -295,7 +294,6 @@ exports.register = (server, options, next) => {
             },
             handler: (request, reply) => {
                 const { quiz_id, survey_id } = request.query;
-
                 if (quiz_id !== undefined) {
                     const parsed_quiz_id = parseInt(quiz_id, 10);
                     getQuizDetails(pool, parsed_quiz_id, (error, quizDetails) => {
