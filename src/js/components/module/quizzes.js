@@ -2,7 +2,12 @@ import React, { PropTypes } from 'react';
 import classnames from 'classnames';
 import { Link } from 'react-router';
 
-const Quizzes = ({ location, quizzes, sendQuizInvite, module_id }) => {
+const Quizzes = ({ location, quizzes, sendQuizInvite, module_id, isSurvey, handleSetIsSurvey }) => {
+
+    const surveyOrQuiz = isSurvey ? 'survey' : 'quiz';
+    const surveyIdOrQuizId = isSurvey ? 'survey_id' : 'quiz_id';
+    const surveyOrQuizCapitalized = isSurvey ? 'Survey' : 'Quiz';
+    const surveyOrQuizPluralCapitalized = isSurvey ? 'Surveys' : 'Quizzes';
 
     const desktopView = quizzes.map((quiz, index) => {
 
@@ -35,13 +40,13 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id }) => {
                 <td><i className={ iconClasses } /></td>
                 <td><i className={ is_last_quizClasses } /></td>
                 <td>
-                    <Link to={`${module_id}/${quiz.quiz_id}/edit-quiz`}>
-                        <span title="Edit Quiz" className={ editQuizClass }>
+                    <Link to={`${module_id}/${quiz[surveyIdOrQuizId]}/edit-${surveyOrQuiz}`}>
+                        <span title={`Edit ${surveyOrQuiz}`} className={ editQuizClass }>
                             <i className="fa fa-edit"></i>
                         </span>
                     </Link>
 
-                    <Link to={ `${module_id}/${quiz.quiz_id}/members` }>
+                    <Link onClick={ () => handleSetIsSurvey(quiz.quiz_id, quiz.survey_id) } to={ `${module_id}/${quiz[surveyIdOrQuizId]}/members` }>
                         <span title="Quiz History" className={ quizHistoryClass }>
                             <i className="fa fa-history"></i>
                         </span>
@@ -50,8 +55,8 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id }) => {
                 <td>
                     <Link to={`${location.pathname}/live`}>
                         <span className={ buttonClass }
-                            onClick={ () => sendQuizInvite(quiz.quiz_id, quiz.name) }>
-                            Invite students to quiz
+                            onClick={ () => sendQuizInvite(quiz.quiz_id, quiz.survey_id, quiz.name) }>
+                            Invite students to { surveyOrQuiz }
                         </span>
                     </Link>
                 </td>
@@ -92,16 +97,20 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id }) => {
                 </div>
                 <div className="columns is-mobile has-text-centered">
                     <div className="column">Presented: <i className={ iconClasses } /></div>
-                    <div className="column">Last Quiz: <i className={ is_last_quizClasses } /></div>
+                    { !isSurvey &&
+                        <div className="column">
+                            Last { surveyOrQuizCapitalized }: <i className={ is_last_quizClasses } />
+                        </div>
+                    }
                 </div>
                 <div className="columns is-mobile has-text-centered">
-                    <Link className={ editQuizClass } to={`${module_id}/${quiz.quiz_id}/edit-quiz`}>
+                    <Link className={ editQuizClass } to={`${module_id}/${quiz[surveyIdOrQuizId]}/edit-quiz`}>
                         <span title="Edit Quiz" className="column tag is-warning is-medium settings-tag">
                             <i className="fa fa-edit"></i>
                         </span>
                     </Link>
 
-                    <Link className={ quizHistoryClass } to={ `${module_id}/${quiz.quiz_id}/members` }>
+                    <Link onClick={ () => handleSetIsSurvey(quiz.quiz_id, quiz.survey_id) } className={ quizHistoryClass } to={ `${module_id}/${quiz[surveyIdOrQuizId]}/members` }>
                         <span title="Quiz History" className="column tag is-warning is-medium settings-tag">
                             <i className="fa fa-history"></i>
                         </span>
@@ -111,8 +120,8 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id }) => {
                 <div className="columns is-mobile has-text-centered">
                     <Link className={ buttonClass } to={`${location.pathname}/live`}>
                         <span
-                        onClick={ () => sendQuizInvite(quiz.quiz_id, quiz.name) }>
-                        Invite students to quiz
+                        onClick={ () => sendQuizInvite(quiz[surveyIdOrQuizId], quiz.name) }>
+                        Invite students to { surveyOrQuiz }
                         </span>
                     </Link>
                 </div>
@@ -125,7 +134,9 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id }) => {
         <div className="section quizzes">
             <div className="level">
                 <div className="level-left">
-                    <h3 className="level-item">Quizzes</h3>
+                    <h3 className="level-item">
+                        { surveyOrQuizPluralCapitalized }
+                    </h3>
                 </div>
                 <div className="level-right">
 
@@ -135,7 +146,7 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id }) => {
                             <span className="icon">
                                 <i className="fa fa-plus" />
                             </span>
-                            <span>Add a new quiz</span>
+                            <span>Add a new { surveyOrQuiz }</span>
                         </button>
                     </Link>
                 </div>
@@ -144,11 +155,13 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id }) => {
             <table className="table is-hidden-mobile">
                 <thead>
                     <tr>
-                        <th>Quiz name</th>
+                        <th>name</th>
                         <th># questions</th>
                         <th># entries</th>
                         <th>Presented?</th>
-                        <th>Last Quiz?</th>
+                        { !isSurvey &&
+                            <th>Last { surveyOrQuizCapitalized }?</th>
+                        }
                         <th></th>
                         <th></th>
                     </tr>
@@ -169,7 +182,9 @@ Quizzes.propTypes = {
     location: PropTypes.object.isRequired,
     quizzes: PropTypes.array.isRequired,
     sendQuizInvite: PropTypes.func.isRequired,
-    module_id: PropTypes.string.isRequired
+    module_id: PropTypes.string.isRequired,
+    isSurvey: PropTypes.bool,
+    handleSetIsSurvey: PropTypes.func.isRequired
 };
 
 export default Quizzes;

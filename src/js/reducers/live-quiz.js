@@ -2,12 +2,13 @@ import update from 'react-addons-update';
 import * as actionsTypes from '../actions/live-quiz';
 
 
-const initialState = {
+export const initialState = {
     error: undefined,
     isFetchingQuizQuestions: false,
     isSavingResponse: false,
     isResponseSubmitted: false,
     quiz_id: undefined,
+    isSurvey: undefined,
     name: undefined,
     questions: undefined,
     response: undefined,
@@ -19,7 +20,7 @@ const initialState = {
     numParticipants: 0
 };
 
-export default function liveQuiz (state = initialState, action) {
+export const liveQuiz = (state = initialState, action) => {
 
     switch (action.type) {
 
@@ -76,7 +77,15 @@ export default function liveQuiz (state = initialState, action) {
         });
 
     case actionsTypes.END_QUIZ_SUCCESS:
-        return initialState;
+        return update(state, {
+            quiz_id: { $set: undefined },
+            name: { $set: undefined },
+            questions: { $set: undefined },
+            nextQuestionIndex: { $set: 0 },
+            isQuizStarted: { $set: false },
+            isEndingQuiz: { $set: false },
+            interval_id: { $set: undefined },
+        });
 
     case actionsTypes.END_QUIZ_FAILURE:
         return update(state, {
@@ -130,7 +139,12 @@ export default function liveQuiz (state = initialState, action) {
             numParticipants: { $set: action.numParticipants }
         });
 
+    case actionsTypes.SET_IS_SURVEY:
+        return update(state, {
+            isSurvey: { $set: action.isSurvey }
+        });
+
     default:
         return state;
     }
-}
+};

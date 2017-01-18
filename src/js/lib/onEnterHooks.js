@@ -166,8 +166,10 @@ export function fetchModuleList (nextState, replace, callback) {
 export function fetchQuizReview (nextState, replace, callback) {
 
     if (validCookieExists()) {
+        const isSurvey = store.getState().liveQuiz.isSurvey;
         const quiz_id = nextState.params.quiz_id;
-        store.dispatch(getQuizReview(quiz_id));
+        console.log(isSurvey, quiz_id);
+        store.dispatch(getQuizReview(quiz_id, isSurvey));
     }
     callback();
 }
@@ -219,8 +221,9 @@ export function fetchResult (nextState, replace, callback) {
 export function fetchQuizMembers (nextState, replace, callback) {
 
     if (validCookieExists()) {
-        const quiz_id = nextState.params.quiz_id;
-        store.dispatch(getQuizMembers(quiz_id));
+        const isSurvey = store.getState().liveQuiz.isSurvey;
+        const id = nextState.params.quiz_id;
+        store.dispatch(getQuizMembers(id, isSurvey));
     }
     callback();
 }
@@ -239,7 +242,8 @@ export function fetchQuizDetails (nextState, replace, callback) {
     if (validCookieExists()) {
 
         const quiz_id = nextState.params.quiz_id;
-        store.dispatch(getQuizDetails(quiz_id));
+        const survey_id = nextState.params.survey_id;
+        store.dispatch(getQuizDetails(quiz_id, survey_id));
     }
     callback();
 }

@@ -1,11 +1,16 @@
 import test from 'tape';
+import sinon from 'sinon';
+import axios from 'axios';
+
 import * as actions from '../../../src/js/actions/new-quiz';
 import createThunk from '../../utils/mockThunk';
 import { getQuizDetailsData } from '../../utils/data-fixtures';
 import { questions } from '../../utils/data-fixtures';
 import deepFreeze from '../../utils/deepFreeze';
 import { saveQuizError as error, getQuizDetailsError } from '../../utils/action-fixtures';
+import { initialState } from '../../../src/js/reducers/new-quiz.js';
 
+const createSandbox = sinon.sandbox.create;
 
 test('addQuestion action creator returns the expected action', (t) => {
 
@@ -89,21 +94,77 @@ test('toggleIsLastQuiz action creator returns the expected action', (t) => {
 // -----
 
 
-test('saveQuiz async action creator returns expected action', (t) => {
+test('saveQuiz async action: success', (t) => {
 
-    t.plan(1);
+    t.plan(2);
     let module_id = 'TEST';
     let quizName = 'week 1';
-    let actual;
-    const { dispatch, queue } = createThunk();
-    dispatch(actions.saveQuiz(module_id, quizName, questions));
 
-    [{ ...actual }] = queue;
+    const sandbox = createSandbox();
+    const successResponse = 'ok';
+    const successPromise = new Promise((resolve) => resolve(successResponse));
+    sandbox.stub(axios, 'post').returns(successPromise);
 
-    const expected = {
-        type: actions.SAVE_QUIZ_REQUEST,
+    const { dispatch, queue } = createThunk({ newQuiz: initialState });
+    dispatch(actions.saveQuiz(module_id, quizName, questions, false, false));
+
+    setTimeout(() => {
+        t.deepEqual(
+            queue.shift(),
+            {
+                type: actions.SAVE_QUIZ_REQUEST,
+            },
+            'flags request'
+        );
+
+        t.deepEqual(
+            queue.shift(),
+            {
+                type: actions.SAVE_QUIZ_SUCCESS,
+                data: successResponse
+            },
+            'sets data from response'
+        );
+        sandbox.restore();
+    }, 300);
+});
+
+test('saveQuiz async action: failure', (t) => {
+
+    t.plan(2);
+    let module_id = 'TEST';
+    let quizName = 'week 1';
+
+    const sandbox = createSandbox();
+    const failureResponse = {
+        response: { status: 500 },
+        message: 'Sorry, something went wrong!'
     };
-    t.deepEqual(actual, expected);
+    const failurePromise = Promise.reject(failureResponse);
+    sandbox.stub(axios, 'post').returns(failurePromise);
+
+    const { dispatch, queue } = createThunk({ newQuiz: initialState });
+    dispatch(actions.saveQuiz(module_id, quizName, questions, false, false));
+
+    setTimeout(() => {
+        t.deepEqual(
+            queue.shift(),
+            {
+                type: actions.SAVE_QUIZ_REQUEST,
+            },
+            'flags request'
+        );
+
+        t.deepEqual(
+            queue.shift(),
+            {
+                type: actions.SAVE_QUIZ_FAILURE,
+                error: failureResponse
+            },
+            'sets error from response'
+        );
+        sandbox.restore();
+    }, 300);
 });
 
 test('saveQuizRequest creates the correct action', (t) => {
@@ -154,10 +215,11 @@ test('updateQuiz async action creator returns expected action', (t) => {
     t.plan(1);
     let module_id = 'TEST';
     let quiz_id = 1;
+    let survey_id = 1;
     let quizName = 'week 1';
     let actual;
-    const { dispatch, queue } = createThunk();
-    dispatch(actions.updateQuiz(module_id, quiz_id, quizName, questions));
+    const { dispatch, queue } = createThunk({ newQuiz: initialState });
+    dispatch(actions.updateQuiz(module_id, quiz_id, survey_id, quizName, questions));
 
     [{ ...actual }] = queue;
 
@@ -257,5 +319,19 @@ test('getQuizDetailsFailure creates the correct action', (t) => {
         error: getQuizDetailsError
     };
     const actual = deepFreeze(actions.getQuizDetailsFailure(getQuizDetailsError));
+    t.deepEqual(actual, expected);
+});
+
+test('toggleIsSurvey creates the correct action', (t) => {
+
+    t.plan(1);
+
+    const checked = true;
+    const mockEvent = { target: { checked } };
+    const expected = {
+        type: actions.TOGGLE_IS_SURVEY,
+        isSurvey: true
+    };
+    const actual = deepFreeze(actions.toggleIsSurvey(mockEvent));
     t.deepEqual(actual, expected);
 });

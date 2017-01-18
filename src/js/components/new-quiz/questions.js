@@ -1,8 +1,37 @@
 import React, { PropTypes } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
+const RadioButton = ({ question, value, idx, handleInputChange }) => <input { ...{
+    type: "radio",
+    className: "radio column is-1 radio-button",
+    checked: question.correct_answer === value,
+    name: idx,
+    value: value,
+    onChange: (e) => handleInputChange('correct_answer', e.target.value, idx)
+} } />;
 
-const Questions = ({ questions, handleInputChange, handleDeleteQuestion }) => {
+const InputChanger = ({ question, value, idx, handleInputChange }) => <input { ...{
+    type: "text",
+    className: "input column is-9",
+    value: question[value] || "",
+    onChange: (e) => handleInputChange(value, e.target.value, idx),
+    placeholder: 'a'
+} } />;
+
+const Option = ({ question, value, idx, isSurvey, handleInputChange }) =>
+    <div className="control is-horizontal">
+        <div className="control-label answer-label">
+            <label className="label">{ value.toUpperCase() }</label>
+        </div>
+        <div className="control">
+            <InputChanger {...{ question, value, idx, handleInputChange }}/>
+            { !isSurvey &&
+                <RadioButton {...{ question, value, idx, handleInputChange }}/>
+            }
+        </div>
+    </div>;
+
+const Questions = ({ questions, handleInputChange, handleDeleteQuestion, isSurvey }) => {
 
     const transitionOptions = {
         transitionName: "fade",
@@ -12,50 +41,16 @@ const Questions = ({ questions, handleInputChange, handleDeleteQuestion }) => {
 
     let mappedQuestions = questions.map((question, i) => {
         return (
-            <div key={ i } className="column is-6 is-offset-3 question box">
+            <div key={ `question-${i}` } className="column is-6 is-offset-3 question box">
 
                 <label className="label"> Question { i + 1 }</label>
                 <textarea className="textarea" type="text" value={ question.question } onChange={ (e) => handleInputChange('question', e.target.value, i) } placeholder='question'></textarea>
 
-                <div className="control is-horizontal">
-                    <div className="control-label answer-label">
-                        <label className="label">A</label>
-                    </div>
-                    <div className="control">
-                        <input className="input column is-9" type="text" value={ question.a || "" } onChange={ (e) => handleInputChange('a', e.target.value, i) } placeholder='a' ></input>
-                        <input className="radio column is-1 radio-button" type="radio" checked={ question.correct_answer === 'a' } name={ i } value="a" onClick={ (e) => handleInputChange('correct_answer', e.target.value, i) } />
-                    </div>
-                </div>
-
-                <div className="control is-horizontal">
-                    <div className="control-label answer-label">
-                        <label className="label"> B </label>
-                    </div>
-                    <div className="control">
-                        <input className="input column is-9" type="text" value={ question.b || "" } onChange={ (e) => handleInputChange('b', e.target.value, i) }  placeholder='b' ></input>
-                        <input className="radio column is-1 radio-button" type="radio" checked={ question.correct_answer === 'b' } name={ i } value="b" onClick={ (e) => handleInputChange('correct_answer', e.target.value, i) } />
-                    </div>
-                </div>
-
-                <div className="control is-horizontal">
-                    <div className="control-label answer-label">
-                        <label className="label"> C </label>
-                    </div>
-                    <div className="control">
-                        <input className="input column is-9" type="text" value={ question.c || "" } onChange={ (e) => handleInputChange('c', e.target.value, i) }  placeholder='c' ></input>
-                        <input className="radio column is-1 radio-button" type="radio" checked={ question.correct_answer === 'c' } name={ i } value="c" onClick={ (e) => handleInputChange('correct_answer', e.target.value, i) } />
-                    </div>
-                </div>
-
-                <div className="control is-horizontal">
-                    <div className="control-label answer-label">
-                        <label className="label"> D </label>
-                    </div>
-                    <div className="control">
-                        <input className="input column is-9" type="text" value={ question.d || "" } onChange={ (e) => handleInputChange('d', e.target.value, i) }  placeholder='d' ></input>
-                        <input className="radio column is-1 radio-button" type="radio" checked={ question.correct_answer === 'd' } name={ i } value="d" onClick={ (e) => handleInputChange('correct_answer', e.target.value, i) } />
-                    </div>
-                </div>
+                { ['a', 'b', 'c', 'd'].map((value, idx) =>
+                    <Option { ...{ key: `option-${idx}`,
+                        question, value, idx: i, isSurvey, handleInputChange
+                    }} />
+                ) }
 
                 <button className="button is-danger" onClick={ () => { handleDeleteQuestion(i); } }> Delete Question </button>
 
@@ -75,9 +70,31 @@ const Questions = ({ questions, handleInputChange, handleDeleteQuestion }) => {
 
 Questions.propTypes = {
     questions: PropTypes.array.isRequired,
+    isSurvey: PropTypes.bool,
     handleInputChange: PropTypes.func.isRequired,
     handleDeleteQuestion: PropTypes.func.isRequired
 };
 
+RadioButton.propTypes = {
+    question: PropTypes.object,
+    value: PropTypes.string.isRequired,
+    idx: PropTypes.number.isRequired,
+    handleInputChange: PropTypes.func.isRequired
+};
+
+InputChanger.propTypes = {
+    question: PropTypes.object,
+    value: PropTypes.string.isRequired,
+    idx: PropTypes.number.isRequired,
+    handleInputChange: PropTypes.func.isRequired
+};
+
+Option.propTypes = {
+    question: PropTypes.object,
+    value: PropTypes.string.isRequired,
+    idx: PropTypes.number.isRequired,
+    isSurvey: PropTypes.bool,
+    handleInputChange: PropTypes.func.isRequired
+};
 
 export default Questions;

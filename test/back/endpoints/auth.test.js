@@ -35,14 +35,21 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
 
 // quiz tests
     { url: '/abort-quiz?quiz_id=8' },
-    { url: '/save-quiz', method: 'post', payload: { module_id: 'TEST', quizName: 'Brand New Quiz', questions } },
-    { url: '/save-student-response', method: 'post', payload: { user_id: '1', quiz_id: '1', question_id: '1', response: 'a' } },
+    { url: '/save-quiz', method: 'post', payload: { module_id: 'TEST', name: 'Brand New Quiz', isSurvey: false, questions } },
+    { url: '/save-quiz', method: 'post', payload: { module_id: 'TEST', name: 'Brand New Survey', isSurvey: true, questions } },
+    { url: '/save-quiz', method: 'post', payload: { module_id: 'TEST', name: 'Brand New Quiz', questions } },
+    { url: '/save-student-response', method: 'post', payload: { user_id: 1, id: 1, isSurvey: true, question_id: 3, response: 'a' } },
+    { url: '/save-student-response', method: 'post', payload: { user_id: 5, id: 1, isSurvey: false, question_id: 36, response: 'a' } },
     { url: '/get-quiz-questions?quiz_id=1' },
+    { url: '/get-quiz-questions?survey_id=1' },
     { url: '/end-quiz', method: 'post', payload: { quiz_id: 8 } },
-    { url: '/get-quiz-review?quiz_id=1' },
-    { url: '/get-quiz-members?quiz_id=1' },
+    { url: '/get-review?id=1&isSurvey=false' },
+    { url: '/get-review?id=1&isSurvey=true' },
+    { url: '/get-quiz-members?id=1&isSurvey=true' },
+    { url: '/get-quiz-members?id=1&isSurvey=false' },
     { url: '/edit-score?quiz_id=1&score=2' },
     { url: '/get-quiz-details?quiz_id=1' },
+    { url: '/get-quiz-details?survey_id=1' },
     { url: '/update-quiz', method: 'post', payload: updateQuizOptionsPayload },
     { url: '/get-quiz-details-student?quiz_id=1' },
 
@@ -71,6 +78,9 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
         })
         .then((response) => {
             t.equal(response.statusCode, 401, '401 status code for ' + endpoint.url);
+        })
+        .catch((err) => {
+            t.error(err);
         });
     });
 
@@ -93,6 +103,9 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
         })
         .then((response) => {
             t.equal(response.statusCode, 401, '401 status code for ' + endpoint.url);
+        })
+        .catch((err) => {
+            t.error(err); 
         });
     });
 
@@ -114,6 +127,9 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
         })
         .then((response) => {
             t.equal(response.statusCode, 200, '200 status code');
+        })
+        .catch((err) => {
+            t.error(err); 
         });
     });
 
@@ -133,6 +149,9 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
         })
         .then((response) => {
             t.equal(response.statusCode, 401, '401 status code for ' + endpoint.url);
+        })
+        .catch((err) => {
+            t.error(err); 
         });
     });
 });
@@ -161,6 +180,9 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
         })
         .then((response) => {
             t.equal(response.statusCode, 401, '401 status code for ' + endpoint.url);
+        })
+        .catch((err) => {
+            t.error(err); 
         });
     });
 
@@ -183,6 +205,9 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
         })
         .then((response) => {
             t.equal(response.statusCode, 401, '401 status code for ' + endpoint.url);
+        })
+        .catch((err) => {
+            t.error(err); 
         });
     });
 
@@ -204,6 +229,9 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
         })
         .then((response) => {
             t.equal(response.statusCode, 200, '200 status code');
+        })
+        .catch((err) => {
+            t.error(err); 
         });
     });
 
@@ -223,6 +251,9 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
         })
         .then((response) => {
             t.equal(response.statusCode, 401, '401 status code for ' + endpoint.url);
+        })
+        .catch((err) => {
+            t.error(err); 
         });
     });
 });
@@ -242,14 +273,18 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
 
         const options = endpoint;
 
-        server.inject(options, (response) => {
-            if (response.statusCode === 302) {
-                t.equal(response.statusCode, 302, endpoint.url + ' doesnt require authentication');
-                return;
-            }
-            t.equal(response.statusCode, 200, endpoint.url + ' doesnt require authentication');
-        });
-    });
+        server.inject(options)
+            .then((response) => {
+                if (response.statusCode === 302) {
+                    t.equal(response.statusCode, 302, endpoint.url + ' doesnt require authentication');
+                    return;
+                }
+                t.equal(response.statusCode, 200, endpoint.url + ' doesnt require authentication');
+            })
+            .catch((err) => {
+                t.error(err); 
+            });
+    })
 });
 
 test.onFinish(() => {

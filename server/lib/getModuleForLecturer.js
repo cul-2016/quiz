@@ -16,52 +16,65 @@ var organiseModuleData = require('./organiseModuleData');
 function getModuleForLecturer (client, module_id, callback) {
 
     query(client, queries.getModuleForLecturer.quizzes, [module_id], (error, quizzes) => {
-
+        /* istanbul ignore if */
         if (error) {
             console.error(error);
             return callback(error);
-        }
-        query(client, queries.getModuleForLecturer.medals, [module_id], (error, medals) => {
-
-            if (error) {
-                console.error(error);
-                return callback(error);
-            }
-            query(client, queries.getModuleForLecturer.trophies, [module_id], (error, trophies) => {
-
-                if (error) {
-                    console.error(error);
-                    return callback(error);
-                }
-                query(client, queries.getModuleForLecturer.num_enrolled, [module_id], (error, num_enrolled) => {
-
+        } else {
+            // this slow down allows the resource to clear from lock (used resource being responses?)
+            // TODO find better alternative to setTimeout for deadlock issue
+            setTimeout(() => {
+                query(client, queries.getModuleForLecturer.surveys, [module_id], (error, surveys) => {
+                    /* istanbul ignore if */
                     if (error) {
                         console.error(error);
                         return callback(error);
-                    }
+                    } else {
+                        query(client, queries.getModuleForLecturer.medals, [module_id], (error, medals) => {
+                            /* istanbul ignore if */
+                            if (error) {
+                                console.error(error);
+                                return callback(error);
+                            }
+                            query(client, queries.getModuleForLecturer.trophies, [module_id], (error, trophies) => {
+                                /* istanbul ignore if */
+                                if (error) {
+                                    console.error(error);
+                                    return callback(error);
+                                }
+                                query(client, queries.getModuleForLecturer.num_enrolled, [module_id], (error, num_enrolled) => {
+                                    /* istanbul ignore if */
+                                    if (error) {
+                                        console.error(error);
+                                        return callback(error);
+                                    }
+                                    query(client, queries.getModuleForLecturer.name, [module_id], (error, name) => {
+                                        /* istanbul ignore if */
+                                        if (error) {
+                                            console.error(error);
+                                            return callback(error);
+                                        }
+                                        const allData = {
+                                            quizzes: quizzes.rows,
+                                            surveys: surveys.rows,
+                                            medals: medals.rows,
+                                            trophies: trophies.rows,
+                                            num_enrolled: num_enrolled.rows,
+                                            name: name.rows
+                                        };
 
-                    query(client, queries.getModuleForLecturer.name, [module_id], (error, name) => {
+                                        organiseModuleData(true, module_id, allData, (error, organisedData) => {
 
-                        if (error) {
-                            console.error(error);
-                            return callback(error);
-                        }
-                        const allData = {
-                            quizzes: quizzes.rows,
-                            medals: medals.rows,
-                            trophies: trophies.rows,
-                            num_enrolled: num_enrolled.rows,
-                            name: name.rows
-                        };
-
-                        organiseModuleData(true, module_id, allData, (error, organisedData) => {
-
-                            callback(null, organisedData);
+                                            callback(null, organisedData);
+                                        });
+                                    });
+                                });
+                            });
                         });
-                    });
+                    }
                 });
-            });
-        });
+            }, 200);
+        }
     });
 }
 
