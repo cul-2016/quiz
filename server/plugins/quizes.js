@@ -204,17 +204,16 @@ exports.register = (server, options, next) => {
             method: 'GET',
             path: '/get-quiz-members',
             handler: (request, reply) => {
-                const { quiz_id } = request.query;
-
-                if (quiz_id !== undefined) {
-
-                    const parsed_quiz_id = parseInt(quiz_id, 10);
-                    getQuizMembers(pool, parsed_quiz_id, (error, users) => {
+                const { id, isSurvey } = request.query;
+                if (id !== undefined && isSurvey !== undefined) {
+                    const parsed_isSurvey = isSurvey === "true";
+                    const parsed_id = parseInt(id, 10);
+                    getQuizMembers(pool, parsed_id, parsed_isSurvey, (error, users) => {
                         const verdict = error || users;
                         reply(verdict);
                     });
                 } else {
-                    reply(new Error('quiz_id is not defined'));
+                    reply(new Error('id & isSurvey is not defined'));
                 }
             }
         },
