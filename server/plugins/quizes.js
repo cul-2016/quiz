@@ -300,6 +300,12 @@ exports.register = (server, options, next) => {
                         const verdict = error || quizDetails;
                         reply(verdict);
                     });
+                } else if (survey_id !== undefined) {
+                    const parsed_survey_id = parseInt(survey_id, 10);
+                    getSurveyDetails(pool, parsed_survey_id, (error, surveyDetails) => {
+                        const verdict = error || surveyDetails;
+                        reply(verdict);
+                    });
                 } else {
                     const parsed_survey_id = parseInt(survey_id, 10);
                     getSurveyDetails(pool, parsed_survey_id, (error, surveyDetails) => {
