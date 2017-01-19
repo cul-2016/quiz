@@ -9,6 +9,7 @@ const hideNav = (path) => {
 };
 
 const Nav = ({ location, is_lecturer }) => {
+    console.log(location.pathname, '<<<<<<<<');
 
     let navClasses = classnames("navbar", {
         "display-none": hideNav(location.pathname),

@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import Nav from './general/nav';
-import CookieMessage from './general/cookie-message';
 import ErrorMessage from './general/error-message';
 
 const App = ({ children, location, username, error, isCookieAccepted, handleCookieMessage, handleErrorClearance, is_lecturer }) => {
@@ -18,20 +17,8 @@ const App = ({ children, location, username, error, isCookieAccepted, handleCook
                 </div>
         }
         {
-            !error && location.pathname !== '/' &&
-            <div>
-                <CookieMessage
-                    isCookieAccepted={ isCookieAccepted }
-                    handleCookieMessage={ handleCookieMessage } />
-                <div>
-                    <Nav location={ location } username={ username } is_lecturer={ is_lecturer }  />
-                    { children }
-                </div>
-            </div>
-        }
-        {
-            !error && location.pathname === '/' &&
-            <div>
+            !error &&
+            <div style={{ position: 'fixed', width: '100%' }}>
                 <Nav location={ location } username={ username } is_lecturer={ is_lecturer }  />
                 { children }
             </div>

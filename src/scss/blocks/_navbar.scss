@@ -4,6 +4,8 @@
     position: fixed;
     background-color: $light-blue;
     box-shadow: inset 0 -2px 0 0 $dark-blue, 0 1px 0 0 $black;
+    font-size: 1rem;
+    
     &__links {
         display: table;
         width: 100%;

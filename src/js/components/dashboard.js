@@ -28,31 +28,26 @@ class Dashboard extends Component {
             let role = is_lecturer ? 'lecturer' : 'student';
 
             return (
-                <Link key={ i } to={ `${module.module_id}/${role}` } >
-                    <li className="box level is-mobile">
-                        <div className="level-left">
-
-                            <label className="level-item">
-                                { module.name }
-                            </label>
+                <div key={ i } className="card">
+                    <Link to={ `${module.module_id}/${role}` } >
+                        <div className="body">
+                            { module.name }
                         </div>
-                        <div className="level-right">
-
-                            <label className="level-item has-text-centered">
-                                <strong>{ module.module_id }</strong>
-                            </label>
+                        <div className="body body__tertiary">
+                            { module.module_id }
                         </div>
-                    </li>
-                </Link>
+                    </Link>
+                </div>
             );
         });
         return (
-            <div className="container dashboard">
+            <div className="container">
 
-                <button className="button button__secondary button__secondary--large">
+                <button className="button button__tertiary button__tertiary--large button__icon--right">
                     Trophy Cabinet
+                    <span className="fa-chevron-right"></span>
                 </button>
-                    <h2 className="has-text-centered"> Modules </h2>
+                    <h2 className="display"> Modules </h2>
                     {
                         is_lecturer &&
                             <Link to="add-new-module">
@@ -68,35 +63,15 @@ class Dashboard extends Component {
                     }
                     {
                         !is_lecturer &&
-                            <Link to="join-module">
-                                <button className="button is-info is-medium">
-                                    Join a module
-                                </button>
-                            </Link>
-                    }
-                    {
-                        modules.length === 0 && is_lecturer &&
-                            <div className="notification">
-                                Create your first module by clicking the button above.
+                            <div className="card card__secondary">
+                                <input className="form__input" placeholder="CODE"></input>
+                                <button className="button button__secondary">Add A Module</button>
                             </div>
                     }
-                    {
-                        modules.length === 0 && !is_lecturer &&
-                            <div className="notification">
-                                Join your first module by clicking the button above.
-                            </div>
-                    }
-                    <div className={ headerClasses }>
-                        <div className="level-item">
-                            Module name
-                        </div>
-                        <div className="level-item">
-                            Module code
-                        </div>
-                    </div>
-                    <ul>
+                    <div className="line"></div>
+                    <div>
                         { moduleList }
-                    </ul>
+                    </div>
             </div>
         );
     }
