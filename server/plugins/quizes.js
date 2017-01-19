@@ -23,30 +23,40 @@ const editScore = require('../lib/editScore.js');
 const getQuizDetailsStudent = require('../lib/getQuizDetailsStudent');
 
 const jwt = require('jsonwebtoken');
+const Joi = require('joi');
 
 exports.register = (server, options, next) => {
-    const pool = server.app.pool;
+    const { pool } = server.app;
 
     server.route([
         {
             method: 'POST',
             path: '/save-student-response',
+            config: {
+                validate: {
+                    payload: {
+                        id: Joi.number().required(),
+                        isSurvey: Joi.boolean().required(),
+                        question_id: Joi.number().required(),
+                        response: Joi.string().required(),
+                        user_id: Joi.number()
+                    }
+                }
+            },
             handler: (request, reply) => {
                 jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
                     /* istanbul ignore if */
                     if (error) { return reply(error); }
 
                     const { user_id } = decoded.user_details;
-                    let {
-                        id, isSurvey, question_id, response: studentResponse
-                    } = request.payload;
+                    const { id, isSurvey, question_id, response } = request.payload;
 
-                    saveStudentResponse(pool, user_id, id, isSurvey, question_id, studentResponse, (error, response) => {
+                    saveStudentResponse(pool, user_id, id, isSurvey, question_id, response, (error, response) => {
                         /* istanbul ignore if */
                         if (error) {
                             console.error(error);
                         }
-                        var verdict = error || response;
+                        const verdict = error || response;
                         reply(verdict);
                     });
                 });
@@ -102,6 +112,14 @@ exports.register = (server, options, next) => {
         {
             method: 'GET',
             path: '/get-quiz-questions',
+            config: {
+                validate: {
+                    query: Joi.alternatives().try(
+                        Joi.object().keys({ quiz_id: Joi.string().required() }),
+                        Joi.object().keys({ survey_id: Joi.string().required() })
+                    )
+                }
+            },
             handler: (request, reply) => {
                 const { quiz_id, survey_id } = request.query;
                 if (quiz_id !== undefined) {
@@ -110,20 +128,25 @@ exports.register = (server, options, next) => {
                         const verdict = error || quizQuestions;
                         reply(verdict);
                     });
-                } else if (survey_id !== undefined) {
+                } else {
                     const parsed_survey_id = parseInt(survey_id, 10);
                     getSurveyQuestions(pool, parsed_survey_id, (error, surveyQuestions) => {
                         const verdict = error || surveyQuestions;
                         reply(verdict);
                     });
-                } else {
-                    reply(new Error('quiz_id and survey_id is not defined'));
                 }
             }
         },
         {
             method: 'POST',
             path: '/end-quiz',
+            config: {
+                validate: {
+                    payload: {
+                        quiz_id: Joi.number().required()
+                    }
+                }
+            },
             handler: (request, reply) => {
                 const { id, isSurvey } = request.payload;
 
@@ -185,41 +208,59 @@ exports.register = (server, options, next) => {
         {
             method: 'GET',
             path: '/get-review',
+            config: {
+                validate: {
+                    query: {
+                        id: Joi.string().required(),
+                        isSurvey: Joi.boolean().required()
+                    }
+                }
+            },
             handler: (request, reply) => {
                 const { id, isSurvey } = request.query;
-                if (id !== undefined && isSurvey !== undefined) {
-                    const parsed_isSurvey = isSurvey === "true";
-                    const parsed_id = parseInt(id, 10);
 
-                    getReview(pool, parsed_id, parsed_isSurvey, (error, module) => {
-                        const verdict = error || module;
-                        reply(verdict);
-                    });
-                } else {
-                    reply(new Error('quiz_id is not defined'));
-                }
+                const parsed_isSurvey = isSurvey === "true";
+                const parsed_id = parseInt(id, 10);
+
+                getReview(pool, parsed_id, parsed_isSurvey, (error, module) => {
+                    const verdict = error || module;
+                    reply(verdict);
+                });
             }
         },
         {
             method: 'GET',
             path: '/get-quiz-members',
+            config: {
+                validate: {
+                    query: {
+                        id: Joi.string().required(),
+                        isSurvey: Joi.boolean().required()
+                    }
+                }
+            },
             handler: (request, reply) => {
                 const { id, isSurvey } = request.query;
-                if (id !== undefined && isSurvey !== undefined) {
-                    const parsed_isSurvey = isSurvey === "true";
-                    const parsed_id = parseInt(id, 10);
-                    getQuizMembers(pool, parsed_id, parsed_isSurvey, (error, users) => {
-                        const verdict = error || users;
-                        reply(verdict);
-                    });
-                } else {
-                    reply(new Error('id & isSurvey is not defined'));
-                }
+
+                const parsed_isSurvey = isSurvey === "true";
+                const parsed_id = parseInt(id, 10);
+                getQuizMembers(pool, parsed_id, parsed_isSurvey, (error, users) => {
+                    const verdict = error || users;
+                    reply(verdict);
+                });
             }
         },
         {
             method: 'GET',
             path: '/edit-score',
+            config: {
+                validate: {
+                    query: {
+                        quiz_id: Joi.string().required(),
+                        score: Joi.string().required()
+                    }
+                }
+            },
             handler: (request, reply) => {
                 jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
                     /* istanbul ignore if */
@@ -243,6 +284,14 @@ exports.register = (server, options, next) => {
         {
             method: 'GET',
             path: '/get-quiz-details',
+            config: {
+                validate: {
+                    query: Joi.alternatives().try(
+                        Joi.object().keys({ quiz_id: Joi.string().required() }),
+                        Joi.object().keys({ survey_id: Joi.string().required() })
+                    )
+                }
+            },
             handler: (request, reply) => {
                 const { quiz_id, survey_id } = request.query;
                 if (quiz_id !== undefined) {
@@ -258,13 +307,30 @@ exports.register = (server, options, next) => {
                         reply(verdict);
                     });
                 } else {
-                    reply(new Error('quiz_id and survey_id is not defined'));
+                    const parsed_survey_id = parseInt(survey_id, 10);
+                    getSurveyDetails(pool, parsed_survey_id, (error, surveyDetails) => {
+                        const verdict = error || surveyDetails;
+                        reply(verdict);
+                    });
                 }
             }
         },
         {
             method: 'POST',
             path: '/update-quiz',
+            config: {
+                validate: {
+                    payload: {
+                        module_id: Joi.string().required(),
+                        quiz_id: Joi.number().required(),
+                        name: Joi.string().required(),
+                        editedQuestions: Joi.array().required(),
+                        newQuestions: Joi.array().required(),
+                        deletedQuestions: Joi.array().required(),
+                        is_last_quiz: Joi.boolean().required()
+                    }
+                }
+            },
             handler: (request, reply) => {
                 const {
                   module_id, quiz_id, survey_id, name, editedQuestions, newQuestions, deletedQuestions, is_last_quiz
@@ -328,26 +394,34 @@ exports.register = (server, options, next) => {
         {
             method: 'GET',
             path: '/abort-quiz',
-            handler: (request, reply) => {
-
-                const { quiz_id } = request.query;
-
-                if (quiz_id !== undefined) {
-                    const parsed_quiz_id = parseInt(quiz_id, 10);
-
-                    deleteResponses(pool, parsed_quiz_id, (error, result) => {
-
-                        const verdict = error || result;
-                        reply(verdict);
-                    });
-                } else {
-                    reply(new Error('quiz_id is not defined'));
+            config: {
+                validate: {
+                    query: {
+                        quiz_id: Joi.string().required()
+                    }
                 }
+            },
+            handler: (request, reply) => {
+                const { quiz_id } = request.query;
+                const parsed_quiz_id = parseInt(quiz_id, 10);
+
+                deleteResponses(pool, parsed_quiz_id, (error, result) => {
+
+                    const verdict = error || result;
+                    reply(verdict);
+                });
             }
         },
         {
             method: 'GET',
             path: '/get-quiz-details-student',
+            config: {
+                validate: {
+                    query: {
+                        quiz_id: Joi.string().required()
+                    }
+                }
+            },
             handler: (request, reply) => {
                 jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
                     /* istanbul ignore if */
@@ -356,16 +430,11 @@ exports.register = (server, options, next) => {
                     const { quiz_id } = request.query;
                     const { user_id } = decoded.user_details;
 
-                    if (quiz_id !== undefined) {
-
-                        const parsed_quiz_id = parseInt(quiz_id, 10);
-                        getQuizDetailsStudent(pool, parsed_quiz_id, user_id, (error, quizDetails) => {
-                            const verdict = error || quizDetails;
-                            reply(verdict);
-                        });
-                    } else {
-                        reply(new Error('quiz_id is not defined'));
-                    }
+                    const parsed_quiz_id = parseInt(quiz_id, 10);
+                    getQuizDetailsStudent(pool, parsed_quiz_id, user_id, (error, quizDetails) => {
+                        const verdict = error || quizDetails;
+                        reply(verdict);
+                    });
                 });
             }
         }
