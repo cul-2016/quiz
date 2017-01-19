@@ -4,7 +4,7 @@ import ReviewButtons from './review-buttons';
 import Spinner from '../general/spinner';
 import classnames from 'classnames';
 
-const Review = ({ isFetchingReview, question, numQuestions, currentQuizIndex, isAnswerShowing, handleIsAnswerShowing, handleIncrementCurrentQuizIndex, endReview, params, handleGoBack }) => {
+const Review = ({ isFetchingReview, question, numQuestions, currentQuizIndex, isAnswerShowing, handleIsAnswerShowing, handleIncrementCurrentQuizIndex, endReview, params, handleGoBack, isSurvey }) => {
 
     const backButtonClasses = classnames("column", {
         "display-none": currentQuizIndex === 0
@@ -32,7 +32,8 @@ const Review = ({ isFetchingReview, question, numQuestions, currentQuizIndex, is
                 question &&
                 <ShowAnswer
                     isAnswerShowing={ isAnswerShowing }
-                    data={ question } />
+                    data={ question }
+                    isSurvey={ isSurvey } />
             }
             <ReviewButtons
                 isAnswerShowing={ isAnswerShowing }
@@ -41,7 +42,8 @@ const Review = ({ isFetchingReview, question, numQuestions, currentQuizIndex, is
                 handleIsAnswerShowing={ handleIsAnswerShowing }
                 handleIncrementCurrentQuizIndex={ handleIncrementCurrentQuizIndex }
                 endReview={ endReview }
-                params={ params } />
+                params={ params }
+                isSurvey={ isSurvey } />
         </div>
     );
 };
@@ -56,7 +58,8 @@ Review.propTypes = {
     handleIncrementCurrentQuizIndex: PropTypes.func.isRequired,
     endReview: PropTypes.func.isRequired,
     params: PropTypes.object.isRequired,
-    handleGoBack: PropTypes.func
+    handleGoBack: PropTypes.func,
+    isSurvey: PropTypes.bool.isRequired
 };
 
 export default Review;

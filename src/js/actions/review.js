@@ -13,11 +13,11 @@ export const CLEAR_REVIEW_STATE = 'CLEAR_REVIEW_STATE';
 export const GO_BACK = 'GO_BACK';
 export const SHOW_ANSWER = 'SHOW_ANSWER';
 
-export const getQuizReview = (quiz_id) => (dispatch) => {
+export const getQuizReview = (id, isSurvey) => (dispatch) => {
 
     dispatch(getQuizReviewRequest());
 
-    request.get(dispatch)(`/get-quiz-review?quiz_id=${quiz_id}`)
+    request.get(dispatch)(`/get-review?id=${id}&isSurvey=${isSurvey}`)
         .then((response) => {
             dispatch(getQuizReviewSuccess(response.data));
         })

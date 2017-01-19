@@ -1,10 +1,15 @@
 import test from 'tape';
-import { newQuiz as newQuizState } from '../../utils/reducer-fixtures';
-import { newQuizWithQuestion as newQuizStateWithQuestion, editQuizWithQuestion as editQuizWithQuestionState } from '../../utils/reducer-fixtures';
+import {
+    initialState as newQuizState,
+    newQuiz as reducer
+} from '../../../src/js/reducers/new-quiz.js';
+import {
+    newQuizWithQuestion as newQuizStateWithQuestion,
+    editQuizWithQuestion as editQuizWithQuestionState
+} from '../../utils/reducer-fixtures';
 import { getQuizDetailsData } from '../../utils/data-fixtures';
 
 import { saveQuizError as error, getQuizDetailsError } from '../../utils/action-fixtures';
-import reducer from '../../../src/js/reducers/new-quiz';
 import deepFreeze from '../../utils/deepFreeze';
 
 test('ADD_QUESTION works', (t) => {
@@ -119,6 +124,22 @@ test('TOGGLE_IS_LAST_QUIZ works', (t) => {
     };
 
     const expected = Object.assign({}, newQuizState, { is_last_quiz: true });
+
+    const result = reducer(initialState, action);
+    t.deepEqual(result, expected);
+});
+
+test('TOGGLE_IS_SURVEY works', (t) => {
+
+    t.plan(1);
+    const initialState = deepFreeze(newQuizState);
+    const isSurvey = true;
+    const action = {
+        type: 'TOGGLE_IS_SURVEY',
+        isSurvey
+    };
+
+    const expected = Object.assign({}, newQuizState, { isSurvey });
 
     const result = reducer(initialState, action);
     t.deepEqual(result, expected);

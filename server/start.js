@@ -30,12 +30,14 @@ io.on('connection', (socket) => {
     socket.on('send_quiz_invite', (quizInfo, cb) => {
 
         var room = quizInfo.room;
-        var quiz_id = quizInfo.quiz_id;
-
+        var idObj = {
+            quiz_id: quizInfo.quiz_id,
+            survey_id: quizInfo.survey_id
+        };
 
         // broadcast to whole room
         console.log("still sending quiz invite"); //eslint-disable-line no-console
-        socket.broadcast.to(room).emit('receive_quiz_invite', quiz_id);
+        socket.broadcast.to(room).emit('receive_quiz_invite', idObj);
         cb('STUDENTS INVITED TO QUIZ', room);
     });
 
@@ -50,8 +52,11 @@ io.on('connection', (socket) => {
 
     socket.on('end_of_quiz', (data, cb) => {
         var room = data.room;
-        var quiz_id = data.quiz_id;
-        socket.broadcast.to(room).emit('receive_end_of_quiz', quiz_id);
+        var idObj = {
+            quiz_id: data.quiz_id,
+            isSurvey: data.isSurvey
+        };
+        socket.broadcast.to(room).emit('receive_end_of_quiz', idObj);
 
         console.log('end of quiz sent'); //eslint-disable-line no-console
         cb('end of quiz sent');

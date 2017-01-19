@@ -3,6 +3,7 @@ import io from 'socket.io-client';
 import { store } from './store';
 import { hashHistory } from 'react-router';
 import { openQuiz, closeQuiz } from './actions/module';
+import { setIsSurvey } from './actions/live-quiz';
 import { setQuizDetails, startQuiz, endQuiz, setNextQuestion, updateNumParticipants } from './actions/live-quiz';
 import showNavbar from './lib/showNavbar';
 import { fadeOutThenIn } from './lib/animate';
@@ -21,13 +22,13 @@ socketClient.on('num_participants', (numParticipants) => {
     store.dispatch(updateNumParticipants(numParticipants));
 });
 
-socketClient.on('receive_quiz_invite', () => {
+socketClient.on('receive_quiz_invite', (idObj) => {
 
     console.log("have received quiz invite");
-    
-    if (!store.getState().module.isQuizOpen) {
 
+    if (!store.getState().module.isQuizOpen) {
         store.dispatch(openQuiz());
+        store.dispatch(setIsSurvey(idObj.quiz_id, idObj.survey_id));
     }
 });
 
@@ -49,8 +50,8 @@ socketClient.on('receive_next_question', (questionObj) => {
 
 });
 
-socketClient.on('receive_end_of_quiz', (quiz_id) => {
-
+socketClient.on('receive_end_of_quiz', (idObj) => {
+    const { quiz_id, isSurvey } = idObj;
     console.log('received end of quiz notification', quiz_id);
 
     fadeOutThenIn('.live-quiz');
@@ -60,7 +61,11 @@ socketClient.on('receive_end_of_quiz', (quiz_id) => {
         store.dispatch(endQuiz());
         store.dispatch(closeQuiz());
         showNavbar();
-        hashHistory.push(`${module_id}/${quiz_id}/result`);
+        if (!isSurvey) {
+            hashHistory.push(`${module_id}/${quiz_id}/result`);
+        } else {
+            hashHistory.push(`${module_id}/student`);
+        }
     }, 400);
 
 });
