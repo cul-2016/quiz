@@ -90,7 +90,8 @@ LiveQuiz.propTypes = {
     response: PropTypes.string,
     name: PropTypes.string,
     numParticipants: PropTypes.number,
-    handleAbortQuiz: PropTypes.func
+    handleAbortQuiz: PropTypes.func,
+    review: PropTypes.bool 
 };
 
 export default LiveQuiz;

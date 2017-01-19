@@ -12,13 +12,8 @@ function composeQuestionStatement (id, rows, { isSurvey }, callback) {
 
     for (var i = 0; i < rows.length; i++) {
         var row = rows[i];
-        if (isSurvey) {
-            row.survey_id = id;
-        } else {
-            row.quiz_id = id;
-        }
         var valueClause = [];
-        params.push(row[quizIdOrSurveyId]);
+        params.push(id);
         valueClause.push('$' + params.length);
         params.push(row.question);
         valueClause.push('$' + params.length);

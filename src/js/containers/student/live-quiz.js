@@ -18,7 +18,8 @@ const mapDispatchToProps = (dispatch) => ({
     submitResponse: () => {
         let data = {
             user_id: store.getState().user.user_id,
-            quiz_id: store.getState().liveQuiz.quiz_id,
+            id: store.getState().liveQuiz.quiz_id,
+            isSurvey: store.getState().liveQuiz.isSurvey,
             question_id: store.getState().liveQuiz.questions[0].question_id,
             response: store.getState().liveQuiz.response
         };

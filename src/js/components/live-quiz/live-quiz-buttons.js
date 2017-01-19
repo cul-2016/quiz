@@ -56,7 +56,9 @@ LiveQuizButtons.propTypes = {
     startQuiz: PropTypes.func,
     endQuiz: PropTypes.func,
     quiz_id: PropTypes.number,
-    response: PropTypes.string
+    response: PropTypes.string,
+    review: PropTypes.bool,
+    handleAbortQuiz: PropTypes.func
 };
 
 export default LiveQuizButtons;

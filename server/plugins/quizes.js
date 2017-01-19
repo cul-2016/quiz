@@ -36,36 +36,19 @@ exports.register = (server, options, next) => {
                     /* istanbul ignore if */
                     if (error) { return reply(error); }
 
-                    //questions about the following
-                    // unsure as to where we are getting the survey_id from
-                    // response: studentResponse, payload already gives it to us as response.
-
                     const { user_id } = decoded.user_details;
                     let {
-                        quiz_id = null, survey_id = null, question_id, response: studentResponse
+                        id, isSurvey, question_id, response: studentResponse
                     } = request.payload;
 
-                    const checkExists = el => el !== undefined && el !== null;
-
-                    if (
-                        [user_id, question_id, studentResponse].every(checkExists) &&
-                        [quiz_id, survey_id].some(checkExists)
-                    ) {
-                        quiz_id = quiz_id && parseInt(quiz_id);
-                        survey_id = survey_id && parseInt(survey_id);
-
-                        question_id = parseInt(question_id);
-                        saveStudentResponse(pool, user_id, quiz_id, survey_id, question_id, studentResponse, (error, response) => {
-                            /* istanbul ignore if */
-                            if (error) {
-                                console.error(error);
-                            }
-                            var verdict = error || response;
-                            reply(verdict);
-                        });
-                    } else {
-                        reply(new Error('one of the required querystrings is not defined'));
-                    }
+                    saveStudentResponse(pool, user_id, id, isSurvey, question_id, studentResponse, (error, response) => {
+                        /* istanbul ignore if */
+                        if (error) {
+                            console.error(error);
+                        }
+                        var verdict = error || response;
+                        reply(verdict);
+                    });
                 });
 
             }
@@ -221,17 +204,16 @@ exports.register = (server, options, next) => {
             method: 'GET',
             path: '/get-quiz-members',
             handler: (request, reply) => {
-                const { quiz_id } = request.query;
-
-                if (quiz_id !== undefined) {
-
-                    const parsed_quiz_id = parseInt(quiz_id, 10);
-                    getQuizMembers(pool, parsed_quiz_id, (error, users) => {
+                const { id, isSurvey } = request.query;
+                if (id !== undefined && isSurvey !== undefined) {
+                    const parsed_isSurvey = isSurvey === "true";
+                    const parsed_id = parseInt(id, 10);
+                    getQuizMembers(pool, parsed_id, parsed_isSurvey, (error, users) => {
                         const verdict = error || users;
                         reply(verdict);
                     });
                 } else {
-                    reply(new Error('quiz_id is not defined'));
+                    reply(new Error('id & isSurvey is not defined'));
                 }
             }
         },
@@ -247,7 +229,7 @@ exports.register = (server, options, next) => {
                     const { user_id } = decoded.user_details;
                     if (quiz_id !== undefined && score !== undefined) {
                         const parsed_quiz_id = parseInt(quiz_id, 10);
-                        const parsed_score = parseInt(quiz_id, 10);
+                        const parsed_score = parseInt(score, 10);
                         editScore(pool, user_id, parsed_quiz_id, parsed_score, (error, response) => {
                             const verdict = error || response;
                             reply(verdict);
