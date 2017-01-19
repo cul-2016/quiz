@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import classnames from 'classnames';
 
-const LiveQuizButtons = ({ is_lecturer, numQuestions, nextQuestionIndex, nextQuestion, submitResponse, isQuizStarted, isSavingResponse, isResponseSubmitted, startQuiz, endQuiz, quiz_id, response }) => {
+const LiveQuizButtons = ({ is_lecturer, numQuestions, nextQuestionIndex, nextQuestion, submitResponse, isQuizStarted, isSavingResponse, isResponseSubmitted, startQuiz, endQuiz, quiz_id, response, review, handleAbortQuiz }) => {
 
     let startButtonClasses = classnames("button is-large is-success start-quiz-button", {
         "display-none": !is_lecturer || isQuizStarted
@@ -33,8 +33,8 @@ const LiveQuizButtons = ({ is_lecturer, numQuestions, nextQuestionIndex, nextQue
                 Next question
             </button>
 
-            <button className={ endButtonClasses } onClick={ () => endQuiz(quiz_id)  }>
-                End quiz
+            <button className={ endButtonClasses } onClick={ () => review ? handleAbortQuiz(quiz_id) : endQuiz(quiz_id) }>
+                { review ? 'End Review' : 'End quiz' }
             </button>
 
             <button className={ submitButtonClasses } onClick={ submitResponse }>
@@ -56,7 +56,9 @@ LiveQuizButtons.propTypes = {
     startQuiz: PropTypes.func,
     endQuiz: PropTypes.func,
     quiz_id: PropTypes.number,
-    response: PropTypes.string
+    response: PropTypes.string,
+    review: PropTypes.bool,
+    handleAbortQuiz: PropTypes.func
 };
 
 export default LiveQuizButtons;

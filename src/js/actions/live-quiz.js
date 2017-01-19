@@ -106,10 +106,11 @@ export const saveResponseFailure = (error) => ({
  * SET QUIZ ID, START QUIZ, SET INTERVAL ID
  ***/
 
-export const setQuizDetails = (quiz_id, name) => ({
+export const setQuizDetails = (quiz_id, name, review) => ({
     type: SET_QUIZ_DETAILS,
     quiz_id,
-    name
+    name,
+    review
 });
 
 export const startQuiz = () => ({

@@ -229,7 +229,7 @@ exports.register = (server, options, next) => {
                     const { user_id } = decoded.user_details;
                     if (quiz_id !== undefined && score !== undefined) {
                         const parsed_quiz_id = parseInt(quiz_id, 10);
-                        const parsed_score = parseInt(quiz_id, 10);
+                        const parsed_score = parseInt(score, 10);
                         editScore(pool, user_id, parsed_quiz_id, parsed_score, (error, response) => {
                             const verdict = error || response;
                             reply(verdict);
