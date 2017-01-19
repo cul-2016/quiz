@@ -1,0 +1,27 @@
+.display {
+    width: 9.7rem;
+    height: 3.4rem;
+    font-size: 3rem;
+    font-weight: bold;
+    line-height: 3.5rem;
+    letter-spacing: -0.1rem;
+    color: $black;
+}
+
+    .display__primary--dark {
+        color: #059A9A;
+        text-shadow: 0 0.13rem 0 0 #98F0F0;
+    }
+    .display__primary--light {
+        color: #98F0F0;
+        text-shadow: 0 2px 0 0 #059A9A;
+    }
+
+
+.body {
+    width: 3.2rem;
+    height: 1.4rem;
+    font-weight: 500;
+    line-height: 1.4rem;
+    color: $black;
+}

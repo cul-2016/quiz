@@ -1,0 +1,43 @@
+.navbar {
+    width: 100%;
+    height: 4rem; /* 64px */
+    position: fixed;
+    background-color: $light-blue;
+    box-shadow: inset 0 -2px 0 0 $dark-blue, 0 1px 0 0 $black;
+    &__links {
+        display: table;
+        width: 100%;
+        height: 100%;
+        table-layout: fixed;
+        max-width: 54.857142857rem;
+        margin: auto;
+    }
+
+    &__item {
+        display: table-cell;
+        vertical-align: middle;
+        width: 50%;
+        text-align: left;
+    }
+
+    &__link {
+        width: 2.8rem;
+        height: 1.4rem;
+        font-weight: 500;
+        line-height: 1.4rem;
+        color: $black;
+        cursor: pointer;
+        margin: auto;
+        width: 45px;
+
+        &--left {
+            float: left;
+            margin-left: 15%;
+        }
+
+        &--right {
+            float: right;
+            margin-right: 15%;
+        }
+    }
+}

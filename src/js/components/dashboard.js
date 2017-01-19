@@ -48,6 +48,10 @@ class Dashboard extends Component {
         });
         return (
             <div className="container dashboard">
+
+                <button className="button button__secondary button__secondary--large">
+                    Trophy Cabinet
+                </button>
                     <h2 className="has-text-centered"> Modules </h2>
                     {
                         is_lecturer &&
