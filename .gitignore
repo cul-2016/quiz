@@ -42,6 +42,7 @@ bundle.js
 
 test-env.sh
 *env.sh
+*.env
 
 queries.txt
 credentials.md
