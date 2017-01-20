@@ -14,7 +14,9 @@ const hasStudentSubmitted = require('../lib/hasStudentSubmitted');
 const getBestAndWorstQuiz = require('../lib/getBestAndWorstQuiz');
 const getParticipationRate = require('../lib/getParticipationRate');
 const getStudentHistory = require('../lib/getStudentHistory.js');
+
 const jwt = require('jsonwebtoken');
+const Joi = require('joi');
 
 exports.register = (server, options, next) => {
     const { pool } = server.app;
@@ -23,41 +25,51 @@ exports.register = (server, options, next) => {
         {
             method: 'GET',
             path: '/get-leaderboard',
+            config: {
+                validate: {
+                    query: {
+                        module_id: Joi.string().required()
+                    }
+                }
+            },
             handler: (request, reply) => {
                 const { module_id } = request.query;
-                if (module_id !== undefined) {
 
-                    getTotalScoresAndTrophies(pool, module_id, (error, mainData) => {
+                getTotalScoresAndTrophies(pool, module_id, (error, mainData) => {
+                    /* istanbul ignore if */
+                    if (error) {
+                        return reply(error);
+                    }
+                    getScoresForLeaderboard(pool, module_id, (error, scores) => {
                         /* istanbul ignore if */
                         if (error) {
                             return reply(error);
                         }
-                        getScoresForLeaderboard(pool, module_id, (error, scores) => {
+                        getQuizIDList(pool, module_id, (error, quiz_id_list) => {
                             /* istanbul ignore if */
                             if (error) {
                                 return reply(error);
                             }
-                            getQuizIDList(pool, module_id, (error, quiz_id_list) => {
-                                /* istanbul ignore if */
-                                if (error) {
-                                    return reply(error);
-                                }
-                                reply({
-                                    medalScores: scores,
-                                    mainData: mainData,
-                                    quiz_id_list: quiz_id_list
-                                });
+                            reply({
+                                medalScores: scores,
+                                mainData: mainData,
+                                quiz_id_list: quiz_id_list
                             });
                         });
                     });
-                } else {
-                    reply(new Error('module_id is not defined'));
-                }
+                });
             }
         },
         {
             method: 'GET',
             path: '/get-feedback',
+            config: {
+                validate: {
+                    query: {
+                        module_id: Joi.string().required()
+                    }
+                }
+            },
             handler: (request, reply) => {
                 jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
                     /* istanbul ignore if */
@@ -108,14 +120,19 @@ exports.register = (server, options, next) => {
         {
             method: 'GET',
             path: '/get-student-history',
+            config: {
+                validate: {
+                    query: {
+                        module_id: Joi.string().required(),
+                        user_id: Joi.string().required()
+                    }
+                }
+            },
             handler: (request, reply) => {
 
                 const { module_id, user_id } = request.query;
-
-                if (!module_id || !user_id) {
-                    return reply(new Error('module_id must be defined'));
-                }
                 const parsed_user_id = parseInt(user_id, 10);
+
                 getStudentHistory(pool, parsed_user_id, module_id, (error, history) => {
                     const verdict = error || history;
                     reply(verdict);
@@ -141,6 +158,14 @@ exports.register = (server, options, next) => {
         {
             method: 'GET',
             path: '/get-module',
+            config: {
+                validate: {
+                    query: {
+                        module_id: Joi.string().required(),
+                        is_lecturer: Joi.string()
+                    }
+                }
+            },
             handler: (request, reply) => {
                 jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
                     /* istanbul ignore if */
@@ -166,12 +191,16 @@ exports.register = (server, options, next) => {
         {
             method: 'GET',
             path: '/validate-module',
+            config: {
+                validate: {
+                    query: {
+                        module_id: Joi.string().required()
+                    }
+                }
+            },
             handler: (request, reply) => {
                 const { module_id } = request.query;
 
-                if (!module_id) {
-                    return reply(new Error('module_id must be defined'));
-                }
                 validateModuleID(pool, module_id, (error, exists) => {
 
                     const verdict = error || exists;
@@ -182,6 +211,22 @@ exports.register = (server, options, next) => {
         {
             method: 'POST',
             path: '/add-new-module',
+            config: {
+                validate: {
+                    payload: {
+                        module_id: Joi.string().required(),
+                        name: Joi.string().required(),
+                        medals: Joi.object().keys({
+                            condition: Joi.array().required(),
+                            medal_name: Joi.array().required()
+                        }),
+                        trophies: Joi.object().keys({
+                            condition: Joi.array().required(),
+                            trophy_name: Joi.array().required()
+                        })
+                    }
+                }
+            },
             handler: (request, reply) => {
                 jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
                     /* istanbul ignore if */
@@ -199,6 +244,13 @@ exports.register = (server, options, next) => {
         {
             method: 'get',
             path: '/join-module',
+            config: {
+                validate: {
+                    query: {
+                        module_id: Joi.string().required()
+                    }
+                }
+            },
             handler: (request, reply) => {
                 jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
                     /* istanbul ignore if */
@@ -221,35 +273,41 @@ exports.register = (server, options, next) => {
         {
             method: 'GET',
             path: '/get-module-members',
+            config: {
+                validate: {
+                    query: {
+                        module_id: Joi.string().required()
+                    }
+                }
+            },
             handler: (request, reply) => {
                 const { module_id } = request.query;
 
-                if (module_id !== undefined) {
-                    getModuleMembers(pool, module_id, (error, users) => {
-                        const verdict = error || users;
-                        reply(verdict);
-                    });
-                } else {
-                    reply(new Error('module_id is not defined'));
-                }
+                getModuleMembers(pool, module_id, (error, users) => {
+                    const verdict = error || users;
+                    reply(verdict);
+                });
             }
         },
         {
             method: 'GET',
             path: '/remove-module-member',
+            config: {
+                validate: {
+                    query: {
+                        module_id: Joi.string().required(),
+                        user_id: Joi.string().required()
+                    }
+                }
+            },
             handler: (request, reply) => {
-
                 const { module_id, user_id } = request.query;
 
-                if (module_id !== undefined && user_id !== undefined) {
-                    const parsed_user_id = parseInt(user_id, 10);
-                    removeModuleMember(pool, module_id, parsed_user_id, (error, modules) => {
-                        const verdict = error || modules;
-                        reply(verdict);
-                    });
-                } else {
-                    reply(new Error('module_id is not defined'));
-                }
+                const parsed_user_id = parseInt(user_id, 10);
+                removeModuleMember(pool, module_id, parsed_user_id, (error, modules) => {
+                    const verdict = error || modules;
+                    reply(verdict);
+                });
             }
         }
     ]);
