@@ -6,5 +6,5 @@ module.exports = ({ name, email, verificationLink }, cb) => {
         subject: "Welcome to City Uni :)",
         verificationLink
     };
-    sendEmail('lecturer-verification', person, cb);
+    sendEmail.email('lecturer-verification', person, cb);
 };

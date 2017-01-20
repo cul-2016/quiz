@@ -7,5 +7,5 @@ module.exports = ({ name, email, resetPasswordLink }, cb) => {
         subject: "Reset password request for Quiz App",
         resetPasswordLink
     };
-    sendEmail('reset-password', person, cb);
+    sendEmail.email('reset-password', person, cb);
 };
