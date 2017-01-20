@@ -1,3 +1,5 @@
+require('env2')('config.env');
+
 const Hapi = require('hapi');
 const plugins = require('./plugins/index.js');
 const assert = require('assert');
