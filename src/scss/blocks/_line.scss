@@ -1,7 +1,12 @@
 .line {
     width: 80%;
-    box-shadow: inset 0 -2px 0 0 $black;
-    height: 0.2rem;
+    background-color: $black;
+    height: 0.15rem;
     margin: 1rem auto;
     padding: 0 1rem;
+
+    &__tertiary {
+        background-color: $red;
+        width: 100%;
+    }
 }

@@ -1,9 +1,13 @@
 @import 'reset';
 @import 'config/colors';
-@import 'blocks/font';
+@import 'config/partials';
 @import 'blocks/buttons';
-@import 'blocks/navbar';
-@import 'blocks/container';
 @import 'blocks/card';
+@import 'blocks/container';
+@import 'blocks/dashboard';
+@import 'blocks/font';
 @import 'blocks/form';
 @import 'blocks/line';
+@import 'blocks/navbar';
+@import 'blocks/quiz';
+@import 'blocks/student-module';

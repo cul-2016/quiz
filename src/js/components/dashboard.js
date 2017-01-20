@@ -41,7 +41,7 @@ class Dashboard extends Component {
             );
         });
         return (
-            <div className="container">
+            <div className="container dashboard">
 
                 <button className="button button__tertiary button__tertiary--large button__icon--right">
                     Trophy Cabinet

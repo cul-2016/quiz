@@ -60,18 +60,11 @@ table {
 html {
     font-size: 16px; /* for REM size declarations */
     font-family: 'Ubuntu', Helvetica, Ariel, sans-serif;
-    width: 100%;
-    text-align: center;
 }
 
 body {
     min-height: 100vh;
-    line-height: 1.5rem;
     background-color: #fafafa;
-    font-size: 0.875rem; /* 14px */
+    font-size: 1rem; /* 16px */
     margin: auto;
-}
-
-.display-none {
-  display: none !important;
 }

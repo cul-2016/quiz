@@ -1,0 +1,49 @@
+.quiz {
+    &__item {
+        width: 80%;
+        height: 5rem;
+        position: relative;
+        margin: 1rem auto;
+
+        &__score {
+            border-radius: 5px;
+            border: 2px solid $pale-grey;
+            width: 5rem;
+            height: 5rem;
+            text-align: center;
+            position: absolute;
+            top:0;
+            left:0;
+        }
+
+
+        &__name {
+            position: absolute;
+            left:6rem;
+            top:0.2rem;
+        }
+    }
+
+    &__item__score {
+        &--postion {
+            position: absolute;
+            top: 0.3rem;
+            left: 0.3rem;
+        }
+
+        &--medal {
+            height: 3rem;
+            width: 3rem;
+            background-color: $gold;
+            position: relative;
+            top: 1rem;
+            margin: auto;
+        }
+
+        &--percent {
+            position: relative;
+            bottom: -1rem;
+        }
+    }
+
+}
