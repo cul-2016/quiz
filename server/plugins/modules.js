@@ -124,18 +124,21 @@ exports.register = (server, options, next) => {
                 validate: {
                     query: {
                         module_id: Joi.string().required(),
-                        user_id: Joi.string().required()
+                        user_id: Joi.string()
                     }
                 }
             },
             handler: (request, reply) => {
 
-                const { module_id, user_id } = request.query;
-                const parsed_user_id = parseInt(user_id, 10);
+                jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
 
-                getStudentHistory(pool, parsed_user_id, module_id, (error, history) => {
-                    const verdict = error || history;
-                    reply(verdict);
+                    const { module_id } = request.query;
+                    const user_id = request.query.user_id === 'undefined' ? decoded.user_details.user_id : request.query.user_id;
+                    const parsed_user_id = parseInt(user_id, 10);
+                    getStudentHistory(pool, parsed_user_id, module_id, (error, history) => {
+                        const verdict = error || history;
+                        reply(verdict);
+                    });
                 });
             }
         },

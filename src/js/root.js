@@ -93,17 +93,10 @@ const Root = ({ store }) => (
                     onEnter={ composeHooks(hooks.authenticate, hooks.checkUserRole, hooks.fetchModule, hooks.checkModuleOwner) }
                     path=":module_id/lecturer"
                     component={ ModuleContainer } />
-                <Route path=":module_id/student" component={ StudentModuleContainer }>
-                    <IndexRedirect to="feedback" />
-                    <Route
-                        onEnter={ composeHooks(hooks.authenticate) }
-                        path="history"
-                        component={ StudentHistoryContainer } />
-                    <Route
-                        onEnter={ composeHooks(hooks.authenticate, hooks.fetchModule) }
-                        path="feedback"
-                        component={ StudentPerformanceContainer } />
-                </Route>
+                <Route
+                    onEnter={ composeHooks(hooks.authenticate, hooks.fetchModule) }
+                    path=":module_id/student"
+                    component={ StudentModuleContainer } />
                 <Route
                     onEnter={ composeHooks(hooks.authenticate, hooks.fetchModule) }
                     path=":module_id/student/performance"

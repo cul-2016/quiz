@@ -5,18 +5,34 @@ import Tabs from './tabs';
 import Spinner from '../general/spinner';
 import Trophies from './trophies';
 
-const StudentModule = ({ location, children,
+const StudentModule = ({ location,
                         trophies, trophies_awarded,
-                        isFetchingModule, isQuizOpen,
+                        isFetchingModule, isFetchingFeedback,
+                        isFetchingStudentHistory, isQuizOpen,
                         quiz_id, question, response, //eslint-disable-line no-unused-vars
-                        handleJoiningQuiz, params, module }) => {
-
+                        handleJoiningQuiz, params, module,
+                        review, history }) => {
+                            console.log('module.medals.condition');
     let buttonAreaClasses = classnames("section has-text-centered transparent-background", {
         "animated-infinite pulse": isQuizOpen
     });
 
     let buttonClasses = classnames("button", {
         "button__tertiary": isQuizOpen,
+    });
+
+    let mappedQuizzes = history.map((quiz, i) => {
+        let percentageScore = Math.round(quiz.score / quiz.num_questions * 100);
+        return (
+            <div key={i} className="quiz__item">
+                <div className="quiz__item__score">
+                    <span className="small-label small-label__dark quiz__item__score--postion">{ i++ }</span>
+                    <div className="quiz__item__score--medal"> </div>
+                    <div className="quiz__item__score--percent">{ percentageScore }%</div>
+                </div>
+                <div className="quiz__item__name"> { quiz.name } </div>
+            </div>
+        );
     });
 
     let handleAnimation = (e, livePath) => {
@@ -40,10 +56,10 @@ const StudentModule = ({ location, children,
     return (
         <div>
         {
-            isFetchingModule && <Spinner/>
+            isFetchingModule && isFetchingFeedback && isFetchingStudentHistory && <Spinner/>
         }
         {
-            !isFetchingModule &&
+            !isFetchingModule && !isFetchingFeedback && !isFetchingStudentHistory &&
             <div className="student-module">
 
                 <p className="headline"> { module.name } </p>
@@ -68,32 +84,9 @@ const StudentModule = ({ location, children,
                 <div className="line line__tertiary"></div>
 
                 <div className="quiz">
-                    <div className="quiz__item">
-                        <div className="quiz__item__score">
-                            <span className="small-label small-label__dark quiz__item__score--postion">1</span>
-                            <div className="quiz__item__score--medal"> </div>
-                            <div className="quiz__item__score--percent">70%</div>
-                        </div>
-                        <div className="quiz__item__name"> Angles and Percentiles </div>
-                    </div>
-                    <div className="quiz__item">
-                        <div className="quiz__item__score">
-                            <span className="quiz__item__score--postion small-label small-label__dark">2</span>
-                            <div className="quiz__item__score--medal"> </div>
-                            <div className="quiz__item__score--percent">80%</div>
-                        </div>
-                        <div className="quiz__item__name"> Angle is a Lie </div>
-                    </div>
+                    { mappedQuizzes }
                 </div>
 
-                <div>
-                    <Trophies trophies={ trophies } trophies_awarded={ trophies_awarded } />
-
-                    <Tabs location={ location } />
-                    <div className="section">
-                        { children }
-                    </div>
-                </div>
             </div>
         }
         </div>
@@ -112,7 +105,10 @@ StudentModule.propTypes = {
     response: PropTypes.string,
     handleJoiningQuiz: PropTypes.func,
     params: PropTypes.object,
-    module: PropTypes.object
+    module: PropTypes.object,
+    review: PropTypes.object,
+    history: PropTypes.array,
+    medalConditions: PropTypes.array
 };
 
 export default StudentModule;
