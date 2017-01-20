@@ -135,7 +135,7 @@ export function fetchModule (nextState, replace, callback) {
 
         if (is_lecturer === false) {
             store.dispatch(getFeedback(module_id));
-            store.dispatch(getStudentHistory(module_id));
+            store.dispatch(getStudentHistory(null, module_id));
         }
     }
     callback();

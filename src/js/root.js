@@ -28,7 +28,7 @@ import ReviewQuizStudentContainer from './containers/student/quiz-review.js';
 import StudentJoinModuleContainer from './containers/student/join-module';
 import StudentModuleContainer from './containers/student/module';
 import StudentHistoryContainer from './containers/student/history';
-import StudentFeedbackContainer from './containers/student/feedback';
+import StudentPerformanceContainer from './containers/student/feedback';
 import StudentLiveQuizContainer from './containers/student/live-quiz';
 import StudentQuizResultContainer from './containers/student/result';
 
@@ -102,8 +102,12 @@ const Root = ({ store }) => (
                     <Route
                         onEnter={ composeHooks(hooks.authenticate, hooks.fetchModule) }
                         path="feedback"
-                        component={ StudentFeedbackContainer } />
+                        component={ StudentPerformanceContainer } />
                 </Route>
+                <Route
+                    onEnter={ composeHooks(hooks.authenticate, hooks.fetchModule) }
+                    path=":module_id/student/performance"
+                    component={ StudentPerformanceContainer } />
                 <Route
                     onEnter={ composeHooks(hooks.fetchQuizDetailsStudent) }
                     path=":module_id/student/history/:quiz_id"

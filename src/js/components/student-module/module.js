@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { hashHistory } from 'react-router';
+import { hashHistory, Link } from 'react-router';
 import classnames from 'classnames';
 import Tabs from './tabs';
 import Spinner from '../general/spinner';
@@ -10,7 +10,6 @@ const StudentModule = ({ location, children,
                         isFetchingModule, isQuizOpen,
                         quiz_id, question, response, //eslint-disable-line no-unused-vars
                         handleJoiningQuiz, params, module }) => {
-
 
     let buttonAreaClasses = classnames("section has-text-centered transparent-background", {
         "animated-infinite pulse": isQuizOpen
@@ -59,10 +58,12 @@ const StudentModule = ({ location, children,
                     <label className="label"> Trophies </label>
                     <span className="body"> 1/4 </span>
                 </div>
-                <button className="button button__secondary button__icon--right">
-                    My Performance
-                    <span className="fa-chevron-right"></span>
-                </button>
+                <Link to={ `${module.module_id}/student/performance` }>
+                    <button className="button button__secondary button__icon--right">
+                        My Performance
+                        <span className="fa-chevron-right"></span>
+                    </button>
+                </Link>
 
                 <div className="line line__tertiary"></div>
 

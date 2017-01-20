@@ -26,6 +26,16 @@
     }
 }
 
+.subheader {
+    font-size: 1.25rem;
+    font-weight: bold;
+    line-height: 1.5rem;
+    color: $black;
+
+    &--light {
+        color: $white;
+    }
+}
 .title {
     font-size: 1.75rem;
     font-weight: 300;
@@ -47,6 +57,27 @@
 
     &__primary {
         color: $gold;
+    }
+
+    &--light {
+        font-weight: 500;
+    }
+
+    &__secondary {
+        color: $blue;
+        font-weight: bold;
+    }
+}
+
+.small-body {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    font-weight: bold;
+    line-height: 1.25rem;
+    color: $black;
+
+    &__secondary--dark {
+        color: $dark-blue;
     }
 }
 

@@ -27,5 +27,15 @@
             float: right;
             margin-right: 15%;
         }
+
+        &--back {
+            border-bottom: 2px solid $white;
+            color: $white;
+        }
+    }
+
+    &__secondary {
+        box-shadow: none;
+        background-color: $blue;
     }
 }
