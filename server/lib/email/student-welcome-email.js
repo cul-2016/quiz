@@ -6,5 +6,5 @@ module.exports = ({ username, email }, cb) => {
         email,
         subject: "Welcome to City Uni :)"
     };
-    sendEmail('student-welcome', person, cb);
+    sendEmail.email('student-welcome', person, cb);
 };
