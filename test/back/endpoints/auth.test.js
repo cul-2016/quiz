@@ -384,7 +384,7 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
             email.restore();
             t.error(err); 
         });
-    })
+    });
 
 });
 
