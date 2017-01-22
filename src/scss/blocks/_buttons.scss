@@ -23,6 +23,17 @@
         padding: 0.5rem 1rem;
     }
 
+    &__primary {
+        background-color: $gold;
+        color: $black;
+
+        &--large {
+            font-size: 1.5rem;
+            line-height: 2;
+            padding: 0.5rem 1rem;
+        }
+    }
+
     &__secondary {
         background-color: $blue;
         color: white;
