@@ -16,5 +16,21 @@
         border-bottom: 1px solid $black;
         text-align: left;
     }
+}
+
+.student-view__questions {
+    background-color: $white;
+    .subheader {
+        padding: 1rem 2rem;
+    }
+    .body {
+        padding: 0 2rem 2rem 2rem;
+    }
+    .current-question {
+        background-color: $gold;
+        border-top: 3px solid $dark-gold;
+        padding: 1rem 0;
+    }
+
 
 }

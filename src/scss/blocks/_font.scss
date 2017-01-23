@@ -52,6 +52,10 @@
     &__primary {
         color: $gold;
     }
+
+    &__light {
+        color: $grey;
+    }
 }
 
 
@@ -72,6 +76,10 @@
 
     &__secondary {
         color: $blue;
+        font-weight: bold;
+    }
+    &__tertiary {
+        color: $red;
         font-weight: bold;
     }
 }

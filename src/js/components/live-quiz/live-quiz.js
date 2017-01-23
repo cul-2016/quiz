@@ -20,7 +20,6 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
         <section className="live-quiz container">
 
             <div className="has-text-centered" >
-                <h1>{ name }</h1>
 
                 <h3 className={ titleClass }>Question { nextQuestionIndex }</h3>
             </div>
@@ -62,7 +61,29 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                     </button>
                 }
                 {
-                    isQuizStarted && question &&
+                    isQuizStarted && question && !is_lecturer &&
+                    <div className="student-view__questions">
+                        <nav className="navbar navbar__light navbar__light--tertiary">
+                            <li className="navbar__item">
+                                <Link to={ `${params.module_id}/student` } className="navbar__link navbar__link--left navbar__link--quit ">
+                                    Quit
+                                </Link>
+                            </li>
+                        </nav>
+
+                        <div className="question">
+                            <p className="subheader"> Q{ nextQuestionIndex }.</p>
+                            <p className="body">{ question.question }</p>
+                        </div>
+                        <CurrentQuestion
+                            data={ question }
+                            handleSelection={ handleSelection }
+                            response={ response }/>
+
+                    </div>
+                }
+                {
+                    isQuizStarted && question && is_lecturer &&
                     <div>
                         <CurrentQuestion
                             data={ question }

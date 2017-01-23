@@ -32,10 +32,19 @@
             border-bottom: 2px solid $white;
             color: $white;
         }
+        &--quit {
+            border-bottom: 2px solid $red;
+            color: $red;
+        }
     }
 
     &__secondary {
         box-shadow: none;
         background-color: $blue;
+    }
+    &__light {
+        box-shadow: none;
+        background-color: $white;
+
     }
 }
