@@ -12,7 +12,7 @@ const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthentic
 
     return (
         <div className="login"> 
-            <h1 className="headline"> Quaddle </h1>
+            <h1 className="headline"><img src="/Yellow.svg"></img></h1>
             <h3 className="subheader"> Realtime Quizzes for better lectures </h3>
 
             <form className="form">

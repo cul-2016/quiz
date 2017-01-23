@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="25px" height="35px" viewBox="0 0 25 35" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
+    <title>Trophy / Small</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M12.0267455,20.6899511 C11.8363804,19.6475091 11.7820084,18.285791 11.7697468,17.3320441 C14.5168722,16.9772626 17.316273,15.51719 17.4192893,11.9319444 C18.3224805,11.7913521 20.599868,11.2769891 20.6526709,9.66013624 C20.8055135,4.98000879 21.0341063,4.43650446 20.6526709,3.33654312 C20.321885,2.38264198 18.0260913,3.0832124 17.4222222,3.2860847 C17.4222222,3.08612779 17.4222222,2.90736969 17.4222222,2.74756298 C18.1180995,2.68000383 18.6666667,2.09217863 18.6666667,1.37701947 C18.6666667,0.611210502 18.0494938,0 17.2881725,0 L3.71182748,0 C2.95367463,0 2.33333333,0.616512616 2.33333333,1.37701947 C2.33333333,2.0973369 2.8793599,2.68087763 3.57777778,2.74766424 C3.57777778,2.91089139 3.57777778,3.09388839 3.57777778,3.29904973 C3.04036152,3.11571701 0.647288382,2.36108784 0.309028153,3.33654312 C-0.0724072466,4.43650446 0.156185559,4.98000879 0.309028153,9.66013624 C0.362603566,11.300646 2.70633753,11.8061677 3.58116079,11.9378778 C3.69042972,15.3325321 6.42825817,16.9591539 9.11254241,17.335439 C9.08886602,18.3001702 9.03167498,19.6764769 8.89352822,20.6964956 C8.35648393,20.7604725 7.93333333,21.2201803 7.93333333,21.7777778 L7.93333333,22.8666667 L13.0666667,22.8666667 L13.0666667,21.7777778 C13.0666667,21.1886546 12.605377,20.7152313 12.0267455,20.6899511 Z M3.57777778,10.2767095 C3.57777778,7.98187864 3.57777778,6.28031362 3.57777778,5.01864178 C3.19070566,4.83968467 1.88278519,4.29440742 1.8283657,5.06989783 C1.8283657,5.55833941 1.8283657,5.06989783 1.8283657,9.66013624 C1.8283657,10.188417 3.1826988,10.2654707 3.57777778,10.2767095 Z M17.4222222,10.2755025 C17.4222222,7.97064402 17.4222222,6.26432887 17.4222222,5.00112271 C17.8503307,4.807365 19.0805891,4.31827987 19.1333333,5.06989783 C19.1333333,5.55833941 19.1333333,5.06989783 19.1333333,9.66013624 C19.1333333,10.1724841 17.8594617,10.2604124 17.4222222,10.2755025 Z" id="path-1"></path>
+        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="-1" in="SourceAlpha" result="shadowOffsetInner1"></feOffset>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowInnerInner1"></feColorMatrix>
+        </filter>
+        <rect id="path-3" x="4.35555556" y="22.5555556" width="12.4444444" height="5.75555556" rx="2.87777778"></rect>
+        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-4">
+            <feOffset dx="0" dy="-1" in="SourceAlpha" result="shadowOffsetInner1"></feOffset>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowInnerInner1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Typography" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Icons" transform="translate(-27.000000, -320.000000)">
+            <g id="Icon-/-Trophy-small" transform="translate(27.000000, 320.000000)">
+                <g id="Trophy">
+                    <g id="Combined-Shape">
+                        <use fill="#FFD772" fill-rule="evenodd" xlink:href="#path-1"></use>
+                        <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                        <use xlink:href="#path-1"></use>
+                    </g>
+                    <g id="Rectangle-13">
+                        <use fill="#B95B46" fill-rule="evenodd" xlink:href="#path-3"></use>
+                        <use fill="black" fill-opacity="1" filter="url(#filter-4)" xlink:href="#path-3"></use>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -17,6 +17,8 @@
 .headline {
     font-size: 2.25rem;
     font-weight: bold;
+    padding: 0.25rem 0.5rem;
+    text-transform: capitalize;
     line-height: 2.6rem;
     letter-spacing: -1px;
     color: $black;
@@ -26,14 +28,33 @@
     }
 }
 
+.subheader {
+    font-size: 1.25rem;
+    font-weight: bold;
+    padding: 0.25rem 0.5rem;
+    line-height: 1.5rem;
+    color: $black;
+
+    &__tertiary {
+        color: $red;
+    }
+    &--light {
+        color: $white;
+    }
+}
 .title {
     font-size: 1.75rem;
     font-weight: 300;
+    padding: 0.25rem 0.5rem;
     line-height: 2rem;
     color: $black;
 
     &__primary {
         color: $gold;
+    }
+
+    &__light {
+        color: $grey;
     }
 }
 
@@ -59,6 +80,31 @@
     &__warning {
         color: $red;
     }
+  
+    &--light {
+        font-weight: 500;
+    }
+
+    &__secondary {
+        color: $blue;
+        font-weight: bold;
+    }
+    &__tertiary {
+        color: $red;
+        font-weight: bold;
+    }
+}
+
+.small-body {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    font-weight: bold;
+    line-height: 1.25rem;
+    color: $black;
+
+    &__secondary--dark {
+        color: $dark-blue;
+    }
 }
 
 .label {
@@ -67,6 +113,10 @@
     line-height: 1.2rem;
     letter-spacing: 1px;
     color: $grey;
+
+    &__dark {
+        color: $black;
+    }
 }
 
 .small-label {

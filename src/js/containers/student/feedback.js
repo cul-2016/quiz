@@ -5,7 +5,8 @@ import Feedback from '../../components/student-module/feedback';
 const mapStateToProps = (state) => ({
     ranking: state.feedback.ranking,
     quizzes: state.feedback.quizzes,
-    participation: state.feedback.participation
+    participation: state.feedback.participation,
+    module: state.module
 });
 
 
