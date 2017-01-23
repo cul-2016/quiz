@@ -6,10 +6,26 @@ import isEmail from 'validator/lib/isEmail';
 const Signup = ({ register, handleChange, handleRegisteringUser, location }) => {
 
     const isEmailValid = isEmail(register.email);
-    const is_lecturer = location.pathname !== '/register-student'
+    const is_lecturer = location.pathname !== '/register-student';
+    const registerButtonEnabled = isEmailValid
+        && register.password
+        && register.username
+        && register.password === register.confirmPassword;
+    const buttonClass = classnames("button button__primary", {
+        'button__is-disabled': !registerButtonEnabled
+    });
+    const errorClass = classnames("body__warning", {
+        'display-none': (
+            !isEmailValid
+            && register.email
+        ) || (
+            register.password
+            && register.password !== register.confirmPassword
+        )
+    });
 
     const submitOnEnter = (e) => {
-        if (e.keyCode === 13 && isEmailValid && register.password && register.username) {
+        if (e.keyCode === 13 && registerButtonEnabled) {
             handleRegisteringUser(register.email, register.username, register.password, is_lecturer);
         }
     };
@@ -17,12 +33,12 @@ const Signup = ({ register, handleChange, handleRegisteringUser, location }) => 
     return (
         <div className="login">
             <h2 className="headline"> Register </h2>
-            { register.error &&
-                <span className={ "body__warning" + !isEmailValid && register.email ? '' : ' display-none' }>
-                    { register.error }
-                </span>
+            { /*register.error*/ true &&
+                  <span className={ errorClass }>
+                      { register.error + register.password }
+                  </span>
             }
-            <form className="form">
+            <div className="form">
                 <div className="form__field body">
                     <label className="form__label">Email address</label>
                     <input
@@ -47,7 +63,7 @@ const Signup = ({ register, handleChange, handleRegisteringUser, location }) => 
                         onKeyDown={ submitOnEnter }
                         className="form__input"
                         value={ register.password }
-                        onChange={ (e) => handleChange("password", e.target.value)}
+                        onChange={ (e) => handleChange("password", e.target.value) }
                         type="password" />
                 </div>
         
@@ -62,11 +78,13 @@ const Signup = ({ register, handleChange, handleRegisteringUser, location }) => 
                 </div>
         
                 <button
-                    className="button button__primary"
-                    onClick={ () => handleRegisteringUser(register.email, register.username, register.password, is_lecturer) }
+                    className={ buttonClass }
+                    onClick={
+                        () => handleRegisteringUser(register.email, register.username, register.password, is_lecturer)
+                    }
                 > Register </button>
 
-            </form>
+            </div>
     
             <div className="body">
                 <Link to="/">
