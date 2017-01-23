@@ -18,7 +18,7 @@ const App = ({ children, location, username, error, isCookieAccepted, handleCook
         }
         {
             !error &&
-            <div style={{ position: 'fixed', width: '100%' }}>
+            <div>
                 <Nav location={ location } username={ username } is_lecturer={ is_lecturer }  />
                 { children }
             </div>
