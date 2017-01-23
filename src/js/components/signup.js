@@ -7,37 +7,43 @@ const Signup = ({ register, handleChange, handleRegisteringUser, location }) => 
 
     const isEmailValid = isEmail(register.email);
     const is_lecturer = location.pathname !== '/register-student';
-    const registerButtonEnabled = isEmailValid
-        && register.password
-        && register.username
-        && register.password === register.confirmPassword;
-    const buttonClass = classnames("button button__primary", {
-        'button__is-disabled': !registerButtonEnabled
+
+    const registerButtonClasses = classnames("button button__primary", {
+        "is-disabled": !isEmailValid
+            || !register.password
+            || !register.username
+            || register.password !== register.confirmPassword,
+        "is-loading": register.isRegistering
     });
-    const errorClass = classnames("body__warning", {
-        'display-none': (
-            !isEmailValid
-            && register.email
-        ) || (
-            register.password
-            && register.password !== register.confirmPassword
-        )
+
+    const invalidEmailClasses = classnames("body__warning", {
+        "display-none": register.email && isEmailValid
+    });
+
+    const passwordMatchClasses = classnames("form__input", {
+        "body__warning": register.confirmPassword !== register.password
     });
 
     const submitOnEnter = (e) => {
-        if (e.keyCode === 13 && registerButtonEnabled) {
+        if (e.keyCode === 13 && isEmailValid && register.password && register.username) {
             handleRegisteringUser(register.email, register.username, register.password, is_lecturer);
         }
     };
 
     return (
+
         <div className="login">
-            <h2 className="headline"> Register </h2>
-            { /*register.error*/ true &&
-                  <span className={ errorClass }>
-                      { register.error + register.password }
-                  </span>
+            <h2 className="headline">
+                Register
+            </h2>
+            { register.error &&
+                <div>
+                    <span className="body__warning">
+                        { register.error }
+                    </span>
+                </div>
             }
+
             <div className="form">
                 <div className="form__field body">
                     <label className="form__label">Email address</label>
@@ -47,7 +53,11 @@ const Signup = ({ register, handleChange, handleRegisteringUser, location }) => 
                         value={ register.email }
                         onChange={ (e) => handleChange("email", e.target.value) }
                         type="email" />
+                    <div>
+                        <span className={ invalidEmailClasses }>This email is invalid</span>
+                    </div>
                 </div>
+
                 <div className="form__field body">
                     <label className="form__label">Choose a nickname</label>
                     <input
@@ -57,36 +67,33 @@ const Signup = ({ register, handleChange, handleRegisteringUser, location }) => 
                         onChange={ (e) => handleChange("username", e.target.value)}
                         type="username"/>
                 </div>
+
                 <div className="form__field body">
                     <label className="form__label">Choose a password</label>
                     <input
                         onKeyDown={ submitOnEnter }
-                        className="form__input"
+                        className={ passwordMatchClasses }
                         value={ register.password }
-                        onChange={ (e) => handleChange("password", e.target.value) }
+                        onChange={ (e) => handleChange("password", e.target.value)}
                         type="password" />
                 </div>
-        
+
                 <div className="form__field body">
                     <label className="form__label">Confirm password</label>
                     <input
                         onKeyDown={ submitOnEnter }
-                        className="form__input"
+                        className={ passwordMatchClasses }
                         value={ register.confirmPassword }
                         onChange={ (e) => handleChange("confirmPassword", e.target.value)}
                         type="password" />
                 </div>
-        
-                <button
-                    className={ buttonClass }
-                    onClick={
-                        () => handleRegisteringUser(register.email, register.username, register.password, is_lecturer)
-                    }
-                > Register </button>
 
+                <button className={ registerButtonClasses } onClick={ () => handleRegisteringUser(register.email, register.username, register.password, is_lecturer) }>
+                    Register
+                </button>
             </div>
-    
-            <div className="body">
+
+            <div>
                 <Link to="/">
                     Already have an account? Please sign in here
                 </Link>
