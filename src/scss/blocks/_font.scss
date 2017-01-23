@@ -17,6 +17,8 @@
 .headline {
     font-size: 2.25rem;
     font-weight: bold;
+    padding: 0.25rem 0.5rem;
+    text-transform: capitalize;
     line-height: 2.6rem;
     letter-spacing: -1px;
     color: $black;
@@ -29,9 +31,13 @@
 .subheader {
     font-size: 1.25rem;
     font-weight: bold;
+    padding: 0.25rem 0.5rem;
     line-height: 1.5rem;
     color: $black;
 
+    &__tertiary {
+        color: $red;
+    }
     &--light {
         color: $white;
     }
@@ -39,6 +45,7 @@
 .title {
     font-size: 1.75rem;
     font-weight: 300;
+    padding: 0.25rem 0.5rem;
     line-height: 2rem;
     color: $black;
 
@@ -87,6 +94,10 @@
     line-height: 1.2rem;
     letter-spacing: 1px;
     color: $grey;
+
+    &__dark {
+        color: $black;
+    }
 }
 
 .small-label {

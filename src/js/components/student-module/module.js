@@ -12,7 +12,6 @@ const StudentModule = ({ location,
                         quiz_id, question, response, //eslint-disable-line no-unused-vars
                         handleJoiningQuiz, params, module,
                         review, history }) => {
-                            console.log('module.medals.condition');
     let buttonAreaClasses = classnames("section has-text-centered transparent-background", {
         "animated-infinite pulse": isQuizOpen
     });
@@ -21,13 +20,21 @@ const StudentModule = ({ location,
         "button__tertiary": isQuizOpen,
     });
 
-    let mappedQuizzes = history.map((quiz, i) => {
+    let mappedQuizzes = !isFetchingModule && history.map((quiz, i) => {
+
+        const medalConditions = module.medals.condition;
         let percentageScore = Math.round(quiz.score / quiz.num_questions * 100);
+        let medalClass = classnames({
+            "quiz__item__score--medal--gold": percentageScore >= medalConditions[1],
+            "quiz__item__score--medal--silver": percentageScore >= medalConditions[0] && percentageScore < medalConditions[1],
+            "quiz__item__score--medal--bronze": percentageScore < medalConditions[0] && percentageScore > 0
+        });
+
         return (
             <div key={i} className="quiz__item">
                 <div className="quiz__item__score">
                     <span className="small-label small-label__dark quiz__item__score--postion">{ i++ }</span>
-                    <div className="quiz__item__score--medal"> </div>
+                    <div className={ medalClass }> </div>
                     <div className="quiz__item__score--percent">{ percentageScore }%</div>
                 </div>
                 <div className="quiz__item__name"> { quiz.name } </div>
@@ -63,15 +70,16 @@ const StudentModule = ({ location,
             <div className="student-module">
 
                 <p className="headline"> { module.name } </p>
-                <p className="title title__tertiary"> { module.module_id } </p>
+                <p className="title title__primary"> { module.module_id } </p>
                 <div className={ buttonAreaClasses }>
                     <button onClick={ (e) => { handleAnimation(e, livePath); }} className={ buttonClasses }>
                         Join Live Quiz
                     </button>
                 </div>
 
-                <div>
+                <div className="trophy">
                     <label className="label"> Trophies </label>
+                    <div className="trophy__small"> </div>
                     <span className="body"> 1/4 </span>
                 </div>
                 <Link to={ `${module.module_id}/student/performance` }>

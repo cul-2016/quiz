@@ -1,0 +1,18 @@
+@keyframes fadeInOut {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.logo {
+    background: url(../../public/assets/logo/yellow.svg);
+
+    &--large {
+        background-size: 5rem;
+        margin: 1rem auto;
+        height: 5rem;
+        width: 5rem;
+        -webkit-animation: fadeInOut 2s infinite; /* Safari 4.0 - 8.0 */
+        animation: fadeInOut 2s infinite;
+    }
+}

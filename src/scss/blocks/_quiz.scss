@@ -31,13 +31,32 @@
             left: 0.3rem;
         }
 
-        &--medal {
+        &--medal--gold {
             height: 3rem;
             width: 3rem;
-            background-color: $gold;
             position: relative;
             top: 1rem;
             margin: auto;
+            background: url(../../public/assets/medals/small-gold.svg);
+            background-size: 3rem;
+        }
+        &--medal--silver {
+            height: 3rem;
+            width: 3rem;
+            position: relative;
+            top: 1rem;
+            margin: auto;
+            background: url(../../public/assets/medals/small-silver.svg);
+            background-size: 3rem;
+        }
+        &--medal--bronze {
+            height: 3rem;
+            width: 3rem;
+            position: relative;
+            top: 1rem;
+            margin: auto;
+            background: url(../../public/assets/medals/small-bronze.svg);
+            background-size: 3rem;
         }
 
         &--percent {
