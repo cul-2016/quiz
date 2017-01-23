@@ -58,6 +58,13 @@
     }
 }
 
+.subheader {
+    font-family: 'Ubuntu';
+    font-size: 1.25rem;
+    font-weight: bold;
+    line-height: 1.5rem;
+    color: $black;
+}
 
 .body {
     font-size: 1rem;
@@ -70,6 +77,10 @@
         color: $gold;
     }
 
+    &__warning {
+        color: $red;
+    }
+  
     &--light {
         font-weight: 500;
     }
