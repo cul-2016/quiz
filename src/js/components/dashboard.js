@@ -33,7 +33,7 @@ class Dashboard extends Component {
                         <div className="body">
                             { module.name }
                         </div>
-                        <div className="body body__tertiary">
+                        <div className="body body__primary">
                             { module.module_id }
                         </div>
                     </Link>
