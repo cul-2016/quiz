@@ -11,6 +11,8 @@ const mapStateToProps = (state) => {
     return {
 
         isFetchingModule: state.module.isFetchingModule,
+        isFetchingFeedback: state.feedback.isFetchingFeedback,
+        isFetchingStudentHistory: state.studentHistory.isFetchingStudentHistory,
         trophies: state.module.trophies_awarded && Object.keys(state.module.trophies_awarded).sort(),
         trophies_awarded: state.module.trophies_awarded,
         username: state.user.username,
@@ -18,7 +20,9 @@ const mapStateToProps = (state) => {
         quiz_id: state.liveQuiz.quiz_id,
         question: state.liveQuiz.question,
         response: state.liveQuiz.response,
-        module: state.module
+        module: state.module,
+        review: state.review,
+        history: state.studentHistory.history,
     };
 };
 
