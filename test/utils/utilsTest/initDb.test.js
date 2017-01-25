@@ -16,7 +16,7 @@ tape('flush db clears pg database', (t) => {
                     if (error) {
                         return t.error(error);
                     }
-                    t.equal(data.rows.length, 33, 'database has been setup');
+                    t.equal(data.rows.length, 34, 'database has been setup');
                 }
             );
         });

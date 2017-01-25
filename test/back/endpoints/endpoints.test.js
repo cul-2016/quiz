@@ -10,6 +10,11 @@ const { moduleInfo } = require('../../utils/data-fixtures.js');
 const lecturerCreds = { email: 'authenticate-user@city.ac.uk', password: 'testinglecturer' };
 const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer', is_lecturer: true };
 
+const sinon = require('sinon');
+const sendemail = require('sendemail');
+
+let email;
+
 if (!process.env.TESTING) {
     throw new Error("Please set the testing environment variable!");
 }
@@ -18,9 +23,23 @@ test('/ endpoint works returns the correct payload', (t) => {
     t.plan(1);
 
     initDb()
+    .then(() => {
+        email = sinon.stub(
+            sendemail,
+            'email',
+            (name, person, cb) => cb(null)
+        );
+
+        return Promise.resolve();
+    })
     .then(() => server.inject('/'))
     .then((response) => {
+        email.restore();
         t.ok(response.payload.indexOf('<title>Quiz App</title>') > -1, "index page loads correctly!");
+    })
+    .catch((err) => {
+        email.restore();
+        t.error(err);
     });
 });
 
@@ -154,6 +173,15 @@ test('/ endpoint works returns the correct payload', (t) => {
         t.plan(1);
 
         initDb()
+        .then(() => {
+            email = sinon.stub(
+                sendemail,
+                'email',
+                (name, person, cb) => cb(null)
+            );
+
+            return Promise.resolve();
+        })
         .then(() => simulateAuth())
         .then((token) => {
             const options = {
@@ -165,7 +193,12 @@ test('/ endpoint works returns the correct payload', (t) => {
             return server.inject(options);
         })
         .then((response) => {
+            email.restore();
             t.deepEqual(response.result, endpoint.expected, 'payload is correct for ' + endpoint.url);
+        })
+        .catch((err) => {
+            email.restore();
+            t.error(err);
         });
     });
 });
@@ -202,6 +235,15 @@ test('/ endpoint works returns the correct payload', (t) => {
         t.plan(1);
 
         initDb()
+        .then(() => {
+            email = sinon.stub(
+                sendemail,
+                'email',
+                (name, person, cb) => cb(null)
+            );
+
+            return Promise.resolve();
+        })
         .then(() => simulateAuthStudents())
         .then((token) => {
             const options = {
@@ -212,7 +254,12 @@ test('/ endpoint works returns the correct payload', (t) => {
             return server.inject(options);
         })
         .then((response) => {
+            email.restore();
             t.deepEqual(response.result, endpoint.expected, 'payload is correct for ' + endpoint.url);
+        })
+        .catch((err) => {
+            email.restore();
+            t.error(err);
         });
     });
 });
