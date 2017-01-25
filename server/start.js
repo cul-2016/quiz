@@ -64,8 +64,11 @@ io.on('connection', (socket) => {
 
     socket.on('abort_quiz', (data, cb) => {
         var room = data.room;
-        var quiz_id = data.quiz_id;
-        socket.broadcast.to(room).emit('receive_abort_quiz', quiz_id);
+        var idObj = {
+            quiz_id: data.quiz_id,
+            isSurvey: data.isSurvey
+        };
+        socket.broadcast.to(room).emit('receive_abort_quiz', idObj);
 
         console.log('quiz has been aborted'); //eslint-disable-line no-console
         cb('quiz has been aborted');

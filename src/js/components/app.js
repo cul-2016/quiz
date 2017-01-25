@@ -2,7 +2,9 @@ import React, { PropTypes } from 'react';
 import Nav from './general/nav';
 import ErrorMessage from './general/error-message';
 
-const App = ({ children, location, username, error, isCookieAccepted, handleCookieMessage, handleErrorClearance, is_lecturer }) => {
+const App = ({ children, location, username,
+               error, isCookieAccepted, handleCookieMessage, //eslint-disable-line no-unused-vars
+               handleErrorClearance, is_lecturer }) => {
 
     return (
         <div>

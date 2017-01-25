@@ -1,17 +1,17 @@
 import React, { PropTypes } from 'react';
 import { hashHistory, Link } from 'react-router';
 import classnames from 'classnames';
-import Tabs from './tabs';
+import Tabs from './tabs'; //eslint-disable-line no-unused-vars
 import Spinner from '../general/spinner';
-import Trophies from './trophies';
+import Trophies from './trophies'; //eslint-disable-line no-unused-vars
 
 const StudentModule = ({ location,
-                        trophies, trophies_awarded,
-                        isFetchingModule, isFetchingFeedback,
-                        isFetchingStudentHistory, isQuizOpen,
+                        trophies, trophies_awarded, //eslint-disable-line no-unused-vars
+                        isFetchingModule, isFetchingFeedback, //eslint-disable-line no-unused-vars
+                        isFetchingStudentHistory, isQuizOpen, //eslint-disable-line no-unused-vars
                         quiz_id, question, response, //eslint-disable-line no-unused-vars
                         handleJoiningQuiz, params, module,
-                        review, history }) => {
+                        review, history }) => { //eslint-disable-line no-unused-vars
     let buttonAreaClasses = classnames("section has-text-centered transparent-background", {
         "animated-infinite pulse": isQuizOpen
     });
@@ -116,7 +116,9 @@ StudentModule.propTypes = {
     module: PropTypes.object,
     review: PropTypes.object,
     history: PropTypes.array,
-    medalConditions: PropTypes.array
+    medalConditions: PropTypes.array,
+    isFetchingStudentHistory: PropTypes.isfunc,
+    isFetchingFeedback: PropTypes.isfunc
 };
 
 export default StudentModule;

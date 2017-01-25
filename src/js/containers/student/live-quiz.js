@@ -28,6 +28,16 @@ const mapDispatchToProps = (dispatch) => ({
     },
     handleSelection: (data) => {
         dispatch(setResponse(data));
+
+        let responseData = {
+            user_id: store.getState().user.user_id,
+            id: store.getState().liveQuiz.quiz_id,
+            isSurvey: store.getState().liveQuiz.isSurvey,
+            question_id: store.getState().liveQuiz.questions[0].question_id,
+            response: data
+        };
+        console.log('saveing response', responseData);
+        dispatch(saveResponse(responseData));
     }
 });
 

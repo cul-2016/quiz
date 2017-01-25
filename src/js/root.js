@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Router, Route, IndexRoute, IndexRedirect, Redirect, hashHistory } from 'react-router';
+import { Router, Route, IndexRoute, Redirect, hashHistory } from 'react-router';
 import { Provider } from 'react-redux';
 
 import AppContainer from './containers/app-container';
@@ -27,7 +27,6 @@ import ReviewQuizStudentContainer from './containers/student/quiz-review.js';
 
 import StudentJoinModuleContainer from './containers/student/join-module';
 import StudentModuleContainer from './containers/student/module';
-import StudentHistoryContainer from './containers/student/history';
 import StudentPerformanceContainer from './containers/student/feedback';
 import StudentLiveQuizContainer from './containers/student/live-quiz';
 import StudentQuizResultContainer from './containers/student/result';

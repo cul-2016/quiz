@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { store } from '../store';
 import { clearModuleState } from '../actions/module';
-import classnames from 'classnames';
 
 
 class Dashboard extends Component {
@@ -19,9 +18,6 @@ class Dashboard extends Component {
 
         let { modules, is_lecturer } = this.props;
 
-        let headerClasses = classnames("level module-header is-mobile", {
-            "display-none": modules.length === 0
-        });
 
         let moduleList = modules.map((module, i) => {
 

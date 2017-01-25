@@ -1,7 +1,10 @@
 import React, { PropTypes } from 'react';
 import classnames from 'classnames';
 
-const LiveQuizButtons = ({ is_lecturer, numQuestions, nextQuestionIndex, nextQuestion, submitResponse, isQuizStarted, isSavingResponse, isResponseSubmitted, startQuiz, endQuiz, quiz_id, response }) => {
+const LiveQuizButtons = ({ is_lecturer, numQuestions, nextQuestionIndex,
+                           nextQuestion, isQuizStarted, isSavingResponse, //eslint-disable-line no-unused-vars
+                           isResponseSubmitted, startQuiz, endQuiz, //eslint-disable-line no-unused-vars
+                           quiz_id, response }) => { //eslint-disable-line no-unused-vars
 
     let startButtonClasses = classnames("button is-large is-success start-quiz-button", {
         "display-none": !is_lecturer || isQuizStarted
@@ -15,11 +18,6 @@ const LiveQuizButtons = ({ is_lecturer, numQuestions, nextQuestionIndex, nextQue
         "display-none": !is_lecturer || nextQuestionIndex !== numQuestions
     });
 
-    let submitButtonClasses = classnames("button is-large is-success", {
-        "display-none": is_lecturer || isQuizStarted === false,
-        "is-disabled": !response,
-        "is-loading": isSavingResponse
-    });
 
 
     return (
@@ -36,10 +34,6 @@ const LiveQuizButtons = ({ is_lecturer, numQuestions, nextQuestionIndex, nextQue
             <button className={ endButtonClasses } onClick={ () => endQuiz(quiz_id)  }>
                 End quiz
             </button>
-
-            <button className={ submitButtonClasses } onClick={ submitResponse }>
-                { isResponseSubmitted ? "Resubmit answer" : "Submit answer" }
-            </button>
         </div>
     );
 };
@@ -49,7 +43,6 @@ LiveQuizButtons.propTypes = {
     numQuestions: PropTypes.number,
     nextQuestionIndex: PropTypes.number,
     nextQuestion: PropTypes.func,
-    submitResponse: PropTypes.func,
     isQuizStarted: PropTypes.bool,
     isSavingResponse: PropTypes.bool,
     isResponseSubmitted: PropTypes.bool,

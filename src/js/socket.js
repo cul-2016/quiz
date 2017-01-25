@@ -58,7 +58,7 @@ socketClient.on('receive_end_of_quiz', (idObj) => {
     const module_id = store.getState().module.module_id;
 
     setTimeout(() => {
-        store.dispatch(endQuiz());
+        store.dispatch(endQuiz(quiz_id, isSurvey));
         store.dispatch(closeQuiz());
         showNavbar();
         if (!isSurvey) {
@@ -70,13 +70,13 @@ socketClient.on('receive_end_of_quiz', (idObj) => {
 
 });
 
-socketClient.on('receive_abort_quiz', (quiz_id) => {
-
+socketClient.on('receive_abort_quiz', (idObj) => {
+    const { quiz_id, isSurvey } = idObj;
     console.log('received abort quiz notification', quiz_id);
 
     const module_id = store.getState().module.module_id;
 
-    store.dispatch(endQuiz());
+    store.dispatch(endQuiz(quiz_id, isSurvey));
     store.dispatch(closeQuiz());
     showNavbar();
     hashHistory.push(`${module_id}/student`);

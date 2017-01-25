@@ -6,10 +6,10 @@ import classnames from 'classnames';
 
 
 const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
-                    nextQuestion, isQuizStarted, submitResponse,
+                    nextQuestion, isQuizStarted, submitResponse, //eslint-disable-line no-unused-vars
                     isResponseSubmitted, isSavingResponse, startQuiz,
                     numQuestions, endQuiz, quiz_id,
-                    handleSelection, response, name,
+                    handleSelection, response, name, //eslint-disable-line no-unused-vars
                     numParticipants, handleAbortQuiz, params }) => {
 
     let titleClass = classnames({
@@ -43,7 +43,7 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                         </div>
                         <div className="hint">
                             <p className="label label__dark"> Hint </p>
-                            <p className="body body__secondary"> During the quiz, you can change your answer as many times as you like, as long as it's before the next question appears.</p>
+                            <p className="body body__secondary"> During the quiz, you can change your answer as many times as you like, as long as it''s before the next question appears.</p>
                         </div>
 
                     </div>
@@ -97,7 +97,6 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                 numQuestions={ numQuestions }
                 nextQuestion={ nextQuestion }
                 nextQuestionIndex={ nextQuestionIndex }
-                submitResponse={ submitResponse }
                 isQuizStarted={ isQuizStarted }
                 isSavingResponse={ isSavingResponse }
                 isResponseSubmitted={ isResponseSubmitted }
