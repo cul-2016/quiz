@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200px" height="200px" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
+    <title>Combined Shape Copy 2</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M190.845547,1380.96055 C187.503399,1381.64212 184.043493,1382 180.5,1382 C152.057335,1382 129,1358.94266 129,1330.5 C129,1302.05734 152.057335,1279 180.5,1279 C208.942665,1279 232,1302.05734 232,1330.5 C232,1337.58572 230.569011,1344.33721 227.980262,1350.48125 L204.793744,1319.7117 L166.459239,1348.59882 L190.845547,1380.96055 Z M181,1431 C236.228475,1431 281,1386.22847 281,1331 C281,1275.77153 236.228475,1231 181,1231 C125.771525,1231 81,1275.77153 81,1331 C81,1386.22847 125.771525,1431 181,1431 Z" id="path-1"></path>
+        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="-4" in="SourceAlpha" result="shadowOffsetInner1"></feOffset>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 1   0 0 0 0 0.905882353   0 0 0 0 0.670588235  0 0 0 1 0" type="matrix" in="shadowInnerInner1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Typography" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Icons" transform="translate(-81.000000, -1231.000000)">
+            <g id="Combined-Shape-Copy-2">
+                <use fill="#D3A736" fill-rule="evenodd" xlink:href="#path-1"></use>
+                <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+            </g>
+        </g>
+    </g>
+</svg>

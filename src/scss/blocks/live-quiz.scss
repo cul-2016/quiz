@@ -19,7 +19,12 @@
 }
 
 .student-view__questions {
-    background-color: $white;
+    background-color: $gold;
+    min-height: 100vh;
+
+    .question {
+      background-color: $white;
+    }
     .subheader {
         padding: 1rem 2rem;
     }
@@ -32,5 +37,9 @@
         padding: 1rem 0;
     }
 
+}
 
+.live-quiz-footer {
+  background-color: $gold;
+  padding:2rem;
 }

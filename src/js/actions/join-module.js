@@ -1,5 +1,5 @@
 import request from '../lib/request.js';
-import { hashHistory } from 'react-router';
+import { getDashboard } from '../actions/dashboard';
 
 export const INPUT_CHANGE = 'INPUT_CHANGE';
 
@@ -21,9 +21,8 @@ export function joinModule (module_id) {
         dispatch(joinModuleRequest());
         request.get(dispatch)(`/join-module?module_id=${module_id}`)
             .then(() => {
-
                 dispatch(joinModuleSuccess());
-                hashHistory.push('/dashboard');
+                dispatch(getDashboard());
             })
             .catch((error) => {
                 dispatch(joinModuleFailure(error));

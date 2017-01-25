@@ -16,7 +16,7 @@ class Dashboard extends Component {
 
     render () {
 
-        let { modules, is_lecturer } = this.props;
+        let { modules, is_lecturer, module_id, moduleIDExists, handleInputChange, handleJoinModule } = this.props;
 
 
         let moduleList = modules.map((module, i) => {
@@ -39,10 +39,6 @@ class Dashboard extends Component {
         return (
             <div className="container dashboard">
 
-                <button className="button button__tertiary button__tertiary--large button__icon--right">
-                    Trophy Cabinet
-                    <span className="fa-chevron-right"></span>
-                </button>
                     <h2 className="display"> Modules </h2>
                     {
                         is_lecturer &&
@@ -60,8 +56,17 @@ class Dashboard extends Component {
                     {
                         !is_lecturer &&
                             <div className="card card__secondary">
-                                <input className="form__input" placeholder="CODE"></input>
-                                <button className="button button__secondary">Add A Module</button>
+                                <input
+                                  className="form__input"
+                                  value={ module_id || '' }
+                                  onChange={ (e) => handleInputChange(e.target.value)}
+                                  type="text"
+                                  placeholder="CODE"/>
+                                <button
+                                  className="button button__secondary"
+                                  onClick={ () => handleJoinModule() }>
+                                  Add A Module
+                                </button>
                             </div>
                     }
                     <div className="line"></div>
