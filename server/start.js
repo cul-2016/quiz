@@ -5,6 +5,7 @@ var io = socket(server.listener);
 io.on('connection', (socket) => {
 
     io.emit('we have connected', socket.id);
+
     console.log("CONNECTION!", socket.id); //eslint-disable-line no-console
 
     socket.on('disconnect', () => {
