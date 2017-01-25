@@ -18,7 +18,7 @@ socketClient.on('we have connected', (id) => {
     if (room) {
       socketClient.emit("join_room", room, () => {
         console.log('you madddee it!');
-      }})
+      });
     }
 });
 
