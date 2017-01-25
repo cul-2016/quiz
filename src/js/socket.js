@@ -14,8 +14,6 @@ export const socketClient = io(uri);
 
 socketClient.on('we have connected', (id) => {
     console.log("We're connected!", id);
-
-    window.location.reload();
 });
 
 socketClient.on('num_participants', (numParticipants) => {

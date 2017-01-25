@@ -16,6 +16,8 @@ io.on('connection', (socket) => {
 
     socket.on('join_room', (room, cb) => {
 
+        console.log('>>>>>>>joining room', room);
+
         socket.join(room);
 
         cb('Successfully joined room: >>>' + room);
