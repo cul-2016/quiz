@@ -58,6 +58,10 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id, isSurvey, handl
                             onClick={ () => sendQuizInvite(quiz.quiz_id, quiz.survey_id, quiz.name) }>
                             Invite students to { surveyOrQuiz }
                         </span>
+                        <span className={ buttonClass }
+                            onClick={ () => sendQuizInvite(quiz.quiz_id, quiz.survey_id, quiz.name, true) }>
+                            Review { surveyOrQuiz }
+                        </span>
                     </Link>
                 </td>
             </tr>

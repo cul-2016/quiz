@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import CurrentQuestion from './current-question';
-import LiveQuizButtons from './live-quiz-buttons';
+import LiveQuizButtons from './live-quiz-buttons.js';
 import classnames from 'classnames';
 
 
@@ -10,7 +10,7 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                     isResponseSubmitted, isSavingResponse, startQuiz,
                     numQuestions, endQuiz, quiz_id,
                     handleSelection, response, name, //eslint-disable-line no-unused-vars
-                    numParticipants, handleAbortQuiz, params }) => {
+                    numParticipants, handleAbortQuiz, params, review }) => {
 
     let titleClass = classnames({
         "display-none": !nextQuestionIndex
@@ -55,7 +55,7 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                     </h2>
                 }
                 {
-                    isQuizStarted && is_lecturer &&
+                    isQuizStarted && is_lecturer && !review &&
                     <button onClick={ () => handleAbortQuiz(quiz_id) } className="button is-danger">
                         Abort Quiz
                     </button>
@@ -105,6 +105,8 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                 startQuiz={ startQuiz }
                 endQuiz={ endQuiz }
                 quiz_id={ quiz_id }
+                review={ review }
+                handleAbortQuiz={ handleAbortQuiz }
                 response={ response } />
         </section>
     );
@@ -128,7 +130,8 @@ LiveQuiz.propTypes = {
     name: PropTypes.string,
     numParticipants: PropTypes.number,
     handleAbortQuiz: PropTypes.func,
-    params: PropTypes.object
+    params: PropTypes.object,
+    review: PropTypes.bool 
 };
 
 export default LiveQuiz;

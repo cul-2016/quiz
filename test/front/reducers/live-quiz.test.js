@@ -11,14 +11,16 @@ test('SET_QUIZ_DETAILS works', (t) => {
     const initialState = deepFreeze(liveQuizState);
     const quiz_id = 1;
     const name = "week 1 quiz";
+    const review = 'true';
     const action = {
         type: 'SET_QUIZ_DETAILS',
         quiz_id,
-        name
+        name,
+        review
     };
 
     const actual = reducer(initialState, action);
-    const expected = Object.assign({}, liveQuizState, { quiz_id, name });
+    const expected = Object.assign({}, liveQuizState, { quiz_id, name, review });
 
     t.deepEqual(actual, expected);
 });
@@ -350,7 +352,7 @@ test('ABORT_QUIZ_REQUEST works', (t) => {
     };
 
     const actual = reducer(initialState, action);
-    const expected = Object.assign({}, liveQuizState, { isAbortingQuiz: true });
+    const expected = Object.assign({}, liveQuizState, { isAbortingQuiz: true, review: false });
 
     t.deepEqual(actual, expected);
 });
