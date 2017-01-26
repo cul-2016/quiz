@@ -10,14 +10,20 @@ const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthentic
         }
     };
 
+    const handleOnSubmit = () => {
+        if (isEmail(login.email) && login.password.length !== 0) {
+            handleAuthenticateUser(login.email, login.password);
+        }
+    };
+
     return (
-        <div className="login"> 
+        <div className="login">
             <h1 className="headline"><img src="/Yellow.svg"></img></h1>
             <h3 className="subheader"> Realtime Quizzes for better lectures </h3>
 
             <form className="form">
                 <div className="form__field body">
-                    <label className="form__label">Email/Username</label>
+                    <label className="form__label">Email / Username</label>
                     <input
                         onKeyDown={ submitOnEnter }
                         onChange={ (e) => handleEmailChange(e.target.value) }
@@ -37,16 +43,15 @@ const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthentic
                 <div className={ login.userIsAuthenticated ? 'display-none' : 'body__warning' }>
                     { login.message }
                 </div>
-                <span className={ login.email && !isEmail(login.email) ? 'body__warning' : 'display-none' }>
-                    This email is invalid
-                </span>
-                <button className="button button__primary button--large">Login</button>
+                <button onClick={ handleOnSubmit } className="button button__primary">
+                    <p className="subheader">Log in</p>
+                </button>
             </form>
 
-            <div className="label__secondary"> Don't have an Account? </div>
-            <div className="body"> <Link to="/register-student"> Sign Up Here </Link> </div>
+            <p className="body body__secondary body__secondary--dark"> Don't have an Account? </p>
+            <div> <Link className="subheader" to="/register-student"> Sign Up </Link> </div>
 
-            <div> <Link to="/request-reset-password"> Forgotten Password </Link> </div>
+            <div> <Link className="subheader" to="/request-reset-password"> Forgotten Password </Link> </div>
         </div>
     );
 };

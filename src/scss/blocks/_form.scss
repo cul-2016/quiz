@@ -1,5 +1,21 @@
 .form {
+
+  &__label {
+      display: block;
+      text-align: left;
+      padding: 1rem 0;
+  }
+
     &__input {
+        border: 1px solid $black;
+        height: 2.9375rem;
+        font-size: 1rem;
+        width: 100%;
+        background-color: $white;
+        color: $black;
+        font-family: ubuntu;
+    }
+    &__input--add-module {
         font-size: 1.3rem;
         font-weight: bold;
         letter-spacing: 0.3rem;

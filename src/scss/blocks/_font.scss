@@ -75,7 +75,7 @@
     &__warning {
         color: $red;
     }
-  
+
     &--light {
         font-weight: 500;
     }
@@ -83,7 +83,12 @@
     &__secondary {
         color: $blue;
         font-weight: bold;
+
+        &--dark {
+          color: $dark-blue;
+        }
     }
+
     &__tertiary {
         color: $red;
         font-weight: bold;
@@ -106,6 +111,7 @@
     line-height: 1.2rem;
     letter-spacing: 1px;
     color: $grey;
+
 
     &__dark {
         color: $black;

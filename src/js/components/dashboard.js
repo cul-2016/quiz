@@ -57,7 +57,7 @@ class Dashboard extends Component {
                         !is_lecturer &&
                             <div className="card card__secondary">
                                 <input
-                                  className="form__input"
+                                  className="form__input--add-module"
                                   value={ module_id || '' }
                                   onChange={ (e) => handleInputChange(e.target.value)}
                                   type="text"
