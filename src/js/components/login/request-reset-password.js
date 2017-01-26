@@ -33,7 +33,7 @@ const ResetPassword = ({ resetPassword, handleEmailChange, handleResetPassword }
                         <h2>Request Password Reset</h2>
                         <span className={ errorMessageClass }>{ resetPassword.error }</span>
 
-                        <label className="label has-text-left">Email</label>
+                        <label className="f-label has-text-left">Email</label>
                         <input
                             onKeyDown={ submitOnEnter }
                             className="input"

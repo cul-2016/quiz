@@ -25,7 +25,7 @@ const EditScoreModal = ({ members, member_key, quiz_id, module_id, handleUpdateS
                             <h2>
                               Edit Score
                             </h2>
-                            <label className="label">Score</label>
+                            <label className="f-label">Score</label>
                             <input
                                 className="input"
                                 value={ value || '' }

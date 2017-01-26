@@ -34,7 +34,7 @@ const StudentModule = ({ location,
               <div key={i} className="quiz__item">
                 <Link to={`/${module.module_id}/student/history/${quiz.quiz_id}`}>
                     <div className="quiz__item__score">
-                        <span className="small-label small-label__dark quiz__item__score--postion">{ i + 1 }</span>
+                      <span className="f-small-label f-small-label--dark quiz__item__score--postion">{ i + 1 }</span>
                         <div className={ medalClass }> </div>
                         <div className="quiz__item__score--percent">{ percentageScore }%</div>
                     </div>
@@ -71,8 +71,8 @@ const StudentModule = ({ location,
             !isFetchingModule && !isFetchingFeedback && !isFetchingStudentHistory &&
             <div className="student-module">
 
-                <p className="headline"> { module.name } </p>
-                <p className="title title__primary"> { module.module_id } </p>
+                <p className="f-headline"> { module.name } </p>
+                <p className="f-title f-title--primary"> { module.module_id } </p>
                 <div className={ buttonAreaClasses }>
                     <button onClick={ (e) => { handleAnimation(e, livePath); }} className={ buttonClasses }>
                         Join Live Quiz
@@ -80,9 +80,9 @@ const StudentModule = ({ location,
                 </div>
 
                 <div className="trophy">
-                    <label className="label"> Trophies </label>
+                    <label className="f-label"> Trophies </label>
                     <div className="trophy__small"> </div>
-                    <span className="body"> 1/4 </span>
+                    <span className="f-body"> 1/4 </span>
                 </div>
                 <Link to={ `${module.module_id}/student/performance` }>
                     <button className="button button__secondary button__icon--right">

@@ -1,0 +1,14 @@
+.medal-result {
+    height: 8.7rem;
+    width: 6.3rem;
+
+    &--silver {
+      background: url(../../public/assets/medals/silver-result.svg)
+    }
+    &--bronze {
+      background: url(../../public/assets/medals/bronze-result.svg)
+    }
+    &--gold {
+      background: url(../../public/assets/medals/gold-result.svg)
+    }
+}

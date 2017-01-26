@@ -35,15 +35,15 @@ const Question = ({ idx, question, is_lecturer, showAnswer }) => {
     const chosenAnswer = (value) => {
         if (value === response && correct_answer.toLowerCase() === value && response === correct_answer.toLowerCase()) {
             return (
-                <span className="small-body small-body__secondary--dark chosen-answer">Correct Answer</span>
+                <span className="f-small-body f-small-body--dark chosen-answer">Correct Answer</span>
             );
         } else if (value === response && correct_answer.toLowerCase() !== value && response !== correct_answer.toLowerCase()) {
             return (
-                <span className="small-body small-body__secondary--dark chosen-answer">You chose</span>
+                <span className="f-small-body f-small-body--dark chosen-answer">You chose</span>
             );
         } else if (correct_answer.toLowerCase() === value && response !== correct_answer.toLowerCase()) {
             return (
-                <span className="small-body small-body__secondary--dark chosen-answer">Correct Answer</span>
+                <span className="f-small-body f-small-body--dark chosen-answer">Correct Answer</span>
             );
         }
     };
@@ -52,27 +52,27 @@ const Question = ({ idx, question, is_lecturer, showAnswer }) => {
         <div key={ idx }>
             <div className="card">
                 <div className="question">
-                    <p className="body">Q{idx + 1}.</p>
+                    <p className="f-body">Q{idx + 1}.</p>
                     <p className="small-body">{question.question}</p>
                 </div>
                 <div className={ aClasses }>
-                  <span className="label"> A </span>
-                  <span className="small-body"> { question.a } </span>
+                  <span className="f-label"> A </span>
+                  <span className="f-small-body"> { question.a } </span>
                   { chosenAnswer('a') }
                 </div>
                 <div className={ bClasses }>
-                  <span className="label"> B </span>
-                  <span className="small-body"> { question.b } </span>
+                  <span className="f-label"> B </span>
+                  <span className="f-small-body"> { question.b } </span>
                   { chosenAnswer('b') }
                 </div>
                 <div className={ cClasses }>
-                  <span className="label"> C </span>
-                  <span className="small-body"> { question.c } </span>
+                  <span className="f-label"> C </span>
+                  <span className="f-small-body"> { question.c } </span>
                   { chosenAnswer('c') }
                 </div>
                 <div className={ dClasses }>
-                  <span className="label"> D </span>
-                  <span className="small-body"> { question.d } </span>
+                  <span className="f-label"> D </span>
+                  <span className="f-small-body"> { question.d } </span>
                   { chosenAnswer('d') }
                 </div>
             </div>

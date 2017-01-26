@@ -3,6 +3,9 @@
   min-height: 100vh;
   text-align: center;
 
+    .f-headline {
+      margin-top: 1rem;
+    }
     .card {
       padding: 0;
       width: inherit;
@@ -24,7 +27,7 @@
     .chosen-answer {
         float:right;
     }
-    .label {
+    .f-label {
       padding-right: 0.5rem;
     }
 }

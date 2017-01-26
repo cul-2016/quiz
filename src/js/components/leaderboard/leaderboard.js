@@ -26,10 +26,10 @@ const Leaderboard = ({ mainData, medalScores, quiz_id_list, medalCondition, para
             <li className="columns is-desktop" key={ i }>
                 <span className="rank-number column is-1">{ rankingNumbers[i] }</span>
                 <div className="column is-3">
-                    <span className="subtitle is-4">{ user.username }</span>
+                    <span className="f-subtitle is-4">{ user.username }</span>
                 </div>
                 <div className="column is-1">
-                    <span className="subtitle is-4">{ parseFloat(user.total_score) }</span>
+                    <span className="f-subtitle is-4">{ parseFloat(user.total_score) }</span>
                 </div>
                 <div className="column is-2 is-hidden-mobile">
                     <Trophies data={ user } />

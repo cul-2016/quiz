@@ -12,7 +12,7 @@ const QuizReviewStudent = ({ review, showAnswer, params }) =>
               </li>
           </nav>
 
-          <p className="headline headline--light"> My Answers </p>
+          <p className="f-headline f-headline--light"> My Answers </p>
           {
             review.questions.map((question, idx) =>
                 <Question {...{

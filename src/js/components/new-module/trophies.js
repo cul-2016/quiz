@@ -38,7 +38,7 @@ class Trophies extends React.Component {
             return (
                 <div className="new-module-medals columns" key={ i }>
                     <div className="column box is-info has-text-centered">
-                        <label className="label module-section-headers">{ normaliseText(name) }</label>
+                        <label className="f-label module-section-headers">{ normaliseText(name) }</label>
                         <i onClick={ () => { this.toggleRollover(name);} } className="fa fa-question-circle help-icon" />
                         <div className={ this.returnClassnames(name) } >
                         <p>

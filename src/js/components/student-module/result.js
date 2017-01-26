@@ -4,6 +4,7 @@ import normaliseText from '../../lib/normaliseText';
 import showNavbar from '../../lib/showNavbar';
 import ResultMedal from './result-medal';
 import { elastic } from '../../lib/animate';
+import { Link } from 'react-router';
 
 
 export default class Result extends Component {
@@ -39,10 +40,23 @@ export default class Result extends Component {
         });
 
         return (
-            <div className="result hero is-info is-bold is-fullheight">
-                <div className="hero-body">
-                    <div className="container has-text-centered">
-                        <h2 className="subtitle">Your score is...</h2>
+            <div className="result">
+
+              <ul className="navbar navbar--invisible">
+                   <li className="navbar__item">
+                       <Link to={ `${module_id}/student` } className="f-body navbar__link navbar__link--left navbar__link--quit">
+                         Back
+                       </Link>
+                   </li>
+               </ul>
+                <p className="logo logo--large"></p>
+
+                <div>
+                  <span className="medal-result medal-result--silver"> </span>
+                  <span>You Score:</span>
+                  <span className="f-display f-display--secondary">{ percentageScore }</span>
+                </div>
+                        <h2 className="f-subtitle">Your score is...</h2>
                         <div className="columns is-mobile">
                             { trophiesToPresent }
                         </div>
@@ -54,8 +68,6 @@ export default class Result extends Component {
                         <button onClick={ (e) => { this.returnToDashboard(e, `/${module_id}/student`); } } className="button is-large is-success is-fullwidth">
                             Finish
                         </button>
-                    </div>
-                </div>
             </div>
         );
     }
