@@ -9,13 +9,15 @@ test('setQuizDetails creates the correct action', (t) => {
     t.plan(1);
     const quiz_id = 1;
     const name = "week 1 quiz";
+    const review = true;
     const expected = {
         type: actions.SET_QUIZ_DETAILS,
         quiz_id,
-        name
+        name,
+        review
     };
 
-    const actual = deepFreeze(actions.setQuizDetails(quiz_id, name));
+    const actual = deepFreeze(actions.setQuizDetails(quiz_id, name, review));
     t.deepEqual(actual, expected);
 });
 

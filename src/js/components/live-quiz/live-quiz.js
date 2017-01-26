@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import CurrentQuestion from './current-question';
-import LiveQuizButtons from './live-quiz-buttons';
+import LiveQuizButtons from './live-quiz-buttons.js';
 import classnames from 'classnames';
 
 
@@ -10,7 +10,7 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                     isResponseSubmitted, isSavingResponse, startQuiz,
                     numQuestions, endQuiz, quiz_id,
                     handleSelection, response, name, //eslint-disable-line no-unused-vars
-                    numParticipants, handleAbortQuiz, params }) => {
+                    numParticipants, handleAbortQuiz, params, review }) => {
 
     let titleClass = classnames({
         "display-none": !nextQuestionIndex
@@ -50,15 +50,67 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                 }
                 {
                     !isQuizStarted && is_lecturer &&
-                    <h2 className="has-text-centered">
-                        Number of Participants: { numParticipants }
-                    </h2>
+                    <div className="content content--pattern-background content--join-quiz">
+
+                        <ul className="navbar navbar--invisible">
+                            <li className="navbar__item">
+                                <Link to={ `${module.module_id}/student` } className="f-body navbar__link navbar__link--left navbar__link--quit">
+                                  Quit
+                                </Link>
+                            </li>
+                        </ul>
+                        <div className="content__body">
+
+                            <div className="quiz__titles">
+                                <span className="quiz__status-indicator quiz__status-indicator--live f-subheader f-subheader--tertiary">Live Now</span>
+                                <img className="quiz__titles-icon" src="Yellow.svg" alt="Letter Q Icon"/>
+                                <h1 className="quiz__name f-display f-display--tertiary">{name}</h1>
+                            </div>
+
+                            <p className="quiz__cta f-title">Join this Quiz at <span className="f-title f-title--secondary">app.quodl.co.uk</span> with Module code:</p>
+                            <div className="quiz__module">
+                                <span className="f-headline quiz__module-code">
+                                    {params.module_id}
+                                </span>
+                            </div>
+                            <LiveQuizButtons
+                                is_lecturer={ is_lecturer }
+                                numQuestions={ numQuestions }
+                                nextQuestion={ nextQuestion }
+                                nextQuestionIndex={ nextQuestionIndex }
+                                isQuizStarted={ isQuizStarted }
+                                isSavingResponse={ isSavingResponse }
+                                isResponseSubmitted={ isResponseSubmitted }
+                                startQuiz={ startQuiz }
+                                endQuiz={ endQuiz }
+                                quiz_id={ quiz_id }
+                                response={ response } />
+                            <span className="quiz__copy quiz__copy--center f-subheader">
+                                { numParticipants } Students Connected
+                            </span>
+
+                        </div>
+                    </div>
                 }
                 {
                     isQuizStarted && is_lecturer &&
-                    <button onClick={ () => handleAbortQuiz(quiz_id) } className="button is-danger">
-                        Abort Quiz
-                    </button>
+                    <div>
+                        <LiveQuizButtons
+                            is_lecturer={ is_lecturer }
+                            numQuestions={ numQuestions }
+                            nextQuestion={ nextQuestion }
+                            nextQuestionIndex={ nextQuestionIndex }
+                            isQuizStarted={ isQuizStarted }
+                            isSavingResponse={ isSavingResponse }
+                            isResponseSubmitted={ isResponseSubmitted }
+                            startQuiz={ startQuiz }
+                            endQuiz={ endQuiz }
+                            quiz_id={ quiz_id }
+                            response={ response } />
+                        <button onClick={ () => handleAbortQuiz(quiz_id) } className="button is-danger">
+                            Abort Quiz
+                        </button>
+                    </div>
                 }
                 {
                     isQuizStarted && question && !is_lecturer &&
@@ -82,30 +134,46 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                           <div className="live-quiz-footer">
                             <div className="logo__primary--dark"></div>
                           </div>
+                        <LiveQuizButtons
+                            is_lecturer={ is_lecturer }
+                            numQuestions={ numQuestions }
+                            nextQuestion={ nextQuestion }
+                            nextQuestionIndex={ nextQuestionIndex }
+                            isQuizStarted={ isQuizStarted }
+                            isSavingResponse={ isSavingResponse }
+                            isResponseSubmitted={ isResponseSubmitted }
+                            startQuiz={ startQuiz }
+                            endQuiz={ endQuiz }
+                            quiz_id={ quiz_id }
+                            response={ response } />
                     </div>
                 }
                 {
                     isQuizStarted && question && is_lecturer &&
                     <div>
+                        <div className="question">
+                            <p className="f-subheader"> Q{ nextQuestionIndex }.</p>
+                            <p className="f-body">{ question.question }</p>
+                        </div>
                         <CurrentQuestion
                             data={ question }
                             handleSelection={ handleSelection }
                             response={ response }/>
+                        <LiveQuizButtons
+                            is_lecturer={ is_lecturer }
+                            numQuestions={ numQuestions }
+                            nextQuestion={ nextQuestion }
+                            nextQuestionIndex={ nextQuestionIndex }
+                            isQuizStarted={ isQuizStarted }
+                            isSavingResponse={ isSavingResponse }
+                            isResponseSubmitted={ isResponseSubmitted }
+                            startQuiz={ startQuiz }
+                            endQuiz={ endQuiz }
+                            quiz_id={ quiz_id }
+                            response={ response } />
                     </div>
                 }
             </div>
-            <LiveQuizButtons
-                is_lecturer={ is_lecturer }
-                numQuestions={ numQuestions }
-                nextQuestion={ nextQuestion }
-                nextQuestionIndex={ nextQuestionIndex }
-                isQuizStarted={ isQuizStarted }
-                isSavingResponse={ isSavingResponse }
-                isResponseSubmitted={ isResponseSubmitted }
-                startQuiz={ startQuiz }
-                endQuiz={ endQuiz }
-                quiz_id={ quiz_id }
-                response={ response } />
         </section>
     );
 };
@@ -128,7 +196,8 @@ LiveQuiz.propTypes = {
     name: PropTypes.string,
     numParticipants: PropTypes.number,
     handleAbortQuiz: PropTypes.func,
-    params: PropTypes.object
+    params: PropTypes.object,
+    review: PropTypes.bool 
 };
 
 export default LiveQuiz;

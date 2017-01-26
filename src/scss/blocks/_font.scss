@@ -4,12 +4,16 @@
     letter-spacing: -0.1rem;
     color: $black;
     &--primary-dark {
-        color: #059A9A;
-        text-shadow: 0px 2px 0px 0px #98F0F0;
+        color: $dark-blue;
+        text-shadow: 0px 2px 0px 0px $light-blue;
     }
     &--primary-light {
-        color: #98F0F0;
-        text-shadow: 0px 2px 0px 0px #059A9A;
+        color: $light-blue;
+        text-shadow: 0px 2px 0px 0px $dark-blue;
+    }
+    &--tertiary {
+        color: $light-pink; 
+        text-shadow: 0px 2px 0px 0px $red;
     }
     &--secondary {
         color: $red;
@@ -38,6 +42,25 @@
     }
 }
 
+.f-title {
+    font-size: 1.75rem;
+    font-weight: 300;
+    line-height: 2rem;
+    color: $black;
+
+    &--primary {
+        color: $gold;
+    }
+
+    &--secondary {
+        color: $blue;
+    }
+
+    &--light {
+        color: $grey;
+    }
+}
+
 .f-subheader {
     font-size: 1.25rem;
     font-weight: bold;
@@ -50,28 +73,6 @@
     &--light {
         color: $white;
     }
-}
-.f-title {
-    font-size: 1.75rem;
-    font-weight: 300;
-    line-height: 2rem;
-    color: $black;
-
-    &--primary {
-        color: $gold;
-    }
-
-    &--light {
-        color: $grey;
-    }
-}
-
-.f-subheader {
-    font-family: 'Ubuntu';
-    font-size: 1.25rem;
-    font-weight: bold;
-    line-height: 1.5rem;
-    color: $black;
 }
 
 .f-body {
@@ -107,17 +108,6 @@
 
 }
 
-.f-small-body {
-    font-size: 0.75rem;
-    font-weight: bold;
-    line-height: 1.25rem;
-    color: $black;
-
-    &--dark {
-        color: $dark-blue;
-    }
-}
-
 .f-label {
     font-size: 0.875rem;
     line-height: 1.2rem;
@@ -127,6 +117,17 @@
 
     &--dark {
         color: $black;
+    }
+}
+
+.f-small-body {
+    font-size: 0.75rem;
+    font-weight: bold;
+    line-height: 1.25rem;
+    color: $black;
+
+    &--dark {
+        color: $dark-blue;
     }
 }
 

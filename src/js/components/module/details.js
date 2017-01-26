@@ -1,44 +1,32 @@
 import React, { PropTypes } from 'react';
-import Trophies from './trophies';
-import Medals from './medals';
+import Trophies from './trophies.js';
+import Medals from './medals.js';
 import { Link } from 'react-router';
 
 const Details = ({ name, module_id, num_enrolled, trophies, medals }) => {
 
     return (
         <div>
-            <div className="has-text-centered">
+            <h1 className="display">{ name }</h1>
+            <h4 className="body body__primary">{ module_id }</h4>
 
-                <h1>{ name }</h1>
-                <h4>{ module_id }</h4>
-
-                <h5>
-                    <i className="fa fa-users" />
-                    { `${+num_enrolled} students have registered` }
-                </h5>
-            </div>
-
-            <div className="button-panel has-text-centered">
-
-                <Link to={ `${module_id}/members` }>
-                    <button className="button is-warning">
-                        <span className="icon">
-
-                            <i className="fa fa-cog" />
-                        </span>
-                        <span>Manage students</span>
-                    </button>
-                </Link>
-
+            <div className="module__buttons">
                 <Link to={ `${module_id}/leaderboard` }>
-                    <button className="button is-info">
+                    <button className="button module__button">
                         View leaderboard
                     </button>
                 </Link>
+
+                <Link to={ `${module_id}/members` }>
+                    <button className="button button__icon--right module__button">
+                        { +num_enrolled } Students <span className="fa-chevron-right"></span>
+                    </button>
+                </Link>
             </div>
 
+            <div className="line"></div>
 
-            <div className="columns">
+            <div className="module__medals-and-trophies">
                 <Trophies trophies={ trophies } />
                 <Medals medals={ medals } />
             </div>

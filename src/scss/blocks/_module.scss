@@ -1,0 +1,51 @@
+.module {
+  &__medals-and-trophies {
+    margin: 2rem 4rem;
+  }
+
+  &__trophies, &__medals {
+    display: inline-block;
+    width: 50%;
+    text-align: center;
+  }
+
+  &__table {
+    width: 100%;
+  }
+
+  &__headline {
+    margin: 0.5rem 2rem;
+  }
+
+  &__buttons {
+    text-align: center;
+    margin: 1.5rem 0;
+  }
+
+  &__button__link {
+    margin: 0 2rem;
+  }
+
+  .button__secondary {
+    margin: 0.5rem;
+  }
+
+  .table {
+    margin: 1rem 2rem;
+    text-align: center;
+
+    th td {
+      padding: 1rem;
+    }
+  }
+
+  .display, .body__primary {
+    margin: 1rem 2rem;
+  }
+
+  .quizzes {
+    padding: 1.5rem;
+    margin: 1rem 2rem;
+  }
+}
+
