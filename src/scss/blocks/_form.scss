@@ -1,10 +1,10 @@
 .form {
 
-  &__label {
+    &__label {
       display: block;
       text-align: left;
       padding: 1rem 0;
-  }
+    }
 
     &__input {
         border: 1px solid $black;
@@ -14,18 +14,17 @@
         background-color: $white;
         color: $black;
         font-family: ubuntu;
-    }
-    &__input--add-module {
-        font-size: 1.3rem;
-        font-weight: bold;
-        letter-spacing: 0.3rem;
-        padding: 0.25rem 0.5rem;
-        background-color: $white;
-        border: 1px solid $black;
-        text-align: center;
 
-        &::-webkit-input-placeholder {
-            color: $grey;
+        &--add-module {
+            font-size: 1.3rem;
+            font-weight: bold;
+            letter-spacing: 0.3rem;
+            padding: 0.25rem 0.5rem;
+            text-align: center;
+
+            &::-webkit-input-placeholder {
+                color: $grey;
+            }
         }
     }
 }
