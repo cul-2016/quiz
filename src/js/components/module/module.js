@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
-import Details from './details';
-import Quizzes from './quizzes';
+import Details from './details.js';
+import Quizzes from './quizzes.js';
 const  Surveys = Quizzes;
 import Spinner from '../general/spinner';
 
