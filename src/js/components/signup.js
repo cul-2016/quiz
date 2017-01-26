@@ -52,7 +52,7 @@ const Signup = ({ register, handleChange, handleRegisteringUser, location }) => 
                             </span>
                         }
 
-                        <label className="label has-text-left">Email address</label>
+                        <label className="f-label has-text-left">Email address</label>
                         <input
                             onKeyDown={ submitOnEnter }
                             className="input"
@@ -62,7 +62,7 @@ const Signup = ({ register, handleChange, handleRegisteringUser, location }) => 
                         <span className={ invalidEmailClasses }>This email is invalid</span>
 
 
-                        <label className="label has-text-left">Choose a nickname</label>
+                        <label className="f-label has-text-left">Choose a nickname</label>
                         <input
                             onKeyDown={ submitOnEnter }
                             className="input"
@@ -70,7 +70,7 @@ const Signup = ({ register, handleChange, handleRegisteringUser, location }) => 
                             onChange={ (e) => handleChange("username", e.target.value)}
                             type="username"/>
 
-                        <label className="label has-text-left">Choose a password</label>
+                        <label className="f-label has-text-left">Choose a password</label>
                         <input
                             onKeyDown={ submitOnEnter }
                             className={ passwordMatchClasses }
@@ -78,7 +78,7 @@ const Signup = ({ register, handleChange, handleRegisteringUser, location }) => 
                             onChange={ (e) => handleChange("password", e.target.value)}
                             type="password" />
 
-                        <label className="label has-text-left">Confirm password</label>
+                        <label className="f-label has-text-left">Confirm password</label>
                         <input
                             onKeyDown={ submitOnEnter }
                             className={ passwordMatchClasses }

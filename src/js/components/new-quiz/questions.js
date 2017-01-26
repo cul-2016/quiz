@@ -21,7 +21,7 @@ const InputChanger = ({ question, value, idx, handleInputChange }) => <input { .
 const Option = ({ question, value, idx, isSurvey, handleInputChange }) =>
     <div className="control is-horizontal">
         <div className="control-label answer-label">
-            <label className="label">{ value.toUpperCase() }</label>
+            <label className="f-label">{ value.toUpperCase() }</label>
         </div>
         <div className="control">
             <InputChanger {...{ question, value, idx, handleInputChange }}/>
@@ -43,7 +43,7 @@ const Questions = ({ questions, handleInputChange, handleDeleteQuestion, isSurve
         return (
             <div key={ `question-${i}` } className="column is-6 is-offset-3 question box">
 
-                <label className="label"> Question { i + 1 }</label>
+                <label className="f-label"> Question { i + 1 }</label>
                 <textarea className="textarea" type="text" value={ question.question } onChange={ (e) => handleInputChange('question', e.target.value, i) } placeholder='question'></textarea>
 
                 { ['a', 'b', 'c', 'd'].map((value, idx) =>

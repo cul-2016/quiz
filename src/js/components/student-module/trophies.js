@@ -17,7 +17,7 @@ const Trophies = ({ trophies, trophies_awarded }) => {
 
             return (
                 <div className="box has-text-centered" key={ i }>
-                    <div className="label">{ normaliseText(name) }</div>
+                    <div className="f-label">{ normaliseText(name) }</div>
                     <div className={ trophyClasses } />
                 </div>
             );
@@ -34,7 +34,7 @@ const Trophies = ({ trophies, trophies_awarded }) => {
 
             return (
                 <div className="box has-text-centered" key={ i }>
-                    <div className="label">{ normaliseText(name) }</div>
+                    <div className="f-label">{ normaliseText(name) }</div>
                     <div className={ trophyClasses } />
                 </div>
             );

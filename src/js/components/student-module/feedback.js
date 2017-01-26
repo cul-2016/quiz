@@ -19,21 +19,21 @@ const Feedback = ({ ranking, quizzes, participation, module }) => {
                 </li>
             </nav>
 
-            <div className="subheader subheader--light"> My Performance in:</div>
-            <div className="title">{ module.name }</div>
+            <div className="f-subheader f-subheader--light"> My Performance in:</div>
+            <div className="f-title">{ module.name }</div>
 
 
             <div className="card">
-                <p className="body body--light">How well are you doing?</p>
-                <p className="small-body small-body__secondary--dark">{ displayRankingText(text, ranking) }</p>
+                <p className="f-body f-body--light">How well are you doing?</p>
+                <p className="f-small-body f-small-body--dark">{ displayRankingText(text, ranking) }</p>
             </div>
             <div className="card">
-                <p className="body body--light">How do you compare to other people?</p>
-                <p className="small-body small-body__secondary--dark">{ displayStrengthsWeaknessesText(text, quizzes) }</p>
+                <p className="f-body f-body--light">How do you compare to other people?</p>
+                <p className="f-small-body f-small-body--dark">{ displayStrengthsWeaknessesText(text, quizzes) }</p>
             </div>
             <div className="card">
-                <p className="body body--light">Your participation rate</p>
-                <p className="small-body small-body__secondary--dark">{ displayParticipationText(text, participation) }</p>
+                <p className="f-body f-body--light">Your participation rate</p>
+                <p className="f-small-body f-small-body--dark">{ displayParticipationText(text, participation) }</p>
             </div>
         </div>
     );

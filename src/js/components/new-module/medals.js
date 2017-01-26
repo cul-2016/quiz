@@ -39,7 +39,7 @@ class Medals extends React.Component {
 
                 <div className="columns">
                     <div className="column box has-text-centered">
-                        <label className="label">Bronze</label>
+                        <label className="f-label">Bronze</label>
                         <span className="label-inline">0 to </span>
                         <input
                             className="input"
@@ -54,14 +54,14 @@ class Medals extends React.Component {
 
                 <div className="columns">
                     <div className="column box has-text-centered">
-                        <label className="label">Silver</label>
+                        <label className="f-label">Silver</label>
                         <span className="inline">{ `${this.props.medals[0]} to ${this.props.medals[1]} %` }</span>
                     </div>
                 </div>
 
                 <div className="columns">
                     <div className="column box has-text-centered">
-                        <label className="label">Gold</label>
+                        <label className="f-label">Gold</label>
                         <input
                             className="input"
                             name="gold"

@@ -12,11 +12,11 @@ class NotFound extends React.Component {
             <div className="outer red-hero">
                 <div className="middle">
                     <div className="container inner has-text-centered">
-                        <h1 className="title">
+                        <h1 className="f-title">
                             Oops! Nothing to see here
                         </h1>
                         <Link to="/dashboard">
-                            <button className="subtitle button is-success is-large">Dashboard</button>
+                            <button className="f-subtitle button is-success is-large">Dashboard</button>
                         </Link>
                     </div>
                 </div>

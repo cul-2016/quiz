@@ -11,11 +11,11 @@ const StudentHistory = ({ params = {}, history, medalConditions }) => {
 
         return (
             <tr key={ i }>
-                <td className="subtitle is-5">
+                <td className="f-subtitle is-5">
                     { quiz.name }
                 </td>
                 <td>
-                    <span className="subtitle is-4">
+                    <span className="f-subtitle is-4">
                         { `${quiz.score} ` }
                     </span>
                     <span>
@@ -25,7 +25,7 @@ const StudentHistory = ({ params = {}, history, medalConditions }) => {
                 <td>
                     <Medal percentageScore={ percentageScore } medalConditions={ medalConditions } />
                 </td>
-                <td className="subtitle is-5">
+                <td className="f-subtitle is-5">
                     <Link to={`/${module_id}/student/history/${quiz.quiz_id}`}>
                         Show
                     </Link>

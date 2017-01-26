@@ -10,9 +10,7 @@ const VerifiedComponent = ({ params }) => {
                 <p>Thank you for verifying</p> :
                 <p>Sorry, it looks like you have already verified before.</p>
             }
-            <button className="button is-warning">
-                <Link to="/">Log In</Link>
-            </button>
+            <Link className="button is-warning" to="/">Log In</Link>
         </div>
     );
 };
