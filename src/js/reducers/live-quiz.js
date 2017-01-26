@@ -63,7 +63,8 @@ export const liveQuiz = (state = initialState, action) => {
     case actionsTypes.SET_QUIZ_DETAILS:
         return update(state, {
             quiz_id: { $set: action.quiz_id },
-            name: { $set: action.name }
+            name: { $set: action.name },
+            review: { $set: action.review }
         });
 
     case actionsTypes.START_QUIZ:
@@ -95,7 +96,8 @@ export const liveQuiz = (state = initialState, action) => {
 
     case actionsTypes.ABORT_QUIZ_REQUEST:
         return update(state, {
-            isAbortingQuiz: { $set: true }
+            isAbortingQuiz: { $set: true },
+            review: { $set: false }
         });
 
     case actionsTypes.ABORT_QUIZ_SUCCESS:
