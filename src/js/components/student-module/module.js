@@ -54,7 +54,7 @@ const StudentModule = ({ location,
         setTimeout( () => {
             hashHistory.push(livePath);
             handleJoiningQuiz(params.module_id);
-        }, 1600);
+        }, 100);
 
     };
 

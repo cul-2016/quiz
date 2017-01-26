@@ -79,7 +79,9 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                             data={ question }
                             handleSelection={ handleSelection }
                             response={ response }/>
-
+                          <div className="live-quiz-footer">
+                            <div className="logo__primary--dark"></div>
+                          </div>
                     </div>
                 }
                 {

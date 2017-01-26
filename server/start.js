@@ -5,6 +5,7 @@ var io = socket(server.listener);
 io.on('connection', (socket) => {
 
     io.emit('we have connected', socket.id);
+
     console.log("CONNECTION!", socket.id); //eslint-disable-line no-console
 
     socket.on('disconnect', () => {
@@ -15,6 +16,8 @@ io.on('connection', (socket) => {
     /****/
 
     socket.on('join_room', (room, cb) => {
+
+        console.log('>>>>>>>joining room', room);
 
         socket.join(room);
 

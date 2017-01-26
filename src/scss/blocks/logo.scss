@@ -15,4 +15,19 @@
         -webkit-animation: fadeInOut 2s infinite; /* Safari 4.0 - 8.0 */
         animation: fadeInOut 2s infinite;
     }
+
+    &__footer {
+        background-size: 3rem;
+        margin: 1rem auto;
+        height: 3rem;
+        width: 3rem;
+    }
+}
+
+.logo__primary--dark {
+    background: url(../../public/assets/logo/dark-yellow.svg);
+    height: 4rem;
+    width: 4rem;
+    background-size: 4rem;
+    margin: auto;
 }
