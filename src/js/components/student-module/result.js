@@ -42,7 +42,7 @@ export default class Result extends Component {
             <div className="result hero is-info is-bold is-fullheight">
                 <div className="hero-body">
                     <div className="container has-text-centered">
-                        <h2 className="subtitle">Your score is...</h2>
+                        <h2 className="f-subtitle">Your score is...</h2>
                         <div className="columns is-mobile">
                             { trophiesToPresent }
                         </div>

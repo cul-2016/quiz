@@ -40,14 +40,14 @@ const ResetPasswordForm = ({
                     <div className="box">
                         <h2>Reset Password</h2>
                         <span className={ errorMessageClass }>{ error }</span>
-                        <label className="label has-text-left">Password</label>
+                        <label className="f-label has-text-left">Password</label>
                         <input
                             onKeyDown={ submitOnEnter }
                             className={passwordMatchClasses}
                             value={ password }
                             onChange={ (e) => handlePasswordChange(e.target.value) }
                             type="password" />
-                        <label className="label has-text-left">Confirm Password</label>
+                        <label className="f-label has-text-left">Confirm Password</label>
                         <input
                             onKeyDown={ submitOnEnter }
                             className={passwordMatchClasses}

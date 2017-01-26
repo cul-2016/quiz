@@ -26,6 +26,7 @@
     &__primary {
         background-color: $gold;
         color: $black;
+        box-shadow: inset 0 -3px 0 0 $dark-gold;
 
         &--large {
             font-size: 1.5rem;

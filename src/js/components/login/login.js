@@ -10,14 +10,20 @@ const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthentic
         }
     };
 
+    const handleOnSubmit = () => {
+        if (isEmail(login.email) && login.password.length !== 0) {
+            handleAuthenticateUser(login.email, login.password);
+        }
+    };
+
     return (
-        <div className="login"> 
-            <h1 className="headline"><img src="/Yellow.svg"></img></h1>
-            <h3 className="subheader"> Realtime Quizzes for better lectures </h3>
+        <div className="login">
+            <h1 className="f-headline"><img src="/Yellow.svg"></img></h1>
+            <h3 className="f-subheader"> Realtime Quizzes for better lectures </h3>
 
             <form className="form">
-                <div className="form__field body">
-                    <label className="form__label">Email/Username</label>
+                <div className="form__field f-body">
+                    <label className="form__label">Email / Username</label>
                     <input
                         onKeyDown={ submitOnEnter }
                         onChange={ (e) => handleEmailChange(e.target.value) }
@@ -25,7 +31,7 @@ const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthentic
                         type="text"
                     ></input>
                 </div>
-                <div className="form__field body">
+                <div className="form__field f-body">
                     <label className="form__label">Password</label>
                     <input
                         onKeyDown={ submitOnEnter }
@@ -34,19 +40,18 @@ const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthentic
                         type="password"
                     ></input>
                 </div>
-                <div className={ login.userIsAuthenticated ? 'display-none' : 'body__warning' }>
+                <div className={ login.userIsAuthenticated ? 'display-none' : 'f-body--warning' }>
                     { login.message }
                 </div>
-                <span className={ login.email && !isEmail(login.email) ? 'body__warning' : 'display-none' }>
-                    This email is invalid
-                </span>
-                <button className="button button__primary button--large">Login</button>
+                <button onClick={ handleOnSubmit } className="button button__primary">
+                    <p className="f-subheader">Log in</p>
+                </button>
             </form>
 
-            <div className="label__secondary"> Don't have an Account? </div>
-            <div className="body"> <Link to="/register-student"> Sign Up Here </Link> </div>
+            <p className="f-body f-body--dark"> Don't have an Account? </p>
+            <div> <Link className="f-subheader" to="/register-student"> Sign Up </Link> </div>
 
-            <div> <Link to="/request-reset-password"> Forgotten Password </Link> </div>
+            <div> <Link className="f-subheader" to="/request-reset-password"> Forgotten Password </Link> </div>
         </div>
     );
 };

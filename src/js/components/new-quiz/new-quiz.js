@@ -44,7 +44,7 @@ const NewQuiz = ({
                 </div>
                 <div className="columns">
                     <div className="column is-5 is-offset-3 has-text-centered">
-                        <label className="label">New Quiz name</label>
+                        <label className="f-label">New Quiz name</label>
                         <input
                             className="input"
                             type="text"
@@ -57,7 +57,7 @@ const NewQuiz = ({
                             </span>
                     </div>
                     <div className="column is-1 has-text-centered">
-                        <label className="label">Survey?</label>
+                        <label className="f-label">Survey?</label>
                         <input
                             className="column is-half"
                             type="checkbox"
@@ -67,7 +67,7 @@ const NewQuiz = ({
                         />
                     </div>
                     { !isSurvey && <div className="column is-1 has-text-centered">
-                        <label className="label">Last Quiz?</label>
+                        <label className="f-label">Last Quiz?</label>
                         <input
                             className="column is-half"
                             type="checkbox"

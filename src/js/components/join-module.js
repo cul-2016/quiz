@@ -21,7 +21,7 @@ const JoinModule = ({ module_id, moduleIDExists, handleInputChange, handleJoinMo
                             <h2 className="login-title">
                               Join a Module
                             </h2>
-                            <label className="label">Module Name</label>
+                            <label className="f-label">Module Name</label>
                             <h6>Enter the module code your lecturer gave you.</h6>
                             <input
                                 className={ inputClass }

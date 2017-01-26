@@ -18,8 +18,8 @@ const CurrentQuestion = ({ data, response, handleSelection }) => {
         });
         return (
             <div key={ i } className={ classes } onClick={ () => handleSelection && handleSelection(letter) }>
-                <span className="title title__light">{ `${letter}` }</span>
-                <span className="body">{ `${data[letter]}` }</span>
+                <span className="f-title f-title--light">{ `${letter}` }</span>
+                <span className="f-body">{ `${data[letter]}` }</span>
             </div>
         );
 

@@ -52,7 +52,7 @@ class Details extends React.Component {
                 </h3>
 
 
-                <label className="label module-section-headers">Module name</label>
+                <label className="f-label module-section-headers">Module name</label>
                 <i onClick={ () => { this.toggleRollover("name");} } className="fa fa-question-circle help-icon" />
                 <div className={ toggleClassnamesName }>
                 <p>{ text.name }</p>
@@ -63,7 +63,7 @@ class Details extends React.Component {
                     type="text"
                     onChange={ (e) => handleInputChange('name', e.target.value) } />
 
-                <label className="label module-section-headers">Code (4 characters long)</label>
+                <label className="f-label module-section-headers">Code (4 characters long)</label>
                 <i onClick={ () => { this.toggleRollover("code");} } className="fa fa-question-circle help-icon" />
                 <div className={ toggleClassnamesCode }>
                 <p> { text.code }</p>

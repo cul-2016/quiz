@@ -161,15 +161,15 @@ class QuizMembers extends Component {
                                 <thead>
                                     <tr>
                                         <th>
-                                            <label className="label">Email</label>
+                                            <label className="f-label">Email</label>
                                         </th>
                                         <th>
-                                            <label className="label">Nickname</label>
+                                            <label className="f-label">Nickname</label>
                                         </th>
                                         {
                                             !isSurvey &&
                                             <th colSpan="2">
-                                                <label className="label">Score</label>
+                                                <label className="f-label">Score</label>
                                             </th>
                                         }
                                     </tr>

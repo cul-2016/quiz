@@ -35,15 +35,15 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                             </li>
                         </nav>
 
-                        <p className="subheader subheader__tertiary">Joining...</p>
+                        <p className="f-subheader f-subheader--tertiary">Joining...</p>
                         <p className="logo logo--large"></p>
                         <div className="holding-message">
-                            <p className="title"> Waiting for all participants</p>
-                            <p className="body"> The quiz will start momentarily</p>
+                            <p className="f-title"> Waiting for all participants</p>
+                            <p className="f-body"> The quiz will start momentarily</p>
                         </div>
                         <div className="hint">
-                            <p className="label label__dark"> Hint </p>
-                            <p className="body body__secondary"> During the quiz, you can change your answer as many times as you like, as long as it''s before the next question appears.</p>
+                            <p className="f-label f-label--dark"> Hint </p>
+                            <p className="f-body f-body--secondary"> During the quiz, you can change your answer as many times as you like, as long as it''s before the next question appears.</p>
                         </div>
 
                     </div>
@@ -72,8 +72,8 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                         </nav>
 
                         <div className="question">
-                            <p className="subheader"> Q{ nextQuestionIndex }.</p>
-                            <p className="body">{ question.question }</p>
+                            <p className="f-subheader"> Q{ nextQuestionIndex }.</p>
+                            <p className="f-body">{ question.question }</p>
                         </div>
                         <CurrentQuestion
                             data={ question }

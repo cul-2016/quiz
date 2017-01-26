@@ -40,7 +40,7 @@ const EditQuiz = ({ questions, isUpdatingQuiz, name, is_last_quiz, deletedQuesti
                                 </label>
                             }
                             { !isSurvey &&
-                                <label className="label">
+                                <label className="f-label">
                                     Quiz Name
                                 </label>
                             }
@@ -56,7 +56,7 @@ const EditQuiz = ({ questions, isUpdatingQuiz, name, is_last_quiz, deletedQuesti
                         {
                             !isSurvey &&
                             <div>
-                                <label className="label">
+                                <label className="f-label">
                                     Last Quiz?
                                 </label>
                                 <input

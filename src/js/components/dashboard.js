@@ -26,10 +26,10 @@ class Dashboard extends Component {
             return (
                 <div key={ i } className="card">
                     <Link to={ `${module.module_id}/${role}` } >
-                        <div className="body">
+                        <div className="f-body">
                             { module.name }
                         </div>
-                        <div className="body body__primary">
+                        <div className="f-body f-body--primary">
                             { module.module_id }
                         </div>
                     </Link>
@@ -39,7 +39,7 @@ class Dashboard extends Component {
         return (
             <div className="container dashboard">
 
-                    <h2 className="display"> Modules </h2>
+                    <h2 className="f-display"> Modules </h2>
                     {
                         is_lecturer &&
                             <Link to="add-new-module">
@@ -57,7 +57,7 @@ class Dashboard extends Component {
                         !is_lecturer &&
                             <div className="card card__secondary">
                                 <input
-                                  className="form__input"
+                                  className="form__input--add-module"
                                   value={ module_id || '' }
                                   onChange={ (e) => handleInputChange(e.target.value)}
                                   type="text"
