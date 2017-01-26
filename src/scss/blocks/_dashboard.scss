@@ -1,12 +1,13 @@
 .dashboard {
     text-align: center;
-    margin-top: 1rem;
-
+    background-color: $white;
+    min-height: 100vh;
+    
     .display {
         padding: 2rem 0 1rem 0;
     }
 
-    .form__input {
+    .form__input--add-module {
         width: 30%;
         float: left;
         margin-left: 1.4rem;

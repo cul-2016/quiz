@@ -31,14 +31,16 @@ const StudentModule = ({ location,
         });
 
         return (
-            <div key={i} className="quiz__item">
-                <div className="quiz__item__score">
-                    <span className="small-label small-label__dark quiz__item__score--postion">{ i++ }</span>
-                    <div className={ medalClass }> </div>
-                    <div className="quiz__item__score--percent">{ percentageScore }%</div>
-                </div>
-                <div className="quiz__item__name"> { quiz.name } </div>
-            </div>
+              <div key={i} className="quiz__item">
+                <Link to={`/${module.module_id}/student/history/${quiz.quiz_id}`}>
+                    <div className="quiz__item__score">
+                        <span className="small-label small-label__dark quiz__item__score--postion">{ i + 1 }</span>
+                        <div className={ medalClass }> </div>
+                        <div className="quiz__item__score--percent">{ percentageScore }%</div>
+                    </div>
+                    <div className="quiz__item__name"> { quiz.name } </div>
+                </Link>
+              </div>
         );
     });
 

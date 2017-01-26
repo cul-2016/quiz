@@ -8,4 +8,8 @@
     .headline, .title, .button, .trophy {
         margin: 0.5rem 1rem;
     }
+
+    .quiz__item__score--percent, .quiz__item__name {
+      color: $black;
+    }
 }

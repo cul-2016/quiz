@@ -1,0 +1,30 @@
+.review-quiz-student {
+  background-color: $blue;
+  min-height: 100vh;
+  text-align: center;
+
+    .card {
+      padding: 0;
+      width: inherit;
+    }
+    .question {
+        padding: 1rem;
+        border-bottom: 1px solid $black;
+    }
+    .answer {
+        padding: 0.75rem;
+    }
+
+    .same_answer {
+        background: linear-gradient(90deg, #98F0F0 0%, #FFE7AB 100%);
+    }
+    .user_answer {
+        background-color: #98F0F0;
+    }
+    .chosen-answer {
+        float:right;
+    }
+    .label {
+      padding-right: 0.5rem;
+    }
+}

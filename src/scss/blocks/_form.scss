@@ -14,7 +14,10 @@
         background-color: $white;
         color: $black;
         font-family: ubuntu;
+        padding: 0 0.5rem;
+        box-sizing: border-box;
     }
+
     &__input--add-module {
         font-size: 1.3rem;
         font-weight: bold;
@@ -23,6 +26,7 @@
         background-color: $white;
         border: 1px solid $black;
         text-align: center;
+
 
         &::-webkit-input-placeholder {
             color: $grey;
