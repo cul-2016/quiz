@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="70px" height="70px" viewBox="0 0 70 70" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
+    <title>Logo / Yellow</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M188.356586,208.701985 C187.234489,208.919091 186.075523,209.032799 184.889999,209.032799 C174.870008,209.032799 166.7472,200.909991 166.7472,190.889999 C166.7472,180.870008 174.870008,172.7472 184.889999,172.7472 C194.909991,172.7472 203.032799,180.870008 203.032799,190.889999 C203.032799,193.536256 202.466253,196.050189 201.447837,198.31712 L193.057423,187.182664 L179.716292,197.235928 L188.356586,208.701985 Z M184.889999,225.779999 C204.159214,225.779999 219.779999,210.159214 219.779999,190.889999 C219.779999,171.620785 204.159214,156 184.889999,156 C165.620785,156 150,171.620785 150,190.889999 C150,210.159214 165.620785,225.779999 184.889999,225.779999 Z" id="path-1"></path>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="69.7799988" height="69.7799988" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <g id="Typography" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Icons" transform="translate(-150.000000, -156.000000)" stroke="#3E3E3E" stroke-width="4" fill="#FFD772">
+            <use id="Logo-/-Yellow" mask="url(#mask-2)" xlink:href="#path-1"></use>
+        </g>
+    </g>
+</svg>
