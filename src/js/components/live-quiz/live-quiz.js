@@ -151,6 +151,10 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                 {
                     isQuizStarted && question && is_lecturer &&
                     <div>
+                        <div className="question">
+                            <p className="f-subheader"> Q{ nextQuestionIndex }.</p>
+                            <p className="f-body">{ question.question }</p>
+                        </div>
                         <CurrentQuestion
                             data={ question }
                             handleSelection={ handleSelection }

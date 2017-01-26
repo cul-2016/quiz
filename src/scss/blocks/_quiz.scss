@@ -85,9 +85,9 @@
             transform: translateY(50%);
             width: 1rem;
             height: 1rem;
-            background: radial-gradient(circle, #F9CBD7 0%, #EB415C 100%);
-            box-shadow: 0 0 6px 1px #F6788C;
-            border: 2px solid #C10F2B;
+            background: radial-gradient(circle, $off-white 0%, $light-pink 30%, $pink 100%);
+            box-shadow: 0 0 6px 1px $light-pink;
+            border: 2px solid $red;
             box-sizing: border-box;
             border-radius: 50%;
         }
