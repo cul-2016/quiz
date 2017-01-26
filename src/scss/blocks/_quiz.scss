@@ -1,68 +1,131 @@
-.quiz {
-    &__item {
-        width: 80%;
+.quiz {}
+.quiz__item {
+    width: 80%;
+    height: 5rem;
+    position: relative;
+    margin: 1rem auto;
+
+    &__score {
+        border-radius: 5px;
+        border: 2px solid $pale-grey;
+        width: 5rem;
         height: 5rem;
+        text-align: center;
+        position: absolute;
+        top:0;
+        left:0;
+    }
+
+
+    &__name {
+        position: absolute;
+        left:6rem;
+        top:0.2rem;
+    }
+}
+
+.quiz__item__score {
+    &--postion {
+        position: absolute;
+        top: 0.3rem;
+        left: 0.3rem;
+    }
+
+    &--medal--gold {
+        height: 3rem;
+        width: 3rem;
         position: relative;
-        margin: 1rem auto;
-
-        &__score {
-            border-radius: 5px;
-            border: 2px solid $pale-grey;
-            width: 5rem;
-            height: 5rem;
-            text-align: center;
-            position: absolute;
-            top:0;
-            left:0;
-        }
-
-
-        &__name {
-            position: absolute;
-            left:6rem;
-            top:0.2rem;
-        }
+        top: 1rem;
+        margin: auto;
+        background: url(../../public/assets/medals/small-gold.svg);
+        background-size: 3rem;
+    }
+    &--medal--silver {
+        height: 3rem;
+        width: 3rem;
+        position: relative;
+        top: 1rem;
+        margin: auto;
+        background: url(../../public/assets/medals/small-silver.svg);
+        background-size: 3rem;
+    }
+    &--medal--bronze {
+        height: 3rem;
+        width: 3rem;
+        position: relative;
+        top: 1rem;
+        margin: auto;
+        background: url(../../public/assets/medals/small-bronze.svg);
+        background-size: 3rem;
     }
 
-    &__item__score {
-        &--postion {
+    &--percent {
+        position: relative;
+        bottom: -1rem;
+    }
+}
+
+/* Live Quiz (lecturer/live) */
+
+.quiz__titles {
+    margin-bottom: 4.5rem;
+}
+
+.quiz__status-indicator { /* quiz view - is quiz live right now or not? */
+    display: block;
+    position: relative;
+
+    &--live {
+        margin: 0 0 1rem 1.5rem;
+        &:before {
+            content: "";
             position: absolute;
-            top: 0.3rem;
-            left: 0.3rem;
-        }
-
-        &--medal--gold {
-            height: 3rem;
-            width: 3rem;
-            position: relative;
-            top: 1rem;
-            margin: auto;
-            background: url(../../public/assets/medals/small-gold.svg);
-            background-size: 3rem;
-        }
-        &--medal--silver {
-            height: 3rem;
-            width: 3rem;
-            position: relative;
-            top: 1rem;
-            margin: auto;
-            background: url(../../public/assets/medals/small-silver.svg);
-            background-size: 3rem;
-        }
-        &--medal--bronze {
-            height: 3rem;
-            width: 3rem;
-            position: relative;
-            top: 1rem;
-            margin: auto;
-            background: url(../../public/assets/medals/small-bronze.svg);
-            background-size: 3rem;
-        }
-
-        &--percent {
-            position: relative;
-            bottom: -1rem;
+            left: -1.5rem;
+            bottom: 50%;
+            transform: translateY(50%);
+            width: 1rem;
+            height: 1rem;
+            background: radial-gradient(circle, #F9CBD7 0%, #EB415C 100%);
+            box-shadow: 0 0 6px 1px #F6788C;
+            border: 2px solid #C10F2B;
+            box-sizing: border-box;
+            border-radius: 50%;
         }
     }
+}
 
+.quiz__titles-icon {
+    display: block;
+    float: left;
+}
+
+.quiz__name {
+    display: inline;
+    margin-left: 1rem;
+    line-height: 4.375rem; /* 70px - same size as titles-icon */ 
+}
+
+.quiz__cta {
+    text-align: center;
+}
+
+.quiz__module { /* containing box for module code */
+    text-align: center;
+    margin: 1rem 0 5rem;
+}
+.quiz__module-code {
+    letter-spacing: 4px;
+    display: inline-block;
+    padding: 1rem 1.625rem;
+    background-color: $white;
+    border-radius: 3px;
+}
+
+.quiz__copy { /* for generic text or messages on a quiz view */
+    display: block; /* for when the elem is a span or a */
+    margin: 1rem auto;
+
+    &--center {
+        text-align: center;
+    }
 }
