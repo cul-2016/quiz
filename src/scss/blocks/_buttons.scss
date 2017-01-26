@@ -17,6 +17,12 @@
     background-color: #F5F5F5;
     border: 1px solid #3E3E3E;
 
+    &__is-disabled {
+        pointer-events: none;
+        cursor: not-allowed;
+        background-color: red;
+    }
+
     &--large {
         font-size: 1.5rem;
         line-height: 2;
