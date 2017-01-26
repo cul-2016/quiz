@@ -1,0 +1,12 @@
+.line {
+    width: 80%;
+    background-color: $black;
+    height: 0.15rem;
+    margin: 1rem auto;
+    padding: 0 1rem;
+
+    &__tertiary {
+        background-color: $red;
+        width: 100%;
+    }
+}

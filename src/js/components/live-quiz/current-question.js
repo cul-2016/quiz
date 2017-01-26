@@ -13,12 +13,13 @@ const CurrentQuestion = ({ data, response, handleSelection }) => {
 
     let answers = answersArray.map((letter, i) => {
 
-        let classes = classnames("box answer", {
-            "response": letter === response
+        let classes = classnames("card answer", {
+            "card__response": letter === response
         });
         return (
             <div key={ i } className={ classes } onClick={ () => handleSelection && handleSelection(letter) }>
-                <span>{ `${data[letter]}` }</span>
+                <span className="title title__light">{ `${letter}` }</span>
+                <span className="body">{ `${data[letter]}` }</span>
             </div>
         );
 
@@ -26,7 +27,6 @@ const CurrentQuestion = ({ data, response, handleSelection }) => {
 
     return (
         <div className="current-question">
-            <h1>{ data.question }</h1>
             { answers }
         </div>
     );

@@ -1,0 +1,120 @@
+.display {
+    font-size: 3rem;
+    font-weight: bold;
+    padding: 0.25rem 0.5rem;
+    letter-spacing: -0.1rem;
+    color: $black;
+    &__primary--dark {
+        color: #059A9A;
+        text-shadow: 0 0.13rem 0 0 #98F0F0;
+    }
+    &__primary--light {
+        color: #98F0F0;
+        text-shadow: 0 2px 0 0 #059A9A;
+    }
+}
+
+.headline {
+    font-size: 2.25rem;
+    font-weight: bold;
+    padding: 0.25rem 0.5rem;
+    text-transform: capitalize;
+    line-height: 2.6rem;
+    letter-spacing: -1px;
+    color: $black;
+
+    &__primary {
+        color: $gold;
+    }
+}
+
+.subheader {
+    font-size: 1.25rem;
+    font-weight: bold;
+    padding: 0.25rem 0.5rem;
+    line-height: 1.5rem;
+    color: $black;
+
+    &__tertiary {
+        color: $red;
+    }
+    &--light {
+        color: $white;
+    }
+}
+.title {
+    font-size: 1.75rem;
+    font-weight: 300;
+    padding: 0.25rem 0.5rem;
+    line-height: 2rem;
+    color: $black;
+
+    &__primary {
+        color: $gold;
+    }
+
+    &__light {
+        color: $grey;
+    }
+}
+
+
+.body {
+    font-size: 1rem;
+    padding: 0.25rem 0.5rem;
+    font-weight: bold;
+    line-height: 1.4rem;
+    color: $black;
+
+    &__primary {
+        color: $gold;
+    }
+
+    &--light {
+        font-weight: 500;
+    }
+
+    &__secondary {
+        color: $blue;
+        font-weight: bold;
+    }
+    &__tertiary {
+        color: $red;
+        font-weight: bold;
+    }
+}
+
+.small-body {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    font-weight: bold;
+    line-height: 1.25rem;
+    color: $black;
+
+    &__secondary--dark {
+        color: $dark-blue;
+    }
+}
+
+.label {
+    font-size: 0.875rem;
+    padding: 0.25rem 0.5rem;
+    line-height: 1.2rem;
+    letter-spacing: 1px;
+    color: $grey;
+
+    &__dark {
+        color: $black;
+    }
+}
+
+.small-label {
+    font-size: 0.625rem;
+    font-weight: bold;
+    line-height: 0.8125rem;
+    color: $grey;
+
+    &__dark {
+        color: $black;
+    }
+}

@@ -47,7 +47,8 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
     { url: '/save-student-response', method: 'post', payload: { user_id: 5, id: 1, isSurvey: false, question_id: 36, response: 'a' } },
     { url: '/get-quiz-questions?quiz_id=1' },
     { url: '/get-quiz-questions?survey_id=1' },
-    { url: '/end-quiz', method: 'post', payload: { quiz_id: 8 } },
+    { url: '/end-quiz', method: 'post', payload: { id: 8, isSurvey: false } },
+    { url: '/end-quiz', method: 'post', payload: { id: 1, isSurvey: true } },
     { url: '/get-review?id=1&isSurvey=false' },
     { url: '/get-review?id=1&isSurvey=true' },
     { url: '/get-quiz-members?id=1&isSurvey=true' },
@@ -133,7 +134,7 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
         })
         .catch((err) => {
             email.restore();
-            t.error(err); 
+            t.error(err);
         });
     });
 
@@ -168,7 +169,7 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
         })
         .catch((err) => {
             email.restore();
-            t.error(err); 
+            t.error(err);
         });
     });
 
@@ -201,7 +202,7 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
         })
         .catch((err) => {
             email.restore();
-            t.error(err); 
+            t.error(err);
         });
     });
 });
@@ -243,7 +244,7 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
         })
         .catch((err) => {
             email.restore();
-            t.error(err); 
+            t.error(err);
         });
     });
 
@@ -279,7 +280,7 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
         })
         .catch((err) => {
             email.restore();
-            t.error(err); 
+            t.error(err);
         });
     });
 
@@ -313,7 +314,7 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
         })
         .catch((err) => {
             email.restore();
-            t.error(err); 
+            t.error(err);
         });
     });
 
@@ -345,7 +346,7 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
         })
         .catch((err) => {
             email.restore();
-            t.error(err); 
+            t.error(err);
         });
     });
 });
@@ -382,7 +383,7 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
         })
         .catch((err) => {
             email.restore();
-            t.error(err); 
+            t.error(err);
         });
     });
 

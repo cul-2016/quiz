@@ -1,0 +1,68 @@
+.quiz {
+    &__item {
+        width: 80%;
+        height: 5rem;
+        position: relative;
+        margin: 1rem auto;
+
+        &__score {
+            border-radius: 5px;
+            border: 2px solid $pale-grey;
+            width: 5rem;
+            height: 5rem;
+            text-align: center;
+            position: absolute;
+            top:0;
+            left:0;
+        }
+
+
+        &__name {
+            position: absolute;
+            left:6rem;
+            top:0.2rem;
+        }
+    }
+
+    &__item__score {
+        &--postion {
+            position: absolute;
+            top: 0.3rem;
+            left: 0.3rem;
+        }
+
+        &--medal--gold {
+            height: 3rem;
+            width: 3rem;
+            position: relative;
+            top: 1rem;
+            margin: auto;
+            background: url(../../public/assets/medals/small-gold.svg);
+            background-size: 3rem;
+        }
+        &--medal--silver {
+            height: 3rem;
+            width: 3rem;
+            position: relative;
+            top: 1rem;
+            margin: auto;
+            background: url(../../public/assets/medals/small-silver.svg);
+            background-size: 3rem;
+        }
+        &--medal--bronze {
+            height: 3rem;
+            width: 3rem;
+            position: relative;
+            top: 1rem;
+            margin: auto;
+            background: url(../../public/assets/medals/small-bronze.svg);
+            background-size: 3rem;
+        }
+
+        &--percent {
+            position: relative;
+            bottom: -1rem;
+        }
+    }
+
+}

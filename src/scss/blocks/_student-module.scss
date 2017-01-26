@@ -1,0 +1,11 @@
+.student-module {
+    background-color: $white;
+    height: 100vh;
+
+    .headline {
+        margin-top: 2rem;
+    }
+    .headline, .title, .button, .trophy {
+        margin: 0.5rem 1rem;
+    }
+}

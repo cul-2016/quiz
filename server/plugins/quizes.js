@@ -145,13 +145,14 @@ exports.register = (server, options, next) => {
             config: {
                 validate: {
                     payload: {
-                        quiz_id: Joi.number().required()
+                        id: Joi.number().required(),
+                        isSurvey: Joi.boolean().required()
                     }
                 }
             },
             handler: (request, reply) => {
                 const { id, isSurvey } = request.payload;
-
+                console.log(id, isSurvey, 'end quiz');
                 setQuizOrSurveyToPresented(pool, id, isSurvey, (error, result) => {
 
                     const verdict = error || result;

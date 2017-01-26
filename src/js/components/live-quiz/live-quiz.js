@@ -1,10 +1,16 @@
 import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
 import CurrentQuestion from './current-question';
 import LiveQuizButtons from './live-quiz-buttons';
 import classnames from 'classnames';
 
 
-const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex, nextQuestion, isQuizStarted, submitResponse, isResponseSubmitted, isSavingResponse, startQuiz, numQuestions, endQuiz, quiz_id, handleSelection, response, name, numParticipants, handleAbortQuiz }) => {
+const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
+                    nextQuestion, isQuizStarted, submitResponse, //eslint-disable-line no-unused-vars
+                    isResponseSubmitted, isSavingResponse, startQuiz,
+                    numQuestions, endQuiz, quiz_id,
+                    handleSelection, response, name, //eslint-disable-line no-unused-vars
+                    numParticipants, handleAbortQuiz, params }) => {
 
     let titleClass = classnames({
         "display-none": !nextQuestionIndex
@@ -14,7 +20,6 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex, nextQuestion, isQu
         <section className="live-quiz container">
 
             <div className="has-text-centered" >
-                <h1>{ name }</h1>
 
                 <h3 className={ titleClass }>Question { nextQuestionIndex }</h3>
             </div>
@@ -22,14 +27,25 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex, nextQuestion, isQu
                 {
                     !isQuizStarted && !is_lecturer &&
                     <div className="student-view">
-                        <div className="has-text-centered instructions">
-                            Get ready!
-                            <div>The quiz will start in a moment.</div>
+                        <nav className="navbar navbar__secondary">
+                            <li className="navbar__item">
+                                <Link to={ `${params.module_id}/student` } className="navbar__link navbar__link--left navbar__link--back">
+                                    Quit
+                                </Link>
+                            </li>
+                        </nav>
 
-                            <div>
-                                During the quiz, you can change your answer as many times as you like, as long as it's before the next question appears. <br />
-                            </div>
+                        <p className="subheader subheader__tertiary">Joining...</p>
+                        <p className="logo logo--large"></p>
+                        <div className="holding-message">
+                            <p className="title"> Waiting for all participants</p>
+                            <p className="body"> The quiz will start momentarily</p>
                         </div>
+                        <div className="hint">
+                            <p className="label label__dark"> Hint </p>
+                            <p className="body body__secondary"> During the quiz, you can change your answer as many times as you like, as long as it''s before the next question appears.</p>
+                        </div>
+
                     </div>
                 }
                 {
@@ -45,7 +61,29 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex, nextQuestion, isQu
                     </button>
                 }
                 {
-                    isQuizStarted && question &&
+                    isQuizStarted && question && !is_lecturer &&
+                    <div className="student-view__questions">
+                        <nav className="navbar navbar__light navbar__light--tertiary">
+                            <li className="navbar__item">
+                                <Link to={ `${params.module_id}/student` } className="navbar__link navbar__link--left navbar__link--quit ">
+                                    Quit
+                                </Link>
+                            </li>
+                        </nav>
+
+                        <div className="question">
+                            <p className="subheader"> Q{ nextQuestionIndex }.</p>
+                            <p className="body">{ question.question }</p>
+                        </div>
+                        <CurrentQuestion
+                            data={ question }
+                            handleSelection={ handleSelection }
+                            response={ response }/>
+
+                    </div>
+                }
+                {
+                    isQuizStarted && question && is_lecturer &&
                     <div>
                         <CurrentQuestion
                             data={ question }
@@ -59,7 +97,6 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex, nextQuestion, isQu
                 numQuestions={ numQuestions }
                 nextQuestion={ nextQuestion }
                 nextQuestionIndex={ nextQuestionIndex }
-                submitResponse={ submitResponse }
                 isQuizStarted={ isQuizStarted }
                 isSavingResponse={ isSavingResponse }
                 isResponseSubmitted={ isResponseSubmitted }
@@ -88,7 +125,8 @@ LiveQuiz.propTypes = {
     response: PropTypes.string,
     name: PropTypes.string,
     numParticipants: PropTypes.number,
-    handleAbortQuiz: PropTypes.func
+    handleAbortQuiz: PropTypes.func,
+    params: PropTypes.object
 };
 
 export default LiveQuiz;

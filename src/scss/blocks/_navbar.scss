@@ -1,0 +1,50 @@
+.navbar {
+    width: 100%;
+    background-color: $light-blue;
+    box-shadow: inset 0 -2px 0 0 $dark-blue, 0 1px 0 0 $black;
+    font-size: 1rem;
+    display: table;
+    table-layout: fixed;
+
+    &__item {
+        display: table-cell;
+        vertical-align: middle;
+        text-align: left;
+    }
+
+    &__link {
+        padding: 1rem;
+        line-height: 1.4rem;
+        color: $black;
+        cursor: pointer;
+
+        &--left {
+            float: left;
+            margin-left: 15%;
+        }
+
+        &--right {
+            float: right;
+            margin-right: 15%;
+        }
+
+        &--back {
+            border-bottom: 2px solid $white;
+            color: $white;
+        }
+        &--quit {
+            border-bottom: 2px solid $red;
+            color: $red;
+        }
+    }
+
+    &__secondary {
+        box-shadow: none;
+        background-color: $blue;
+    }
+    &__light {
+        box-shadow: none;
+        background-color: $white;
+
+    }
+}

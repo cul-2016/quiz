@@ -5,60 +5,35 @@ import logout from '../../lib/logout';
 
 
 const hideNav = (path) => {
-    return path === "/" || path.match(/live|holding-page|result|review|register-student|please-verify|verification|reset-password/);
+    console.log(path, "<<<<<<<<<<");
+    return path === "/" || path.match(/live|holding-page|result|review|register-student|please-verify|verification|reset-password|performance/);
 };
 
-const Nav = ({ location, username, is_lecturer }) => {
+const Nav = ({ location, is_lecturer }) => {
+    console.log(location.pathname, '<<<<<<<<');
 
-    let navClasses = classnames("nav has-shadow", {
+    let navClasses = classnames("navbar", {
         "display-none": hideNav(location.pathname),
         "student": is_lecturer === false
     });
 
-    let dashboardClasses = classnames("nav-item is-hidden-mobile", {
-        "is-active": window.location.hash.indexOf("dashboard") > -1,
-    });
-
     return (
-        <nav className={ navClasses }>
-            <div className="nav-left">
-                <p className="nav-item is-brand">
-                    <strong>Welcome,&ensp;</strong>{ username || 'lecturer' }
+        <ul className={ navClasses}>
+            <li className="navbar__item" onClick={ () => hashHistory.push('/dashboard') }>
+                <p className="navbar__link navbar__link--left">
+                    Home
                 </p>
-            </div>
-
-            <div className="nav-right">
-                <span className={ dashboardClasses }>
-                    <button className="button" onClick={ () => hashHistory.push('/dashboard') }>
-                        <i className="fa fa-home" />
-                        &nbsp;to dashboard
-                    </button>
-                </span>
-
-                <span className="nav-item is-hidden-mobile">
-                    <button className="button is-danger" onClick={ logout }>
-                        Logout
-                    </button>
-                </span>
-
-                <span className="nav-item is-hidden-tablet is-active" onClick={ () => hashHistory.push('/dashboard') }>
-                    <span className="icon">
-                        <i className="fa fa-home"/>
-                    </span>
-                </span>
-
-                <span className="nav-item is-hidden-tablet is-active" onClick={ logout }>
-                    <span className="icon is-danger">
-                        <i className="fa fa-sign-out is-danger" />
-                    </span>
-                </span>
-            </div>
-        </nav>
+            </li>
+            <li className="navbar__item" onClick={ logout }>
+                <p className="navbar__link navbar__link--right">
+                    Logout
+                </p>
+            </li>
+        </ul>
     );
 };
 
 Nav.propTypes = {
-    username: PropTypes.string,
     location: PropTypes.object,
     is_lecturer: PropTypes.bool
 };

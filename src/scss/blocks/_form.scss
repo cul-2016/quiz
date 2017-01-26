@@ -1,0 +1,16 @@
+.form {
+    &__input {
+        line-height: 1.5rem;
+        padding: 0.25rem 0.5rem;
+        background-color: $white;
+        border: 1px solid $black;
+
+        &::-webkit-input-placeholder {
+            font-weight: bold;
+            letter-spacing: 0.3rem;
+            color: $grey;
+            text-align: center;
+            font-size: 1.3rem;
+        }
+    }
+}

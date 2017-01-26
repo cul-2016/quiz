@@ -63,9 +63,11 @@ const mapDispatchToProps = (dispatch) => ({
 
         const intervalID = store.getState().liveQuiz.interval_id;
         const module_id = store.getState().module.module_id;
+        const isSurvey = store.getState().liveQuiz.isSurvey;
         const data = {
             room: module_id,
-            quiz_id
+            quiz_id,
+            isSurvey
         };
         socketClient.emit('abort_quiz', data, () => {
 

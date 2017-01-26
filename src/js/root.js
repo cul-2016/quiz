@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Router, Route, IndexRoute, IndexRedirect, Redirect, hashHistory } from 'react-router';
+import { Router, Route, IndexRoute, Redirect, hashHistory } from 'react-router';
 import { Provider } from 'react-redux';
 
 import AppContainer from './containers/app-container';
@@ -27,8 +27,7 @@ import ReviewQuizStudentContainer from './containers/student/quiz-review.js';
 
 import StudentJoinModuleContainer from './containers/student/join-module';
 import StudentModuleContainer from './containers/student/module';
-import StudentHistoryContainer from './containers/student/history';
-import StudentFeedbackContainer from './containers/student/feedback';
+import StudentPerformanceContainer from './containers/student/feedback';
 import StudentLiveQuizContainer from './containers/student/live-quiz';
 import StudentQuizResultContainer from './containers/student/result';
 
@@ -93,17 +92,14 @@ const Root = ({ store }) => (
                     onEnter={ composeHooks(hooks.authenticate, hooks.checkUserRole, hooks.fetchModule, hooks.checkModuleOwner) }
                     path=":module_id/lecturer"
                     component={ ModuleContainer } />
-                <Route path=":module_id/student" component={ StudentModuleContainer }>
-                    <IndexRedirect to="feedback" />
-                    <Route
-                        onEnter={ composeHooks(hooks.authenticate) }
-                        path="history"
-                        component={ StudentHistoryContainer } />
-                    <Route
-                        onEnter={ composeHooks(hooks.authenticate, hooks.fetchModule) }
-                        path="feedback"
-                        component={ StudentFeedbackContainer } />
-                </Route>
+                <Route
+                    onEnter={ composeHooks(hooks.authenticate, hooks.fetchModule) }
+                    path=":module_id/student"
+                    component={ StudentModuleContainer } />
+                <Route
+                    onEnter={ composeHooks(hooks.authenticate, hooks.fetchModule) }
+                    path=":module_id/student/performance"
+                    component={ StudentPerformanceContainer } />
                 <Route
                     onEnter={ composeHooks(hooks.fetchQuizDetailsStudent) }
                     path=":module_id/student/history/:quiz_id"
