@@ -7,9 +7,9 @@ import Medal from '../general/medal';
 const Medals = ({ medals }) => {
 
     return (
-            <div className="section column">
+            <div className="module__medals">
                 <h3>Medals</h3>
-                <table className="table has-text-centered">
+                <table className="module__table module__medal-table">
                     <thead>
                         <tr>
                             <th></th>
