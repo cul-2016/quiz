@@ -8,7 +8,7 @@
     border-radius: 3px;
     font-weight: 400;
     font-size: 1rem;   /* This (and partly line-height) should determine the majority of the height of the element */
-    line-height: 1.5;
+    line-height: 2;
     letter-spacing: 0.4px;
     text-decoration: none;
     text-transform: capitalize;
@@ -85,8 +85,14 @@
         }
     }
     &__wrapper {
+        max-width: 62rem;
+        margin: auto;
+        padding: 0 2rem;
         &--centered {
             text-align: center;
+        }
+        &--right {
+            text-align: right;
         }
     }
 }
