@@ -20,15 +20,15 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id, isSurvey, handl
             "fa-check": quiz.is_last_quiz
         });
 
-        let buttonClass = classnames("tag is-success is-medium invite-students-tag", {
+        let buttonClass = classnames("", {
             "display-none": quiz.is_presented
         });
 
-        let quizHistoryClass = classnames("tag is-warning is-medium settings-tag", {
+        let quizHistoryClass = classnames("", {
             "display-none": !quiz.is_presented
         });
 
-        let editQuizClass = classnames("tag is-warning is-medium settings-tag", {
+        let editQuizClass = classnames("", {
             "display-none": quiz.is_presented
         });
 
@@ -58,101 +58,32 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id, isSurvey, handl
                             onClick={ () => sendQuizInvite(quiz.quiz_id, quiz.survey_id, quiz.name) }>
                             Invite students to { surveyOrQuiz }
                         </span>
+                        <span className={ buttonClass }
+                            onClick={ () => sendQuizInvite(quiz.quiz_id, quiz.survey_id, quiz.name, true) }>
+                            Review { surveyOrQuiz }
+                        </span>
                     </Link>
                 </td>
             </tr>
         );
     });
 
-    const mobileView = quizzes.map((quiz, index) => {
-
-        let iconClasses = classnames("fa", {
-            "fa-check": quiz.is_presented === true,
-            "fa-times": quiz.is_presented === false
-        });
-
-        let buttonClass = classnames("tag is-success is-medium settings-link-element", {
-            "display-none": quiz.is_presented
-        });
-
-        let quizHistoryClass = classnames("settings-link-element", {
-            "display-none": !quiz.is_presented
-        });
-
-        let editQuizClass = classnames("settings-link-element", {
-            "display-none": quiz.is_presented
-        });
-
-        let is_last_quizClasses = classnames("fa", {
-            "fa-check": quiz.is_last_quiz
-        });
-
-
-        return (
-            <div key={ index } className="box">
-                <h5>{ quiz.name }</h5>
-                <div className="columns is-mobile has-text-centered">
-                    <div className="column">{`Questions: \n${+quiz.num_questions}`}</div>
-                    <div className="column">{`Entries: \n${+quiz.num_entries}`}</div>
-                </div>
-                <div className="columns is-mobile has-text-centered">
-                    <div className="column">Presented: <i className={ iconClasses } /></div>
-                    { !isSurvey &&
-                        <div className="column">
-                            Last { surveyOrQuizCapitalized }: <i className={ is_last_quizClasses } />
-                        </div>
-                    }
-                </div>
-                <div className="columns is-mobile has-text-centered">
-                    <Link className={ editQuizClass } to={`${module_id}/${quiz[surveyIdOrQuizId]}/edit-quiz`}>
-                        <span title="Edit Quiz" className="column tag is-warning is-medium settings-tag">
-                            <i className="fa fa-edit"></i>
-                        </span>
-                    </Link>
-
-                    <Link onClick={ () => handleSetIsSurvey(quiz.quiz_id, quiz.survey_id) } className={ quizHistoryClass } to={ `${module_id}/${quiz[surveyIdOrQuizId]}/members` }>
-                        <span title="Quiz History" className="column tag is-warning is-medium settings-tag">
-                            <i className="fa fa-history"></i>
-                        </span>
-                    </Link>
-                </div>
-
-                <div className="columns is-mobile has-text-centered">
-                    <Link className={ buttonClass } to={`${location.pathname}/live`}>
-                        <span
-                        onClick={ () => sendQuizInvite(quiz[surveyIdOrQuizId], quiz.name) }>
-                        Invite students to { surveyOrQuiz }
-                        </span>
-                    </Link>
-                </div>
-
-            </div>
-        );
-    });
-
     return (
-        <div className="section quizzes">
-            <div className="level">
-                <div className="level-left">
-                    <h3 className="level-item">
-                        { surveyOrQuizPluralCapitalized }
-                    </h3>
-                </div>
-                <div className="level-right">
+        <div className="quizzes">
+            <h3 className="headline module__headline">
+                { surveyOrQuizPluralCapitalized }
+            </h3>
+            <Link className="module__button__link" to={ `${module_id}/new-quiz` } >
 
-                    <Link className="level-item" to={ `${module_id}/new-quiz` } >
+                <button className="button button__secondary">
+                    <span className="icon">
+                        <i className="fa fa-plus" />
+                    </span>
+                    <span>Add a new { surveyOrQuiz }</span>
+                </button>
+            </Link>
 
-                        <button className="add-quiz-button button is-info">
-                            <span className="icon">
-                                <i className="fa fa-plus" />
-                            </span>
-                            <span>Add a new { surveyOrQuiz }</span>
-                        </button>
-                    </Link>
-                </div>
-            </div>
-
-            <table className="table is-hidden-mobile">
+            <table className="table">
                 <thead>
                     <tr>
                         <th>name</th>
@@ -170,10 +101,6 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id, isSurvey, handl
                     { desktopView }
                 </tbody>
             </table>
-
-            <div className="is-hidden-tablet">
-                { mobileView }
-            </div>
         </div>
     );
 };

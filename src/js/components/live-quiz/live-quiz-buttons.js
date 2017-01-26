@@ -4,7 +4,7 @@ import classnames from 'classnames';
 const LiveQuizButtons = ({ is_lecturer, numQuestions, nextQuestionIndex,
                            nextQuestion, isQuizStarted, isSavingResponse, //eslint-disable-line no-unused-vars
                            isResponseSubmitted, startQuiz, endQuiz, //eslint-disable-line no-unused-vars
-                           quiz_id, response }) => { //eslint-disable-line no-unused-vars
+                           quiz_id, response, review, handleAbortQuiz }) => { //eslint-disable-line no-unused-vars
 
     let startButtonClasses = classnames("button button--large button__primary start-quiz-button", {
         "display-none": !is_lecturer || isQuizStarted
@@ -30,8 +30,8 @@ const LiveQuizButtons = ({ is_lecturer, numQuestions, nextQuestionIndex,
                 Next question
             </button>
 
-            <button className={ endButtonClasses } onClick={ () => endQuiz(quiz_id)  }>
-                End quiz
+            <button className={ endButtonClasses } onClick={ () => review ? handleAbortQuiz(quiz_id) : endQuiz(quiz_id) }>
+                { review ? 'End Review' : 'End quiz' }
             </button>
         </div>
     );
@@ -48,7 +48,9 @@ LiveQuizButtons.propTypes = {
     startQuiz: PropTypes.func,
     endQuiz: PropTypes.func,
     quiz_id: PropTypes.number,
-    response: PropTypes.string
+    response: PropTypes.string,
+    review: PropTypes.bool,
+    handleAbortQuiz: PropTypes.func
 };
 
 export default LiveQuizButtons;
