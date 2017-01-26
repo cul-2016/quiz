@@ -17,6 +17,12 @@
     background-color: #F5F5F5;
     border: 1px solid #3E3E3E;
 
+        &:active {
+            box-shadow: none;
+            padding-top: 0.35rem;
+            padding-bottom: 0.15rem;
+        }
+
     &--large {
         font-size: 1.25rem;
         font-weight: bold;
