@@ -14,12 +14,12 @@ const Questions = ({ questions, handleInputChange, handleDeleteQuestion }) => {
         return (
             <div key={ i } className="column is-6 is-offset-3 question box">
 
-                <label className="label"> Question { i + 1 }</label>
+                <label className="f-label"> Question { i + 1 }</label>
                 <textarea className="textarea" type="text" value={ question.question || ""} onChange={ (e) => handleInputChange('question', e.target.value, i) } placeholder='question'></textarea>
 
                 <div className="control is-horizontal">
                     <div className="control-label answer-label">
-                        <label className="label">A</label>
+                        <label className="f-label">A</label>
                     </div>
                     <div className="control">
                         <input className="input column is-9" type="text" value={ question.a || "" } onChange={ (e) => handleInputChange('a', e.target.value, i) } placeholder='a' ></input>
@@ -29,7 +29,7 @@ const Questions = ({ questions, handleInputChange, handleDeleteQuestion }) => {
 
                 <div className="control is-horizontal">
                     <div className="control-label answer-label">
-                        <label className="label"> B </label>
+                        <label className="f-label"> B </label>
                     </div>
                     <div className="control">
                         <input className="input column is-9" type="text" value={ question.b || "" } onChange={ (e) => handleInputChange('b', e.target.value, i) }  placeholder='b' ></input>
@@ -39,7 +39,7 @@ const Questions = ({ questions, handleInputChange, handleDeleteQuestion }) => {
 
                 <div className="control is-horizontal">
                     <div className="control-label answer-label">
-                        <label className="label"> C </label>
+                        <label className="f-label"> C </label>
                     </div>
                     <div className="control">
                         <input className="input column is-9" type="text" value={ question.c || "" } onChange={ (e) => handleInputChange('c', e.target.value, i) }  placeholder='c' ></input>
@@ -49,7 +49,7 @@ const Questions = ({ questions, handleInputChange, handleDeleteQuestion }) => {
 
                 <div className="control is-horizontal">
                     <div className="control-label answer-label">
-                        <label className="label"> D </label>
+                        <label className="f-label"> D </label>
                     </div>
                     <div className="control">
                         <input className="input column is-9" type="text" value={ question.d || "" } onChange={ (e) => handleInputChange('d', e.target.value, i) }  placeholder='d' ></input>

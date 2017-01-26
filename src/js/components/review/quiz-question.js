@@ -31,7 +31,7 @@ const Question = ({ idx, question, is_lecturer, showAnswer }) => {
 
     return (
         <div key={idx} className="question">
-            <h4 className="title is-5 has-text-centered">
+            <h4 className="f-title is-5 has-text-centered">
                 { `${idx + 1}. ${question.question}` }
                 { showButton && <button onClick={ () => showAnswer(idx) }>
                     Show Answer

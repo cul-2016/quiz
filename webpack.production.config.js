@@ -25,7 +25,7 @@ module.exports = {
             {
                 test: /\.s?css$/,
                 exclude: /node_modules/,
-                loader: "style-loader!css-loader!postcss-loader!sass-loader"
+                loader: "style-loader!css-loader!sass-loader"
             },
             {
                 test: /\.json$/,

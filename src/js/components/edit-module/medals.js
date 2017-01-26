@@ -12,7 +12,7 @@ const Medals = ({ applyOffset, updateMedalVals, medals }) => {
 
                 <div className="column box has-text-centered">
 
-                    <label className="label">Bronze</label>
+                    <label className="f-label">Bronze</label>
                     <span className="label-inline">0 to </span>
                     <input
                         name="bronze"
@@ -25,13 +25,13 @@ const Medals = ({ applyOffset, updateMedalVals, medals }) => {
 
                 <div className="column box has-text-centered">
 
-                    <label className="label">Silver</label>
+                    <label className="f-label">Silver</label>
                     <span className="inline">{ `${medals[0]} to ${medals[1]} %` }</span>
                 </div>
 
                 <div className="column box has-text-centered">
 
-                    <label className="label">Gold</label>
+                    <label className="f-label">Gold</label>
                     <input
                         name="gold"
                         type="number"

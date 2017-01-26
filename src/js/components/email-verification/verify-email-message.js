@@ -6,9 +6,7 @@ const VerficationMessageComponent = () => {
         <div>
             <p>Thank you for registering</p>
             <p>Please follow the link we provided on your email to activate your account</p>
-            <button className="button is-warning">
-                <Link to="/">Back to Home</Link>
-            </button>
+            <Link to="/" className="button is-warning">Back to Home</Link>
         </div>
     );
 };

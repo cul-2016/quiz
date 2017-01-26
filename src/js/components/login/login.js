@@ -18,11 +18,11 @@ const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthentic
 
     return (
         <div className="login">
-            <h1 className="headline"><img src="/Yellow.svg"></img></h1>
-            <h3 className="subheader"> Realtime Quizzes for better lectures </h3>
+            <h1 className="f-headline"><img src="/Yellow.svg"></img></h1>
+            <h3 className="f-subheader"> Realtime Quizzes for better lectures </h3>
 
             <form className="form">
-                <div className="form__field body">
+                <div className="form__field f-body">
                     <label className="form__label">Email / Username</label>
                     <input
                         onKeyDown={ submitOnEnter }
@@ -31,7 +31,7 @@ const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthentic
                         type="text"
                     ></input>
                 </div>
-                <div className="form__field body">
+                <div className="form__field f-body">
                     <label className="form__label">Password</label>
                     <input
                         onKeyDown={ submitOnEnter }
@@ -40,18 +40,18 @@ const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthentic
                         type="password"
                     ></input>
                 </div>
-                <div className={ login.userIsAuthenticated ? 'display-none' : 'body__warning' }>
+                <div className={ login.userIsAuthenticated ? 'display-none' : 'f-body--warning' }>
                     { login.message }
                 </div>
                 <button onClick={ handleOnSubmit } className="button button__primary">
-                    <p className="subheader">Log in</p>
+                    <p className="f-subheader">Log in</p>
                 </button>
             </form>
 
-            <p className="body body__secondary body__secondary--dark"> Don't have an Account? </p>
-            <div> <Link className="subheader" to="/register-student"> Sign Up </Link> </div>
+            <p className="f-body f-body--dark"> Don't have an Account? </p>
+            <div> <Link className="f-subheader" to="/register-student"> Sign Up </Link> </div>
 
-            <div> <Link className="subheader" to="/request-reset-password"> Forgotten Password </Link> </div>
+            <div> <Link className="f-subheader" to="/request-reset-password"> Forgotten Password </Link> </div>
         </div>
     );
 };
