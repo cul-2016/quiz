@@ -31,6 +31,10 @@
             border-bottom: 2px solid $white;
             color: $white;
         }
+        &--back--dark {
+            border-bottom: 2px solid $black;
+            color: $black;
+        }
         &--quit {
             color: $red;
             position: relative;
