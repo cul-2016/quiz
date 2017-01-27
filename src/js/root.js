@@ -44,7 +44,7 @@ import { store } from './store'; // eslint-disable-line
 const Root = ({ store }) => (
 
     <Provider store={ store }>
-        <Router onUpdate={() => window.scrollTo(0, 0)} history={ hashHistory }>
+        <Router history={ hashHistory }>
             <Route path="/" component={ AppContainer }>
                 <IndexRoute
                     onEnter={ hooks.shouldUserRedirect }
