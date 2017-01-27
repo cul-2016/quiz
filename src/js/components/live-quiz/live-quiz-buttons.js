@@ -18,13 +18,11 @@ const LiveQuizButtons = ({ is_lecturer, numQuestions, nextQuestionIndex,
         "display-none": !is_lecturer || nextQuestionIndex !== numQuestions
     });
 
-
-
     return (
         <div>
             <div className="button__wrapper button__wrapper--centered">
                 <button className={ startButtonClasses } onClick={ startQuiz }>
-                    Start quiz
+                    Start { review ? 'Review' : 'Quiz' }
                 </button>
             </div>
             <div className="button__wrapper button__wrapper--right">
