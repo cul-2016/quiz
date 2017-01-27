@@ -30,14 +30,14 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                         </nav>
 
                         <p className="f-subheader f-subheader--tertiary">Joining...</p>
-                        <p className="logo logo--large"></p>
+                        <p className="logo logo--large logo--large--animated"></p>
                         <div className="holding-message">
                             <p className="f-title"> Waiting for all participants</p>
                             <p className="f-body"> The quiz will start momentarily</p>
                         </div>
                         <div className="hint">
                             <p className="f-label f-label--dark"> Hint </p>
-                            <p className="f-body f-body--secondary"> During the quiz, you can change your answer as many times as you like, as long as it''s before the next question appears.</p>
+                            <p className="f-body f-body--secondary"> During the quiz, you can change your answer as many times as you like, as long as it's before the next question appears.</p>
                         </div>
 
                     </div>

@@ -12,8 +12,12 @@
         text-shadow: 0px 2px 0px 0px $dark-blue;
     }
     &--tertiary {
-        color: $light-pink; 
-        text-shadow: 0px 2px 0px 0px $red;
+        color: $light-pink;
+        text-shadow: 2px 2px 0px $red;
+    }
+    &--secondary {
+        color: $red;
+        text-shadow: 2px 0 0 $light-pink;
     }
 }
 
@@ -27,6 +31,14 @@
 
     &--primary {
         color: $gold;
+    }
+
+    &--secondary {
+        color: $red;
+    }
+
+    &--light {
+      color: $white;
     }
 }
 
@@ -72,7 +84,7 @@
     &--primary {
         color: $gold;
     }
- 
+
     &--secondary {
         color: $blue;
     }
@@ -86,6 +98,7 @@
     }
 
     &--light {
+        color: white;
         font-weight: 500;
     }
 
@@ -116,6 +129,12 @@
 
     &--dark {
         color: $dark-blue;
+    }
+    &--light {
+        color: $white;
+    }
+    &--primary {
+        color: $gold;
     }
 }
 

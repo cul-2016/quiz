@@ -221,11 +221,8 @@ exports.register = (server, options, next) => {
             },
             handler: (request, reply) => {
                 const { id, isSurvey } = request.query;
-
-                const parsed_isSurvey = isSurvey === "true";
                 const parsed_id = parseInt(id, 10);
-
-                getReview(pool, parsed_id, parsed_isSurvey, (error, module) => {
+                getReview(pool, parsed_id, isSurvey, (error, module) => {
                     const verdict = error || module;
                     reply(verdict);
                 });
