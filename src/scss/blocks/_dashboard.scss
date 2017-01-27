@@ -2,7 +2,7 @@
     text-align: center;
     background-color: $white;
     min-height: 100vh;
-    
+
     .display {
         padding: 2rem 0 1rem 0;
     }
@@ -10,10 +10,21 @@
     .form__input--add-module {
         width: 30%;
         float: left;
-        margin-left: 1.4rem;
+        margin-left: 1.2rem;
     }
 
     .card__secondary {
         text-align: center;
+
+        .button__secondary {
+          padding: 0.984rem;
+        }
+    }
+}
+
+.dashboard__lecturer {
+
+    .fa-plus:before {
+        padding-right: 1rem;
     }
 }

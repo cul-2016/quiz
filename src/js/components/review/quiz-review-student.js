@@ -4,13 +4,14 @@ import { Link } from 'react-router';
 
 const QuizReviewStudent = ({ review, showAnswer, params }) =>
     <div className="review-quiz-student">
-          <nav className="navbar navbar__secondary">
-              <li className="navbar__item">
-                  <Link to={ `${params.module_id}/student` } className="navbar__link navbar__link--left navbar__link--back">
-                      Back
-                  </Link>
-              </li>
-          </nav>
+
+          <ul className="navbar navbar--invisible">
+               <li className="navbar__item">
+                 <Link to={ `${params.module_id}/student` } className="navbar__link navbar__link--left navbar__link--back">
+                     Back
+                   </Link>
+               </li>
+           </ul>
 
           <p className="f-headline f-headline--light"> My Answers </p>
           {

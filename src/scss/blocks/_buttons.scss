@@ -1,6 +1,6 @@
 .button {
     display: inline-block;
-    padding: 0.25rem 1rem; /* a bit of space on top and a bit more on the sides of the word(s) */
+    padding: 0.5rem 1rem; /* a bit of space on top and a bit more on the sides of the word(s) */
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance:  none; /* Removes NATIVE styling (esp. when .button is an input)*/
@@ -65,6 +65,12 @@
             line-height: 2;
         }
     }
+
+    &__dark {
+      background-color: $black;
+      color: $white;
+      box-shadow: none;
+    }
     &__icon {
         &--right {
             text-align: left;
@@ -88,5 +94,12 @@
         &--centered {
             text-align: center;
         }
+    }
+
+    &__disabled {
+      pointer-events: none;
+      cursor: default;
+      background-color: $white;
+      box-shadow: none;
     }
 }

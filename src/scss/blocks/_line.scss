@@ -5,6 +5,13 @@
     margin: 1rem auto;
     padding: 0 1rem;
 
+    &--primary {
+      background-color: $gold;
+      margin: 1rem 0 1rem 0;
+      max-width: 30rem;
+      padding: 0;
+    }
+
     &__tertiary {
         background-color: $red;
         width: 100%;

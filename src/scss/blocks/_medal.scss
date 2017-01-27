@@ -1,6 +1,8 @@
 .medal-result {
-    height: 8.7rem;
-    width: 6.3rem;
+    height: 8.75rem;
+    width: 6.372rem;
+    background-size: 5rem;
+    display: block;
 
     &--silver {
       background: url(../../public/assets/medals/silver-result.svg)
@@ -11,4 +13,20 @@
     &--gold {
       background: url(../../public/assets/medals/gold-result.svg)
     }
+}
+
+.medal-small {
+    height: 1.6rem;
+    width: 1.4rem;
+
+  &--gold {
+      background: url(../../public/assets/medals/small-gold.svg);
+  }
+  &--silver {
+      background: url(../../public/assets/medals/small-silver.svg);
+  }
+  &--bronze {
+      background: url(../../public/assets/medals/small-bronze.svg);
+  }
+
 }

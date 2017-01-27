@@ -26,5 +26,26 @@
                 color: $grey;
             }
         }
+
+        &--new-module {
+          padding: 0.25rem 0.5rem;
+          max-width: 29rem;
+          height: 2.5rem;
+          text-transform: capitalize;
+
+          &--code {
+            max-width: 6.25rem;
+            letter-spacing: 0.3rem;
+          }
+        }
+
+        &--medal {
+          max-width: 2.5rem;
+        }
+        &--trophy {
+          width: 3.5rem;
+          height: 2.5rem
+        }
+
     }
 }

@@ -62,7 +62,8 @@
         box-shadow: none;
         background: none;
         max-width: 62rem; /* 960px + 32px */
-        padding: 0 2rem; /* supports screens smaller than 960px */
+        padding: 0 0 0 2rem; /* supports screens smaller than 960px */
         margin: auto;
+        box-sizing: border-box;
     }
 }
