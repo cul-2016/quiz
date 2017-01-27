@@ -22,7 +22,7 @@ const LiveQuizButtons = ({ is_lecturer, numQuestions, nextQuestionIndex,
         <div>
             <div className="button__wrapper button__wrapper--centered">
                 <button className={ startButtonClasses } onClick={ startQuiz }>
-                    Start { review ? 'Review' : 'Quiz' }
+                    Start { review ? 'Preview' : 'Quiz' }
                 </button>
             </div>
             <div className="button__wrapper button__wrapper--right">
@@ -31,7 +31,7 @@ const LiveQuizButtons = ({ is_lecturer, numQuestions, nextQuestionIndex,
                 </button>
 
                 <button className={ endButtonClasses } onClick={ () => review ? handleAbortQuiz(quiz_id) : endQuiz(quiz_id) }>
-                    { review ? 'End Review' : 'End quiz' }
+                    { review ? 'End Preview' : 'End Quiz' }
                 </button>
             </div>
         </div>
