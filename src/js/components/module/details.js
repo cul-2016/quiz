@@ -7,8 +7,8 @@ const Details = ({ name, module_id, num_enrolled, trophies, medals }) => {
 
     return (
         <div>
-            <h1 className="display">{ name }</h1>
-            <h4 className="body body__primary">{ module_id }</h4>
+            <h1 className="f-display">{ name }</h1>
+            <h4 className="f-body f-body--primary">{ module_id }</h4>
 
             <div className="module__buttons">
                 <Link to={ `${module_id}/leaderboard` }>

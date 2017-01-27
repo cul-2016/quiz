@@ -6,6 +6,9 @@
 
 .logo {
     background: url(../../public/assets/logo/yellow.svg);
+    background-size: 3rem;
+    height: 3rem;
+    width: 3rem;
 
     &--large {
         background-size: 5rem;
@@ -30,4 +33,12 @@
         background-size: 4rem;
         margin: auto;
     }
+}
+
+.logo--white {
+  background: url(../../public/assets/logo/Off-white.svg);
+
+  background-size: 3rem;
+  height: 3rem;
+  width: 3rem;
 }

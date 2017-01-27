@@ -22,6 +22,10 @@
     margin: 1.5rem 0;
   }
 
+  &__button {
+    margin: 0.5rem;
+  }
+
   &__button__link {
     margin: 0 2rem;
   }
@@ -39,13 +43,60 @@
     }
   }
 
-  .display, .body__primary {
+  .f-display, .f-body--primary {
     margin: 1rem 2rem;
   }
 
   .quizzes {
     padding: 1.5rem;
     margin: 1rem 2rem;
+  }
+}
+
+.quiz {
+  display: block;
+  padding: 2.5rem;
+  position: relative;
+
+  &__index,
+  &__logo,
+  &__logo--white,
+  &__buttons,
+  &__entries,
+  &__name,
+  &__questions {
+    display: inline-block;
+    position:absolute;
+  }
+
+  &__index {
+    left: 5rem;
+    top: 1rem;
+  }
+  
+  &__logo, &__logo--white {
+    left: 7rem;
+    top: 0;
+  }
+
+  &__buttons {
+    top: 0.5rem;
+    right: 3rem;
+  }
+
+  &__name {
+    top: 0rem;
+    left: 11rem;
+  }
+
+  &__questions {
+    top: 1.7rem;
+    left: 11rem;
+  }
+
+  &__entries {
+    top: 1.7rem;
+    right: 5rem;
   }
 }
 
