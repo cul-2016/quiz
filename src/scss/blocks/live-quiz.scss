@@ -1,3 +1,83 @@
+.live-quiz {}
+
+// QUESTION
+    
+    .live-quiz__question-wrapper {
+        max-width: 60rem;
+        margin: 2.5rem auto;
+        padding: 0 2rem;
+        display: table;
+    }
+    .live-quiz__question,
+    .live-quiz__question-number {
+        display: table-cell;
+        vertical-align: middle;    
+    }
+    .live-quiz__question-number {
+        padding-right: 1rem;
+    }
+
+// ANSWERS
+
+    .live-quiz__answers-wrapper {} /* aesthetic purpose */
+    .live-quiz__answers {
+        max-width: 62rem; /* 992px */
+        margin: auto;
+        text-align: center;
+    }
+    .live-quiz__answer {
+        display: inline-block; /* centered by parent wrapper */
+        box-sizing: border-box;
+        max-width: 29rem; /* 464px */
+        margin: 1rem; /* 464 + 16 + 16 = 496px in total */
+
+        &--response {
+            background-color: $blue;
+            box-shadow: none;
+            // when a repsponse is given the letter changes colour
+            .live-quiz__letter {
+                color: $dark-blue;
+            }
+            .live-quiz__answer-text {
+                color: $white;
+            }
+        }
+    }
+    .live-quiz__answer-inner {
+        display: table;
+    }
+
+
+    .live-quiz__letter { /* A,B,C, or D */
+        text-transform: capitalize;
+    }
+    .live-quiz__answer-text { /* text of the option */
+        padding-left: 1rem;
+        line-height: 1.75;
+    }
+        .live-quiz__letter, 
+        .live-quiz__answer-text {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+    @media (min-width: 60rem) {
+        .live-quiz__answer-inner {
+            min-height: 4rem;
+        }
+    }
+
+// FOOTER
+
+    .live-quiz__footer {
+        background-color: $gold;
+        padding:2rem;
+    }
+
+
+
+// OVERRIDES
+
 .student-view {
     text-align: center;
     background-color: $blue;
@@ -31,15 +111,10 @@
     .body {
         padding: 0 2rem 2rem 2rem;
     }
-    .current-question {
+    .live-quiz__answers-wrapper {
         background-color: $gold;
         border-top: 3px solid $dark-gold;
         padding: 1rem 0;
     }
 
-}
-
-.live-quiz-footer {
-  background-color: $gold;
-  padding:2rem;
 }

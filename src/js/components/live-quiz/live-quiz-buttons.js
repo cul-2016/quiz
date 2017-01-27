@@ -10,29 +10,32 @@ const LiveQuizButtons = ({ is_lecturer, numQuestions, nextQuestionIndex,
         "display-none": !is_lecturer || isQuizStarted
     });
 
-    let nextButtonClasses = classnames("button button--large is-warning", {
+    let nextButtonClasses = classnames("button button__secondary", {
         "display-none": !is_lecturer || nextQuestionIndex === 0 || nextQuestionIndex === numQuestions
     });
 
-    let endButtonClasses = classnames("button button--large is-success", {
+    let endButtonClasses = classnames("button button--large button__primary", {
         "display-none": !is_lecturer || nextQuestionIndex !== numQuestions
     });
 
 
 
     return (
-        <div className="button__wrapper button__wrapper--centered">
+        <div>
+            <div className="button__wrapper button__wrapper--centered">
+                <button className={ startButtonClasses } onClick={ startQuiz }>
+                    Start quiz
+                </button>
+            </div>
+            <div className="button__wrapper button__wrapper--right">
+                <button className={ nextButtonClasses } onClick={ nextQuestion }>
+                    Next question
+                </button>
 
-            <button className={ startButtonClasses } onClick={ startQuiz }>
-                Start quiz
-            </button>
-            <button className={ nextButtonClasses } onClick={ nextQuestion }>
-                Next question
-            </button>
-
-            <button className={ endButtonClasses } onClick={ () => review ? handleAbortQuiz(quiz_id) : endQuiz(quiz_id) }>
-                { review ? 'End Review' : 'End quiz' }
-            </button>
+                <button className={ endButtonClasses } onClick={ () => review ? handleAbortQuiz(quiz_id) : endQuiz(quiz_id) }>
+                    { review ? 'End Review' : 'End quiz' }
+                </button>
+            </div>
         </div>
     );
 };
