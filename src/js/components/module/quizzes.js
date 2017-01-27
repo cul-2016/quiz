@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import classnames from 'classnames';
-import { Link } from 'react-router';
+import { Link, hashHistory } from 'react-router';
 
 const Quizzes = ({ location, quizzes, sendQuizInvite, module_id, isSurvey, handleSetIsSurvey }) => {
 
@@ -9,7 +9,7 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id, isSurvey, handl
     const surveyOrQuizCapitalized = isSurvey ? 'Survey' : 'Quiz';
     const surveyOrQuizPluralCapitalized = isSurvey ? 'Surveys' : 'Quizzes';
 
-    const desktopView = quizzes.map((quiz, index) => {
+    const desktopView = quizzes.slice().reverse().map((quiz, index) => {
 
         let iconClasses = classnames("fa", {
             "fa-check": quiz.is_presented === true,
@@ -33,38 +33,57 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id, isSurvey, handl
         });
 
         return (
-            <tr key={ index }>
-                <td>{ quiz.name }</td>
-                <td>{+quiz.num_questions}</td>
-                <td>{+quiz.num_entries}</td>
-                <td><i className={ iconClasses } /></td>
-                <td><i className={ is_last_quizClasses } /></td>
-                <td>
-                    <Link to={`${module_id}/${quiz[surveyIdOrQuizId]}/edit-${surveyOrQuiz}`}>
-                        <span title={`Edit ${surveyOrQuiz}`} className={ editQuizClass }>
-                            <i className="fa fa-edit"></i>
-                        </span>
-                    </Link>
+          <div
+              key={ index }
+              className="quiz"
+              onClick={ () => {
 
-                    <Link onClick={ () => handleSetIsSurvey(quiz.quiz_id, quiz.survey_id) } to={ `${module_id}/${quiz[surveyIdOrQuizId]}/members` }>
-                        <span title="Quiz History" className={ quizHistoryClass }>
-                            <i className="fa fa-history"></i>
-                        </span>
-                    </Link>
-                </td>
-                <td>
-                    <Link to={`${location.pathname}/live`}>
-                        <span className={ buttonClass }
-                            onClick={ () => sendQuizInvite(quiz.quiz_id, quiz.survey_id, quiz.name) }>
-                            Invite students to { surveyOrQuiz }
-                        </span>
-                        <span className={ buttonClass }
-                            onClick={ () => sendQuizInvite(quiz.quiz_id, quiz.survey_id, quiz.name, true) }>
-                            Review { surveyOrQuiz }
-                        </span>
-                    </Link>
-                </td>
-            </tr>
+                  if (quiz.is_presented) {
+                    handleSetIsSurvey(quiz.quiz_id, quiz.survey_id);
+                  }
+
+                  const url = `${module_id}/${quiz[surveyIdOrQuizId]}/${
+                      quiz.is_presented ? 'members' : 'edit-' + surveyOrQuiz
+                  }`;
+
+                  hashHistory.push(url);
+
+              } }
+          >
+            <span className="quiz__index">{ index + 1 }</span>
+            {
+              quiz.is_presented
+              ? <p className="logo--white quiz__logo--white"></p>
+              : <p className="logo quiz__logo"></p>
+            }
+            <div className="f-header quiz__name">{ quiz.name }</div>
+            <div className="quiz__questions">{ `${ +quiz.num_questions } Question${ +quiz.num_questions === 1 ? '' : 's'}` }</div>
+            {
+              quiz.is_presented
+              ? <div className="quiz__entries">{ +quiz.num_entries + ' entries' }</div>
+              : <div className="quiz__buttons">
+                    <button
+                    className="button button__primary"
+                    onClick={ (e) => {
+                        e.stopPropagation();
+                        hashHistory.push(`${location.pathname}/live`);
+                        sendQuizInvite(quiz.quiz_id, quiz.survey_id, quiz.name);
+                    } }>Run Quiz</button>
+                    <button
+                    className="button button__primary"
+                    onClick={ (e) => {
+                        e.stopPropagation();
+                        hashHistory.push(`${location.pathname}/live`);
+                        sendQuizInvite(quiz.quiz_id, quiz.survey_id, quiz.name, true);
+                    } }>Preview Quiz</button>
+                </div>
+            }
+            {
+                quiz.is_last_quiz &&
+                    <span className="quiz__last-message">(This is the last quiz)</span>
+            }
+            <div className="line"></div>
+          </div>
         );
     });
 
@@ -73,34 +92,18 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id, isSurvey, handl
             <h3 className="headline module__headline">
                 { surveyOrQuizPluralCapitalized }
             </h3>
+            <div className="table">
+                { desktopView }
+            </div>
             <Link className="module__button__link" to={ `${module_id}/new-quiz` } >
 
-                <button className="button button__secondary">
+                <button className="button button__secondary quizzes__button">
                     <span className="icon">
                         <i className="fa fa-plus" />
                     </span>
                     <span>Add a new { surveyOrQuiz }</span>
                 </button>
             </Link>
-
-            <table className="table">
-                <thead>
-                    <tr>
-                        <th>name</th>
-                        <th># questions</th>
-                        <th># entries</th>
-                        <th>Presented?</th>
-                        { !isSurvey &&
-                            <th>Last { surveyOrQuizCapitalized }?</th>
-                        }
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    { desktopView }
-                </tbody>
-            </table>
         </div>
     );
 };
