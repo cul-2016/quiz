@@ -18,6 +18,8 @@ function getReview (client, id, isSurvey, callback) {
     } else {
         getQuizReviewQuery = queries.getSurveyReview;
     }
+
+    console.log(getQuizReviewQuery, '<<<<<<<<<<');
     query(client, getQuizReviewQuery, idArray, (error, response) => {
 
         if (error) {

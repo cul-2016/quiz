@@ -6,34 +6,36 @@ const LiveQuizButtons = ({ is_lecturer, numQuestions, nextQuestionIndex,
                            isResponseSubmitted, startQuiz, endQuiz, //eslint-disable-line no-unused-vars
                            quiz_id, response, review, handleAbortQuiz }) => { //eslint-disable-line no-unused-vars
 
-    let startButtonClasses = classnames("button is-large is-success start-quiz-button", {
+    let startButtonClasses = classnames("button button--large button__primary start-quiz-button", {
         "display-none": !is_lecturer || isQuizStarted
     });
 
-    let nextButtonClasses = classnames("button is-large is-warning", {
+    let nextButtonClasses = classnames("button button__secondary", {
         "display-none": !is_lecturer || nextQuestionIndex === 0 || nextQuestionIndex === numQuestions
     });
 
-    let endButtonClasses = classnames("button is-large is-success", {
+    let endButtonClasses = classnames("button button--large button__primary", {
         "display-none": !is_lecturer || nextQuestionIndex !== numQuestions
     });
 
 
 
     return (
-        <div className="column is-8 is-offset-2 has-text-centered">
+        <div>
+            <div className="button__wrapper button__wrapper--centered">
+                <button className={ startButtonClasses } onClick={ startQuiz }>
+                    Start quiz
+                </button>
+            </div>
+            <div className="button__wrapper button__wrapper--right">
+                <button className={ nextButtonClasses } onClick={ nextQuestion }>
+                    Next question
+                </button>
 
-            <button className={ startButtonClasses } onClick={ startQuiz }>
-                Start quiz!
-            </button>
-
-            <button className={ nextButtonClasses } onClick={ nextQuestion }>
-                Next question
-            </button>
-
-            <button className={ endButtonClasses } onClick={ () => review ? handleAbortQuiz(quiz_id) : endQuiz(quiz_id) }>
-                { review ? 'End Review' : 'End quiz' }
-            </button>
+                <button className={ endButtonClasses } onClick={ () => review ? handleAbortQuiz(quiz_id) : endQuiz(quiz_id) }>
+                    { review ? 'End Review' : 'End quiz' }
+                </button>
+            </div>
         </div>
     );
 };

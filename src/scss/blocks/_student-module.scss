@@ -2,10 +2,14 @@
     background-color: $white;
     height: 100vh;
 
-    .headline {
+    .f-headline {
         margin-top: 2rem;
     }
-    .headline, .title, .button, .trophy {
+    .f-headline, .f-title, .button, .trophy {
         margin: 0.5rem 1rem;
+    }
+
+    .quiz__item__score--percent, .quiz__item__name {
+      color: $black;
     }
 }

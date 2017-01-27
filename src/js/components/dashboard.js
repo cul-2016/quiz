@@ -42,22 +42,24 @@ class Dashboard extends Component {
                     <h2 className="f-display"> Modules </h2>
                     {
                         is_lecturer &&
-                            <Link to="add-new-module">
-                                <button className="button is-info">
-                                    <span className="icon">
-                                        <i className="fa fa-plus" />
-                                    </span>
-                                    <span>
-                                        Add a new module
-                                    </span>
-                                </button>
-                            </Link>
+                        <div className="dashboard__lecturer">
+                          <Link to="add-new-module">
+                            <button className="button button__dark">
+                              <span className="icon">
+                                <i className="fa fa-plus" />
+                              </span>
+                              <span>
+                                New Module
+                              </span>
+                            </button>
+                          </Link>
+                        </div>
                     }
                     {
                         !is_lecturer &&
                             <div className="card card__secondary">
                                 <input
-                                  className="form__input--add-module"
+                                  className="form__input form__input--add-module"
                                   value={ module_id || '' }
                                   onChange={ (e) => handleInputChange(e.target.value)}
                                   type="text"

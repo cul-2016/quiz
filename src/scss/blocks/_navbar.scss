@@ -20,7 +20,6 @@
 
         &--left {
             float: left;
-            margin-left: 15%;
         }
 
         &--right {
@@ -33,8 +32,20 @@
             color: $white;
         }
         &--quit {
-            border-bottom: 2px solid $red;
             color: $red;
+            position: relative;
+
+            &::after { /* simulates underline on word */
+                content: "";
+                display: inline-block;
+                position: absolute;
+                width: 2.25rem;
+                height: 0.125rem;
+                bottom: 0.5rem;
+                left: 50%;
+                transform: translateX(-50%);
+                background-color: $red;
+            }
         }
     }
 
@@ -46,5 +57,13 @@
         box-shadow: none;
         background-color: $white;
 
+    }
+    &--invisible {
+        box-shadow: none;
+        background: none;
+        max-width: 62rem; /* 960px + 32px */
+        padding: 0 0 0 2rem; /* supports screens smaller than 960px */
+        margin: auto;
+        box-sizing: border-box;
     }
 }

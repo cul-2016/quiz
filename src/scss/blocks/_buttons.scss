@@ -1,6 +1,6 @@
 .button {
     display: inline-block;
-    padding: 0.25rem 0.5rem; /* a bit of space on top and a bit more on the sides of the word(s) */
+    padding: 0.5rem 1rem; /* a bit of space on top and a bit more on the sides of the word(s) */
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance:  none; /* Removes NATIVE styling (esp. when .button is an input)*/
@@ -8,7 +8,7 @@
     border-radius: 3px;
     font-weight: 400;
     font-size: 1rem;   /* This (and partly line-height) should determine the majority of the height of the element */
-    line-height: 1.5;
+    line-height: 2;
     letter-spacing: 0.4px;
     text-decoration: none;
     text-transform: capitalize;
@@ -17,10 +17,20 @@
     background-color: #F5F5F5;
     border: 1px solid #3E3E3E;
 
+        &:active {
+            box-shadow: none;
+            padding-top: 0.35rem;
+            padding-bottom: 0.15rem;
+        }
+
     &--large {
-        font-size: 1.5rem;
-        line-height: 2;
-        padding: 0.5rem 1rem;
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 2.5rem;
+    }
+    &--wider {
+        padding-left: 3rem;
+        padding-right: 3rem;
     }
 
     &__primary {
@@ -31,7 +41,6 @@
         &--large {
             font-size: 1.5rem;
             line-height: 2;
-            padding: 0.5rem 1rem;
         }
     }
 
@@ -43,7 +52,6 @@
         &--large {
             font-size: 1.5rem;
             line-height: 2;
-            padding: 0.5rem 1rem;
         }
     }
 
@@ -55,8 +63,13 @@
         &--large {
             font-size: 1.5rem;
             line-height: 2;
-            padding: 0.5rem 1rem;
         }
+    }
+
+    &__dark {
+      background-color: $black;
+      color: $white;
+      box-shadow: none;
     }
     &__icon {
         &--right {
@@ -76,5 +89,23 @@
                 float: left;
             }
         }
+    }
+    &__wrapper {
+        max-width: 62rem;
+        margin: auto;
+        padding: 0 2rem;
+        &--centered {
+            text-align: center;
+        }
+        &--right {
+            text-align: right;
+        }
+    }
+
+    &__disabled {
+      pointer-events: none;
+      cursor: default;
+      background-color: $white;
+      box-shadow: none;
     }
 }

@@ -1,0 +1,62 @@
+.new-module {
+  background-color: $black;
+  min-height: 100vh;
+  color: $white;
+
+}
+
+.medal-values {
+
+    max-width: 21rem;
+    height: 7rem;
+
+    &--bronze {
+        float:left;
+        width:7rem;
+    }
+    &--silver {
+        display: inline-block;
+        margin:0 auto;
+        width:7rem;
+
+        .f-body {
+            line-height: 3rem;
+        }
+    }
+    &--gold {
+        float:right;
+        width:7rem;
+    }
+
+    .medal-values--header {
+      position: relative;
+      padding: 0.75rem 0;
+
+      .medal-small {
+        position: absolute;
+        float: left;
+      }
+
+      .f-small-body {
+        line-height: 1.6rem;
+        margin-left: 2rem;
+      }
+    }
+}
+
+.new-module-trophies {
+  width: 25rem;
+  display: inline-block;
+  padding: 0.5rem 0;
+
+  .trophy__small--new-module {
+    margin: 0.5rem 0.5rem 0.5rem 0;
+  }
+  p.f-small-body {
+    display: inherit;
+  }
+
+  .form__input--trophy {
+      float: right;
+  }
+}

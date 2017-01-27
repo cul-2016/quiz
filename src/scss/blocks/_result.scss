@@ -1,0 +1,24 @@
+.result {
+    background-color: $light-blue;
+    min-height: 100vh;
+    text-align: center;
+}
+
+
+.result__score {
+  width: 15rem;
+  position: relative;
+  margin: 1rem auto;
+
+  .f-label--dark {
+    position: absolute;
+    right: 2rem;
+    top: 4rem;
+  }
+
+  .f-display {
+    position: absolute;
+    right: 1.2rem;
+    bottom: 0rem;
+  }
+}

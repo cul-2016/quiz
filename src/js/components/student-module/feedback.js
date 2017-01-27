@@ -10,14 +10,13 @@ const Feedback = ({ ranking, quizzes, participation, module }) => {
 
     return (
         <div className="performance">
-
-            <nav className="navbar navbar__secondary">
-                <li className="navbar__item">
-                    <Link to={ `${module.module_id}/student` } className="navbar__link navbar__link--left navbar__link--back">
-                        Back
-                    </Link>
-                </li>
-            </nav>
+            <ul className="navbar navbar--invisible">
+                 <li className="navbar__item">
+                     <Link to={ `${module.module_id}/student` } className="navbar__link navbar__link--left navbar__link--back">
+                       Back
+                     </Link>
+                 </li>
+             </ul>
 
             <div className="f-subheader f-subheader--light"> My Performance in:</div>
             <div className="f-title">{ module.name }</div>

@@ -64,7 +64,9 @@ const mapDispatchToProps = (dispatch) => ({
                 }
             );
             dispatch(addNewModule(data));
-            hashHistory.push('/dashboard');
+            setTimeout(() => {
+                hashHistory.push('/dashboard');
+            }, 300);
         }
     }
 });

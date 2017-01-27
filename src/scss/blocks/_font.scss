@@ -4,12 +4,20 @@
     letter-spacing: -0.1rem;
     color: $black;
     &--primary-dark {
-        color: #059A9A;
-        text-shadow: 0px 2px 0px 0px #98F0F0;
+        color: $dark-blue;
+        text-shadow: 0px 2px 0px 0px $light-blue;
     }
     &--primary-light {
-        color: #98F0F0;
-        text-shadow: 0px 2px 0px 0px #059A9A;
+        color: $light-blue;
+        text-shadow: 0px 2px 0px 0px $dark-blue;
+    }
+    &--tertiary {
+        color: $light-pink;
+        text-shadow: 2px 2px 0px $red;
+    }
+    &--secondary {
+        color: $red;
+        text-shadow: 2px 0 0 $light-pink;
     }
 }
 
@@ -23,6 +31,33 @@
 
     &--primary {
         color: $gold;
+    }
+
+    &--secondary {
+        color: $red;
+    }
+
+    &--light {
+      color: $white;
+    }
+}
+
+.f-title {
+    font-size: 1.75rem;
+    font-weight: 300;
+    line-height: 2rem;
+    color: $black;
+
+    &--primary {
+        color: $gold;
+    }
+
+    &--secondary {
+        color: $blue;
+    }
+
+    &--light {
+        color: $grey;
     }
 }
 
@@ -39,28 +74,6 @@
         color: $white;
     }
 }
-.f-title {
-    font-size: 1.75rem;
-    font-weight: 300;
-    line-height: 2rem;
-    color: $black;
-
-    &--primary {
-        color: $gold;
-    }
-
-    &--light {
-        color: $grey;
-    }
-}
-
-.f-subheader {
-    font-family: 'Ubuntu';
-    font-size: 1.25rem;
-    font-weight: bold;
-    line-height: 1.5rem;
-    color: $black;
-}
 
 .f-body {
     font-size: 1rem;
@@ -71,7 +84,7 @@
     &--primary {
         color: $gold;
     }
- 
+
     &--secondary {
         color: $blue;
     }
@@ -85,6 +98,7 @@
     }
 
     &--light {
+        color: white;
         font-weight: 500;
     }
 
@@ -93,17 +107,6 @@
     }
 
 
-}
-
-.f-small-body {
-    font-size: 0.75rem;
-    font-weight: bold;
-    line-height: 1.25rem;
-    color: $black;
-
-    &--dark {
-        color: $dark-blue;
-    }
 }
 
 .f-label {
@@ -115,6 +118,23 @@
 
     &--dark {
         color: $black;
+    }
+}
+
+.f-small-body {
+    font-size: 0.75rem;
+    font-weight: bold;
+    line-height: 1.25rem;
+    color: $black;
+
+    &--dark {
+        color: $dark-blue;
+    }
+    &--light {
+        color: $white;
+    }
+    &--primary {
+        color: $gold;
     }
 }
 

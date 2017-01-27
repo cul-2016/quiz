@@ -19,50 +19,46 @@ const NewModule = ({ isValidatingModuleID, moduleIDExists,
         return !isNaN(originalValue) ? originalValue + offset : '-';
     }
 
-    let validationClasses = classnames("button is-success has-text-centered", {
-        "is-disabled": validateForm(name, module_id, moduleIDExists, medals, trophies)
+    let validationClasses = classnames("button button__primary f-subheader", {
+        "button__disabled": validateForm(name, module_id, moduleIDExists, medals, trophies)
     });
 
 
     return (
-            <div>
-                <div className="new-module container">
-                    <h2 className="has-text-centered"> Add a new module </h2>
-                    <div className="column">
-                        <Link to={ `/dashboard` }>
-                            <button className="button is-3 is-light is-inverted">
-                                <span className="icon">
-                                    <i className="fa fa-chevron-left"></i>
-                                </span>
-                                <span>Back to Dashboard</span>
-                            </button>
-                        </Link>
-                    </div>
-                    <div className="notification container average is-info has-text-centered">
-                        <p> { text.newModule } </p>
-                    </div>
+              <div className="new-module">
+                  <ul className="navbar navbar--invisible">
+                    <li className="navbar__item">
+                      <Link to={ `/dashboard` } className="navbar__link navbar__link--left navbar__link--back">
+                        Back
+                      </Link>
+                    </li>
+                  </ul>
+                  <div className="content__body">
+                    <h2 className="f-headline f-headline--primary"> New Module </h2>
                     <div className="columns">
-                        <Details module_id={ module_id }
-                                 moduleIDExists={ moduleIDExists }
-                                 isValidatingModuleID={ isValidatingModuleID }
-                                 module_id_length={ module_id.length }
-                                 handleCodeInputChange={ handleCodeInputChange }
-                                 handleInputChange={ handleInputChange } />
-                        <Medals medals={ medals }
-                                updateMedalVals={ updateMedalVals }
-                                applyOffset={ applyOffset }/>
+                      <Details module_id={ module_id }
+                        moduleIDExists={ moduleIDExists }
+                        isValidatingModuleID={ isValidatingModuleID }
+                        module_id_length={ module_id.length }
+                        handleCodeInputChange={ handleCodeInputChange }
+                        handleInputChange={ handleInputChange } />
+                      <p className="line line--primary"></p>
+                      <h2 className="f-subheader f-subheader--light"> Medals and Trophies </h2>
+                      <Medals medals={ medals }
+                        updateMedalVals={ updateMedalVals }
+                        applyOffset={ applyOffset }/>
 
-                        <Trophies trophies={ trophies }
-                                  updateTrophyVals={ updateTrophyVals }
-                                  applyOffset={ applyOffset } />
+                      <Trophies trophies={ trophies }
+                        updateTrophyVals={ updateTrophyVals }
+                        applyOffset={ applyOffset } />
+                      <p className="line line--primary"></p>
                     </div>
-                    <div className="has-text-centered">
-                        <button className={ validationClasses } onClick={ submit }>
-                            Save module
-                        </button>
-                    </div>
-                </div>
-            </div>
+                      <button className={ validationClasses } onClick={ submit }>
+                        Save Module
+                      </button>
+
+                  </div>
+              </div>
     );
 };
 
