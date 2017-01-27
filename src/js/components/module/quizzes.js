@@ -35,7 +35,7 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id, isSurvey, handl
         return (
           <div
               key={ index }
-              className="quiz"
+              className="module-quiz"
               onClick={ () => {
 
                   if (quiz.is_presented) {
@@ -50,18 +50,18 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id, isSurvey, handl
 
               } }
           >
-            <span className="quiz__index">{ index + 1 }</span>
+            <span className="module-quiz__index">{ index + 1 }</span>
             {
               quiz.is_presented
               ? <p className="logo--white quiz__logo--white"></p>
               : <p className="logo quiz__logo"></p>
             }
-            <div className="f-header quiz__name">{ quiz.name }</div>
-            <div className="quiz__questions">{ `${ +quiz.num_questions } Question${ +quiz.num_questions === 1 ? '' : 's'}` }</div>
+            <div className="f-header module-quiz__name">{ quiz.name }</div>
+            <div className="module-quiz__questions">{ `${ +quiz.num_questions } Question${ +quiz.num_questions === 1 ? '' : 's'}` }</div>
             {
               quiz.is_presented
-              ? <div className="quiz__entries">{ +quiz.num_entries + ' entries' }</div>
-              : <div className="quiz__buttons">
+              ? <div className="module-quiz__entries">{ +quiz.num_entries + ' entries' }</div>
+              : <div className="module-quiz__buttons">
                     <button
                     className="button button__primary"
                     onClick={ (e) => {
@@ -80,7 +80,7 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id, isSurvey, handl
             }
             {
                 quiz.is_last_quiz &&
-                    <span className="quiz__last-message">(This is the last quiz)</span>
+                    <span className="module-quiz__last-message">(This is the last quiz)</span>
             }
             <div className="line"></div>
           </div>

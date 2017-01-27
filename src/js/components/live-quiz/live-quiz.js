@@ -21,13 +21,13 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                 {
                     !isQuizStarted && !is_lecturer &&
                     <div className="student-view">
-                        <nav className="navbar navbar__secondary">
-                            <li className="navbar__item">
-                                <Link to={ `${params.module_id}/student` } className="navbar__link navbar__link--left navbar__link--back">
-                                    Quit
-                                </Link>
-                            </li>
-                        </nav>
+                        <ul className="navbar navbar--invisible">
+                             <li className="navbar__item">
+                                 <Link to={ `${module.module_id}/student` } className="navbar__link navbar__link--left navbar__link--back">
+                                   Quit
+                                 </Link>
+                             </li>
+                         </ul>
 
                         <p className="f-subheader f-subheader--tertiary">Joining...</p>
                         <p className="logo logo--large logo--large--animated"></p>
@@ -121,7 +121,7 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                             <p className="f-subheader"> Q{ nextQuestionIndex }.</p>
                             <p className="f-body">{ question.question }</p>
                         </div>
-                        
+
                         <CurrentQuestion
                             data={ question }
                             handleSelection={ handleSelection }
@@ -176,7 +176,7 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                                 endQuiz={ endQuiz }
                                 quiz_id={ quiz_id }
                                 response={ response } />
-                        </div>            
+                        </div>
                     </div>
                 }
         </section>
@@ -202,7 +202,7 @@ LiveQuiz.propTypes = {
     numParticipants: PropTypes.number,
     handleAbortQuiz: PropTypes.func,
     params: PropTypes.object,
-    review: PropTypes.bool 
+    review: PropTypes.bool
 };
 
 export default LiveQuiz;
