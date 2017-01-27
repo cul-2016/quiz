@@ -10,10 +10,6 @@
         padding: 1rem;
     }
 
-    .subheader {
-    }
-
-
     .button__primary {
         padding: 1rem 2rem;
         margin: 1rem auto;
@@ -23,4 +19,8 @@
         padding: 0.5rem 2rem;
     }
 
+    &__err-message {
+      display: block;
+      margin-top: 2rem;
+    }
 }

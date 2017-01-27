@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Signup from '../components/signup';
-import { updateInputField, registeringUser } from '../actions/register';
+import { updateInputField, registeringUser } from '../actions/register.js';
 
 const mapStateToProps = (state) => ({
     register: state.register
