@@ -21,7 +21,7 @@ const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthentic
             <h1 className="f-headline"><img src="/Yellow.svg"></img></h1>
             <h3 className="f-subheader"> Realtime Quizzes for better lectures </h3>
 
-            <form className="form">
+            <div className="form">
                 <div className="form__field f-body">
                     <label className="form__label">Email / Username</label>
                     <input
@@ -46,7 +46,7 @@ const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthentic
                 <button onClick={ handleOnSubmit } className="button button__primary">
                     <p className="f-subheader">Log in</p>
                 </button>
-            </form>
+            </div>
 
             <p className="f-body f-body--dark"> Don't have an Account? </p>
             <div> <Link className="f-subheader" to="/register-student"> Sign Up </Link> </div>
