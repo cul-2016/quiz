@@ -3,6 +3,7 @@ import ShowAnswer from './show-answer';
 import ReviewButtons from './review-buttons';
 import Spinner from '../general/spinner';
 import classnames from 'classnames';
+import { Link } from 'react-router';
 
 const Review = ({ isFetchingReview, question, numQuestions, currentQuizIndex, isAnswerShowing, handleIsAnswerShowing, handleIncrementCurrentQuizIndex, endReview, params, handleGoBack, isSurvey }) => {
 
@@ -16,24 +17,26 @@ const Review = ({ isFetchingReview, question, numQuestions, currentQuizIndex, is
                 isFetchingReview && <Spinner />
             }
             <div>
-                <div className={ backButtonClasses }>
-                    <button onClick={ handleGoBack } className="button is-3 is-light">
-                        <span className="icon">
-                            <i className="fa fa-chevron-left"></i>
-                        </span>
-                        <span>Back</span>
-                    </button>
-                </div>
-                <div className="column has-text-centered" >
-                    <h3>Question { currentQuizIndex + 1 }</h3>
-                </div>
+                <ul className="navbar navbar--invisible">
+                    <li className="navbar__item">
+                        <Link to={ `${params.module_id}/lecturer` } className="f-body navbar__link navbar__link--left navbar__link--quit">
+                          Quit
+                        </Link>
+                    </li>
+                </ul>
             </div>
             {
                 question &&
-                <ShowAnswer
-                    isAnswerShowing={ isAnswerShowing }
-                    data={ question }
-                    isSurvey={ isSurvey } />
+                <div className="content" >
+                    <div className="live-quiz__question-wrapper">
+                        <p className="live-quiz__question-number f-display"> Q{ currentQuizIndex + 1 }.</p>
+                        <p className="live-quiz__question f-title">{ question.question }</p>
+                    </div>
+                    <ShowAnswer
+                        isAnswerShowing={ isAnswerShowing }
+                        data={ question }
+                        isSurvey={ isSurvey } />
+                </div>
             }
             <ReviewButtons
                 isAnswerShowing={ isAnswerShowing }
