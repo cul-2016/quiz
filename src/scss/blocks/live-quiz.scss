@@ -1,7 +1,7 @@
 .live-quiz {}
 
 // QUESTION
-    
+
     .live-quiz__question-wrapper {
         max-width: 60rem;
         margin: 2.5rem auto;
@@ -11,7 +11,7 @@
     .live-quiz__question,
     .live-quiz__question-number {
         display: table-cell;
-        vertical-align: middle;    
+        vertical-align: middle;
     }
     .live-quiz__question-number {
         padding-right: 1rem;
@@ -51,12 +51,17 @@
     .live-quiz__letter { /* A,B,C, or D */
         text-transform: capitalize;
     }
-    .live-quiz__answer-text { /* text of the option */
+    .live-quiz__answer-text, .live-quiz__total-replies { /* text of the option */
         padding-left: 1rem;
         line-height: 1.75;
     }
-        .live-quiz__letter, 
-        .live-quiz__answer-text {
+
+    .live-quiz__answer-text {
+      width: 22.685rem;
+    }
+        .live-quiz__letter,
+        .live-quiz__answer-text,
+        .live-quiz__total-replies {
             display: table-cell;
             vertical-align: middle;
         }

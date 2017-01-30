@@ -28,21 +28,25 @@ const ShowAnswer = ({ isAnswerShowing, data, isSurvey }) => {
 
     let answersWithResponse = answersArray.map((letter, i) => {
 
-        let classes = classnames("box answer", {
-            "correct_answer": !isSurvey && isAnswerShowing && letter === data.correct_answer.toLowerCase()
+        let classes = classnames("card live-quiz__answer", {
+            "live-quiz__answer--response": !isSurvey && isAnswerShowing && letter === data.correct_answer.toLowerCase()
         });
         return (
             <div key={ i } className={ classes }>
-                <span>{ `${data[letter]}` }</span>
-                <div className="num-responses">{ `${+data[responsesArray[i]]}`}</div>
+                <div className="live-quiz__answer-inner">
+                    <span className="live-quiz__letter f-title f-title--light">{ `${letter}` }</span>
+                    <span className="live-quiz__answer-text f-body">{ `${data[letter]}` }</span>
+                    <span className="live-quiz__total-replies f-title">{ `${+data[responsesArray[i]]}`}</span>
+                </div>
             </div>
         );
 
     });
     return (
-        <div className="current-question">
-            <h1>{ data.question }</h1>
-            { answersWithResponse }
+        <div className="live-quiz__answers-wrapper">
+            <div className="live-quiz__answers">
+                { answersWithResponse }
+            </div>
         </div>
     );
 };
