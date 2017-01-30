@@ -16,6 +16,8 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
         "display-none": !nextQuestionIndex
     });
 
+    console.log('REVIEW: ', review, 'ISQUIZSTARTED: ', isQuizStarted, 'IS_LECTURE: ', is_lecturer, 'QUESTION: ', question);
+
     return (
         <section className="live-quiz container">
                 {
@@ -61,7 +63,9 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                                 <h1 className="quiz__name f-display f-display--tertiary">{name}</h1>
                             </div>
 
-                            <p className="quiz__cta f-title">Join this Quiz at <span className="f-title f-title--secondary">app.quodl.co.uk</span> with Module code:</p>
+                            <p className="quiz__cta f-title">
+                                Join this Quiz at <span className="f-title f-title--secondary">app.quodl.co.uk</span> with Module code:
+                            </p>
                             <div className="quiz__module">
                                 <span className="f-headline quiz__module-code">
                                     {params.module_id}
@@ -78,6 +82,8 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                                 startQuiz={ startQuiz }
                                 endQuiz={ endQuiz }
                                 quiz_id={ quiz_id }
+                                review={ review }
+                                handleAbortQuiz={ handleAbortQuiz }
                                 response={ response } />
                             <span className="quiz__copy quiz__copy--center f-subheader">
                                 { numParticipants } Students Connected
@@ -100,6 +106,8 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                             startQuiz={ startQuiz }
                             endQuiz={ endQuiz }
                             quiz_id={ quiz_id }
+                            review={ review }
+                            handleAbortQuiz={ handleAbortQuiz }
                             response={ response } />
                         <button onClick={ () => handleAbortQuiz(quiz_id) } className="button is-danger">
                             Abort Quiz
@@ -175,6 +183,8 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                                 startQuiz={ startQuiz }
                                 endQuiz={ endQuiz }
                                 quiz_id={ quiz_id }
+                                review={ review }
+                                handleAbortQuiz={ handleAbortQuiz }
                                 response={ response } />
                         </div>
                     </div>
