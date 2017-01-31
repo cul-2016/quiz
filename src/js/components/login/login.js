@@ -23,7 +23,7 @@ const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthentic
 
             <div className="form">
                 <div className="form__field f-body">
-                    <label className="form__label">Email / Username</label>
+                    <label className="form__label">Email</label>
                     <input
                         onKeyDown={ submitOnEnter }
                         onChange={ (e) => handleEmailChange(e.target.value) }

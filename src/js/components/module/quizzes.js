@@ -68,14 +68,14 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id, isSurvey, handl
                         e.stopPropagation();
                         hashHistory.push(`${location.pathname}/live`);
                         sendQuizInvite(quiz.quiz_id, quiz.survey_id, quiz.name);
-                    } }>Run Quiz</button>
+                    } }>Run { surveyOrQuizCapitalized }</button>
                     <button
                     className="button button__primary"
                     onClick={ (e) => {
                         e.stopPropagation();
                         hashHistory.push(`${location.pathname}/live`);
                         sendQuizInvite(quiz.quiz_id, quiz.survey_id, quiz.name, true);
-                    } }>Preview Quiz</button>
+                    } }>Preview { surveyOrQuizCapitalized }</button>
                 </div>
             }
             {
