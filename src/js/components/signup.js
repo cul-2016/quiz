@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import classnames from 'classnames';
 import { Link } from 'react-router';
 import isEmail from 'validator/lib/isEmail';
+import lowerCaseBeforeAt from '../lib/lowerCaseBeforeAt.js';
 
 const Signup = ({ register, handleChange, handleRegisteringUser, location }) => {
 
@@ -88,7 +89,7 @@ const Signup = ({ register, handleChange, handleRegisteringUser, location }) => 
                     onKeyDown={ submitOnEnter }
                     className="form__input"
                     value={ register.email }
-                    onChange={ (e) => handleChange("email", e.target.value) }
+                    onChange={ (e) => handleChange("email", lowerCaseBeforeAt(e.target.value).trim()) }
                     type="email" />
                 <span className={ invalidEmailClasses }>This email is invalid</span>
                 </div>

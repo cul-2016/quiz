@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import isEmail from 'validator/lib/isEmail';
+import lowerCaseBeforeAt from '../../lib/lowerCaseBeforeAt.js';
 
 const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthenticateUser }) => {
 
@@ -23,10 +24,10 @@ const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthentic
 
             <div className="form">
                 <div className="form__field f-body">
-                    <label className="form__label">Email / Username</label>
+                    <label className="form__label">Email</label>
                     <input
                         onKeyDown={ submitOnEnter }
-                        onChange={ (e) => handleEmailChange(e.target.value) }
+                        onChange={ (e) => handleEmailChange(lowerCaseBeforeAt(e.target.value).trim()) }
                         className="form__input"
                         type="text"
                     ></input>
@@ -42,6 +43,9 @@ const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthentic
                 </div>
                 <div className={ login.userIsAuthenticated ? 'display-none' : 'f-body--warning' }>
                     { login.message }
+                </div>
+                <div className={ login.email && !isEmail(login.email) ? 'f-body--warning' : 'display-none' }>
+                    Invalid Email Address
                 </div>
                 <button onClick={ handleOnSubmit } className="button button__primary">
                     <p className="f-subheader">Log in</p>
