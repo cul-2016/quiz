@@ -28,7 +28,6 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                                  <Link
                                     to={ `${params.module_id}/student` }
                                     className="navbar__link navbar__link--left navbar__link--back"
-                                    onClick={ () => handleAbortQuiz(quiz_id) }
                                  >
                                    Quit
                                  </Link>
@@ -130,7 +129,6 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                                 <Link
                                     to={ `${params.module_id}/student` }
                                     className="navbar__link navbar__link--left navbar__link--quit "
-                                    onClick={ () => handleAbortQuiz(quiz_id) }
                                 >
                                     Quit
                                 </Link>
