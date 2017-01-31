@@ -27,7 +27,7 @@ const StudentModule = ({ location,
         let medalClass = classnames({
             "quiz__item__score--medal--gold": percentageScore >= medalConditions[1],
             "quiz__item__score--medal--silver": percentageScore >= medalConditions[0] && percentageScore < medalConditions[1],
-            "quiz__item__score--medal--bronze": percentageScore < medalConditions[0] && percentageScore > 0
+            "quiz__item__score--medal--bronze": percentageScore < medalConditions[0] && percentageScore >= 0
         });
 
         return (
