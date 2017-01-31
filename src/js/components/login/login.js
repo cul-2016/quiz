@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import isEmail from 'validator/lib/isEmail';
+import lowerCaseBeforeAt from '../../lib/lowerCaseBeforeAt.js';
 
 const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthenticateUser }) => {
 
@@ -26,7 +27,7 @@ const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthentic
                     <label className="form__label">Email</label>
                     <input
                         onKeyDown={ submitOnEnter }
-                        onChange={ (e) => handleEmailChange(e.target.value) }
+                        onChange={ (e) => handleEmailChange(lowerCaseBeforeAt(e.target.value).trim()) }
                         className="form__input"
                         type="text"
                     ></input>
