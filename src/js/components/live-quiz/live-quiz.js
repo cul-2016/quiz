@@ -25,7 +25,10 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                     <div className="student-view">
                         <ul className="navbar navbar--invisible">
                              <li className="navbar__item">
-                                 <Link to={ `${params.module_id}/student` } className="navbar__link navbar__link--left navbar__link--back">
+                                 <Link
+                                    to={ `${params.module_id}/student` }
+                                    className="navbar__link navbar__link--left navbar__link--back"
+                                 >
                                    Quit
                                  </Link>
                              </li>
@@ -50,7 +53,11 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
 
                         <ul className="navbar navbar--invisible">
                             <li className="navbar__item">
-                                <Link to={ `${params.module_id}/lecturer` } className="f-body navbar__link navbar__link--left navbar__link--quit">
+                                <Link
+                                    to={ `${params.module_id}/lecturer` }
+                                    className="f-body navbar__link navbar__link--left navbar__link--quit"
+                                    onClick={ () => handleAbortQuiz(quiz_id) }
+                                >
                                   Quit
                                 </Link>
                             </li>
@@ -119,7 +126,10 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                     <div className="student-view__questions">
                         <ul className="navbar navbar__light navbar__light--tertiary">
                             <li className="navbar__item">
-                                <Link to={ `${params.module_id}/student` } className="navbar__link navbar__link--left navbar__link--quit ">
+                                <Link
+                                    to={ `${params.module_id}/student` }
+                                    className="navbar__link navbar__link--left navbar__link--quit "
+                                >
                                     Quit
                                 </Link>
                             </li>
@@ -158,7 +168,11 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                     <div>
                         <ul className="navbar navbar--invisible">
                             <li className="navbar__item">
-                                <Link to={ `${params.module_id}/lecturer` } className="f-body navbar__link navbar__link--left navbar__link--quit">
+                                <Link
+                                    to={ `${params.module_id}/lecturer` }
+                                    className="f-body navbar__link navbar__link--left navbar__link--quit"
+                                    onClick={ () => handleAbortQuiz(quiz_id) }
+                                >
                                   Quit
                                 </Link>
                             </li>
