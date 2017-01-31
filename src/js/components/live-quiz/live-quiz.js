@@ -16,8 +16,6 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
         "display-none": !nextQuestionIndex
     });
 
-    console.log('REVIEW: ', review, 'ISQUIZSTARTED: ', isQuizStarted, 'IS_LECTURE: ', is_lecturer, 'QUESTION: ', question);
-
     return (
         <section className="live-quiz container">
                 {
