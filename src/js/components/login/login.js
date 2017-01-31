@@ -44,6 +44,9 @@ const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthentic
                 <div className={ login.userIsAuthenticated ? 'display-none' : 'f-body--warning' }>
                     { login.message }
                 </div>
+                <div className={ login.email && !isEmail(login.email) ? 'f-body--warning' : 'display-none' }>
+                    Invalid Email Address
+                </div>
                 <button onClick={ handleOnSubmit } className="button button__primary">
                     <p className="f-subheader">Log in</p>
                 </button>
