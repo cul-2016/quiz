@@ -104,8 +104,9 @@
 
     &__disabled {
       pointer-events: none;
-      cursor: default;
+      cursor: not-allowed;
       background-color: $white;
+      color: $black;
       box-shadow: none;
     }
 }
