@@ -1,34 +1,48 @@
 import React, { PropTypes } from 'react';
+import classnames from 'classnames';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-const RadioButton = ({ question, value, idx, handleInputChange }) => <input { ...{
-    type: "radio",
-    className: "radio column is-1 radio-button",
-    checked: question.correct_answer === value,
-    name: idx,
-    value: value,
-    onChange: (e) => handleInputChange('correct_answer', e.target.value, idx)
-} } />;
+const RadioButton = ({ question, value, idx, handleInputChange }) => {
 
-const InputChanger = ({ question, value, idx, handleInputChange }) => <input { ...{
+    const sliderClass = classnames({
+        "form__radio--off": question.correct_answer !== value,
+        "form__radio--on": question.correct_answer === value
+    });
+    const sliderCircleClass = classnames({
+        "form__radio--off--circle": question.correct_answer !== value,
+        "form__radio--on--circle": question.correct_answer === value
+    });
+    const sliderCylinderClass = classnames({
+        "form__radio--off--cylinder": question.correct_answer !== value,
+        "form__radio--on--cylinder": question.correct_answer === value
+    });
+
+    return (
+            <div className={ sliderClass }>
+              <p className="f-small-body f-small-body--grey">correct</p>
+            <div onClick={ () => handleInputChange('correct_answer', value, idx) }>
+              <div className={ sliderCylinderClass }></div>
+              <div className= { sliderCircleClass }></div>
+            </div>
+          </div>
+    );
+};
+
+const InputChanger = ({ question, value, idx, handleInputChange }) => <textarea { ...{
     type: "text",
-    className: "input column is-9",
+    className: "form__input form__input--new-quiz-answer",
     value: question[value] || "",
     onChange: (e) => handleInputChange(value, e.target.value, idx),
-    placeholder: 'a'
+    placeholder: value
 } } />;
 
 const Option = ({ question, value, idx, isSurvey, handleInputChange }) =>
-    <div className="control is-horizontal">
-        <div className="control-label answer-label">
-            <label className="f-label">{ value.toUpperCase() }</label>
-        </div>
-        <div className="control">
+    <div className="form__radio">
+        <label className="f-title form__label form__label--new-quiz">{ value.toUpperCase() }</label>
             <InputChanger {...{ question, value, idx, handleInputChange }}/>
             { !isSurvey &&
                 <RadioButton {...{ question, value, idx, handleInputChange }}/>
             }
-        </div>
     </div>;
 
 const Questions = ({ questions, handleInputChange, handleDeleteQuestion, isSurvey }) => {
@@ -41,10 +55,11 @@ const Questions = ({ questions, handleInputChange, handleDeleteQuestion, isSurve
 
     let mappedQuestions = questions.map((question, i) => {
         return (
-            <div key={ `question-${i}` } className="column is-6 is-offset-3 question box">
+            <div key={ `question-${i}` } className="card">
 
-                <label className="f-label"> Question { i + 1 }</label>
-                <textarea className="textarea" type="text" value={ question.question } onChange={ (e) => handleInputChange('question', e.target.value, i) } placeholder='question'></textarea>
+                <label className="form__label--new-quiz f-subheader">{ i + 1 }.</label>
+                <textarea className="form__input form__input--new-quiz-question" type="text" value={ question.question } onChange={ (e) => handleInputChange('question', e.target.value, i) } placeholder='Question'></textarea>
+                <div className="line--new-quiz"></div>
 
                 { ['a', 'b', 'c', 'd'].map((value, idx) =>
                     <Option { ...{ key: `option-${idx}`,

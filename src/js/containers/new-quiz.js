@@ -30,6 +30,7 @@ const mapDispatchToProps = (dispatch) => ({
     },
 
     handleInputChange: (inputType, value, index) => {
+      console.log(inputType, value, index);
         dispatch(updateValue(inputType, value, index));
     },
 
@@ -49,8 +50,8 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(toggleIsLastQuiz());
     },
 
-    handleIsSurvey: (e) => {
-        dispatch(toggleIsSurvey(e));
+    handleIsSurvey: () => {
+        dispatch(toggleIsSurvey());
     }
 });
 
