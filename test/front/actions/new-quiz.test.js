@@ -325,13 +325,9 @@ test('getQuizDetailsFailure creates the correct action', (t) => {
 test('toggleIsSurvey creates the correct action', (t) => {
 
     t.plan(1);
-
-    const checked = true;
-    const mockEvent = { target: { checked } };
     const expected = {
-        type: actions.TOGGLE_IS_SURVEY,
-        isSurvey: true
+        type: actions.TOGGLE_IS_SURVEY
     };
-    const actual = deepFreeze(actions.toggleIsSurvey(mockEvent));
+    const actual = deepFreeze(actions.toggleIsSurvey());
     t.deepEqual(actual, expected);
 });
