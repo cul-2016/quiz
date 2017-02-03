@@ -18,10 +18,10 @@ const Module = ({ location, module, quizzes, surveys, isFetchingModule, sendQuiz
                 <div className="container module content__body">
 
                     <Details name={ module.name }
-                             module_id={ module.module_id }
-                             num_enrolled={ module.num_enrolled }
-                             trophies={ module.trophies }
-                             medals={ module.medals }/>
+                        module_id={ module.module_id }
+                        num_enrolled={ module.num_enrolled }
+                        trophies={ module.trophies }
+                        medals={ module.medals }/>
 
                     <Quizzes quizzes={ quizzes }
                         location={ location }
