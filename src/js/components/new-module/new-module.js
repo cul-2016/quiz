@@ -41,14 +41,16 @@ const NewModule = ({ isValidatingModuleID, moduleIDExists,
                         handleCodeInputChange={ handleCodeInputChange }
                         handleInputChange={ handleInputChange } />
                       <p className="line line--primary"></p>
-                      <h2 className="f-subheader f-subheader--light"> Medals and Trophies </h2>
+                      <h2 className="f-subheader f-subheader--light"> Medals {/*and Trophies */} </h2>
                       <Medals medals={ medals }
                         updateMedalVals={ updateMedalVals }
                         applyOffset={ applyOffset }/>
 
-                      <Trophies trophies={ trophies }
-                        updateTrophyVals={ updateTrophyVals }
-                        applyOffset={ applyOffset } />
+                      {/* Commented out as trophy functionality is currently being taken out
+                          <Trophies trophies={ trophies }
+                            updateTrophyVals={ updateTrophyVals }
+                            applyOffset={ applyOffset } />
+                      */}
                       <p className="line line--primary"></p>
                     </div>
                       <button className={ validationClasses } onClick={ submit }>

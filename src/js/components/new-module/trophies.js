@@ -55,7 +55,7 @@ class Trophies extends React.Component {
         });
 
         return (
-            <div className="section column">
+            <div className="trophies">
                 <h3 className="f-body f-body--light">
                     Trophies
                 </h3>
