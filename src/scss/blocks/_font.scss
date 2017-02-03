@@ -100,6 +100,10 @@
     &--light {
         font-weight: 500;
     }
+    &--white {
+        color: $white;
+        font-weight: 500;
+    }
 
     &--dark {
       color: $dark-blue;
