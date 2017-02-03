@@ -1,7 +1,5 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
-import Trophies from './trophies';
-import Medals from './medals';
 import classnames from 'classnames';
 
 const Leaderboard = ({ mainData, medalScores, quiz_id_list, medalCondition, params }) => { //eslint-disable-line no-unused-vars

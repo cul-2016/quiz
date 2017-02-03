@@ -16,9 +16,9 @@ socketClient.on('we have connected', (id) => {
     console.log("We're connected!", id);
     const room = store.getState().module.module_id;
     if (room) {
-      socketClient.emit("join_room", room, () => {
-        console.log('you madddee it!');
-      });
+        socketClient.emit("join_room", room, () => {
+            console.log('you madddee it!');
+        });
     }
 });
 

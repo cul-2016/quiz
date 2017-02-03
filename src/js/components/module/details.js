@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react';
 import Medals from './medals.js';
 import { Link } from 'react-router';
 
-const Details = ({ name, module_id, num_enrolled, trophies, medals }) => {
+const Details = ({ name, module_id, num_enrolled, medals }) => {
 
     return (
         <div>

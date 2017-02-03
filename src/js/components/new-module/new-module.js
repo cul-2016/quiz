@@ -5,8 +5,6 @@ import Details from './details';
 import Medals from './medals';
 import Trophies from './trophies';
 import validateForm from '../../lib/validateForm';
-import text from '../../lib/newModuleRollovers.json';
-
 
 const NewModule = ({ isValidatingModuleID, moduleIDExists,
                      medals, trophies, updateMedalVals, updateTrophyVals,

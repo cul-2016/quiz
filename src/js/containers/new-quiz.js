@@ -30,7 +30,6 @@ const mapDispatchToProps = (dispatch) => ({
     },
 
     handleInputChange: (inputType, value, index) => {
-      console.log(inputType, value, index);
         dispatch(updateValue(inputType, value, index));
     },
 

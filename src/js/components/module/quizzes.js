@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import classnames from 'classnames';
 import { Link, hashHistory } from 'react-router';
 
 const Quizzes = ({ location, quizzes, sendQuizInvite, module_id, isSurvey, handleSetIsSurvey }) => {
@@ -7,30 +6,8 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id, isSurvey, handl
     const surveyOrQuiz = isSurvey ? 'survey' : 'quiz';
     const surveyIdOrQuizId = isSurvey ? 'survey_id' : 'quiz_id';
     const surveyOrQuizCapitalized = isSurvey ? 'Survey' : 'Quiz';
-    const surveyOrQuizPluralCapitalized = isSurvey ? 'Surveys' : 'Quizzes';
 
     const desktopView = quizzes.slice().reverse().map((quiz, index) => {
-
-        let iconClasses = classnames("fa", {
-            "fa-check": quiz.is_presented === true,
-            "fa-times": quiz.is_presented === false
-        });
-
-        let is_last_quizClasses = classnames("fa", {
-            "fa-check": quiz.is_last_quiz
-        });
-
-        let buttonClass = classnames("", {
-            "display-none": quiz.is_presented
-        });
-
-        let quizHistoryClass = classnames("", {
-            "display-none": !quiz.is_presented
-        });
-
-        let editQuizClass = classnames("", {
-            "display-none": quiz.is_presented
-        });
 
         return (
           <div
@@ -39,7 +16,7 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id, isSurvey, handl
               onClick={ () => {
 
                   if (quiz.is_presented) {
-                    handleSetIsSurvey(quiz.quiz_id, quiz.survey_id);
+                      handleSetIsSurvey(quiz.quiz_id, quiz.survey_id);
                   }
 
                   const url = `${module_id}/${quiz[surveyIdOrQuizId]}/${

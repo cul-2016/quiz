@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import classnames from 'classnames';
 
-const Question = ({ idx, question, is_lecturer, showAnswer }) => {
+const Question = ({ idx, question, is_lecturer }) => {
 
     const { isAnswerShowing, response, correct_answer } = question;
     const showAnswers = is_lecturer || isAnswerShowing;
@@ -84,7 +84,6 @@ Question.propTypes = {
     idx: PropTypes.number.isRequired,
     is_lecturer: PropTypes.bool.isRequired,
     question: PropTypes.object.isRequired,
-    showAnswer: PropTypes.func
 };
 
 export default Question;
