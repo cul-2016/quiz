@@ -1,12 +1,30 @@
 .module {
+  margin: 2rem 6rem;
+  border: 1px solid;
+  padding: 2rem 4rem;
+
+  &__medal-grouping {
+    .medal-container {
+      display: inline-block;
+    }
+
+    margin: 0 3rem;
+    display: inline-block;
+  }
+
+  &__line {
+    width: inherit;
+  }
+
   &__medals-and-trophies {
-    margin: 2rem 4rem;
+    margin: 1rem 4rem;
   }
 
   &__trophies, &__medals {
-    display: inline-block;
-    width: 50%;
     text-align: center;
+    h4 {
+      margin: 1rem;
+    }
   }
 
   &__table {
@@ -18,12 +36,12 @@
   }
 
   &__buttons {
-    text-align: center;
-    margin: 1.5rem 0;
+    text-align: right;
+    margin: 0.5rem 0;
   }
 
   &__button {
-    margin: 0.5rem;
+    padding: 0.2rem 1rem;
   }
 
   &__button__link {
@@ -35,7 +53,6 @@
   }
 
   .table {
-    margin: 1rem 2rem;
     text-align: center;
 
     th td {
@@ -44,18 +61,23 @@
   }
 
   .f-display, .f-body--primary {
-    margin: 1rem 2rem;
+    margin: 0;
+  }
+
+  .f-body {
+    float: left;
+    margin-top: 0.7rem;
+    font-size: 1.8rem;
+    line-height: 2rem;
   }
 
   .quizzes {
-    padding: 1.5rem;
-    margin: 1rem 2rem;
+    margin: 1rem 0;
   }
 }
 
 .module-quiz {
   display: block;
-  padding: 2.5rem;
   position: relative;
 
   &__index,

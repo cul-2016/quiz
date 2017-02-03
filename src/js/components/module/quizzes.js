@@ -89,9 +89,6 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id, isSurvey, handl
 
     return (
         <div className="quizzes">
-            <h3 className="headline module__headline">
-                { surveyOrQuizPluralCapitalized }
-            </h3>
             <div className="table">
                 { desktopView }
             </div>
