@@ -5,7 +5,7 @@ import classnames from 'classnames';
 
 
 const NewQuiz = ({
-    newQuiz: { name, questions, is_last_quiz, isSavingQuiz, isSurvey },
+    newQuiz: { name, questions, is_last_quiz, isSurvey },
     handleAddQuestion,
     handleDeleteQuestion,
     handleInputChange,
@@ -17,20 +17,13 @@ const NewQuiz = ({
     params
 }) => {
 
-  console.log(isSurvey);
-
     const questionsValidation = questions.map((questionObj) => {
         const { question, a, b, correct_answer } = questionObj;
         return Boolean(question && a && b && (correct_answer || isSurvey));
     }).every((elem) => elem);
-
     const submitClasses = classnames("button button__tertiary", {
         "button__disabled": !name || questionsValidation === false,
     });
-    const quizNameClasses = classnames("help is-danger", {
-        "display-none": name
-    });
-
     const lastQuizIconClasses = classnames("fa", {
         "fa-square": !is_last_quiz,
         "fa-check-square": is_last_quiz

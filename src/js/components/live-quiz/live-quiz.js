@@ -2,8 +2,6 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import CurrentQuestion from './current-question';
 import LiveQuizButtons from './live-quiz-buttons.js';
-import classnames from 'classnames';
-
 
 const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                     nextQuestion, isQuizStarted, submitResponse, //eslint-disable-line no-unused-vars
@@ -11,10 +9,6 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                     numQuestions, endQuiz, quiz_id,
                     handleSelection, response, name, //eslint-disable-line no-unused-vars
                     numParticipants, handleAbortQuiz, params, review }) => {
-
-    let titleClass = classnames({
-        "display-none": !nextQuestionIndex
-    });
 
     return (
         <section className="live-quiz container">

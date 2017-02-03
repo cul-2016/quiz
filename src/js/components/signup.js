@@ -10,11 +10,6 @@ const Signup = ({ register, handleChange, handleRegisteringUser, location }) => 
 
     const is_lecturer = location.pathname !== '/register-student';
 
-    let registerButtonClasses = classnames("button is-warning login-button", {
-        "is-disabled": !isEmailValid || !register.password || !register.username || register.password !== register.confirmPassword,
-        "is-loading": register.isRegistering === true
-    });
-
     let invalidEmailClasses = classnames("help is-danger", {
         "display-none": register.email.length === 0 || isEmailValid
     });
@@ -22,10 +17,6 @@ const Signup = ({ register, handleChange, handleRegisteringUser, location }) => 
     let passwordMatchClasses = classnames("form__input", {
         "is-success": register.confirmPassword !== "" && register.password === register.confirmPassword,
         "is-danger": register.confirmPassword.length >= register.password.length && register.confirmPassword !== register.password
-    });
-
-    let outerSectionClasses = classnames("login outer", {
-        "blue-hero": is_lecturer === false
     });
 
     const submitOnEnter = (e) => {

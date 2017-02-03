@@ -16,7 +16,7 @@ class Dashboard extends Component {
 
     render () {
 
-        let { modules, is_lecturer, module_id, moduleIDExists, handleInputChange, handleJoinModule } = this.props;
+        let { modules, is_lecturer, module_id, handleInputChange, handleJoinModule } = this.props;
 
 
         let moduleList = modules.map((module, i) => {
@@ -83,7 +83,10 @@ class Dashboard extends Component {
 
 Dashboard.propTypes = {
     modules: PropTypes.array.isRequired,
-    is_lecturer: PropTypes.bool.isRequired
+    is_lecturer: PropTypes.bool.isRequired,
+    module_id: PropTypes.string.isRequired,
+    handleInputChange: PropTypes.func.isRequired,
+    handleJoinModule: PropTypes.func.isRequired
 };
 
 export default Dashboard;

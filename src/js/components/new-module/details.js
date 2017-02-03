@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import classnames from 'classnames';
-import text from '../../lib/newModuleRollovers.json';
 
 const REQUIRED_ID_LENGTH = 4;
 
@@ -23,24 +22,16 @@ class Details extends React.Component {
 
         let { module_id, moduleIDExists, isValidatingModuleID, module_id_length, handleCodeInputChange, handleInputChange } = this.props;
 
-        const moduleIDClasses = classnames("input", {
-            "is-danger": moduleIDExists === true && !isValidatingModuleID && module_id_length === REQUIRED_ID_LENGTH,
-            "is-success": moduleIDExists === false && !isValidatingModuleID && module_id_length === REQUIRED_ID_LENGTH
-        });
-
         const iconClasses = classnames("fa", {
             "fa-warning": moduleIDExists === true && !isValidatingModuleID && module_id_length === REQUIRED_ID_LENGTH,
             "fa-check": moduleIDExists === false && !isValidatingModuleID && module_id_length === REQUIRED_ID_LENGTH
         });
-        console.log(moduleIDExists, module_id_length, REQUIRED_ID_LENGTH, isValidatingModuleID);
         const moduleIDHelpClasses = classnames("f-small-body", {
             "f-small-body--light": moduleIDExists === true && !isValidatingModuleID && module_id_length === REQUIRED_ID_LENGTH,
         });
-        console.log(moduleIDHelpClasses);
         const toggleClassnamesName = classnames("notification container average is-info has-text-centered ", {
             "display-none": !this.state.name
         });
-
         const toggleClassnamesCode = classnames("notification container average is-info has-text-centered ", {
             "display-none": !this.state.code
         });
