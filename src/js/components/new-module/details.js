@@ -32,9 +32,11 @@ class Details extends React.Component {
             "fa-warning": moduleIDExists === true && !isValidatingModuleID && module_id_length === REQUIRED_ID_LENGTH,
             "fa-check": moduleIDExists === false && !isValidatingModuleID && module_id_length === REQUIRED_ID_LENGTH
         });
+        console.log(moduleIDExists, module_id_length, REQUIRED_ID_LENGTH, isValidatingModuleID);
         const moduleIDHelpClasses = classnames("f-small-body", {
-            "display-none": moduleIDExists === true && !isValidatingModuleID && module_id_length === REQUIRED_ID_LENGTH
+            "f-small-body--light": moduleIDExists === true && !isValidatingModuleID && module_id_length === REQUIRED_ID_LENGTH,
         });
+        console.log(moduleIDHelpClasses);
         const toggleClassnamesName = classnames("notification container average is-info has-text-centered ", {
             "display-none": !this.state.name
         });
