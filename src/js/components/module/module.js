@@ -14,7 +14,7 @@ const Module = ({ location, module, quizzes, surveys, isFetchingModule, sendQuiz
         {
             !isFetchingModule &&
             <div>
-                <div className="container module">
+                <div className="container module content__body">
 
                     <Details name={ module.name }
                              module_id={ module.module_id }

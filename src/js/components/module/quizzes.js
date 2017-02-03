@@ -59,7 +59,7 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id, isSurvey, handl
                 quiz.is_last_quiz &&
                     <span className="module-quiz__last-message">(This is the last quiz)</span>
             }
-            <div className="line"></div>
+            <div className="line module-quiz__line"></div>
           </div>
         );
     });

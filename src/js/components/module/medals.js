@@ -6,7 +6,7 @@ const Medals = ({ medals }) => {
 
     return (
       <div className="module__medals">
-          <h4>Medal Thresholds</h4>
+          <h4 className="subheader module__title-under-line">Medal Thresholds</h4>
           
           <div className="module__medal-grouping">
               <Medal percentageScore={ medals.condition[1] + 1 } medalConditions={ medals.condition } />

@@ -1,7 +1,11 @@
 .module {
-  margin: 2rem 6rem;
+  margin: 3rem auto;
   border: 1px solid;
   padding: 2rem 4rem;
+
+  &__title-under-line {
+    color: $dark-grey;
+  }
 
   &__medal-grouping {
     .medal-container {
@@ -42,6 +46,7 @@
 
   &__button {
     padding: 0.2rem 1rem;
+    margin-left: 1rem;
   }
 
   &__button__link {
@@ -91,6 +96,11 @@
     position:absolute;
   }
 
+  &__line {
+    height: 1px;
+    background-color: $pale-grey;
+  }
+
   &__index {
     left: 5rem;
     top: 1rem;
@@ -104,6 +114,10 @@
   &__buttons {
     top: 0.5rem;
     right: 3rem;
+
+    .button {
+      margin-left: 0.5rem;
+    }
   }
 
   &__name {
@@ -114,6 +128,7 @@
   &__questions {
     top: 1.7rem;
     left: 11rem;
+    color: $dark-blue;
   }
 
   &__entries {
