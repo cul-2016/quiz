@@ -10,10 +10,6 @@ const Medal = ({ percentageScore, medalConditions }) => {
         "medal-small--bronze": percentageScore < medalConditions[0] && percentageScore >= 0
     });
 
-    { /* let containerClass = classnames("medal-container", {
-         "display-none": percentageScore === 0
-    }); */ }
-
     return (
         <div className="medal-container">
             <div className="ribbon" />
