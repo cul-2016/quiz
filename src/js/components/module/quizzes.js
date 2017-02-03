@@ -1,11 +1,12 @@
 import React, { PropTypes } from 'react';
-import { Link, hashHistory } from 'react-router';
+import { hashHistory } from 'react-router';
 
 const Quizzes = ({ location, quizzes, sendQuizInvite, module_id, isSurvey, handleSetIsSurvey }) => {
 
     const surveyOrQuiz = isSurvey ? 'survey' : 'quiz';
     const surveyIdOrQuizId = isSurvey ? 'survey_id' : 'quiz_id';
     const surveyOrQuizCapitalized = isSurvey ? 'Survey' : 'Quiz';
+    const surveyOrQuizPluralCapitalized = isSurvey ? 'Surveys' : 'Quizzes';
 
     const desktopView = quizzes.slice().reverse().map((quiz, index) => {
 
@@ -66,18 +67,12 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id, isSurvey, handl
 
     return (
         <div className="quizzes">
+            <h3 className="headline module__headline">
+               { surveyOrQuizPluralCapitalized }
+            </h3>
             <div className="table">
                 { desktopView }
             </div>
-            <Link className="module__button__link" to={ `${module_id}/new-quiz` } >
-
-                <button className="button button__secondary quizzes__button">
-                    <span className="icon">
-                        <i className="fa fa-plus" />
-                    </span>
-                    <span>Add a new { surveyOrQuiz }</span>
-                </button>
-            </Link>
         </div>
     );
 };

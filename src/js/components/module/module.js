@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
 import Details from './details.js';
 import Quizzes from './quizzes.js';
 const  Surveys = Quizzes;
@@ -34,6 +35,15 @@ const Module = ({ location, module, quizzes, surveys, isFetchingModule, sendQuiz
                         sendQuizInvite={ sendQuizInvite }
                         module_id={ module.module_id }
                         handleSetIsSurvey={ handleSetIsSurvey }/>
+
+                    <Link className="module__button__link" to={ `${module.module_id}/new-quiz` } >
+                        <button className="button button__secondary quizzes__button">
+                            <span className="icon">
+                                <i className="fa fa-plus" />
+                            </span>
+                            <span>Add a new Survey/Quiz</span>
+                        </button>
+                    </Link>
                 </div>
             </div>
         }
