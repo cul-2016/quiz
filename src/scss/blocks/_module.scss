@@ -106,13 +106,12 @@
   }
 
   &__index {
-    left: 5rem;
+    left: 1rem;
     top: 1rem;
   }
 
-  &__logo, &__logo--white {
-    left: 7rem;
-    top: 0;
+  .logo, .logo--white {
+    margin-left: 4rem;
   }
 
   &__buttons {
