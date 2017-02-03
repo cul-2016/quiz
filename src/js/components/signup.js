@@ -41,7 +41,7 @@ const Signup = ({ register, handleChange, handleRegisteringUser, location }) => 
             && register.password === register.confirmPassword
         ) {
             handleRegisteringUser(
-                register.email,
+                lowerCaseBeforeAt(register.email).trim(),
                 register.username,
                 register.password,
                 is_lecturer
@@ -56,7 +56,7 @@ const Signup = ({ register, handleChange, handleRegisteringUser, location }) => 
             && register.password === register.confirmPassword
         ) {
             handleRegisteringUser(
-                register.email,
+                lowerCaseBeforeAt(register.email).trim(),
                 register.username,
                 register.password,
                 is_lecturer
@@ -89,7 +89,7 @@ const Signup = ({ register, handleChange, handleRegisteringUser, location }) => 
                     onKeyDown={ submitOnEnter }
                     className="form__input"
                     value={ register.email }
-                    onChange={ (e) => handleChange("email", lowerCaseBeforeAt(e.target.value).trim()) }
+                    onChange={ (e) => handleChange("email", e.target.value) }
                     type="email" />
                 <span className={ invalidEmailClasses }>This email is invalid</span>
                 </div>
