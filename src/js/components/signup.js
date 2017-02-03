@@ -6,13 +6,9 @@ import lowerCaseBeforeAt from '../lib/lowerCaseBeforeAt.js';
 
 const Signup = ({ register, handleChange, handleRegisteringUser, location }) => {
 
-    let isEmailValid = isEmail(register.email);
-    let is_lecturer;
-    if (location.pathname === '/register-student') {
-        is_lecturer = false;
-    } else {
-        is_lecturer = true;
-    }
+    const isEmailValid = isEmail(register.email);
+
+    const is_lecturer = location.pathname !== '/register-student';
 
     let registerButtonClasses = classnames("button is-warning login-button", {
         "is-disabled": !isEmailValid || !register.password || !register.username || register.password !== register.confirmPassword,
@@ -33,19 +29,8 @@ const Signup = ({ register, handleChange, handleRegisteringUser, location }) => 
     });
 
     const submitOnEnter = (e) => {
-        if (
-            e.keyCode === 13
-            && isEmailValid
-            && register.password
-            && register.username
-            && register.password === register.confirmPassword
-        ) {
-            handleRegisteringUser(
-                lowerCaseBeforeAt(register.email).trim(),
-                register.username,
-                register.password,
-                is_lecturer
-            );
+        if (e.keyCode === 13) {
+            handleOnSubmit();
         }
     };
 
