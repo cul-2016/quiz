@@ -15,13 +15,13 @@ const getQuestionsForUser = (user_id, rows) => {
                 if (!prevQuestionIdResponse) {
                     const indexOfPrevQuestId = prev
                         .map((question) => question.question_id)
-                        .indexOf(curr.question_id)
+                        .indexOf(curr.question_id);
 
                     return [
                         ...prev.slice(0, indexOfPrevQuestId),
                         curr,
                         ...prev.slice(indexOfPrevQuestId + 1)
-                    ]
+                    ];
                 } else {
                     return prev;
                 }
@@ -39,7 +39,7 @@ const getQuestionsForUser = (user_id, rows) => {
             response: question.response
         }));
 
-}
+};
 
 /**
  * Returns from the database quiz info
@@ -75,6 +75,6 @@ const getQuizDetailsStudent = (client, quiz_id, user_id, callback) => {
 
         callback( null, getQuestionsForUser(user_id, questions.rows));
     });
-}
+};
 
 module.exports = { getQuizDetailsStudent, getQuestionsForUser };
