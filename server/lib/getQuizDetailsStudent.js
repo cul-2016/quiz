@@ -14,24 +14,30 @@ var query = require('./query');
 function getQuizDetailsStudent (client, quiz_id, user_id, callback) {
 
     const questionsQuery = [
-        'SELECT questions.question,',
-        'questions.a, questions.b, questions.c, questions.d,',
-        'questions.correct_answer, responses.response',
-        'FROM questions JOIN responses ON',
-        'questions.quiz_id = $1 AND',
-        'responses.user_id = $2 AND',
-        'questions.quiz_id = responses.quiz_id AND',
-        'questions.question_id = responses.question_id',
-        'ORDER BY questions.question_id;'
+        'SELECT',
+        'q.question, q.a, q.b, q.c, q.d, q.correct_answer, r.response, r.user_id',
+        'FROM',
+        'questions as q',
+        'LEFT OUTER JOIN',
+        'responses as r',
+        'on q.question_id = r.question_id',
+        'WHERE q.quiz_id = $1',
+        'ORDER BY q.question_id'
     ].join(' ');
 
-    query(client, questionsQuery, [quiz_id, user_id], (error, questions) => {
+    query(client, questionsQuery, [quiz_id], (error, questions) => {
         /* istanbul ignore if */
         if (error) {
             console.error(error);
             return callback(error);
         }
-        callback(null, questions.rows);
+
+        callback(
+            null,
+            questions.rows.filter(
+                (row) => !row.user_id || row.user_id === user_id
+            )
+        );
     });
 }
 
