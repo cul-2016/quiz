@@ -50,8 +50,8 @@ export default class Result extends Component {
                     <span className="f-label--dark">You Score:</span>
                     <span className="f-display f-display--secondary">{ percentageScore }%</span>
                 </div>
-                <Link  className="button button__secondary" to={ `${module_id}/student/history/${quiz_id}`}>
-                  See my Answers
+                <Link  className="button button__secondary" to={ `${module_id}/student`}>
+                  Finish
                 </Link>
             </div>
         );

@@ -74,7 +74,7 @@ const NewQuiz = ({
                                 Survey
                             </span>
                         </button>
-                        {
+                        {/*
                           !isSurvey &&
                           <div>
                               <button onClick={ handleIsLastQuiz } className={ lastQuizClasses }>
@@ -87,7 +87,7 @@ const NewQuiz = ({
                               </button>
                               <p className="f-small-body f-small-body--dark"> Check this box if this is the last quiz in a series </p>
                           </div>
-                        }
+                        */}
                         <div className="line line__tertiary"></div>
 
                     </div>
