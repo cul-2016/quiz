@@ -79,18 +79,21 @@ const StudentModule = ({ location,
                     </button>
                 </div>
 
-                <div className="trophy">
+                {/*
+
+                  <div className="trophy">
                     <label className="f-label"> Trophies </label>
                     <div className="trophy__small"> </div>
                     <span className="f-body"> 1/4 </span>
-                </div>
-                <Link to={ `${module.module_id}/student/performance` }>
-                    <button className="button button__secondary button__icon--right">
+                  </div>
+                */}
+                <Link className="button button__secondary button__icon--right" to={ `${module.module_id}/student/performance` }>
                         My Performance
-                        <span className="fa-chevron-right"></span>
-                    </button>
+                        <span className="icon">
+                          <i className="fa fa-chevron-right" />
+                        </span>
                 </Link>
-
+                
                 <div className="line line__tertiary"></div>
 
                 <div className="quiz">
