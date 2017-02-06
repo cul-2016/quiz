@@ -1,5 +1,46 @@
 var query = require('./query');
 
+const getQuestionsForUser = (user_id, rows) => {
+    return rows.filter((row) => !row.user_id || row.user_id === user_id)
+        .reduce((prev, curr) => {
+            const questionIdInPrev = prev.map(
+                (question) => question.question_id
+            ).includes(curr.question_id);
+
+            const prevQuestionIdResponse = (prev.filter(
+                (question) => question.question_id === curr.question_id
+            )[0] || {}).response;
+
+            if (questionIdInPrev) {
+                if (!prevQuestionIdResponse) {
+                    const indexOfPrevQuestId = prev
+                        .map((question) => question.question_id)
+                        .indexOf(curr.question_id)
+
+                    return [
+                        ...prev.slice(0, indexOfPrevQuestId),
+                        curr,
+                        ...prev.slice(indexOfPrevQuestId + 1)
+                    ]
+                } else {
+                    return prev;
+                }
+            } else {
+                return prev.concat(curr);
+            }
+        }, [])
+        .map((question) => ({
+            question: question.question,
+            a: question.a,
+            b: question.b,
+            c: question.c,
+            d: question.d,
+            correct_answer: question.correct_answer,
+            response: question.response
+        }));
+
+}
+
 /**
  * Returns from the database quiz info
  * (questions, options, correct answer and provided answer).
@@ -11,11 +52,11 @@ var query = require('./query');
  * @param {function} callback - callback function
  */
 
-function getQuizDetailsStudent (client, quiz_id, user_id, callback) {
+const getQuizDetailsStudent = (client, quiz_id, user_id, callback) => {
 
     const questionsQuery = [
         'SELECT',
-        'q.question, q.a, q.b, q.c, q.d, q.correct_answer, r.response, r.user_id',
+        'q.question, q.a, q.b, q.c, q.d, q.correct_answer, q.question_id, r.response, r.user_id',
         'FROM',
         'questions as q',
         'LEFT OUTER JOIN',
@@ -32,13 +73,8 @@ function getQuizDetailsStudent (client, quiz_id, user_id, callback) {
             return callback(error);
         }
 
-        callback(
-            null,
-            questions.rows.filter(
-                (row) => !row.user_id || row.user_id === user_id
-            )
-        );
+        callback( null, getQuestionsForUser(user_id, questions.rows));
     });
 }
 
-module.exports = getQuizDetailsStudent;
+module.exports = { getQuizDetailsStudent, getQuestionsForUser };
