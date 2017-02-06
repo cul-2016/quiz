@@ -4,23 +4,35 @@ import StudentHistory from '../student-module/history';
 import Spinner from '../general/spinner';
 
 
-const QuizHistoryModal = ({ isVisible, history, medalConditions, hide, username }) => {
-
+const QuizHistoryModal = ({ isVisible, history, hide, username, member }) => {
     let modalClasses = classnames("modal", {
-        "is-active": isVisible
+        "display-none": !isVisible || username !== member.username
+    });
+
+    let memberResults = history.map((quiz, i) => {
+
+        let percentageScore = Math.round(quiz.score / quiz.num_questions * 100);
+        return (
+          <div className="quiz__details" key={ i }>
+            <p className="f-small-body f-small-body--grey"> { i + 1 }</p>
+            <p className="f-small-body"> { quiz.score }</p>
+            <p className="f-small-body"> { percentageScore }</p>
+          </div>
+        );
     });
 
     return (
         <div className={ modalClasses }>
-            <div className="modal-background" />
             { !history && <Spinner /> }
             {
                 history &&
-                <div className="modal-container">
-                    <div className="modal-content box">
-                        <h3>{ `${username}'s quiz history` }</h3>
-                        <StudentHistory history={ history } medalConditions={ medalConditions } />
+                <div className="member__quiz__details">
+                    <div className="member__quiz__header">
+                      <p className="f-small-body f-small-body--grey">  Quiz </p>
+                      <p className="f-small-body f-small-body--grey"> Score </p>
+                      <p className="f-small-body f-small-body--grey"> % </p>
                     </div>
+                    { memberResults }
                 </div>
             }
             <button className="modal-close" onClick={ () => hide() } />
@@ -31,9 +43,9 @@ const QuizHistoryModal = ({ isVisible, history, medalConditions, hide, username 
 QuizHistoryModal.propTypes = {
     isVisible: PropTypes.bool.isRequired,
     history: PropTypes.array,
-    medalConditions: PropTypes.array,
     hide: PropTypes.func.isRequired,
-    username: PropTypes.string
+    username: PropTypes.string,
+    member: PropTypes.object
 };
 
 export default QuizHistoryModal;
