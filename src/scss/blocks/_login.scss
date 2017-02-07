@@ -15,9 +15,6 @@
         margin: 1rem auto;
     }
 
-    .form__field {
-        padding: 0.5rem 2rem;
-    }
 
     &__err-message {
       display: block;
@@ -36,6 +33,11 @@
 
 @media (min-width: 769px) {
   .login {
+
+
+        .form__field {
+            padding: 0.5rem 2rem;
+        }
 
       .content__body {
         position: relative;

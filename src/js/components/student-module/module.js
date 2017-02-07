@@ -12,12 +12,13 @@ const StudentModule = ({ location,
                         quiz_id, question, response, //eslint-disable-line no-unused-vars
                         handleJoiningQuiz, params, module,
                         review, history }) => { //eslint-disable-line no-unused-vars
-    let buttonAreaClasses = classnames("section has-text-centered transparent-background", {
+    let buttonAreaClasses = classnames("quiz-button section has-text-centered transparent-background", {
         "animated-infinite pulse": isQuizOpen
     });
 
-    let buttonClasses = classnames("button", {
-        "button__tertiary": isQuizOpen,
+    let buttonClasses = classnames("quiz__status-indicator quiz__status-indicator--live f-subheader f-subheader--tertiary", {
+        "quiz__status-indicator--live": isQuizOpen,
+        "quiz__status-indicator--off": !isQuizOpen
     });
 
     let mappedQuizzes = !isFetchingModule && history.map((quiz, i) => {
@@ -93,7 +94,7 @@ const StudentModule = ({ location,
                           <i className="fa fa-chevron-right" />
                         </span>
                 </Link>
-                
+
                 <div className="line line__tertiary"></div>
 
                 <div className="quiz">
