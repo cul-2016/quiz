@@ -3,6 +3,11 @@
     background-color: $white;
     min-height: 100vh;
 
+    .content__body {
+      margin: 0 auto;
+      padding-top: 2rem;
+    }
+
     .display {
         padding: 2rem 0 1rem 0;
     }
