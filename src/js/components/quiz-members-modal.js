@@ -1,25 +1,22 @@
 import React, { PropTypes } from 'react';
-import classnames from 'classnames';
-import QuizReviewLecturer from './review/quiz-review-lecturer';
+import Question from './review/quiz-question.js';
 
 
-const QuizMembersModal = ({ questions, hide, isVisible }) => {
+const QuizMembersModal = ({ questions }) => {
 
-    let modalClasses = classnames("modal", {
-        "is-active": isVisible
+    let mappedQuestions = questions.map((question, i) => {
+
+        return ( <Question
+            key={ `lecturer-question-${i}` }
+            idx={ i }
+            question={ { ...question, correct_answer: question.correct_answer || '' } }
+            is_lecturer={ true }
+        /> );
     });
 
-
     return (
-        <div className={ modalClasses }>
-            <div className="modal-background modal-content-outer">
-                <div className="modal-content-middle">
-                    <div className="modal-content-inner section container">
-                        <QuizReviewLecturer questions={ questions } />
-                    </div>
-                </div>
-            </div>
-            <button className="modal-close" onClick={ () => hide() } />
+        <div className="quiz-members-review">
+            { mappedQuestions }
         </div>
     );
 };

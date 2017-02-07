@@ -21,6 +21,15 @@
         color: $black;
         font-family: ubuntu;
 
+        &--edit-score {
+          font-size: 1.3rem;
+          font-weight: bold;
+          letter-spacing: 0.3rem;
+          padding: 0.25rem 0.5rem;
+          text-align: center;
+          display: block;
+          width: 15%;
+        }
         &--add-module {
             font-size: 1.3rem;
             font-weight: bold;

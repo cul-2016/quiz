@@ -1,0 +1,86 @@
+.quiz-member {
+    margin: 0.5rem 0;
+
+    .member__details {
+        display: inline-block;
+        width: 60%
+    }
+    .member__score-details {
+        display: inline-block;
+        width: 40%
+    }
+    .member__score, .member__score-percentage, .member__edit-score {
+        padding: 0 0.5rem;
+        display: inline-block;
+    }
+
+    .member__score-percentage {
+        width: 13%;
+    }
+
+    .edit__user__score {
+        width: 80%;
+        margin: 0.5rem 0 1rem 0;
+        padding: 1rem 2rem;
+        box-shadow: inset 0 -4px 0 0 $grey;
+        border: 1px solid #3E3E3E;
+
+        .button {
+          margin: 1rem 1rem 0 0;
+        }
+    }
+
+}
+
+.members {
+  margin: 1rem 0;
+}
+
+
+.quiz-members-review {
+
+    .card {
+        width: 100%;
+        padding: 0;
+    }
+
+    .question {
+        padding: 1rem;
+        border-bottom: 1px solid $black;
+    }
+
+    .response {
+        width: 50%;
+        display: inline-block;
+        padding: 1rem;
+        box-sizing: border-box;
+        background-color: $white;
+    }
+
+    .correct_answer {
+        background-color: #F1F1F1;
+        border: 2px solid $dark-gold;
+
+        .f-title {
+            color: $dark-gold;
+        }
+
+        .answer {
+          background-color: #F1F1F1;
+          width: 80%;
+        }
+    }
+
+    .letter {
+      display: inline-block;
+    }
+    .answer {
+      display: inline-block;
+      width: 80%;
+      padding-left: 0.5rem;
+    }
+    .num_responses {
+      display: inline-block;
+    }
+
+}

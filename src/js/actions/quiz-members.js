@@ -45,13 +45,10 @@ export const editScore = (module_id, quiz_id, user_id, score) => {
     return (dispatch) => {
 
         dispatch(editScoreRequest());
-
-        request.get(dispatch)(`edit-score?quiz_id=${quiz_id}&score=${score}`)
+        request.get(dispatch)(`edit-score?quiz_id=${quiz_id}&score=${score}&user_id=${user_id}`)
             .then(() => {
 
                 dispatch(editScoreSuccess());
-                //forward back to members area
-                hashHistory.push(`${module_id}/${quiz_id}/members`);
             })
             .catch((error) => {
                 dispatch(editScoreFailure(error));
