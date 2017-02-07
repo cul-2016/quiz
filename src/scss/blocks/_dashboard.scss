@@ -7,6 +7,15 @@
         padding: 2rem 0 1rem 0;
     }
 
+    .module__header {
+      display: none;
+    }
+
+    .card, .line {
+      width: 100%;
+      box-sizing: border-box;
+    }
+
     .form__input--add-module {
         width: 30%;
         float: left;
@@ -27,4 +36,45 @@
     .fa-plus:before {
         padding-right: 1rem;
     }
+}
+
+
+@media (min-width: 769px) {
+  .dashboard {
+
+      .f-display, .dashboard__lecturer {
+        text-align: left;
+      }
+
+      .module__header {
+        width: 100%;
+        display: inline-block;
+        box-sizing: border-box;
+        padding: 1rem;
+
+        .module__header__name {
+          display: inline-block;
+          width: 70%;
+          text-align: left;
+        }
+        .module__header__id {
+          width: 30%;
+          display: inline-block;
+          text-align: right;
+        }
+
+      }
+      .card {
+        margin: 0;
+        .module__name {
+          display: inline-block;
+          width: 70%;
+        }
+        .module__id {
+          width: 30%;
+          display: inline-block;
+          text-align: right;
+        }
+      }
+  }
 }
