@@ -1,7 +1,8 @@
-var query = require('./query');
+const query = require('./query.js');
 
 const getQuestionsForUser = (user_id, rows) => {
-    return rows.filter((row) => !row.user_id || row.user_id === user_id)
+    return rows
+        .filter((row) => !row.user_id || row.user_id === user_id)
         .reduce((prev, curr) => {
             const questionIdInPrev = prev.map(
                 (question) => question.question_id
@@ -17,11 +18,12 @@ const getQuestionsForUser = (user_id, rows) => {
                         .map((question) => question.question_id)
                         .indexOf(curr.question_id);
 
-                    return [
-                        ...prev.slice(0, indexOfPrevQuestId),
-                        curr,
-                        ...prev.slice(indexOfPrevQuestId + 1)
-                    ];
+                    return prev.map(
+                        (question, i) =>
+                            i === indexOfPrevQuestId
+                            ? curr
+                            : question
+                    );
                 } else {
                     return prev;
                 }
