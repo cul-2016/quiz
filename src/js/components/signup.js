@@ -42,77 +42,83 @@ const Signup = ({ register, handleChange, handleRegisteringUser, location }) => 
 
     return (
         <div className="login">
-            <p className="f-headline">
-                Register
-            </p>
+
+          <div className="content__body">
+            <div className="header">
+              <h1 className="f-headline f-headline--primary"><img src="/Yellow.svg"></img></h1>
+              <h3 className="f-headline"> Realtime Quizzes for better lectures </h3>
+            </div>
             { register.error &&
-                <span className="login__err-message">
-                    { register.error }
-                </span>
+              <span className="login__err-message">
+                { register.error }
+              </span>
             }
 
             {
               register.confirmPassword
               && register.confirmPassword !== register.password
               &&
-                <span className="login__err-message"> Passwords are not matching </span>
+              <span className="login__err-message"> Passwords are not matching </span>
             }
 
             <div className="form">
-                <div className="form__field f-body">
+              <div className="form__field f-body">
+                <p className="f-title">Register</p>
                 <label className="form__label">Email address</label>
                 <input
-                    onKeyDown={ submitOnEnter }
-                    className="form__input"
-                    value={ register.email }
-                    onChange={ (e) => handleChange("email", e.target.value) }
-                    type="email" />
+                  onKeyDown={ submitOnEnter }
+                  className="form__input"
+                  value={ register.email }
+                  onChange={ (e) => handleChange("email", e.target.value) }
+                  type="email" />
                 <span className={ invalidEmailClasses }>This email is invalid</span>
-                </div>
+              </div>
 
 
-                <div className="form__field f-body">
+              <div className="form__field f-body">
                 <label className="form__label">Choose a nickname</label>
                 <input
-                    onKeyDown={ submitOnEnter }
-                    className="form__input"
-                    value={ register.username }
-                    onChange={ (e) => handleChange("username", e.target.value)}
-                    type="username"/>
-                </div>
+                  onKeyDown={ submitOnEnter }
+                  className="form__input"
+                  value={ register.username }
+                  onChange={ (e) => handleChange("username", e.target.value)}
+                  type="username"/>
+              </div>
 
-                <div className="form__field f-body">
+              <div className="form__field f-body">
                 <label className="form__label">Choose a password</label>
                 <input
-                    onKeyDown={ submitOnEnter }
-                    className={ passwordMatchClasses }
-                    value={ register.password }
-                    onChange={ (e) => handleChange("password", e.target.value)}
-                    type="password" />
+                  onKeyDown={ submitOnEnter }
+                  className={ passwordMatchClasses }
+                  value={ register.password }
+                  onChange={ (e) => handleChange("password", e.target.value)}
+                  type="password" />
 
-                </div>
-                <div className="form__field f-body">
+              </div>
+              <div className="form__field f-body">
                 <label className="form__label">Confirm password</label>
                 <input
-                    onKeyDown={ submitOnEnter }
-                    className={ passwordMatchClasses }
-                    value={ register.confirmPassword }
-                    onChange={ (e) => handleChange("confirmPassword", e.target.value)}
-                    type="password" />
-                </div>
+                  onKeyDown={ submitOnEnter }
+                  className={ passwordMatchClasses }
+                  value={ register.confirmPassword }
+                  onChange={ (e) => handleChange("confirmPassword", e.target.value)}
+                  type="password" />
+              </div>
 
-                <button
-                    className="button button__primary"
-                    onClick={ handleOnSubmit }
-                    >Register
-                </button>
-            </div>
-
-            <div>
-                <Link to="/">
-                    Already have an account? Please sign in here
+              <button
+                className="button button__primary"
+                onClick={ handleOnSubmit }
+                >Register
+              </button>
+              <div>
+                <Link className="f-body" to="/">
+                  Already have an account? Please sign in here
                 </Link>
+              </div>
+
             </div>
+
+          </div>
         </div>
     );
 };

@@ -20,6 +20,9 @@
         background-color: $white;
         color: $black;
         font-family: ubuntu;
+        border-radius: 2px;
+        padding: 0.5rem 0;
+
 
         &--edit-score {
           font-size: 1.3rem;
@@ -81,6 +84,13 @@
         &--trophy {
           width: 3.5rem;
           height: 2.5rem
+        }
+
+        &--is-success {
+          border: 3px solid rgb(88, 170, 101);
+        }
+        &--is-danger {
+          border: 3px solid rgb(170, 88, 88);
         }
 
     }
