@@ -53,7 +53,7 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
     { url: '/get-review?id=1&isSurvey=true' },
     { url: '/get-quiz-members?id=1&isSurvey=true' },
     { url: '/get-quiz-members?id=1&isSurvey=false' },
-    { url: '/edit-score?quiz_id=1&score=2' },
+    { url: '/edit-score?quiz_id=1&score=2&user_id=1' },
     { url: '/get-quiz-details?quiz_id=1' },
     { url: '/get-quiz-details?survey_id=1' },
     { url: '/update-quiz', method: 'post', payload: updateQuizOptionsPayload },
