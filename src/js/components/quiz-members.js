@@ -35,7 +35,6 @@ class QuizMembers extends Component {
     }
 
     hideEditScore () {
-      console.log('you clicked hide');
         this.setState({
             isEditScoreVisible: false
         });
@@ -77,7 +76,7 @@ class QuizMembers extends Component {
                             <p>{ member.score } / {questions.length}</p>
                           </div>
                           <div className="member__score-percentage">
-                            <p>{ (member.score  / questions.length) * 100 }%</p>
+                            <p>{ Math.round((member.score  / questions.length) * 100) }%</p>
                           </div>
                           <div className="member__edit-score" onClick={ () => this.showEditScore(i) }>
                             <p className="f-body f-body--primary">Edit Score</p>
@@ -121,59 +120,16 @@ class QuizMembers extends Component {
                       <div className="content__body">
                           <p className="f-headline">Students&#39; Individual Scores</p>
                           <p className="f-title">In {quizName}</p>
-                        <section>
+                        <section className="members">
                             { mappedMembers }
                         </section>
+                        <QuizMembersModal
+                          isVisible={ this.state.isQuizQuestionsVisible }
+                          questions={ questions }
+                          hide={ this.hideQuizQuestions }/>
                       </div>
 
-                        <EditScoreModal
-                            isVisible={ this.state.isEditScoreVisible }
-                            hide={ this.hideEditScore }
-                            member_key={ this.state.member_key }
-                            members={ store.getState().quizMembers.members }
-                            quiz_id={ params.quiz_id }
-                            module_id={ params.module_id }
-                            handleEditScore={ handleEditScore }
-                            handleUpdateScore={ handleUpdateScore }/>
 
-                        <QuizMembersModal
-                            isVisible={ this.state.isQuizQuestionsVisible }
-                            questions={ questions }
-                            hide={ this.hideQuizQuestions }/>
-
-                        <h2 className="has-text-centered"> Quiz History </h2>
-                        <h3 className="has-text-centered"> { quizName } </h3>
-
-                        <div className="has-text-centered">
-                            <button className="button is-info show-quiz-questions-button" onClick={ () => this.showQuizQuestions() }>
-                                Show quiz questions
-                            </button>
-                        </div>
-
-                        <div className="section is-hidden-mobile">
-                            <h3>Quiz Members</h3>
-                            <table className="table">
-                                <thead>
-                                    <tr>
-                                        <th>
-                                            <label className="f-label">Email</label>
-                                        </th>
-                                        <th>
-                                            <label className="f-label">Nickname</label>
-                                        </th>
-                                        {
-                                            !isSurvey &&
-                                            <th colSpan="2">
-                                                <label className="f-label">Score</label>
-                                            </th>
-                                        }
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    { mappedMembers }
-                                </tbody>
-                            </table>
-                        </div>
                     </div>
                 }
             </div>

@@ -9,7 +9,6 @@ const EditScoreModal = ({ members, member_key, quiz_id, module_id, handleUpdateS
         score = members[member_key].score;
         value = members[member_key].score;
     }
-
     let modalClasses = classnames({
         "display-none": !isVisible || member.user_id !== user_id
     });
