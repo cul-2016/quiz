@@ -18,10 +18,11 @@ const Details = ({ name, module_id, num_enrolled, medals }) => {
                         </button>
                     </Link>
 
-                    <Link to={ `${module_id}/members` }>
-                        <button className="button button__icon--right module__button">
-                            { +num_enrolled } Students <span className="fa-chevron-right"></span>
-                        </button>
+                    <Link className="button button__icon--right module__button" to={ `${module_id}/members` }>
+                            { +num_enrolled } Students
+                            <span className="icon">
+                                <i className="fa fa-chevron-right" />
+                            </span>
                     </Link>
                 </div>
             </div>

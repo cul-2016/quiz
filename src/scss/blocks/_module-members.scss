@@ -1,4 +1,14 @@
+.module-members {
+
+    .section {
+        margin-top: 1rem;
+    }
+}
+
+
 .member {
+
+    margin: 0.5rem 0;
     .member__details {
         display: inline-block;
         width: 70%;
@@ -28,6 +38,7 @@
 
     .member__quiz__details {
         width: 100%;
+        margin: 0.5rem 0 1rem 0;
         padding: 1rem 2rem;
         box-shadow: inset 0 -4px 0 0 $grey;
         border: 1px solid #3E3E3E;

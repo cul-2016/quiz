@@ -35,7 +35,6 @@ const QuizHistoryModal = ({ isVisible, history, hide, username, member }) => {
                     { memberResults }
                 </div>
             }
-            <button className="modal-close" onClick={ () => hide() } />
         </div>
     );
 };
