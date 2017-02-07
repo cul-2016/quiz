@@ -123,6 +123,9 @@ class QuizMembers extends Component {
                         <section className="members">
                             { mappedMembers }
                         </section>
+                          <p className="f-headline">Quiz Review</p>
+                          <p className="f-body">{ questions.length } Questions</p>
+                          <p className="f-body">This quiz has been run and can no longer be edited.</p>
                         <QuizMembersModal
                           isVisible={ this.state.isQuizQuestionsVisible }
                           questions={ questions }

@@ -5,7 +5,7 @@ import logout from '../../lib/logout';
 
 
 const hideNav = (path) => {
-    return path === "/" || path.match(/live|holding-page|result|review|register-student|please-verify|verification|reset-password|performance|history|add-new-module|leaderboard|new-quiz|members/);
+    return path === "/" || path.match(/live|holding-page|result|review|register-student|please-verify|verification|reset-password|performance|history|add-new-module|leaderboard|new-quiz|edit-quiz|edit-survey|members/);
 };
 
 const Nav = ({ location, is_lecturer }) => {
@@ -17,16 +17,19 @@ const Nav = ({ location, is_lecturer }) => {
 
     return (
         <ul className={ navClasses}>
-            <li className="navbar__item" onClick={ () => hashHistory.push('/dashboard') }>
+
+            <div className="navbar__container">
+            <li className="navbar__item navbar__item--left" onClick={ () => hashHistory.push('/dashboard') }>
                 <p className="navbar__link navbar__link--left">
                     Home
                 </p>
             </li>
-            <li className="navbar__item" onClick={ logout }>
+            <li className="navbar__item navbar__item--right" onClick={ logout }>
                 <p className="navbar__link navbar__link--right">
                     Logout
                 </p>
             </li>
+          </div>
         </ul>
     );
 };
