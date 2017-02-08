@@ -26,7 +26,7 @@ const Question = ({ idx, question, is_lecturer }) => {
         "wrong_answer": showWrongAnswer('c')
     });
     let dClasses = classnames("answer", {
-        "display-none": question.d === undefined  || question.c === null,
+        "display-none": question.d === undefined  || question.d === null,
         "same_answer": 'd' === correct_answer.toLowerCase()  && 'd' === response,
         "user_answer": 'd' === response && correct_answer.toLowerCase() !== 'd',
         "wrong_answer": showWrongAnswer('d')

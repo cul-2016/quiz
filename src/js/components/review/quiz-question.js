@@ -24,7 +24,7 @@ const Question = ({ idx, question, is_lecturer, showAnswer }) => {
         "wrong_answer": showWrongAnswer('c')
     });
     let dClasses = classnames("response box", {
-        "display-none": question.d === undefined || question.c === null,
+        "display-none": question.d === undefined || question.d === null,
         "correct_answer": showAnswers && 'd' === correct_answer.toLowerCase(),
         "wrong_answer": showWrongAnswer('d')
     });
