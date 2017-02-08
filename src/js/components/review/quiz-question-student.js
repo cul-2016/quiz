@@ -9,7 +9,6 @@ const Question = ({ idx, question, is_lecturer }) => {
     const showWrongAnswer = value => !is_lecturer && response && answerIsWrong
         && value === response.toLowerCase();
 
-        console.log(question.c, question.d, 'cd');
     let aClasses = classnames("answer", {
         "same_answer": 'a' === correct_answer.toLowerCase() && 'a' === response,
         "user_answer": 'a' === response && correct_answer.toLowerCase() !== 'a',
