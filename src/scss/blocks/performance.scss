@@ -1,6 +1,7 @@
 .performance {
     background-color: $blue;
-    height: 100vh;
+    height: 100%;
+    min-height: 100vh;
 
     .f-subheader {
         text-align: center;

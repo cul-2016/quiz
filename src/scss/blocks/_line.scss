@@ -16,6 +16,11 @@
         background-color: $red;
         width: 100%;
     }
+    &__primary--long {
+        background-color: $gold;
+        width: 100%;
+        margin: 3rem auto;
+    }
 
     &--new-quiz {
         width: 89%;

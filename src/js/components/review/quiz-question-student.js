@@ -20,13 +20,13 @@ const Question = ({ idx, question, is_lecturer }) => {
         "wrong_answer": showWrongAnswer('b')
     });
     let cClasses = classnames("answer", {
-        "display-none": question.c === undefined,
+        "display-none": question.c === undefined || question.c === null,
         "same_answer": 'c' === correct_answer.toLowerCase()  && 'c' === response,
         "user_answer": 'c' === response && correct_answer.toLowerCase() !== 'c',
         "wrong_answer": showWrongAnswer('c')
     });
     let dClasses = classnames("answer", {
-        "display-none": question.d === undefined,
+        "display-none": question.d === undefined  || question.d === null,
         "same_answer": 'd' === correct_answer.toLowerCase()  && 'd' === response,
         "user_answer": 'd' === response && correct_answer.toLowerCase() !== 'd',
         "wrong_answer": showWrongAnswer('d')

@@ -75,9 +75,9 @@ const StudentModule = ({ location,
                 <p className="f-headline"> { module.name } </p>
                 <p className="f-title f-title--primary"> { module.module_id } </p>
                 <div className={ buttonAreaClasses }>
-                    <button onClick={ (e) => { handleAnimation(e, livePath); }} className={ buttonClasses }>
+                    <p onClick={ (e) => { handleAnimation(e, livePath); }} className={ buttonClasses }>
                         Join Live Quiz
-                    </button>
+                    </p>
                 </div>
 
                 {/*
