@@ -20,7 +20,7 @@ const deleteResponses = require('../lib/deleteResponses.js');
 const getQuizDetails = require('../lib/getQuizDetails.js');
 const getSurveyDetails = require('../lib/getSurveyDetails.js');
 const editScore = require('../lib/editScore.js');
-const getQuizDetailsStudent = require('../lib/getQuizDetailsStudent');
+const getQuizDetailsStudent = require('../lib/getQuizDetailsStudent.js').getQuizDetailsStudent;
 
 const jwt = require('jsonwebtoken');
 const Joi = require('joi');
