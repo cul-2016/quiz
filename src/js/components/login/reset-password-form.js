@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import classnames from 'classnames';
+import { Link } from 'react-router';
 
 const ResetPasswordForm = ({
     params,
@@ -65,6 +66,9 @@ const ResetPasswordForm = ({
                                 onClick={ () => handleSubmitNewPassword(password, code) }>
                             Submit
                         </button>
+                        <p className="f-body f-body--dark"> Already have an Account? </p>
+                        <div> <Link className="f-body" to="/register-student"> Sign Up </Link> </div>
+
                     </div>
                 </div>
             </div>

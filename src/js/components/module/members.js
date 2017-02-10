@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import Spinner from '../general/spinner';
 import QuizHistoryModal from './quiz-history-modal';
-import ConfirmModal from '../general/confirm-modal';
+import RemoveStudentModal from './remove-student-modal';
 
 
 class Members extends Component {
@@ -11,7 +11,7 @@ class Members extends Component {
         super(props);
         this.state = {
             isQuizHistoryVisible: false,
-            isConfirmModalVisible: false,
+            isRemoveMemberVisible: false,
             user_id: undefined,
             module_id: undefined,
             email: undefined,
@@ -19,8 +19,8 @@ class Members extends Component {
         };
         this.showQuizHistory = this.showQuizHistory.bind(this);
         this.hideQuizHistory = this.hideQuizHistory.bind(this);
-        this.showConfirmModal = this.showConfirmModal.bind(this);
-        this.hideConfirmModal = this.hideConfirmModal.bind(this);
+        this.showRemoveStudent = this.showRemoveStudent.bind(this);
+        this.hideRemoveStudent = this.hideRemoveStudent.bind(this);
     }
 
     showQuizHistory (user_id, module_id, username) {
@@ -28,6 +28,7 @@ class Members extends Component {
         this.props.getStudentHistory(user_id, module_id);
         this.setState({
             isQuizHistoryVisible: true,
+            isRemoveMemberVisible: false,
             username
         });
     }
@@ -41,9 +42,11 @@ class Members extends Component {
         });
     }
 
-    showConfirmModal (user_id, module_id, email, username) {
+    showRemoveStudent (user_id, module_id, email, username) {
+
         this.setState({
-            isConfirmModalVisible: !this.state.isConfirmModalVisible,
+            isRemoveMemberVisible: true,
+            isQuizHistoryVisible: false,
             user_id,
             module_id,
             email,
@@ -51,10 +54,10 @@ class Members extends Component {
         });
     }
 
-    hideConfirmModal () {
+    hideRemoveStudent () {
 
         this.setState({
-            isConfirmModalVisible: false,
+            isRemoveMemberVisible: false,
             user_id: undefined,
             module_id: undefined,
             email: undefined,
@@ -64,7 +67,7 @@ class Members extends Component {
 
     render () {
 
-        let { members, name, isFetchingMembers, isRemovingMember, handleRemovingMember, params, history, medalConditions } = this.props;
+        let { members, name, isFetchingMembers, isRemovingMember, handleRemovingMember, params, history } = this.props;
         let module_id = params.module_id;
 
         let mappedMembers = members.map((member, i) => {
@@ -82,9 +85,17 @@ class Members extends Component {
                           <i className="fa fa-caret-down" />
                         </span>
                     </div>
-                    <div className="member__view-remove-member" onClick={ () => handleRemovingMember(member.user_id, module_id) } >
+                    <div className="member__view-remove-member" onClick={ () => this.showRemoveStudent(member.user_id, module_id, member.email, member.username) } >
                         <p className="f-body f-body--primary" > Remove </p>
                     </div>
+                    <RemoveStudentModal
+                      module_id={ module_id }
+                      handleRemovingMember={ handleRemovingMember }
+                      user_id={ member.user_id }
+                      isVisible={ this.state.isRemoveMemberVisible }
+                      hide={ this.hideRemoveStudent }
+                      username={ this.state.username }
+                      member={ member }/>
 
                     <QuizHistoryModal
 
