@@ -1,7 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import { Link } from 'react-router';
 import Spinner from './general/spinner';
-import QuizMembersModal from './quiz-members-modal';
 import EditScoreModal from './edit-score-modal';
 import { store } from '../store.js';
 
@@ -118,22 +117,13 @@ class QuizMembers extends Component {
                       </ul>
 
                       <div className="content__body">
+                        <Link className="button button__primary review-quiz-button" to={ `${params.module_id}/${params.quiz_id}/members/quiz-review` }>Quiz Review</Link>
                           <p className="f-headline">Students&#39; Individual Scores</p>
                           <p className="f-title">In {quizName}</p>
                         <section className="members">
                             { mappedMembers }
                         </section>
-                        <div className="line line__primary--long"></div>
-                          <p className="f-headline">Quiz Review</p>
-                          <p className="f-body quiz-review--header">{ questions.length } Questions</p>
-                          <p className="f-body">This quiz has been run and can no longer be edited.</p>
-                        <QuizMembersModal
-                          isVisible={ this.state.isQuizQuestionsVisible }
-                          questions={ questions }
-                          hide={ this.hideQuizQuestions }/>
                       </div>
-
-
                     </div>
                 }
             </div>

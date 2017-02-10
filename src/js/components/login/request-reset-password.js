@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import classnames from 'classnames';
+import { Link } from 'react-router';
 
 const ResetPassword = ({ resetPassword, handleEmailChange, handleResetPassword }) => {
 
@@ -52,6 +53,9 @@ const ResetPassword = ({ resetPassword, handleEmailChange, handleResetPassword }
                         onClick={ () => { handleResetPassword(resetPassword.email); } }>
                     Send Email
                 </button>
+                <p className="f-body f-body--dark"> Already have an Account? </p>
+                <div> <Link className="f-body" to="/register-student"> Sign Up </Link> </div>
+
                   </div>
             </div>
         </section>
