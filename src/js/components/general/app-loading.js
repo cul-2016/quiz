@@ -4,7 +4,13 @@ import { hashHistory } from 'react-router';
 
 const AppLoading = ({ userState }) => {
 
-    const previousPath = localStorage.getItem('previousPath');
+    let previousPath;
+    if (localStorage.getItem('previousPath') === 'app-loading' || !localStorage.getItem('previousPath')) {
+        previousPath = '/';
+    } else {
+        previousPath = localStorage.getItem('previousPath');
+    }
+
     if (userState.user_id) {
         hashHistory.push(previousPath);
         localStorage.removeItem("previousPath");

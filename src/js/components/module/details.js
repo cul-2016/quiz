@@ -1,33 +1,37 @@
 import React, { PropTypes } from 'react';
-import Trophies from './trophies.js';
+// import Trophies from './trophies.js'; to be added in later
 import Medals from './medals.js';
 import { Link } from 'react-router';
 
-const Details = ({ name, module_id, num_enrolled, trophies, medals }) => {
+const Details = ({ name, module_id, num_enrolled, medals }) => {
 
     return (
         <div>
             <h1 className="f-display">{ name }</h1>
-            <h4 className="f-body f-body--primary">{ module_id }</h4>
 
-            <div className="module__buttons">
-                <Link to={ `${module_id}/leaderboard` }>
-                    <button className="button module__button">
-                        View leaderboard
-                    </button>
-                </Link>
+            <div className="module__second-line">
+                <h4 className="f-body f-body--primary">{ module_id }</h4>
+                <div className="module__buttons">
+                    <Link to={ `${module_id}/leaderboard` }>
+                        <button className="button module__button">
+                            View leaderboard
+                        </button>
+                    </Link>
 
-                <Link to={ `${module_id}/members` }>
-                    <button className="button button__icon--right module__button">
-                        { +num_enrolled } Students <span className="fa-chevron-right"></span>
-                    </button>
-                </Link>
+                    <Link className="button button__icon--right module__button" to={ `${module_id}/members` }>
+                            { +num_enrolled } Students
+                            <span className="icon">
+                                <i className="fa fa-chevron-right" />
+                            </span>
+                    </Link>
+                </div>
             </div>
 
-            <div className="line"></div>
+            <div className="line module__line"></div>
 
             <div className="module__medals-and-trophies">
-                <Trophies trophies={ trophies } />
+                { /* currently not using trophies
+                    <Trophies trophies={ trophies } /> */ }
                 <Medals medals={ medals } />
             </div>
         </div>

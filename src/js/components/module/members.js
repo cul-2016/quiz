@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import Spinner from '../general/spinner';
 import QuizHistoryModal from './quiz-history-modal';
-import ConfirmModal from '../general/confirm-modal';
+import RemoveStudentModal from './remove-student-modal';
 
 
 class Members extends Component {
@@ -11,7 +11,7 @@ class Members extends Component {
         super(props);
         this.state = {
             isQuizHistoryVisible: false,
-            isConfirmModalVisible: false,
+            isRemoveMemberVisible: false,
             user_id: undefined,
             module_id: undefined,
             email: undefined,
@@ -19,8 +19,8 @@ class Members extends Component {
         };
         this.showQuizHistory = this.showQuizHistory.bind(this);
         this.hideQuizHistory = this.hideQuizHistory.bind(this);
-        this.showConfirmModal = this.showConfirmModal.bind(this);
-        this.hideConfirmModal = this.hideConfirmModal.bind(this);
+        this.showRemoveStudent = this.showRemoveStudent.bind(this);
+        this.hideRemoveStudent = this.hideRemoveStudent.bind(this);
     }
 
     showQuizHistory (user_id, module_id, username) {
@@ -28,6 +28,7 @@ class Members extends Component {
         this.props.getStudentHistory(user_id, module_id);
         this.setState({
             isQuizHistoryVisible: true,
+            isRemoveMemberVisible: false,
             username
         });
     }
@@ -41,10 +42,11 @@ class Members extends Component {
         });
     }
 
-    showConfirmModal (user_id, module_id, email, username) {
+    showRemoveStudent (user_id, module_id, email, username) {
 
         this.setState({
-            isConfirmModalVisible: true,
+            isRemoveMemberVisible: true,
+            isQuizHistoryVisible: false,
             user_id,
             module_id,
             email,
@@ -52,10 +54,10 @@ class Members extends Component {
         });
     }
 
-    hideConfirmModal () {
+    hideRemoveStudent () {
 
         this.setState({
-            isConfirmModalVisible: false,
+            isRemoveMemberVisible: false,
             user_id: undefined,
             module_id: undefined,
             email: undefined,
@@ -65,56 +67,43 @@ class Members extends Component {
 
     render () {
 
-        let { members, name, isFetchingMembers, isRemovingMember, handleRemovingMember, params, history, medalConditions } = this.props;
+        let { members, name, isFetchingMembers, isRemovingMember, handleRemovingMember, params, history } = this.props;
         let module_id = params.module_id;
 
         let mappedMembers = members.map((member, i) => {
 
             return (
-                <tr key={ i }>
-                    <td>{ member.user_id }</td>
-                    <td>{ member.email }</td>
-                    <td>{ member.username }</td>
-                    <td title="Quiz scores" className="is-icon" onClick={ () => this.showQuizHistory(member.user_id, module_id, member.username) }>
-                        <span className="tag is-warning quiz-scores is-medium">
-                            <i className="fa fa-list-ol" />
-                        </span>
-                    </td>
-                    <td
-                        title="Delete student"
-                        className="is-icon"
-                        onClick={ () => this.showConfirmModal(member.user_id, module_id, member.email, member.username) }>
-                        <span className="tag is-danger delete-student is-medium">
-                            <i className="fa fa-user-times" />
-                        </span>
-                    </td>
-                </tr>
-            );
-        });
+                <div className="member" key={ i }>
 
-        let mobileView = members.map((member, i) => {
+                    <div className="member__details">
+                      <p className="f-label f-label--dark">{ member.username }</p>
+                      <p className="f-small-body f-small-body--slim">{ member.email }</p>
+                    </div>
+                    <div className="member__view-details" onClick={ () => this.showQuizHistory(member.user_id, module_id, member.username) }>
+                        <span className="f-body f-body--primary">All Results</span>
+                        <span className="icon">
+                          <i className="fa fa-caret-down" />
+                        </span>
+                    </div>
+                    <div className="member__view-remove-member" onClick={ () => this.showRemoveStudent(member.user_id, module_id, member.email, member.username) } >
+                        <p className="f-body f-body--primary" > Remove </p>
+                    </div>
+                    <RemoveStudentModal
+                      module_id={ module_id }
+                      handleRemovingMember={ handleRemovingMember }
+                      user_id={ member.user_id }
+                      isVisible={ this.state.isRemoveMemberVisible }
+                      hide={ this.hideRemoveStudent }
+                      username={ this.state.username }
+                      member={ member }/>
 
-            return (
-                <div key={ i } className="box">
-                    <div className="columns is-mobile has-text-centered">
-                        <div className="column">{ member.email }</div>
-                        <div className="column">{ member.username }</div>
-                    </div>
-                    <div className="columns is-mobile has-text-centered">
-                        <div title="Quiz scores" className="is-icon column" onClick={ () => this.showQuizHistory(member.user_id, module_id, member.username) }>
-                            <span className="tag is-warning quiz-scores is-medium">
-                                <i className="fa fa-list-ol" />
-                            </span>
-                        </div>
-                        <div
-                            title="Delete student"
-                            className="is-icon column"
-                            onClick={ () => this.showConfirmModal(member.user_id, module_id, member.email, member.username) }>
-                            <span className="tag is-danger delete-student is-medium">
-                                <i className="fa fa-user-times" />
-                            </span>
-                        </div>
-                    </div>
+                    <QuizHistoryModal
+
+                      member={ member }
+                      isVisible={ this.state.isQuizHistoryVisible }
+                      history={ history }
+                      hide={ this.hideQuizHistory }
+                      username={ this.state.username } />
                 </div>
             );
         });
@@ -128,54 +117,23 @@ class Members extends Component {
                 !isFetchingMembers && members &&
                 <div className="module-members container">
                     <div className="container average">
+                        <ul className="navbar navbar--invisible">
+                            <li className="navbar__item">
+                                <Link to={ `${module_id}/lecturer` } className="f-body navbar__link navbar__link--left navbar__link--quit">
+                                  Back
+                                </Link>
+                            </li>
+                        </ul>
 
-                        <h1 className="has-text-centered">{ `Students registered to ${name}` }</h1>
-                        <div className="column">
-                            <Link to={ `/${this.props.params.module_id}/lecturer` }>
-                                <button className="button is-3 is-light is-inverted">
-                                    <span className="icon">
-                                        <i className="fa fa-chevron-left"></i>
-                                    </span>
-                                    <span>Back to { this.props.params.module_id }</span>
-                                </button>
-                            </Link>
+                        <div className="content__body">
+                          <p className="f-headline">Students</p>
+                          <p className="f-title">In {name}</p>
+                          <section className="section">
+                                { mappedMembers }
+                          </section>
+
                         </div>
 
-                        <QuizHistoryModal
-                            isVisible={ this.state.isQuizHistoryVisible }
-                            history={ history }
-                            hide={ this.hideQuizHistory }
-                            username={ this.state.username }
-                            medalConditions={ medalConditions } />
-
-                        <ConfirmModal
-                            isVisible={ this.state.isConfirmModalVisible }
-                            hide={ this.hideConfirmModal }
-                            removeMember={ handleRemovingMember }
-                            user_id={ this.state.user_id }
-                            module_id={ this.state.module_id }
-                            email={ this.state.email }
-                            username={ this.state.username } />
-
-                        <section className="section table-container is-hidden-mobile">
-                            <table className="table">
-                                <thead>
-                                    <tr>
-                                        <th>Unique ID</th>
-                                        <th>Email address</th>
-                                        <th>Nickname</th>
-                                        <th colSpan="2"><em>Settings</em></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    { mappedMembers }
-                                </tbody>
-                            </table>
-                        </section>
-
-                        <div className="is-hidden-tablet">
-                            { mobileView }
-                        </div>
                     </div>
                 </div>
             }

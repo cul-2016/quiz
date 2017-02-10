@@ -2,14 +2,9 @@ import React, { PropTypes } from 'react'; //eslint-disable-line no-unused-vars
 import ShowAnswer from './show-answer';
 import ReviewButtons from './review-buttons';
 import Spinner from '../general/spinner';
-import classnames from 'classnames';
 import { Link } from 'react-router';
 
-const Review = ({ isFetchingReview, question, numQuestions, currentQuizIndex, isAnswerShowing, handleIsAnswerShowing, handleIncrementCurrentQuizIndex, endReview, params, handleGoBack, isSurvey }) => {
-
-    const backButtonClasses = classnames("column", {
-        "display-none": currentQuizIndex === 0
-    });
+const Review = ({ isFetchingReview, question, numQuestions, currentQuizIndex, isAnswerShowing, handleIsAnswerShowing, handleIncrementCurrentQuizIndex, endReview, params, isSurvey }) => {
 
     return (
         <div className="review container">

@@ -2,21 +2,13 @@ import React, { PropTypes } from 'react';
 import classnames from 'classnames';
 import { Link } from 'react-router';
 import isEmail from 'validator/lib/isEmail';
+import lowerCaseBeforeAt from '../lib/lowerCaseBeforeAt.js';
 
 const Signup = ({ register, handleChange, handleRegisteringUser, location }) => {
 
-    let isEmailValid = isEmail(register.email);
-    let is_lecturer;
-    if (location.pathname === '/register-student') {
-        is_lecturer = false;
-    } else {
-        is_lecturer = true;
-    }
+    const isEmailValid = isEmail(register.email);
 
-    let registerButtonClasses = classnames("button is-warning login-button", {
-        "is-disabled": !isEmailValid || !register.password || !register.username || register.password !== register.confirmPassword,
-        "is-loading": register.isRegistering === true
-    });
+    const is_lecturer = location.pathname !== '/register-student';
 
     let invalidEmailClasses = classnames("help is-danger", {
         "display-none": register.email.length === 0 || isEmailValid
@@ -27,24 +19,9 @@ const Signup = ({ register, handleChange, handleRegisteringUser, location }) => 
         "is-danger": register.confirmPassword.length >= register.password.length && register.confirmPassword !== register.password
     });
 
-    let outerSectionClasses = classnames("login outer", {
-        "blue-hero": is_lecturer === false
-    });
-
     const submitOnEnter = (e) => {
-        if (
-            e.keyCode === 13
-            && isEmailValid
-            && register.password
-            && register.username
-            && register.password === register.confirmPassword
-        ) {
-            handleRegisteringUser(
-                register.email,
-                register.username,
-                register.password,
-                is_lecturer
-            );
+        if (e.keyCode === 13) {
+            handleOnSubmit();
         }
     };
 
@@ -55,7 +32,7 @@ const Signup = ({ register, handleChange, handleRegisteringUser, location }) => 
             && register.password === register.confirmPassword
         ) {
             handleRegisteringUser(
-                register.email,
+                lowerCaseBeforeAt(register.email).trim(),
                 register.username,
                 register.password,
                 is_lecturer
@@ -65,77 +42,83 @@ const Signup = ({ register, handleChange, handleRegisteringUser, location }) => 
 
     return (
         <div className="login">
-            <p className="f-headline">
-                Register
-            </p>
+
+          <div className="content__body">
+            <div className="header">
+              <h1 className="f-headline f-headline--primary"><img src="/Yellow.svg"></img></h1>
+              <h3 className="f-headline"> Realtime Quizzes for better lectures </h3>
+            </div>
             { register.error &&
-                <span className="login__err-message">
-                    { register.error }
-                </span>
+              <span className="login__err-message">
+                { register.error }
+              </span>
             }
 
             {
               register.confirmPassword
               && register.confirmPassword !== register.password
               &&
-                <span className="login__err-message"> Passwords are not matching </span>
+              <span className="login__err-message"> Passwords are not matching </span>
             }
 
             <div className="form">
-                <div className="form__field f-body">
+              <div className="form__field f-body">
+                <p className="f-title">Register</p>
                 <label className="form__label">Email address</label>
                 <input
-                    onKeyDown={ submitOnEnter }
-                    className="form__input"
-                    value={ register.email }
-                    onChange={ (e) => handleChange("email", e.target.value) }
-                    type="email" />
+                  onKeyDown={ submitOnEnter }
+                  className="form__input"
+                  value={ register.email }
+                  onChange={ (e) => handleChange("email", e.target.value) }
+                  type="email" />
                 <span className={ invalidEmailClasses }>This email is invalid</span>
-                </div>
+              </div>
 
 
-                <div className="form__field f-body">
+              <div className="form__field f-body">
                 <label className="form__label">Choose a nickname</label>
                 <input
-                    onKeyDown={ submitOnEnter }
-                    className="form__input"
-                    value={ register.username }
-                    onChange={ (e) => handleChange("username", e.target.value)}
-                    type="username"/>
-                </div>
+                  onKeyDown={ submitOnEnter }
+                  className="form__input"
+                  value={ register.username }
+                  onChange={ (e) => handleChange("username", e.target.value)}
+                  type="username"/>
+              </div>
 
-                <div className="form__field f-body">
+              <div className="form__field f-body">
                 <label className="form__label">Choose a password</label>
                 <input
-                    onKeyDown={ submitOnEnter }
-                    className={ passwordMatchClasses }
-                    value={ register.password }
-                    onChange={ (e) => handleChange("password", e.target.value)}
-                    type="password" />
+                  onKeyDown={ submitOnEnter }
+                  className={ passwordMatchClasses }
+                  value={ register.password }
+                  onChange={ (e) => handleChange("password", e.target.value)}
+                  type="password" />
 
-                </div>
-                <div className="form__field f-body">
+              </div>
+              <div className="form__field f-body">
                 <label className="form__label">Confirm password</label>
                 <input
-                    onKeyDown={ submitOnEnter }
-                    className={ passwordMatchClasses }
-                    value={ register.confirmPassword }
-                    onChange={ (e) => handleChange("confirmPassword", e.target.value)}
-                    type="password" />
-                </div>
+                  onKeyDown={ submitOnEnter }
+                  className={ passwordMatchClasses }
+                  value={ register.confirmPassword }
+                  onChange={ (e) => handleChange("confirmPassword", e.target.value)}
+                  type="password" />
+              </div>
 
-                <button
-                    className="button button__primary"
-                    onClick={ handleOnSubmit }
-                    >Register
-                </button>
-            </div>
-
-            <div>
-                <Link to="/">
-                    Already have an account? Please sign in here
+              <button
+                className="button button__primary"
+                onClick={ handleOnSubmit }
+                >Register
+              </button>
+              <div>
+                <Link className="f-body" to="/">
+                  Already have an account? Please sign in here
                 </Link>
+              </div>
+
             </div>
+
+          </div>
         </div>
     );
 };

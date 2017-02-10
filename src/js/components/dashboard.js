@@ -16,7 +16,7 @@ class Dashboard extends Component {
 
     render () {
 
-        let { modules, is_lecturer, module_id, moduleIDExists, handleInputChange, handleJoinModule } = this.props;
+        let { modules, is_lecturer, module_id, handleInputChange, handleJoinModule } = this.props;
 
 
         let moduleList = modules.map((module, i) => {
@@ -26,10 +26,10 @@ class Dashboard extends Component {
             return (
                 <div key={ i } className="card">
                     <Link to={ `${module.module_id}/${role}` } >
-                        <div className="f-body">
+                        <div className="module__name f-body">
                             { module.name }
                         </div>
-                        <div className="f-body f-body--primary">
+                        <div className="module__id f-body f-body--primary">
                             { module.module_id }
                         </div>
                     </Link>
@@ -38,43 +38,53 @@ class Dashboard extends Component {
         });
         return (
             <div className="container dashboard">
+              <div className="content__body">
+                <h2 className="f-display"> Modules </h2>
+                {
+                  is_lecturer &&
+                  <div className="dashboard__lecturer">
+                    <Link to="add-new-module">
+                      <button className="button button__dark">
+                        <span className="icon">
+                          <i className="fa fa-plus" />
+                        </span>
+                        <span>
+                          New Module
+                        </span>
+                      </button>
+                    </Link>
+                  </div>
+                }
+                {
+                  !is_lecturer &&
+                  <div className="card card__secondary">
+                    <input
+                      className="form__input form__input--add-module"
+                      value={ module_id || '' }
+                      onChange={ (e) => handleInputChange(e.target.value)}
+                      type="text"
+                      placeholder="CODE"/>
+                    <button
+                      className="button button__secondary"
+                      onClick={ () => handleJoinModule() }>
+                      Add A Module
+                    </button>
+                  </div>
+                }
+                <div className="line"></div>
 
-                    <h2 className="f-display"> Modules </h2>
-                    {
-                        is_lecturer &&
-                        <div className="dashboard__lecturer">
-                          <Link to="add-new-module">
-                            <button className="button button__dark">
-                              <span className="icon">
-                                <i className="fa fa-plus" />
-                              </span>
-                              <span>
-                                New Module
-                              </span>
-                            </button>
-                          </Link>
-                        </div>
-                    }
-                    {
-                        !is_lecturer &&
-                            <div className="card card__secondary">
-                                <input
-                                  className="form__input form__input--add-module"
-                                  value={ module_id || '' }
-                                  onChange={ (e) => handleInputChange(e.target.value)}
-                                  type="text"
-                                  placeholder="CODE"/>
-                                <button
-                                  className="button button__secondary"
-                                  onClick={ () => handleJoinModule() }>
-                                  Add A Module
-                                </button>
-                            </div>
-                    }
-                    <div className="line"></div>
-                    <div>
-                        { moduleList }
-                    </div>
+                  <div className="module__header" >
+                      <div className="module__header__name f-label f-label--dark">
+                          Name
+                      </div>
+                      <div className="module__header__id f-label f-label--dark">
+                          Code
+                      </div>
+                  </div>
+                <div>
+                  { moduleList }
+                </div>
+              </div>
             </div>
         );
     }
@@ -83,7 +93,10 @@ class Dashboard extends Component {
 
 Dashboard.propTypes = {
     modules: PropTypes.array.isRequired,
-    is_lecturer: PropTypes.bool.isRequired
+    is_lecturer: PropTypes.bool.isRequired,
+    module_id: PropTypes.string.isRequired,
+    handleInputChange: PropTypes.func.isRequired,
+    handleJoinModule: PropTypes.func.isRequired
 };
 
 export default Dashboard;

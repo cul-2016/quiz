@@ -49,8 +49,8 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(toggleIsLastQuiz());
     },
 
-    handleIsSurvey: (e) => {
-        dispatch(toggleIsSurvey(e));
+    handleIsSurvey: () => {
+        dispatch(toggleIsSurvey());
     }
 });
 

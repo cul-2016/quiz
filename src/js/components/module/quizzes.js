@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
-import classnames from 'classnames';
-import { Link, hashHistory } from 'react-router';
+import { hashHistory } from 'react-router';
 
 const Quizzes = ({ location, quizzes, sendQuizInvite, module_id, isSurvey, handleSetIsSurvey }) => {
 
@@ -11,27 +10,6 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id, isSurvey, handl
 
     const desktopView = quizzes.slice().reverse().map((quiz, index) => {
 
-        let iconClasses = classnames("fa", {
-            "fa-check": quiz.is_presented === true,
-            "fa-times": quiz.is_presented === false
-        });
-
-        let is_last_quizClasses = classnames("fa", {
-            "fa-check": quiz.is_last_quiz
-        });
-
-        let buttonClass = classnames("", {
-            "display-none": quiz.is_presented
-        });
-
-        let quizHistoryClass = classnames("", {
-            "display-none": !quiz.is_presented
-        });
-
-        let editQuizClass = classnames("", {
-            "display-none": quiz.is_presented
-        });
-
         return (
           <div
               key={ index }
@@ -39,7 +17,7 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id, isSurvey, handl
               onClick={ () => {
 
                   if (quiz.is_presented) {
-                    handleSetIsSurvey(quiz.quiz_id, quiz.survey_id);
+                      handleSetIsSurvey(quiz.quiz_id, quiz.survey_id);
                   }
 
                   const url = `${module_id}/${quiz[surveyIdOrQuizId]}/${
@@ -68,21 +46,21 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id, isSurvey, handl
                         e.stopPropagation();
                         hashHistory.push(`${location.pathname}/live`);
                         sendQuizInvite(quiz.quiz_id, quiz.survey_id, quiz.name);
-                    } }>Run Quiz</button>
+                    } }>Run { surveyOrQuizCapitalized }</button>
                     <button
                     className="button button__primary"
                     onClick={ (e) => {
                         e.stopPropagation();
                         hashHistory.push(`${location.pathname}/live`);
                         sendQuizInvite(quiz.quiz_id, quiz.survey_id, quiz.name, true);
-                    } }>Preview Quiz</button>
+                    } }>Preview { surveyOrQuizCapitalized }</button>
                 </div>
             }
             {
                 quiz.is_last_quiz &&
                     <span className="module-quiz__last-message">(This is the last quiz)</span>
             }
-            <div className="line"></div>
+            <div className="line module-quiz__line"></div>
           </div>
         );
     });
@@ -90,20 +68,11 @@ const Quizzes = ({ location, quizzes, sendQuizInvite, module_id, isSurvey, handl
     return (
         <div className="quizzes">
             <h3 className="headline module__headline">
-                { surveyOrQuizPluralCapitalized }
+               { surveyOrQuizPluralCapitalized }
             </h3>
             <div className="table">
                 { desktopView }
             </div>
-            <Link className="module__button__link" to={ `${module_id}/new-quiz` } >
-
-                <button className="button button__secondary quizzes__button">
-                    <span className="icon">
-                        <i className="fa fa-plus" />
-                    </span>
-                    <span>Add a new { surveyOrQuiz }</span>
-                </button>
-            </Link>
         </div>
     );
 };

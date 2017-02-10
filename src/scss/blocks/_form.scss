@@ -4,6 +4,12 @@
       display: block;
       text-align: left;
       padding: 1rem 0;
+
+      &--new-quiz {
+        display: inline-block;
+        text-align: left;
+        width: 2.75rem;
+      }
     }
 
     &__input {
@@ -14,7 +20,19 @@
         background-color: $white;
         color: $black;
         font-family: ubuntu;
+        border-radius: 2px;
+        padding: 0.5rem 0;
 
+
+        &--edit-score {
+          font-size: 1.3rem;
+          font-weight: bold;
+          letter-spacing: 0.3rem;
+          padding: 0.25rem 0.5rem;
+          text-align: center;
+          display: block;
+          width: 15%;
+        }
         &--add-module {
             font-size: 1.3rem;
             font-weight: bold;
@@ -31,12 +49,30 @@
           padding: 0.25rem 0.5rem;
           max-width: 29rem;
           height: 2.5rem;
-          text-transform: capitalize;
 
           &--code {
             max-width: 6.25rem;
             letter-spacing: 0.3rem;
           }
+        }
+
+        &--new-quiz-question {
+          padding: 0.25rem 0.5rem;
+          max-width: 43rem;
+          height: 3.875rem;
+          border: 1px solid $black;
+          border-radius: 2px;
+          font-size: 1rem;
+          line-height: 1.375rem;
+        }
+        &--new-quiz-answer {
+          padding: 0.25rem 0.5rem;
+          max-width: 38rem;
+          height: 3.875rem;
+          border: 1px solid $black;
+          border-radius: 2px;
+          font-size: 1rem;
+          line-height: 1.375rem;
         }
 
         &--medal {
@@ -47,5 +83,69 @@
           height: 2.5rem
         }
 
+        &--is-success {
+          border: 3px solid rgb(88, 170, 101);
+        }
+        &--is-danger {
+          border: 3px solid rgb(170, 88, 88);
+        }
+
     }
+
+    &__radio {
+      position: relative;
+    }
+
+    &__radio--off {
+        width: 3rem;
+        position: absolute;
+        top: 0;
+        right: 0;
+        &--circle {
+            width: 1.5rem;
+            height: 1.5rem;
+            background-color: #AAAAAA;
+            box-shadow: inset 0 -1px 0 0 #757575;
+            border-radius: 3rem;
+            position: relative;
+            top: 0;
+        }
+        &--cylinder {
+            width: 2.625rem;
+            height: 0.9375rem;
+            background-color: #757575;
+            box-shadow: inset 0 1px 0 0 #3E3E3E;
+            border-radius: 0.625rem;
+            position: relative;
+            top: 1.2rem;
+        }
+    }
+
+    &__radio--on {
+        width: 3rem;
+        position: absolute;
+        top: 0;
+        right: 0;
+        &--circle {
+            width: 1.5rem;
+            height: 1.5rem;
+            background-color: #45C5C5;
+            border: 1px solid #3E3E3E;
+            box-shadow: inset 0 -1px 0 0 #757575;
+            border-radius: 3rem;
+            position: relative;
+            top: 0;
+            left: 1.2rem;
+        }
+        &--cylinder {
+            width: 2.625rem;
+            height: 0.9375rem;
+            background-color: #45C5C5;
+            box-shadow: inset 0 1px 0 0 #059A9A;
+            border-radius: 0.625rem;
+            position: relative;
+            top: 1.2rem;
+        }
+    }
+
 }

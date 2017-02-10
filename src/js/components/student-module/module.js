@@ -12,12 +12,13 @@ const StudentModule = ({ location,
                         quiz_id, question, response, //eslint-disable-line no-unused-vars
                         handleJoiningQuiz, params, module,
                         review, history }) => { //eslint-disable-line no-unused-vars
-    let buttonAreaClasses = classnames("section has-text-centered transparent-background", {
+    let buttonAreaClasses = classnames("quiz-button section has-text-centered transparent-background", {
         "animated-infinite pulse": isQuizOpen
     });
 
-    let buttonClasses = classnames("button", {
-        "button__tertiary": isQuizOpen,
+    let buttonClasses = classnames("quiz__status-indicator quiz__status-indicator--live f-subheader f-subheader--tertiary", {
+        "quiz__status-indicator--live": isQuizOpen,
+        "quiz__status-indicator--off": !isQuizOpen
     });
 
     let mappedQuizzes = !isFetchingModule && history.map((quiz, i) => {
@@ -27,7 +28,7 @@ const StudentModule = ({ location,
         let medalClass = classnames({
             "quiz__item__score--medal--gold": percentageScore >= medalConditions[1],
             "quiz__item__score--medal--silver": percentageScore >= medalConditions[0] && percentageScore < medalConditions[1],
-            "quiz__item__score--medal--bronze": percentageScore < medalConditions[0] && percentageScore > 0
+            "quiz__item__score--medal--bronze": percentageScore < medalConditions[0] && percentageScore >= 0
         });
 
         return (
@@ -74,21 +75,24 @@ const StudentModule = ({ location,
                 <p className="f-headline"> { module.name } </p>
                 <p className="f-title f-title--primary"> { module.module_id } </p>
                 <div className={ buttonAreaClasses }>
-                    <button onClick={ (e) => { handleAnimation(e, livePath); }} className={ buttonClasses }>
+                    <p onClick={ (e) => { handleAnimation(e, livePath); }} className={ buttonClasses }>
                         Join Live Quiz
-                    </button>
+                    </p>
                 </div>
 
-                <div className="trophy">
+                {/*
+
+                  <div className="trophy">
                     <label className="f-label"> Trophies </label>
                     <div className="trophy__small"> </div>
                     <span className="f-body"> 1/4 </span>
-                </div>
-                <Link to={ `${module.module_id}/student/performance` }>
-                    <button className="button button__secondary button__icon--right">
+                  </div>
+                */}
+                <Link className="button button__secondary button__icon--right" to={ `${module.module_id}/student/performance` }>
                         My Performance
-                        <span className="fa-chevron-right"></span>
-                    </button>
+                        <span className="icon">
+                          <i className="fa fa-chevron-right" />
+                        </span>
                 </Link>
 
                 <div className="line line__tertiary"></div>

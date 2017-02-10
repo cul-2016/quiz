@@ -20,7 +20,7 @@ const deleteResponses = require('../lib/deleteResponses.js');
 const getQuizDetails = require('../lib/getQuizDetails.js');
 const getSurveyDetails = require('../lib/getSurveyDetails.js');
 const editScore = require('../lib/editScore.js');
-const getQuizDetailsStudent = require('../lib/getQuizDetailsStudent');
+const getQuizDetailsStudent = require('../lib/getQuizDetailsStudent.js').getQuizDetailsStudent;
 
 const jwt = require('jsonwebtoken');
 const Joi = require('joi');
@@ -258,27 +258,20 @@ exports.register = (server, options, next) => {
                 validate: {
                     query: {
                         quiz_id: Joi.string().required(),
-                        score: Joi.string().required()
+                        score: Joi.string().required(),
+                        user_id: Joi.string().required()
                     }
                 }
             },
             handler: (request, reply) => {
-                jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
-                    /* istanbul ignore if */
-                    if (error) { return reply(error); }
 
-                    const { quiz_id, score } = request.query;
-                    const { user_id } = decoded.user_details;
-                    if (quiz_id !== undefined && score !== undefined) {
-                        const parsed_quiz_id = parseInt(quiz_id, 10);
-                        const parsed_score = parseInt(score, 10);
-                        editScore(pool, user_id, parsed_quiz_id, parsed_score, (error, response) => {
-                            const verdict = error || response;
-                            reply(verdict);
-                        });
-                    } else {
-                        reply(new Error('quiz_id || user_id || score is not defined'));
-                    }
+                const { quiz_id, score, user_id } = request.query;
+                const parsed_quiz_id = parseInt(quiz_id, 10);
+                const parsed_user_id = parseInt(user_id, 10);
+                const parsed_score = parseInt(score, 10);
+                editScore(pool, parsed_user_id, parsed_quiz_id, parsed_score, (error, response) => {
+                    const verdict = error || response;
+                    reply(verdict);
                 });
             }
         },
@@ -323,12 +316,13 @@ exports.register = (server, options, next) => {
                 validate: {
                     payload: {
                         module_id: Joi.string().required(),
-                        quiz_id: Joi.number().required(),
+                        quiz_id: Joi.number(),
+                        survey_id: Joi.number(),
                         name: Joi.string().required(),
-                        editedQuestions: Joi.array().required(),
-                        newQuestions: Joi.array().required(),
-                        deletedQuestions: Joi.array().required(),
-                        is_last_quiz: Joi.boolean().required()
+                        editedQuestions: Joi.array(),
+                        newQuestions: Joi.array(),
+                        deletedQuestions: Joi.array(),
+                        is_last_quiz: Joi.boolean()
                     }
                 }
             },

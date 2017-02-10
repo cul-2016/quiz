@@ -42,7 +42,7 @@ export function newQuiz (state = initialState, action) {
 
     case actionsTypes.TOGGLE_IS_SURVEY:
         return update(state, {
-            isSurvey: { $set: action.isSurvey }
+            isSurvey: { $set: !state.isSurvey }
         });
 
     case actionsTypes.SAVE_QUIZ_REQUEST:

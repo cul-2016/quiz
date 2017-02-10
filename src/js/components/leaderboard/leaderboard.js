@@ -1,7 +1,5 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
-import Trophies from './trophies';
-import Medals from './medals';
 import classnames from 'classnames';
 
 const Leaderboard = ({ mainData, medalScores, quiz_id_list, medalCondition, params }) => { //eslint-disable-line no-unused-vars
@@ -42,32 +40,34 @@ const Leaderboard = ({ mainData, medalScores, quiz_id_list, medalCondition, para
 
         return (
           <tr className={ rowClass }>
-              <td className="f-small-body"> { rankingNumbers[i] } </td>
-              <td className="f-small-body"> { user.username } </td>
-              <td className="f-small-body"> { bronzeTotal} </td>
-              <td className="f-small-body"> { silverTotal } </td>
-              <td className="f-small-body"> { goldTotal } </td>
-              <td className="f-small-body"> { parseFloat(user.total_score) } </td>
+              <td className="f-body"> { rankingNumbers[i] } </td>
+              <td className="f-body"> { user.username } </td>
+              <td className="f-body"> { bronzeTotal} </td>
+              <td className="f-body"> { silverTotal } </td>
+              <td className="f-body"> { goldTotal } </td>
+              <td className="f-body"> { parseFloat(user.total_score) } </td>
           </tr>
         );
     });
 
     return (
         <div className="leaderboard">
-              <ul className="navbar navbar--invisible">
-                   <li className="navbar__item">
-                       <Link to={ `${params.module_id}/lecturer` } className="navbar__link navbar__link--left navbar__link--back--dark">
-                         Back
-                       </Link>
-                   </li>
-               </ul>
+               <div>
+                   <ul className="navbar navbar--invisible">
+                       <li className="navbar__item">
+                           <Link to={ `${params.module_id}/lecturer` } className="f-body navbar__link navbar__link--left navbar__link--quit">
+                             Back
+                           </Link>
+                       </li>
+                   </ul>
+               </div>
                <div className="content__body">
                     <h1 className="f-headline">Module Leaderboard</h1>
                     <table>
                         <thead>
                             <tr>
-                                <th className="f-small-body f-small-body--light">Pos</th>
-                                <th className="f-small-body f-small-body--light">Name</th>
+                                <th className="f-body f-body--white">Pos</th>
+                                <th className="f-body f-body--white">Name</th>
                                 <th>
                                   <p className="medal-small medal-small--bronze"></p>
                                 </th>
@@ -77,7 +77,7 @@ const Leaderboard = ({ mainData, medalScores, quiz_id_list, medalCondition, para
                                 <th>
                                   <p className="medal-small medal-small--gold"></p>
                                 </th>
-                                <th className="f-small-body f-small-body--light">Raw</th>
+                                <th className="f-body f-body--white">Score</th>
                             </tr>
                         </thead>
                         <tbody>

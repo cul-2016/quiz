@@ -6,10 +6,21 @@
     display: table;
     table-layout: fixed;
 
+    &__container {
+      max-width: 52rem;
+      padding: 0 2rem;
+      margin: 0 auto;
+
+
+    }
+
     &__item {
-        display: table-cell;
-        vertical-align: middle;
-        text-align: left;
+        &--left {
+          float: left;
+        }
+        &--right {
+          float: right;
+        }
     }
 
     &__link {
