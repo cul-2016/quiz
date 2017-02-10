@@ -27,7 +27,7 @@ const RemoveStudentModal = ({ module_id, handleRemovingMember, user_id, isVisibl
 RemoveStudentModal.propTypes = {
     module_id: PropTypes.string.isRequired,
     handleRemovingMember: PropTypes.func.isRequired,
-    user_id: PropTypes.string.isRequired,
+    user_id: PropTypes.number.isRequired,
     isVisible: PropTypes.bool.isRequired,
     history: PropTypes.array,
     hide: PropTypes.func.isRequired,
