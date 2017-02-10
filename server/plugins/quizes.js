@@ -316,12 +316,13 @@ exports.register = (server, options, next) => {
                 validate: {
                     payload: {
                         module_id: Joi.string().required(),
-                        quiz_id: Joi.number().required(),
+                        quiz_id: Joi.number(),
+                        survey_id: Joi.number(),
                         name: Joi.string().required(),
-                        editedQuestions: Joi.array().required(),
-                        newQuestions: Joi.array().required(),
-                        deletedQuestions: Joi.array().required(),
-                        is_last_quiz: Joi.boolean().required()
+                        editedQuestions: Joi.array(),
+                        newQuestions: Joi.array(),
+                        deletedQuestions: Joi.array(),
+                        is_last_quiz: Joi.boolean()
                     }
                 }
             },
