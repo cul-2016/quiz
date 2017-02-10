@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import classnames from 'classnames';
-import StudentHistory from '../student-module/history';
 import Spinner from '../general/spinner';
 
 
@@ -33,6 +32,9 @@ const QuizHistoryModal = ({ isVisible, history, hide, username, member }) => {
                       <p className="f-small-body f-small-body--grey"> % </p>
                     </div>
                     { memberResults }
+                    <span onClick= { () => hide() } className="icon close-button">
+                      <i className="fa fa-window-close" />
+                    </span>
                 </div>
             }
         </div>
