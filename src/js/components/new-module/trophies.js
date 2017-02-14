@@ -36,36 +36,29 @@ class Trophies extends React.Component {
         let mappedTrophies = this.props.trophies.trophy_name.map((name, i) => {
 
             return (
-                <div className="new-module-medals columns" key={ i }>
-                    <div className="column box is-info has-text-centered">
-                        <label className="label module-section-headers">{ normaliseText(name) }</label>
-                        <i onClick={ () => { this.toggleRollover(name);} } className="fa fa-question-circle help-icon" />
-                        <div className={ this.returnClassnames(name) } >
-                        <p>
-                        { text.trophy.conditions[i] }
-                        </p>
-                        </div>
-                        <div>
-                            <input
-                                   className="input"
-                                   type="number"
-                                   min="1"
-                                   max="100"
-                                   defaultValue={ this.props.trophies.condition[i] }
-                                   onChange={ (e) => this.props.updateTrophyVals(name, e.target.value) } />
-                        </div>
+                <div key={ i }>
+
+                    <div className="new-module-trophies">
+                      <p className="trophy__small--new-module"> </p>
+                      <p className="f-small-body f-small-body--primary">{ normaliseText(name) }</p>
+                      <input
+                        className="form__input form__input--trophy"
+                        type="number"
+                        min="1"
+                        max="100"
+                        defaultValue={ this.props.trophies.condition[i] }
+                        onChange={ (e) => this.props.updateTrophyVals(name, e.target.value) } />
                     </div>
-                </div>
+                 </div>
 
             );
         });
 
         return (
-            <div className="section column">
-                <h3 className="module-section-headers">
-                    <i className="fa fa-star" /> Trophies
+            <div className="trophies">
+                <h3 className="f-body f-body--light">
+                    Trophies
                 </h3>
-                <i onClick={ () => { this.toggleRollover("trophies");} } className="fa fa-question-circle help-icon" />
 
                 <div className={ toggleClassnamesTrophies }>
                     <p>

@@ -1,12 +1,11 @@
-var Server = require('./server.js');
+var server = require('./server.js');
 var socket = require('socket.io');
-
-var server = Server.init(process.env.PORT || 9000);
 
 var io = socket(server.listener);
 io.on('connection', (socket) => {
 
     io.emit('we have connected', socket.id);
+
     console.log("CONNECTION!", socket.id); //eslint-disable-line no-console
 
     socket.on('disconnect', () => {
@@ -17,6 +16,8 @@ io.on('connection', (socket) => {
     /****/
 
     socket.on('join_room', (room, cb) => {
+
+        console.log('>>>>>>>joining room', room);
 
         socket.join(room);
 
@@ -32,12 +33,14 @@ io.on('connection', (socket) => {
     socket.on('send_quiz_invite', (quizInfo, cb) => {
 
         var room = quizInfo.room;
-        var quiz_id = quizInfo.quiz_id;
-
+        var idObj = {
+            quiz_id: quizInfo.quiz_id,
+            survey_id: quizInfo.survey_id
+        };
 
         // broadcast to whole room
         console.log("still sending quiz invite"); //eslint-disable-line no-console
-        socket.broadcast.to(room).emit('receive_quiz_invite', quiz_id);
+        socket.broadcast.to(room).emit('receive_quiz_invite', idObj);
         cb('STUDENTS INVITED TO QUIZ', room);
     });
 
@@ -52,8 +55,11 @@ io.on('connection', (socket) => {
 
     socket.on('end_of_quiz', (data, cb) => {
         var room = data.room;
-        var quiz_id = data.quiz_id;
-        socket.broadcast.to(room).emit('receive_end_of_quiz', quiz_id);
+        var idObj = {
+            quiz_id: data.quiz_id,
+            isSurvey: data.isSurvey
+        };
+        socket.broadcast.to(room).emit('receive_end_of_quiz', idObj);
 
         console.log('end of quiz sent'); //eslint-disable-line no-console
         cb('end of quiz sent');
@@ -61,8 +67,11 @@ io.on('connection', (socket) => {
 
     socket.on('abort_quiz', (data, cb) => {
         var room = data.room;
-        var quiz_id = data.quiz_id;
-        socket.broadcast.to(room).emit('receive_abort_quiz', quiz_id);
+        var idObj = {
+            quiz_id: data.quiz_id,
+            isSurvey: data.isSurvey
+        };
+        socket.broadcast.to(room).emit('receive_abort_quiz', idObj);
 
         console.log('quiz has been aborted'); //eslint-disable-line no-console
         cb('quiz has been aborted');

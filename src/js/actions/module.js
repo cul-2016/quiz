@@ -1,4 +1,4 @@
-import axios from 'axios';
+import request from '../lib/request.js';
 
 export const OPEN_QUIZ = 'OPEN_QUIZ';
 export const CLOSE_QUIZ = 'CLOSE_QUIZ';
@@ -16,10 +16,6 @@ export const REMOVE_MODULE_MEMBER_REQUEST = 'REMOVE_MODULE_MEMBER_REQUEST';
 export const REMOVE_MODULE_MEMBER_SUCCESS = 'REMOVE_MODULE_MEMBER_SUCCESS';
 export const REMOVE_MODULE_MEMBER_FAILURE = 'REMOVE_MODULE_MEMBER_FAILURE';
 
-/****
- * OPEN/CLOSE QUIZ
- ****/
-
 export const openQuiz = () => ( {
     type: OPEN_QUIZ
 });
@@ -32,21 +28,14 @@ export const clearModuleState = () => ({
     type: CLEAR_MODULE_STATE
 });
 
-
-//
-// GET MODULE actions
-//
-
-export const getModule = (module_id, is_lecturer, user_id) => {
+export const getModule = (module_id, is_lecturer) => {
     return (dispatch) => {
 
         dispatch(getModuleRequest());
 
-        axios.get(`get-module?is_lecturer=${is_lecturer}&user_id=${user_id}&module_id=${module_id}`)
+        request.get(dispatch)(`get-module?is_lecturer=${is_lecturer}&module_id=${module_id}`)
             .then((response) => {
                 dispatch(getModuleSuccess(is_lecturer, response.data));
-            }, (error) => {
-                console.error(error, 'error from server');
             })
             .catch((error) => {
                 dispatch(getModuleFailure(error));
@@ -69,21 +58,14 @@ export const getModuleFailure = (error) => ({
     error
 });
 
-//
-// GET MODULE MEMBERS actions
-//
-
 export const getModuleMembers = (module_id) => {
     return (dispatch) => {
 
         dispatch(getModuleMembersRequest());
 
-        axios.get(`get-module-members?module_id=${module_id}`)
+        request.get(dispatch)(`get-module-members?module_id=${module_id}`)
             .then((response) => {
-
                 dispatch(getModuleMembersSuccess(response.data));
-            }, (error) => {
-                console.error(error, 'error from server');
             })
             .catch((error) => {
                 dispatch(getModuleMembersFailure(error));
@@ -105,23 +87,15 @@ export const getModuleMembersFailure = (error) => ({
     error
 });
 
-
-//
-// REMOVE_MODULE_MEMBER actions
-//
-
 export const removeModuleMember = (user_id, module_id) => {
     return (dispatch) => {
 
         dispatch(removeModuleMemberRequest());
 
-        axios.get(`remove-module-member?user_id=${user_id}&module_id=${module_id}`)
+        request.get(dispatch)(`remove-module-member?user_id=${user_id}&module_id=${module_id}`)
             .then(() => {
-
                 dispatch(removeModuleMemberSuccess());
                 dispatch(getModuleMembers(module_id));
-            }, (error) => {
-                console.error(error, 'error from server');
             })
             .catch((error) => {
                 dispatch(removeModuleMemberFailure(error));

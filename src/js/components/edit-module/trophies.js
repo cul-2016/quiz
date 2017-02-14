@@ -7,7 +7,7 @@ const Trophies = ({ trophies, updateTrophyVals }) => {
 
         return (
             <div className="column box is-info has-text-centered" key={ i }>
-                <label className="label">{ normaliseText(name) }</label>
+                <label className="f-label">{ normaliseText(name) }</label>
                 <input
                        type="number"
                        min="1"

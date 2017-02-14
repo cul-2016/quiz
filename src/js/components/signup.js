@@ -1,98 +1,125 @@
 import React, { PropTypes } from 'react';
 import classnames from 'classnames';
 import { Link } from 'react-router';
+import isEmail from 'validator/lib/isEmail';
+import lowerCaseBeforeAt from '../lib/lowerCaseBeforeAt.js';
 
 const Signup = ({ register, handleChange, handleRegisteringUser, location }) => {
 
-    let isEmailValid = /.+@.+\..+/.test(register.email);
-    let is_lecturer;
-    if (location.pathname === '/register-student') {
-        is_lecturer = false;
-    } else {
-        is_lecturer = true;
-    }
+    const isEmailValid = isEmail(register.email);
 
-    let userExists = classnames({
-        "display-none": register.userExists !== true
-    });
-
-    let registerButtonClasses = classnames("button is-warning login-button", {
-        "is-disabled": !isEmailValid || !register.password || !register.username || register.password !== register.confirmPassword,
-        "is-loading": register.isRegistering === true
-    });
+    const is_lecturer = location.pathname !== '/register-student';
 
     let invalidEmailClasses = classnames("help is-danger", {
         "display-none": register.email.length === 0 || isEmailValid
     });
 
-    let passwordMatchClasses = classnames("input", {
+    let passwordMatchClasses = classnames("form__input", {
         "is-success": register.confirmPassword !== "" && register.password === register.confirmPassword,
         "is-danger": register.confirmPassword.length >= register.password.length && register.confirmPassword !== register.password
     });
 
-    let outerSectionClasses = classnames("login outer", {
-        "blue-hero": is_lecturer === false
-    });
+    const submitOnEnter = (e) => {
+        if (e.keyCode === 13) {
+            handleOnSubmit();
+        }
+    };
+
+    const handleOnSubmit = () => {
+        if (isEmailValid
+            && register.password
+            && register.username
+            && register.password === register.confirmPassword
+        ) {
+            handleRegisteringUser(
+                lowerCaseBeforeAt(register.email).trim(),
+                register.username,
+                register.password,
+                is_lecturer
+            );
+        }
+    };
+
     return (
+        <div className="login">
 
-        <section className={ outerSectionClasses }>
-            <div className="middle">
-                <div className="container inner has-text-centered">
-                    <div className="box" onKeyDown={ (e) => { if (e.keyCode === 13 && isEmailValid && register.password && register.username) { handleRegisteringUser(register.email, register.username, register.password, is_lecturer); }}}>
-                        <h2>
-                            Register
-                        </h2>
-                        <p className={ userExists }>
-                            <span className="tag is-danger">
-                                This email already exists. Follow link below to sign in
-                            </span>
-                        </p>
-
-                        <label className="label has-text-left">Email address</label>
-                        <input
-                            className="input"
-                            value={ register.email }
-                            onChange={ (e) => handleChange("email", e.target.value) }
-                            type="email" />
-                        <span className={ invalidEmailClasses }>This email is invalid</span>
-
-
-                        <label className="label has-text-left">Choose a nickname</label>
-                        <input
-                            className="input"
-                            value={ register.username }
-                            onChange={ (e) => handleChange("username", e.target.value)}
-                            type="username"/>
-
-                        <label className="label has-text-left">Choose a password</label>
-                        <input
-                            className={ passwordMatchClasses }
-                            value={ register.password }
-                            onChange={ (e) => handleChange("password", e.target.value)}
-                            type="password" />
-
-                        <label className="label has-text-left">Confirm password</label>
-                        <input
-                            className={ passwordMatchClasses }
-                            value={ register.confirmPassword }
-                            onChange={ (e) => handleChange("confirmPassword", e.target.value)}
-                            type="password" />
-
-                        <button className={ registerButtonClasses } onClick={ () => handleRegisteringUser(register.email, register.username, register.password, is_lecturer) }>
-                            Register
-                        </button>
-
-                        <p>
-                            <Link to="/">
-                                <span className=" is-success">
-                                    Already have an account? Please sign in here
-                                </span>
-                            </Link>
-                        </p>
-                    </div>
-                </div>
+          <div className="content__body">
+            <div className="header">
+              <h1 className="f-headline f-headline--primary"><img src="/Yellow.svg"></img></h1>
+              <h3 className="f-headline"> Realtime Quizzes for better lectures </h3>
             </div>
-        </section>
+            { register.error &&
+              <span className="login__err-message">
+                { register.error }
+              </span>
+            }
+
+            {
+              register.confirmPassword
+              && register.confirmPassword !== register.password
+              &&
+              <span className="login__err-message"> Passwords are not matching </span>
+            }
+
+            <div className="form">
+              <div className="form__field f-body">
+                <p className="f-title">Register</p>
+                <label className="form__label">Email address</label>
+                <input
+                  onKeyDown={ submitOnEnter }
+                  className="form__input"
+                  value={ register.email }
+                  onChange={ (e) => handleChange("email", e.target.value) }
+                  type="email" />
+                <span className={ invalidEmailClasses }>This email is invalid</span>
+              </div>
+
+
+              <div className="form__field f-body">
+                <label className="form__label">Choose a nickname</label>
+                <input
+                  onKeyDown={ submitOnEnter }
+                  className="form__input"
+                  value={ register.username }
+                  onChange={ (e) => handleChange("username", e.target.value)}
+                  type="username"/>
+              </div>
+
+              <div className="form__field f-body">
+                <label className="form__label">Choose a password</label>
+                <input
+                  onKeyDown={ submitOnEnter }
+                  className={ passwordMatchClasses }
+                  value={ register.password }
+                  onChange={ (e) => handleChange("password", e.target.value)}
+                  type="password" />
+
+              </div>
+              <div className="form__field f-body">
+                <label className="form__label">Confirm password</label>
+                <input
+                  onKeyDown={ submitOnEnter }
+                  className={ passwordMatchClasses }
+                  value={ register.confirmPassword }
+                  onChange={ (e) => handleChange("confirmPassword", e.target.value)}
+                  type="password" />
+              </div>
+
+              <button
+                className="button button__primary"
+                onClick={ handleOnSubmit }
+                >Register
+              </button>
+              <div>
+                <Link className="f-body" to="/">
+                  Already have an account? Please sign in here
+                </Link>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
     );
 };
 

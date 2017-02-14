@@ -1,4 +1,4 @@
-import axios from 'axios';
+import request from '../lib/request.js';
 
 export const GET_QUIZ_REVIEW_REQUEST = 'GET_QUIZ_REVIEW_REQUEST';
 export const GET_QUIZ_REVIEW_SUCCESS = 'GET_QUIZ_REVIEW_SUCCESS';
@@ -11,22 +11,20 @@ export const INCREMENT_CURRENT_QUIZ_INDEX = 'INCREMENT_CURRENT_QUIZ_INDEX';
 export const CLEAR_REVIEW_STATE = 'CLEAR_REVIEW_STATE';
 
 export const GO_BACK = 'GO_BACK';
+export const SHOW_ANSWER = 'SHOW_ANSWER';
 
-export function getQuizReview (quiz_id) {
+export const getQuizReview = (id, isSurvey) => (dispatch) => {
 
-    return (dispatch) => {
+    dispatch(getQuizReviewRequest());
 
-        dispatch(getQuizReviewRequest());
-
-        axios.get(`/get-quiz-review?quiz_id=${quiz_id}`)
-            .then((response) => {
-                dispatch(getQuizReviewSuccess(response.data));
-            })
-            .catch((error) => {
-                dispatch(getQuizReviewFailure(error));
-            });
-    };
-}
+    request.get(dispatch)(`/get-review?id=${id}&isSurvey=${isSurvey}`)
+        .then((response) => {
+            dispatch(getQuizReviewSuccess(response.data));
+        })
+        .catch((error) => {
+            dispatch(getQuizReviewFailure(error));
+        });
+};
 
 
 export const getQuizReviewRequest = () => ({
@@ -58,3 +56,20 @@ export const clearReviewState = () => ({
 export const goBack = () => ({
     type: GO_BACK
 });
+
+export const showAnswer = idx => ({
+    type: SHOW_ANSWER,
+    idx
+});
+
+export const getQuizDetailsStudent = (quiz_id) => dispatch => {
+
+    dispatch(getQuizReviewRequest());
+
+    request.get(dispatch)(`/get-quiz-details-student?quiz_id=${quiz_id}`)
+    .then((response) => {
+        dispatch(getQuizReviewSuccess(response.data));
+    }).catch((error) => {
+        dispatch(getQuizReviewFailure(error));
+    });
+};

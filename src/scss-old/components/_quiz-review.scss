@@ -1,0 +1,17 @@
+
+.correct_answer {
+    background-color: $green;
+}
+.wrong_answer {
+    background-color: $bulma-is-danger;
+}
+
+.review-buttons {
+    .finish-button {
+        margin-right: 5px;
+    }
+
+    .leaderboard-button {
+        margin-left: 5px;
+    }
+}

@@ -1,26 +1,21 @@
-import axios from 'axios';
+import request from '../lib/request.js';
 
 export const GET_STUDENT_HISTORY_REQUEST = 'GET_STUDENT_HISTORY_REQUEST';
 export const GET_STUDENT_HISTORY_SUCCESS = 'GET_STUDENT_HISTORY_SUCCESS';
 export const GET_STUDENT_HISTORY_FAILURE = 'GET_STUDENT_HISTORY_FAILURE';
 export const CLEAR_STUDENT_HISTORY = 'CLEAR_STUDENT_HISTORY';
 
-export const getStudentHistory = (user_id, module_id) => {
+export const getStudentHistory = (user_id, module_id) => (dispatch) => {
 
-    return (dispatch) => {
+    dispatch(getStudentHistoryRequest());
 
-        dispatch(getStudentHistoryRequest());
-
-        axios.get(`get-student-history?user_id=${user_id}&module_id=${module_id}`)
-            .then((response) => {
-                dispatch(getStudentHistorySuccess(response.data));
-            }, (error) => {
-                console.error(error, 'error from /get-student-history');
-            })
-            .catch((error) => {
-                dispatch(getStudentHistoryFailure(error));
-            });
-    };
+    request.get(dispatch)(`get-student-history?user_id=${user_id}&module_id=${module_id}`)
+        .then((response) => {
+            dispatch(getStudentHistorySuccess(response.data));
+        })
+        .catch((error) => {
+            dispatch(getStudentHistoryFailure(error));
+        });
 };
 
 export const getStudentHistoryRequest = () => ({

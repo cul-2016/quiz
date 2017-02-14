@@ -4,6 +4,7 @@ DROP TABLE IF EXISTS modules CASCADE;
 DROP TABLE IF EXISTS medals CASCADE;
 DROP TABLE IF EXISTS trophies CASCADE;
 DROP TABLE IF EXISTS quizzes CASCADE;
+DROP TABLE IF EXISTS surveys CASCADE;
 DROP TABLE IF EXISTS questions CASCADE;
 DROP TABLE IF EXISTS responses CASCADE;
 DROP TABLE IF EXISTS scores CASCADE;
@@ -11,6 +12,7 @@ DROP TABLE IF EXISTS module_members CASCADE;
 
 DROP SEQUENCE IF EXISTS user_id_seq;
 DROP SEQUENCE IF EXISTS quiz_id_seq;
+DROP SEQUENCE IF EXISTS survey_id_seq;
 DROP SEQUENCE IF EXISTS question_id_seq;
 
 /********* create tables ********/
@@ -21,7 +23,11 @@ CREATE TABLE IF NOT EXISTS users (
     email TEXT NOT NULL UNIQUE,
     password TEXT NOT NULL,
     is_lecturer BOOLEAN DEFAULT FALSE NOT NULL,
-    username TEXT
+    username TEXT,
+    is_verified BOOLEAN DEFAULT FALSE NOT NULL,
+    verification_code TEXT,
+    reset_password_code TEXT,
+    expiry_code BIGINT
 );
 
 /* modules */
@@ -54,25 +60,35 @@ CREATE TABLE IF NOT EXISTS quizzes (
     is_last_quiz BOOLEAN DEFAULT FALSE NOT NULL
 );
 
+/* surveys */
+CREATE TABLE IF NOT EXISTS surveys (
+    survey_id SERIAL PRIMARY KEY,
+    module_id CHAR(4),
+    name TEXT NOT NULL,
+    is_presented BOOLEAN DEFAULT FALSE NOT NULL
+);
+
 /* questions */
 CREATE TABLE IF NOT EXISTS questions (
     question_id SERIAL PRIMARY KEY,
-    quiz_id INTEGER NOT NULL,
+    quiz_id INTEGER,
+    survey_id INTEGER,
     question TEXT NOT NULL,
     a TEXT NOT NULL,
     b TEXT NOT NULL,
     c TEXT,
     d TEXT,
-    correct_answer CHAR(1) NOT NULL
+    correct_answer CHAR(1)
 );
 
 /* responses */
 CREATE TABLE IF NOT EXISTS responses (
     user_id INTEGER NOT NULL,
-    quiz_id INTEGER NOT NULL,
+    quiz_id INTEGER,
+    survey_id INTEGER,
     question_id INTEGER NOT NULL,
     response CHAR(1) NOT NULL,
-    PRIMARY KEY (user_id, quiz_id, question_id)
+    PRIMARY KEY (user_id, question_id)
 );
 
 /* scores */
@@ -125,11 +141,24 @@ ALTER TABLE quizzes
     REFERENCES modules (module_id)
     ON DELETE CASCADE;
 
+/* surveys */
+ALTER TABLE surveys
+    ADD CONSTRAINT surveys_to_modules_fk
+    FOREIGN KEY (module_id)
+    REFERENCES modules (module_id)
+    ON DELETE CASCADE;
+
 /* questions */
 ALTER TABLE questions
     ADD CONSTRAINT questions_to_quizzes_fk
     FOREIGN KEY (quiz_id)
     REFERENCES quizzes (quiz_id)
+    ON DELETE CASCADE;
+
+ALTER TABLE questions
+    ADD CONSTRAINT questions_to_surveys_fk
+    FOREIGN KEY (survey_id)
+    REFERENCES surveys (survey_id)
     ON DELETE CASCADE;
 
 /* responses */
@@ -143,6 +172,12 @@ ALTER TABLE responses
     ADD CONSTRAINT responses_to_quizzes_fk
     FOREIGN KEY (quiz_id)
     REFERENCES quizzes (quiz_id)
+    ON DELETE CASCADE;
+
+ALTER TABLE responses
+    ADD CONSTRAINT responses_to_surveys_fk
+    FOREIGN KEY (survey_id)
+    REFERENCES surveys (survey_id)
     ON DELETE CASCADE;
 
 ALTER TABLE responses
@@ -180,38 +215,66 @@ ALTER TABLE module_members
 
 /********* insert users ********/
 
-INSERT INTO users (email, username, password)
-    VALUES ('student@city.ac.uk', 'student', '$2a$10$UnvUuW91Jh6.zWQi3G/2J.HLDTomSqJHxvBC.TYx/Bj8HZa.AAm4K');
+INSERT INTO users (email, username, password, is_verified)
+    VALUES ('student@city.ac.uk', 'student', '$2a$10$UnvUuW91Jh6.zWQi3G/2J.HLDTomSqJHxvBC.TYx/Bj8HZa.AAm4K', true);
 
-INSERT INTO users (email, username, password, is_lecturer)
-VALUES ('lecturer@city.ac.uk', 'lecturer', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true);
+INSERT INTO users (email, username, password, is_lecturer, is_verified)
+VALUES ('lecturer@city.ac.uk', 'lecturer', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, true);
 
-INSERT INTO users (email, username, password)
-    VALUES ('sohil@city.ac.uk', 'Sohil', '$2a$10$UnvUuW91Jh6.zWQi3G/2J.HLDTomSqJHxvBC.TYx/Bj8HZa.AAm4K'),
-           ('mina@city.ac.uk', 'Mina', '$2a$10$UnvUuW91Jh6.zWQi3G/2J.HLDTomSqJHxvBC.TYx/Bj8HZa.AAm4K'),
-           ('homer@simpsons.com', 'Homer', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
-           ('marge@simpsons.com', 'Marge', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
-           ('lisa@simpsons.com', 'Lisa', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
-           ('bart@simpsons.com', 'Bart', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
-           ('maggie@simpsons.com', 'Maggie', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
-           ('ned@simpsons.com', 'Ned', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
-           ('apu@simpsons.com', 'Apu', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
-           ('smithers@simpsons.com', 'Smithers', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
-           ('mrburns@simpsons.com', 'Mr Burns', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
-           ('revlovejoy@simpsons.com', 'Rev Lovejoy', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
-           ('milhouse@simpsons.com', 'Milhouse', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
-           ('nelson@simpsons.com', 'Nelson', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
-           ('patty@simpsons.com', 'Patty', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
-           ('selma@simpsons.com', 'Selma', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
-           ('comicbookguy@simpsons.com', 'Comic Book Guy', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
-           ('krusty@simpsons.com', 'Krusty', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
-           ('sideshowbob@simpsons.com', 'Sideshow Bob', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
-           ('sideshowmel@simpsons.com', 'Sideshow Mel', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
-           ('drnick@simpsons.com', 'Dr Nick', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K'),
-           ('principalskinner@simpsons.com', 'Principal Skinner', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K');
+INSERT INTO users (email, username, password, is_verified)
+    VALUES ('sohil@city.ac.uk', 'Sohil', '$2a$10$UnvUuW91Jh6.zWQi3G/2J.HLDTomSqJHxvBC.TYx/Bj8HZa.AAm4K', true),
+           ('mina@city.ac.uk', 'Mina', '$2a$10$UnvUuW91Jh6.zWQi3G/2J.HLDTomSqJHxvBC.TYx/Bj8HZa.AAm4K', true),
+           ('homer@simpsons.com', 'Homer', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K', true),
+           ('marge@simpsons.com', 'Marge', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K', true),
+           ('lisa@simpsons.com', 'Lisa', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K', true),
+           ('bart@simpsons.com', 'Bart', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K', true),
+           ('maggie@simpsons.com', 'Maggie', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K', true),
+           ('ned@simpsons.com', 'Ned', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K', true),
+           ('apu@simpsons.com', 'Apu', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K', true),
+           ('smithers@simpsons.com', 'Smithers', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K', true),
+           ('mrburns@simpsons.com', 'Mr Burns', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K', true),
+           ('revlovejoy@simpsons.com', 'Rev Lovejoy', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K', true),
+           ('milhouse@simpsons.com', 'Milhouse', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K', true),
+           ('nelson@simpsons.com', 'Nelson', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K', true),
+           ('patty@simpsons.com', 'Patty', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K', true),
+           ('selma@simpsons.com', 'Selma', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K', true),
+           ('comicbookguy@simpsons.com', 'Comic Book Guy', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K', true),
+           ('krusty@simpsons.com', 'Krusty', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K', true),
+           ('sideshowbob@simpsons.com', 'Sideshow Bob', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K', true),
+           ('sideshowmel@simpsons.com', 'Sideshow Mel', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K', true),
+           ('drnick@simpsons.com', 'Dr Nick', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K', true),
+           ('principalskinner@simpsons.com', 'Principal Skinner', '$2a$10$tfPmiBxwRuQkGJXEchXd7ORY3JyU7aVF9zhvl2itF8HnJas4k9c6K', true);
+
+INSERT INTO users (email, username, password, is_lecturer, verification_code)
+    VALUES ('verify-lecturer@city.ac.uk', 'verify-lecturer', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, 'testing-verification-code');
+
+INSERT INTO users (email, username, password, is_verified, verification_code)
+    VALUES ('verify-student@city.ac.uk', 'verify-student', '$2a$10$UnvUuW91Jh6.zWQi3G/2J.HLDTomSqJHxvBC.TYx/Bj8HZa.AAm4K', true, 'reset-verification-code');
+
+INSERT INTO users (email, username, password, is_lecturer, verification_code)
+    VALUES ('verification@email.com', 'lecturer-test-verify', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, 'testing-verification-code-lecturer');
+
+INSERT INTO users (email, username, password, is_lecturer, is_verified)
+    VALUES ('authenticate-user@city.ac.uk', 'lecturer', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, true);
+
+INSERT INTO users (email, username, password, is_lecturer, is_verified, verification_code)
+    VALUES ('not-authenticated-user@city.ac.uk', 'lecturer', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, false, 'verification-code-for-not-authenticated-user');
+
+INSERT INTO users (email, username, password, is_verified, reset_password_code, expiry_code)
+    VALUES ('sohilpandya@foundersandcoders.com', 'reset-password-student', '$2a$10$UnvUuW91Jh6.zWQi3G/2J.HLDTomSqJHxvBC.TYx/Bj8HZa.AAm4K', true, 'reset-password-code-does not matter', 1490893097275);
+
+/*** User with a future timestamp for resetting password ***/
+INSERT INTO users (email, username, password, is_verified, reset_password_code, expiry_code)
+    VALUES ('validexpiry@city.ac.uk', 'valid-password-expiry', '$2a$10$UnvUuW91Jh6.zWQi3G/2J.HLDTomSqJHxvBC.TYx/Bj8HZa.AAm4K', true, 'reset-password-code', 1490893097275);
+
+/*** User with an expired timestamp for resetting the password ***/
+INSERT INTO users (email, username, password, is_verified, reset_password_code, expiry_code)
+    VALUES ('expiredpassword@city.ac.uk', 'expired-password', '$2a$10$UnvUuW91Jh6.zWQi3G/2J.HLDTomSqJHxvBC.TYx/Bj8HZa.AAm4K', true, 'reset-password-code-2', 1482166876770);
 
 
-
+/*** User for resetting pasword endpoint test ***/
+INSERT INTO users (email, username, password, is_verified, reset_password_code, expiry_code)
+    VALUES ('reset-password-endpoint@city.ac.uk', 'reset-password', '$2a$10$UnvUuW91Jh6.zWQi3G/2J.HLDTomSqJHxvBC.TYx/Bj8HZa.AAm4K', true, 'reset-password-code-endpoint', 1741536250477);
 
 /********* insert modules ********/
 
@@ -263,9 +326,17 @@ INSERT INTO quizzes (module_id, name, is_presented)
            ('FAC8', 'Best Quiz EVER!', false),
            ('FAC8', 'Quiz for testing abort functionality', false);
 
+INSERT INTO surveys (module_id, name, is_presented)
+    VALUES ('TEST', 'Week 1 Survey', true),
+           ('TEST', 'Week 2 Survey', true),
+           ('CENT', 'Arbitrary Survey 1', true),
+           ('CENT', 'Arbitrary Survey 2', true),
+           ('CENT', 'Arbitrary Survey 3', true),
+           ('FAC8', 'Best Survey EVER!', false),
+           ('FAC8', 'Survey for testing abort functionality', false);
 
 
-/********* insert questions ********/
+/********* insert quiz questions ********/
 
 INSERT INTO questions (quiz_id, question, a, b, c, d, correct_answer)
     VALUES (1, 'What is the capital of England?', 'London', 'Cardiff', 'Edinburgh', 'Doncaster', 'a'),
@@ -300,8 +371,7 @@ INSERT INTO questions (quiz_id, question, a, b, c, d, correct_answer)
            (7, 'What is Canada''s national animal?' , 'Bear', 'Beaver', 'Racoon', 'Deer', 'b'),
            (8, 'Question for Aborting Quiz?' , 'A', 'B', 'C', 'This one', 'd');
 
-
-/********* insert responses ********/
+/********* insert quiz responses ********/
 
 INSERT INTO responses (user_id, quiz_id, question_id, response)
     VALUES (1, 1, 1, 'a'),
@@ -439,6 +509,37 @@ INSERT INTO responses (user_id, quiz_id, question_id, response)
            (24, 3, 14, 'd'),
            (24, 3, 15, 'b'),
            (24, 8, 31, 'b');
+
+
+/********* insert survey questions ********/
+
+INSERT INTO questions (survey_id, question, a, b, c, d)
+   VALUES (1, 'How do you feel about this module?', 'Bad', 'Not interested', 'Good', 'Mind blown'),
+          (1, 'Would you recommend this lecturer?', 'No', 'Yes', null, null),
+          (2, 'This module engages you. Do you agree?', 'Strongly Disagree', 'Disagree', 'Agree', 'Strongly agree'),
+          (2, 'DELETE this question in deleteQuestions test?', 'Strongly Disagree', 'Disagree', 'Agree', 'Strongly agree'),
+          (3, 'Do you like this survey?', 'Strongly Disagree', 'Disagree', 'Agree', 'Strongly agree');
+
+/********* insert survey responses ********/
+
+INSERT INTO responses (user_id, survey_id, question_id, response)
+    VALUES (1, 1, 32, 'a'),
+           (2, 1, 32, 'a'),
+           (3, 1, 32, 'c'),
+           (4, 1, 32, 'd'),
+
+           (1, 1, 33, 'a'),
+           (2, 1, 33, 'b'),
+           (3, 1, 33, 'b'),
+
+           (1, 2, 34, 'a'),
+           (2, 2, 34, 'b'),
+           (3, 2, 34, 'b'),
+           (4, 2, 34, 'c'),
+
+           (1, 2, 35, 'a'),
+           (2, 2, 35, 'a'),
+           (3, 2, 35, 'd');
 
 
 /********* insert module members ********/

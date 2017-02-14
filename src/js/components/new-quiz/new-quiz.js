@@ -4,79 +4,116 @@ import Questions from './questions';
 import classnames from 'classnames';
 
 
-const NewQuiz = ({ newQuiz, handleAddQuestion, handleDeleteQuestion, handleInputChange, handleQuizNameChange, handleSaveQuiz, handleIsLastQuiz, location, params }) => {
+const NewQuiz = ({
+    newQuiz: { name, questions, is_last_quiz, isSurvey },
+    handleAddQuestion,
+    handleDeleteQuestion,
+    handleInputChange,
+    handleQuizNameChange,
+    handleSaveQuiz,
+    handleIsLastQuiz,
+    handleIsSurvey,
+    location,
+    params
+}) => {
 
-    const questionsValidation = newQuiz.questions.map((question) => {
-        if (!question.question || !question.a || !question.b || !question.correct_answer){
-            return false;
-        } else {
-            return true;
-        }
-    }).every((elem) => {
-        return elem;
+    const questionsValidation = questions.map((questionObj) => {
+        const { question, a, b, correct_answer } = questionObj;
+        return Boolean(question && a && b && (correct_answer || isSurvey));
+    }).every((elem) => elem);
+    const submitClasses = classnames("button button__tertiary", {
+        "button__disabled": !name || questionsValidation === false,
     });
-
-    const submitClasses = classnames("button is-success save-question", {
-        "is-disabled": !newQuiz.name || questionsValidation === false,
-        "is-loading": newQuiz.isSavingQuiz
+    const lastQuizIconClasses = classnames("fa", {
+        "fa-square": !is_last_quiz,
+        "fa-check-square": is_last_quiz
     });
-    const quizNameClasses = classnames("help is-danger", {
-        "display-none": newQuiz.name
+    const lastQuizClasses = classnames("button", {
+        "button__secondary": is_last_quiz
+    });
+    const surveyIconClasses = classnames("fa", {
+        "fa-square": !isSurvey,
+        "fa-check-square": isSurvey
+    });
+    const surveyClasses = classnames("button", {
+        "button__secondary": isSurvey
     });
 
     return (
             <div className="new-quiz">
-                <div className="column is-offset-3">
-                    <Link to={ `/${params.module_id}/lecturer` }>
-                        <button className="button is-3 is-light is-inverted">
+
+              <div>
+                  <ul className="navbar navbar--invisible">
+                      <li className="navbar__item">
+                          <Link to={ `${params.module_id}/lecturer` } className="f-body navbar__link navbar__link--left navbar__link--quit">
+                            Back
+                          </Link>
+                      </li>
+                  </ul>
+              </div>
+
+              <div className="content__body">
+                  <p className="f-headline"> New Quiz</p>
+                  <p className="f-small-body--grey"> { params.module_id }</p>
+
+                  <label className="f-body form__label">Name</label>
+                  <input
+                      className="form__input form__input--new-module"
+                      type="text"
+                      name="name"
+                      defaultValue={ name }
+                      onChange={ (e) => handleQuizNameChange(e.target.value) }
+                      placeholder='Quiz Name'
+                      />
+                    <div>
+                        <button onClick={ handleIsSurvey } className={ surveyClasses }>
                             <span className="icon">
-                                <i className="fa fa-chevron-left"></i>
+                                <i className={ surveyIconClasses } />
                             </span>
-                            <span>Back to { params.module_id }</span>
+                            <span className="f-body-light">
+                                Survey
+                            </span>
                         </button>
-                    </Link>
-                </div>
-                <div className="columns">
-                    <div className="column is-5 is-offset-3 has-text-centered">
-                        <label className="label">
-                        New Quiz name
-                        </label>
-                        <input
-                            className="input"
-                            type="text"
-                            defaultValue={ newQuiz.name }
-                            onChange={ (e) => handleQuizNameChange(e.target.value) }
-                            placeholder='Quiz Name'></input>
-                            <span className={ quizNameClasses }>Please enter a Quiz Name</span>
+                        {/*
+                          !isSurvey &&
+                          <div>
+                              <button onClick={ handleIsLastQuiz } className={ lastQuizClasses }>
+                                <span className="icon">
+                                  <i className={ lastQuizIconClasses } />
+                                </span>
+                                <span className="f-body-light">
+                                  Last Quiz
+                                </span>
+                              </button>
+                              <p className="f-small-body f-small-body--dark"> Check this box if this is the last quiz in a series </p>
+                          </div>
+                        */}
+                        <div className="line line__tertiary"></div>
+
                     </div>
-                    <div className="column is-1 has-text-centered">
-                        <label className="label">
-                        Last Quiz?
-                        </label>
-                        <input
-                            className="column is-1"
-                            type="checkbox"
-                            checked={ newQuiz.is_last_quiz === true }
-                            name="is_last_quiz"
-                            onClick={ handleIsLastQuiz } />
-                    </div>
-                </div>
+                    <Questions
+                      questions={ questions }
+                      isSurvey={ isSurvey }
+                      handleInputChange={ handleInputChange }
+                      handleDeleteQuestion={ handleDeleteQuestion }
+                      />
 
-
-                <Questions
-                    questions={ newQuiz.questions }
-                    handleInputChange={ handleInputChange }
-                    handleDeleteQuestion={ handleDeleteQuestion } />
-
-                <div className="column is-6 is-offset-3 has-text-centered">
-                    <button className="button is-info add-question" onClick={ handleAddQuestion }>
+                    <div className="new-quiz--buttons">
+                      <button className="button button--add-question" onClick={ handleAddQuestion }>
                         Add Question
-                    </button>
-                    <button className={ submitClasses } onClick={ () => handleSaveQuiz(location.pathname.split('/')[1], newQuiz.name, newQuiz.questions, newQuiz.is_last_quiz) }>
+                      </button>
+                      <button className={ submitClasses }
+                        onClick={ () => handleSaveQuiz(
+                          location.pathname.split('/')[1],
+                          name,
+                          questions,
+                          is_last_quiz,
+                          isSurvey
+                        ) }>
                         Save and Exit
-                    </button>
-                </div>
-
+                      </button>
+                    </div>
+              </div>
             </div>
 
     );
@@ -90,6 +127,7 @@ NewQuiz.propTypes = {
     handleQuizNameChange: PropTypes.func.isRequired,
     handleSaveQuiz: PropTypes.func.isRequired,
     handleIsLastQuiz: PropTypes.func.isRequired,
+    handleIsSurvey: PropTypes.func.isRequired,
     location: PropTypes.object.isRequired,
     params: PropTypes.object.isRequired
 };

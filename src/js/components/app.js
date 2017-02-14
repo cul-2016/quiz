@@ -1,9 +1,10 @@
 import React, { PropTypes } from 'react';
 import Nav from './general/nav';
-import CookieMessage from './general/cookie-message';
 import ErrorMessage from './general/error-message';
 
-const App = ({ children, location, username, error, isCookieAccepted, handleCookieMessage, handleErrorClearance, is_lecturer }) => {
+const App = ({ children, location, username,
+               error, isCookieAccepted, handleCookieMessage, //eslint-disable-line no-unused-vars
+               handleErrorClearance, is_lecturer }) => {
 
     return (
         <div>
@@ -18,19 +19,7 @@ const App = ({ children, location, username, error, isCookieAccepted, handleCook
                 </div>
         }
         {
-            !error && location.pathname !== '/' &&
-            <div>
-                <CookieMessage
-                    isCookieAccepted={ isCookieAccepted }
-                    handleCookieMessage={ handleCookieMessage } />
-                <div>
-                    <Nav location={ location } username={ username } is_lecturer={ is_lecturer }  />
-                    { children }
-                </div>
-            </div>
-        }
-        {
-            !error && location.pathname === '/' &&
+            !error &&
             <div>
                 <Nav location={ location } username={ username } is_lecturer={ is_lecturer }  />
                 { children }

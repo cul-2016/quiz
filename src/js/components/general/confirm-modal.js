@@ -4,7 +4,7 @@ import classnames from 'classnames';
 
 const ConfirmModal = ({ isVisible, hide, removeMember, username, email, user_id, module_id }) => {
 
-    let modalClasses = classnames("modal", {
+    const modalClasses = classnames("modal", {
         "is-active": isVisible
     });
 

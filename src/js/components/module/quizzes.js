@@ -1,165 +1,77 @@
 import React, { PropTypes } from 'react';
-import classnames from 'classnames';
-import { Link } from 'react-router';
+import { hashHistory } from 'react-router';
 
-const Quizzes = ({ location, quizzes, sendQuizInvite, module_id }) => {
+const Quizzes = ({ location, quizzes, sendQuizInvite, module_id, isSurvey, handleSetIsSurvey }) => {
 
-    const desktopView = quizzes.map((quiz, index) => {
+    const surveyOrQuiz = isSurvey ? 'survey' : 'quiz';
+    const surveyIdOrQuizId = isSurvey ? 'survey_id' : 'quiz_id';
+    const surveyOrQuizCapitalized = isSurvey ? 'Survey' : 'Quiz';
+    const surveyOrQuizPluralCapitalized = isSurvey ? 'Surveys' : 'Quizzes';
 
-        let iconClasses = classnames("fa", {
-            "fa-check": quiz.is_presented === true,
-            "fa-times": quiz.is_presented === false
-        });
-
-        let is_last_quizClasses = classnames("fa", {
-            "fa-check": quiz.is_last_quiz
-        });
-
-        let buttonClass = classnames("tag is-success is-medium invite-students-tag", {
-            "display-none": quiz.is_presented
-        });
-
-        let quizHistoryClass = classnames("tag is-warning is-medium settings-tag", {
-            "display-none": !quiz.is_presented
-        });
-
-        let editQuizClass = classnames("tag is-warning is-medium settings-tag", {
-            "display-none": quiz.is_presented
-        });
+    const desktopView = quizzes.slice().reverse().map((quiz, index) => {
 
         return (
-            <tr key={ index }>
-                <td>{ quiz.name }</td>
-                <td>{+quiz.num_questions}</td>
-                <td>{+quiz.num_entries}</td>
-                <td><i className={ iconClasses } /></td>
-                <td><i className={ is_last_quizClasses } /></td>
-                <td>
-                    <Link to={`${module_id}/${quiz.quiz_id}/edit-quiz`}>
-                        <span title="Edit Quiz" className={ editQuizClass }>
-                            <i className="fa fa-edit"></i>
-                        </span>
-                    </Link>
+          <div
+              key={ index }
+              className="module-quiz"
+              onClick={ () => {
 
-                    <Link to={ `${module_id}/${quiz.quiz_id}/members` }>
-                        <span title="Quiz History" className={ quizHistoryClass }>
-                            <i className="fa fa-history"></i>
-                        </span>
-                    </Link>
-                </td>
-                <td>
-                    <Link to={`${location.pathname}/live`}>
-                        <span className={ buttonClass }
-                            onClick={ () => sendQuizInvite(quiz.quiz_id, quiz.name) }>
-                            Invite students to quiz
-                        </span>
-                    </Link>
-                </td>
-            </tr>
-        );
-    });
+                  if (quiz.is_presented) {
+                      handleSetIsSurvey(quiz.quiz_id, quiz.survey_id);
+                  }
 
-    const mobileView = quizzes.map((quiz, index) => {
+                  const url = `${module_id}/${quiz[surveyIdOrQuizId]}/${
+                      quiz.is_presented ? 'members' : 'edit-' + surveyOrQuiz
+                  }`;
 
-        let iconClasses = classnames("fa", {
-            "fa-check": quiz.is_presented === true,
-            "fa-times": quiz.is_presented === false
-        });
+                  hashHistory.push(url);
 
-        let buttonClass = classnames("tag is-success is-medium settings-link-element", {
-            "display-none": quiz.is_presented
-        });
-
-        let quizHistoryClass = classnames("settings-link-element", {
-            "display-none": !quiz.is_presented
-        });
-
-        let editQuizClass = classnames("settings-link-element", {
-            "display-none": quiz.is_presented
-        });
-
-        let is_last_quizClasses = classnames("fa", {
-            "fa-check": quiz.is_last_quiz
-        });
-
-
-        return (
-            <div key={ index } className="box">
-                <h5>{ quiz.name }</h5>
-                <div className="columns is-mobile has-text-centered">
-                    <div className="column">{`Questions: \n${+quiz.num_questions}`}</div>
-                    <div className="column">{`Entries: \n${+quiz.num_entries}`}</div>
+              } }
+          >
+            <span className="module-quiz__index">{ index + 1 }</span>
+            {
+              quiz.is_presented
+              ? <p className="logo--white quiz__logo--white"></p>
+              : <p className="logo quiz__logo"></p>
+            }
+            <div className="f-header module-quiz__name">{ quiz.name }</div>
+            <div className="module-quiz__questions">{ `${ +quiz.num_questions } Question${ +quiz.num_questions === 1 ? '' : 's'}` }</div>
+            {
+              quiz.is_presented
+              ? <div className="module-quiz__entries">{ +quiz.num_entries + ' entries' }</div>
+              : <div className="module-quiz__buttons">
+                    <button
+                    className="button button__primary"
+                    onClick={ (e) => {
+                        e.stopPropagation();
+                        hashHistory.push(`${location.pathname}/live`);
+                        sendQuizInvite(quiz.quiz_id, quiz.survey_id, quiz.name);
+                    } }>Run { surveyOrQuizCapitalized }</button>
+                    <button
+                    className="button button__primary"
+                    onClick={ (e) => {
+                        e.stopPropagation();
+                        hashHistory.push(`${location.pathname}/live`);
+                        sendQuizInvite(quiz.quiz_id, quiz.survey_id, quiz.name, true);
+                    } }>Preview { surveyOrQuizCapitalized }</button>
                 </div>
-                <div className="columns is-mobile has-text-centered">
-                    <div className="column">Presented: <i className={ iconClasses } /></div>
-                    <div className="column">Last Quiz: <i className={ is_last_quizClasses } /></div>
-                </div>
-                <div className="columns is-mobile has-text-centered">
-                    <Link className={ editQuizClass } to={`${module_id}/${quiz.quiz_id}/edit-quiz`}>
-                        <span title="Edit Quiz" className="column tag is-warning is-medium settings-tag">
-                            <i className="fa fa-edit"></i>
-                        </span>
-                    </Link>
-
-                    <Link className={ quizHistoryClass } to={ `${module_id}/${quiz.quiz_id}/members` }>
-                        <span title="Quiz History" className="column tag is-warning is-medium settings-tag">
-                            <i className="fa fa-history"></i>
-                        </span>
-                    </Link>
-                </div>
-
-                <div className="columns is-mobile has-text-centered">
-                    <Link className={ buttonClass } to={`${location.pathname}/live`}>
-                        <span
-                        onClick={ () => sendQuizInvite(quiz.quiz_id, quiz.name) }>
-                        Invite students to quiz
-                        </span>
-                    </Link>
-                </div>
-
-            </div>
+            }
+            {
+                quiz.is_last_quiz &&
+                    <span className="module-quiz__last-message">(This is the last quiz)</span>
+            }
+            <div className="line module-quiz__line"></div>
+          </div>
         );
     });
 
     return (
-        <div className="section quizzes">
-            <div className="level">
-                <div className="level-left">
-                    <h3 className="level-item">Quizzes</h3>
-                </div>
-                <div className="level-right">
-
-                    <Link className="level-item" to={ `${module_id}/new-quiz` } >
-
-                        <button className="add-quiz-button button is-info">
-                            <span className="icon">
-                                <i className="fa fa-plus" />
-                            </span>
-                            <span>Add a new quiz</span>
-                        </button>
-                    </Link>
-                </div>
-            </div>
-
-            <table className="table is-hidden-mobile">
-                <thead>
-                    <tr>
-                        <th>Quiz name</th>
-                        <th># questions</th>
-                        <th># entries</th>
-                        <th>Presented?</th>
-                        <th>Last Quiz?</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    { desktopView }
-                </tbody>
-            </table>
-
-            <div className="is-hidden-tablet">
-                { mobileView }
+        <div className="quizzes">
+            <h3 className="headline module__headline">
+               { surveyOrQuizPluralCapitalized }
+            </h3>
+            <div className="table">
+                { desktopView }
             </div>
         </div>
     );
@@ -169,7 +81,9 @@ Quizzes.propTypes = {
     location: PropTypes.object.isRequired,
     quizzes: PropTypes.array.isRequired,
     sendQuizInvite: PropTypes.func.isRequired,
-    module_id: PropTypes.string.isRequired
+    module_id: PropTypes.string.isRequired,
+    isSurvey: PropTypes.bool,
+    handleSetIsSurvey: PropTypes.func.isRequired
 };
 
 export default Quizzes;

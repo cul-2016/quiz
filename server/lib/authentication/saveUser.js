@@ -7,17 +7,18 @@ var query = require('../query');
 * @param {string} password - password for the given user
 * @param {Boolean} is_lecturer - indicaes whether the user is a lecturer or student
 * @param {string} username - username for the given student or lecturer
+* @param {string} verification_code - uuid code necessary for verification url sent via email
 * @param {Function} callback - callback function.
 */
-function saveUser (pool, email, password, is_lecturer, username, callback) {
+function saveUser (pool, email, password, is_lecturer, username, verification_code, callback) {
     var userQuery;
     var userArray;
     if (is_lecturer) {
-        userQuery = 'INSERT INTO users (email, password, is_lecturer, username) VALUES ( $1, $2, $3, $4 );';
-        userArray = [email, password, is_lecturer, username];
+        userQuery = 'INSERT INTO users (email, password, is_lecturer, username, verification_code) VALUES ( $1, $2, $3, $4, $5 );';
+        userArray = [email, password, is_lecturer, username, verification_code];
     } else {
-        userQuery = 'INSERT INTO users (email, password, username) VALUES ( $1, $2, $3);';
-        userArray = [email, password, username];
+        userQuery = 'INSERT INTO users (email, password, username, is_verified) VALUES ( $1, $2, $3, $4);';
+        userArray = [email, password, username, true];
     }
     query(pool, userQuery, userArray, (error, result) => {
         if (error) {

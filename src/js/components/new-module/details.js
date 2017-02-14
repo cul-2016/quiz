@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import classnames from 'classnames';
-import text from '../../lib/newModuleRollovers.json';
 
 const REQUIRED_ID_LENGTH = 4;
 
@@ -23,54 +22,37 @@ class Details extends React.Component {
 
         let { module_id, moduleIDExists, isValidatingModuleID, module_id_length, handleCodeInputChange, handleInputChange } = this.props;
 
-        const moduleIDClasses = classnames("input", {
-            "is-danger": moduleIDExists === true && !isValidatingModuleID && module_id_length === REQUIRED_ID_LENGTH,
-            "is-success": moduleIDExists === false && !isValidatingModuleID && module_id_length === REQUIRED_ID_LENGTH
-        });
-
         const iconClasses = classnames("fa", {
             "fa-warning": moduleIDExists === true && !isValidatingModuleID && module_id_length === REQUIRED_ID_LENGTH,
             "fa-check": moduleIDExists === false && !isValidatingModuleID && module_id_length === REQUIRED_ID_LENGTH
         });
-
-        const moduleIDHelpClasses = classnames("help is-white", {
-            "is-danger": moduleIDExists === true && !isValidatingModuleID && module_id_length === REQUIRED_ID_LENGTH
+        const moduleIDHelpClasses = classnames("f-small-body", {
+            "f-small-body--light": moduleIDExists === true && !isValidatingModuleID && module_id_length === REQUIRED_ID_LENGTH,
         });
-
         const toggleClassnamesName = classnames("notification container average is-info has-text-centered ", {
             "display-none": !this.state.name
         });
-
         const toggleClassnamesCode = classnames("notification container average is-info has-text-centered ", {
             "display-none": !this.state.code
         });
 
         return (
             <div className="section column">
-                <h3>
-                    <i className="fa fa-pencil" /> Module name and code
-                </h3>
 
-
-                <label className="label module-section-headers">Module name</label>
-                <i onClick={ () => { this.toggleRollover("name");} } className="fa fa-question-circle help-icon" />
-                <div className={ toggleClassnamesName }>
-                <p>{ text.name }</p>
-                </div>
+                <label className="f-label form__label">Name</label>
                 <input
-                    className="input"
+                    className="form__input form__input--new-module"
+                    placeholder="e.g. Analytics"
                     name="name"
                     type="text"
                     onChange={ (e) => handleInputChange('name', e.target.value) } />
 
-                <label className="label module-section-headers">Code (4 characters long)</label>
-                <i onClick={ () => { this.toggleRollover("code");} } className="fa fa-question-circle help-icon" />
-                <div className={ toggleClassnamesCode }>
-                <p> { text.code }</p>
-                </div>
+                <label className="f-label form__label">Module Code (4 Letters)</label>
+
                 <p className="control has-icon has-icon-right">
                     <input
-                        className={ moduleIDClasses }
+                        className="form__input form__input--new-module form__input--new-module--code"
+                        placeholder="CODE"
                         value={ module_id }
                         name="module_id"
                         type="text"

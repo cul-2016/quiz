@@ -1,0 +1,70 @@
+.module-members {
+
+    .section {
+        margin-top: 1rem;
+    }
+}
+
+
+.member {
+    margin: 0.5rem 0;
+    
+    .f-body {
+      cursor: default;
+    }
+    .member__details {
+        display: inline-block;
+        width: 70%;
+    }
+    .member__view-details {
+      width: 15%;
+      display: inline-block;
+      text-align: right;
+      padding-right: 1rem;
+      box-sizing: border-box;
+
+          .f-body {
+              padding-right: 0.5rem;
+          }
+    }
+    .member__view-remove-member {
+      width: 15%;
+      display: inline-block;
+      text-align: right;
+    }
+
+
+    .quiz__details, .member__quiz__header {
+        display: inline-block;
+        padding: 0 1rem;
+    }
+
+    .member__quiz__details {
+        position: relative;
+        width: 100%;
+        margin: 0.5rem 0 1rem 0;
+        padding: 1rem 2rem;
+        box-shadow: inset 0 -4px 0 0 $grey;
+        border: 1px solid #3E3E3E;
+
+        .close-button {
+          position: absolute;
+          top: 0.2rem;
+          right: 0.6rem;
+        }
+    }
+
+    .remove__student {
+        position: relative;
+        width: 100%;
+        margin: 0.5rem 0 1rem 0;
+        padding: 1rem 2rem;
+        box-shadow: inset 0 -4px 0 0 $grey;
+        border: 1px solid #3E3E3E;
+
+        .button {
+          margin: 1rem 0.5rem;
+        }
+    }
+
+}

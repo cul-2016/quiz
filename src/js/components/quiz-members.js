@@ -1,7 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import { Link } from 'react-router';
 import Spinner from './general/spinner';
-import QuizMembersModal from './quiz-members-modal';
 import EditScoreModal from './edit-score-modal';
 import { store } from '../store.js';
 
@@ -56,50 +55,49 @@ class QuizMembers extends Component {
             return quiz.name;
         })[0];
     }
-
     render () {
 
 
-        let { members, isFetchingQuizMembers, questions, params, handleUpdateScore, handleEditScore } = this.props;
+        let { members, isFetchingQuizMembers, questions, params, handleUpdateScore, handleEditScore, isSurvey } = this.props;
         let quizName = this.getQuizName();
 
         let mappedMembers = members.map((member, i) => {
             return (
-                <tr key={ i } className="quiz-members">
-                    <td>
-                        <p>{ member.email }</p>
-                    </td>
-                    <td>
-                        <p>{ member.username }</p>
-                    </td>
-                    <td>
-                        <p>{ member.score }</p>
-                    </td>
-                    <td>
-                        <button className="button is-warning" onClick={ () => this.showEditScore(i) }>Edit Score</button>
-                    </td>
-                </tr>
-            );
-        });
+                <div key={ i } className="quiz-member">
+                    <div className="member__details">
+                      <p className="f-label f-label--dark">{ member.username }</p>
+                      <p className="f-small-body f-small-body--slim">{ member.email }</p>
+                    </div>
+                    {
+                      !isSurvey &&
+                      <div className="member__score-details">
+                          <div className="member__score">
+                            <p>{ member.score } / {questions.length}</p>
+                          </div>
+                          <div className="member__score-percentage">
+                            <p>{ Math.round((member.score  / questions.length) * 100) }%</p>
+                          </div>
+                          <div className="member__edit-score" onClick={ () => this.showEditScore(i) }>
+                            <p className="f-body f-body--primary">Edit Score</p>
+                          </div>
+                      </div>
+                    }
 
-        let mobileView = members.map((member, i) => {
-            return (
-                <div key={ i } className="box">
-                    <div className="columns is-mobile has-text-centered">
-                        <div className="column">{ member.email }</div>
-                        <div className="column">{ member.username }</div>
-                    </div>
-                    <div className="columns is-mobile has-text-centered">
-                        <div className="column"><strong>Score:</strong>{ member.score }</div>
-                    </div>
-                    <div className="columns is-mobile has-text-centered">
-                        <div className="column">
-                            <button className="button is-warning" onClick={ () => this.showEditScore(i) }>Edit Score</button>
-                        </div>
-                    </div>
+                    <EditScoreModal
+                      member={ member }
+                      isVisible={ this.state.isEditScoreVisible }
+                      hide={ this.hideEditScore }
+                      member_key={ this.state.member_key }
+                      members={ store.getState().quizMembers.members }
+                      quiz_id={ params.quiz_id }
+                      module_id={ params.module_id }
+                      handleEditScore={ handleEditScore }
+                      handleUpdateScore={ handleUpdateScore }/>
+
                 </div>
             );
         });
+
 
         return (
             <div>
@@ -110,66 +108,22 @@ class QuizMembers extends Component {
                     !isFetchingQuizMembers && members &&
                     <div className="quiz-members container average">
 
-                        <EditScoreModal
-                            isVisible={ this.state.isEditScoreVisible }
-                            hide={ this.hideEditScore }
-                            member_key={ this.state.member_key }
-                            members={ store.getState().quizMembers.members }
-                            quiz_id={ params.quiz_id }
-                            module_id={ params.module_id }
-                            handleEditScore={ handleEditScore }
-                            handleUpdateScore={ handleUpdateScore }/>
+                      <ul className="navbar navbar--invisible">
+                          <li className="navbar__item">
+                              <Link to={ `${this.props.params.module_id}/lecturer` } className="f-body navbar__link navbar__link--left navbar__link--quit">
+                                Back
+                              </Link>
+                          </li>
+                      </ul>
 
-                        <QuizMembersModal
-                            isVisible={ this.state.isQuizQuestionsVisible }
-                            questions={ questions }
-                            hide={ this.hideQuizQuestions }/>
-
-                        <h2 className="has-text-centered"> Quiz History </h2>
-                        <h3 className="has-text-centered"> { quizName } </h3>
-
-                        <div className="column">
-                            <Link to={ `/${this.props.params.module_id}/lecturer` }>
-                                <button className="button is-3 is-light is-inverted">
-                                    <span className="icon">
-                                        <i className="fa fa-chevron-left"></i>
-                                    </span>
-                                    <span>Back to { this.props.params.module_id }</span>
-                                </button>
-                            </Link>
-                        </div>
-
-                        <div className="has-text-centered">
-                            <button className="button is-info show-quiz-questions-button" onClick={ () => this.showQuizQuestions() }>
-                                Show quiz questions
-                            </button>
-                        </div>
-
-                        <div className="section is-hidden-mobile">
-                            <h3>Quiz Members</h3>
-                            <table className="table">
-                                <thead>
-                                    <tr>
-                                        <th>
-                                            <label className="label">Email</label>
-                                        </th>
-                                        <th>
-                                            <label className="label">Nickname</label>
-                                        </th>
-                                        <th colSpan="2">
-                                            <label className="label">Score</label>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    { mappedMembers }
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div className="is-hidden-tablet">
-                            { mobileView }
-                        </div>
+                      <div className="content__body">
+                        <Link className="button button__primary review-quiz-button" to={ `${params.module_id}/${params.quiz_id}/members/quiz-review` }>Quiz Review</Link>
+                          <p className="f-headline">Students&#39; Individual Scores</p>
+                          <p className="f-title">In {quizName}</p>
+                        <section className="members">
+                            { mappedMembers }
+                        </section>
+                      </div>
                     </div>
                 }
             </div>
@@ -183,7 +137,8 @@ QuizMembers.propTypes = {
     params: PropTypes.object,
     questions: PropTypes.array,
     handleEditScore: PropTypes.func,
-    handleUpdateScore: PropTypes.func
+    handleUpdateScore: PropTypes.func,
+    isSurvey: PropTypes.bool
 };
 
 export default QuizMembers;

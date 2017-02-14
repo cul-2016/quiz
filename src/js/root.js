@@ -1,9 +1,12 @@
 import React, { PropTypes } from 'react';
-import { Router, Route, IndexRoute, IndexRedirect, Redirect, hashHistory } from 'react-router';
+import { Router, Route, IndexRoute, Redirect, hashHistory } from 'react-router';
 import { Provider } from 'react-redux';
 
 import AppContainer from './containers/app-container';
 import LoginContainer from './containers/login';
+import RequestResetPasswordContainer from './containers/request-reset-password.js';
+import RequestEmailSentComponent from './components/login/reset-password-email-sent.js';
+import ResetPasswordFormContainer from './containers/reset-password-form-container.js';
 import DashboardContainer from './containers/dashboard';
 import NewModuleContainer from './containers/new-module';
 import SignupContainer from './containers/signup';
@@ -20,35 +23,56 @@ import HoldingPageComponent from './components/holding-page';
 import ReviewContainer from './containers/review';
 import ModuleMembersContainer from './containers/module-members';
 import QuizMembersContainer from './containers/quiz-members';
+import QuizMembersReviewContainer from './containers/quiz-members-review';
+import ReviewQuizStudentContainer from './containers/student/quiz-review.js';
 
 import StudentJoinModuleContainer from './containers/student/join-module';
 import StudentModuleContainer from './containers/student/module';
-import StudentHistoryContainer from './containers/student/history';
-import StudentFeedbackContainer from './containers/student/feedback';
+import StudentPerformanceContainer from './containers/student/feedback';
 import StudentLiveQuizContainer from './containers/student/live-quiz';
 import StudentQuizResultContainer from './containers/student/result';
+
+import VerficationMessageComponent from './components/email-verification/verify-email-message.js';
+import VerifiedComponent from './components/email-verification/verified.js';
 
 import NotFound from './components/general/not-found';
 
 import composeHooks from './lib/composeHooks';
 import * as hooks from './lib/onEnterHooks';
 
-import { store } from './store';
+import { store } from './store'; // eslint-disable-line
 
 const Root = ({ store }) => (
 
     <Provider store={ store }>
-        <Router history={ hashHistory }>
+        <Router history={ hashHistory } onUpdate={() => window.scrollTo(0, 0)}>
             <Route path="/" component={ AppContainer }>
                 <IndexRoute
                     onEnter={ hooks.shouldUserRedirect }
                     component={ LoginContainer } />
+                <Route
+                    onEnter={ hooks.clearState }
+                    path="request-reset-password"
+                    component={ RequestResetPasswordContainer } />
+                <Route
+                    path="reset-password-email-sent"
+                    component={ RequestEmailSentComponent } />
+                <Route
+                    onEnter={ hooks.clearState }
+                    path="reset-password/:code"
+                    component={ ResetPasswordFormContainer } />
                 <Route
                     path="register-student"
                     component={ SignupContainer } />
                 <Route
                     path="register-lecturer-invite-only"
                     component={ SignupContainer } />
+                <Route
+                    path="please-verify"
+                    component={ VerficationMessageComponent } />
+                <Route
+                    path="verification/:verified"
+                    component={ VerifiedComponent } />
                 <Route
                     onEnter={ composeHooks(hooks.authenticate, hooks.fetchModuleList, hooks.leaveRoom) }
                     path="dashboard"
@@ -69,17 +93,18 @@ const Root = ({ store }) => (
                     onEnter={ composeHooks(hooks.authenticate, hooks.checkUserRole, hooks.fetchModule, hooks.checkModuleOwner) }
                     path=":module_id/lecturer"
                     component={ ModuleContainer } />
-                <Route path=":module_id/student" component={ StudentModuleContainer }>
-                    <IndexRedirect to="feedback" />
-                    <Route
-                        onEnter={ composeHooks(hooks.authenticate) }
-                        path="history"
-                        component={ StudentHistoryContainer } />
-                    <Route
-                        onEnter={ composeHooks(hooks.authenticate, hooks.fetchModule) }
-                        path="feedback"
-                        component={ StudentFeedbackContainer } />
-                </Route>
+                <Route
+                    onEnter={ composeHooks(hooks.authenticate, hooks.fetchModule) }
+                    path=":module_id/student"
+                    component={ StudentModuleContainer } />
+                <Route
+                    onEnter={ composeHooks(hooks.authenticate, hooks.fetchModule) }
+                    path=":module_id/student/performance"
+                    component={ StudentPerformanceContainer } />
+                <Route
+                    onEnter={ composeHooks(hooks.fetchQuizDetailsStudent) }
+                    path=":module_id/student/history/:quiz_id"
+                    component={ ReviewQuizStudentContainer } />
                 <Route
                     onEnter={ composeHooks(hooks.authenticate, hooks.checkUserRole, hooks.checkModuleOwner) }
                     path=":module_id/new-quiz"
@@ -89,6 +114,10 @@ const Root = ({ store }) => (
                     path=":module_id/:quiz_id/edit-quiz"
                     component={ EditQuizContainer } />
                 <Route
+                    onEnter={ composeHooks(hooks.authenticate, hooks.checkUserRole, hooks.fetchQuizDetails, hooks.checkModuleOwner) }
+                    path=":module_id/:survey_id/edit-survey"
+                    component={ EditQuizContainer } />
+                <Route
                     onEnter={ composeHooks(hooks.authenticate, hooks.checkUserRole, hooks.fetchModuleMembers, hooks.checkModuleOwner) }
                     path=":module_id/members"
                     component={ ModuleMembersContainer } />
@@ -96,6 +125,10 @@ const Root = ({ store }) => (
                     onEnter={ composeHooks(hooks.authenticate, hooks.checkUserRole, hooks.fetchQuizMembers, hooks.fetchQuizReview, hooks.checkModuleOwner) }
                     path=":module_id/:quiz_id/members"
                     component={ QuizMembersContainer } />
+                <Route
+                    onEnter={ composeHooks(hooks.authenticate, hooks.checkUserRole, hooks.fetchQuizMembers, hooks.fetchQuizReview, hooks.checkModuleOwner) }
+                    path=":module_id/:quiz_id/members/quiz-review"
+                    component={ QuizMembersReviewContainer } />
                 <Route
                     onEnter={ composeHooks(hooks.authenticate, hooks.checkUserRole, hooks.checkModuleOwner) }
                     path=":module_id/lecturer/live"

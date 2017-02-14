@@ -1,0 +1,48 @@
+@keyframes fadeInOut {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.logo {
+    background: url(../../public/assets/logo/yellow.svg);
+    background-size: 3rem;
+    height: 3rem;
+    width: 3rem;
+
+    &--large {
+        background-size: 5rem;
+        margin: 1rem auto;
+        height: 5rem;
+        width: 5rem;
+    }
+
+    &--animated {
+      -webkit-animation: fadeInOut 2s infinite; /* Safari 4.0 - 8.0 */
+      animation: fadeInOut 2s infinite;
+    }
+
+    &--footer {
+        background-size: 3rem;
+        margin: 1rem auto;
+        height: 3rem;
+        width: 3rem;
+    }
+
+    &--primary-dark {
+        background: url(../../public/assets/logo/dark-yellow.svg);
+        height: 4rem;
+        width: 4rem;
+        background-size: 4rem;
+        margin: auto;
+    }
+}
+
+.logo--white {
+  background: url(../../public/assets/logo/Off-white.svg);
+
+  background-size: 3rem;
+  height: 3rem;
+  width: 3rem;
+}
+

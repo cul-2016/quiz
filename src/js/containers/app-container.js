@@ -7,7 +7,7 @@ const mapStateToProps = (state) => ({
     username: state.user.username,
     isCookieAccepted: state.user.isCookieAccepted,
     is_lecturer: state.user.is_lecturer,
-    error: state.dashboard.error || state.joinModule.error || state.leaderboard.error || state.liveQuiz.error || state.login.error || state.module.error || state.newModule.error || state.newQuiz.error || state.quizMembers.error || state.register.error || state.result.error || state.review.error || state.user.error
+    error: state.dashboard.error || state.joinModule.error || state.leaderboard.error || state.liveQuiz.error || state.login.error || state.module.error || state.newModule.error || state.newQuiz.error || state.quizMembers.error || state.result.error || state.review.error || state.user.error
 });
 
 const mapDispatchToProps = (dispatch) => ({

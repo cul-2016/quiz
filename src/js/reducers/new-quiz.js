@@ -1,10 +1,11 @@
 import update from 'react-addons-update';
 import * as actionsTypes from '../actions/new-quiz';
 
-const initialState = {
+export const initialState = {
     name: undefined,
     questions: [],
     is_last_quiz: false,
+    isSurvey: false,
     isSavingQuiz: false,
     isUpdatingQuiz: false,
     isFetchingQuizDetails: false,
@@ -12,7 +13,7 @@ const initialState = {
     deletedQuestions: []
 };
 
-export default function (state = initialState, action) {
+export function newQuiz (state = initialState, action) {
 
     switch (action.type) {
 
@@ -37,6 +38,11 @@ export default function (state = initialState, action) {
     case actionsTypes.TOGGLE_IS_LAST_QUIZ:
         return update(state, {
             is_last_quiz: { $set: !state.is_last_quiz }
+        });
+
+    case actionsTypes.TOGGLE_IS_SURVEY:
+        return update(state, {
+            isSurvey: { $set: !state.isSurvey }
         });
 
     case actionsTypes.SAVE_QUIZ_REQUEST:

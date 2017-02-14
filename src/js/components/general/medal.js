@@ -4,18 +4,14 @@ import classnames from 'classnames';
 
 const Medal = ({ percentageScore, medalConditions }) => {
 
-    let medalClass = classnames("medal", {
-        "gold": percentageScore >= medalConditions[1],
-        "silver": percentageScore >= medalConditions[0] && percentageScore < medalConditions[1],
-        "bronze": percentageScore < medalConditions[0] && percentageScore > 0
-    });
-
-    let containerClass = classnames("medal-container", {
-        "display-none": percentageScore === 0
+    const medalClass = classnames("medal-small", {
+        "medal-small--gold": percentageScore >= medalConditions[1],
+        "medal-small--silver": percentageScore >= medalConditions[0] && percentageScore < medalConditions[1],
+        "medal-small--bronze": percentageScore < medalConditions[0] && percentageScore >= 0
     });
 
     return (
-        <div className={ containerClass }>
+        <div className="medal-container">
             <div className="ribbon" />
             <div className={ medalClass } />
         </div>

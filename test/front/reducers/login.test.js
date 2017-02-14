@@ -1,0 +1,135 @@
+import test from 'tape';
+import * as states from '../../utils/reducer-fixtures';
+import { authenticateUserError as error } from '../../utils/action-fixtures';
+import {
+    initialState as loginState,
+    login as reducer
+}  from '../../../src/js/reducers/login';
+import deepFreeze from '../../utils/deepFreeze';
+
+
+test('UPDATE_EMAIL works when user enters a value', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(loginState);
+
+    const email = 'test@city.ac.uk';
+    const action = {
+        type: 'UPDATE_EMAIL',
+        value: email
+    };
+
+    const expected = Object.assign({}, loginState, { email });
+
+
+    const result = reducer(initialState, action);
+    t.deepEqual(result, expected);
+});
+
+test('UPDATE_PASSWORD works when user enters a value', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(loginState);
+
+    const password = 'testpassword';
+    const action = {
+        type: 'UPDATE_PASSWORD',
+        value: password
+    };
+
+    const expected = Object.assign({}, loginState, { password });
+
+    const result = reducer(initialState, action);
+    t.deepEqual(result, expected);
+});
+
+test('AUTHENTICATE_USER_REQUEST works', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(loginState);
+
+    const action = {
+        type: 'AUTHENTICATE_USER_REQUEST',
+    };
+
+    const expected = Object.assign({}, loginState, { isAuthenticating: true });
+
+    const result = reducer(initialState, action);
+    t.deepEqual(result, expected);
+});
+
+test('AUTHENTICATE_USER_SUCCESS works', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(
+        Object.assign(
+            {},
+            loginState,
+            { isAuthenticating: true }
+        )
+    );
+
+    const data = true;
+    const action = {
+        type: 'AUTHENTICATE_USER_SUCCESS',
+        data
+    };
+    const expected = Object.assign({}, loginState, { isAuthenticating: false });
+
+    const result = reducer(initialState, action);
+
+    t.deepEqual(result, expected);
+});
+
+test('AUTHENTICATE_USER_FAILURE works', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(
+        Object.assign(
+            {},
+            loginState,
+            { isAuthenticating: true }
+        )
+    );
+
+    const action = {
+        type: 'AUTHENTICATE_USER_FAILURE',
+        error
+    };
+
+    const expected = Object.assign({}, loginState, { isAuthenticating: false }, { error });
+    const result = reducer(initialState, action);
+
+    t.deepEqual(result, expected);
+});
+
+test.skip('LOGOUT works', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(
+        Object.assign({},
+            { user: Object.assign({}, states.user, { user_id: 10 }) },
+            { login: Object.assign({}, loginState, { email: "testing@email.com" }) },
+            { dashboard: Object.assign({}, states.dashboard, { data: 'some arbitrary data' }) }
+        )
+    );
+
+    const action = {
+        type: 'LOGOUT',
+    };
+
+    const expected = Object.assign({},
+        { user: Object.assign({}, states.user) },
+        { login: Object.assign({}, loginState) },
+        { dashboard: Object.assign({}, states.dashboard) }
+    );
+    const result = reducer(initialState, action);
+
+    t.deepEqual(result, expected);
+});

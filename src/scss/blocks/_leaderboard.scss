@@ -1,0 +1,38 @@
+.leaderboard {
+  background-color: $white;
+  min-height: 100vh;
+
+  .f-headline {
+    max-width: 35rem;
+    margin: auto;
+    text-align: center;
+  }
+
+  table {
+    width: 45rem;
+    margin: 1rem auto;
+    text-align: center;
+  }
+  thead {
+    background-color: $black;
+    color: $white;
+  }
+
+  .leaderboard__row--odd {
+    background-color: white;
+    color: black;
+  }
+  .leaderboard__row--even {
+    background-color: $light-blue;
+    color: black;
+  }
+
+  th, td {
+    padding: 1rem;
+}
+
+  .medal-small {
+    margin: auto;
+  }
+
+}

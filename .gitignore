@@ -40,7 +40,10 @@ dump.rdb
 # Webpack bundle
 bundle.js
 
+test-env.sh
 *env.sh
+*.env
+
 queries.txt
 credentials.md
 public/bundle.js.map
@@ -49,7 +52,6 @@ public/bundle.js.map
 *.hot-update.json
 *.woff
 *.woff2
-*.svg
 
 # Fonts
 
@@ -60,6 +62,5 @@ bundle.js.map
 *.woff
 *.woff2
 *.eot
-*.svg
 trophy.*.png
 trophy-not-awarded.*.png

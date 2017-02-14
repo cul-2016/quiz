@@ -1,8 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
-import Trophies from './trophies';
-import Medals from './medals';
-
+import classnames from 'classnames';
 
 const Leaderboard = ({ mainData, medalScores, quiz_id_list, medalCondition, params }) => { //eslint-disable-line no-unused-vars
 
@@ -21,57 +19,72 @@ const Leaderboard = ({ mainData, medalScores, quiz_id_list, medalCondition, para
         let userScores = medalScores.filter((scoreObj) => {
             return scoreObj.user_id === user.user_id;
         });
+        let bronzeTotal = 0;
+        let silverTotal = 0;
+        let goldTotal = 0;
+
+        userScores.map((quiz) => {
+            if (quiz.percentage_score > 0 && quiz.percentage_score <= medalCondition[0]) {
+                bronzeTotal += 1;
+            } else if (quiz.percentage_score > medalCondition[0] && quiz.percentage_score <= medalCondition[1]) {
+                silverTotal += 1;
+            } else if (quiz.percentage_score > medalCondition[1]) {
+                goldTotal += 1;
+            }
+        });
+
+        let rowClass = classnames({
+            "leaderboard__row--odd": rankingNumbers[i] % 2 !== 0,
+            "leaderboard__row--even": rankingNumbers[i] % 2 === 0
+        });
 
         return (
-            <li className="columns is-desktop" key={ i }>
-                <span className="rank-number column is-1">{ rankingNumbers[i] }</span>
-                <div className="column is-3">
-                    <span className="subtitle is-4">{ user.username }</span>
-                </div>
-                <div className="column is-1">
-                    <span className="subtitle is-4">{ parseFloat(user.total_score) }</span>
-                </div>
-                <div className="column is-2 is-hidden-mobile">
-                    <Trophies data={ user } />
-                </div>
-                <div className="column is-hidden-mobile">
-                    <Medals quiz_id_list={ quiz_id_list } medalCondition={ medalCondition } userScores={ userScores } user_id={ user.user_id } />
-                </div>
-            </li>
+          <tr className={ rowClass }>
+              <td className="f-body"> { rankingNumbers[i] } </td>
+              <td className="f-body"> { user.username } </td>
+              <td className="f-body"> { bronzeTotal} </td>
+              <td className="f-body"> { silverTotal } </td>
+              <td className="f-body"> { goldTotal } </td>
+              <td className="f-body"> { parseFloat(user.total_score) } </td>
+          </tr>
         );
     });
 
     return (
         <div className="leaderboard">
-            <div className="container">
-                <h1 className="has-text-centered">Leaderboard</h1>
-                <div className="column">
-                    <Link to={ `/${params.module_id}/lecturer` }>
-                        <button className="button is-3 is-light">
-                            <span className="icon">
-                                <i className="fa fa-chevron-left"></i>
-                            </span>
-                            <span>Back to { params.module_id }</span>
-                        </button>
-                    </Link>
-                </div>
-                <div className="section">
-                    <div className="leaderboard-header columns is-hidden-mobile">
-                        <div className="column is-4 nickname">
-                            Nickname
-                        </div>
-                        <div className="column is-1 score-header">
-                            Total Score
-                        </div>
-                        <div className="column">
-                            Achievements
-                        </div>
-                    </div>
-                    <ol>
-                        { mappedLeaderboard }
-                    </ol>
-                </div>
-            </div>
+               <div>
+                   <ul className="navbar navbar--invisible">
+                       <li className="navbar__item">
+                           <Link to={ `${params.module_id}/lecturer` } className="f-body navbar__link navbar__link--left navbar__link--quit">
+                             Back
+                           </Link>
+                       </li>
+                   </ul>
+               </div>
+               <div className="content__body">
+                    <h1 className="f-headline">Module Leaderboard</h1>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th className="f-body f-body--white">Pos</th>
+                                <th className="f-body f-body--white">Name</th>
+                                <th>
+                                  <p className="medal-small medal-small--bronze"></p>
+                                </th>
+                                <th>
+                                  <p className="medal-small medal-small--silver"></p>
+                                </th>
+                                <th>
+                                  <p className="medal-small medal-small--gold"></p>
+                                </th>
+                                <th className="f-body f-body--white">Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                          { mappedLeaderboard }
+                        </tbody>
+                  </table>
+              </div>
         </div>
     );
 };

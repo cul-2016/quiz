@@ -3,11 +3,12 @@ import dashboard from './dashboard';
 import newModule from './new-module';
 import { joinModule } from './join-module';
 import user from './user';
-import login from './login';
+import { login } from './login';
+import { resetPassword } from './reset-password.js';
 import register from './register';
-import newQuiz from './new-quiz';
+import { newQuiz } from './new-quiz';
 import { module } from './module';
-import liveQuiz from './live-quiz';
+import { liveQuiz } from './live-quiz';
 import review from './review';
 import { result } from './result';
 import quizMembers from './quiz-members';
@@ -20,6 +21,7 @@ import { studentHistory } from './student-history';
 const appReducer = combineReducers({
     user,
     login,
+    resetPassword,
     dashboard,
     newModule,
     joinModule,

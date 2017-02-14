@@ -1,8 +1,6 @@
 import { store } from '../store';
 import { socketClient } from '../socket';
 import validCookieExists from './validCookieExists';
-import isUserLecturer from './isUserLecturer';
-import getUserID from './getUserID';
 import { getModule, getModuleMembers } from '../actions/module';
 import { getDashboard } from '../actions/dashboard';
 import { getUserDetails } from '../actions/user';
@@ -10,10 +8,11 @@ import { getQuizReview } from '../actions/review';
 import { getQuizResult } from '../actions/result';
 import { getQuizMembers } from '../actions/quiz-members';
 import { getQuizDetails } from '../actions/new-quiz';
+import { getQuizDetailsStudent } from '../actions/review';
 import { getLeaderboard } from '../actions/leaderboard';
 import { getFeedback } from '../actions/feedback';
 import { getStudentHistory } from '../actions/student-history';
-
+import { logout } from '../actions/login';
 
 /**
  * Checks if user is authenticated.  Redirects  to '/' if they're not
@@ -51,7 +50,7 @@ export function authenticate (nextState, replace, callback) {
  */
 export function checkUserRole (nextState, replace, callback) {
 
-    if (isUserLecturer() === false) {
+    if (store.getState().user.is_lecturer === false) {
         replace('/dashboard');
         callback(false);
     } else {
@@ -96,7 +95,7 @@ export function fetchUserDetails (nextState, replace, callback) {
     if (!validCookieExists()) {
         replace('/');
     } else {
-        store.dispatch(getUserDetails(getUserID()));
+        store.dispatch(getUserDetails());
     }
     callback();
 }
@@ -129,15 +128,14 @@ export function fetchModule (nextState, replace, callback) {
     // get user's role
     let module_id = nextState.params.module_id;
     let is_lecturer = store.getState().user.is_lecturer;
-    let user_id = store.getState().user.user_id;
 
     if (validCookieExists()) {
 
-        store.dispatch(getModule(module_id, is_lecturer, user_id));
+        store.dispatch(getModule(module_id, is_lecturer));
 
         if (is_lecturer === false) {
-            store.dispatch(getFeedback(user_id, module_id));
-            store.dispatch(getStudentHistory(user_id, module_id));
+            store.dispatch(getFeedback(module_id));
+            store.dispatch(getStudentHistory(undefined, module_id));
         }
     }
     callback();
@@ -168,8 +166,10 @@ export function fetchModuleList (nextState, replace, callback) {
 export function fetchQuizReview (nextState, replace, callback) {
 
     if (validCookieExists()) {
+        const isSurvey = store.getState().liveQuiz.isSurvey;
         const quiz_id = nextState.params.quiz_id;
-        store.dispatch(getQuizReview(quiz_id));
+        console.log(isSurvey, quiz_id);
+        store.dispatch(getQuizReview(quiz_id, isSurvey));
     }
     callback();
 }
@@ -221,8 +221,9 @@ export function fetchResult (nextState, replace, callback) {
 export function fetchQuizMembers (nextState, replace, callback) {
 
     if (validCookieExists()) {
-        const quiz_id = nextState.params.quiz_id;
-        store.dispatch(getQuizMembers(quiz_id));
+        const isSurvey = store.getState().liveQuiz.isSurvey;
+        const id = nextState.params.quiz_id;
+        store.dispatch(getQuizMembers(id, isSurvey));
     }
     callback();
 }
@@ -241,7 +242,18 @@ export function fetchQuizDetails (nextState, replace, callback) {
     if (validCookieExists()) {
 
         const quiz_id = nextState.params.quiz_id;
-        store.dispatch(getQuizDetails(quiz_id));
+        const survey_id = nextState.params.survey_id;
+        store.dispatch(getQuizDetails(quiz_id, survey_id));
+    }
+    callback();
+}
+
+export function fetchQuizDetailsStudent (nextState, replace, callback) {
+
+    if (validCookieExists()) {
+        const quiz_id = nextState.params.quiz_id;
+
+        store.dispatch(getQuizDetailsStudent(quiz_id));
     }
     callback();
 }
@@ -278,5 +290,19 @@ export function leaveRoom (nextState, replace, callback) {
     if (validCookieExists()) {
         socketClient.emit('leave_room', () => {});
     }
+    callback();
+}
+
+/**
+ * leaves all the socket rooms the user is part of.  Is used as an onEnter hook for React Router
+ * Matches the signature of a React Router hook: https://github.com/reactjs/react-router/blob/master/docs/API.md#onenternextstate-replace-callback
+ * @param {object} nextState - the next router state
+ * @param {function} replace - function to redirect to another path
+ * @param {function} callback - (optional) can be used to make the transition block
+ */
+
+export function clearState (nextState, replace, callback) {
+
+    store.dispatch(logout());
     callback();
 }

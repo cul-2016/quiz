@@ -8,6 +8,7 @@ const mapStateToProps = (state) => ({
     question: state.review.questions && state.review.questions[state.review.currentQuizIndex],
     currentQuizIndex: state.review.currentQuizIndex,
     isAnswerShowing: state.review.isAnswerShowing,
+    isSurvey: state.liveQuiz.isSurvey
 });
 
 const mapDispatchToProps = (dispatch) => ({

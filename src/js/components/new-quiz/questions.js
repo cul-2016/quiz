@@ -1,8 +1,51 @@
 import React, { PropTypes } from 'react';
+import classnames from 'classnames';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
+const RadioButton = ({ question, value, idx, handleInputChange }) => {
 
-const Questions = ({ questions, handleInputChange, handleDeleteQuestion }) => {
+    const sliderClass = classnames({
+        "form__radio--off": question.correct_answer !== value,
+        "form__radio--on": question.correct_answer === value
+    });
+    const sliderCircleClass = classnames({
+        "form__radio--off--circle": question.correct_answer !== value,
+        "form__radio--on--circle": question.correct_answer === value
+    });
+    const sliderCylinderClass = classnames({
+        "form__radio--off--cylinder": question.correct_answer !== value,
+        "form__radio--on--cylinder": question.correct_answer === value
+    });
+
+    return (
+            <div className={ sliderClass }>
+              <p className="f-small-body f-small-body--grey">correct</p>
+            <div onClick={ () => handleInputChange('correct_answer', value, idx) }>
+              <div className={ sliderCylinderClass }></div>
+              <div className= { sliderCircleClass }></div>
+            </div>
+          </div>
+    );
+};
+
+const InputChanger = ({ question, value, idx, handleInputChange }) => <textarea { ...{
+    type: "text",
+    className: "form__input form__input--new-quiz-answer",
+    value: question[value] || "",
+    onChange: (e) => handleInputChange(value, e.target.value, idx),
+    placeholder: value
+} } />;
+
+const Option = ({ question, value, idx, isSurvey, handleInputChange }) =>
+    <div className="form__radio">
+        <label className="f-title form__label form__label--new-quiz">{ value.toUpperCase() }</label>
+            <InputChanger {...{ question, value, idx, handleInputChange }}/>
+            { !isSurvey &&
+                <RadioButton {...{ question, value, idx, handleInputChange }}/>
+            }
+    </div>;
+
+const Questions = ({ questions, handleInputChange, handleDeleteQuestion, isSurvey }) => {
 
     const transitionOptions = {
         transitionName: "fade",
@@ -12,50 +55,17 @@ const Questions = ({ questions, handleInputChange, handleDeleteQuestion }) => {
 
     let mappedQuestions = questions.map((question, i) => {
         return (
-            <div key={ i } className="column is-6 is-offset-3 question box">
+            <div key={ `question-${i}` } className="card">
 
-                <label className="label"> Question { i + 1 }</label>
-                <textarea className="textarea" type="text" value={ question.question } onChange={ (e) => handleInputChange('question', e.target.value, i) } placeholder='question'></textarea>
+                <label className="form__label--new-quiz f-subheader">{ i + 1 }.</label>
+                <textarea className="form__input form__input--new-quiz-question" type="text" value={ question.question } onChange={ (e) => handleInputChange('question', e.target.value, i) } placeholder='Question'></textarea>
+                <div className="line--new-quiz"></div>
 
-                <div className="control is-horizontal">
-                    <div className="control-label answer-label">
-                        <label className="label">A</label>
-                    </div>
-                    <div className="control">
-                        <input className="input column is-9" type="text" value={ question.a || "" } onChange={ (e) => handleInputChange('a', e.target.value, i) } placeholder='a' ></input>
-                        <input className="radio column is-1 radio-button" type="radio" checked={ question.correct_answer === 'a' } name={ i } value="a" onClick={ (e) => handleInputChange('correct_answer', e.target.value, i) } />
-                    </div>
-                </div>
-
-                <div className="control is-horizontal">
-                    <div className="control-label answer-label">
-                        <label className="label"> B </label>
-                    </div>
-                    <div className="control">
-                        <input className="input column is-9" type="text" value={ question.b || "" } onChange={ (e) => handleInputChange('b', e.target.value, i) }  placeholder='b' ></input>
-                        <input className="radio column is-1 radio-button" type="radio" checked={ question.correct_answer === 'b' } name={ i } value="b" onClick={ (e) => handleInputChange('correct_answer', e.target.value, i) } />
-                    </div>
-                </div>
-
-                <div className="control is-horizontal">
-                    <div className="control-label answer-label">
-                        <label className="label"> C </label>
-                    </div>
-                    <div className="control">
-                        <input className="input column is-9" type="text" value={ question.c || "" } onChange={ (e) => handleInputChange('c', e.target.value, i) }  placeholder='c' ></input>
-                        <input className="radio column is-1 radio-button" type="radio" checked={ question.correct_answer === 'c' } name={ i } value="c" onClick={ (e) => handleInputChange('correct_answer', e.target.value, i) } />
-                    </div>
-                </div>
-
-                <div className="control is-horizontal">
-                    <div className="control-label answer-label">
-                        <label className="label"> D </label>
-                    </div>
-                    <div className="control">
-                        <input className="input column is-9" type="text" value={ question.d || "" } onChange={ (e) => handleInputChange('d', e.target.value, i) }  placeholder='d' ></input>
-                        <input className="radio column is-1 radio-button" type="radio" checked={ question.correct_answer === 'd' } name={ i } value="d" onClick={ (e) => handleInputChange('correct_answer', e.target.value, i) } />
-                    </div>
-                </div>
+                { ['a', 'b', 'c', 'd'].map((value, idx) =>
+                    <Option { ...{ key: `option-${idx}`,
+                        question, value, idx: i, isSurvey, handleInputChange
+                    }} />
+                ) }
 
                 <button className="button is-danger" onClick={ () => { handleDeleteQuestion(i); } }> Delete Question </button>
 
@@ -75,9 +85,31 @@ const Questions = ({ questions, handleInputChange, handleDeleteQuestion }) => {
 
 Questions.propTypes = {
     questions: PropTypes.array.isRequired,
+    isSurvey: PropTypes.bool,
     handleInputChange: PropTypes.func.isRequired,
     handleDeleteQuestion: PropTypes.func.isRequired
 };
 
+RadioButton.propTypes = {
+    question: PropTypes.object,
+    value: PropTypes.string.isRequired,
+    idx: PropTypes.number.isRequired,
+    handleInputChange: PropTypes.func.isRequired
+};
+
+InputChanger.propTypes = {
+    question: PropTypes.object,
+    value: PropTypes.string.isRequired,
+    idx: PropTypes.number.isRequired,
+    handleInputChange: PropTypes.func.isRequired
+};
+
+Option.propTypes = {
+    question: PropTypes.object,
+    value: PropTypes.string.isRequired,
+    idx: PropTypes.number.isRequired,
+    isSurvey: PropTypes.bool,
+    handleInputChange: PropTypes.func.isRequired
+};
 
 export default Questions;

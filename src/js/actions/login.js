@@ -1,4 +1,4 @@
-import axios from 'axios';
+import request from '../lib/request.js';
 import { hashHistory } from 'react-router';
 import { setUserDetails } from './user';
 
@@ -12,16 +12,9 @@ export const AUTHENTICATE_USER_FAILURE = 'AUTHENTICATE_USER_FAILURE';
 export const LOGOUT = 'LOGOUT';
 export const INCORRECT_USER_DETAILS = 'INCORRECT_USER_DETAILS';
 
-
-export const updateEmail = (value) => ({
-    type: UPDATE_EMAIL,
-    value
-});
-
-export const updatePassword = (value) => ({
-    type: UPDATE_PASSWORD,
-    value
-});
+const basicUpdate = (type) => (value) => ({ type, value });
+export const updateEmail = basicUpdate(UPDATE_EMAIL);
+export const updatePassword = basicUpdate(UPDATE_PASSWORD);
 
 // -----
 // AUTHENTICATE USER
@@ -38,18 +31,15 @@ export function authenticateUser (email, password) {
             password
         };
 
-        axios.post('/authenticate-user', payload)
+        request.post(dispatch)('/authenticate-user', payload)
             .then((response) => {
-                if (response.data === false) {
-                    dispatch(incorrectUserDetails(false));
-                } else {
-                    dispatch(authenticateUserSuccess(true));
+                if (response.data.message) {
+                    dispatch(incorrectUserDetails(response.data.message));
+                }
+                else {
+                    dispatch(authenticateUserSuccess());
                     dispatch(setUserDetails(response.data));
-                    if (response.data.is_lecturer) {
-                        hashHistory.push('/dashboard');
-                    } else {
-                        hashHistory.push('/dashboard');
-                    }
+                    hashHistory.push('/dashboard');
                 }
             })
             .catch((error) => {
@@ -62,9 +52,8 @@ export const authenticateUserRequest = () => ({
     type: AUTHENTICATE_USER_REQUEST
 });
 
-export const authenticateUserSuccess = (data) => ({
-    type: AUTHENTICATE_USER_SUCCESS,
-    data
+export const authenticateUserSuccess = () => ({
+    type: AUTHENTICATE_USER_SUCCESS
 });
 
 export const authenticateUserFailure = (error) => ({

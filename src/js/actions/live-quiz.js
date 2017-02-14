@@ -1,4 +1,4 @@
-import axios from 'axios';
+import request from '../lib/request.js';
 
 export const GET_QUIZ_QUESTIONS_REQUEST = 'GET_QUIZ_QUESTIONS_REQUEST';
 export const GET_QUIZ_QUESTIONS_SUCCESS = 'GET_QUIZ_QUESTIONS_SUCCESS';
@@ -32,17 +32,19 @@ export const TOGGLE_MESSAGE_VISIBILITY = 'TOGGLE_MESSAGE_VISIBILITY';
 
 export const UPDATE_NUM_PARTICIPANTS = 'UPDATE_NUM_PARTICIPANTS';
 
+export const SET_IS_SURVEY = 'SET_IS_SURVEY';
+
 /***
  * GET QUIZ QUESTIONS
  ***/
 
-export function getQuizQuestions (quiz_id) {
+export function getQuizQuestions (quiz_id, survey_id) {
 
     return (dispatch) => {
 
         dispatch(getQuizQuestionsRequest());
 
-        axios.get(`/get-quiz-questions?quiz_id=${quiz_id}`)
+        request.get(dispatch)(`/get-quiz-questions?${ quiz_id ? `quiz_id=${quiz_id}` : `survey_id=${survey_id}` }`)
             .then((response) => {
                 dispatch(getQuizQuestionsSuccess(response.data));
             })
@@ -77,7 +79,7 @@ export function saveResponse (data) {
 
         dispatch(saveResponseRequest());
 
-        axios.post(`/save-student-response`, data)
+        request.post(dispatch)(`/save-student-response`, data)
             .then(() => {
                 dispatch(saveResponseSuccess());
             })
@@ -104,10 +106,11 @@ export const saveResponseFailure = (error) => ({
  * SET QUIZ ID, START QUIZ, SET INTERVAL ID
  ***/
 
-export const setQuizDetails = (quiz_id, name) => ({
+export const setQuizDetails = (quiz_id, name, review) => ({
     type: SET_QUIZ_DETAILS,
     quiz_id,
-    name
+    name,
+    review
 });
 
 export const startQuiz = () => ({
@@ -124,15 +127,15 @@ export const setIntervalID = (interval_id) => ({
  * END QUIZ
  ***/
 
-export function endQuiz (quiz_id) {
+export function endQuiz (id, isSurvey) {
 
     return (dispatch) => {
 
         dispatch(endQuizRequest());
 
-        let payload = { quiz_id };
+        const payload = { id, isSurvey };
 
-        axios.post(`/end-quiz`, payload)
+        request.post(dispatch)(`/end-quiz`, payload)
             .then(() => {
                 dispatch(endQuizSuccess());
             })
@@ -166,7 +169,7 @@ export function abortQuiz (quiz_id) {
 
         dispatch(abortQuizRequest());
 
-        axios.get(`/abort-quiz?quiz_id=${quiz_id}`)
+        request.get(dispatch)(`/abort-quiz?quiz_id=${quiz_id}`)
             .then(() => {
                 dispatch(abortQuizSuccess());
             })
@@ -219,4 +222,9 @@ export const toggleMessageVisibility = () => ({
 export const updateNumParticipants = (numParticipants) => ({
     type: UPDATE_NUM_PARTICIPANTS,
     numParticipants
+});
+
+export const setIsSurvey = (quiz_id, survey_id) => ({
+    type: SET_IS_SURVEY,
+    isSurvey: survey_id ? true : false
 });

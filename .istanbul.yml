@@ -3,7 +3,10 @@ instrumentation:
     root: [ ./src, ./server ]
     extensions: ['.js', '.jsx']
     excludes: [
-        './utils/dev-server.js'
+        'utils/dev-server.js',
+        '**/lib/onEnterHooks.js',
+        '**/components/**',
+        '**/containers/**'
     ]
 reporting:
     watermarks:

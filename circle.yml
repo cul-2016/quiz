@@ -3,7 +3,9 @@ dependencies:
     - npm install -g npm
 machine:
   node:
-    version: 4.4.7
+    version: 6.9.1
+  services:
+    - redis
 database:
   override:
     - psql -U ubuntu circle_test < ./test/utils/test-schema.txt
@@ -11,5 +13,7 @@ general:
   artifacts:
     - "coverage"
 test:
+  override:
+    - npm run coverage
   post:
     - bash <(curl -s https://codecov.io/bash)

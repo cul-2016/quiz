@@ -26,51 +26,52 @@ class Medals extends React.Component {
         return (
             <div className="new-module-medals section column">
 
-                <h3 className="module-section-headers">
-                    <i className="fa fa-shield" /> Medals
+                <h3 className="f-body f-body--light">
+                    Set the scores needed for different medals
                 </h3>
-                <i onClick={ () => { this.toggleRollover("medals");} } className="fa fa-question-circle help-icon" />
 
-                <div className={ toggleClassnamesMedals }>
-                    <p>
-                        { text.medals }
-                    </p>
-                </div>
-
-                <div className="columns">
-                    <div className="column box has-text-centered">
-                        <label className="label">Bronze</label>
-                        <span className="label-inline">0 to </span>
+                <div className="medal-values">
+                    <div className="medal-values--bronze">
+                        <div className="medal-values--header">
+                          <p className="medal-small medal-small--bronze"></p>
+                          <p className="f-small-body f-small-body--light">Bronze</p>
+                        </div>
+                        <span className="f-body f-body--light">0 to </span>
                         <input
-                            className="input"
+                            className="form__input form__input--medal"
                             name="bronze"
                             type="number"
                             min="1" max="96"
                             defaultValue={ this.props.applyOffset(this.props.medals[0], -1) }
                             onChange={ (e) => this.props.updateMedalVals('bronze', e.target.value) } />
-                        <span className="label-inline">%</span>
                     </div>
-                </div>
-
-                <div className="columns">
-                    <div className="column box has-text-centered">
-                        <label className="label">Silver</label>
-                        <span className="inline">{ `${this.props.medals[0]} to ${this.props.medals[1]} %` }</span>
+                    <div className="medal-values--silver">
+                        <div className="medal-values--header">
+                          <p className="medal-small medal-small--silver"></p>
+                          <p className="f-small-body f-small-body--light">Silver</p>
+                        </div>
+                        <p className="f-body f-body--light">{ `${this.props.medals[0]} to ${this.props.medals[1]} %` }</p>
                     </div>
-                </div>
-
-                <div className="columns">
-                    <div className="column box has-text-centered">
-                        <label className="label">Gold</label>
+                    <div className="medal-values--gold">
+                        <div className="medal-values--header">
+                          <p className="medal-small medal-small--gold"></p>
+                          <p className="f-small-body f-small-body--light">Gold</p>
+                        </div>
                         <input
-                            className="input"
+                            className="form__input form__input--medal"
                             name="gold"
                             type="number"
                             min="4" max="99"
                             defaultValue={ this.props.applyOffset(this.props.medals[1], 1) }
                             onChange={ (e) => this.props.updateMedalVals('gold', e.target.value) } />
-                        <span className="label-inline"> to 100%</span>
+                          <span className="f-body f-body--light"> to 100</span>
+
                     </div>
+                </div>
+                <div className={ toggleClassnamesMedals }>
+                    <p>
+                        { text.medals }
+                    </p>
                 </div>
 
             </div>

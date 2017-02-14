@@ -1,10 +1,9 @@
-import axios from 'axios';
+import request from '../lib/request.js';
 import { hashHistory } from 'react-router';
 import { setUserDetails } from './user';
 
 
 export const UPDATE_INPUT_FIELD = 'UPDATE_INPUT_FIELD';
-export const USER_EXISTS = 'USER_EXISTS';
 
 export const REGISTERING_USER_REQUEST = 'REGISTERING_USER_REQUEST';
 export const REGISTERING_USER_SUCCESS = 'REGISTERING_USER_SUCCESS';
@@ -29,25 +28,20 @@ export function registeringUser (email, username, password, is_lecturer) {
             is_lecturer
         };
 
-        axios.post('/save-user', payload)
+        request.post(dispatch)('/save-user', payload)
             .then((response) => {
-
-                if (response.data === true) {
-                    dispatch(userExists());
+                if (response.data.message) {
+                    dispatch(registeringUserFailure(response.data.message));
+                } else if (response.data.emailSent) {
+                    hashHistory.push('/please-verify');
                 } else {
                     dispatch(registeringUserSuccess(true));
                     dispatch(setUserDetails(response.data));
-                    if (response.data.is_lecturer) {
-                        hashHistory.push('/dashboard');
-                    } else {
-                        hashHistory.push('/dashboard');
-                    }
+                    hashHistory.push('/dashboard');
                 }
-            }, (error) => {
-                console.error(error, 'error from axios /save-user');
             })
-            .catch((error) => {
-                dispatch(registeringUserFailure(error));
+            .catch(() => {
+                dispatch(registeringUserFailure('Sorry, something went wrong'));
             });
     };
 }
@@ -64,8 +58,4 @@ export const registeringUserSuccess = (data) => ({
 export const registeringUserFailure = (error) => ({
     type: REGISTERING_USER_FAILURE,
     error
-});
-
-export const userExists = () => ({
-    type: USER_EXISTS
 });

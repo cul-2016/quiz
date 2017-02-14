@@ -1,4 +1,4 @@
-import axios from 'axios';
+import request from '../lib/request.js';
 
 export const ADD_QUESTION = 'ADD_QUESTION';
 export const DELETE_QUESTION = 'DELETE_QUESTION';
@@ -6,6 +6,7 @@ export const UPDATE_VALUE = 'UPDATE_VALUE';
 export const UPDATE_QUIZ_NAME = 'UPDATE_QUIZ_NAME';
 export const CLEAR_NEW_QUIZ_STATE = 'CLEAR_NEW_QUIZ_STATE';
 export const TOGGLE_IS_LAST_QUIZ = 'TOGGLE_IS_LAST_QUIZ';
+export const TOGGLE_IS_SURVEY = 'TOGGLE_IS_SURVEY';
 
 export const SAVE_QUIZ_REQUEST = 'SAVE_QUIZ_REQUEST';
 export const SAVE_QUIZ_SUCCESS = 'SAVE_QUIZ_SUCCESS';
@@ -50,37 +51,37 @@ export const toggleIsLastQuiz = () => ({
     type: TOGGLE_IS_LAST_QUIZ
 });
 
+export const toggleIsSurvey = () => ({
+    type: TOGGLE_IS_SURVEY
+});
+
 
 //
 // SAVE QUIZ ACTIONS
 //
 
-export function saveQuiz (module_id, quizName, questions, is_last_quiz) {
+export const saveQuiz = (
+    module_id, name, questions, is_last_quiz
+) => (dispatch, getState) => {
 
-    return (dispatch) => {
+    dispatch(saveQuizRequest());
 
-        dispatch(saveQuizRequest());
-
-        const payload = {
-            module_id,
-            quizName,
-            questions,
-            is_last_quiz
-        };
-        axios.post('/save-quiz', payload)
-            .then((response) => {
-
-                //what should be returned.
-                dispatch(saveQuizSuccess(response));
-
-            }, (error) => {
-                console.error(error, 'error from axios /save-quiz');
-            })
-            .catch((error) => {
-                dispatch(saveQuizFailure(error));
-            });
+    const isSurvey = getState().newQuiz.isSurvey;
+    const payload = {
+        module_id,
+        name,
+        questions,
+        is_last_quiz,
+        isSurvey
     };
-}
+    request.post(dispatch)('/save-quiz', payload)
+        .then((response) => {
+            dispatch(saveQuizSuccess(response));
+        })
+        .catch((error) => {
+            dispatch(saveQuizFailure(error));
+        });
+};
 
 export const saveQuizRequest = () => ({
     type: SAVE_QUIZ_REQUEST
@@ -100,7 +101,7 @@ export const saveQuizFailure = (error) => ({
 // UPDATE QUIZ ACTIONS
 //
 
-export function updateQuiz (module_id, quiz_id, quizName, questions, deletedQuestions, is_last_quiz) {
+export function updateQuiz (module_id, quiz_id, survey_id, name, questions, deletedQuestions, is_last_quiz) {
 
     var editedQuestions = questions.filter((question) => {
         if (question.question_id) {
@@ -127,19 +128,18 @@ export function updateQuiz (module_id, quiz_id, quizName, questions, deletedQues
         const payload = {
             module_id,
             quiz_id,
-            quizName,
+            survey_id,
+            name,
             editedQuestions,
             newQuestions,
             deletedQuestions,
             is_last_quiz
         };
-        axios.post('/update-quiz', payload)
+        request.post(dispatch)('/update-quiz', payload)
             .then(() => {
 
                 dispatch(updateQuizSuccess());
 
-            }, (error) => {
-                console.error(error, 'error from axios /update-quiz');
             })
             .catch((error) => {
                 dispatch(updateQuizFailure(error));
@@ -164,18 +164,16 @@ export const updateQuizFailure = (error) => ({
 // GET QUIZ DETAILS ACTIONS
 //
 
-export function getQuizDetails (quiz_id) {
+export function getQuizDetails (quiz_id, survey_id) {
 
     return (dispatch) => {
 
         dispatch(getQuizDetailsRequest());
 
-        axios.get(`/get-quiz-details?quiz_id=${quiz_id}`)
+
+        request.get(dispatch)(`/get-quiz-details?${ quiz_id ? `quiz_id=${quiz_id}` : `survey_id=${survey_id}` }`)
             .then((response) => {
                 dispatch(getQuizDetailsSuccess(response.data));
-
-            }, (error) => {
-                console.error(error, 'error from axios /get-quiz-questions');
             })
             .catch((error) => {
                 dispatch(getQuizDetailsFailure(error));

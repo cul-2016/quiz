@@ -30,14 +30,14 @@ const Details = ({ moduleIDExists, isValidatingModuleID, module_id_length, handl
                 <p>Students will use this code to join the module and access quizzes.</p>
             </div>
 
-            <label className="label">Module name</label>
+            <label className="f-label">Module name</label>
             <input
                 className="input"
                 name="name"
                 type="text"
                 onChange={ (e) => handleInputChange('name', e.target.value) } />
 
-            <label className="label">Code (4 characters long)</label>
+            <label className="f-label">Code (4 characters long)</label>
             <p className="control has-icon has-icon-right">
 
                 <input

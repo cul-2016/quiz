@@ -1,83 +1,101 @@
-# Quiz app
+# Quiz App
 
+[![Build Status](https://circleci.com/gh/cul-2016/quiz.png?style=shield)](https://circleci.com/gh/cul-2016/quiz)
+[![codecov.io](https://codecov.io/github/cul-2016/quiz/coverage.svg?branch=staging)](https://codecov.io/gh/cul-2016/quiz/branch/staging)
+[![Dependency Status](https://david-dm.org/cul-2016/quiz.svg)](https://david-dm.org/cul-2016/quiz)
+[![devDependency Status](https://david-dm.org/cul-2016/quiz/dev-status.svg)](https://david-dm.org/cul-2016/quiz#info=devDependencies)
 
-## Getting up and running
+#### This project uses [Node version 6.9.x](https://nodejs.org/en/), [PostgreSQL](https://www.postgresql.org/) version 9.5.x and [Redis 3.2.x](https://redis.io/).
 
-####This project uses Node version 4.4.7 and PostgreSQL version 9.5.x
+## Quick Start
 
-#### Database
-
-Install postgres:
+ - Ensure you have installed the correct versions of Node, Postgres and Redis as above by running:
 ```bash
-brew update
-brew doctor
-brew install postgres
+node -v
+redis-cli -v
+postgres --version
 ```
-
-
-To run the postgres server.
-
+ - Clone the project and cd: `git clone https://github.com/cul-2016/quiz.git && cd quiz`
+ - Install the dependencies: `npm install`
+ - In two different terminal windows ensure you have a postgres server running with:
+ `npm run postgres` and a redis server running with: `redis-server`
+ - Set up your local environment variables in a file called: `config.env` as follows:
+ 
+/* config.env */ 
 ```bash
-postgres -D /usr/local/var/postgres
+#!/bin/bash
+unset PORT
+export DATABASE_USER=<db_user>
+export DATABASE_PASSWORD=<db_password>
+export DATABASE_HOST=<aws_db_host>
+export DATABASE_PORT=5432
+export DATABASE_NAME=<db_name>
+export TEMPLATE_DIRECTORY=./server/templates
+export SENDER_EMAIL_ADDRESS=quiz.cityuni@gmail.com
+export AWS_REGION=us-west-2
+export AWS_ACCESS_KEY_ID=<aws_access_key>
+export AWS_SECRET_ACCESS_KEY=<aws_secret_access_key>
+export SERVER_ROUTE=http://localhost:9000
+export JWT_SECRET=<secret>
 ```
-
-
-This project comes with a handy convenience script to run the postgres server.  Simply:
-```bash
-npm run postgres
-```
-The project uses the [Node postgres module PG](https://github.com/brianc/node-postgres).
-
-The database client is pooled, so that there is less of a bottleneck. currently set the pool connections to 100. Check PG documentation for more information on this: https://github.com/brianc/node-postgres
+and run `source local.env`
+ - Start the server with: `npm start`
+ - Visit `http://localhost:9000` to get started
+ 
+## Testing
+ 
+ - Ensure all of the above except for the last two points
+ - Then run `npm test`
+ - You can check code coverage locally with `npm run coverage`
+ 
+## Deployment
 
 To setup the database schema on HEROKU, use the following command:
 ```bash
 heroku pg:psql --app (APPNAME) DATABASE < ./path/to/schema
 ```
+(See the `load-staging-schema` script in the package if unsure)
+
 To connect a remote database instance to pgAdmin:
 - go to `File > Add Server`.
 - then follow this instructions at link: http://stackoverflow.com/questions/11769860/connect-to-a-heroku-database-with-pgadmin
 
-
-## Testing
-
-##### Database
-When creating a client for the tests, we have to provide options to the `pg`.Pool.
-- `idleTimeoutMillis` will quit the client automatically after a given number of milliseconds (i.e. 3000 = 3 seconds)
-- `database` will link the client to the given database (for us its the `testing` database)
-
-##### Coverage
-Changed npm script to `check-coverage": "babel-node ./node_modules/babel-istanbul/lib/cli.js check-coverage"`
-
-Don't need the tape and test file paths as the script for coverage will do so.
-
-Also added this following option to the the `istanbul.yml` file to cover both root folders:
+## Directory Structure
 ```
-root: [ ./src, ./server ]
-```
-
-##### Circle CI
-The Circle CI build environment must be set to Ubuntu 14.04 (Trusty) or higher, in order for Circle CI to run the tests using a PostgreSQL 9.5.x version.
-
-To configure, on Circle CI go to:
-```
-Builds > Settings > Build Environment
+├── server
+    ├── lib        # Helper functions for the server handlers logic
+    ├── plugins    # Server plugins
+    ├── templates  # Email templates see [dwyl/sendemail](https://github.com/dwyl/sendemail)
+    |
+    ├── server.js  # Main Server logic
+    └── start.js   # Starts the server
+├── src
+    ├── js         # [Typical redux file structure](https://jaysoo.ca/2016/02/28/organizing-redux-application/)
+        ├── actions
+        ├── reducers
+        ├── routes
+        ├── container
+        ├── components
+        |
+        ├── index.js   # Entry point
+        ├── root.js
+        ├── socket.js  # Implementation of socket.io
+        └── store.js
+    ├── scss           # To start the server
+    └── utils          # Dev server configuration
+├── test
+    ├── front
+    └── back
+├── public # Files served by server
+    ├── bundle.js  # Webpack bundle of the `src/js/index.js` entry point
+    ├── index.html
+    └── ...
+├── package.json
+├── README.md
+└── ...
 ```
 
 ## General information
-
-#### Cookies
-
-When setting the cookie from the server, it must be of type `string`.
-
-```js
-reply.state('cookie_name', cookie, { path: "/" })
-```
-
-#### Stack
-* React
-* React Router
-* postgreSQL
 
 #### State hydration
 

@@ -1,20 +1,21 @@
 import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
 import Medal from '../general/medal';
 
 
-const StudentHistory = ({ history, medalConditions }) => {
-
+const StudentHistory = ({ params = {}, history, medalConditions }) => {
+    const { module_id } = params;
     let mappedHistory = history.map((quiz, i) => {
 
         let percentageScore = Math.round(quiz.score / quiz.num_questions * 100);
 
         return (
             <tr key={ i }>
-                <td className="subtitle is-5">
+                <td className="f-subtitle is-5">
                     { quiz.name }
                 </td>
                 <td>
-                    <span className="subtitle is-4">
+                    <span className="f-subtitle is-4">
                         { `${quiz.score} ` }
                     </span>
                     <span>
@@ -23,6 +24,11 @@ const StudentHistory = ({ history, medalConditions }) => {
                 </td>
                 <td>
                     <Medal percentageScore={ percentageScore } medalConditions={ medalConditions } />
+                </td>
+                <td className="f-subtitle is-5">
+                    <Link to={`/${module_id}/student/history/${quiz.quiz_id}`}>
+                        Show
+                    </Link>
                 </td>
             </tr>
         );
@@ -39,6 +45,7 @@ const StudentHistory = ({ history, medalConditions }) => {
 };
 
 StudentHistory.propTypes = {
+    params: PropTypes.object,
     history: PropTypes.array,
     medalConditions: PropTypes.array
 };

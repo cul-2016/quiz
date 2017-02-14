@@ -1,0 +1,160 @@
+.f-display {
+    font-size: 3rem;
+    font-weight: bold;
+    letter-spacing: -0.1rem;
+    color: $black;
+    &--primary-dark {
+        color: $dark-blue;
+        text-shadow: 0px 2px 0px 0px $light-blue;
+    }
+    &--primary-light {
+        color: $light-blue;
+        text-shadow: 0px 2px 0px 0px $dark-blue;
+    }
+    &--tertiary {
+        color: $light-pink;
+        text-shadow: 2px 2px 0px $red;
+    }
+    &--secondary {
+        color: $red;
+        text-shadow: 2px 0 0 $light-pink;
+    }
+}
+
+.f-headline {
+    font-size: 2.25rem;
+    font-weight: bold;
+    text-transform: capitalize;
+    line-height: 2.6rem;
+    letter-spacing: -1px;
+    color: $black;
+
+    &--primary {
+        color: $gold;
+    }
+
+    &--secondary {
+        color: $red;
+    }
+
+    &--light {
+      color: $white;
+    }
+}
+
+.f-title {
+    font-size: 1.75rem;
+    font-weight: 300;
+    line-height: 2rem;
+    color: $black;
+
+    &--primary {
+        color: $gold;
+    }
+
+    &--secondary {
+        color: $blue;
+    }
+
+    &--light {
+        color: $grey;
+    }
+}
+
+.f-subheader {
+    font-size: 1.25rem;
+    font-weight: bold;
+    line-height: 1.5rem;
+    color: $black;
+
+    &--tertiary {
+        color: $red;
+    }
+    &--light {
+        color: $white;
+    }
+}
+
+.f-body {
+    font-size: 1rem;
+    font-weight: bold;
+    line-height: 1.4rem;
+    color: $black;
+
+    &--primary {
+        color: $dark-gold;
+    }
+
+    &--secondary {
+        color: $blue;
+    }
+
+    &--tertiary {
+        color: $red;
+    }
+
+    &--warning {
+        color: $red;
+    }
+
+    &--light {
+        font-weight: 500;
+    }
+    &--white {
+        color: $white;
+        font-weight: 500;
+    }
+
+    &--dark {
+      color: $dark-blue;
+    }
+
+
+}
+
+.f-label {
+    font-size: 0.875rem;
+    line-height: 1.2rem;
+    letter-spacing: 1px;
+    color: $grey;
+
+
+    &--dark {
+        color: $black;
+    }
+}
+
+.f-small-body {
+    font-size: 0.75rem;
+    font-weight: bolder;
+    line-height: 1.25rem;
+    color: $black;
+
+    &--slim {
+      font-weight: 400;
+    }
+
+    &--dark {
+        color: $dark-blue;
+    }
+    &--light {
+        color: $white;
+    }
+    &--primary {
+        color: $gold;
+    }
+    &--grey {
+        color: $grey;
+    }
+}
+
+.f-small-label {
+    font-size: 0.625rem;
+    font-weight: bold;
+    line-height: 0.8125rem;
+    color: $grey;
+
+    &--dark {
+        color: $black;
+    }
+}

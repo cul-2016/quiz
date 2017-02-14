@@ -1,7 +1,7 @@
 import update from 'react-addons-update';
 import * as actionsTypes from '../actions/login';
 
-const initialState = {
+export const initialState = {
     email: "",
     password: "",
     isAuthenticating: false,
@@ -9,14 +9,14 @@ const initialState = {
     error: undefined
 };
 
-export default function login (state = initialState, action ) {
+export const login = (state = initialState, action ) => {
     switch (action.type) {
 
     case actionsTypes.UPDATE_EMAIL:
-        return updateEmail(state, action);
+        return singleUpdate('email')(state, action);
 
     case actionsTypes.UPDATE_PASSWORD:
-        return updatePassword(state, action);
+        return singleUpdate('password')(state, action);
 
     case actionsTypes.AUTHENTICATE_USER_REQUEST:
         return update(state, {
@@ -36,22 +36,16 @@ export default function login (state = initialState, action ) {
     case actionsTypes.INCORRECT_USER_DETAILS:
         return update(state, {
             isAuthenticating: { $set: false },
-            userIsAuthenticated: { $set: action.data }
+            userIsAuthenticated: { $set: false },
+            message: { $set: action.data }
         });
 
     default:
         return state;
     }
-}
+};
 
-function updateEmail (state, action) {
-    return update(state, {
-        email: { $set: action.value }
+const singleUpdate  = (field) => (state, action) =>
+    update(state, {
+        [field]: { $set: action.value }
     });
-}
-
-function updatePassword (state, action) {
-    return update(state, {
-        password: { $set: action.value }
-    });
-}

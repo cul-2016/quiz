@@ -1,4 +1,4 @@
-import axios from 'axios';
+import request from '../lib/request.js';
 
 export const SET_USER_DETAILS = 'SET_USER_DETAILS';
 
@@ -26,27 +26,19 @@ export const clearError = (reducerState) => ({
 });
 
 
-// -----
-// GET_USER_DETAILS
-// -----
+export const getUserDetails = () =>(dispatch) => {
 
-export function getUserDetails (user_id) {
+    dispatch(getUserDetailsRequest());
 
-    return (dispatch) => {
+    request.get(dispatch)(`/get-user-details`)
+    .then((response) => {
+        dispatch(getUserDetailsSuccess(response.data));
+    })
+    .catch((error) => {
+        dispatch(getUserDetailsFailure(error));
+    });
 
-        dispatch(getUserDetailsRequest());
-
-        if (user_id) {
-            axios.get(`/get-user-details?user_id=${user_id}`)
-            .then((response) => {
-                dispatch(getUserDetailsSuccess(response.data));
-            })
-            .catch((error) => {
-                dispatch(getUserDetailsFailure(error));
-            });
-        }
-    };
-}
+};
 
 
 export const getUserDetailsRequest = () => ({

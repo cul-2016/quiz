@@ -1,26 +1,26 @@
-require('babel-register')({
-    presets: ['es2015']
+require('env2')('config.env');
+
+const Hapi = require('hapi');
+const plugins = require('./plugins/index.js');
+const assert = require('assert');
+
+const server = new Hapi.Server();
+
+server.connection({
+    host: "0.0.0.0",
+    port: process.env.PORT || 9000,
+    routes: { cors: true }
 });
-var Hapi = require('hapi');
-var plugins = require('./plugins');
-var routes = require('./routes');
 
-exports.init = (port) => {
+server.register(plugins, (error) => {
+    assert(!error, error);
 
-    var server = new Hapi.Server();
-
-    server.connection({
-        host: "0.0.0.0",
-        port: port,
-        routes: { cors: true }
+    server.route({
+        method: 'get',
+        path: '/{all*}',
+        config: { auth: false },
+        handler: { directory: { path: 'public' } }
     });
+});
 
-    server.register(plugins, (error) => {
-        if (error) {
-            console.error(error);
-        }
-    });
-
-    server.route(routes);
-    return server;
-};
+module.exports = server;

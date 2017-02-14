@@ -2,6 +2,10 @@ import { connect } from 'react-redux';
 import LiveQuiz from '../../components/live-quiz/live-quiz';
 import { setResponse, saveResponse } from '../../actions/live-quiz';
 import { store } from '../../store';
+import { joinWebsocketRoom } from '../../lib/subscriptions';
+import { socketClient } from '../../socket';
+
+joinWebsocketRoom(store, socketClient);
 
 const mapStateToProps = (state) => ({
     question: state.liveQuiz.questions && state.liveQuiz.questions[0],
@@ -18,7 +22,8 @@ const mapDispatchToProps = (dispatch) => ({
     submitResponse: () => {
         let data = {
             user_id: store.getState().user.user_id,
-            quiz_id: store.getState().liveQuiz.quiz_id,
+            id: store.getState().liveQuiz.quiz_id,
+            isSurvey: store.getState().liveQuiz.isSurvey,
             question_id: store.getState().liveQuiz.questions[0].question_id,
             response: store.getState().liveQuiz.response
         };
@@ -27,6 +32,16 @@ const mapDispatchToProps = (dispatch) => ({
     },
     handleSelection: (data) => {
         dispatch(setResponse(data));
+
+        let responseData = {
+            user_id: store.getState().user.user_id,
+            id: store.getState().liveQuiz.quiz_id,
+            isSurvey: store.getState().liveQuiz.isSurvey,
+            question_id: store.getState().liveQuiz.questions[0].question_id,
+            response: data
+        };
+        console.log('saveing response', responseData);
+        dispatch(saveResponse(responseData));
     }
 });
 

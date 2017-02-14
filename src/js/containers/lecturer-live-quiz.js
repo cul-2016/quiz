@@ -17,7 +17,8 @@ const mapStateToProps = (state) => {
         isQuizStarted: state.liveQuiz.isQuizStarted,
         quiz_id: state.liveQuiz.quiz_id,
         name: state.liveQuiz.name,
-        numParticipants: state.liveQuiz.numParticipants
+        numParticipants: state.liveQuiz.numParticipants,
+        review: state.liveQuiz.review
     };
 };
 
@@ -46,14 +47,16 @@ const mapDispatchToProps = (dispatch) => ({
 
         const intervalID = store.getState().liveQuiz.interval_id;
         const module_id = store.getState().module.module_id;
+        const isSurvey = store.getState().liveQuiz.isSurvey;
         const data = {
             room: module_id,
-            quiz_id
+            quiz_id,
+            isSurvey
         };
         socketClient.emit('end_of_quiz', data, () => {
 
             clearInterval(intervalID);
-            dispatch(endQuiz(quiz_id));
+            dispatch(endQuiz(quiz_id, isSurvey));
             hashHistory.push(`${module_id}/${quiz_id}/holding-page`);
         });
     },
@@ -61,9 +64,11 @@ const mapDispatchToProps = (dispatch) => ({
 
         const intervalID = store.getState().liveQuiz.interval_id;
         const module_id = store.getState().module.module_id;
+        const isSurvey = store.getState().liveQuiz.isSurvey;
         const data = {
             room: module_id,
-            quiz_id
+            quiz_id,
+            isSurvey
         };
         socketClient.emit('abort_quiz', data, () => {
 

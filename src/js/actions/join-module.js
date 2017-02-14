@@ -1,5 +1,5 @@
-import axios from 'axios';
-import { hashHistory } from 'react-router';
+import request from '../lib/request.js';
+import { getDashboard } from '../actions/dashboard';
 
 export const INPUT_CHANGE = 'INPUT_CHANGE';
 
@@ -14,18 +14,15 @@ export const inputChange = (value) => ({
     value
 });
 
-export function joinModule (module_id, user_id) {
+export function joinModule (module_id) {
 
     return (dispatch) => {
 
         dispatch(joinModuleRequest());
-        axios.get(`/join-module?module_id=${module_id}&user_id=${user_id}`)
+        request.get(dispatch)(`/join-module?module_id=${module_id}`)
             .then(() => {
-
                 dispatch(joinModuleSuccess());
-                hashHistory.push('/dashboard');
-            }, (error) => {
-                console.error(error, 'error from axios /join-module');
+                dispatch(getDashboard());
             })
             .catch((error) => {
                 dispatch(joinModuleFailure(error));

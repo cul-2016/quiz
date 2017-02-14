@@ -17,7 +17,7 @@ const NewModule = ({ module_id_length, isValidatingModuleID, moduleIDExists,
 
     return (
             <div className="new-module container">
-                <h1 className="title is-2">Add a new module</h1>
+                <h1 className="f-title is-2">Add a new module</h1>
 
                 <Details moduleIDExists={ moduleIDExists }
                          isValidatingModuleID={ isValidatingModuleID }

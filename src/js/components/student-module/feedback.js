@@ -1,25 +1,38 @@
 import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
 import text from '../../lib/feedback-text.json';
 import { displayRankingText,
          displayStrengthsWeaknessesText,
          displayParticipationText } from '../../lib/feedback-methods';
 
 
-const Feedback = ({ ranking, quizzes, participation }) => {
+const Feedback = ({ ranking, quizzes, participation, module }) => {
 
     return (
-        <div className="feedback">
-            <div className="box">
-                <h3>How well are you doing?</h3>
-                { displayRankingText(text, ranking) }
+        <div className="performance">
+            <ul className="navbar navbar--invisible">
+                 <li className="navbar__item">
+                     <Link to={ `${module.module_id}/student` } className="navbar__link navbar__link--left navbar__link--back">
+                       Back
+                     </Link>
+                 </li>
+             </ul>
+
+            <div className="f-subheader f-subheader--light"> My Performance in:</div>
+            <div className="f-title">{ module.name }</div>
+
+
+            <div className="card">
+                <p className="f-body f-body--light">How well are you doing?</p>
+                <p className="f-small-body f-small-body--dark">{ displayRankingText(text, ranking) }</p>
             </div>
-            <div className="box">
-                <h3>How do you compare to other people?</h3>
-                { displayStrengthsWeaknessesText(text, quizzes) }
+            <div className="card">
+                <p className="f-body f-body--light">How do you compare to other people?</p>
+                <p className="f-small-body f-small-body--dark">{ displayStrengthsWeaknessesText(text, quizzes) }</p>
             </div>
-            <div className="box">
-                <h3>Your participation rate</h3>
-                { displayParticipationText(text, participation) }
+            <div className="card">
+                <p className="f-body f-body--light">Your participation rate</p>
+                <p className="f-small-body f-small-body--dark">{ displayParticipationText(text, participation) }</p>
             </div>
         </div>
     );
@@ -28,7 +41,8 @@ const Feedback = ({ ranking, quizzes, participation }) => {
 Feedback.propTypes = {
     ranking: PropTypes.number,
     quizzes: PropTypes.array,
-    participation: PropTypes.number
+    participation: PropTypes.number,
+    module: PropTypes.object
 };
 
 

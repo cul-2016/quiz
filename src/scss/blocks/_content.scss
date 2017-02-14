@@ -1,0 +1,16 @@
+.content {
+    &--pattern-background {
+        height: 100vh;
+        background-size: cover;
+    }
+    &--join-quiz {
+        background-image: url(../../public/background-join-quiz.svg);
+    }
+}
+
+.content__body {
+    max-width: 52rem;
+    padding: 0 2rem; /* to make a max content width of 50rem (800px) */
+    margin: 2.5rem auto 0;
+}
+

@@ -1,49 +1,29 @@
 import React, { PropTypes } from 'react';
 import applyOffset from '../../lib/applyOffset';
-import normaliseText from '../../lib/normaliseText';
-import Medal from '../general/medal';
-
+import Medal from '../general/medal.js';
 
 const Medals = ({ medals }) => {
 
     return (
-            <div className="section column">
-                <h3>Medals</h3>
-                <table className="table has-text-centered">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>Medal</th>
-                            <th>Threshold</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <Medal percentageScore={ medals.condition[0] - 1 } medalConditions={ medals.condition } />
-                            </td>
-                            <td>{ normaliseText(medals.medal_name[0]) }</td>
-                            <td> 0 - { applyOffset( medals.condition[0], -1) } </td>
-                        </tr>
+      <div className="module__medals">
+          <h4 className="subheader module__title-under-line">Medal Thresholds</h4>
+          
+          <div className="module__medal-grouping">
+              <Medal percentageScore={ medals.condition[1] + 1 } medalConditions={ medals.condition } />
+              <div className="module__medal-percent"> { applyOffset(medals.condition[1], 1) } - 100% </div>
+          </div>
 
-                        <tr>
-                            <td>
-                                <Medal percentageScore={ medals.condition[0] } medalConditions={ medals.condition } />
-                            </td>
-                            <td>{ normaliseText(medals.medal_name[1]) }</td>
-                            <td> { medals.condition[0] }  - { medals.condition[1] } </td>
-                        </tr>
+          <div className="module__medal-grouping">
+              <Medal percentageScore={ medals.condition[0] } medalConditions={ medals.condition } />
+              <div className="module__medal-percent">{ medals.condition[0] }  - { medals.condition[1] }% </div>
+          </div>
 
-                        <tr>
-                            <td>
-                                <Medal percentageScore={ medals.condition[1] + 1 } medalConditions={ medals.condition } />
-                            </td>
-                            <td>{ normaliseText(medals.medal_name[2]) }</td>
-                            <td> { applyOffset(medals.condition[1], 1) } - 100 </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+          <div className="module__medal-grouping">
+              <Medal percentageScore={ medals.condition[0] - 1 } medalConditions={ medals.condition } />
+              <div className="module__medal-percent"> 0 - { applyOffset( medals.condition[0], -1) }% </div>
+          </div>
+
+      </div>
     );
 };
 
