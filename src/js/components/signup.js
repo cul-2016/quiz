@@ -76,7 +76,7 @@ const Signup = ({ register, handleChange, handleRegisteringUser, location }) => 
 
 
               <div className="form__field f-body">
-                <label className="form__label">Choose a nickname</label>
+                <label className="form__label">Choose a public nickname (for the leaderboard)</label>
                 <input
                   onKeyDown={ submitOnEnter }
                   className="form__input"
