@@ -1,4 +1,4 @@
-# Quiz App
+# Quodl
 
 [![Build Status](https://circleci.com/gh/cul-2016/quiz.png?style=shield)](https://circleci.com/gh/cul-2016/quiz)
 [![codecov.io](https://codecov.io/github/cul-2016/quiz/coverage.svg?branch=staging)](https://codecov.io/gh/cul-2016/quiz/branch/staging)
@@ -20,8 +20,8 @@ postgres --version
  - In two different terminal windows ensure you have a postgres server running with:
  `npm run postgres` and a redis server running with: `redis-server`
  - Set up your local environment variables in a file called: `config.env` as follows:
- 
-/* config.env */ 
+
+/* config.env */
 ```bash
 #!/bin/bash
 unset PORT
@@ -41,13 +41,13 @@ export JWT_SECRET=<secret>
 and run `source local.env`
  - Start the server with: `npm start`
  - Visit `http://localhost:9000` to get started
- 
+
 ## Testing
- 
+
  - Ensure all of the above except for the last two points
  - Then run `npm test`
  - You can check code coverage locally with `npm run coverage`
- 
+
 ## Deployment
 
 To setup the database schema on HEROKU, use the following command:

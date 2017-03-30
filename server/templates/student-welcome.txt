@@ -6,4 +6,4 @@ You are registered with the following details:
     - email: {{email}}
     - username: {{username}}
 
-http://quodl.co.uk/ University Quiz app
+http://quodl.co.uk/ Quodl
