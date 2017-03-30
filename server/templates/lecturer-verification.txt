@@ -3,4 +3,4 @@ Hello!
 Thank you for registering as an instructor!
 Before accessing your account, you need to verify your email by clicking on this link {{verificationLink}}
 
-City University Quiz app http://cul-app.herokuapp.com/
+City University Quiz app http://quodl.co.uk/
