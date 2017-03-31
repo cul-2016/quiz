@@ -63,7 +63,7 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                             </div>
 
                             <p className="quiz__cta f-title">
-                                Join this Quiz at <span className="f-title f-title--secondary">cul-app.herokuapp.com</span> with Module code:
+                                Join this Quiz at <span className="f-title f-title--secondary">quodl.co.uk</span> with Module code:
                             </p>
                             <div className="quiz__module">
                                 <span className="f-headline quiz__module-code">
