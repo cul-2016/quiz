@@ -15,10 +15,6 @@ const QuizReviewLecturer = ({ questions }) => {
 
     return (
         <div className="quiz-review-questions">
-            <div className="notification is-info has-text-centered">
-
-                <p>Number of students who selected each choice is marked in <strong>bold</strong>.</p>
-            </div>
             { mappedQuestions }
         </div>
     );

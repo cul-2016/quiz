@@ -51,9 +51,8 @@ export const toggleIsLastQuiz = () => ({
     type: TOGGLE_IS_LAST_QUIZ
 });
 
-export const toggleIsSurvey = (e) => ({
-    type: TOGGLE_IS_SURVEY,
-    isSurvey: e.target.checked
+export const toggleIsSurvey = () => ({
+    type: TOGGLE_IS_SURVEY
 });
 
 

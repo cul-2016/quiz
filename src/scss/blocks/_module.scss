@@ -1,12 +1,37 @@
 .module {
+  margin: 3rem auto;
+  border: 1px solid;
+  padding: 2rem 4rem;
+
+  &__title-under-line {
+    color: $dark-grey;
+  }
+
+  &__medal-grouping {
+    .medal-container {
+      display: inline-block;
+    }
+
+    margin: 0 3rem;
+    display: inline-block;
+  }
+
+  &__line {
+    width: inherit;
+    background-color: $dark-blue;
+  }
+
   &__medals-and-trophies {
-    margin: 2rem 4rem;
+    margin: 1rem 4rem;
   }
 
   &__trophies, &__medals {
-    display: inline-block;
-    width: 50%;
     text-align: center;
+    margin: 1rem;
+
+    h4 {
+      margin: 1rem;
+    }
   }
 
   &__table {
@@ -14,20 +39,23 @@
   }
 
   &__headline {
-    margin: 0.5rem 2rem;
+    margin: 1rem 2rem;
+    color: $dark-grey;
   }
 
   &__buttons {
-    text-align: center;
-    margin: 1.5rem 0;
+    text-align: right;
+    margin: 0.5rem 0;
   }
 
   &__button {
-    margin: 0.5rem;
+    padding: 0.2rem 1rem;
+    margin-left: 1rem;
   }
 
   &__button__link {
-    margin: 0 2rem;
+    text-align: center;
+    display: block;
   }
 
   .button__secondary {
@@ -35,7 +63,6 @@
   }
 
   .table {
-    margin: 1rem 2rem;
     text-align: center;
 
     th td {
@@ -44,18 +71,23 @@
   }
 
   .f-display, .f-body--primary {
-    margin: 1rem 2rem;
+    margin: 0;
+  }
+
+  .f-body {
+    float: left;
+    margin-top: 0.7rem;
+    font-size: 1.8rem;
+    line-height: 2rem;
   }
 
   .quizzes {
-    padding: 1.5rem;
-    margin: 1rem 2rem;
+    margin: 2rem 0;
   }
 }
 
 .module-quiz {
   display: block;
-  padding: 2.5rem;
   position: relative;
 
   &__index,
@@ -69,19 +101,27 @@
     position:absolute;
   }
 
+  &__line {
+    height: 1px;
+    background-color: $pale-grey;
+  }
+
   &__index {
-    left: 5rem;
+    left: 1rem;
     top: 1rem;
   }
 
-  &__logo, &__logo--white {
-    left: 7rem;
-    top: 0;
+  .logo, .logo--white {
+    margin-left: 4rem;
   }
 
   &__buttons {
     top: 0.5rem;
     right: 3rem;
+
+    .button {
+      margin-left: 0.5rem;
+    }
   }
 
   &__name {
@@ -92,6 +132,7 @@
   &__questions {
     top: 1.7rem;
     left: 11rem;
+    color: $dark-blue;
   }
 
   &__entries {

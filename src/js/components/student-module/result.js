@@ -30,7 +30,7 @@ export default class Result extends Component {
         let medalClass = classnames("medal-result", {
             "medal-result--gold": percentageScore >= medalConditions[1],
             "medal-result--silver": percentageScore >= medalConditions[0] && percentageScore < medalConditions[1],
-            "medal-result--bronze": percentageScore < medalConditions[0] && percentageScore > 0
+            "medal-result--bronze": percentageScore < medalConditions[0] && percentageScore >= 0
         });
 
         return (
@@ -47,11 +47,11 @@ export default class Result extends Component {
                 <p className="f-display f-display--tertiary"> Quiz Complete </p>
                 <div className="result__score">
                     <span className={ medalClass }> </span>
-                    <span className="f-label--dark">You Score:</span>
+                    <span className="f-label--dark">You Scored:</span>
                     <span className="f-display f-display--secondary">{ percentageScore }%</span>
                 </div>
-                <Link  className="button button__secondary" to={ `${module_id}/student/history/${quiz_id}`}>
-                  See my Answers
+                <Link  className="button button__secondary" to={ `${module_id}/student`}>
+                  Finish
                 </Link>
             </div>
         );

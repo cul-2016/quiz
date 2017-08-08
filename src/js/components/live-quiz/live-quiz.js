@@ -2,8 +2,6 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import CurrentQuestion from './current-question';
 import LiveQuizButtons from './live-quiz-buttons.js';
-import classnames from 'classnames';
-
 
 const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                     nextQuestion, isQuizStarted, submitResponse, //eslint-disable-line no-unused-vars
@@ -12,10 +10,6 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                     handleSelection, response, name, //eslint-disable-line no-unused-vars
                     numParticipants, handleAbortQuiz, params, review }) => {
 
-    let titleClass = classnames({
-        "display-none": !nextQuestionIndex
-    });
-
     return (
         <section className="live-quiz container">
                 {
@@ -23,7 +17,10 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                     <div className="student-view">
                         <ul className="navbar navbar--invisible">
                              <li className="navbar__item">
-                                 <Link to={ `${params.module_id}/student` } className="navbar__link navbar__link--left navbar__link--back">
+                                 <Link
+                                    to={ `${params.module_id}/student` }
+                                    className="navbar__link navbar__link--left navbar__link--back"
+                                 >
                                    Quit
                                  </Link>
                              </li>
@@ -48,7 +45,11 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
 
                         <ul className="navbar navbar--invisible">
                             <li className="navbar__item">
-                                <Link to={ `${params.module_id}/lecturer` } className="f-body navbar__link navbar__link--left navbar__link--quit">
+                                <Link
+                                    to={ `${params.module_id}/lecturer` }
+                                    className="f-body navbar__link navbar__link--left navbar__link--quit"
+                                    onClick={ () => handleAbortQuiz(quiz_id) }
+                                >
                                   Quit
                                 </Link>
                             </li>
@@ -61,7 +62,9 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                                 <h1 className="quiz__name f-display f-display--tertiary">{name}</h1>
                             </div>
 
-                            <p className="quiz__cta f-title">Join this Quiz at <span className="f-title f-title--secondary">app.quodl.co.uk</span> with Module code:</p>
+                            <p className="quiz__cta f-title">
+                                Join this Quiz at <span className="f-title f-title--secondary">quodl.co.uk</span> with Module code:
+                            </p>
                             <div className="quiz__module">
                                 <span className="f-headline quiz__module-code">
                                     {params.module_id}
@@ -78,6 +81,8 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                                 startQuiz={ startQuiz }
                                 endQuiz={ endQuiz }
                                 quiz_id={ quiz_id }
+                                review={ review }
+                                handleAbortQuiz={ handleAbortQuiz }
                                 response={ response } />
                             <span className="quiz__copy quiz__copy--center f-subheader">
                                 { numParticipants } Students Connected
@@ -100,6 +105,8 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                             startQuiz={ startQuiz }
                             endQuiz={ endQuiz }
                             quiz_id={ quiz_id }
+                            review={ review }
+                            handleAbortQuiz={ handleAbortQuiz }
                             response={ response } />
                         <button onClick={ () => handleAbortQuiz(quiz_id) } className="button is-danger">
                             Abort Quiz
@@ -111,7 +118,10 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                     <div className="student-view__questions">
                         <ul className="navbar navbar__light navbar__light--tertiary">
                             <li className="navbar__item">
-                                <Link to={ `${params.module_id}/student` } className="navbar__link navbar__link--left navbar__link--quit ">
+                                <Link
+                                    to={ `${params.module_id}/student` }
+                                    className="navbar__link navbar__link--left navbar__link--quit "
+                                >
                                     Quit
                                 </Link>
                             </li>
@@ -150,7 +160,11 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                     <div>
                         <ul className="navbar navbar--invisible">
                             <li className="navbar__item">
-                                <Link to={ `${params.module_id}/lecturer` } className="f-body navbar__link navbar__link--left navbar__link--quit">
+                                <Link
+                                    to={ `${params.module_id}/lecturer` }
+                                    className="f-body navbar__link navbar__link--left navbar__link--quit"
+                                    onClick={ () => handleAbortQuiz(quiz_id) }
+                                >
                                   Quit
                                 </Link>
                             </li>
@@ -175,6 +189,8 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                                 startQuiz={ startQuiz }
                                 endQuiz={ endQuiz }
                                 quiz_id={ quiz_id }
+                                review={ review }
+                                handleAbortQuiz={ handleAbortQuiz }
                                 response={ response } />
                         </div>
                     </div>

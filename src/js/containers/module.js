@@ -3,8 +3,8 @@ import Module from '../components/module/module.js';
 import { socketClient } from '../socket';
 import { store } from '../store.js';
 import { joinWebsocketRoom } from '../lib/subscriptions';
-import emitSendQuizInvite from '../lib/emitSendQuizInvite';
-import { setIntervalID, getQuizQuestions, setQuizDetails, setIsSurvey } from '../actions/live-quiz';
+import emitSendQuizInvite from '../lib/emitSendQuizInvite.js';
+import { setIntervalID, getQuizQuestions, setQuizDetails, setIsSurvey } from '../actions/live-quiz.js';
 
 joinWebsocketRoom(store, socketClient);
 

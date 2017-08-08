@@ -35,7 +35,7 @@ test('/ endpoint works returns the correct payload', (t) => {
     .then(() => server.inject('/'))
     .then((response) => {
         email.restore();
-        t.ok(response.payload.indexOf('<title>Quiz App</title>') > -1, "index page loads correctly!");
+        t.ok(response.payload.indexOf('<title>Quodl</title>') > -1, "index page loads correctly!");
     })
     .catch((err) => {
         email.restore();

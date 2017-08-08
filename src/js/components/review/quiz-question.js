@@ -10,64 +10,51 @@ const Question = ({ idx, question, is_lecturer, showAnswer }) => {
     const showWrongAnswer = value => !is_lecturer && response && answerIsWrong
         && value === response.toLowerCase();
 
-    let aClasses = classnames("column answer box", {
+    let aClasses = classnames("response box", {
         "correct_answer": showAnswers && 'a' === correct_answer.toLowerCase(),
         "wrong_answer": showWrongAnswer('a')
     });
-    let bClasses = classnames("column answer box", {
+    let bClasses = classnames("response box", {
         "correct_answer": showAnswers && 'b' === correct_answer.toLowerCase(),
         "wrong_answer": showWrongAnswer('b')
     });
-    let cClasses = classnames("column answer box", {
-        "display-none": question.c === undefined,
+    let cClasses = classnames("response box", {
+        "display-none": question.c === undefined || question.c === null,
         "correct_answer": showAnswers && 'c' === correct_answer.toLowerCase(),
         "wrong_answer": showWrongAnswer('c')
     });
-    let dClasses = classnames("column answer box", {
-        "display-none": question.d === undefined,
+    let dClasses = classnames("response box", {
+        "display-none": question.d === undefined || question.d === null,
         "correct_answer": showAnswers && 'd' === correct_answer.toLowerCase(),
         "wrong_answer": showWrongAnswer('d')
     });
 
     return (
-        <div key={idx} className="question">
-            <h4 className="f-title is-5 has-text-centered">
-                { `${idx + 1}. ${question.question}` }
-                { showButton && <button onClick={ () => showAnswer(idx) }>
-                    Show Answer
-                </button>}
-            </h4>
-
-
-            <div className="columns">
-                <div className={ aClasses }>
-                    <p>
-                        <span className="choice"> { question.a } </span>
-                        { is_lecturer && <span><strong>{ `(${+question.a_responses})` } </strong></span> }
-                    </p>
-                </div>
-                <div className={ bClasses }>
-                    <p>
-                        <span className="choice"> { question.b } </span>
-                        { is_lecturer && <span><strong>{ `(${+question.b_responses})` } </strong></span> }
-                    </p>
-                </div>
+        <div key={idx} className="card">
+            <div className="question">
+                <p className="f-subheader">Q{idx + 1}.</p>
+                <p className="f-body">{question.question}</p>
             </div>
 
-            <div className="columns">
-
-                <div className={ cClasses }>
-                    <p>
-                        <span className="choice"> { question.c } </span>
-                        { is_lecturer && <span><strong>{ `(${+question.c_responses})` } </strong></span> }
-                    </p>
-                </div>
-                <div className={ dClasses }>
-                    <p>
-                        <span className="choice"> { question.d } </span>
-                        { is_lecturer && <span><strong>{ `(${+question.d_responses})` } </strong></span> }
-                    </p>
-                </div>
+            <div className={ aClasses }>
+                <p className="letter f-title f-title--light "> A </p>
+                <p className="answer f-body"> { question.a } </p>
+                <p className="num_responses f-subheader">{ `( ${+question.a_responses} )` }</p>
+            </div>
+            <div className={ bClasses }>
+                <p className="letter f-title f-title--light "> B </p>
+                <p className="answer f-body"> { question.b } </p>
+                <p className="num_responses f-subheader">{ `( ${+question.b_responses} )` }</p>
+            </div>
+            <div className={ cClasses }>
+                <p className="letter f-title f-title--light "> C </p>
+                <p className="answer f-body"> { question.c } </p>
+                <p className="num_responses f-subheader">{ `( ${+question.c_responses} )` }</p>
+            </div>
+            <div className={ dClasses }>
+                <p className="letter f-title f-title--light "> D </p>
+                <p className="answer f-body"> { question.d } </p>
+                <p className="num_responses f-subheader">{ `( ${+question.d_responses} )` }</p>
             </div>
         </div>
     );

@@ -13,75 +13,64 @@ const EditQuiz = ({ questions, isUpdatingQuiz, name, is_last_quiz, deletedQuesti
         const { question, a, b, correct_answer } = questionObj;
         return Boolean(question && a && b && (correct_answer || isSurvey));
     }).every((elem) => elem);
-    const submitClasses = classnames("button is-success save-question", {
-        "is-disabled": !name || questionsValidation === false,
-        "is-loading": isUpdatingQuiz
+    const submitClasses = classnames("button button__tertiary", {
+        "button__disabled": !name || questionsValidation === false
     });
-    const quizNameClasses = classnames("help is-danger", {
+    const quizNameClasses = classnames("f-label", {
         "display-none": name
     });
     return (
             <div className="edit-quiz">
-                <div className="column is-offset-3">
-                    <Link to={ `/${params.module_id}/lecturer` }>
-                        <button onClick={ () => store.dispatch(clearNewQuizState()) }className="button is-3 is-light is-inverted">
-                            <span className="icon">
-                                <i className="fa fa-chevron-left"></i>
-                            </span>
-                            <span>Back to { params.module_id }</span>
-                        </button>
-                    </Link>
+                <div>
+                    <ul className="navbar navbar--invisible">
+                        <li className="navbar__item">
+                            <Link onClick={ () => store.dispatch(clearNewQuizState()) } to={ `${params.module_id}/lecturer` } className="f-body navbar__link navbar__link--left navbar__link--quit">
+                              Back
+                            </Link>
+                        </li>
+                    </ul>
                 </div>
-                <div className="columns">
-                    <div className="column is-5 is-offset-3 has-text-centered">
-                            { isSurvey &&
-                                <label className="label">
-                                    Survey Name
-                                </label>
-                            }
-                            { !isSurvey &&
-                                <label className="f-label">
-                                    Quiz Name
-                                </label>
-                            }
-                        <input
-                            className="input"
-                            type="text"
-                            value={ name || "" }
-                            onChange={ (e) => handleQuizNameChange(e.target.value) }
-                            placeholder={ isSurvey ? `Survey Name` : `Quiz Name`}></input>
-                        <span className={ quizNameClasses }>Please enter a { isSurvey ? `Survey` : `Quiz`} Name</span>
+                <div className="content__body">
+                  <p className="f-headline"> Edit { isSurvey ? 'Survey' : 'Quiz'}</p>
+                  <p className="f-small-body--grey"> { params.module_id }</p>
+
+                  <label className="f-body form__label">Name</label>
+                  <input
+                    className="form__input form__input--new-module"
+                    type="text"
+                    value={ name || "" }
+                    onChange={ (e) => handleQuizNameChange(e.target.value) }
+                    placeholder={ isSurvey ? `Survey Name` : `Quiz Name`}></input>
+                  <span className={ quizNameClasses }>Please enter a { isSurvey ? `Survey` : `Quiz`} Name</span>
+                  {/*
+                    !isSurvey &&
+                    <div>
+                      <label className="f-label">
+                        Last Quiz?
+                      </label>
+                      <input
+                        className="column is-1"
+                        type="checkbox"
+                        checked={ is_last_quiz === true }
+                        name="is_last_quiz"
+                        onClick={ handleIsLastQuiz } />
                     </div>
-                    <div className="column is-1 has-text-centered">
-                        {
-                            !isSurvey &&
-                            <div>
-                                <label className="f-label">
-                                    Last Quiz?
-                                </label>
-                                <input
-                                    className="column is-1"
-                                    type="checkbox"
-                                    checked={ is_last_quiz === true }
-                                    name="is_last_quiz"
-                                    onClick={ handleIsLastQuiz } />
-                            </div>
-                        }
-                    </div>
-                </div>
-                <Questions
+                  */}
+                  <div className="line line__tertiary"></div>
+                  <Questions
                     questions={ questions }
                     isSurvey={ isSurvey }
                     handleInputChange={ handleInputChange }
                     handleDeleteQuestion={ handleDeleteQuestion }
                     />
-                <div className="column is-8 is-offset-2 has-text-centered">
-                    <button className="button is-info add-question" onClick={ handleAddQuestion }>
-                        Add Question
+                  <div className="new-quiz--buttons">
+                    <button className="button button--add-question" onClick={ handleAddQuestion }>
+                      Add Question
                     </button>
                     <button className={ submitClasses } onClick={ () => handleEditQuiz(params.module_id, params.quiz_id, params.survey_id, name, questions, deletedQuestions, is_last_quiz) }>
-                        Save and Exit
+                      Save and Exit
                     </button>
+                  </div>
                 </div>
             </div>
 

@@ -5,11 +5,12 @@
   .f-headline {
     max-width: 35rem;
     margin: auto;
+    text-align: center;
   }
 
   table {
-    width: 35rem;
-    margin: auto;
+    width: 45rem;
+    margin: 1rem auto;
     text-align: center;
   }
   thead {
@@ -29,5 +30,9 @@
   th, td {
     padding: 1rem;
 }
+
+  .medal-small {
+    margin: auto;
+  }
 
 }
