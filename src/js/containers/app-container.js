@@ -7,6 +7,7 @@ const mapStateToProps = (state) => ({
     username: state.user.username,
     isCookieAccepted: state.user.isCookieAccepted,
     is_lecturer: state.user.is_lecturer,
+    is_super_admin: state.user.is_super_admin,
     error: state.dashboard.error || state.joinModule.error || state.leaderboard.error || state.liveQuiz.error || state.login.error || state.module.error || state.newModule.error || state.newQuiz.error || state.quizMembers.error || state.result.error || state.review.error || state.user.error
 });
 

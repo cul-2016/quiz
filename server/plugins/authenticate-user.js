@@ -50,7 +50,6 @@ exports.register = (server, options, next) => {
 
                                 client.setAsync(userDetails[0].user_id.toString(), uid)
                                     .then(() => {
-
                                         const twoWeeks = 60 * 60 * 24 * 14;
                                         client.expire(userDetails[0].user_id.toString(), twoWeeks);
                                         const userObject = { user_details: userDetails[0], uid: uid, scope: [userDetails[0].is_super_admin ? "super-admin" : ""] };

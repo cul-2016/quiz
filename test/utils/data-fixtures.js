@@ -4,6 +4,7 @@ const users = [
         email: 'student@city.ac.uk',
         password: '$2a$10$UnvUuW91Jh6.zWQi3G/2J.HLDTomSqJHxvBC.TYx/Bj8HZa.AAm4K',
         is_lecturer: false,
+        is_super_admin: false,
         username: 'student',
         is_verified: true,
         expiry_code: null,
@@ -431,6 +432,31 @@ const moduleInfo = {
     }
 };
 
+const superAdminDashboardData = {
+    students: [{
+        user_id: 1,
+        email: 'student@city.ac.uk',
+        is_lecturer: false,
+        is_super_admin: false,
+        username: 'student',
+        is_verified: true,
+        expiry_code: null,
+        verification_code: null,
+        reset_password_code: null
+    }],
+    lecturer: [{
+        user_id: 2,
+        email: 'lecturer@city.ac.uk',
+        is_lecturer: true,
+        is_super_admin: true,
+        username: 'student',
+        is_verified: true,
+        expiry_code: null,
+        verification_code: null,
+        reset_password_code: null
+    }]
+};
+
 
 module.exports = {
     users,
@@ -459,5 +485,6 @@ module.exports = {
     studentHistoryData,
     updateQuizOptionsPayload,
     questionsAnswers,
-    moduleInfo
+    moduleInfo,
+    superAdminDashboardData
 };

@@ -57,3 +57,4 @@ require('./updateQuizOrSurvey.test.js');
 require('./validateModuleID.test.js');
 require('./verifyCode.test.js');
 require('./getQuestionsForUser.js');
+require('./getAllUsers.test.js');
