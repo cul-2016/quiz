@@ -53,7 +53,7 @@ exports.register = (server, options, next) => {
 
                                         const twoWeeks = 60 * 60 * 24 * 14;
                                         client.expire(userDetails[0].user_id.toString(), twoWeeks);
-                                        const userObject = { user_details: userDetails[0], uid: uid };
+                                        const userObject = { user_details: userDetails[0], uid: uid, scope: [userDetails[0].is_super_admin ? "super-admin" : ""] };
                                         const token = jwt.sign(userObject, process.env.JWT_SECRET);
                                         const options = { path: "/", isSecure: false, isHttpOnly: false };
                                         reply(userDetails[0])
