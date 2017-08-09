@@ -7,7 +7,7 @@ var query = require('./query.js');
  */
 
 function getAllUsers (client, callback) {
-    const moduleQuery = 'SELECT * FROM users;';
+    const moduleQuery = 'SELECT user_id, email, is_lecturer, username FROM users ORDER BY email;';
     query(client, moduleQuery, [], (error, response) => {
         if (error) {
             console.error("`getAllUsers`", error);

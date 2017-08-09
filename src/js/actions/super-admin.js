@@ -33,3 +33,7 @@ export const getSuperAdminDashboardFailure = (error) => ({
     type: GET_SUPER_ADMIN_DASHBOARD_FAILURE,
     error
 });
+
+export function deleteUser (user_id) {
+    console.log(`Deleting user: ${user_id}`);
+}
