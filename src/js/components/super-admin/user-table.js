@@ -1,14 +1,15 @@
 import React, { PropTypes } from 'react';
 
 const UserTable = ({ users, handleDeleteUser, title }) => {
+
     const table = users.map((user, i) => {
         return (
-            <tr className={`leaderboard__row--${i % 2 === 0 || i === 0 ? 'even' : 'odd'}` }>
+            <tr key={ i } className={`leaderboard__row--${i % 2 === 0 || i === 0 ? 'even' : 'odd'}` }>
                 <td className="f-body"> { user.email } </td>
                 <td className="f-body"> { user.username } </td>
                 <td>
                     <button
-                    className="button module__button button__tertiary"
+                    className={`button module__button button__tertiary ${!user.email.includes('@') && user.username.includes('Anon:') ? 'button__disabled' : ''}` }
                     onClick={() => { handleDeleteUser(user.user_id); }}>
                         Delete
                     </button>
