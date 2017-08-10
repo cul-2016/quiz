@@ -8,7 +8,7 @@ const hideNav = (path) => {
     return path === "/" || path.match(/live|holding-page|result|review|register-student|please-verify|verification|reset-password|performance|history|add-new-module|leaderboard|new-quiz|edit-quiz|edit-survey|members|register-lecturer-invite-only/);
 };
 
-const Nav = ({ location, is_lecturer }) => {
+const Nav = ({ location, is_lecturer, is_super_admin }) => {
 
     let navClasses = classnames("navbar", {
         "display-none": hideNav(location.pathname),
@@ -24,6 +24,13 @@ const Nav = ({ location, is_lecturer }) => {
                     Home
                 </p>
             </li>
+            { is_super_admin && is_lecturer &&
+              <li className="navbar__item navbar__item--left" onClick={ () => hashHistory.push('/super-admin') }>
+                  <p className="navbar__link navbar__link--left">
+                      Super Admin Dashboard
+                  </p>
+              </li>
+            }
             <li className="navbar__item navbar__item--right" onClick={ logout }>
                 <p className="navbar__link navbar__link--right">
                     Logout
@@ -36,7 +43,8 @@ const Nav = ({ location, is_lecturer }) => {
 
 Nav.propTypes = {
     location: PropTypes.object,
-    is_lecturer: PropTypes.bool
+    is_lecturer: PropTypes.bool,
+    is_super_admin: PropTypes.bool
 };
 
 export default Nav;

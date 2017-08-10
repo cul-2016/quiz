@@ -2,17 +2,18 @@ import update from 'react-addons-update';
 import * as actionsTypes from '../actions/user';
 import isCookieMessageRequired from '../lib/isCookieMessageRequired';
 
-const initialState = {
+export const initialState = {
     user_id: undefined,
     email: undefined,
     username: undefined,
     is_lecturer: undefined,
+    is_super_admin: undefined,
     isFetchingUser: false,
     isCookieAccepted: isCookieMessageRequired(),
     error: undefined
 };
 
-export default function user (state = initialState, action ) {
+export function user (state = initialState, action ) {
     switch (action.type) {
 
     case actionsTypes.SET_USER_DETAILS:
@@ -46,5 +47,6 @@ function setUserDetails (state, action) {
         email: { $set: action.data.email },
         username: { $set: action.data.username },
         is_lecturer: { $set: action.data.is_lecturer },
+        is_super_admin: { $set: action.data.is_super_admin }
     });
 }

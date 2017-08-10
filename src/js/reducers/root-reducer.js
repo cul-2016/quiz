@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import dashboard from './dashboard';
 import newModule from './new-module';
 import { joinModule } from './join-module';
-import user from './user';
+import { user } from './user';
 import { login } from './login';
 import { resetPassword } from './reset-password.js';
 import register from './register';
@@ -16,7 +16,7 @@ import { leaderboard } from './leaderboard';
 import update from 'react-addons-update';
 import { feedback } from './feedback';
 import { studentHistory } from './student-history';
-
+import { superAdmin } from './super-admin';
 
 const appReducer = combineReducers({
     user,
@@ -34,7 +34,8 @@ const appReducer = combineReducers({
     quizMembers,
     leaderboard,
     feedback,
-    studentHistory
+    studentHistory,
+    superAdmin
 });
 
 const rootReducer = (state, action) => {

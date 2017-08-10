@@ -13,6 +13,7 @@ import { getLeaderboard } from '../actions/leaderboard';
 import { getFeedback } from '../actions/feedback';
 import { getStudentHistory } from '../actions/student-history';
 import { logout } from '../actions/login';
+import { getSuperAdminDashboard } from '../actions/super-admin';
 
 /**
  * Checks if user is authenticated.  Redirects  to '/' if they're not
@@ -304,5 +305,23 @@ export function leaveRoom (nextState, replace, callback) {
 export function clearState (nextState, replace, callback) {
 
     store.dispatch(logout());
+    callback();
+}
+
+/**
+ * fetches all users for super admin.  Redirects  to '/' if they're not authorised
+ * Is used as an onEnter hook for React Router
+ * Matches the signature of a React Router hook: https://github.com/reactjs/react-router/blob/master/docs/API.md#onenternextstate-replace-callback
+ * @param {object} nextState - the next router state
+ * @param {function} replace - function to redirect to another path
+ * @param {function} callback - (optional) can be used to make the transition block
+ */
+export function fetchSuperAdminDashboard (nextState, replace, callback) {
+
+    if (!validCookieExists()) {
+        replace('/');
+    } else {
+        store.dispatch(getSuperAdminDashboard());
+    }
     callback();
 }

@@ -32,6 +32,8 @@ import StudentPerformanceContainer from './containers/student/feedback';
 import StudentLiveQuizContainer from './containers/student/live-quiz';
 import StudentQuizResultContainer from './containers/student/result';
 
+import SuperAdminDashboardContainer from './containers/super-admin/dashboard';
+
 import VerficationMessageComponent from './components/email-verification/verify-email-message.js';
 import VerifiedComponent from './components/email-verification/verified.js';
 
@@ -153,6 +155,10 @@ const Root = ({ store }) => (
                     onEnter={ composeHooks(hooks.authenticate, hooks.checkModuleOwner) }
                     path=":module_id/:quiz_id/history"
                     component={ QuizHistoryContainer } />
+                    <Route
+                        onEnter={ composeHooks(hooks.authenticate, hooks.fetchSuperAdminDashboard) }
+                        path="/super-admin"
+                        component={ SuperAdminDashboardContainer } />
                 <Route
                     onEnter={ composeHooks(hooks.authenticate, hooks.checkUserRole, hooks.fetchLeaderboard, hooks.checkModuleOwner) }
                     path=":module_id/leaderboard"
