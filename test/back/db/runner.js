@@ -59,3 +59,5 @@ require('./verifyCode.test.js');
 require('./getQuestionsForUser.js');
 require('./getAllUsers.test.js');
 require('./deleteUser.test.js');
+require('./getFullQuestionSet.test.js');
+require('./getFullAnswerSet.test.js');
