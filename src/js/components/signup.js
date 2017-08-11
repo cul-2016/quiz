@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 import isEmail from 'validator/lib/isEmail';
 import lowerCaseBeforeAt from '../lib/lowerCaseBeforeAt.js';
 
-const Signup = ({ register, handleChange, handleRegisteringUser, location }) => {
+const Signup = ({ register, handleChange, handleRegisteringUser, handleToggleTcAgreed, location }) => {
 
     const isEmailValid = isEmail(register.email);
 
@@ -48,12 +48,6 @@ const Signup = ({ register, handleChange, handleRegisteringUser, location }) => 
               <h1 className="f-headline f-headline--primary"><img src="/Yellow.svg"></img></h1>
               <h3 className="f-headline"> Realtime Quizzes for better lectures </h3>
             </div>
-            { register.error &&
-              <span className="login__err-message">
-                { register.error }
-              </span>
-            }
-
             {
               register.confirmPassword
               && register.confirmPassword !== register.password
@@ -104,9 +98,26 @@ const Signup = ({ register, handleChange, handleRegisteringUser, location }) => 
                   onChange={ (e) => handleChange("confirmPassword", e.target.value)}
                   type="password" />
               </div>
+              <div className="form__field f-body form__field__tc" >
+                  <span
+                  className="icon"
+                  onClick={ () => handleToggleTcAgreed() }
+                  >
+                      <i className={ `fa ${register.tcAgreed ? 'fa-check-square' : 'fa-square'}` }/>
+                  </span>
+                  <span className="f-body">
+                      I agree with the <Link className="f-body f-body--primary" target="_blank" to="/privacy">privacy statement</Link>, including the <Link className="f-body f-body--primary" target="_blank"  to="/privacy">use of cookies.</Link>
+                  </span>
+              </div>
+
+              { register.error &&
+                <span className="login__err-message">
+                  { register.error }
+                </span>
+              }
 
               <button
-                className="button button__primary"
+                className={ `button button__primary ${register.tcAgreed && isEmailValid ? '' : 'button__disabled'}`}
                 onClick={ handleOnSubmit }
                 >Register
               </button>
@@ -127,6 +138,7 @@ Signup.propTypes = {
     register: PropTypes.object.isRequired,
     handleChange: PropTypes.func.isRequired,
     handleRegisteringUser: PropTypes.func.isRequired,
+    handleToggleTcAgreed: PropTypes.func.isRequired,
     location: PropTypes.object.isRequired
 };
 

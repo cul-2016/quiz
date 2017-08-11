@@ -84,6 +84,9 @@ class Dashboard extends Component {
                 <div>
                   { moduleList }
                 </div>
+                <div className="f-body dashboard__tc" >
+                    View <Link className="f-body f-body--primary" target="_blank" to="/privacy">privacy statement</Link>
+                </div>
               </div>
             </div>
         );
