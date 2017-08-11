@@ -5,7 +5,7 @@ import logout from '../../lib/logout';
 
 
 const hideNav = (path) => {
-    return path === "/" || path.match(/live|holding-page|result|review|register-student|please-verify|verification|reset-password|performance|history|add-new-module|leaderboard|new-quiz|edit-quiz|edit-survey|members|register-lecturer-invite-only/);
+    return path === "/" || path.match(/live|holding-page|result|review|register-student|please-verify|verification|reset-password|performance|history|add-new-module|leaderboard|new-quiz|edit-quiz|edit-survey|members|register-lecturer-invite-only|privacy/);
 };
 
 const Nav = ({ location, is_lecturer, is_super_admin }) => {

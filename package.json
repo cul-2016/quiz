@@ -13,7 +13,7 @@
     "postgres": "postgres -D /usr/local/var/postgres",
     "heroku:production:postgres": "heroku pg:psql --app cul-app",
     "heroku:staging:postgres": "heroku pg:psql --app cul-app-staging Database",
-    "load-staging-schema": "heroku pg:psql --app cul-app-staging Database < ./test/utils/test-schema.txt",
+    "load-staging-schema": "heroku pg:psql --app cul-app-staging Database < ./test/utils/test-schema-local.txt",
     "coverage": "export TESTING=true && ./node_modules/.bin/babel-node ./node_modules/babel-istanbul/lib/cli.js cover tape --require ./test/utils/jsdom.js 'test/runner.js'",
     "check-coverage": "./node_modules/.bin/babel-node ./node_modules/babel-istanbul/lib/cli.js check-coverage",
     "test": "export TESTING=true && node_modules/.bin/tape -r babel-register --require ./test/utils/jsdom.js 'test/runner.js' | tap-spec",
@@ -27,7 +27,7 @@
   },
   "engines": {
     "node": "6.11.0",
-    "npm": "5.3.0"  
+    "npm": "5.3.0"
   },
   "repository": {
     "type": "git",

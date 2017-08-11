@@ -8,6 +8,7 @@ export const UPDATE_INPUT_FIELD = 'UPDATE_INPUT_FIELD';
 export const REGISTERING_USER_REQUEST = 'REGISTERING_USER_REQUEST';
 export const REGISTERING_USER_SUCCESS = 'REGISTERING_USER_SUCCESS';
 export const REGISTERING_USER_FAILURE = 'REGISTERING_USER_FAILURE';
+export const TOGGLE_TC_AGREED = 'TOGGLE_TC_AGREED';
 
 export const updateInputField = (inputKey, value) => ({
     type: UPDATE_INPUT_FIELD,
@@ -58,4 +59,7 @@ export const registeringUserSuccess = (data) => ({
 export const registeringUserFailure = (error) => ({
     type: REGISTERING_USER_FAILURE,
     error
+});
+export const toggleTcAgreed = () => ({
+    type: TOGGLE_TC_AGREED
 });

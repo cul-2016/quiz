@@ -34,6 +34,10 @@
           padding: 0.984rem;
         }
     }
+
+    &__tc {
+        padding-top: 0;
+    }
 }
 
 .dashboard__lecturer {
@@ -80,6 +84,10 @@
           display: inline-block;
           text-align: right;
         }
+      }
+
+      &__tc {
+          padding-top: 1rem;
       }
   }
 }
