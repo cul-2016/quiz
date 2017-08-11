@@ -263,7 +263,7 @@ exports.register = (server, options, next) => {
                     const { user_id } = decoded.user_details;
                     if (module_id !== undefined) {
 
-                        joinModule(pool, module_id, user_id, (error, result) => {
+                        joinModule(pool, module_id.toUpperCase(), user_id, (error, result) => {
                             const verdict = error || result;
                             reply(verdict);
                         });
