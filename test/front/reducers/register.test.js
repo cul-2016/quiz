@@ -96,3 +96,16 @@ test('REGISTERING_USER_FAILURE works', (t) => {
 
     t.deepEqual(result, expected);
 });
+
+test('TOGGLE_TC_AGREED works', (t) => {
+
+    t.plan(1);
+    const initialState = deepFreeze(registerState);
+    const action = {
+        type: 'TOGGLE_TC_AGREED',
+    };
+    const expected = { ...initialState, tcAgreed: true };
+    const result = reducer(initialState, action);
+
+    t.deepEqual(result, expected);
+});
