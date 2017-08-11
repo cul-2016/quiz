@@ -81,8 +81,6 @@ socketClient.on('receive_abort_quiz', (idObj) => {
     console.log('received abort quiz notification', quiz_id);
 
     const module_id = store.getState().module.module_id;
-
-    store.dispatch(endQuiz(quiz_id, isSurvey));
     store.dispatch(closeQuiz());
     showNavbar();
     hashHistory.push(`${module_id}/student`);
