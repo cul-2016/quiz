@@ -17,12 +17,7 @@ const mapDispatchToProps = (dispatch) => ({
 
     handleInputChange: (value) => {
         const upperCaseValue = value.toUpperCase();
-
-        dispatch(inputChange(upperCaseValue));
-
-        if (value && value.length === 4) {
-            dispatch(validateModuleID(upperCaseValue));
-        }
+        dispatch(inputChange(value));
     },
     handleJoinModule: () => {
         let module_id = store.getState().joinModule.module_id;
