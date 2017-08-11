@@ -8,7 +8,7 @@ machine:
     - redis
 database:
   override:
-    - psql -U ubuntu circle_test < ./test/utils/test-schema.txt
+    - psql -U ubuntu circle_test < ./test/utils/test-schema-local.txt
 general:
   artifacts:
     - "coverage"
