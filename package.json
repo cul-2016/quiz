@@ -25,6 +25,10 @@
     "postinstall": "webpack --config ./webpack.production.config.js --progress --colors",
     "make-docs": "./node_modules/.bin/jsdoc -c ./conf.json -r"
   },
+  "engines": {
+    "node": "6.11.0",
+    "npm": "5.3.0"  
+  },
   "repository": {
     "type": "git",
     "url": "git+https://sohilpandya@github.com/cul-2016/quiz.git"
