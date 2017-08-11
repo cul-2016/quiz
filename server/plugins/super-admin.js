@@ -4,7 +4,6 @@ import getFullQuestionSet from '../lib/getFullQuestionSet';
 import getFullAnswerSet from '../lib/getFullAnswerSet';
 import Joi from 'joi';
 import Papa from 'papaparse';
-var fs = require('fs');
 
 
 exports.register = (server, options, next) => {
@@ -44,7 +43,6 @@ exports.register = (server, options, next) => {
                 }
             },
             handler: (request, reply) => {
-                console.log(request);
                 deleteUser(pool, request.payload.user_id, (error, response) => {
                     if (error) reply(error);
                     if (response) reply(true);
@@ -66,7 +64,7 @@ exports.register = (server, options, next) => {
                     var CSV = Papa.unparse(response);
                     reply(CSV)
                     .header('Content-Type', 'text/csv')
-                    .header('Content-Disposition', 'attachment; filename=reports.csv');
+                    .header('Content-Disposition', 'attachment; filename=full-question-set.csv');
                 });
             }
         },
@@ -85,7 +83,7 @@ exports.register = (server, options, next) => {
                     var CSV = Papa.unparse(response);
                     reply(CSV)
                     .header('Content-Type', 'text/csv')
-                    .header('Content-Disposition', 'attachment; filename=reports.csv');
+                    .header('Content-Disposition', 'attachment; filename=full-answer-set.csv');
                 });
             }
         }

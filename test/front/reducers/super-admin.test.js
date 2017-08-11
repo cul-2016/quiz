@@ -116,3 +116,57 @@ test('DELETE_USER_FAILURE works', (t) => {
 
     t.deepEqual(result, expected);
 });
+
+test('DOWNLOAD_DATA_REQUEST works', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(superAdminState);
+
+    const action = {
+        type: 'DOWNLOAD_DATA_REQUEST',
+    };
+    const expected = {
+        ...superAdminState,
+        isDownloadingData: true
+    };
+
+    const result = reducer(initialState, action);
+    t.deepEqual(result, expected);
+});
+
+test('DOWNLOAD_DATA_SUCCESS works', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(superAdminState);
+
+    const action = {
+        type: 'DOWNLOAD_DATA_SUCCESS'
+    };
+    const expected = {
+        ...superAdminState
+    };
+    const result = reducer(initialState, action);
+
+    t.deepEqual(result, expected);
+});
+
+test('DOWNLOAD_DATA_FAILURE works', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(superAdminState);
+
+    const action = {
+        type: 'DOWNLOAD_DATA_FAILURE',
+        error
+    };
+    const expected = {
+        ...superAdminState,
+        error
+    };
+    const result = reducer(initialState, action);
+
+    t.deepEqual(result, expected);
+});

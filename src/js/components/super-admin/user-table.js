@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-const UserTable = ({ users, handleDeleteUser, title }) => {
+const UserTable = ({ users, handleDeleteUser, title, superAdminId }) => {
 
     const table = users.map((user, i) => {
         return (
@@ -9,7 +9,7 @@ const UserTable = ({ users, handleDeleteUser, title }) => {
                 <td className="f-body"> { user.username } </td>
                 <td>
                     <button
-                    className={`button module__button button__tertiary ${!user.email.includes('@') && user.username.includes('Anon:') ? 'button__disabled' : ''}` }
+                    className={`button module__button button__tertiary ${(!user.email.includes('@') && user.username.includes('Anon:')) || (superAdminId === user.user_id) ? 'button__disabled' : ''}` }
                     onClick={() => { handleDeleteUser(user.user_id); }}>
                         Delete
                     </button>
@@ -39,7 +39,8 @@ const UserTable = ({ users, handleDeleteUser, title }) => {
 UserTable.propTypes = {
     users: PropTypes.array,
     handleDeleteUser: PropTypes.func,
-    title: PropTypes.string
+    title: PropTypes.string,
+    superAdminId: PropTypes.number
 };
 
 export default UserTable;

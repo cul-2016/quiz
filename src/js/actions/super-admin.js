@@ -6,6 +6,9 @@ export const GET_SUPER_ADMIN_DASHBOARD_FAILURE = 'GET_SUPER_ADMIN_DASHBOARD_FAIL
 export const DELETE_USER_REQUEST = 'DELETE_USER_REQUEST';
 export const DELETE_USER_SUCCESS = 'DELETE_USER_SUCCESS';
 export const DELETE_USER_FAILURE = 'DELETE_USER_FAILURE';
+export const DOWNLOAD_DATA_REQUEST = 'DOWNLOAD_DATA_REQUEST';
+export const DOWNLOAD_DATA_SUCCESS = 'DOWNLOAD_DATA_SUCCESS';
+export const DOWNLOAD_DATA_FAILURE = 'DOWNLOAD_DATA_FAILURE';
 
 export const getSuperAdminDashboard = () => (dispatch) => {
     dispatch(getSuperAdminDashboardRequest());
@@ -56,5 +59,32 @@ export const deleteUserSuccess = () => ({
 
 export const deleteUserFailure = (error) => ({
     type: DELETE_USER_FAILURE,
+    error
+});
+
+export const downloadData = (url) => (dispatch) => {
+    dispatch(downloadDataRequest());
+    request.get(dispatch)(url)
+        .then((response) => {
+            window.location.href = response.request.responseURL;
+            dispatch(downloadDataSuccess());
+            dispatch(getSuperAdminDashboard());
+        })
+        .catch((error) => {
+            const customError = Object.assign({}, error, { reducerState: 'superAdmin' });
+            dispatch(downloadDataFailure(customError));
+        });
+};
+
+export const downloadDataRequest = () => ({
+    type: DOWNLOAD_DATA_REQUEST
+});
+
+export const downloadDataSuccess = () => ({
+    type: DOWNLOAD_DATA_SUCCESS
+});
+
+export const downloadDataFailure = (error) => ({
+    type: DOWNLOAD_DATA_FAILURE,
     error
 });
