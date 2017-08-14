@@ -142,6 +142,7 @@ export function updateQuiz (module_id, quiz_id, survey_id, name, questions, dele
             deletedQuestions,
             is_last_quiz
         };
+
         request.post(dispatch)('/update-quiz', payload)
             .then(() => {
 

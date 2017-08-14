@@ -83,6 +83,7 @@ exports.register = (server, options, next) => {
                             });
                         }
                     } else {
+                        console.log(questions);
                         saveQuestions(pool, id, questions, { isSurvey }, (error, response) => {
                             /* istanbul ignore if */
                             if (error) {
@@ -152,7 +153,7 @@ exports.register = (server, options, next) => {
             },
             handler: (request, reply) => {
                 const { id, isSurvey } = request.payload;
-                console.log(id, isSurvey, 'end quiz');
+
                 setQuizOrSurveyToPresented(pool, id, isSurvey, (error, result) => {
 
                     const verdict = error || result;

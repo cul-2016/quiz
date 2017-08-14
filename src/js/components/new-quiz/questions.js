@@ -46,7 +46,7 @@ const Option = ({ question, value, idx, isSurvey, handleInputChange }) =>
     </div>;
 
 
-const SortableDragHandle = SortableHandle(() => <div className="fa fa-arrows new-quiz--drag-handle"></div>);
+const SortableDragHandle = SortableHandle(() => <div className="fa fa-2x fa-arrows-v new-quiz--drag-handle"></div>);
 
 const SortableQuestionItem = SortableElement(({ question, handleInputChange, handleDeleteQuestion, isSurvey, i, index }) => {
     return (
@@ -69,7 +69,6 @@ const SortableQuestionItem = SortableElement(({ question, handleInputChange, han
 });
 
 const SortableQuestionList = SortableContainer(({ questions, handleInputChange, handleDeleteQuestion, isSurvey }) => {
-    console.log(questions);
 
     let mappedQuestions = questions.map((question, i) => {
         return (
@@ -95,18 +94,13 @@ const SortableQuestionList = SortableContainer(({ questions, handleInputChange, 
 
 
 class SortableComponent extends Component {
+
     constructor (props) {
         super(props);
-        // this.state = {
-        //     items: this.props.questions
-        // };
         this.onSortEnd = this.onSortEnd.bind(this);
     }
 
     onSortEnd (object) {
-        // this.setState({
-        //     items: arrayMove(this.state.items, object.oldIndex, object.newIndex),
-        // });
         this.props.handleQuestionOrder(this.props.questions, object.oldIndex, object.newIndex);
     }
 

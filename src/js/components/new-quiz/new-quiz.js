@@ -18,8 +18,6 @@ const NewQuiz = ({
     handleQuestionOrder
 }) => {
 
-  console.log("new quiz", questions);
-
     const questionsValidation = questions.map((questionObj) => {
         const { question, a, b, correct_answer } = questionObj;
         return Boolean(question && a && b && (correct_answer || isSurvey));

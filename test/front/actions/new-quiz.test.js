@@ -89,6 +89,21 @@ test('toggleIsLastQuiz action creator returns the expected action', (t) => {
     t.deepEqual(actual, expected);
 });
 
+test('questionOrder action creator returns the expected action', (t) => {
+
+    t.plan(1);
+    let questions = [{ question_id: 1 }, { question_id: 2 }];
+    let oldIndex = 1;
+    let newIndex = 2;
+    const expected = {
+        type: actions.QUESTION_ORDER,
+        data: { questions, oldIndex, newIndex }
+    };
+
+    const actual = deepFreeze(actions.questionOrder(questions, oldIndex, newIndex));
+    t.deepEqual(actual, expected);
+});
+
 // -----
 // SAVING NEW QUIZ
 // -----
