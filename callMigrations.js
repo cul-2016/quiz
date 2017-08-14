@@ -1,3 +1,7 @@
 var migrations = require('./migrations');
 
-migrations(process.exit);
+if (!process.env.CIRCLE_CI || !process.env.TESTING) {
+    migrations(process.exit);
+} else {
+    process.exit();
+}
