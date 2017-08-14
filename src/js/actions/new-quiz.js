@@ -7,6 +7,7 @@ export const UPDATE_QUIZ_NAME = 'UPDATE_QUIZ_NAME';
 export const CLEAR_NEW_QUIZ_STATE = 'CLEAR_NEW_QUIZ_STATE';
 export const TOGGLE_IS_LAST_QUIZ = 'TOGGLE_IS_LAST_QUIZ';
 export const TOGGLE_IS_SURVEY = 'TOGGLE_IS_SURVEY';
+export const QUESTION_ORDER = 'QUESTION_ORDER';
 
 export const SAVE_QUIZ_REQUEST = 'SAVE_QUIZ_REQUEST';
 export const SAVE_QUIZ_SUCCESS = 'SAVE_QUIZ_SUCCESS';
@@ -55,6 +56,12 @@ export const toggleIsSurvey = () => ({
     type: TOGGLE_IS_SURVEY
 });
 
+export const questionOrder = (questions, oldIndex, newIndex) => ({
+    type: QUESTION_ORDER,
+    data: {
+        questions, oldIndex, newIndex
+    }
+});
 
 //
 // SAVE QUIZ ACTIONS

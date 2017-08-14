@@ -1,6 +1,6 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes, Component } from 'react';
 import classnames from 'classnames';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { SortableContainer, SortableElement, SortableHandle } from 'react-sortable-hoc';
 
 const RadioButton = ({ question, value, idx, handleInputChange }) => {
 
@@ -45,45 +45,94 @@ const Option = ({ question, value, idx, isSurvey, handleInputChange }) =>
             }
     </div>;
 
-const Questions = ({ questions, handleInputChange, handleDeleteQuestion, isSurvey }) => {
 
-    const transitionOptions = {
-        transitionName: "fade",
-        transitionEnterTimeout: 500,
-        transitionLeaveTimeout: 500
-    };
+const SortableDragHandle = SortableHandle(() => <div className="fa fa-arrows new-quiz--drag-handle"></div>);
+
+const SortableQuestionItem = SortableElement(({ question, handleInputChange, handleDeleteQuestion, isSurvey, i, index }) => {
+    return (
+        <div key={ `question-${i}` } className="card">
+            <SortableDragHandle />
+            <label className="form__label--new-quiz f-subheader">{ i + 1 }.</label>
+            <textarea className="form__input form__input--new-quiz-question" type="text" value={ question.question } onChange={ (e) => handleInputChange('question', e.target.value, i) } placeholder='Question'></textarea>
+            <div className="line--new-quiz"></div>
+
+            { ['a', 'b', 'c', 'd'].map((value, idx) =>
+                <Option { ...{ key: `option-${idx}`,
+                    question, value, idx: i, isSurvey, handleInputChange
+                }} />
+            ) }
+
+            <button className="button is-danger" onClick={ () => { handleDeleteQuestion(i); } }> Delete Question </button>
+
+        </div>
+    );
+});
+
+const SortableQuestionList = SortableContainer(({ questions, handleInputChange, handleDeleteQuestion, isSurvey }) => {
+    console.log(questions);
 
     let mappedQuestions = questions.map((question, i) => {
         return (
-            <div key={ `question-${i}` } className="card">
-
-                <label className="form__label--new-quiz f-subheader">{ i + 1 }.</label>
-                <textarea className="form__input form__input--new-quiz-question" type="text" value={ question.question } onChange={ (e) => handleInputChange('question', e.target.value, i) } placeholder='Question'></textarea>
-                <div className="line--new-quiz"></div>
-
-                { ['a', 'b', 'c', 'd'].map((value, idx) =>
-                    <Option { ...{ key: `option-${idx}`,
-                        question, value, idx: i, isSurvey, handleInputChange
-                    }} />
-                ) }
-
-                <button className="button is-danger" onClick={ () => { handleDeleteQuestion(i); } }> Delete Question </button>
-
-            </div>
+              <SortableQuestionItem
+                key={i}
+                question={question}
+                i={i}
+                index={i}
+                handleInputChange={handleInputChange}
+                handleDeleteQuestion={handleDeleteQuestion}
+                isSurvey={isSurvey}
+              />
         );
     });
 
     return (
             <div>
-                <ReactCSSTransitionGroup { ...transitionOptions }>
-                    { mappedQuestions }
-                </ReactCSSTransitionGroup>
+                { mappedQuestions }
             </div>
 
     );
+});
+
+
+class SortableComponent extends Component {
+    constructor (props) {
+        super(props);
+        // this.state = {
+        //     items: this.props.questions
+        // };
+        this.onSortEnd = this.onSortEnd.bind(this);
+    }
+
+    onSortEnd (object) {
+        // this.setState({
+        //     items: arrayMove(this.state.items, object.oldIndex, object.newIndex),
+        // });
+        this.props.handleQuestionOrder(this.props.questions, object.oldIndex, object.newIndex);
+    }
+
+    render () {
+        return <SortableQuestionList
+                  lockAxis={'y'}
+                  useWindowAsScrollContainer={true}
+                  useDragHandle={true}
+                  questions={this.props.questions}
+                  onSortEnd={this.onSortEnd}
+                  handleInputChange={this.props.handleInputChange}
+                  handleDeleteQuestion={this.props.handleDeleteQuestion}
+                  isSurvey={this.props.isSurvey} />;
+    }
+}
+
+
+SortableComponent.propTypes = {
+    questions: PropTypes.array,
+    isSurvey: PropTypes.bool,
+    handleInputChange: PropTypes.func.isRequired,
+    handleDeleteQuestion: PropTypes.func.isRequired,
+    handleQuestionOrder: PropTypes.func
 };
 
-Questions.propTypes = {
+SortableQuestionList.propTypes = {
     questions: PropTypes.array.isRequired,
     isSurvey: PropTypes.bool,
     handleInputChange: PropTypes.func.isRequired,
@@ -112,4 +161,4 @@ Option.propTypes = {
     handleInputChange: PropTypes.func.isRequired
 };
 
-export default Questions;
+export default SortableComponent;
