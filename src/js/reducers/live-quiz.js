@@ -146,6 +146,9 @@ export const liveQuiz = (state = initialState, action) => {
             isSurvey: { $set: action.isSurvey }
         });
 
+    case actionsTypes.RESET_LIVE_QUIZ_STATE:
+        return initialState;
+
     default:
         return state;
     }

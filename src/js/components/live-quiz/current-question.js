@@ -8,7 +8,8 @@ const CurrentQuestion = ({ data, response, handleSelection }) => {
     let answersArray = Object.keys(data);
 
     answersArray.splice(answersArray.indexOf('question'), 1);
-    answersArray.splice(answersArray.indexOf('question_id'), 1)
+    answersArray.splice(answersArray.indexOf('question_id'), 1);
+    answersArray.splice(answersArray.indexOf('order_id'), 1)
                 .sort();
 
     let answers = answersArray.map((letter, i) => {
