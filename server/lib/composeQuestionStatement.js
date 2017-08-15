@@ -15,6 +15,8 @@ function composeQuestionStatement (id, rows, { isSurvey }, callback) {
         var valueClause = [];
         params.push(id);
         valueClause.push('$' + params.length);
+        params.push(row.order_id);
+        valueClause.push('$' + params.length);
         params.push(row.question);
         valueClause.push('$' + params.length);
         params.push(row.a);
@@ -32,7 +34,7 @@ function composeQuestionStatement (id, rows, { isSurvey }, callback) {
     }
 
     callback(null, {
-        text: `INSERT INTO questions (${quizIdOrSurveyId}, question, a, b, c, d, correct_answer) VALUES ` + chunks.join(', '),
+        text: `INSERT INTO questions (${quizIdOrSurveyId}, order_id, question, a, b, c, d, correct_answer) VALUES ` + chunks.join(', '),
         values: params
     });
 

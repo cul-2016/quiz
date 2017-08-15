@@ -14,6 +14,7 @@ test('`getQuizQuestions` gets list of questions for a quiz', (t) => {
         const expectedRows = [
             {
                 question_id: 1,
+                order_id: 1,
                 question: 'What is the capital of England?',
                 a: 'London',
                 b: 'Cardiff',
@@ -22,6 +23,7 @@ test('`getQuizQuestions` gets list of questions for a quiz', (t) => {
             },
             {
                 question_id: 2,
+                order_id: 2,
                 question: 'What is the capital of Croatia?',
                 a: 'Zagreb',
                 b: 'Cardiff',
@@ -47,5 +49,3 @@ test.onFinish(() => {
     redisCli.quit();
     pool.end();
 });
-
-

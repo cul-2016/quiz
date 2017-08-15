@@ -1,12 +1,17 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
-import Questions from '../new-quiz/questions';
+import SortableComponent from '../new-quiz/questions';
 import classnames from 'classnames';
 import { store } from '../../store';
 import { clearNewQuizState } from '../../actions/new-quiz';
 
 
-const EditQuiz = ({ questions, isUpdatingQuiz, name, is_last_quiz, deletedQuestions, handleAddQuestion, handleInputChange, handleQuizNameChange, handleEditQuiz, handleDeleteQuestion, handleIsLastQuiz, params }) => {
+const EditQuiz = ({ questions, isUpdatingQuiz, name,
+                    is_last_quiz, deletedQuestions, handleAddQuestion,
+                    handleInputChange, handleQuizNameChange, handleEditQuiz,
+                    handleDeleteQuestion, handleIsLastQuiz, params,
+                    handleQuestionOrder
+                }) => {
 
     const isSurvey = params.survey_id ? true : false;
     const questionsValidation = questions.map((questionObj) => {
@@ -57,11 +62,12 @@ const EditQuiz = ({ questions, isUpdatingQuiz, name, is_last_quiz, deletedQuesti
                     </div>
                   */}
                   <div className="line line__tertiary"></div>
-                  <Questions
+                  <SortableComponent
                     questions={ questions }
                     isSurvey={ isSurvey }
                     handleInputChange={ handleInputChange }
                     handleDeleteQuestion={ handleDeleteQuestion }
+                    handleQuestionOrder={ handleQuestionOrder }
                     />
                   <div className="new-quiz--buttons">
                     <button className="button button--add-question" onClick={ handleAddQuestion }>
@@ -89,6 +95,7 @@ EditQuiz.propTypes = {
     handleEditQuiz: PropTypes.func.isRequired,
     handleDeleteQuestion: PropTypes.func.isRequired,
     handleIsLastQuiz: PropTypes.func.isRequired,
+    handleQuestionOrder: PropTypes.func.isRequired,
     params: PropTypes.object
 };
 
