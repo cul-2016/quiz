@@ -1,4 +1,4 @@
-# Quodl
+## Quodl
 
 [![Build Status](https://circleci.com/gh/cul-2016/quiz.png?style=shield)](https://circleci.com/gh/cul-2016/quiz)
 [![codecov.io](https://codecov.io/github/cul-2016/quiz/coverage.svg?branch=staging)](https://codecov.io/gh/cul-2016/quiz/branch/staging)
