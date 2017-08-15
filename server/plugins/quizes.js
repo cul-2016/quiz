@@ -153,7 +153,6 @@ exports.register = (server, options, next) => {
             },
             handler: (request, reply) => {
                 const { id, isSurvey } = request.payload;
-
                 setQuizOrSurveyToPresented(pool, id, isSurvey, (error, result) => {
 
                     const verdict = error || result;
