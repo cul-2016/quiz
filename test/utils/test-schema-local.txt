@@ -515,12 +515,12 @@ INSERT INTO responses (user_id, quiz_id, question_id, response)
 
 /********* insert survey questions ********/
 
-INSERT INTO questions (survey_id, question, a, b, c, d)
-   VALUES (1, 'How do you feel about this module?', 'Bad', 'Not interested', 'Good', 'Mind blown'),
-          (1, 'Would you recommend this lecturer?', 'No', 'Yes', null, null),
-          (2, 'This module engages you. Do you agree?', 'Strongly Disagree', 'Disagree', 'Agree', 'Strongly agree'),
-          (2, 'DELETE this question in deleteQuestions test?', 'Strongly Disagree', 'Disagree', 'Agree', 'Strongly agree'),
-          (3, 'Do you like this survey?', 'Strongly Disagree', 'Disagree', 'Agree', 'Strongly agree');
+INSERT INTO questions (survey_id, order_id, question, a, b, c, d)
+   VALUES (1, 1, 'How do you feel about this module?', 'Bad', 'Not interested', 'Good', 'Mind blown'),
+          (1, 2, 'Would you recommend this lecturer?', 'No', 'Yes', null, null),
+          (2, 1, 'This module engages you. Do you agree?', 'Strongly Disagree', 'Disagree', 'Agree', 'Strongly agree'),
+          (2, 2, 'DELETE this question in deleteQuestions test?', 'Strongly Disagree', 'Disagree', 'Agree', 'Strongly agree'),
+          (3, 1, 'Do you like this survey?', 'Strongly Disagree', 'Disagree', 'Agree', 'Strongly agree');
 
 /********* insert survey responses ********/
 

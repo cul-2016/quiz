@@ -18,13 +18,15 @@ test('`getSurveyQuestions` gets list of questions for a quiz', (t) => {
                 c: 'Good',
                 d: 'Mind blown',
                 question: 'How do you feel about this module?',
-                question_id: 32
+                question_id: 32,
+                order_id: 1
             },
             {
                 a: 'No',
                 b: 'Yes',
                 question: 'Would you recommend this lecturer?',
-                question_id: 33
+                question_id: 33,
+                order_id: 2
             }
         ];
 
