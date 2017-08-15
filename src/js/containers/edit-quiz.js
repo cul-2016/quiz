@@ -37,7 +37,6 @@ const mapDispatchToProps = (dispatch) => ({
             obj.order_id = i + 1;
             return obj;
         });
-
         dispatch(updateQuiz(module_id, quiz_id, survey_id, quizName, orderedQuestions, deletedQuestions, is_last_quiz));
         setTimeout(() => {
             hashHistory.goBack();
