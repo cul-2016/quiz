@@ -45,12 +45,10 @@ const NewModule = ({ isValidatingModuleID, moduleIDExists,
                       <Medals medals={ medals }
                         updateMedalVals={ updateMedalVals }
                         applyOffset={ applyOffset }/>
+                      <Trophies trophies={ trophies }
+                        updateTrophyVals={ updateTrophyVals }
+                        applyOffset={ applyOffset } />
 
-                      {/* Commented out as trophy functionality is currently being taken out
-                          <Trophies trophies={ trophies }
-                            updateTrophyVals={ updateTrophyVals }
-                            applyOffset={ applyOffset } />
-                      */}
                       <p className="line line--primary"></p>
                     </div>
                       <button className={ validationClasses } onClick={ submit }>
