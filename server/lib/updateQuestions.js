@@ -11,6 +11,7 @@ var composeUpdateQuestionStatement = require('./composeUpdateQuestionStatement')
 
 function updateQuestions (client, questions, callback) {
 
+console.log(questions);
     if (questions.length === 0) {
         return callback(null);
     } else {

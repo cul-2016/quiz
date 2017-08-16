@@ -35,6 +35,7 @@ import StudentQuizResultContainer from './containers/student/result';
 import SuperAdminDashboardContainer from './containers/super-admin/dashboard';
 
 import VerficationMessageComponent from './components/email-verification/verify-email-message.js';
+import PrivacyMessageComponent from './components/privacy-message.js';
 import VerifiedComponent from './components/email-verification/verified.js';
 
 import NotFound from './components/general/not-found';
@@ -52,6 +53,9 @@ const Root = ({ store }) => (
                 <IndexRoute
                     onEnter={ hooks.shouldUserRedirect }
                     component={ LoginContainer } />
+                <Route
+                    path="privacy"
+                    component={ PrivacyMessageComponent } />
                 <Route
                     onEnter={ hooks.clearState }
                     path="request-reset-password"

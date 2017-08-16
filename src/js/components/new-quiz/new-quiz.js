@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
-import Questions from './questions';
+import SortableComponent from './questions';
 import classnames from 'classnames';
 
 
@@ -14,7 +14,8 @@ const NewQuiz = ({
     handleIsLastQuiz,
     handleIsSurvey,
     location,
-    params
+    params,
+    handleQuestionOrder
 }) => {
 
     const questionsValidation = questions.map((questionObj) => {
@@ -91,11 +92,12 @@ const NewQuiz = ({
                         <div className="line line__tertiary"></div>
 
                     </div>
-                    <Questions
+                    <SortableComponent
                       questions={ questions }
                       isSurvey={ isSurvey }
                       handleInputChange={ handleInputChange }
                       handleDeleteQuestion={ handleDeleteQuestion }
+                      handleQuestionOrder={ handleQuestionOrder }
                       />
 
                     <div className="new-quiz--buttons">
@@ -129,7 +131,8 @@ NewQuiz.propTypes = {
     handleIsLastQuiz: PropTypes.func.isRequired,
     handleIsSurvey: PropTypes.func.isRequired,
     location: PropTypes.object.isRequired,
-    params: PropTypes.object.isRequired
+    params: PropTypes.object.isRequired,
+    handleQuestionOrder: PropTypes.func.isRequired
 };
 
 

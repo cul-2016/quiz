@@ -12,6 +12,7 @@ test('composeQuestionStatement returns the correctly formatted object (quiz)', (
         const quiz_id = 1;
         const arrayQuestions = [
             {
+                order_id: 1,
                 question: 'One',
                 a: 'a',
                 b: 'b',
@@ -19,6 +20,7 @@ test('composeQuestionStatement returns the correctly formatted object (quiz)', (
                 d: 'd',
                 correct_answer: 'a' },
             {
+                order_id: 2,
                 question: 'Two',
                 a: 'a',
                 b: 'b',
@@ -28,8 +30,8 @@ test('composeQuestionStatement returns the correctly formatted object (quiz)', (
             }];
 
         const expected = {
-            text: 'INSERT INTO questions (quiz_id, question, a, b, c, d, correct_answer) VALUES ($1, $2, $3, $4, $5, $6, $7), ($8, $9, $10, $11, $12, $13, $14)',
-            values: [1, 'One', 'a', 'b', 'c', 'd', 'a', 1, 'Two', 'a', 'b', 'c', 'd', 'b']
+            text: 'INSERT INTO questions (quiz_id, order_id, question, a, b, c, d, correct_answer) VALUES ($1, $2, $3, $4, $5, $6, $7, $8), ($9, $10, $11, $12, $13, $14, $15, $16)',
+            values: [1, 1, 'One', 'a', 'b', 'c', 'd', 'a', 1, 2, 'Two', 'a', 'b', 'c', 'd', 'b']
         };
         composeQuestionStatement(quiz_id, arrayQuestions, { is_survey: false }, (error, response) => {
             t.deepEqual(response, expected);
@@ -45,6 +47,7 @@ test('composeQuestionStatement returns the correctly formatted object (survey)',
         const survey_id = 1;
         const arrayQuestions = [
             {
+                order_id: 1,
                 question: 'One',
                 a: 'a',
                 b: 'b',
@@ -52,6 +55,7 @@ test('composeQuestionStatement returns the correctly formatted object (survey)',
                 d: 'd',
                 correct_answer: 'a' },
             {
+                order_id: 2,
                 question: 'Two',
                 a: 'a',
                 b: 'b',
@@ -61,8 +65,8 @@ test('composeQuestionStatement returns the correctly formatted object (survey)',
             }];
 
         const expected = {
-            text: 'INSERT INTO questions (quiz_id, question, a, b, c, d, correct_answer) VALUES ($1, $2, $3, $4, $5, $6, $7), ($8, $9, $10, $11, $12, $13, $14)',
-            values: [1, 'One', 'a', 'b', 'c', 'd', 'a', 1, 'Two', 'a', 'b', 'c', 'd', 'b']
+            text: 'INSERT INTO questions (quiz_id, order_id, question, a, b, c, d, correct_answer) VALUES ($1, $2, $3, $4, $5, $6, $7, $8), ($9, $10, $11, $12, $13, $14, $15, $16)',
+            values: [1, 1, 'One', 'a', 'b', 'c', 'd', 'a', 1, 2, 'Two', 'a', 'b', 'c', 'd', 'b']
         };
         composeQuestionStatement(survey_id, arrayQuestions, { is_survey: true }, (error, response) => {
             t.deepEqual(response, expected);

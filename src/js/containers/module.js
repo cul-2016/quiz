@@ -24,6 +24,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
 
     sendQuizInvite: (quiz_id, survey_id, name, review = false) => {
+
+        console.log(review, '<<<<<<<<<<<<<<<<');
         const quizIdOrSurveyId = quiz_id || survey_id;
         let quizInfo = {
             room: store.getState().module.module_id,
@@ -31,8 +33,10 @@ const mapDispatchToProps = (dispatch) => ({
             survey_id: survey_id
         };
 
-        const interval_id = emitSendQuizInvite(socketClient, quizInfo);
-        dispatch(setIntervalID(interval_id));
+        if (!review) {
+            const interval_id = emitSendQuizInvite(socketClient, quizInfo);
+            dispatch(setIntervalID(interval_id));
+        }
         dispatch(setQuizDetails(quizIdOrSurveyId, name, review));
         dispatch(getQuizQuestions(quiz_id, survey_id));
         dispatch(setIsSurvey(quiz_id, survey_id));

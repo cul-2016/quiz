@@ -4,7 +4,7 @@ import { store } from './store';
 import { hashHistory } from 'react-router';
 import { openQuiz, closeQuiz } from './actions/module';
 import { setIsSurvey } from './actions/live-quiz';
-import { setQuizDetails, startQuiz, endQuiz, setNextQuestion, updateNumParticipants } from './actions/live-quiz';
+import { setQuizDetails, startQuiz, endQuiz, setNextQuestion, updateNumParticipants, resetLiveQuizState } from './actions/live-quiz';
 import showNavbar from './lib/showNavbar';
 import { fadeOutThenIn } from './lib/animate';
 
@@ -64,7 +64,7 @@ socketClient.on('receive_end_of_quiz', (idObj) => {
     const module_id = store.getState().module.module_id;
 
     setTimeout(() => {
-        store.dispatch(endQuiz(quiz_id, isSurvey));
+        store.dispatch(resetLiveQuizState());
         store.dispatch(closeQuiz());
         showNavbar();
         if (!isSurvey) {
@@ -81,8 +81,7 @@ socketClient.on('receive_abort_quiz', (idObj) => {
     console.log('received abort quiz notification', quiz_id);
 
     const module_id = store.getState().module.module_id;
-
-    store.dispatch(endQuiz(quiz_id, isSurvey));
+    store.dispatch(resetLiveQuizState());
     store.dispatch(closeQuiz());
     showNavbar();
     hashHistory.push(`${module_id}/student`);

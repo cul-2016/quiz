@@ -1,4 +1,5 @@
 .login {
+
     min-height: 100vh;
     background: url('/pattern_background.png') no-repeat center center fixed;
     background-size: cover;
@@ -28,6 +29,10 @@
     &__err-message {
       display: block;
       margin-top: 2rem;
+      background-color: $pink;
+      padding: 0.5rem;
+      border-radius: 2px;
+      color: white;
     }
 
     .f-body {
@@ -37,6 +42,16 @@
     .forgotten-password {
       margin: 0.5rem 0;
     }
+
+    .form__field {
+        &__tc {
+            padding-top: 1rem;
+            span.f-body {
+                padding-left: 0.5rem;
+            }
+        }
+    }
+
 }
 
 

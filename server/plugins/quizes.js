@@ -83,6 +83,7 @@ exports.register = (server, options, next) => {
                             });
                         }
                     } else {
+                        console.log(questions);
                         saveQuestions(pool, id, questions, { isSurvey }, (error, response) => {
                             /* istanbul ignore if */
                             if (error) {
@@ -152,7 +153,6 @@ exports.register = (server, options, next) => {
             },
             handler: (request, reply) => {
                 const { id, isSurvey } = request.payload;
-                console.log(id, isSurvey, 'end quiz');
                 setQuizOrSurveyToPresented(pool, id, isSurvey, (error, result) => {
 
                     const verdict = error || result;
@@ -292,12 +292,6 @@ exports.register = (server, options, next) => {
                     const parsed_quiz_id = parseInt(quiz_id, 10);
                     getQuizDetails(pool, parsed_quiz_id, (error, quizDetails) => {
                         const verdict = error || quizDetails;
-                        reply(verdict);
-                    });
-                } else if (survey_id !== undefined) {
-                    const parsed_survey_id = parseInt(survey_id, 10);
-                    getSurveyDetails(pool, parsed_survey_id, (error, surveyDetails) => {
-                        const verdict = error || surveyDetails;
                         reply(verdict);
                     });
                 } else {

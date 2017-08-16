@@ -12,28 +12,27 @@ test('`getQuizDetails` gets quiz name and questions for a given quiz', (t) => {
     .then(() => {
         const expectedRows = {
             name: 'Week 1 Quiz',
-            is_last_quiz: false,
             questions: [
-                {
+                { question_id: 1,
+                    order_id: 1,
+                    question: 'What is the capital of England?',
                     a: 'London',
                     b: 'Cardiff',
                     c: 'Edinburgh',
-                    correct_answer: 'a',
                     d: 'Doncaster',
-                    question: 'What is the capital of England?',
-                    question_id: 1
-                },
-                {
+                    correct_answer: 'a'
+                }, {
+                    question_id: 2,
+                    order_id: 2,
+                    question: 'What is the capital of Croatia?',
                     a: 'Zagreb',
                     b: 'Cardiff',
                     c: 'Edinburgh',
-                    correct_answer: 'a',
                     d: 'Doncaster',
-                    question: 'What is the capital of Croatia?',
-                    question_id: 2
+                    correct_answer: 'a'
                 }
-            ]
-        };
+            ],
+            is_last_quiz: false };
         const user_id = 1;
 
         getQuizDetails(pool, user_id, (error, response) => {
@@ -51,5 +50,3 @@ test.onFinish(() => {
     redisCli.quit();
     pool.end();
 });
-
-

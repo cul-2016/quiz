@@ -61,6 +61,7 @@ class Dashboard extends Component {
                     <input
                       className="form__input form__input--add-module"
                       value={ module_id || '' }
+                      maxLength="4"
                       onChange={ (e) => handleInputChange(e.target.value)}
                       type="text"
                       placeholder="CODE"/>
@@ -83,6 +84,9 @@ class Dashboard extends Component {
                   </div>
                 <div>
                   { moduleList }
+                </div>
+                <div className="f-body dashboard__tc" >
+                    View <Link className="f-body f-body--primary" target="_blank" to="/privacy">privacy statement</Link>
                 </div>
               </div>
             </div>

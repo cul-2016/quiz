@@ -8,7 +8,8 @@ import {
     saveQuiz,
     clearNewQuizState,
     toggleIsLastQuiz,
-    toggleIsSurvey
+    toggleIsSurvey,
+    questionOrder
 } from '../actions/new-quiz';
 import { hashHistory } from 'react-router';
 
@@ -38,7 +39,13 @@ const mapDispatchToProps = (dispatch) => ({
     },
 
     handleSaveQuiz: (module_id, quizName, questions, is_last_quiz) => {
-        dispatch(saveQuiz(module_id, quizName, questions, is_last_quiz));
+        const orderedQuestions = questions.map((question, i) => {
+            const obj = Object.assign({}, question);
+            obj.order_id = i + 1;
+            return obj;
+        });
+
+        dispatch(saveQuiz(module_id, quizName, orderedQuestions, is_last_quiz));
         setTimeout(() => {
             hashHistory.goBack();
             dispatch(clearNewQuizState());
@@ -51,6 +58,10 @@ const mapDispatchToProps = (dispatch) => ({
 
     handleIsSurvey: () => {
         dispatch(toggleIsSurvey());
+    },
+
+    handleQuestionOrder: (questions, oldIndex, newIndex) => {
+        dispatch(questionOrder(questions, oldIndex, newIndex));
     }
 });
 
