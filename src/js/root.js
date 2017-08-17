@@ -19,7 +19,7 @@ import ModuleContainer from './containers/module';
 import LecturerLiveQuizContainer from './containers/lecturer-live-quiz';
 import QuizHistoryContainer from './containers/quiz-history';
 import LeaderboardContainer from './containers/leaderboard';
-import HoldingPageComponent from './components/holding-page';
+import HoldingPageContainer from './containers/holding-page';
 import ReviewContainer from './containers/review';
 import ModuleMembersContainer from './containers/module-members';
 import QuizMembersContainer from './containers/quiz-members';
@@ -146,7 +146,7 @@ const Root = ({ store }) => (
                 <Route
                     onEnter={ composeHooks(hooks.authenticate, hooks.checkUserRole, hooks.checkModuleOwner) }
                     path=":module_id/:quiz_id/holding-page"
-                    component={ HoldingPageComponent } />
+                    component={ HoldingPageContainer } />
                 <Route
                     onEnter={ composeHooks(hooks.authenticate, hooks.checkUserRole, hooks.fetchQuizReview, hooks.checkModuleOwner) }
                     path=":module_id/:quiz_id/review"
