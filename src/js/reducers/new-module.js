@@ -9,11 +9,11 @@ const initialState = {
     trophies: {
         trophy_name: [
             "participation",
-            "overall_average",
+            "overall_score",
             "high_score",
             "first_quiz"
         ],
-        condition: [3, 60, 100, 1]
+        condition: [3, 10, 100, 1]
     },
     error: undefined,
     moduleIDExists: undefined,

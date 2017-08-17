@@ -19,7 +19,7 @@ function getModuleForStudent (client, user_id, module_id, callback) {
             return callback(error);
         }
         const mainData = main.rows;
-
+        console.log(mainData);
         query(client, queries.getModuleForStudent.medals, [module_id], (error, medals) => {
 
             if (error) {

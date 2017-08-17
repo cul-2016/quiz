@@ -9,7 +9,7 @@ class Trophies extends React.Component {
         this.state = {
             trophies: false,
             participation: false,
-            overall_average: false,
+            overall_score: false,
             high_score: false,
             first_quiz: false
         };
