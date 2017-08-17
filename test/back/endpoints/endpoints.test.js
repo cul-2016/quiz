@@ -238,7 +238,7 @@ test('/ endpoint works returns the correct payload', (t) => {
     {
         method: 'get',
         url: '/get-module?module_id=TEST',
-        expected: { medals: { condition: [39, 69], medal_name: ['bronze', 'silver', 'gold'] }, module_id: 'TEST', name: 'test module', trophies_awarded: { first_quiz: false, high_score: false, overall_average: false, participation: false } }
+        expected: { medals: { condition: [39, 69], medal_name: ['bronze', 'silver', 'gold'] }, module_id: 'TEST', name: 'test module', trophies_awarded: { first_quiz: false, high_score: false, overall_score: false, participation: false } }
     },
     {
         method: 'get',

@@ -83,7 +83,6 @@ exports.register = (server, options, next) => {
                             });
                         }
                     } else {
-                        console.log(questions);
                         saveQuestions(pool, id, questions, { isSurvey }, (error, response) => {
                             /* istanbul ignore if */
                             if (error) {
@@ -171,36 +170,31 @@ exports.register = (server, options, next) => {
                     const { module_id, quiz_id } = request.query;
                     const { user_id } = decoded.user_details;
 
-                    getIsLastQuiz(pool, quiz_id, (error, is_last_quiz) => {
+                    calculateQuizScore(pool, user_id, quiz_id, (error, score) => {
                         /* istanbul ignore if */
                         if (error) {
                             console.error(error);
                             return reply(error);
                         }
-                        calculateQuizScore(pool, user_id, quiz_id, (error, score) => {
+                        setQuizScore(pool, user_id, quiz_id, score.raw, (error) => {
                             /* istanbul ignore if */
                             if (error) {
                                 console.error(error);
                                 return reply(error);
                             }
-                            setQuizScore(pool, user_id, quiz_id, score.raw, (error) => {
+                            getNewTrophyState(pool, user_id, module_id, quiz_id, score.percentage, (error, newTrophyState) => {
                                 /* istanbul ignore if */
                                 if (error) {
                                     console.error(error);
                                     return reply(error);
                                 }
-                                getNewTrophyState(pool, user_id, module_id, quiz_id, score.percentage, is_last_quiz, (error, newTrophyState) => {
-                                    /* istanbul ignore if */
-                                    if (error) {
-                                        console.error(error);
-                                        return reply(error);
-                                    }
-                                    setNewTrophyState(pool, user_id, module_id, newTrophyState, (error) => {
 
-                                        const verdict = error || { newTrophyState: newTrophyState, score: score };
+                                setNewTrophyState(pool, user_id, module_id, newTrophyState, (error) => {
 
-                                        reply(verdict);
-                                    });
+
+                                    const verdict = error || { newTrophyState: newTrophyState, score: score };
+                                    console.log(verdict, '<<>><<><>><<>');
+                                    reply(verdict);
                                 });
                             });
                         });

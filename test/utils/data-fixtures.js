@@ -88,10 +88,10 @@ const expectedLecturer = {
         trophy_name: [
             "first_quiz",
             "high_score",
-            "overall_average",
+            "overall_score",
             "participation"
         ],
-        condition: [1, 100, 65, 2]
+        condition: [1, 100, 2, 2]
     },
     num_enrolled: 5,
     quizzes: [{
@@ -280,7 +280,7 @@ const getTotalScoresAndTrophiesData = [
     {
         first_quiz: false,
         high_score: false,
-        overall_average: false,
+        overall_score: false,
         participation: false,
         total_score: 3,
         user_id: 5,
@@ -288,7 +288,7 @@ const getTotalScoresAndTrophiesData = [
     }, {
         first_quiz: false,
         high_score: false,
-        overall_average: false,
+        overall_score: false,
         participation: false,
         total_score: 3,
         user_id: 1,
@@ -296,7 +296,7 @@ const getTotalScoresAndTrophiesData = [
     }, {
         first_quiz: false,
         high_score: false,
-        overall_average: false,
+        overall_score: false,
         participation: false,
         total_score: 2,
         user_id: 3,
@@ -304,7 +304,7 @@ const getTotalScoresAndTrophiesData = [
     }, {
         first_quiz: false,
         high_score: false,
-        overall_average: false,
+        overall_score: false,
         participation: false,
         total_score: 0,
         user_id: 11,
@@ -312,7 +312,7 @@ const getTotalScoresAndTrophiesData = [
     }, {
         first_quiz: false,
         high_score: false,
-        overall_average: false,
+        overall_score: false,
         participation: false,
         total_score: 0,
         user_id: 4,
@@ -427,8 +427,8 @@ const moduleInfo = {
         }
     ],
     trophies: {
-        condition: [1, 100, 65, 2],
-        trophy_name: ['first_quiz', 'high_score', 'overall_average', 'participation']
+        condition: [1, 100, 2, 2],
+        trophy_name: ['first_quiz', 'high_score', 'overall_score', 'participation']
     }
 };
 

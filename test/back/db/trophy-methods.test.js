@@ -1,7 +1,7 @@
 const test = require('tape');
 const { getFirstQuizState,
          getHighScoreState,
-         getOverallAverageState,
+         getOverallScoreState,
          getParticipationState } = require('../../../server/lib/trophy-methods');
 const pool = require('../../utils/dbClient.js');
 const redisCli = require('../../utils/configureRedis.js');
@@ -76,23 +76,23 @@ test('`getHighScoreState` does not overwrite a pre-awarded `high_score` trophy',
     });
 });
 
-test('`getOverallAverageState` awards an eligible student with `overall_average` trophy', (t) => {
+test('`getOverallScoreState` awards an eligible student with `overall_score` trophy', (t) => {
 
     t.plan(2);
 
     initDb()
     .then(() => {
-        const user_id = 1; // this student's overall average is 67%
+        const user_id = 1; // this student's overall score is 67%
         const module_id = 'TEST';
 
-        getOverallAverageState(pool, user_id, module_id, (error, result) => {
-            t.equal(typeof result, 'boolean', "getOverallAverageState returns a Boolean value");
+        getOverallScoreState(pool, user_id, module_id, (error, result) => {
+            t.equal(typeof result, 'boolean', "getOverallScoreState returns a Boolean value");
             t.equal(result, true, 'Trophy awarded');
         });
     });
 });
 
-test('`getOverallAverageState` does not award an ineligible student with `overall_average` trophy', (t) => {
+test('`getOverallScoreState` does not award an ineligible student with `overall_average` trophy', (t) => {
 
     t.plan(2);
 
@@ -101,8 +101,8 @@ test('`getOverallAverageState` does not award an ineligible student with `overal
         const user_id = 4; // this student's overall average is 0%
         const module_id = 'TEST';
 
-        getOverallAverageState(pool, user_id, module_id, (error, result) => {
-            t.equal(typeof result, 'boolean', "getOverallAverageState returns a Boolean value");
+        getOverallScoreState(pool, user_id, module_id, (error, result) => {
+            t.equal(typeof result, 'boolean', "getOverallScoreState returns a Boolean value");
             t.equal(result, false, 'Trophy not awarded');
         });
     });

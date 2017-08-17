@@ -17,24 +17,12 @@ function setNewTrophyState (client, user_id, module_id, newTrophyState, callback
         acc.push(newTrophyState[trophy]);
         return acc;
     }, []));
-    
-    if (!("overall_average" in newTrophyState)) {
-        if (queryValues.length !== 5) {
-            return callback(new Error("Too few arguments"));
-        }
-        query(client, queries.setNewTrophyStateWithoutAverage, queryValues, (error) => {
 
-            if (error) {
-                return callback(error);
-            }
-            return callback();
-        });
+
+    if (queryValues.length !== 6) {
+        return callback(new Error("Too few arguments"));
     } else {
-
-        if (queryValues.length !== 6) {
-            return callback(new Error("Too few arguments"));
-        }
-        query(client, queries.setNewTrophyStateWithAverage, queryValues, (error) => {
+        query(client, queries.setNewTrophyState, queryValues, (error) => {
 
             if (error) {
                 return callback(error);

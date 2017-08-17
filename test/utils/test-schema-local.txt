@@ -107,7 +107,7 @@ CREATE TABLE IF NOT EXISTS module_members (
     user_id INTEGER NOT NULL,
     first_quiz BOOLEAN NOT NULL DEFAULT false,
     high_score BOOLEAN NOT NULL DEFAULT false,
-    overall_average BOOLEAN NOT NULL DEFAULT false,
+    overall_score BOOLEAN NOT NULL DEFAULT false,
     participation BOOLEAN NOT NULL DEFAULT false,
     PRIMARY KEY (module_id, user_id)
 );
@@ -304,15 +304,15 @@ INSERT INTO medals (module_id, medal_name, condition)
 INSERT INTO trophies (module_id, trophy_name, condition)
     VALUES ('TEST', 'first_quiz', 1),
            ('TEST', 'high_score', 100),
-           ('TEST', 'overall_average', 65),
+           ('TEST', 'overall_score', 2),
            ('TEST', 'participation', 2),
            ('CENT', 'first_quiz', 1),
            ('CENT', 'high_score', 100),
-           ('CENT', 'overall_average', 65),
+           ('CENT', 'overall_score', 2),
            ('CENT', 'participation', 2),
            ('FAC8', 'first_quiz', 1),
            ('FAC8', 'high_score', 100),
-           ('FAC8', 'overall_average', 65),
+           ('FAC8', 'overall_score', 2),
            ('FAC8', 'participation', 2);
 
 
