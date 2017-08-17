@@ -98,7 +98,7 @@ class Dashboard extends Component {
 Dashboard.propTypes = {
     modules: PropTypes.array.isRequired,
     is_lecturer: PropTypes.bool.isRequired,
-    module_id: PropTypes.string.isRequired,
+    module_id: PropTypes.string,
     handleInputChange: PropTypes.func.isRequired,
     handleJoinModule: PropTypes.func.isRequired
 };

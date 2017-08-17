@@ -22,16 +22,22 @@
     }
 
     .form__input--add-module {
-        width: 30%;
-        float: left;
-        margin-left: 1.2rem;
+        display: inline-block;
+        max-width: 6rem;
+        box-sizing: border-box;
+        margin: 0.5rem;
+        height: 4.1rem;
     }
 
     .card__secondary {
         text-align: center;
 
         .button__secondary {
-          padding: 0.984rem;
+            max-width: 10rem;
+            padding: 0.984rem;
+            display: inline-block;
+            box-sizing: border-box;
+            margin: 0.5rem;
         }
     }
 
