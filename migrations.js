@@ -3,7 +3,6 @@ const async = require('async');
 const pg = require('pg');
 const Hoek = require('hoek');
 const path = require('path');
-require('hapi-postgres-connection');
 
 // var databaseUrl = process.env.DATABASE_URL;
 //Here we need to check if the application is being run on heroku, so we can add ?ssl=true to the DB URL
