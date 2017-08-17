@@ -12,7 +12,7 @@ var queries = require('./queries.json');
 function getFirstQuizState (client, user_id, quiz_id, callback) {
 
     query(client, queries.getFirstQuizState, [user_id, quiz_id], (error, result) => {
-
+        /* istanbul ignore if */
         if (error) {
             return callback(new Error("Problem with getting first quiz state"));
         }
@@ -31,6 +31,7 @@ function getFirstQuizState (client, user_id, quiz_id, callback) {
 function getHighScoreState (client, user_id, module_id, percentageScore, callback) {
 
     query(client, queries.getHighScoreState.getCurrentHighScore, [user_id, module_id], (error, result1) => {
+        /* istanbul ignore if */
         if (error) {
             return callback(new Error("Problem with getting high score"));
         }
@@ -40,7 +41,7 @@ function getHighScoreState (client, user_id, module_id, percentageScore, callbac
             return callback(null, true);
         } else {
             query(client, queries.getHighScoreState.getCondition, [module_id], (error, result2) => {
-
+                /* istanbul ignore if */
                 if (error) {
                     return callback(new Error("Problem with getting high score"));
                 }
@@ -96,7 +97,7 @@ function getHighScoreState (client, user_id, module_id, percentageScore, callbac
 function getOverallScoreState (client, user_id, module_id, callback) {
 
     query(client, queries.getOverallScoreState.hasMetOverallScore, [user_id, module_id], (error, hasMetOverallScore) => {
-
+        /* istanbul ignore if */
         if (error) {
             console.error(error);
             return callback(new Error("Problem with getting overall Score data"));
@@ -106,6 +107,7 @@ function getOverallScoreState (client, user_id, module_id, callback) {
             return callback(null, true);
         } else {
             query(client, queries.getOverallScoreState.data, [user_id, module_id], (error, result) => {
+                /* istanbul ignore if */
                 if (error) {
                     console.error(error);
                     return callback(new Error("Problem with getting overall Score data"));
@@ -114,7 +116,7 @@ function getOverallScoreState (client, user_id, module_id, callback) {
                 var overall_score = result.rows[0].overall_score;
 
                 query(client, queries.getOverallScoreState.condition, [module_id], (error, condition) => {
-
+                    /* istanbul ignore if */
                     if (error) {
                         console.error(error);
                         return callback(new Error("Problem with getting overall score data"));
@@ -139,6 +141,7 @@ function getOverallScoreState (client, user_id, module_id, callback) {
 function getParticipationState (client, user_id, module_id, callback) {
 
     query(client, queries.getParticipationState.hasMetParticipation, [user_id, module_id], (error, hasMetParticipation) => {
+        /* istanbul ignore if */
         if (error) {
             console.error(error);
             return callback(new Error("Problem with getting participation data"));
@@ -148,7 +151,7 @@ function getParticipationState (client, user_id, module_id, callback) {
             return callback(null, true);
         } else {
             query(client, queries.getParticipationState.data, [user_id, module_id], (error, result) => {
-
+                /* istanbul ignore if */
                 if (error) {
                     console.error(error);
                     return callback(new Error("Problem with getting participation data"));
@@ -156,7 +159,7 @@ function getParticipationState (client, user_id, module_id, callback) {
                 var participation = result.rows[0].participation;
 
                 query(client, queries.getParticipationState.condition, [module_id], (error, condition) => {
-
+                    /* istanbul ignore if */
                     if (error) {
                         console.error(error);
                         return callback(new Error("Problem with getting participation data"));
