@@ -60,6 +60,11 @@ To connect a remote database instance to pgAdmin:
 - go to `File > Add Server`.
 - then follow this instructions at link: http://stackoverflow.com/questions/11769860/connect-to-a-heroku-database-with-pgadmin
 
+One off deployment Script to be run after the end of Sprint 6:
+`UPDATE trophies SET trophy_name = 'overall_score' where trophy_name = 'overall_average';`
+This is to ensure that the trophy for overall_average has been updated to overall_score.
+**without this the app will crash, but will only need to be run once and once only on the live version of the app and every time the staging database is reset on the staging site**
+
 ## Directory Structure
 ```
 ├── server
