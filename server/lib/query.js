@@ -21,7 +21,6 @@ function query (pool, queryText, queryArray, callback) {
     }
 
     pool.connect((error, client, done) => {
-
         if (error) {
             return callback(error);
         }
