@@ -109,3 +109,16 @@ test('TOGGLE_TC_AGREED works', (t) => {
 
     t.deepEqual(result, expected);
 });
+
+test('SHOW_TC_AGREED_ERROR works', (t) => {
+
+    t.plan(1);
+    const initialState = deepFreeze(registerState);
+    const action = {
+        type: 'SHOW_TC_AGREED_ERROR',
+        error: 'Please agree to the privacy statement before proceeding'
+    };
+    const expected = { ...initialState, error: 'Please agree to the privacy statement before proceeding' };
+    const result = reducer(initialState, action);
+    t.deepEqual(result, expected);
+});
