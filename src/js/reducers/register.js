@@ -44,6 +44,10 @@ export default function register (state = initialState, action ) {
         return update(state, {
             tcAgreed: { $set: !state.tcAgreed }
         });
+    case actionsTypes.SHOW_TC_AGREED_ERROR:
+        return update(state, {
+            error: { $set: action.error }
+        });
 
     default:
         return state;

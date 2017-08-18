@@ -7,7 +7,6 @@ const getQuizQuestions = require('../lib/getQuizQuestions');
 const getSurveyQuestions = require('../lib/getSurveyQuestions');
 const setQuizOrSurveyToPresented = require('../lib/setQuizOrSurveyToPresented.js');
 const calculateQuizScore = require('../lib/calculateQuizScore.js');
-const getIsLastQuiz = require('../lib/getIsLastQuiz.js');
 const setQuizScore = require('../lib/setQuizScore.js');
 const getNewTrophyState = require('../lib/getNewTrophyState.js');
 const setNewTrophyState = require('../lib/setNewTrophyState.js');

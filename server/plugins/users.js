@@ -34,6 +34,7 @@ exports.register = (server, options, next) => {
             },
             handler: (request, reply) => {
                 const { email, password, is_lecturer, username = '' } = request.payload;
+                console.log(email);
                 const verification_code = is_lecturer ? uuid() : null;
                 const validEmailMessage = { message: 'Please enter a valid email address' };
 
@@ -111,6 +112,7 @@ exports.register = (server, options, next) => {
                             }, (err) => {
                                 /* istanbul ignore if */
                                 if (err) {
+                                    console.log(err);
                                     return reply(validEmailMessage);
                                 } else {
                                     saveUserFlow();
