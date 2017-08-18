@@ -130,8 +130,8 @@ StudentModule.propTypes = {
     review: PropTypes.object,
     history: PropTypes.array,
     medalConditions: PropTypes.array,
-    isFetchingStudentHistory: PropTypes.isfunc,
-    isFetchingFeedback: PropTypes.isfunc
+    isFetchingStudentHistory: PropTypes.bool,
+    isFetchingFeedback: PropTypes.bool
 };
 
 export default StudentModule;
