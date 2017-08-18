@@ -228,3 +228,15 @@ test('togglingTCAgreed creates the correct action', (t) => {
     const actual = deepFreeze(actions.toggleTcAgreed());
     t.deepEqual(actual, expected);
 });
+
+test('showTcAgreedError creates the correct action', (t) => {
+
+    t.plan(1);
+
+    const expected = {
+        type: actions.SHOW_TC_AGREED_ERROR,
+        error: 'Please agree to the privacy statement before proceeding'
+    };
+    const actual = deepFreeze(actions.showTcAgreedError());
+    t.deepEqual(actual, expected);
+});

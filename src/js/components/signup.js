@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 import isEmail from 'validator/lib/isEmail';
 import lowerCaseBeforeAt from '../lib/lowerCaseBeforeAt.js';
 
-const Signup = ({ register, handleChange, handleRegisteringUser, handleToggleTcAgreed, location }) => {
+const Signup = ({ register, updateInputField, registeringUser, toggleTcAgreed, location, showTcAgreedError }) => {
 
     const isEmailValid = isEmail(register.email);
 
@@ -27,16 +27,19 @@ const Signup = ({ register, handleChange, handleRegisteringUser, handleToggleTcA
 
     const handleOnSubmit = () => {
         if (isEmailValid
+            && register.tcAgreed
             && register.password
             && register.username
             && register.password === register.confirmPassword
         ) {
-            handleRegisteringUser(
+            registeringUser(
                 lowerCaseBeforeAt(register.email).trim(),
                 register.username,
                 register.password,
                 is_lecturer
             );
+        } else if (!register.tcAgreed) {
+            showTcAgreedError();
         }
     };
 
@@ -48,12 +51,6 @@ const Signup = ({ register, handleChange, handleRegisteringUser, handleToggleTcA
               <h1 className="f-headline f-headline--primary"><img src="/Yellow.svg"></img></h1>
               <h3 className="f-headline"> Realtime Quizzes for better lectures </h3>
             </div>
-            {
-              register.confirmPassword
-              && register.confirmPassword !== register.password
-              &&
-              <span className="login__err-message"> Passwords are not matching </span>
-            }
 
             <div className="form">
               <div className="form__field f-body">
@@ -63,7 +60,7 @@ const Signup = ({ register, handleChange, handleRegisteringUser, handleToggleTcA
                   onKeyDown={ submitOnEnter }
                   className="form__input"
                   value={ register.email }
-                  onChange={ (e) => handleChange("email", e.target.value) }
+                  onChange={ (e) => updateInputField("email", e.target.value) }
                   type="email" />
                 <span className={ invalidEmailClasses }>This email is invalid</span>
               </div>
@@ -75,7 +72,7 @@ const Signup = ({ register, handleChange, handleRegisteringUser, handleToggleTcA
                   onKeyDown={ submitOnEnter }
                   className="form__input"
                   value={ register.username }
-                  onChange={ (e) => handleChange("username", e.target.value)}
+                  onChange={ (e) => updateInputField("username", e.target.value)}
                   type="username"/>
               </div>
 
@@ -85,7 +82,7 @@ const Signup = ({ register, handleChange, handleRegisteringUser, handleToggleTcA
                   onKeyDown={ submitOnEnter }
                   className={ passwordMatchClasses }
                   value={ register.password }
-                  onChange={ (e) => handleChange("password", e.target.value)}
+                  onChange={ (e) => updateInputField("password", e.target.value)}
                   type="password" />
 
               </div>
@@ -95,29 +92,33 @@ const Signup = ({ register, handleChange, handleRegisteringUser, handleToggleTcA
                   onKeyDown={ submitOnEnter }
                   className={ passwordMatchClasses }
                   value={ register.confirmPassword }
-                  onChange={ (e) => handleChange("confirmPassword", e.target.value)}
+                  onChange={ (e) => updateInputField("confirmPassword", e.target.value)}
                   type="password" />
               </div>
               <div className="form__field f-body form__field__tc" >
                   <span
                   className="icon"
-                  onClick={ () => handleToggleTcAgreed() }
+                  onClick={ () => toggleTcAgreed() }
                   >
                       <i className={ `fa ${register.tcAgreed ? 'fa-check-square' : 'fa-square'}` }/>
                   </span>
                   <span className="f-body">
                       I agree with the <Link className="f-body f-body--primary" target="_blank" to="/privacy">privacy statement</Link>, including the <Link className="f-body f-body--primary" target="_blank"  to="/privacy">use of cookies.</Link>
                   </span>
+                  { register.error &&
+                    <span className="login__err-message">
+                      { register.error }
+                    </span>
+                  }
+                  {
+                    register.confirmPassword
+                    && register.confirmPassword !== register.password
+                    &&
+                    <span className="login__err-message"> Passwords are not matching </span>
+                  }
               </div>
-
-              { register.error &&
-                <span className="login__err-message">
-                  { register.error }
-                </span>
-              }
-
               <button
-                className={ `button button__primary ${register.tcAgreed && isEmailValid ? '' : 'button__disabled'}`}
+                className="button button__primary"
                 onClick={ handleOnSubmit }
                 >Register
               </button>
@@ -136,9 +137,10 @@ const Signup = ({ register, handleChange, handleRegisteringUser, handleToggleTcA
 
 Signup.propTypes = {
     register: PropTypes.object.isRequired,
-    handleChange: PropTypes.func.isRequired,
-    handleRegisteringUser: PropTypes.func.isRequired,
-    handleToggleTcAgreed: PropTypes.func.isRequired,
+    updateInputField: PropTypes.func.isRequired,
+    registeringUser: PropTypes.func.isRequired,
+    toggleTcAgreed: PropTypes.func.isRequired,
+    showTcAgreedError: PropTypes.func.isRequired,
     location: PropTypes.object.isRequired
 };
 
