@@ -19,7 +19,7 @@ function getQuizDetails (client, survey_id, callback) {
         }
         var nameQuery = 'SELECT name FROM surveys WHERE survey_id = $1;';
         query(client, nameQuery, [survey_id], (error, name) => {
-
+            /* istanbul ignore if */
             if (error) {
                 console.error(error);
                 return callback(error);

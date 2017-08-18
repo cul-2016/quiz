@@ -11,7 +11,7 @@ var queries = require('./queries.json');
 function getQuizScores (client, user_id, module_id, callback) {
 
     query(client, queries.getQuizScores, [user_id, module_id], (error, data) => {
-
+        /* istanbul ignore if */
         if (error) {
             console.error(error);
             return callback(error);

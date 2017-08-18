@@ -7,14 +7,14 @@ var query = require('./query');
  * @param {string} module_id - module_id
  * @param {function} callback - a callback function
  */
- 
+
 function validateModuleID (client, module_id, callback) {
 
     var moduleQuery = 'SELECT EXISTS(SELECT 1 FROM modules WHERE module_id = $1);';
     var moduleValue = [module_id];
 
     query(client, moduleQuery, moduleValue, (error, response) => {
-
+        /* istanbul ignore if */
         if (error) {
             console.error(error);
             return callback(error);

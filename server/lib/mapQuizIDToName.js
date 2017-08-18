@@ -16,7 +16,7 @@ function mapQuizIDToName (client, array, module_id, callback) {
     }
 
     query(client, queries.mapQuizIDToName, [module_id], (error, result) => {
-
+        /* istanbul ignore if */
         if (error) {
             return callback(error);
         }

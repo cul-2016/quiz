@@ -13,15 +13,15 @@ var organiseModuleData = require('./organiseModuleData');
 function getModuleForStudent (client, user_id, module_id, callback) {
 
     query(client, queries.getModuleForStudent.main, [user_id, module_id], (error, main) => {
-
+        /* istanbul ignore if */
         if (error) {
             console.error(error);
             return callback(error);
         }
         const mainData = main.rows;
-        console.log(mainData);
-        query(client, queries.getModuleForStudent.medals, [module_id], (error, medals) => {
 
+        query(client, queries.getModuleForStudent.medals, [module_id], (error, medals) => {
+            /* istanbul ignore if */
             if (error) {
                 console.error(error);
                 return callback(error);
@@ -30,7 +30,7 @@ function getModuleForStudent (client, user_id, module_id, callback) {
             const allData = mainData.concat(medalsData);
 
             organiseModuleData(false, module_id, allData, (error, data) => {
-
+                /* istanbul ignore if */
                 if (error) {
                     throw error;
                 }

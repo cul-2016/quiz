@@ -10,6 +10,7 @@ const deleteUser = (client, user_id, callback) => {
     const hashed_email = uuid();
     const hashed_username = `Anon:${Math.round((Math.random() * 100000))}`;
     query(client, userQuery, [hashed_email, hashed_username, user_id], (error, response) => {
+        /* istanbul ignore if */
         if (error) callback(error);
         callback(null, response);
     });

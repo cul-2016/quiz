@@ -23,7 +23,7 @@ function setNewTrophyState (client, user_id, module_id, newTrophyState, callback
         return callback(new Error("Too few arguments"));
     } else {
         query(client, queries.setNewTrophyState, queryValues, (error) => {
-
+            /* istanbul ignore if */
             if (error) {
                 return callback(error);
             }

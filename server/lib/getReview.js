@@ -20,7 +20,7 @@ function getReview (client, id, isSurvey, callback) {
     }
 
     query(client, getQuizReviewQuery, idArray, (error, response) => {
-
+        /* istanbul ignore if */
         if (error) {
             console.error(error);
             return callback(error);

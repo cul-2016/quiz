@@ -15,7 +15,7 @@ function calculateQuizScore (client, user_id, quiz_id, callback) {
     var values = [user_id, quiz_id];
 
     query(client, queries.calculateQuizScore.score, values, (error, response) => {
-
+        /* istanbul ignore if */
         if (error) {
             console.error(error);
             return callback(error);
@@ -23,7 +23,7 @@ function calculateQuizScore (client, user_id, quiz_id, callback) {
         var score = parseInt(response.rows[0].count, 10);
 
         query(client, queries.calculateQuizScore.num_questions, [quiz_id], (error, result) => {
-
+            /* istanbul ignore if */
             if (error) {
                 throw new Error("Problem getting number of questions");
             }

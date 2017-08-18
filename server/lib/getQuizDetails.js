@@ -19,7 +19,7 @@ function getQuizDetails (client, quiz_id, callback) {
         }
         var nameQuery = 'SELECT name, is_last_quiz FROM quizzes WHERE quiz_id = $1;';
         query(client, nameQuery, [quiz_id], (error, name) => {
-
+            /* istanbul ignore if */
             if (error) {
                 console.error(error);
                 return callback(error);

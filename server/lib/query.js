@@ -21,12 +21,14 @@ function query (pool, queryText, queryArray, callback) {
     }
 
     pool.connect((error, client, done) => {
+        /* istanbul ignore if */
         if (error) {
             return callback(error);
         }
 
         client.query(queryText, queryArray, (error, result) => {
             done();
+            /* istanbul ignore if */
             if (error) {
                 return callback(error);
             } else {

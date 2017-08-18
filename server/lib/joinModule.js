@@ -14,7 +14,7 @@ function joinModule (client, module_id, user_id, callback) {
     var values = [module_id, user_id];
 
     query(client, queries.joinModule, values, (error, response) => {
-
+        /* istanbul ignore if */
         if (error) {
             console.error(error);
             return callback(error);

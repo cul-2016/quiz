@@ -21,6 +21,7 @@ function saveUser (pool, email, password, is_lecturer, username, verification_co
         userArray = [email, password, username, true];
     }
     query(pool, userQuery, userArray, (error, result) => {
+        /* istanbul ignore if */
         if (error) {
             callback(error);
         }

@@ -78,6 +78,7 @@ exports.register = (server, options, next) => {
                     const { user_id } = decoded.user_details;
                     const { module_id } = request.query;
 
+                    /* istanbul ignore if */
                     if (!module_id) {
                         return reply(new Error('module_id must be defined'));
                     }
