@@ -17,7 +17,9 @@ exports.register = (server, options, next) => {
 
     if (env.CIRCLE_CI || env.TESTING) {
         config.database = env.CIRCLE_CI ? 'circle_test' : 'testing';
-    } else {
+    }
+    /* istanbul ignore if|else */
+    else {
         Object.assign(config, {
             user: process.env.DATABASE_USER,
             password: process.env.DATABASE_PASSWORD,
@@ -27,7 +29,7 @@ exports.register = (server, options, next) => {
             ssl: true,
         });
     }
-    
+
     server.app.pool = new pg.Pool(config);
 
     server.app.redisCli = redis.createClient(env.REDISCLOUD_URL || {

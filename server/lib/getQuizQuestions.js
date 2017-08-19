@@ -14,7 +14,7 @@ function getQuizQuestions (client, quiz_id, callback) {
     var moduleValue = [quiz_id];
 
     query(client, moduleQuery, moduleValue, (error, response) => {
-
+        /* istanbul ignore if */
         if (error) {
             console.error(error);
             return callback(error);

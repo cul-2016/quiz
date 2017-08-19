@@ -20,23 +20,23 @@ function getRanking (client, user_id, module_id, callback) {
 
     // get all average percentage scores in descending order
     getAllPercentageScores(client, module_id, (error, allPercentageScores) => {
-
+        /* istanbul ignore if */
         if (error) {
             return callback(error);
         }
         // get the percentile boundary values
         getPercentileValues(allPercentageScores, BOUNDARIES, (error, values) => {
-
+            /* istanbul ignore if */
             if (error) {
                 return callback(error);
             }
             getStudentPercentageScore(user_id, allPercentageScores, (error, studentScore) => {
-
+                /* istanbul ignore if */
                 if (error) {
                     return callback(error);
                 }
                 getBoundaryIndex(studentScore, values, (error, index) => {
-
+                    /* istanbul ignore if */
                     if (error) {
                         return callback(error);
                     }

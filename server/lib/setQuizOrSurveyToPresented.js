@@ -20,7 +20,7 @@ function setQuizOrSurveyToPresented (client, id, isSurvey, callback) {
     }
 
     query(client, queryText, queryValues, (error, response) => { //eslint-disable-line no-unused-vars
-
+        /* istanbul ignore if */
         if (error) {
             return callback(error);
         }

@@ -12,7 +12,7 @@ var queries = require('./queries.json');
 function getAllPercentageScores (client, module_id, callback) {
 
     query(client, queries.getAllPercentageScores, [module_id], (error, result) => {
-
+        /* istanbul ignore if */
         if (error) {
             console.error(error);
             return callback(error);

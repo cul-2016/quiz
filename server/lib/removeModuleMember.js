@@ -14,7 +14,7 @@ function removeModuleMember (client, module_id, quiz_id, callback) {
     var moduleValue = [module_id, quiz_id];
 
     query(client, moduleQuery, moduleValue, (error, response) => {
-
+        /* istanbul ignore if */
         if (error) {
             console.error(error);
             return callback(error);

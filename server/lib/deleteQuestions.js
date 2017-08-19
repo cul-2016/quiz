@@ -12,7 +12,7 @@ var composeDeleteQuestionStatement = require('./composeDeleteQuestionStatement')
 function deleteQuestions (client, questions, callback) {
 
     composeDeleteQuestionStatement(questions, (error, builtStatement) => {
-
+        /* istanbul ignore if */
         if (error) {
             return callback(error);
         }

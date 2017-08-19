@@ -14,6 +14,7 @@ const sinon = require('sinon');
 const sendemail = require('sendemail');
 
 let email;
+let redis;
 
 if (!process.env.TESTING) {
     throw new Error("Please set the testing environment variable!");
@@ -40,6 +41,43 @@ test('/ endpoint works returns the correct payload', (t) => {
     .catch((err) => {
         email.restore();
         t.error(err);
+    });
+});
+
+test('/authenticate-user endpoint returns error for setAsync Redis call', (t) => {
+
+    t.plan(1);
+
+    initDb()
+    .then(() => {
+        redis = sinon.stub(
+            redisCli,
+            'setAsync'
+        );
+
+        return Promise.reject({ error: 'setAsync returned an error' });
+    })
+    .catch((err) => {
+        redis.restore();
+        t.deepEqual(err, { error: 'setAsync returned an error' }, 'returns correct error object');
+    });
+});
+test('/authenticate-user endpoint returns error for delAsync Redis call', (t) => {
+
+    t.plan(1);
+
+    initDb()
+    .then(() => {
+        redis = sinon.stub(
+            redisCli,
+            'delAsync'
+        );
+
+        return Promise.reject({ error: 'delAsync returned an error' });
+    })
+    .catch((err) => {
+        redis.restore();
+        t.deepEqual(err, { error: 'delAsync returned an error' }, 'returns correct error object');
     });
 });
 

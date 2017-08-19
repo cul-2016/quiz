@@ -22,7 +22,7 @@ function getModuleList (client, user_id, is_lecturer, callback) {
         moduleValue = [user_id];
     }
     query(client, moduleQuery, moduleValue, (error, response) => {
-
+        /* istanbul ignore if */
         if (error) {
             console.error("`getModuleList`", error);
             return callback(error);

@@ -11,18 +11,17 @@ var composeUpdateQuestionStatement = require('./composeUpdateQuestionStatement')
 
 function updateQuestions (client, questions, callback) {
 
-console.log(questions);
     if (questions.length === 0) {
         return callback(null);
     } else {
         composeUpdateQuestionStatement(questions, (error, builtStatement) => {
-
+            /* istanbul ignore if */
             if (error) {
                 return callback(error);
             }
 
             preparedQuery(client, builtStatement, (error, response) => {
-
+                /* istanbul ignore if */
                 if (error) {
                     return callback(error);
                 }

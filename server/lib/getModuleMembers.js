@@ -15,7 +15,7 @@ function getModuleMembers (client, module_id, callback) {
 
 
     query(client, moduleQuery, moduleValue, (error, response) => {
-
+        /* istanbul ignore if */
         if (error) {
             console.error(error);
             return callback(error);

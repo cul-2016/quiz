@@ -14,7 +14,7 @@ function getQuizQuestions (client, survey_id, callback) {
     var moduleValue = [survey_id];
 
     query(client, moduleQuery, moduleValue, (error, response) => {
-
+        /* istanbul ignore if */
         if (error) {
             console.error(error);
             return callback(error);
