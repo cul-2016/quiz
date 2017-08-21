@@ -20,23 +20,18 @@ const PrivacyMessageComponent = () => {
                               We use it for allowing you to reset your password if you forget it – we will send an email
                               with a link to reset it.
                           </li>
-                          <div className="spacer"></div>
                           <li>
                               We use it for login and user identification – you enter your email address and password to
                               log in. This means your quiz scores and participation are associated with your email address.
                           </li>
-                          <div className="spacer"></div>
-
                           <li>
                               We may very rarely send an email with important information about changes to or
                               developments with Quodl.
                           </li>
-                          <div className="spacer"></div>
                           <li>
                               We may use your email address to contact you directly if we notice any issues with your
                               account.
                           </li>
-                          <div className="spacer"></div>
                           <li>
                               For students, your lecturer or person setting the quiz will be able to see your email address
                               and associated quiz scores. Lecturers will be able to use your email address according to
@@ -46,7 +41,6 @@ const PrivacyMessageComponent = () => {
                               example on the leaderboard – they will not be able to identify you unless you choose a
                               nickname that makes it obvious who you are.
                           </li>
-                          <div className="spacer"></div>
                           <li>
                               For students, your data may be shared with your institution, and you email address may be
                               used by your institution to cross-tabulate Quodl data with data about you held by your
@@ -57,7 +51,6 @@ const PrivacyMessageComponent = () => {
                               strategies that lead to successful outcomes. In all cases, the primary aim would be to
                               improve your learning experience and outcomes, and those of students who follow you.
                           </li>
-                          <div className="spacer"></div>
                           <li>
                               For lecturers, we also use you email address for verification; by sending an email to the
                               address you give us to confirm that the email address is yours.
