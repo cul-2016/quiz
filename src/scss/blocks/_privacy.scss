@@ -4,10 +4,15 @@
     background: url('/pattern_background.png') no-repeat center center fixed;
     background-size: cover;
     text-align: center;
+    line-height: 1.5rem;
 
     ul {
         list-style: disc;
         text-align: left;
+    }
+
+    li {
+        padding-bottom: 10px;
     }
 
     .content__body {
