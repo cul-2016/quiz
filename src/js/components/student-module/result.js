@@ -35,7 +35,7 @@ export default class Result extends Component {
 
         const newTrophies = this.props.newTrophies && this.props.newTrophies.map((trophy, i) => {
             return (
-                <div>{ `${i + 1} ${trophy}` }</div>
+                <div key={i}>{ `${i + 1} ${trophy}` }</div>
             );
         });
         return (
