@@ -192,7 +192,6 @@ exports.register = (server, options, next) => {
 
 
                                     const verdict = error || { newTrophyState: newTrophyState, score: score };
-                                    console.log(verdict, '<<>><<><>><<>');
                                     reply(verdict);
                                 });
                             });

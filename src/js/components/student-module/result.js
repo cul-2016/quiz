@@ -33,6 +33,11 @@ export default class Result extends Component {
             "medal-result--bronze": percentageScore < medalConditions[0] && percentageScore >= 0
         });
 
+        const newTrophies = this.props.newTrophies && this.props.newTrophies.map((trophy, i) => {
+            return (
+                <div>{ `${i + 1} ${trophy}` }</div>
+            );
+        });
         return (
             <div className="result">
 
@@ -50,6 +55,13 @@ export default class Result extends Component {
                     <span className="f-label--dark">You Scored:</span>
                     <span className="f-display f-display--secondary">{ percentageScore }%</span>
                 </div>
+                {
+                    this.props.newTrophies.length > 0 &&
+                    <div>
+                    <h1>New Trophies</h1>
+                    { newTrophies }
+                    </div>
+                }
                 <Link  className="button button__secondary" to={ `${module_id}/student`}>
                   Finish
                 </Link>

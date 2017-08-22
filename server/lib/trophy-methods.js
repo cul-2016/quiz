@@ -122,7 +122,7 @@ function getOverallScoreState (client, user_id, module_id, callback) {
                         return callback(new Error("Problem with getting overall score data"));
                     }
                     var threshold = condition.rows[0].condition;
-
+                    
                     callback(null, overall_score >= threshold);
                 });
             });
