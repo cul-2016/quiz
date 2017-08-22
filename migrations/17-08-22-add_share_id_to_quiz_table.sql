@@ -1,2 +1,2 @@
 ALTER TABLE quizzes
-  ADD COLUMN share_id INT;
+  ADD COLUMN share_id TEXT;

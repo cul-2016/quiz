@@ -1,2 +1,2 @@
 ALTER TABLE surveys
-  ADD COLUMN share_id INT;
+  ADD COLUMN share_id TEXT;
