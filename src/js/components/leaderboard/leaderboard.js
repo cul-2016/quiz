@@ -22,6 +22,11 @@ const Leaderboard = ({ mainData, medalScores, quiz_id_list, medalCondition, para
         let bronzeTotal = 0;
         let silverTotal = 0;
         let goldTotal = 0;
+        let firstQuiz = user.first_quiz ? 'yes' : 'no';
+        let highScore = user.high_score ? 'yes' : 'no';
+        let overallScore = user.overall_score ? 'yes' : 'no';
+        let participation = user.participation ? 'yes' : 'no';
+
 
         userScores.map((quiz) => {
             if (quiz.percentage_score > 0 && quiz.percentage_score <= medalCondition[0]) {
@@ -39,12 +44,16 @@ const Leaderboard = ({ mainData, medalScores, quiz_id_list, medalCondition, para
         });
 
         return (
-          <tr className={ rowClass }>
+          <tr key={i} className={ rowClass }>
               <td className="f-body"> { rankingNumbers[i] } </td>
               <td className="f-body"> { user.username } </td>
               <td className="f-body"> { bronzeTotal} </td>
               <td className="f-body"> { silverTotal } </td>
               <td className="f-body"> { goldTotal } </td>
+              <td className="f-body"> { firstQuiz } </td>
+              <td className="f-body"> { highScore } </td>
+              <td className="f-body"> { overallScore } </td>
+              <td className="f-body"> { participation } </td>
               <td className="f-body"> { parseFloat(user.total_score) } </td>
           </tr>
         );
@@ -77,6 +86,10 @@ const Leaderboard = ({ mainData, medalScores, quiz_id_list, medalCondition, para
                                 <th>
                                   <p className="medal-small medal-small--gold"></p>
                                 </th>
+                                <th className="f-body f-body--white">first quiz</th>
+                                <th className="f-body f-body--white">high score</th>
+                                <th className="f-body f-body--white">overall score</th>
+                                <th className="f-body f-body--white">participation</th>
                                 <th className="f-body f-body--white">Score</th>
                             </tr>
                         </thead>

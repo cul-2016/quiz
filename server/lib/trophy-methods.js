@@ -46,7 +46,6 @@ function getHighScoreState (client, user_id, module_id, percentageScore, callbac
                     return callback(new Error("Problem with getting high score"));
                 }
                 var threshold = result2.rows[0].condition;
-
                 callback(null, percentageScore >= threshold);
             });
         }
@@ -112,9 +111,7 @@ function getOverallScoreState (client, user_id, module_id, callback) {
                     console.error(error);
                     return callback(new Error("Problem with getting overall Score data"));
                 }
-
                 var overall_score = result.rows[0].overall_score;
-
                 query(client, queries.getOverallScoreState.condition, [module_id], (error, condition) => {
                     /* istanbul ignore if */
                     if (error) {
@@ -122,7 +119,6 @@ function getOverallScoreState (client, user_id, module_id, callback) {
                         return callback(new Error("Problem with getting overall score data"));
                     }
                     var threshold = condition.rows[0].condition;
-
                     callback(null, overall_score >= threshold);
                 });
             });
@@ -157,7 +153,6 @@ function getParticipationState (client, user_id, module_id, callback) {
                     return callback(new Error("Problem with getting participation data"));
                 }
                 var participation = result.rows[0].participation;
-
                 query(client, queries.getParticipationState.condition, [module_id], (error, condition) => {
                     /* istanbul ignore if */
                     if (error) {
@@ -165,7 +160,6 @@ function getParticipationState (client, user_id, module_id, callback) {
                         return callback(new Error("Problem with getting participation data"));
                     }
                     var threshold = condition.rows[0].condition;
-
                     callback(null, participation >= threshold);
                 });
             });
