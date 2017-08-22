@@ -93,6 +93,7 @@
     "redux-thunk": "^2.1.0",
     "sass-loader": "^4.0.0",
     "sendemail": "^3.3.0",
+    "shortid": "^2.2.8",
     "simple-statistics": "^2.5.0",
     "socket.io": "^1.7.4",
     "socket.io-client": "^1.7.4",

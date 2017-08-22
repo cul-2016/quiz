@@ -88,7 +88,7 @@
 
 .module-quiz-container {
     position: relative;
-    
+
     .module-quiz {
       display: block;
       position: relative;
@@ -144,9 +144,14 @@
       }
     }
 
-    .share-button-container {
+    .share-button {
       position: absolute;
       right: 40%;
       top: 0.2rem;
+    }
+    .share-code {
+      position: absolute;
+      top: 0;
+      right: 5rem;
     }
 }

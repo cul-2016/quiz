@@ -120,16 +120,15 @@ export const removeModuleMemberFailure = (error) => ({
     error
 });
 
-export const generateShareId = (quiz_id, survey_id) => {
+export const generateShareId = (quiz_id, survey_id, module_id) => {
     // let isQuiz = typeof quiz_id !== 'undefined';
     return (dispatch) => {
-        console.log('quiz id', quiz_id);
-        console.log('survey id', survey_id);
         dispatch(generateShareIdRequest());
 
-        request.get(dispatch)(`generate-share-id?quiz_id=${quiz_id}&survey_id=${survey_id}`)
+        request.post(dispatch)('/generate-share-id', { quiz_id, survey_id })
             .then(() => {
                 dispatch(generateShareIdSuccess());
+                dispatch(getModule(module_id, true));
             })
             .catch((error) => {
                 dispatch(generateShareIdFailure(error));

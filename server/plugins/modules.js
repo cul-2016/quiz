@@ -14,6 +14,7 @@ const hasStudentSubmitted = require('../lib/hasStudentSubmitted');
 const getBestAndWorstQuiz = require('../lib/getBestAndWorstQuiz');
 const getParticipationRate = require('../lib/getParticipationRate');
 const getStudentHistory = require('../lib/getStudentHistory.js');
+const generateShareId = require('../lib/generateShareId.js');
 
 const jwt = require('jsonwebtoken');
 const Joi = require('joi');
@@ -315,29 +316,16 @@ exports.register = (server, options, next) => {
             }
         },
         {
-            method: 'GET',
+            method: 'POST',
             path: '/generate-share-id',
-            config: {
-                validate: {
-                    query: {
-                        quiz_id: Joi.string().required(),
-                        survey_id: Joi.string().required()
-                    }
-                }
-            },
             handler: (request, reply) => {
-                const { quiz_id, survey_id } = request.query;
+                const { quiz_id, survey_id } = request.payload;
 
-                console.log(quiz_id);
-                console.log(survey_id === 'undefined');
-
-                const is_quiz = quiz_id !== 'undefined';
-
-                // removeModuleMember(pool, module_id, parsed_user_id, (error, modules) => {
-                //     const verdict = error || modules;
-                //     reply(verdict);
-                // });
-                reply(true);
+                generateShareId(pool, quiz_id, survey_id, (error, response) => {
+                    console.log(error, response, 'generateShareId');
+                    const verdict = error || response;
+                    reply(verdict);
+                });
             }
         }
     ]);

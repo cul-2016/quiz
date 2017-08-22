@@ -2,12 +2,12 @@ import React, { PropTypes } from 'react';
 import { hashHistory } from 'react-router';
 
 const Quizzes = ({
-    location, 
-    quizzes, 
-    sendQuizInvite, 
-    module_id, 
-    isSurvey, 
-    handleSetIsSurvey, 
+    location,
+    quizzes,
+    sendQuizInvite,
+    module_id,
+    isSurvey,
+    handleSetIsSurvey,
     handleGenerateShareId }) => {
 
     const surveyOrQuiz = isSurvey ? 'survey' : 'quiz';
@@ -16,7 +16,6 @@ const Quizzes = ({
     const surveyOrQuizPluralCapitalized = isSurvey ? 'Surveys' : 'Quizzes';
 
     const desktopView = quizzes.slice().reverse().map((quiz, index) => {
-        console.log(quiz);
         return (
             <div
                 className="module-quiz-container"
@@ -69,16 +68,23 @@ const Quizzes = ({
                     quiz.is_last_quiz &&
                         <span className="module-quiz__last-message">(This is the last quiz)</span>
                 }
-                <div className="line module-quiz__line"></div>
 
+                <div className="line module-quiz__line"></div>
               </div>
               { (quiz.share_id === null) &&
                   <div
-                      className="share-button-container"
+                      className="share-button"
                       onClick={ () => {
-                          handleGenerateShareId(quiz.quiz_id, quiz.survey_id);
+                          handleGenerateShareId(quiz.quiz_id, quiz.survey_id, module_id);
                       }}>
                       <div className="button module__button button__primary">Share</div>
+                  </div>
+              }
+              {
+                  quiz.share_id != null &&
+                  <div
+                  className="share-code">
+                  <p> Share Code: {quiz.share_id} </p>
                   </div>
               }
           </div>

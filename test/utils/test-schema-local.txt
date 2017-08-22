@@ -58,7 +58,8 @@ CREATE TABLE IF NOT EXISTS quizzes (
     module_id CHAR(4),
     name TEXT NOT NULL,
     is_presented BOOLEAN DEFAULT FALSE NOT NULL,
-    is_last_quiz BOOLEAN DEFAULT FALSE NOT NULL
+    is_last_quiz BOOLEAN DEFAULT FALSE NOT NULL,
+    share_id TEXT
 );
 
 /* surveys */
@@ -66,7 +67,8 @@ CREATE TABLE IF NOT EXISTS surveys (
     survey_id SERIAL PRIMARY KEY,
     module_id CHAR(4),
     name TEXT NOT NULL,
-    is_presented BOOLEAN DEFAULT FALSE NOT NULL
+    is_presented BOOLEAN DEFAULT FALSE NOT NULL,
+    share_id TEXT
 );
 
 /* questions */

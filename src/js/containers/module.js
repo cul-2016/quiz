@@ -31,7 +31,6 @@ const mapDispatchToProps = (dispatch) => ({
 
     sendQuizInvite: (quiz_id, survey_id, name, review = false) => {
 
-        console.log(review, '<<<<<<<<<<<<<<<<');
         const quizIdOrSurveyId = quiz_id || survey_id;
         let quizInfo = {
             room: store.getState().module.module_id,
@@ -51,8 +50,8 @@ const mapDispatchToProps = (dispatch) => ({
     handleSetIsSurvey: (quiz_id, survey_id) => {
         dispatch(setIsSurvey(quiz_id, survey_id));
     },
-    handleGenerateShareId: (quiz_id, survey_id) => {
-        dispatch(generateShareId(quiz_id, survey_id));
+    handleGenerateShareId: (quiz_id, survey_id, module_id) => {
+        dispatch(generateShareId(quiz_id, survey_id, module_id));
     }
 });
 
