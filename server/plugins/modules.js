@@ -313,6 +313,32 @@ exports.register = (server, options, next) => {
                     reply(verdict);
                 });
             }
+        },
+        {
+            method: 'GET',
+            path: '/generate-share-id',
+            config: {
+                validate: {
+                    query: {
+                        quiz_id: Joi.string().required(),
+                        survey_id: Joi.string().required()
+                    }
+                }
+            },
+            handler: (request, reply) => {
+                const { quiz_id, survey_id } = request.query;
+
+                console.log(quiz_id);
+                console.log(survey_id === 'undefined');
+
+                const is_quiz = quiz_id !== 'undefined';
+
+                // removeModuleMember(pool, module_id, parsed_user_id, (error, modules) => {
+                //     const verdict = error || modules;
+                //     reply(verdict);
+                // });
+                reply(true);
+            }
         }
     ]);
 

@@ -4,7 +4,13 @@ import { socketClient } from '../socket';
 import { store } from '../store.js';
 import { joinWebsocketRoom } from '../lib/subscriptions';
 import emitSendQuizInvite from '../lib/emitSendQuizInvite.js';
-import { setIntervalID, getQuizQuestions, setQuizDetails, setIsSurvey } from '../actions/live-quiz.js';
+import { generateShareId } from '../actions/module.js';
+import {
+    setIntervalID,
+    getQuizQuestions,
+    setQuizDetails,
+    setIsSurvey
+} from '../actions/live-quiz.js';
 
 joinWebsocketRoom(store, socketClient);
 
@@ -44,6 +50,9 @@ const mapDispatchToProps = (dispatch) => ({
 
     handleSetIsSurvey: (quiz_id, survey_id) => {
         dispatch(setIsSurvey(quiz_id, survey_id));
+    },
+    handleGenerateShareId: (quiz_id, survey_id) => {
+        dispatch(generateShareId(quiz_id, survey_id));
     }
 });
 

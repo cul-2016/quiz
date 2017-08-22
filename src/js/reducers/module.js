@@ -15,7 +15,8 @@ export const initialState = {
     isFetchingModule: false,
     isFetchingMembers: false,
     isQuizOpen: false,
-    isRemovingMember: false
+    isRemovingMember: false,
+    isGeneratingShareId: false
 };
 
 export function module (state = initialState, action ) {
@@ -107,6 +108,22 @@ export function module (state = initialState, action ) {
     case actionsTypes.REMOVE_MODULE_MEMBER_FAILURE:
         return update(state, {
             isRemovingMember: { $set: false },
+            error: { $set: action.error }
+        });
+
+    case actionsTypes.GENERATE_SHARE_ID_REQUEST:
+        return update(state, {
+            isGeneratingShareId: { $set: true }
+        });
+
+    case actionsTypes.GENERATE_SHARE_ID_SUCCESS:
+        return update(state, {
+            isGeneratingShareId: { $set: false }
+        });
+
+    case actionsTypes.GENERATE_SHARE_ID_FAILURE:
+        return update(state, {
+            isGeneratingShareId: { $set: false },
             error: { $set: action.error }
         });
 

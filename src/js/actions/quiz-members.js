@@ -1,5 +1,4 @@
 import request from '../lib/request.js';
-import { hashHistory } from 'react-router';
 
 export const GET_QUIZ_MEMBERS_REQUEST = 'GET_QUIZ_MEMBERS_REQUEST';
 export const GET_QUIZ_MEMBERS_SUCCESS = 'GET_QUIZ_MEMBERS_SUCCESS';

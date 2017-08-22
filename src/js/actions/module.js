@@ -16,6 +16,10 @@ export const REMOVE_MODULE_MEMBER_REQUEST = 'REMOVE_MODULE_MEMBER_REQUEST';
 export const REMOVE_MODULE_MEMBER_SUCCESS = 'REMOVE_MODULE_MEMBER_SUCCESS';
 export const REMOVE_MODULE_MEMBER_FAILURE = 'REMOVE_MODULE_MEMBER_FAILURE';
 
+export const GENERATE_SHARE_ID_REQUEST = 'GENERATE_SHARE_ID_REQUEST';
+export const GENERATE_SHARE_ID_SUCCESS = 'GENERATE_SHARE_ID_SUCCESS';
+export const GENERATE_SHARE_ID_FAILURE = 'GENERATE_SHARE_ID_FAILURE';
+
 export const openQuiz = () => ( {
     type: OPEN_QUIZ
 });
@@ -113,5 +117,35 @@ export const removeModuleMemberSuccess = () => ({
 
 export const removeModuleMemberFailure = (error) => ({
     type: REMOVE_MODULE_MEMBER_FAILURE,
+    error
+});
+
+export const generateShareId = (quiz_id, survey_id) => {
+    // let isQuiz = typeof quiz_id !== 'undefined';
+    return (dispatch) => {
+        console.log('quiz id', quiz_id);
+        console.log('survey id', survey_id);
+        dispatch(generateShareIdRequest());
+
+        request.get(dispatch)(`generate-share-id?quiz_id=${quiz_id}&survey_id=${survey_id}`)
+            .then(() => {
+                dispatch(generateShareIdSuccess());
+            })
+            .catch((error) => {
+                dispatch(generateShareIdFailure(error));
+            });
+    };
+};
+
+export const generateShareIdRequest = () => ({
+    type: GENERATE_SHARE_ID_REQUEST
+});
+
+export const generateShareIdSuccess = () => ({
+    type: GENERATE_SHARE_ID_SUCCESS
+});
+
+export const generateShareIdFailure = (error) => ({
+    type: GENERATE_SHARE_ID_FAILURE,
     error
 });

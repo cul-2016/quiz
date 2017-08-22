@@ -5,7 +5,15 @@ import Quizzes from './quizzes.js';
 const  Surveys = Quizzes;
 import Spinner from '../general/spinner';
 
-const Module = ({ location, module, quizzes, surveys, isFetchingModule, sendQuizInvite, handleSetIsSurvey }) => {
+const Module = ({
+    location,
+    module,
+    quizzes,
+    surveys,
+    isFetchingModule,
+    sendQuizInvite,
+    handleSetIsSurvey,
+    handleGenerateShareId }) => {
 
     return (
         <div>
@@ -27,14 +35,16 @@ const Module = ({ location, module, quizzes, surveys, isFetchingModule, sendQuiz
                         location={ location }
                         sendQuizInvite={ sendQuizInvite }
                         module_id={ module.module_id }
-                        handleSetIsSurvey={ handleSetIsSurvey }/>
+                        handleSetIsSurvey={ handleSetIsSurvey }
+                        handleGenerateShareId={ handleGenerateShareId }/>
 
                     <Surveys quizzes={ surveys }
                         isSurvey={ true }
                         location={ location }
                         sendQuizInvite={ sendQuizInvite }
                         module_id={ module.module_id }
-                        handleSetIsSurvey={ handleSetIsSurvey }/>
+                        handleSetIsSurvey={ handleSetIsSurvey }
+                        handleGenerateShareId={ handleGenerateShareId }/>
 
                     <Link className="module__button__link" to={ `${module.module_id}/new-quiz` } >
                         <button className="button button__secondary quizzes__button">
@@ -58,7 +68,8 @@ Module.propTypes = {
     surveys: PropTypes.array,
     isFetchingModule: PropTypes.bool.isRequired,
     sendQuizInvite: PropTypes.func.isRequired,
-    handleSetIsSurvey: PropTypes.func.isRequired
+    handleSetIsSurvey: PropTypes.func.isRequired,
+    handleGenerateShareId: PropTypes.func.isRequired
 };
 
 Module.defaultProps = {
