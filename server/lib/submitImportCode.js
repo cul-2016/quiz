@@ -12,10 +12,10 @@ function submitImportCode (client, import_code, module_id, callback) {
         } else {
             let questions = response.rows;
             if (questions.length === 0) {
-                return callback();
+                return callback(null, false);
             } else {
                 const quiz_name = questions[0].name;
-                const importQuizParams = [module_id, quiz_name, false, false, null];
+                const importQuizParams = [module_id, quiz_name];
                 query(client, importQuizQuery, importQuizParams, (error, response) => {
                     /* istanbul ignore if */
                     if (error) {

@@ -352,9 +352,12 @@ exports.register = (server, options, next) => {
                 const { import_code, module_id } = request.payload;
 
                 submitImportCode(pool, import_code, module_id, (error, response) => {
-
-                    const verdict = error || typeof response === 'object';
-                    reply(verdict);
+                    if (response === false) {
+                        reply({ message: 'Quiz does not exist' });
+                    } else {
+                        const verdict = error || typeof response === 'object';
+                        reply(verdict);
+                    }
                 });
             }
         }

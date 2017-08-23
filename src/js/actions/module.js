@@ -167,9 +167,13 @@ export const submitImportCode = (import_code, module_id) => {
         dispatch(submitImportCodeRequest());
 
         request.post(dispatch)('/submit-import-code', { import_code, module_id })
-            .then(() => {
-                dispatch(submitImportCodeSuccess());
-                dispatch(getModule(module_id, true));
+            .then((response) => {
+                if (response.data.message) {
+                    dispatch(submitImportCodeFailure(response.data.message));
+                } else {
+                    dispatch(submitImportCodeSuccess());
+                    dispatch(getModule(module_id, true));
+                }
             })
             .catch((error) => {
                 dispatch(submitImportCodeFailure(error));
