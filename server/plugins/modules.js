@@ -318,12 +318,20 @@ exports.register = (server, options, next) => {
         {
             method: 'POST',
             path: '/generate-share-id',
+            config: {
+                validate: {
+                    payload: {
+                        quiz_id: Joi.number(),
+                        survey_id: Joi.number()
+                    }
+                }
+            },
             handler: (request, reply) => {
                 const { quiz_id, survey_id } = request.payload;
 
                 generateShareId(pool, quiz_id, survey_id, (error, response) => {
-                    console.log(error, response, 'generateShareId');
-                    const verdict = error || response;
+
+                    const verdict = error || typeof response === 'object';
                     reply(verdict);
                 });
             }
