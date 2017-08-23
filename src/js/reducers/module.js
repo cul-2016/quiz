@@ -144,6 +144,10 @@ export function module (state = initialState, action ) {
             isSubmittingImportCode: { $set: false },
             error: { $set: action.error }
         });
+    case actionsTypes.CLEAR_ERROR_MESSAGE:
+        return update(state, {
+            error: { $set: undefined }
+        });
 
     default:
         return state;

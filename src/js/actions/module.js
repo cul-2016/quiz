@@ -26,6 +26,8 @@ export const SUBMIT_IMPORT_CODE_REQUEST = 'SUBMIT_IMPORT_CODE_REQUEST';
 export const SUBMIT_IMPORT_CODE_SUCCESS = 'SUBMIT_IMPORT_CODE_SUCCESS';
 export const SUBMIT_IMPORT_CODE_FAILURE = 'SUBMIT_IMPORT_CODE_FAILURE';
 
+export const CLEAR_ERROR_MESSAGE = 'CLEAR_ERROR_MESSAGE';
+
 export const openQuiz = () => ( {
     type: OPEN_QUIZ
 });
@@ -170,6 +172,9 @@ export const submitImportCode = (import_code, module_id) => {
             .then((response) => {
                 if (response.data.message) {
                     dispatch(submitImportCodeFailure(response.data.message));
+                    setTimeout(() => {
+                        dispatch(clearErrorMessage());
+                    }, 5000);
                 } else {
                     dispatch(submitImportCodeSuccess());
                     dispatch(getModule(module_id, true));
@@ -192,4 +197,8 @@ export const submitImportCodeSuccess = () => ({
 export const submitImportCodeFailure = (error) => ({
     type: SUBMIT_IMPORT_CODE_FAILURE,
     error
+});
+
+export const clearErrorMessage = () => ({
+    type: CLEAR_ERROR_MESSAGE
 });
