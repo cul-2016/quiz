@@ -3,6 +3,34 @@
   border: 1px solid;
   padding: 2rem 4rem;
 
+  .or-container {
+      text-align: center;
+      padding: 1rem;
+  }
+
+  .horizontal-spacer {
+      display: inline-block;
+      width: 2rem;
+      height: 1px;
+      background-color: grey;
+      margin-bottom: 0.3rem;
+  }
+
+  .form__input--import {
+      max-width: 8rem;
+  }
+
+  .import-container {
+      text-align: center;
+  }
+
+  .or {
+      display: inline-block;
+      margin-left: 0.3rem;
+      margin-right: 0.3rem;
+      color: grey;
+  }
+
   &__title-under-line {
     color: $dark-grey;
   }
@@ -88,6 +116,7 @@
 
 .module-quiz-container {
     position: relative;
+    padding-top: 0.75rem;
 
     .module-quiz {
       display: block;
@@ -147,7 +176,15 @@
     .share-button {
       position: absolute;
       right: 40%;
-      top: 0.2rem;
+      top: 1.2rem;
+
+        button {
+            margin-left: 0.5rem;
+        }
+
+        .edit {
+            min-width: 5.5rem;
+        }
     }
     .share-code {
       position: absolute;

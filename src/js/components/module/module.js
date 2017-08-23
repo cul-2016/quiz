@@ -13,7 +13,8 @@ const Module = ({
     isFetchingModule,
     sendQuizInvite,
     handleSetIsSurvey,
-    handleGenerateShareId }) => {
+    handleGenerateShareId,
+    handleInputChange }) => {
 
     return (
         <div>
@@ -54,6 +55,20 @@ const Module = ({
                             <span>Add a new Survey/Quiz</span>
                         </button>
                     </Link>
+                    <div className="or-container">
+                      <div className="horizontal-spacer"></div>
+                      <div className="or">OR</div>
+                      <div className="horizontal-spacer"></div>
+                    </div>
+                    <div className="import-container">
+                        <input
+                            className="form__input form__input--import"
+                            placeholder="CODE"
+                            name="share_id"
+                            type="text"
+                            onChange={ (e) => handleInputChange('share_id', e.target.value) } />
+                        <button className="button button__secondary quizzes__button">Import Survey/Quiz</button>
+                    </div>
                 </div>
             </div>
         }
@@ -69,7 +84,8 @@ Module.propTypes = {
     isFetchingModule: PropTypes.bool.isRequired,
     sendQuizInvite: PropTypes.func.isRequired,
     handleSetIsSurvey: PropTypes.func.isRequired,
-    handleGenerateShareId: PropTypes.func.isRequired
+    handleGenerateShareId: PropTypes.func.isRequired,
+    handleInputChange: PropTypes.func.isRequired
 };
 
 Module.defaultProps = {

@@ -21,21 +21,7 @@ const Quizzes = ({
                 className="module-quiz-container"
                 key={ index } >
               <div
-                  className="module-quiz"
-                  onClick={ () => {
-
-                      if (quiz.is_presented) {
-                          handleSetIsSurvey(quiz.quiz_id, quiz.survey_id);
-                      }
-
-                      const url = `${module_id}/${quiz[surveyIdOrQuizId]}/${
-                          quiz.is_presented ? 'members' : 'edit-' + surveyOrQuiz
-                      }`;
-
-                      hashHistory.push(url);
-
-                  } }
-              >
+                  className="module-quiz">
                 <span className="module-quiz__index">{ index + 1 }</span>
                 {
                   quiz.is_presented
@@ -71,15 +57,29 @@ const Quizzes = ({
 
                 <div className="line module-quiz__line"></div>
               </div>
-              { (quiz.share_id === null) &&
-                  <div
-                      className="share-button"
-                      onClick={ () => {
-                          handleGenerateShareId(quiz.quiz_id, quiz.survey_id, module_id);
-                      }}>
-                      <div className="button module__button button__primary">Share</div>
+                  <div className="share-button">
+                      { (quiz.share_id === null) &&
+                      <button
+                          className="button button__primary"
+                          onClick={ () => {
+                              handleGenerateShareId(quiz.quiz_id, quiz.survey_id, module_id);
+                          }}>Share</button>
+                      }
+                      <button
+                          className="button edit"
+                          onClick={ () => {
+                              if (quiz.is_presented) {
+                                  handleSetIsSurvey(quiz.quiz_id, quiz.survey_id);
+                              }
+
+                              const url = `${module_id}/${quiz[surveyIdOrQuizId]}/${
+                                  quiz.is_presented ? 'members' : 'edit-' + surveyOrQuiz
+                              }`;
+
+                              hashHistory.push(url);
+
+                          } }>{ `${ quiz.is_presented ? 'Details' : 'Edit'}` }</button>
                   </div>
-              }
               {
                   quiz.share_id != null &&
                   <div
