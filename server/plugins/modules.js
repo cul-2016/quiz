@@ -15,6 +15,7 @@ const getBestAndWorstQuiz = require('../lib/getBestAndWorstQuiz');
 const getParticipationRate = require('../lib/getParticipationRate');
 const getStudentHistory = require('../lib/getStudentHistory.js');
 const generateShareId = require('../lib/generateShareId.js');
+const submitImportCode = require('../lib/submitImportCode.js');
 
 const jwt = require('jsonwebtoken');
 const Joi = require('joi');
@@ -330,6 +331,27 @@ exports.register = (server, options, next) => {
                 const { quiz_id, survey_id } = request.payload;
 
                 generateShareId(pool, quiz_id, survey_id, (error, response) => {
+
+                    const verdict = error || typeof response === 'object';
+                    reply(verdict);
+                });
+            }
+        },
+        {
+            method: 'POST',
+            path: '/submit-import-code',
+            config: {
+                validate: {
+                    payload: {
+                        import_code: Joi.string(),
+                        module_id: Joi.string()
+                    }
+                }
+            },
+            handler: (request, reply) => {
+                const { import_code, module_id } = request.payload;
+
+                submitImportCode(pool, import_code, module_id, (error, response) => {
 
                     const verdict = error || typeof response === 'object';
                     reply(verdict);

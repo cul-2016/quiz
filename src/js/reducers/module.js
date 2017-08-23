@@ -16,7 +16,8 @@ export const initialState = {
     isFetchingMembers: false,
     isQuizOpen: false,
     isRemovingMember: false,
-    isGeneratingShareId: false
+    isGeneratingShareId: false,
+    importCode: null
 };
 
 export function module (state = initialState, action ) {
@@ -125,6 +126,10 @@ export function module (state = initialState, action ) {
         return update(state, {
             isGeneratingShareId: { $set: false },
             error: { $set: action.error }
+        });
+    case actionsTypes.UPDATE_IMPORT_CODE:
+        return update(state, {
+            importCode: { $set: action.code }
         });
 
     default:

@@ -5,6 +5,7 @@ import { store } from '../store.js';
 import { joinWebsocketRoom } from '../lib/subscriptions';
 import emitSendQuizInvite from '../lib/emitSendQuizInvite.js';
 import { generateShareId } from '../actions/module.js';
+import { updateImportCode, submitImportCode } from '../actions/module.js';
 import {
     setIntervalID,
     getQuizQuestions,
@@ -20,7 +21,8 @@ const mapStateToProps = (state) => ({
         name: state.module.name,
         medals: state.module.medals,
         trophies: state.module.trophies,
-        num_enrolled: state.module.num_enrolled
+        num_enrolled: state.module.num_enrolled,
+        importCode: state.module.importCode
     },
     quizzes: state.module.quizzes,
     surveys: state.module.surveys,
@@ -52,6 +54,12 @@ const mapDispatchToProps = (dispatch) => ({
     },
     handleGenerateShareId: (quiz_id, survey_id, module_id) => {
         dispatch(generateShareId(quiz_id, survey_id, module_id));
+    },
+    handleImportCode: (importCode) => {
+        dispatch(updateImportCode(importCode));
+    },
+    handleSubmitImportCode: (importCode, module_id) => {
+        dispatch(submitImportCode(importCode, module_id));
     }
 });
 

@@ -14,7 +14,8 @@ const Module = ({
     sendQuizInvite,
     handleSetIsSurvey,
     handleGenerateShareId,
-    handleInputChange }) => {
+    handleImportCode,
+    handleSubmitImportCode }) => {
 
     return (
         <div>
@@ -66,8 +67,12 @@ const Module = ({
                             placeholder="CODE"
                             name="share_id"
                             type="text"
-                            onChange={ (e) => handleInputChange('share_id', e.target.value) } />
-                        <button className="button button__secondary quizzes__button">Import Survey/Quiz</button>
+                            onChange={ (e) => handleImportCode(e.target.value) } />
+                        <button
+                            className="button button__secondary quizzes__button"
+                            onClick={ () => {
+                                handleSubmitImportCode(module.importCode, module.module_id);
+                            }} >Import Survey/Quiz</button>
                     </div>
                 </div>
             </div>
@@ -85,7 +90,9 @@ Module.propTypes = {
     sendQuizInvite: PropTypes.func.isRequired,
     handleSetIsSurvey: PropTypes.func.isRequired,
     handleGenerateShareId: PropTypes.func.isRequired,
-    handleInputChange: PropTypes.func.isRequired
+    handleImportCode: PropTypes.func.isRequired,
+    handleSubmitImportCode: PropTypes.func.isRequired,
+    importCode: PropTypes.string
 };
 
 Module.defaultProps = {
