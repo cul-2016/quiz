@@ -131,6 +131,19 @@ export function module (state = initialState, action ) {
         return update(state, {
             importCode: { $set: action.code }
         });
+    case actionsTypes.SUBMIT_IMPORT_CODE_REQUEST:
+        return update(state, {
+            isSubmittingImportCode: { $set: true }
+        });
+    case actionsTypes.SUBMIT_IMPORT_CODE_SUCCESS:
+        return update(state, {
+            isSubmittingImportCode: { $set: false }
+        });
+    case actionsTypes.SUBMIT_IMPORT_CODE_FAILURE:
+        return update(state, {
+            isSubmittingImportCode: { $set: false },
+            error: { $set: action.error }
+        });
 
     default:
         return state;

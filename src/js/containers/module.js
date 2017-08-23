@@ -22,7 +22,9 @@ const mapStateToProps = (state) => ({
         medals: state.module.medals,
         trophies: state.module.trophies,
         num_enrolled: state.module.num_enrolled,
-        importCode: state.module.importCode
+        importCode: state.module.importCode,
+        isSubmittingImportCode: state.module.isSubmittingImportCode,
+        error: state.module.error
     },
     quizzes: state.module.quizzes,
     surveys: state.module.surveys,

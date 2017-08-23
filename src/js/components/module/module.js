@@ -15,7 +15,10 @@ const Module = ({
     handleSetIsSurvey,
     handleGenerateShareId,
     handleImportCode,
-    handleSubmitImportCode }) => {
+    handleSubmitImportCode,
+    error }) => {
+
+        console.log(error);
 
     return (
         <div>
@@ -92,7 +95,8 @@ Module.propTypes = {
     handleGenerateShareId: PropTypes.func.isRequired,
     handleImportCode: PropTypes.func.isRequired,
     handleSubmitImportCode: PropTypes.func.isRequired,
-    importCode: PropTypes.string
+    importCode: PropTypes.string,
+    error: PropTypes.object
 };
 
 Module.defaultProps = {
