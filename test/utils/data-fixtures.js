@@ -403,7 +403,8 @@ const moduleInfo = {
             name: 'Week 1 Quiz',
             num_entries: '4',
             num_questions: '2',
-            quiz_id: 1
+            quiz_id: 1,
+            share_id: null
         },
         {
             is_last_quiz: false,
@@ -411,7 +412,8 @@ const moduleInfo = {
             name: 'Week 2 Quiz',
             num_entries: '3',
             num_questions: '3',
-            quiz_id: 2
+            quiz_id: 2,
+            share_id: null
         }
     ],
     surveys: [
@@ -420,14 +422,16 @@ const moduleInfo = {
             name: 'Week 1 Survey',
             num_entries: '4',
             num_questions: '2',
-            survey_id: 1
+            survey_id: 1,
+            share_id: null
         },
         {
             is_presented: true,
             name: 'Week 2 Survey',
             num_entries: '4',
             num_questions: '2',
-            survey_id: 2
+            survey_id: 2,
+            share_id: null
         }
     ],
     trophies: {

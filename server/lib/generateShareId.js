@@ -13,11 +13,12 @@ function generateShareId (client, quiz_id, survey_id, callback) {
         generateShareIdParams = [uniqueCode, survey_id];
     }
 
-    query(client, generateShareIdQuery, generateShareIdParams, (error) => {
+    query(client, generateShareIdQuery, generateShareIdParams, (error, response) => {
+        /* istanbul ignore if */
         if (error) {
             callback(error);
         } else {
-            callback(null, true);
+            callback(null, response);
         }
     });
 }

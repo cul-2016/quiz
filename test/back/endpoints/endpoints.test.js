@@ -220,7 +220,24 @@ test('/authenticate-user endpoint returns error for delAsync Redis call', (t) =>
         method: 'get',
         url: '/super-admin',
         expected: { lecturers: [{ email: 'authenticate-user@city.ac.uk', is_lecturer: true, user_id: 28, username: 'lecturer' }, { email: 'lecturer@city.ac.uk', is_lecturer: true, user_id: 2, username: 'lecturer' }, { email: 'not-authenticated-user@city.ac.uk', is_lecturer: true, user_id: 29, username: 'lecturer' }, { email: 'verification@email.com', is_lecturer: true, user_id: 27, username: 'lecturer-test-verify' }, { email: 'verify-lecturer@city.ac.uk', is_lecturer: true, user_id: 25, username: 'verify-lecturer' }], students: [{ email: 'apu@simpsons.com', is_lecturer: false, user_id: 11, username: 'Apu' }, { email: 'bart@simpsons.com', is_lecturer: false, user_id: 8, username: 'Bart' }, { email: 'comicbookguy@simpsons.com', is_lecturer: false, user_id: 19, username: 'Comic Book Guy' }, { email: 'drnick@simpsons.com', is_lecturer: false, user_id: 23, username: 'Dr Nick' }, { email: 'expiredpassword@city.ac.uk', is_lecturer: false, user_id: 32, username: 'expired-password' }, { email: 'homer@simpsons.com', is_lecturer: false, user_id: 5, username: 'Homer' }, { email: 'krusty@simpsons.com', is_lecturer: false, user_id: 20, username: 'Krusty' }, { email: 'lisa@simpsons.com', is_lecturer: false, user_id: 7, username: 'Lisa' }, { email: 'maggie@simpsons.com', is_lecturer: false, user_id: 9, username: 'Maggie' }, { email: 'marge@simpsons.com', is_lecturer: false, user_id: 6, username: 'Marge' }, { email: 'milhouse@simpsons.com', is_lecturer: false, user_id: 15, username: 'Milhouse' }, { email: 'mina@city.ac.uk', is_lecturer: false, user_id: 4, username: 'Mina' }, { email: 'mrburns@simpsons.com', is_lecturer: false, user_id: 13, username: 'Mr Burns' }, { email: 'ned@simpsons.com', is_lecturer: false, user_id: 10, username: 'Ned' }, { email: 'nelson@simpsons.com', is_lecturer: false, user_id: 16, username: 'Nelson' }, { email: 'patty@simpsons.com', is_lecturer: false, user_id: 17, username: 'Patty' }, { email: 'principalskinner@simpsons.com', is_lecturer: false, user_id: 24, username: 'Principal Skinner' }, { email: 'reset-password-endpoint@city.ac.uk', is_lecturer: false, user_id: 33, username: 'reset-password' }, { email: 'revlovejoy@simpsons.com', is_lecturer: false, user_id: 14, username: 'Rev Lovejoy' }, { email: 'selma@simpsons.com', is_lecturer: false, user_id: 18, username: 'Selma' }, { email: 'sideshowbob@simpsons.com', is_lecturer: false, user_id: 21, username: 'Sideshow Bob' }, { email: 'sideshowmel@simpsons.com', is_lecturer: false, user_id: 22, username: 'Sideshow Mel' }, { email: 'smithers@simpsons.com', is_lecturer: false, user_id: 12, username: 'Smithers' }, { email: 'sohil@city.ac.uk', is_lecturer: false, user_id: 3, username: 'Sohil' }, { email: 'sohilpandya@foundersandcoders.com', is_lecturer: false, user_id: 30, username: 'reset-password-student' }, { email: 'student@city.ac.uk', is_lecturer: false, user_id: 1, username: 'student' }, { email: 'validexpiry@city.ac.uk', is_lecturer: false, user_id: 31, username: 'valid-password-expiry' }, { email: 'verify-student@city.ac.uk', is_lecturer: false, user_id: 26, username: 'verify-student' }] }
-    }
+    },
+    {
+        method: 'post',
+        url: '/generate-share-id',
+        payload: { quiz_id: 1 },
+        expected: true
+    },
+    {
+        method: 'post',
+        url: '/generate-share-id',
+        payload: { survey_id: 1 },
+        expected: true
+    },
+    {
+        method: 'post',
+        url: '/generate-share-id',
+        expected: { statusCode: 400, error: 'Bad Request', message: '"value" must be an object', validation: { source: 'payload', keys: ['value'] } }
+    },
 ].forEach((endpoint) => {
     test(endpoint.url + ' endpoint returns expected payload', (t) => {
         t.plan(1);
