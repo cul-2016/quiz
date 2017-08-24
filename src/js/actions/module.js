@@ -178,6 +178,7 @@ export const submitImportCode = (import_code, module_id) => {
                 } else {
                     dispatch(submitImportCodeSuccess());
                     dispatch(getModule(module_id, true));
+                    dispatch(clearErrorMessage());
                 }
             })
             .catch((error) => {

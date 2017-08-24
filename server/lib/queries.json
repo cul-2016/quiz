@@ -55,6 +55,8 @@
     "getStudentHistory": "SELECT quizzes.quiz_id, quizzes.name, scores.score, COUNT(DISTINCT(questions.question_id)) AS num_questions FROM quizzes JOIN questions ON quizzes.quiz_id = questions.quiz_id JOIN scores ON quizzes.quiz_id = scores.quiz_id WHERE scores.user_id = $1 AND quizzes.module_id = $2 GROUP BY quizzes.quiz_id, scores.score, quizzes.name ORDER BY quizzes.quiz_id;",
     "deleteResponses": "DELETE FROM responses WHERE quiz_id = $1;",
     "getQuizforImport": "SELECT quizzes.quiz_id, quizzes.name, questions.question, questions.a, questions.b, questions.c, questions.d, questions.correct_answer, questions.order_id, questions.quiz_id FROM quizzes JOIN questions ON questions.quiz_id = quizzes.quiz_id WHERE quizzes.share_id = $1;",
+    "getSurveyforImport": "SELECT surveys.survey_id, surveys.name, questions.question, questions.a, questions.b, questions.c, questions.d, questions.correct_answer, questions.order_id, questions.survey_id FROM surveys JOIN questions ON questions.survey_id = surveys.survey_id WHERE surveys.share_id = $1;",
     "importQuiz": "INSERT INTO quizzes (module_id, name) VALUES ($1, $2) RETURNING quiz_id;",
-    "importQuestion": "INSERT INTO questions (order_id, quiz_id, question, a, b, c, d, correct_answer) VALUES ($1, $2, $3, $4, $5, $6, $7, $8);"
+    "importSurvey": "INSERT INTO surveys (module_id, name) VALUES ($1, $2) RETURNING survey_id;",
+    "importQuestion": "INSERT INTO questions (order_id, quiz_id, survey_id, question, a, b, c, d, correct_answer) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);"
 }

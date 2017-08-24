@@ -1,18 +1,37 @@
 const query = require('./query.js');
-const getQuizforImportQuery = require('./queries.json').getQuizforImport;
+const getQuizForImportQuery = require('./queries.json').getQuizforImport;
+const getSurveyForImportQuery = require('./queries.json').getSurveyforImport;
 const importQuizQuery = require('./queries.json').importQuiz;
+const importSurveyQuery = require('./queries.json').importSurvey;
 const importQuestionQuery = require('./queries.json').importQuestion;
 
 function submitImportCode (client, import_code, module_id, callback) {
-    const getQuizforImportParams = [import_code];
-    query(client, getQuizforImportQuery, getQuizforImportParams, (error, response) => {
+    const getImportParams = [import_code];
+    query(client, getQuizForImportQuery, getImportParams, (error, response) => {
         /* istanbul ignore if */
         if (error) {
             return callback(error);
         } else {
             let questions = response.rows;
             if (questions.length === 0) {
-                return callback(null, false);
+                query(client, getSurveyForImportQuery, getImportParams, (error, response) => {
+                    /* istanbul ignore if */
+                    if (error) {
+                        return callback(error);
+                    } else {
+                        let surveyQuestions = response.rows;
+                        if (surveyQuestions.length === 0) {
+                            return callback(null, false);
+                        } else {
+                            const survey_name = surveyQuestions[0].name;
+                            const importSurveyParams = [module_id, survey_name];
+                            query(client, importSurveyQuery, importSurveyParams, (error, response) => {
+                                const new_survey_id = response.rows[0].survey_id;
+                                return insertMultipleQuestions(client, importQuestionQuery, surveyQuestions, null, new_survey_id, callback);
+                            });
+                        }
+                    }
+                });
             } else {
                 const quiz_name = questions[0].name;
                 const importQuizParams = [module_id, quiz_name];
@@ -22,7 +41,7 @@ function submitImportCode (client, import_code, module_id, callback) {
                         return callback(error);
                     } else {
                         const new_quiz_id = response.rows[0].quiz_id;
-                        return insertMultipleQuestions(client, importQuestionQuery, questions, new_quiz_id, callback);
+                        return insertMultipleQuestions(client, importQuestionQuery, questions, new_quiz_id, null, callback);
                     }
                 });
             }
@@ -30,18 +49,18 @@ function submitImportCode (client, import_code, module_id, callback) {
     });
 }
 
-function insertMultipleQuestions (client, importQuestionQuery, questions, quiz_id, callback) {
+function insertMultipleQuestions (client, importQuestionQuery, questions, quiz_id, survey_id, callback) {
     if (questions.length === 0) {
         return callback(null, true);
     } else {
         const question = questions[0];
-        const params = [question.order_id, quiz_id, question.question, question.a, question.b, question.c, question.d, question.correct_answer];
+        const params = [question.order_id, quiz_id, survey_id, question.question, question.a, question.b, question.c, question.d, question.correct_answer];
         return query(client, importQuestionQuery, params, (error) => {
             if (error) {
                 return callback(error);
             } else {
                 const newQuestions = questions.slice(1);
-                return insertMultipleQuestions(client, importQuestionQuery, newQuestions, quiz_id, callback);
+                return insertMultipleQuestions(client, importQuestionQuery, newQuestions, quiz_id, survey_id, callback);
             }
         });
     }
