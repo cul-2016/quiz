@@ -11,6 +11,7 @@
 }
 
 .content__body {
+  box-sizing: border-box;
   max-width: 62rem;
   margin: 1rem auto;
   background-color: $white;
