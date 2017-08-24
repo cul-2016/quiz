@@ -44,6 +44,15 @@
     display: inline-block;
   }
 
+  &__err-message {
+    display: block;
+    margin-top: 0.5rem;
+    background-color: $pink;
+    padding: 0.5rem;
+    border-radius: 2px;
+    color: white;
+  }
+
   &__line {
     width: inherit;
     background-color: $dark-blue;

@@ -75,7 +75,7 @@ const Module = ({
                                 handleSubmitImportCode(module.importCode, module.module_id);
                             }} >Import Survey/Quiz</button>
                         { module.error &&
-                            <p style={{ color: 'red' }}>Invalid Code</p>
+                            <p className="module__err-message">No quiz found with this code</p>
                         }
                     </div>
                 </div>
