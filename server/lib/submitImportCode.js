@@ -15,7 +15,7 @@ function submitImportCode (client, import_code, module_id, callback) {
         } else {
             let questions = response.rows;
             if (questions.length === 0) {
-                return insertSurvey(client, module_id, importParams, callback);
+                return insertSurvey(client, importParams, module_id, callback);
             } else {
                 return insertQuiz(client, questions, module_id, callback);
             }
@@ -23,8 +23,8 @@ function submitImportCode (client, import_code, module_id, callback) {
     });
 }
 
-function insertSurvey (client, module_id, importParams, callback) {
-    query(client, getSurveyForImportQuery, importParams, (error, response) => {
+function insertSurvey (client, import_params, module_id, callback) {
+    query(client, getSurveyForImportQuery, import_params, (error, response) => {
         /* istanbul ignore if */
         if (error) {
             return callback(error);
@@ -60,18 +60,18 @@ function insertQuiz (client, questions, module_id, callback) {
     });
 }
 
-function insertMultipleQuestions (client, importQuestionQuery, questions, quiz_id, survey_id, callback) {
+function insertMultipleQuestions (client, import_question_query, questions, quiz_id, survey_id, callback) {
     if (questions.length === 0) {
         return callback(null, true);
     } else {
         const question = questions[0];
         const params = [question.order_id, quiz_id, survey_id, question.question, question.a, question.b, question.c, question.d, question.correct_answer];
-        return query(client, importQuestionQuery, params, (error) => {
+        return query(client, import_question_query, params, (error) => {
             if (error) {
                 return callback(error);
             } else {
                 const newQuestions = questions.slice(1);
-                return insertMultipleQuestions(client, importQuestionQuery, newQuestions, quiz_id, survey_id, callback);
+                return insertMultipleQuestions(client, import_question_query, newQuestions, quiz_id, survey_id, callback);
             }
         });
     }
