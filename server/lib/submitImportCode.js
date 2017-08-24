@@ -6,49 +6,56 @@ const importSurveyQuery = require('./queries.json').importSurvey;
 const importQuestionQuery = require('./queries.json').importQuestion;
 
 function submitImportCode (client, import_code, module_id, callback) {
-    const getImportParams = [import_code];
+    const importParams = [import_code];
     // query for quiz
-    query(client, getQuizForImportQuery, getImportParams, (error, response) => {
+    query(client, getQuizForImportQuery, importParams, (error, response) => {
         /* istanbul ignore if */
         if (error) {
             return callback(error);
         } else {
             let questions = response.rows;
             if (questions.length === 0) {
-                // query for survey
-                query(client, getSurveyForImportQuery, getImportParams, (error, response) => {
-                    /* istanbul ignore if */
-                    if (error) {
-                        return callback(error);
-                    } else {
-                        let surveyQuestions = response.rows;
-                        if (surveyQuestions.length === 0) {
-                            return callback(null, false);
-                        } else {
-                            const survey_name = surveyQuestions[0].name;
-                            const importSurveyParams = [module_id, survey_name];
-                            // query to insert survey
-                            query(client, importSurveyQuery, importSurveyParams, (error, response) => {
-                                const new_survey_id = response.rows[0].survey_id;
-                                return insertMultipleQuestions(client, importQuestionQuery, surveyQuestions, null, new_survey_id, callback);
-                            });
-                        }
-                    }
-                });
+                return insertSurvey(client, module_id, importParams, callback);
             } else {
-                const quiz_name = questions[0].name;
-                const importQuizParams = [module_id, quiz_name];
-                // query to insert quiz
-                query(client, importQuizQuery, importQuizParams, (error, response) => {
-                    /* istanbul ignore if */
-                    if (error) {
-                        return callback(error);
-                    } else {
-                        const new_quiz_id = response.rows[0].quiz_id;
-                        return insertMultipleQuestions(client, importQuestionQuery, questions, new_quiz_id, null, callback);
-                    }
+                return insertQuiz(client, questions, module_id, callback);
+            }
+        }
+    });
+}
+
+function insertSurvey (client, module_id, importParams, callback) {
+    query(client, getSurveyForImportQuery, importParams, (error, response) => {
+        /* istanbul ignore if */
+        if (error) {
+            return callback(error);
+        } else {
+            let surveyQuestions = response.rows;
+            if (surveyQuestions.length === 0) {
+                return callback(null, false);
+            } else {
+                const survey_name = surveyQuestions[0].name;
+                const importSurveyParams = [module_id, survey_name];
+                // query to insert survey
+                query(client, importSurveyQuery, importSurveyParams, (error, response) => {
+                    const new_survey_id = response.rows[0].survey_id;
+                    return insertMultipleQuestions(client, importQuestionQuery, surveyQuestions, null, new_survey_id, callback);
                 });
             }
+        }
+    });
+}
+
+function insertQuiz (client, questions, module_id, callback) {
+    const quiz_name = questions[0].name;
+    const importQuizParams = [module_id, quiz_name];
+    // query to insert quiz
+    query(client, importQuizQuery, importQuizParams, (error, response) => {
+        /* istanbul ignore if */
+        if (error) {
+            return callback(error);
+        } else {
+            const new_quiz_id = response.rows[0].quiz_id;
+            return insertMultipleQuestions(client, importQuestionQuery, questions, new_quiz_id, null, callback);
         }
     });
 }
@@ -69,5 +76,7 @@ function insertMultipleQuestions (client, importQuestionQuery, questions, quiz_i
         });
     }
 }
+
+
 
 module.exports = submitImportCode;
