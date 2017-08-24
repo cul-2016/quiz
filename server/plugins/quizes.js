@@ -7,7 +7,6 @@ const getQuizQuestions = require('../lib/getQuizQuestions');
 const getSurveyQuestions = require('../lib/getSurveyQuestions');
 const setQuizOrSurveyToPresented = require('../lib/setQuizOrSurveyToPresented.js');
 const calculateQuizScore = require('../lib/calculateQuizScore.js');
-const getIsLastQuiz = require('../lib/getIsLastQuiz.js');
 const setQuizScore = require('../lib/setQuizScore.js');
 const getNewTrophyState = require('../lib/getNewTrophyState.js');
 const setNewTrophyState = require('../lib/setNewTrophyState.js');
@@ -152,7 +151,6 @@ exports.register = (server, options, next) => {
             },
             handler: (request, reply) => {
                 const { id, isSurvey } = request.payload;
-                console.log(id, isSurvey, 'end quiz');
                 setQuizOrSurveyToPresented(pool, id, isSurvey, (error, result) => {
 
                     const verdict = error || result;
@@ -171,36 +169,31 @@ exports.register = (server, options, next) => {
                     const { module_id, quiz_id } = request.query;
                     const { user_id } = decoded.user_details;
 
-                    getIsLastQuiz(pool, quiz_id, (error, is_last_quiz) => {
+                    calculateQuizScore(pool, user_id, quiz_id, (error, score) => {
                         /* istanbul ignore if */
                         if (error) {
                             console.error(error);
                             return reply(error);
                         }
-                        calculateQuizScore(pool, user_id, quiz_id, (error, score) => {
+                        setQuizScore(pool, user_id, quiz_id, score.raw, (error) => {
                             /* istanbul ignore if */
                             if (error) {
                                 console.error(error);
                                 return reply(error);
                             }
-                            setQuizScore(pool, user_id, quiz_id, score.raw, (error) => {
+                            getNewTrophyState(pool, user_id, module_id, quiz_id, score.percentage, (error, newTrophyState) => {
                                 /* istanbul ignore if */
                                 if (error) {
                                     console.error(error);
                                     return reply(error);
                                 }
-                                getNewTrophyState(pool, user_id, module_id, quiz_id, score.percentage, is_last_quiz, (error, newTrophyState) => {
-                                    /* istanbul ignore if */
-                                    if (error) {
-                                        console.error(error);
-                                        return reply(error);
-                                    }
-                                    setNewTrophyState(pool, user_id, module_id, newTrophyState, (error) => {
 
-                                        const verdict = error || { newTrophyState: newTrophyState, score: score };
+                                setNewTrophyState(pool, user_id, module_id, newTrophyState, (error) => {
 
-                                        reply(verdict);
-                                    });
+
+                                    const verdict = error || { newTrophyState: newTrophyState, score: score };
+                                    console.log(verdict, '<<>><<><>><<>');
+                                    reply(verdict);
                                 });
                             });
                         });
@@ -292,12 +285,6 @@ exports.register = (server, options, next) => {
                     const parsed_quiz_id = parseInt(quiz_id, 10);
                     getQuizDetails(pool, parsed_quiz_id, (error, quizDetails) => {
                         const verdict = error || quizDetails;
-                        reply(verdict);
-                    });
-                } else if (survey_id !== undefined) {
-                    const parsed_survey_id = parseInt(survey_id, 10);
-                    getSurveyDetails(pool, parsed_survey_id, (error, surveyDetails) => {
-                        const verdict = error || surveyDetails;
                         reply(verdict);
                     });
                 } else {

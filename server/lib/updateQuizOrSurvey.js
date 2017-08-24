@@ -22,7 +22,7 @@ function updateQuizOrSurvey (client, module_id, quiz_id, survey_id, name, is_las
     }
 
     query(client, queryText, value, (error, response) => {
-
+        /* istanbul ignore if */
         if (error) {
             return callback(error);
         }

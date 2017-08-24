@@ -19,7 +19,7 @@ import ModuleContainer from './containers/module';
 import LecturerLiveQuizContainer from './containers/lecturer-live-quiz';
 import QuizHistoryContainer from './containers/quiz-history';
 import LeaderboardContainer from './containers/leaderboard';
-import HoldingPageComponent from './components/holding-page';
+import HoldingPageContainer from './containers/holding-page';
 import ReviewContainer from './containers/review';
 import ModuleMembersContainer from './containers/module-members';
 import QuizMembersContainer from './containers/quiz-members';
@@ -32,7 +32,10 @@ import StudentPerformanceContainer from './containers/student/feedback';
 import StudentLiveQuizContainer from './containers/student/live-quiz';
 import StudentQuizResultContainer from './containers/student/result';
 
+import SuperAdminDashboardContainer from './containers/super-admin/dashboard';
+
 import VerficationMessageComponent from './components/email-verification/verify-email-message.js';
+import PrivacyMessageComponent from './components/privacy-message.js';
 import VerifiedComponent from './components/email-verification/verified.js';
 
 import NotFound from './components/general/not-found';
@@ -50,6 +53,9 @@ const Root = ({ store }) => (
                 <IndexRoute
                     onEnter={ hooks.shouldUserRedirect }
                     component={ LoginContainer } />
+                <Route
+                    path="privacy"
+                    component={ PrivacyMessageComponent } />
                 <Route
                     onEnter={ hooks.clearState }
                     path="request-reset-password"
@@ -140,7 +146,7 @@ const Root = ({ store }) => (
                 <Route
                     onEnter={ composeHooks(hooks.authenticate, hooks.checkUserRole, hooks.checkModuleOwner) }
                     path=":module_id/:quiz_id/holding-page"
-                    component={ HoldingPageComponent } />
+                    component={ HoldingPageContainer } />
                 <Route
                     onEnter={ composeHooks(hooks.authenticate, hooks.checkUserRole, hooks.fetchQuizReview, hooks.checkModuleOwner) }
                     path=":module_id/:quiz_id/review"
@@ -153,6 +159,10 @@ const Root = ({ store }) => (
                     onEnter={ composeHooks(hooks.authenticate, hooks.checkModuleOwner) }
                     path=":module_id/:quiz_id/history"
                     component={ QuizHistoryContainer } />
+                    <Route
+                        onEnter={ composeHooks(hooks.authenticate, hooks.fetchSuperAdminDashboard) }
+                        path="/super-admin"
+                        component={ SuperAdminDashboardContainer } />
                 <Route
                     onEnter={ composeHooks(hooks.authenticate, hooks.checkUserRole, hooks.fetchLeaderboard, hooks.checkModuleOwner) }
                     path=":module_id/leaderboard"

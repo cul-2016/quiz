@@ -18,7 +18,7 @@ function getQuizMembers (client, id, isSurvey, callback) {
         getQuizMembersQuery = 'SELECT DISTINCT responses.user_id, users.username, users.email FROM responses INNER JOIN users ON responses.user_id = users.user_id WHERE survey_id=$1;';
     }
     query(client, getQuizMembersQuery, idArray, (error, response) => {
-
+        /* istanbul ignore if */
         if (error) {
             console.error(error);
             return callback(error);

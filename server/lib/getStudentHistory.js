@@ -15,7 +15,7 @@ function getStudentHistory (client, user_id, module_id, callback) {
     var values = [user_id, module_id];
 
     query(client, queryText, values, (error, response) => {
-
+        /* istanbul ignore if */
         if (error) {
             console.error(error);
             return callback(error);

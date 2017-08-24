@@ -15,7 +15,7 @@ function saveQuiz (client, module_id, name, is_last_quiz, callback) {
     var value = [module_id, name, is_last_quiz];
 
     query(client, queryText, value, (error, response) => {
-
+        /* istanbul ignore if */
         if (error) {
             return callback(error);
         }

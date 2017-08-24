@@ -4,14 +4,25 @@ import ErrorMessage from './general/error-message';
 
 const App = ({ children, location, username,
                error, isCookieAccepted, handleCookieMessage, //eslint-disable-line no-unused-vars
-               handleErrorClearance, is_lecturer }) => {
+               handleErrorClearance, is_lecturer, is_super_admin, loading }) => {
 
     return (
         <div>
         {
-            error &&
+            loading && !error &&
+            <div className="content">
+                <div className="content__body">
+                    <div className="loading">
+                        <img className="f-headline" src="/Yellow.svg" />
+                        <p className="f-title">Loading ...</p>
+                    </div>
+                </div>
+            </div>
+        }
+        {
+            !loading && error &&
                 <div>
-                    <Nav location={ location } username={ username } is_lecturer={ is_lecturer }  />
+                    <Nav location={ location } username={ username } is_lecturer={ is_lecturer } is_super_admin={ is_super_admin } />
                     { children }
                     <ErrorMessage
                         error={ error }
@@ -19,9 +30,9 @@ const App = ({ children, location, username,
                 </div>
         }
         {
-            !error &&
+            !loading && !error &&
             <div>
-                <Nav location={ location } username={ username } is_lecturer={ is_lecturer }  />
+                <Nav location={ location } username={ username } is_lecturer={ is_lecturer } is_super_admin={ is_super_admin }  />
                 { children }
             </div>
         }
@@ -37,7 +48,9 @@ App.propTypes = {
     handleCookieMessage: PropTypes.func.isRequired,
     location: PropTypes.object.isRequired,
     handleErrorClearance: PropTypes.func.isRequired,
-    is_lecturer: PropTypes.bool
+    is_lecturer: PropTypes.bool,
+    is_super_admin: PropTypes.bool,
+    loading: PropTypes.bool
 };
 
 export default App;

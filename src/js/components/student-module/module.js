@@ -63,6 +63,17 @@ const StudentModule = ({ location,
 
     let url = location.pathname.split('/');
     let livePath = isQuizOpen ? `/${url[1]}/${url[2]}/live` : location.pathname;
+
+    let totalTrophies = 0;
+
+    if (trophies_awarded) {
+        Object.keys(trophies_awarded).map((key) => {
+            if (trophies_awarded[key]) {
+                totalTrophies += 1;
+            }
+        });
+    }
+
     return (
         <div>
         {
@@ -79,15 +90,11 @@ const StudentModule = ({ location,
                         Join Live Quiz
                     </p>
                 </div>
-
-                {/*
-
-                  <div className="trophy">
+                <div className="trophy">
                     <label className="f-label"> Trophies </label>
                     <div className="trophy__small"> </div>
-                    <span className="f-body"> 1/4 </span>
-                  </div>
-                */}
+                    <span className="f-body"> {totalTrophies}/4 </span>
+                </div>
                 <Link className="button button__secondary button__icon--right" to={ `${module.module_id}/student/performance` }>
                         My Performance
                         <span className="icon">
@@ -123,8 +130,8 @@ StudentModule.propTypes = {
     review: PropTypes.object,
     history: PropTypes.array,
     medalConditions: PropTypes.array,
-    isFetchingStudentHistory: PropTypes.isfunc,
-    isFetchingFeedback: PropTypes.isfunc
+    isFetchingStudentHistory: PropTypes.bool,
+    isFetchingFeedback: PropTypes.bool
 };
 
 export default StudentModule;

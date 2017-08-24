@@ -13,7 +13,7 @@ var queries = require('./queries.json');
 function getMeanQuizScores (client, module_id, callback) {
 
     query(client, queries.getMeanQuizScores, [module_id], (error, data) => {
-
+        /* istanbul ignore if */
         if (error) {
             return callback(error);
         }

@@ -20,7 +20,7 @@ test('`getModuleForStudent` gets module info for a given student', (t) => {
             trophies_awarded: {
                 first_quiz: false,
                 high_score: false,
-                overall_average: false,
+                overall_score: false,
                 participation: false
             }
         };
@@ -42,5 +42,3 @@ test.onFinish(() => {
     redisCli.quit();
     pool.end();
 });
-
-

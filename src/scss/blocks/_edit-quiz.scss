@@ -5,6 +5,7 @@
     .card {
         margin: 1rem 0 1rem 0;
         width: inherit;
+        position: relative;
     }
 
     .line {
@@ -24,6 +25,17 @@
       margin: 0 1rem 0 0;
     }
 
+    .fa-arrows-v:before {
+        color: $dark-grey;
+    }
+
+    .fa-arrows-v:active {
+        cursor: grabbing;
+        cursor: -webkit-grabbing;
+        cursor: -moz-grabbing;
+        pointer-events: auto;
+    }
+
     .new-quiz--buttons {
         text-align: center;
         max-width: 54rem;
@@ -32,5 +44,22 @@
           display: block;
           margin: 1rem auto;
         }
+    }
+    &--drag-handle {
+        position: absolute;
+        right: 1rem;
+        cursor: move;
+        cursor: grab;
+        cursor: -webkit-grab;
+        cursor: -moz-grab;
+        pointer-events: auto;
+    }
+    &--drag-handle:active {
+        position: absolute;
+        right: 1rem;
+        cursor: grabbing;
+        cursor: -webkit-grabbing;
+        cursor: -moz-grabbing;
+        pointer-events: auto;
     }
 }

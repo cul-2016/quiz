@@ -9,8 +9,8 @@ exports.register = (server, options, next) => {
                 ? callback(null, true)
                 : callback(null, false);
             })
-            /* istanbul ignore next */
             .catch((error) => {
+                /*istanbul ignore next*/
                 callback(error, false);
             });
     };

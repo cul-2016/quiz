@@ -6,7 +6,8 @@ instrumentation:
         'utils/dev-server.js',
         '**/lib/onEnterHooks.js',
         '**/components/**',
-        '**/containers/**'
+        '**/containers/**',
+        'migrations.js'
     ]
 reporting:
     watermarks:

@@ -4,6 +4,7 @@ const users = [
         email: 'student@city.ac.uk',
         password: '$2a$10$UnvUuW91Jh6.zWQi3G/2J.HLDTomSqJHxvBC.TYx/Bj8HZa.AAm4K',
         is_lecturer: false,
+        is_super_admin: false,
         username: 'student',
         is_verified: true,
         expiry_code: null,
@@ -87,10 +88,10 @@ const expectedLecturer = {
         trophy_name: [
             "first_quiz",
             "high_score",
-            "overall_average",
+            "overall_score",
             "participation"
         ],
-        condition: [1, 100, 65, 2]
+        condition: [1, 100, 2, 2]
     },
     num_enrolled: 5,
     quizzes: [{
@@ -279,7 +280,7 @@ const getTotalScoresAndTrophiesData = [
     {
         first_quiz: false,
         high_score: false,
-        overall_average: false,
+        overall_score: false,
         participation: false,
         total_score: 3,
         user_id: 5,
@@ -287,7 +288,7 @@ const getTotalScoresAndTrophiesData = [
     }, {
         first_quiz: false,
         high_score: false,
-        overall_average: false,
+        overall_score: false,
         participation: false,
         total_score: 3,
         user_id: 1,
@@ -295,7 +296,7 @@ const getTotalScoresAndTrophiesData = [
     }, {
         first_quiz: false,
         high_score: false,
-        overall_average: false,
+        overall_score: false,
         participation: false,
         total_score: 2,
         user_id: 3,
@@ -303,7 +304,7 @@ const getTotalScoresAndTrophiesData = [
     }, {
         first_quiz: false,
         high_score: false,
-        overall_average: false,
+        overall_score: false,
         participation: false,
         total_score: 0,
         user_id: 11,
@@ -311,7 +312,7 @@ const getTotalScoresAndTrophiesData = [
     }, {
         first_quiz: false,
         high_score: false,
-        overall_average: false,
+        overall_score: false,
         participation: false,
         total_score: 0,
         user_id: 4,
@@ -426,9 +427,34 @@ const moduleInfo = {
         }
     ],
     trophies: {
-        condition: [1, 100, 65, 2],
-        trophy_name: ['first_quiz', 'high_score', 'overall_average', 'participation']
+        condition: [1, 100, 2, 2],
+        trophy_name: ['first_quiz', 'high_score', 'overall_score', 'participation']
     }
+};
+
+const superAdminDashboardData = {
+    students: [{
+        user_id: 1,
+        email: 'student@city.ac.uk',
+        is_lecturer: false,
+        is_super_admin: false,
+        username: 'student',
+        is_verified: true,
+        expiry_code: null,
+        verification_code: null,
+        reset_password_code: null
+    }],
+    lecturer: [{
+        user_id: 2,
+        email: 'lecturer@city.ac.uk',
+        is_lecturer: true,
+        is_super_admin: true,
+        username: 'student',
+        is_verified: true,
+        expiry_code: null,
+        verification_code: null,
+        reset_password_code: null
+    }]
 };
 
 
@@ -459,5 +485,6 @@ module.exports = {
     studentHistoryData,
     updateQuizOptionsPayload,
     questionsAnswers,
-    moduleInfo
+    moduleInfo,
+    superAdminDashboardData
 };

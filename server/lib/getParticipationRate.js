@@ -15,7 +15,7 @@ var MINIMUM_QUIZZES = 4;
 function getParticipationRate (client, user_id, module_id, callback) {
 
     getQuizScores(client, user_id, module_id, (error, studentScores) => {
-
+        /* istanbul ignore if */
         if (error) {
             console.error(error);
             return callback(error);
@@ -26,7 +26,7 @@ function getParticipationRate (client, user_id, module_id, callback) {
         var values = [user_id, module_id];
 
         query(client, queries.getParticipationRate, values, (error, response) => {
-
+            /* istanbul ignore if */
             if (error) {
                 console.error(error);
                 return callback(error);

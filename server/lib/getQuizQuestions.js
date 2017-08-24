@@ -10,11 +10,11 @@ var removeNullAnswers = require('./removeNullAnswers');
 
 function getQuizQuestions (client, quiz_id, callback) {
 
-    var moduleQuery = 'SELECT question_id, question, a, b, c, d FROM questions WHERE quiz_id=$1 ORDER BY question_id;';
+    var moduleQuery = 'SELECT question_id, order_id, question, a, b, c, d FROM questions WHERE quiz_id=$1 ORDER BY order_id, question_id;';
     var moduleValue = [quiz_id];
 
     query(client, moduleQuery, moduleValue, (error, response) => {
-
+        /* istanbul ignore if */
         if (error) {
             console.error(error);
             return callback(error);

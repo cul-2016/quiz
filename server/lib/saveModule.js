@@ -40,6 +40,7 @@ function saveModule (pool, module_id, user_id, name, medals, trophies, callback)
 
     function report (error, result) {
         index++;
+        /* istanbul ignore if */
         if (error) {
             console.error(error);
             return callback(error);

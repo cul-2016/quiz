@@ -1,6 +1,6 @@
 var getFirstQuizState = require('./trophy-methods').getFirstQuizState;
 var getHighScoreState = require('./trophy-methods').getHighScoreState;
-var getOverallAverageState = require('./trophy-methods').getOverallAverageState;
+var getOverallScoreState = require('./trophy-methods').getOverallScoreState;
 var getParticipationState = require('./trophy-methods').getParticipationState;
 
 /**
@@ -14,16 +14,16 @@ var getParticipationState = require('./trophy-methods').getParticipationState;
  * @param {function} callback - a callback function
  */
 
-function getNewTrophyState (client, user_id, module_id, quiz_id, percentageScore, is_last_quiz, callback) {
+function getNewTrophyState (client, user_id, module_id, quiz_id, percentageScore, callback) {
 
-    if (arguments.length !== 7) {
+    if (arguments.length !== 6) {
         throw new Error("`getNewTrophyState`: Incorrect number of arguments");
     }
 
     var trophies_awarded = {};
 
     getFirstQuizState(client, user_id, quiz_id, (error, first_quiz) => {
-
+        /* istanbul ignore if */
         if (error) {
             console.error(error);
             return callback(error);
@@ -31,7 +31,7 @@ function getNewTrophyState (client, user_id, module_id, quiz_id, percentageScore
         trophies_awarded.first_quiz = first_quiz;
 
         getHighScoreState(client, user_id, module_id, percentageScore, (error, high_score) => {
-
+            /* istanbul ignore if */
             if (error) {
                 console.error(error);
                 return callback(error);
@@ -41,28 +41,22 @@ function getNewTrophyState (client, user_id, module_id, quiz_id, percentageScore
 
 
             getParticipationState(client, user_id, module_id, (error, participation) => {
-
+                /* istanbul ignore if */
                 if (error) {
                     console.error(error);
                     return callback(error);
                 }
                 trophies_awarded.participation = participation;
 
-                if (is_last_quiz) {
-                    getOverallAverageState(client, user_id, module_id, (error, overall_average) => {
-
-                        if (error) {
-                            console.error(error);
-                            return callback(error);
-                        }
-                        trophies_awarded.overall_average = overall_average;
-
-                        return callback(null, trophies_awarded);
-                    });
-                } else {
-
-                    return callback(null, trophies_awarded);
-                }
+                getOverallScoreState(client, user_id, module_id, (error, overall_score) => {
+                    /* istanbul ignore if */
+                    if (error) {
+                        console.error(error);
+                        return callback(error);
+                    }
+                    trophies_awarded.overall_score = overall_score;
+                    callback(null, trophies_awarded);
+                });
             });
         });
     });

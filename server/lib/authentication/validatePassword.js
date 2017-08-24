@@ -8,6 +8,7 @@ var bcrypt = require('bcrypt');
 */
 function validatePassword (password, hashedPassword, callback) {
     bcrypt.compare(password, hashedPassword, (error, response) => {
+        /* istanbul ignore if */
         if (error) {
             callback(error);
         }

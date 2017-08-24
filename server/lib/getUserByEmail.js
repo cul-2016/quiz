@@ -12,7 +12,7 @@ function getUserByEmail (client, email, callback) {
     var userValue = [email];
 
     query(client, userQuery, userValue, (error, response) => {
-
+        /* istanbul ignore if */
         if (error) {
             return callback(error);
         }

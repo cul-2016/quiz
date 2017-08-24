@@ -8,6 +8,8 @@ export const UPDATE_INPUT_FIELD = 'UPDATE_INPUT_FIELD';
 export const REGISTERING_USER_REQUEST = 'REGISTERING_USER_REQUEST';
 export const REGISTERING_USER_SUCCESS = 'REGISTERING_USER_SUCCESS';
 export const REGISTERING_USER_FAILURE = 'REGISTERING_USER_FAILURE';
+export const TOGGLE_TC_AGREED = 'TOGGLE_TC_AGREED';
+export const SHOW_TC_AGREED_ERROR = 'SHOW_TC_AGREED_ERROR';
 
 export const updateInputField = (inputKey, value) => ({
     type: UPDATE_INPUT_FIELD,
@@ -58,4 +60,12 @@ export const registeringUserSuccess = (data) => ({
 export const registeringUserFailure = (error) => ({
     type: REGISTERING_USER_FAILURE,
     error
+});
+export const toggleTcAgreed = () => ({
+    type: TOGGLE_TC_AGREED
+});
+
+export const showTcAgreedError = () => ({
+    type: SHOW_TC_AGREED_ERROR,
+    error: 'Please agree to the privacy statement before proceeding'
 });
