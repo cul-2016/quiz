@@ -100,27 +100,31 @@ const expectedLecturer = {
         num_questions: '2',
         num_entries: '4',
         is_presented: true,
-        is_last_quiz: false
+        is_last_quiz: false,
+        share_id: 'testingsharecodeforquiz'
     }, {
         quiz_id: 2,
         name: 'Week 2 Quiz',
         num_questions: '3',
         num_entries: '3',
         is_presented: true,
-        is_last_quiz: false
+        is_last_quiz: false,
+        share_id: null
     }],
     surveys: [{
         survey_id: 1,
         name: 'Week 1 Survey',
         is_presented: true,
         num_entries: '4',
-        num_questions: '2'
+        num_questions: '2',
+        share_id: 'testingsharecodeforsurvey'
     }, {
         survey_id: 2,
         name: 'Week 2 Survey',
         is_presented: true,
         num_entries: '4',
-        num_questions: '2'
+        num_questions: '2',
+        share_id: null
     }]
 };
 
@@ -399,7 +403,8 @@ const moduleInfo = {
             name: 'Week 1 Quiz',
             num_entries: '4',
             num_questions: '2',
-            quiz_id: 1
+            quiz_id: 1,
+            share_id: 'testingsharecodeforquiz'
         },
         {
             is_last_quiz: false,
@@ -407,7 +412,8 @@ const moduleInfo = {
             name: 'Week 2 Quiz',
             num_entries: '3',
             num_questions: '3',
-            quiz_id: 2
+            quiz_id: 2,
+            share_id: null
         }
     ],
     surveys: [
@@ -416,14 +422,16 @@ const moduleInfo = {
             name: 'Week 1 Survey',
             num_entries: '4',
             num_questions: '2',
-            survey_id: 1
+            survey_id: 1,
+            share_id: 'testingsharecodeforsurvey'
         },
         {
             is_presented: true,
             name: 'Week 2 Survey',
             num_entries: '4',
             num_questions: '2',
-            survey_id: 2
+            survey_id: 2,
+            share_id: null
         }
     ],
     trophies: {

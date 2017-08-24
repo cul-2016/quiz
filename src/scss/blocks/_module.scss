@@ -3,6 +3,34 @@
   border: 1px solid;
   padding: 2rem 4rem;
 
+  .or-container {
+      text-align: center;
+      padding: 1rem;
+  }
+
+  .horizontal-spacer {
+      display: inline-block;
+      width: 2rem;
+      height: 1px;
+      background-color: grey;
+      margin-bottom: 0.3rem;
+  }
+
+  .form__input--import {
+      max-width: 8rem;
+  }
+
+  .import-container {
+      text-align: center;
+  }
+
+  .or {
+      display: inline-block;
+      margin-left: 0.3rem;
+      margin-right: 0.3rem;
+      color: grey;
+  }
+
   &__title-under-line {
     color: $dark-grey;
   }
@@ -14,6 +42,15 @@
 
     margin: 0 3rem;
     display: inline-block;
+  }
+
+  &__err-message {
+    display: block;
+    margin-top: 0.5rem;
+    background-color: $pink;
+    padding: 0.5rem;
+    border-radius: 2px;
+    color: white;
   }
 
   &__line {
@@ -86,57 +123,81 @@
   }
 }
 
-.module-quiz {
-  display: block;
-  position: relative;
+.module-quiz-container {
+    position: relative;
+    padding-top: 0.75rem;
 
-  &__index,
-  &__logo,
-  &__logo--white,
-  &__buttons,
-  &__entries,
-  &__name,
-  &__questions {
-    display: inline-block;
-    position:absolute;
-  }
+    .module-quiz {
+      display: block;
+      position: relative;
 
-  &__line {
-    height: 1px;
-    background-color: $pale-grey;
-  }
+      &__index,
+      &__logo,
+      &__logo--white,
+      &__buttons,
+      &__entries,
+      &__name,
+      &__questions {
+        display: inline-block;
+        position:absolute;
+      }
 
-  &__index {
-    left: 1rem;
-    top: 1rem;
-  }
+      &__line {
+        height: 1px;
+        background-color: $pale-grey;
+      }
 
-  .logo, .logo--white {
-    margin-left: 4rem;
-  }
+      &__index {
+        left: 1rem;
+        top: 1rem;
+      }
 
-  &__buttons {
-    top: 0.5rem;
-    right: 3rem;
+      .logo, .logo--white {
+        margin-left: 4rem;
+      }
 
-    .button {
-      margin-left: 0.5rem;
+      &__buttons {
+        top: 0.5rem;
+        right: 3rem;
+
+        .button {
+          margin-left: 0.5rem;
+        }
+      }
+
+      &__name {
+        top: 0rem;
+        left: 11rem;
+      }
+
+      &__questions {
+        top: 1.7rem;
+        left: 11rem;
+        color: $dark-blue;
+      }
+
+      &__entries {
+        top: 1.7rem;
+        right: 5rem;
+      }
     }
-  }
 
-  &__name {
-    top: 0rem;
-    left: 11rem;
-  }
+    .share-button {
+      position: absolute;
+      right: 41.2%;
+      top: 1.2rem;
 
-  &__questions {
-    top: 1.7rem;
-    left: 11rem;
-    color: $dark-blue;
-  }
+        button {
+            margin-left: 0.5rem;
+        }
 
-  &__entries {
-    top: 1.7rem;
-    right: 5rem;
-  }
+        .edit {
+            min-width: 5.5rem;
+        }
+    }
+    .share-code {
+      position: absolute;
+      top: 0;
+      right: 5rem;
+    }
 }
