@@ -320,9 +320,11 @@ INSERT INTO trophies (module_id, trophy_name, condition)
 
 /********* insert quizzes ********/
 
+INSERT INTO quizzes (module_id, name, is_presented, share_id)
+    VALUES ('TEST', 'Week 1 Quiz', true, 'testingsharecodeforquiz');
+
 INSERT INTO quizzes (module_id, name, is_presented)
-    VALUES ('TEST', 'Week 1 Quiz', true),
-           ('TEST', 'Week 2 Quiz', true),
+    VALUES ('TEST', 'Week 2 Quiz', true),
            ('CENT', 'Trivia quiz', true),
            ('CENT', 'Arbitrary 1', true),
            ('CENT', 'Arbitrary 2', true),
@@ -330,9 +332,13 @@ INSERT INTO quizzes (module_id, name, is_presented)
            ('FAC8', 'Best Quiz EVER!', false),
            ('FAC8', 'Quiz for testing abort functionality', false);
 
+/********* insert surveys ********/
+
+INSERT INTO surveys (module_id, name, is_presented, share_id)
+    VALUES ('TEST', 'Week 1 Survey', true, 'testingsharecodeforsurvey');
+
 INSERT INTO surveys (module_id, name, is_presented)
-    VALUES ('TEST', 'Week 1 Survey', true),
-           ('TEST', 'Week 2 Survey', true),
+    VALUES ('TEST', 'Week 2 Survey', true),
            ('CENT', 'Arbitrary Survey 1', true),
            ('CENT', 'Arbitrary Survey 2', true),
            ('CENT', 'Arbitrary Survey 3', true),
