@@ -48,9 +48,6 @@ class Dashboard extends Component {
                         <span className="icon">
                           <i className="fa fa-plus" />
                         </span>
-                        <span>
-                          New Module
-                        </span>
                       </button>
                     </Link>
                   </div>

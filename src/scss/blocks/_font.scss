@@ -1,18 +1,18 @@
 .f-display {
-    font-size: 3rem;
+    font-size: 3rem; // 48px
     font-weight: bold;
     letter-spacing: -0.1rem;
-    color: $black;
+    color: $blue;
     &--primary-dark {
-        color: $dark-blue;
+        color: $blue;
         text-shadow: 0px 2px 0px 0px $light-blue;
     }
     &--primary-light {
-        color: $light-blue;
+        color: $blue;
         text-shadow: 0px 2px 0px 0px $dark-blue;
     }
     &--tertiary {
-        color: $light-pink;
+        color: $red;
         text-shadow: 2px 2px 0px $red;
     }
     &--secondary {
@@ -22,7 +22,7 @@
 }
 
 .f-headline {
-    font-size: 2.25rem;
+    font-size: 1.875rem; // 30px
     font-weight: bold;
     text-transform: capitalize;
     line-height: 2.6rem;
@@ -30,7 +30,24 @@
     color: $black;
 
     &--primary {
-        color: $gold;
+        color: $blue;
+    }
+    &--secondary {
+        color: $red;
+    }
+    &--light {
+      color: $white;
+    }
+}
+
+.f-title {
+    font-size: 1.5rem; //24px
+    font-weight: 300;
+    line-height: 1.25rem;
+    color: $blue;
+
+    &--primary {
+        color: $blue;
     }
 
     &--secondary {
@@ -38,33 +55,14 @@
     }
 
     &--light {
-      color: $white;
-    }
-}
-
-.f-title {
-    font-size: 1.75rem;
-    font-weight: 300;
-    line-height: 2rem;
-    color: $black;
-
-    &--primary {
-        color: $gold;
-    }
-
-    &--secondary {
-        color: $blue;
-    }
-
-    &--light {
-        color: $grey;
+        color: $white;
     }
 }
 
 .f-subheader {
     font-size: 1.25rem;
     font-weight: bold;
-    line-height: 1.5rem;
+    line-height: 1.25rem;
     color: $black;
 
     &--tertiary {
@@ -76,17 +74,16 @@
 }
 
 .f-body {
-    font-size: 1rem;
-    font-weight: bold;
-    line-height: 1.4rem;
+    font-size: 1rem; // 16px
+    line-height: 1.5rem;
     color: $black;
 
     &--primary {
-        color: $dark-gold;
+        color: $blue;
     }
 
     &--secondary {
-        color: $blue;
+        color: $red;
     }
 
     &--tertiary {
@@ -104,16 +101,18 @@
         color: $white;
         font-weight: 500;
     }
-
     &--dark {
-      color: $dark-blue;
+      color: $blue;
     }
-
+    &--link {
+      text-decoration: underline;
+      color: $blue;
+    }
 
 }
 
 .f-label {
-    font-size: 0.875rem;
+    font-size: 0.875rem; // 14px
     line-height: 1.2rem;
     letter-spacing: 1px;
     color: $grey;
@@ -125,7 +124,7 @@
 }
 
 .f-small-body {
-    font-size: 0.75rem;
+    font-size: 0.875rem; // 14px
     font-weight: bolder;
     line-height: 1.25rem;
     color: $black;
@@ -135,13 +134,13 @@
     }
 
     &--dark {
-        color: $dark-blue;
+        color: $blue;
     }
     &--light {
         color: $white;
     }
     &--primary {
-        color: $gold;
+        color: $blue;
     }
     &--grey {
         color: $grey;

@@ -1,6 +1,5 @@
 .dashboard {
     text-align: center;
-    min-height: 100vh;
 
     .display {
         padding: 2rem 0 1rem 0;
@@ -39,14 +38,6 @@
         padding-top: 0;
     }
 }
-
-.dashboard__lecturer {
-
-    .fa-plus:before {
-        padding-right: 1rem;
-    }
-}
-
 
 @media (min-width: 769px) {
   .dashboard {

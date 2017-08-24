@@ -1,5 +1,6 @@
-.content {
+.app {
   background-color: $grey;
+  background-image: url(../../public/assets/app_bg.svg);
   height: 100%;
     &--pattern-background {
         height: 100vh;
@@ -8,16 +9,29 @@
     &--join-quiz {
         background-image: url(../../public/background-join-quiz.svg);
     }
+
+    &--login {
+      background-image: url('/Login_bg_pattern.svg');
+    }
 }
 
 .content__body {
   box-sizing: border-box;
-  max-width: 62rem;
-  margin: 1rem auto;
+  max-width: 72rem;
+  margin: 5rem auto;
   background-color: $white;
   border-radius: 0.625rem;
   padding: 5rem;
-  -webkit-box-shadow: 0px 0px 10px 10px rgba(0,0,0,0.04);
-  -moz-box-shadow: 0px 0px 10px 10px rgba(0,0,0,0.04);
-  box-shadow: 0px 0px 10px 10px rgba(0,0,0,0.04)
+  -webkit-box-shadow: 0px 11px 70px 12px rgba(0, 0, 0, 0.04);
+  -moz-box-shadow: 0px 11px 70px 12px rgba(0, 0, 0, 0.04);
+  box-shadow: 0px 11px 70px 12px rgba(0, 0, 0, 0.04);
+
+  &--login {
+    background-color: $white-75;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 50%;
+    margin: 0;
+  }
 }

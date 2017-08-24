@@ -5,12 +5,14 @@ import ErrorMessage from './general/error-message';
 const App = ({ children, location, username,
                error, isCookieAccepted, handleCookieMessage, //eslint-disable-line no-unused-vars
                handleErrorClearance, is_lecturer, is_super_admin, loading }) => {
-
+                 console.log(location.pathname);
+    const customClasses = `app ${location.pathname === '/' ? 'app--login' : ''}`;
+    console.log(customClasses);
     return (
         <div>
         {
             loading && !error &&
-            <div className="content">
+            <div className={ customClasses }>
                 <div className="content__body">
                     <div className="loading">
                         <img className="f-headline" src="/Yellow.svg" />
@@ -31,7 +33,7 @@ const App = ({ children, location, username,
         }
         {
             !loading && !error &&
-            <div>
+            <div className={ customClasses }>
                 <Nav location={ location } username={ username } is_lecturer={ is_lecturer } is_super_admin={ is_super_admin }  />
                 { children }
             </div>
