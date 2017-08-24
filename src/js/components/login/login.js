@@ -53,7 +53,7 @@ const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthentic
                 <button onClick={ handleOnSubmit } className="button button__primary">
                   <p className="f-subheader">Log in</p>
                 </button>
-                <p className="f-body f-body--dark"> Don't have an Account? </p>
+                <p className="f-body f-body--dark"> Don&#39;t have an Account? </p>
                 <div> <Link className="f-body" to="/register-student"> Sign Up </Link> </div>
 
                 <div className="forgotten-password"> <Link className="f-body" to="/request-reset-password"> Forgotten Password </Link> </div>
