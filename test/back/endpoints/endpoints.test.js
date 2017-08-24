@@ -238,6 +238,18 @@ test('/authenticate-user endpoint returns error for delAsync Redis call', (t) =>
         url: '/generate-share-id',
         expected: { statusCode: 400, error: 'Bad Request', message: '"value" must be an object', validation: { source: 'payload', keys: ['value'] } }
     },
+    {
+        method: 'post',
+        url: '/submit-import-code',
+        payload: { import_code: 'testingsharecodeforquiz', module_id: 'TEST' },
+        expected: true
+    },
+    {
+        method: 'post',
+        url: '/submit-import-code',
+        payload: { import_code: 'fake', module_id: 'TEST' },
+        expected: { message: 'Quiz does not exist' }
+    },
 ].forEach((endpoint) => {
     test(endpoint.url + ' endpoint returns expected payload', (t) => {
         t.plan(1);
