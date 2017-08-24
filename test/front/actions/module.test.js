@@ -1,9 +1,15 @@
 import test from 'tape';
+import sinon from 'sinon';
+import axios from 'axios';
+
 import createThunk from '../../utils/mockThunk';
 import * as actions from '../../../src/js/actions/module';
 import { getModuleError as error, getModuleMembersError, removeModuleMemberError } from '../../utils/action-fixtures';
 import deepFreeze from '../../utils/deepFreeze';
 import { module as data, getModuleMembers } from '../../utils/data-fixtures';
+import { initialState } from '../../../src/js/reducers/module.js';
+
+const createSandbox = sinon.sandbox.create;
 
 
 //
@@ -209,4 +215,81 @@ test('removeModuleMemberFailure creates the correct action', (t) => {
 
     const actual = deepFreeze(actions.removeModuleMemberFailure(removeModuleMemberError));
     t.deepEqual(actual, expected);
+});
+
+
+//
+// SHARING QUIZ ID
+//
+
+test('generateShareId async action: success', (t) => {
+    t.plan(2);
+    const quiz_id = 1,
+        module_id = 'TEST',
+        sandbox = createSandbox(),
+        successResponse = 'ok',
+        successPromise = new Promise((resolve) => resolve(successResponse));
+
+    sandbox.stub(axios, 'post').returns(successPromise);
+
+    const { dispatch, queue } = createThunk({ module: initialState });
+
+    dispatch(actions.generateShareId(quiz_id, null, module_id));
+
+    setTimeout(() => {
+        t.deepEqual(
+            queue.shift(),
+            {
+                type: actions.GENERATE_SHARE_ID_REQUEST
+            },
+            'flags generateShareId request'
+        );
+
+        t.deepEqual(
+            queue.shift(),
+            {
+                type: actions.GENERATE_SHARE_ID_SUCCESS
+            },
+            'flags generateShareId success'
+        );
+        sandbox.restore();
+    }, 300);
+});
+
+test('generateShareId async action: failure', (t) => {
+    t.plan(2);
+
+    const quiz_id = 1,
+        module_id = 'TEST',
+        sandbox = createSandbox(),
+        failureResponse = {
+            response: { status: 500 },
+            message: 'Sorry, something went wrong!'
+        },
+        failurePromise = Promise.reject(failureResponse);
+
+    sandbox.stub(axios, 'post').returns(failurePromise);
+    const { dispatch, queue } = createThunk({ module: initialState });
+
+    dispatch(actions.generateShareId(quiz_id, null, module_id));
+
+    setTimeout(() => {
+        t.deepEqual(
+            queue.shift(),
+            {
+                type: actions.GENERATE_SHARE_ID_REQUEST
+            },
+            'flags generateShareId request'
+        );
+
+        t.deepEqual(
+            queue.shift(),
+            {
+                type: actions.GENERATE_SHARE_ID_FAILURE,
+                error: failureResponse
+            },
+            'flags generateShareId failure'
+        );
+        sandbox.restore();
+    }, 300);
 });
