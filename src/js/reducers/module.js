@@ -17,7 +17,8 @@ export const initialState = {
     isQuizOpen: false,
     isRemovingMember: false,
     isGeneratingShareId: false,
-    importCode: null
+    importCode: null,
+    isSubmittingImportCode: false
 };
 
 export function module (state = initialState, action ) {
