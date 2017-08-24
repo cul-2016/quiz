@@ -62,3 +62,4 @@ require('./deleteUser.test.js');
 require('./getFullQuestionSet.test.js');
 require('./getFullAnswerSet.test.js');
 require('./generateShareId.test.js');
+require('./submitImportCode.test.js');

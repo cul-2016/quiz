@@ -101,7 +101,7 @@ const expectedLecturer = {
         num_entries: '4',
         is_presented: true,
         is_last_quiz: false,
-        share_id: null
+        share_id: 'testingsharecodeforquiz'
     }, {
         quiz_id: 2,
         name: 'Week 2 Quiz',
@@ -117,7 +117,7 @@ const expectedLecturer = {
         is_presented: true,
         num_entries: '4',
         num_questions: '2',
-        share_id: null
+        share_id: 'testingsharecodeforsurvey'
     }, {
         survey_id: 2,
         name: 'Week 2 Survey',
@@ -404,7 +404,7 @@ const moduleInfo = {
             num_entries: '4',
             num_questions: '2',
             quiz_id: 1,
-            share_id: null
+            share_id: 'testingsharecodeforquiz'
         },
         {
             is_last_quiz: false,
@@ -423,7 +423,7 @@ const moduleInfo = {
             num_entries: '4',
             num_questions: '2',
             survey_id: 1,
-            share_id: null
+            share_id: 'testingsharecodeforsurvey'
         },
         {
             is_presented: true,

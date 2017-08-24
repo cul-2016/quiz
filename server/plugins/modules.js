@@ -15,7 +15,7 @@ const getBestAndWorstQuiz = require('../lib/getBestAndWorstQuiz');
 const getParticipationRate = require('../lib/getParticipationRate');
 const getStudentHistory = require('../lib/getStudentHistory.js');
 const generateShareId = require('../lib/generateShareId.js');
-const submitImportCode = require('../lib/submitImportCode.js');
+const submitImportCode = require('../lib/submitImportCode.js').submitImportCode;
 
 const jwt = require('jsonwebtoken');
 const Joi = require('joi');
