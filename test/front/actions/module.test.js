@@ -219,7 +219,7 @@ test('removeModuleMemberFailure creates the correct action', (t) => {
 
 
 //
-// SHARING QUIZ ID
+// Generate Share ID
 //
 
 test('generateShareId async action: success', (t) => {
@@ -289,6 +289,122 @@ test('generateShareId async action: failure', (t) => {
                 error: failureResponse
             },
             'flags generateShareId failure'
+        );
+        sandbox.restore();
+    }, 300);
+});
+
+//
+// Submit Share ID
+//
+
+test('submitImportCode async action: success', (t) => {
+    t.plan(2);
+    const import_code = 'sampleCode',
+        module_id = 'TEST',
+        sandbox = createSandbox(),
+        successResponse = {
+            data: {}
+        },
+        successPromise = new Promise((resolve) => resolve(successResponse));
+
+    sandbox.stub(axios, 'post').returns(successPromise);
+
+    const { dispatch, queue } = createThunk({ module: initialState });
+
+    dispatch(actions.submitImportCode(import_code, module_id));
+
+    setTimeout(() => {
+        t.deepEqual(
+            queue.shift(),
+            {
+                type: actions.SUBMIT_IMPORT_CODE_REQUEST
+            },
+            'flags submitImportCode request'
+        );
+
+        t.deepEqual(
+            queue.shift(),
+            {
+                type: actions.SUBMIT_IMPORT_CODE_SUCCESS
+            },
+            'flags submitImportCode success'
+        );
+        sandbox.restore();
+    }, 300);
+});
+test('submitImportCode async action: success with failure custom message', (t) => {
+    t.plan(2);
+    const import_code = 'sampleCode',
+        module_id = 'TEST',
+        sandbox = createSandbox(),
+        successResponse = {
+            data: {
+                message: 'wrong share id'
+            }
+        },
+        successPromise = new Promise((resolve) => resolve(successResponse));
+
+    sandbox.stub(axios, 'post').returns(successPromise);
+
+    const { dispatch, queue } = createThunk({ module: initialState });
+
+    dispatch(actions.submitImportCode(import_code, module_id));
+
+    setTimeout(() => {
+        t.deepEqual(
+            queue.shift(),
+            {
+                type: actions.SUBMIT_IMPORT_CODE_REQUEST
+            },
+            'flags submitImportCode request'
+        );
+
+        t.deepEqual(
+            queue.shift(),
+            {
+                type: actions.SUBMIT_IMPORT_CODE_FAILURE,
+                error: 'wrong share id'
+            },
+            'flags submitImportCode success'
+        );
+        sandbox.restore();
+    }, 300);
+});
+
+test('submitImportCode async action: failure', (t) => {
+    t.plan(2);
+
+    const import_code = 'sampleCode',
+        module_id = 'TEST',
+        sandbox = createSandbox(),
+        failureResponse = {
+            response: { status: 500 },
+            message: 'Sorry, something went wrong!'
+        },
+        failurePromise = Promise.reject(failureResponse);
+
+    sandbox.stub(axios, 'post').returns(failurePromise);
+    const { dispatch, queue } = createThunk({ module: initialState });
+
+    dispatch(actions.submitImportCode(import_code, module_id));
+
+    setTimeout(() => {
+        t.deepEqual(
+            queue.shift(),
+            {
+                type: actions.SUBMIT_IMPORT_CODE_REQUEST
+            },
+            'flags submitImportCode request'
+        );
+
+        t.deepEqual(
+            queue.shift(),
+            {
+                type: actions.SUBMIT_IMPORT_CODE_FAILURE,
+                error: failureResponse
+            },
+            'flags submitImportCode failure'
         );
         sandbox.restore();
     }, 300);
