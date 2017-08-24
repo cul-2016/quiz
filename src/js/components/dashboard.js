@@ -44,7 +44,7 @@ class Dashboard extends Component {
                   is_lecturer &&
                   <div className="dashboard__lecturer">
                     <Link to="add-new-module">
-                      <button className="button button__dark">
+                      <button className="button">
                         <span className="icon">
                           <i className="fa fa-plus" />
                         </span>

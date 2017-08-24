@@ -1,42 +1,35 @@
 .navbar {
     width: 100%;
-    background-color: $light-blue;
-    box-shadow: inset 0 -2px 0 0 $dark-blue, 0 1px 0 0 $black;
+    background-color: $blue;
     font-size: 1rem;
-    display: table;
-    table-layout: fixed;
+
+    height: 5rem;
+
+    &__inner { // comes imediately after the .navbar
+      max-width: 72rem;
+      margin: auto;
+    }
 
     &__container {
-      max-width: 52rem;
-      padding: 0 2rem;
-      margin: 0 auto;
-
-
+      display: table;
+      table-layout: fixed;
+      height: 5rem;
+      width: 100%;
     }
 
     &__item {
-        &--left {
-          float: left;
-        }
+      display: table-cell;
+      vertical-align: middle;
+        &--left {}
         &--right {
-          float: right;
+          text-align: right;
         }
     }
 
     &__link {
-        padding: 1rem;
         line-height: 1.4rem;
-        color: $black;
+        color: $white;
         cursor: pointer;
-
-        &--left {
-            float: left;
-        }
-
-        &--right {
-            float: right;
-            margin-right: 15%;
-        }
 
         &--back {
             border-bottom: 2px solid $white;

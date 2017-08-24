@@ -17,18 +17,19 @@ const Nav = ({ location, is_lecturer }) => {
 
     return (
         <ul className={ navClasses}>
-
+          <div className="navbar__inner">
             <div className="navbar__container">
-            <li className="navbar__item navbar__item--left" onClick={ () => hashHistory.push('/dashboard') }>
-                <p className="navbar__link navbar__link--left">
-                    Home
-                </p>
-            </li>
-            <li className="navbar__item navbar__item--right" onClick={ logout }>
-                <p className="navbar__link navbar__link--right">
-                    Logout
-                </p>
-            </li>
+              <li className="navbar__item navbar__item--left" onClick={ () => hashHistory.push('/dashboard') }>
+                  <p className="navbar__link navbar__link--left">
+                      Home
+                  </p>
+              </li>
+              <li className="navbar__item navbar__item--right" onClick={ logout }>
+                  <button className="button">
+                      Logout
+                  </button>
+              </li>
+            </div>
           </div>
         </ul>
     );
