@@ -16,6 +16,18 @@ export const REMOVE_MODULE_MEMBER_REQUEST = 'REMOVE_MODULE_MEMBER_REQUEST';
 export const REMOVE_MODULE_MEMBER_SUCCESS = 'REMOVE_MODULE_MEMBER_SUCCESS';
 export const REMOVE_MODULE_MEMBER_FAILURE = 'REMOVE_MODULE_MEMBER_FAILURE';
 
+export const GENERATE_SHARE_ID_REQUEST = 'GENERATE_SHARE_ID_REQUEST';
+export const GENERATE_SHARE_ID_SUCCESS = 'GENERATE_SHARE_ID_SUCCESS';
+export const GENERATE_SHARE_ID_FAILURE = 'GENERATE_SHARE_ID_FAILURE';
+
+export const UPDATE_IMPORT_CODE = 'UPDATE_IMPORT_CODE';
+
+export const SUBMIT_IMPORT_CODE_REQUEST = 'SUBMIT_IMPORT_CODE_REQUEST';
+export const SUBMIT_IMPORT_CODE_SUCCESS = 'SUBMIT_IMPORT_CODE_SUCCESS';
+export const SUBMIT_IMPORT_CODE_FAILURE = 'SUBMIT_IMPORT_CODE_FAILURE';
+
+export const CLEAR_ERROR_MESSAGE = 'CLEAR_ERROR_MESSAGE';
+
 export const openQuiz = () => ( {
     type: OPEN_QUIZ
 });
@@ -114,4 +126,80 @@ export const removeModuleMemberSuccess = () => ({
 export const removeModuleMemberFailure = (error) => ({
     type: REMOVE_MODULE_MEMBER_FAILURE,
     error
+});
+
+export const generateShareId = (quiz_id, survey_id, module_id) => {
+    // let isQuiz = typeof quiz_id !== 'undefined';
+    return (dispatch) => {
+        dispatch(generateShareIdRequest());
+
+        request.post(dispatch)('/generate-share-id', { quiz_id, survey_id })
+            .then(() => {
+                dispatch(generateShareIdSuccess());
+                dispatch(getModule(module_id, true));
+            })
+            .catch((error) => {
+                dispatch(generateShareIdFailure(error));
+            });
+    };
+};
+
+export const generateShareIdRequest = () => ({
+    type: GENERATE_SHARE_ID_REQUEST
+});
+
+export const generateShareIdSuccess = () => ({
+    type: GENERATE_SHARE_ID_SUCCESS
+});
+
+export const generateShareIdFailure = (error) => ({
+    type: GENERATE_SHARE_ID_FAILURE,
+    error
+});
+
+export const updateImportCode = (code) => {
+    return {
+        type: UPDATE_IMPORT_CODE,
+        code
+    };
+};
+
+export const submitImportCode = (import_code, module_id) => {
+    return (dispatch) => {
+        dispatch(submitImportCodeRequest());
+
+        request.post(dispatch)('/submit-import-code', { import_code, module_id })
+            .then((response) => {
+                if (response.data.message) {
+                    dispatch(submitImportCodeFailure(response.data.message));
+                    setTimeout(() => {
+                        dispatch(clearErrorMessage());
+                    }, 5000);
+                } else {
+                    dispatch(submitImportCodeSuccess());
+                    dispatch(getModule(module_id, true));
+                    dispatch(clearErrorMessage());
+                }
+            })
+            .catch((error) => {
+                dispatch(submitImportCodeFailure(error));
+            });
+    };
+};
+
+export const submitImportCodeRequest = () => ({
+    type: SUBMIT_IMPORT_CODE_REQUEST
+});
+
+export const submitImportCodeSuccess = () => ({
+    type: SUBMIT_IMPORT_CODE_SUCCESS
+});
+
+export const submitImportCodeFailure = (error) => ({
+    type: SUBMIT_IMPORT_CODE_FAILURE,
+    error
+});
+
+export const clearErrorMessage = () => ({
+    type: CLEAR_ERROR_MESSAGE
 });
