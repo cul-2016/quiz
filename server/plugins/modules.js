@@ -14,6 +14,8 @@ const hasStudentSubmitted = require('../lib/hasStudentSubmitted');
 const getBestAndWorstQuiz = require('../lib/getBestAndWorstQuiz');
 const getParticipationRate = require('../lib/getParticipationRate');
 const getStudentHistory = require('../lib/getStudentHistory.js');
+const generateShareId = require('../lib/generateShareId.js');
+const submitImportCode = require('../lib/submitImportCode.js').submitImportCode;
 
 const jwt = require('jsonwebtoken');
 const Joi = require('joi');
@@ -311,6 +313,51 @@ exports.register = (server, options, next) => {
                 removeModuleMember(pool, module_id, parsed_user_id, (error, modules) => {
                     const verdict = error || modules;
                     reply(verdict);
+                });
+            }
+        },
+        {
+            method: 'POST',
+            path: '/generate-share-id',
+            config: {
+                validate: {
+                    payload: {
+                        quiz_id: Joi.number(),
+                        survey_id: Joi.number()
+                    }
+                }
+            },
+            handler: (request, reply) => {
+                const { quiz_id, survey_id } = request.payload;
+
+                generateShareId(pool, quiz_id, survey_id, (error, response) => {
+
+                    const verdict = error || typeof response === 'object';
+                    reply(verdict);
+                });
+            }
+        },
+        {
+            method: 'POST',
+            path: '/submit-import-code',
+            config: {
+                validate: {
+                    payload: {
+                        import_code: Joi.string(),
+                        module_id: Joi.string()
+                    }
+                }
+            },
+            handler: (request, reply) => {
+                const { import_code, module_id } = request.payload;
+
+                submitImportCode(pool, import_code, module_id, (error, response) => {
+                    if (response === false) {
+                        reply({ message: 'Quiz does not exist' });
+                    } else {
+                        const verdict = error || typeof response === 'object';
+                        reply(verdict);
+                    }
                 });
             }
         }
