@@ -19,13 +19,13 @@ const Nav = ({ location, is_lecturer, is_super_admin }) => {
         <ul className={ navClasses}>
           <div className="navbar__inner">
             <div className="navbar__container">
-              <li className="navbar__item navbar__item--left" onClick={ () => hashHistory.push('/dashboard') }>
-                  <img src="/assets/logo/nav_icon.svg" className="navbar__link navbar__link--left"></img>
+              <li className="navbar__item navbar__item--home" onClick={ () => hashHistory.push('/dashboard') }>
+                  <img src="/assets/logo/nav_icon.svg" className="navbar__img"></img>
               </li>
               { is_super_admin && is_lecturer &&
-                <li className="navbar__item navbar__item--left" onClick={ () => hashHistory.push('/super-admin') }>
-                    <img src="/assets/nav_dashboard_icon.svg" className="navbar__link navbar__link--left"></img>
-                    <p className="navbar__link navbar__link--left">Dashboard</p>
+                <li className="navbar__item navbar__item--dashboard" onClick={ () => hashHistory.push('/super-admin') }>
+                    <img src="/assets/nav_dashboard_icon.svg" className=""></img>
+                    <span className="navbar__link">Admin Dashboard</span>
                 </li>
               }
               <li className="navbar__item navbar__item--right" onClick={ logout }>

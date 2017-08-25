@@ -23,7 +23,7 @@ const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthentic
             <div className="content__body content__body--login">
               <div className="header">
                   <img src="/assets/logo/Login_signup_icon.svg"></img>
-                  <h3 className="f-title"> Realtime Quizzes for better lectures </h3>
+                  <h3 className="f-title"> Realtime Quizzes for Better Lectures</h3>
               </div>
               <div className="form">
                 <div className="form__field f-body">
@@ -43,6 +43,7 @@ const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthentic
                     className="form__input"
                     type="password"
                     ></input>
+                  <Link className="login__link login__link--left f-body f-body--link" to="/request-reset-password"> Forgotten Password</Link>
                 </div>
                 <div className={ login.userIsAuthenticated ? 'display-none' : 'f-body--warning' }>
                   { login.message }
@@ -51,9 +52,13 @@ const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthentic
                   Invalid Email Address
                 </div>
                 <button onClick={ handleOnSubmit } className="button">Log in</button>
-                <p className="f-body"> Don&#39;t have an Account? </p>
-                <div> <Link className="f-body f-body--link" to="/register-student"> Sign Up </Link> </div>
-                <div className="forgotten-password"> <Link className="f-body f-body--link" to="/request-reset-password"> Forgotten Password </Link> </div>
+
+                <div className="login__links">
+                    <p className="f-body"> Don&#39;t have an Account? </p>
+                    <Link className="login__link f-body f-body--link" to="/register-student"> Sign Up </Link>
+
+                </div>
+
               </div>
 
             </div>

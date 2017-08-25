@@ -25,7 +25,7 @@
     font-size: 1.875rem; // 30px
     font-weight: bold;
     text-transform: capitalize;
-    line-height: 2.6rem;
+    line-height: 1.25;
     letter-spacing: -1px;
     color: $black;
 
@@ -43,7 +43,7 @@
 .f-title {
     font-size: 1.5rem; //24px
     font-weight: 300;
-    line-height: 1.25rem;
+    line-height: 1.25;
     color: $blue;
 
     &--primary {
@@ -62,7 +62,7 @@
 .f-subheader {
     font-size: 1.25rem;
     font-weight: bold;
-    line-height: 1.25rem;
+    line-height: 1.25;
     color: $black;
 
     &--tertiary {
@@ -75,7 +75,7 @@
 
 .f-body {
     font-size: 1rem; // 16px
-    line-height: 1.5rem;
+    line-height: 1.5;
     color: $black;
 
     &--primary {
@@ -113,7 +113,7 @@
 
 .f-label {
     font-size: 0.875rem; // 14px
-    line-height: 1.2rem;
+    line-height: 1.25;
     letter-spacing: 1px;
     color: $grey;
 
@@ -126,7 +126,7 @@
 .f-small-body {
     font-size: 0.875rem; // 14px
     font-weight: bolder;
-    line-height: 1.25rem;
+    line-height: 1.5;
     color: $black;
 
     &--slim {
@@ -150,7 +150,7 @@
 .f-small-label {
     font-size: 0.625rem;
     font-weight: bold;
-    line-height: 0.8125rem;
+    line-height: 1;
     color: $grey;
 
     &--dark {

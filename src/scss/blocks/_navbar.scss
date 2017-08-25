@@ -20,41 +20,36 @@
     &__item {
       display: table-cell;
       vertical-align: middle;
-        &--left {}
+      cursor: pointer;
+        &--home {
+          width: 5rem;
+        }
+        &--dashboard {
+          width: auto;
+          &::before {
+            display: inline-block;
+            content: "";
+            height: 100%;
+            vertical-align: middle;
+          }
+          > * {
+            display: inline-block;
+            vertical-align: middle;
+          }
+        }
         &--right {
           text-align: right;
         }
     }
 
+    &__img {
+      display: block;
+      max-width: 100%;
+    }
+
     &__link {
-        line-height: 1.4rem;
         color: $white;
-        cursor: pointer;
-
-        &--back {
-            border-bottom: 2px solid $white;
-            color: $white;
-        }
-        &--back--dark {
-            border-bottom: 2px solid $black;
-            color: $black;
-        }
-        &--quit {
-            color: $red;
-            position: relative;
-
-            &::after { /* simulates underline on word */
-                content: "";
-                display: inline-block;
-                position: absolute;
-                width: 2.25rem;
-                height: 0.125rem;
-                bottom: 0.5rem;
-                left: 50%;
-                transform: translateX(-50%);
-                background-color: $red;
-            }
-        }
+        padding: 0 0.5rem;
     }
 
     &__secondary {

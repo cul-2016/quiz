@@ -1,9 +1,13 @@
 .form {
 
+    &__field {
+      margin: 1rem 0rem;
+    }
+
     &__label {
       display: block;
       text-align: left;
-      padding: 1rem 0;
+      padding: 0.25rem 0rem;
 
       &--new-quiz {
         display: inline-block;
