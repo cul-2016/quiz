@@ -48,7 +48,7 @@ const Signup = ({ register, updateInputField, registeringUser, toggleTcAgreed, l
 
           <div className="content__body content__body--login">
             <div className="header">
-              <h1 className="f-headline f-headline--primary"><img src="/Yellow.svg"></img></h1>
+              <h1 className="f-headline f-headline--primary"><img src="/assets/logo/Login_signup_icon.svg"></img></h1>
               <h3 className="f-headline"> Realtime Quizzes for better lectures </h3>
             </div>
 
@@ -123,9 +123,10 @@ const Signup = ({ register, updateInputField, registeringUser, toggleTcAgreed, l
                 >Register
               </button>
               <div>
-                <Link className="f-body" to="/">
-                  Already have an account? Please sign in here
-                </Link>
+                <p className="f-body">
+                  Already have an account?
+                  <Link className="login__link f-body f-body--link" to="/"> Please sign in here </Link>
+                </p>
               </div>
 
             </div>

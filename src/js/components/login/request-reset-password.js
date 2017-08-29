@@ -30,7 +30,7 @@ const ResetPassword = ({ resetPassword, handleEmailChange, handleResetPassword }
         <section className="login">
             <div className="content__body content__body--login">
               <div className="header">
-                  <h1 className="f-headline"><img src="/Yellow.svg"></img></h1>
+                  <h1 className="f-headline"><img src="/assets/logo/Login_signup_icon.svg"></img></h1>
                   <h3 className="f-headline"> Realtime Quizzes for better lectures </h3>
               </div>
               <div className="form">
