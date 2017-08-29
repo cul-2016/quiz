@@ -39,19 +39,23 @@ class Dashboard extends Component {
         return (
             <div className="container dashboard">
               <div className="content__body">
-                <h2 className="f-display"> Modules </h2>
-                {
-                  is_lecturer &&
                   <div className="dashboard__lecturer">
-                    <Link to="add-new-module">
-                      <button className="button">
-                        <span className="icon">
-                          <i className="fa fa-plus" />
-                        </span>
-                      </button>
-                    </Link>
+                  <div>
+                        <h2 className="f-display"> Modules </h2>
                   </div>
-                }
+                    {
+                      is_lecturer &&
+                      <div>
+                        <Link to="add-new-module">
+                          <button className="button button__icon">
+                            <span className="icon">
+                              <i className="fa fa-plus fa-2x" />
+                            </span>
+                          </button>
+                        </Link>
+                        </div>
+                      }
+                  </div>
                 {
                   !is_lecturer &&
                   <div className="card card__secondary">
@@ -70,15 +74,6 @@ class Dashboard extends Component {
                   </div>
                 }
                 <div className="line"></div>
-
-                  <div className="module__header" >
-                      <div className="module__header__name f-label f-label--dark">
-                          Name
-                      </div>
-                      <div className="module__header__id f-label f-label--dark">
-                          Code
-                      </div>
-                  </div>
                 <div>
                   { moduleList }
                 </div>
