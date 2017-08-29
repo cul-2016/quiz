@@ -6,7 +6,7 @@
     height: 5rem;
 
     &__inner { // comes imediately after the .navbar
-      max-width: 72rem;
+      max-width: 73rem;
       margin: auto;
     }
 
@@ -23,7 +23,6 @@
       cursor: pointer;
         &--home {
           width: 5rem;
-          padding-left: 1rem;
         }
         &--dashboard {
           width: auto;
@@ -39,7 +38,6 @@
           }
         }
         &--right {
-          padding-right: 1rem;
           text-align: right;
         }
     }
@@ -70,5 +68,19 @@
         padding: 0 0 0 2rem; /* supports screens smaller than 960px */
         margin: auto;
         box-sizing: border-box;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .navbar {
+        &__item {
+            &--home {
+              padding-left: 1rem;
+            }
+            &--right {
+              padding-right: 1rem;
+              text-align: right;
+            }
+        }
     }
 }
