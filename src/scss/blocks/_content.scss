@@ -20,9 +20,9 @@
   box-sizing: border-box;
   max-width: 72rem;
   margin: 5rem auto;
-  background-color: $white;
+  background-color: $white-75;
   border-radius: 0.625rem;
-  padding: 5rem;
+  padding: 1rem;
   -webkit-box-shadow: 0px 11px 70px 12px rgba(0, 0, 0, 0.04);
   -moz-box-shadow: 0px 11px 70px 12px rgba(0, 0, 0, 0.04);
   box-shadow: 0px 11px 70px 12px rgba(0, 0, 0, 0.04);
@@ -41,7 +41,7 @@
 
 @media screen and (max-width: 768px) {
     .content__body {
-
+        margin: 0rem auto;
         &--login {
             left: auto;
             position: relative;

@@ -23,6 +23,7 @@
       cursor: pointer;
         &--home {
           width: 5rem;
+          padding-left: 1rem;
         }
         &--dashboard {
           width: auto;
@@ -38,6 +39,7 @@
           }
         }
         &--right {
+          padding-right: 1rem;
           text-align: right;
         }
     }

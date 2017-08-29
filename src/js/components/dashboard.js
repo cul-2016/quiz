@@ -39,38 +39,40 @@ class Dashboard extends Component {
         return (
             <div className="container dashboard">
               <div className="content__body">
-                  <div className="dashboard__lecturer">
-                  <div>
+                <div className="dashboard__lecturer">
+                    <div className="dashboard__lecturer--title">
                         <h2 className="f-display"> Modules </h2>
-                  </div>
+                    </div>
                     {
-                      is_lecturer &&
-                      <div>
-                        <Link to="add-new-module">
-                          <button className="button button__icon">
-                            <span className="icon">
-                              <i className="fa fa-plus fa-2x" />
-                            </span>
-                          </button>
-                        </Link>
-                        </div>
-                      }
-                  </div>
+                        is_lecturer &&
+                            <div className="dashboard__lecturer--icon">
+                                <Link to="add-new-module">
+                                    <button className="button button__icon">
+                                        <span className="icon">
+                                            <i className="fa fa-plus fa-2x" />
+                                        </span>
+                                    </button>
+                                </Link>
+                            </div>
+                    }
+                </div>
                 {
                   !is_lecturer &&
-                  <div className="card card__secondary">
-                    <input
-                      className="form__input form__input--add-module"
-                      value={ module_id || '' }
-                      maxLength="4"
-                      onChange={ (e) => handleInputChange(e.target.value)}
-                      type="text"
-                      placeholder="CODE"/>
-                    <button
-                      className="button button__secondary"
-                      onClick={ () => handleJoinModule() }>
-                      Add A Module
-                    </button>
+                  <div className="card">
+                  <div className="dashboard__student--module">
+                      <input
+                          className="form__input form__input--add-module"
+                          value={ module_id || '' }
+                          maxLength="4"
+                          onChange={ (e) => handleInputChange(e.target.value)}
+                          type="text"
+                          placeholder="CODE"/>
+                      <button
+                          className="button"
+                          onClick={ () => handleJoinModule() }>
+                          Add A Module
+                      </button>
+                  </div>
                   </div>
                 }
                 <div className="line"></div>
