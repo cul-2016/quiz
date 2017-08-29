@@ -19,7 +19,7 @@ const CurrentQuestion = ({ data, response, handleSelection }) => {
         return (
             <div key={ i } className={ classes } onClick={ () => handleSelection && handleSelection(letter) }>
                 <div className="live-quiz__answer-inner">
-                    <span className="live-quiz__letter f-title f-title--light">{ `${letter}` }</span>
+                    <span className="live-quiz__letter">{ `${letter}` }</span>
                     <span className="live-quiz__answer-text f-body">{ `${data[letter]}` }</span>
                 </div>
             </div>
