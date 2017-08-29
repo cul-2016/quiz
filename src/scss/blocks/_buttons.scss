@@ -106,9 +106,9 @@
       pointer-events: none;
       cursor: not-allowed;
       background-color: $white;
-      color: $black;
+      color: $blue;
       box-shadow: none;
-      padding: 1rem 2rem;
-      margin: 1rem auto;
+      margin: 0 auto;
+      border: 1px solid $blue;
     }
 }

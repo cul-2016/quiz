@@ -15,7 +15,7 @@ const App = ({ children, location, username,
         {
             loading && !error &&
             <div className={ customClasses }>
-                <div className="content__body">
+                <div className="loading__body">
                     <div className="loading">
                         <img className="f-headline" src="/assets/logo/Login_signup_icon.svg" />
                         <p className="f-title">Loading ...</p>

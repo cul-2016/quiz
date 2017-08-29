@@ -17,7 +17,6 @@ const ResetPasswordForm = ({
     let submitButtonClasses = classnames("button", {
         "is-loading": isRequesting === true,
         "button__disabled": !doPasswordsMatch || passwordsEmpty,
-        "button__primary": doPasswordsMatch && !passwordsEmpty
     });
 
     let passwordMatchClasses = classnames("form__input", {
@@ -62,12 +61,15 @@ const ResetPasswordForm = ({
                             onChange={ (e) => handleConfirmedPasswordChange(e.target.value) }
                             type="password" />
 
+                        <br />
+                        <br />
+
                         <button className={ submitButtonClasses }
                                 onClick={ () => handleSubmitNewPassword(password, code) }>
                             Submit
                         </button>
-                        <p className="f-body f-body--dark"> Already have an Account? </p>
-                        <div> <Link className="f-body" to="/register-student"> Sign Up </Link> </div>
+                        <p className="f-body"> Already have an Account? </p>
+                        <div> <Link className="f-body f-body--dark" to="/register-student"> Sign Up </Link> </div>
 
                     </div>
                 </div>

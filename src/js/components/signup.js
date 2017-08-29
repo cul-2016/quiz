@@ -118,7 +118,7 @@ const Signup = ({ register, updateInputField, registeringUser, toggleTcAgreed, l
                   }
               </div>
               <button
-                className="button button__primary"
+                className="button"
                 onClick={ handleOnSubmit }
                 >Register
               </button>

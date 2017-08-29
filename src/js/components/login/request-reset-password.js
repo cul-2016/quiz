@@ -7,7 +7,7 @@ const ResetPassword = ({ resetPassword, handleEmailChange, handleResetPassword }
     let isEmailValid = /.+@.+\..+/.test(resetPassword.email);
     let isEmailEmpty = resetPassword.email.length === 0;
 
-    let submitButtonClasses = classnames("button button__primary", {
+    let submitButtonClasses = classnames("button", {
         "is-loading": resetPassword.isRequesting === true,
         "is-disabled": !isEmailValid
     });
@@ -53,8 +53,8 @@ const ResetPassword = ({ resetPassword, handleEmailChange, handleResetPassword }
                         onClick={ () => { handleResetPassword(resetPassword.email); } }>
                     Send Email
                 </button>
-                <p className="f-body f-body--dark"> Already have an Account? </p>
-                <div> <Link className="f-body" to="/register-student"> Sign Up </Link> </div>
+                <p className="f-body"> Already have an Account? </p>
+                <div> <Link className="f-body f-body--dark" to="/register-student"> Sign Up </Link> </div>
 
                   </div>
             </div>
