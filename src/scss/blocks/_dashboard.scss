@@ -49,6 +49,14 @@
 
       .card {
           padding: 0 3rem;
+          -moz-transition: all .2s ease-in;
+          -o-transition: all .2s ease-in;
+          -webkit-transition: all .2s ease-in;
+          transition: all .2s ease-in;
+      }
+
+      .card:hover {
+          border: 1px solid $blue; 
       }
       .f-display, .dashboard__lecturer {
         text-align: left;

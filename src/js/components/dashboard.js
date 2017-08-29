@@ -24,16 +24,16 @@ class Dashboard extends Component {
             let role = is_lecturer ? 'lecturer' : 'student';
 
             return (
+                <Link to={ `${module.module_id}/${role}` } >
                 <div key={ i } className="card">
-                    <Link to={ `${module.module_id}/${role}` } >
                         <div className="module__name f-body">
                             { module.name }
                         </div>
-                        <div className="module__id f-body f-body--primary">
+                        <div className="module__id f-body f-body--primary f-body--heavy">
                             { module.module_id }
                         </div>
-                    </Link>
                 </div>
+                </Link>
             );
         });
         return (

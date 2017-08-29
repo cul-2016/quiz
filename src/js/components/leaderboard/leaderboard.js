@@ -53,13 +53,6 @@ const Leaderboard = ({ mainData, medalScores, quiz_id_list, medalCondition, para
 
     return (
         <div className="leaderboard">
-                   <ul className="navbar navbar--invisible">
-                       <li className="navbar__item">
-                           <Link to={ `${params.module_id}/lecturer` } className="f-body navbar__link navbar__link--left navbar__link--quit">
-                             Back
-                           </Link>
-                       </li>
-                   </ul>
                <div className="content__body">
                     <div className="leaderboard__image"></div>
                     <table className="leaderboard__table">
