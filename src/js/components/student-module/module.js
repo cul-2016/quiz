@@ -32,16 +32,30 @@ const StudentModule = ({ location,
         });
 
         return (
-              <div key={i} className="quiz__item">
-                <Link to={`/${module.module_id}/student/history/${quiz.quiz_id}`}>
+            <div key={i} className="card">
+
+                <div key={i} className="quiz__item">
+
                     <div className="quiz__item__score">
-                      <span className="f-small-label f-small-label--dark quiz__item__score--postion">{ i + 1 }</span>
-                        <div className={ medalClass }> </div>
-                        <div className="quiz__item__score--percent">{ percentageScore }%</div>
+                    <span className="f-small-label f-small-label--dark quiz__item__score--postion">{ i + 1 }</span>
+                    <div className={ medalClass }> </div>
+                    <div className="quiz__item__score--percent">{ percentageScore }%</div>
                     </div>
                     <div className="quiz__item__name"> { quiz.name } </div>
-                </Link>
-              </div>
+
+                </div>
+                <div className="quiz__item__buttons">
+                    <Link to={`/${module.module_id}/student/history/${quiz.quiz_id}`}>
+                        <button className="button button__secondary">
+                                Review
+                        </button>
+                    </Link>
+                    <Link to={`/${module.module_id}/student/revise/${quiz.quiz_id}`}>
+                        <button className="button button__secondary"> Revise </button>
+                    </Link>
+
+                </div>
+            </div>
         );
     });
 
