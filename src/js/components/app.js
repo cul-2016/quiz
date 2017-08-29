@@ -5,9 +5,11 @@ import ErrorMessage from './general/error-message';
 const App = ({ children, location, username,
                error, isCookieAccepted, handleCookieMessage, //eslint-disable-line no-unused-vars
                handleErrorClearance, is_lecturer, is_super_admin, loading }) => {
-                 console.log(location.pathname);
-    const customClasses = `app ${location.pathname === '/' ? 'app--login' : ''}`;
-    console.log(customClasses);
+
+    const checkPath = (path) => {
+        return path === '/' || path === '/register-student' || path === '/register-lecturer-invite-only';
+    };
+    const customClasses = `app ${checkPath(location.pathname) ? 'app--login' : ''}`;
     return (
         <div>
         {

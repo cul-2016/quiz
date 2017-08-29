@@ -12,6 +12,8 @@
 
     &--login {
       background-image: url('/Login_bg_pattern.svg');
+      background-position: center;
+      background-size: cover;
     }
 }
 
@@ -35,4 +37,19 @@
     margin: 0;
     padding: 3rem 5rem;
   }
+}
+
+
+@media screen and (max-width: 768px) {
+    .content__body {
+
+        &--login {
+            left: auto;
+            position: relative;
+            top: auto;
+            transform: none;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+        }
+    }
 }
