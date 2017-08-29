@@ -28,7 +28,7 @@ const ResetPassword = ({ resetPassword, handleEmailChange, handleResetPassword }
 
     return (
         <section className="login">
-            <div className="content__body">
+            <div className="content__body content__body--login">
               <div className="header">
                   <h1 className="f-headline"><img src="/Yellow.svg"></img></h1>
                   <h3 className="f-headline"> Realtime Quizzes for better lectures </h3>

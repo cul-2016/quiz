@@ -7,7 +7,7 @@ const App = ({ children, location, username,
                handleErrorClearance, is_lecturer, is_super_admin, loading }) => {
 
     const checkPath = (path) => {
-        return path === '/' || path === '/register-student' || path === '/register-lecturer-invite-only';
+        return path === '/' || path.includes('/register') || path.includes('reset-password');
     };
     const customClasses = `app ${checkPath(location.pathname) ? 'app--login' : ''}`;
     return (
