@@ -14,7 +14,7 @@
         padding-left: 1rem;
     }
     .live-quiz__question-number {
-        background-color: #5CABC9;
+        background-color: $blue;
         border-radius: 10px;
         color: $white;
         padding: 0 0.75rem 0 0.5rem;
@@ -41,9 +41,9 @@
                 color: $salmon;
             }
             .live-quiz__letter {
-                height: 62px;
-                line-height: 62px;
-                width: 85px;
+                height: 67px;
+                line-height: 20px;
+                width: 67px;
             }
         }
 
@@ -55,9 +55,9 @@
             .live-quiz__letter {
                 color: $white;
                 border-color: $white;
-                height: 62px;
-                line-height: 62px;
-                width: 85px;
+                height: 67px;
+                line-height: 20px;
+                width: 67px;
             }
             .live-quiz__total-replies {
                 color: $white;
@@ -70,22 +70,23 @@
     .live-quiz__answer-inner {
         display: table;
         padding-top: 1rem;
+        padding-bottom: 1rem;
     }
 
 
     .live-quiz__letter { /* A,B,C, or D */
+        padding-top: 2rem;
+        box-sizing: border-box;
+        display: inline-block;
         text-transform: capitalize;
-        font-size: 2.5rem;
-        font-weight: 300;
+        font-size: 3rem;
+        font-weight: 700;
         line-height: 1.25;
         color: $blue;
-        border: 4px solid #5CABC9;
         border-radius: 100%;
-        height: 62px;
-        line-height: 62px;
-        width: 85px;
+        height: 67px;
+        width: 67px;
         text-align: center;
-        border-style: double;
     }
     .live-quiz__answer-text { /* text of the option */
         padding-left: 1rem;
@@ -101,11 +102,15 @@
     .live-quiz__answer-text {
       width: 22.685rem;
     }
-        .live-quiz__letter,
+
         .live-quiz__answer-text,
         .live-quiz__total-replies {
             display: table-cell;
             vertical-align: middle;
+        }
+
+        .live-quiz__letter {
+            display: inline-block;
         }
 
     @media (min-width: 60rem) {
