@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import Details from './details.js';
 import Quizzes from './quizzes.js';
 const  Surveys = Quizzes;
-import Spinner from '../general/spinner';
+import applyOffset from '../../lib/applyOffset';
 
 const Module = ({
     location,
@@ -57,16 +57,27 @@ const Module = ({
                         </Link>
                     </div>
 
-                    <div className="card">
+                    <div className="card card__medals">
+
                         <h3 className="f-title">Medal Threshold</h3>
-                        <img className="icon__svg--medals" src="/assets/medals/bronze_medal.svg"></img>
-                        <img className="icon__svg--medals" src="/assets/medals/silver_medal.svg"></img>
-                        <img className="icon__svg--medals" src="/assets/medals/gold_medal.svg"></img>
-                        <Link className="module__button__link" to={ `${module.module_id}/leaderboard` } >
-                            <button className="button">
-                                <span>View Students</span>
-                            </button>
-                        </Link>
+                        <div className="content__body--medals">
+                            <img className="icon__svg--medals" src="/assets/medals/bronze_medal.svg"></img>
+                            <h3 className="f-small-label"> Bronze </h3>
+                            <h3 className="f-small-label"> 0 - { applyOffset(module.medals.condition[0], -1) }% </h3>
+                        </div>
+
+                        <div className="content__body--medals">
+                            <img className="icon__svg--medals" src="/assets/medals/silver_medal.svg"></img>
+                            <h3 className="f-small-label">Silver </h3>
+                            <h3 className="f-small-label">{ module.medals.condition[0] }  - { module.medals.condition[1] }% </h3>
+                        </div>
+
+                        <div className="content__body--medals">
+                            <img className="icon__svg--medals" src="/assets/medals/gold_medal.svg"></img>
+                            <h3 className="f-small-label"> Gold </h3>
+                            <h3 className="f-small-label"> { applyOffset(module.medals.condition[1], 1) } - 100% </h3>
+                        </div>
+
                     </div>
 
 
