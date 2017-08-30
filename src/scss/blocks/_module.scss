@@ -1,7 +1,50 @@
 .module {
   margin: 3rem auto;
-  border: 1px solid;
-  padding: 2rem 4rem;
+  max-width: 73rem;
+  box-sizing: border-box;
+
+  .content__body {
+      margin-bottom: 1rem;
+      padding: 0;
+
+      &--quiz {
+        margin: 0.5rem;
+        min-width: 51.75rem;
+        box-sizing: border-box;
+        display: inline-block;
+      }
+
+      &--info {
+        max-width: 19.25rem;
+        margin: 0.5rem;
+        box-sizing: border-box;
+        display: inline-block;
+        vertical-align: top;
+
+      }
+  }
+
+  .card {
+      margin: 0;
+      margin-bottom: 1rem;
+      border: none;
+  }
+
+  .icon__svg {
+      display: block;
+      margin: 0 auto;
+      min-width: 10rem;
+      padding-top: 2rem;
+
+      &--medals {
+          display: inline-block;
+          min-width: 2rem;
+          padding-left: 0.5rem;
+          padding-right: 0.5rem;
+      }
+  }
+
+
 
   .or-container {
       text-align: center;
