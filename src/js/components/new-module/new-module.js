@@ -33,6 +33,7 @@ const NewModule = ({ isValidatingModuleID, moduleIDExists,
                   </ul>
                   <div className="content__body">
                     <h2 className="f-headline f-headline--primary"> New Module </h2>
+                    <p className="line-primary--long-grey"></p>
                     <div className="columns">
                       <Details module_id={ module_id }
                         moduleIDExists={ moduleIDExists }
@@ -41,18 +42,19 @@ const NewModule = ({ isValidatingModuleID, moduleIDExists,
                         handleCodeInputChange={ handleCodeInputChange }
                         handleInputChange={ handleInputChange } />
                       <p className="line line--primary"></p>
-                      <h2 className="f-subheader"> Medals {/*and Trophies */} </h2>
+                      <h2 className="f-title"> Medals {/*and Trophies */} </h2>
                       <Medals medals={ medals }
                         updateMedalVals={ updateMedalVals }
                         applyOffset={ applyOffset }/>
+                    <p className="line line--primary"></p>
                     <div>
                         <Trophies trophies={ trophies }
                             updateTrophyVals={ updateTrophyVals }
                             applyOffset={ applyOffset } />
                     </div>
 
-                      <p className="line line--primary"></p>
                     </div>
+                    <br />
                     <div className="save-module-container">
                         <button className={ validationClasses } onClick={ submit }>
                             Save Module

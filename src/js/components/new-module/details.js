@@ -38,7 +38,7 @@ class Details extends React.Component {
 
         return (
             <div className="section column">
-
+                <br />
                 <label className="f-label f-label--50 form__label">Name</label>
                 <input
                     className="form__input form__input--new-module"
@@ -46,9 +46,9 @@ class Details extends React.Component {
                     name="name"
                     type="text"
                     onChange={ (e) => handleInputChange('name', e.target.value) } />
-
+                <br />
+                <br />
                 <label className="f-label f-label--50 form__label">Module Code (4 Letters)</label>
-
                 <p className="control has-icon has-icon-right">
                     <input
                         className="form__input form__input--new-module form__input--new-module--code"
@@ -61,7 +61,7 @@ class Details extends React.Component {
                     <i className={ iconClasses } />
                     <span className={ moduleIDHelpClasses }> This code already exists.  Please choose another.</span>
                 </p>
-
+                <br />
             </div>
         );
 

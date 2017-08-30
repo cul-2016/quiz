@@ -39,7 +39,7 @@ class Trophies extends React.Component {
                 <div key={ i } className="new-module-trophies">
                   <img src={`/assets/trophy/${name}.svg`} className="new-module-trophy" />
                   <div>
-                      <p className="f-small-body f-small-body--primary">{ normaliseText(name) }</p>
+                      <p className="new-module-trophy-name f-small-body--primary">{ normaliseText(name) }</p>
                   </div>
                   <div>
                       <input
