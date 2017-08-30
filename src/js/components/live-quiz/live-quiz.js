@@ -169,9 +169,9 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                                 </Link>
                             </li>
                         </ul>
-                        <div className="content">
+                        <div className="content content__body">
                             <div className="live-quiz__question-wrapper">
-                                <p className="live-quiz__question-number f-display"> Q{ nextQuestionIndex }.</p>
+                                <p className="live-quiz__question-number f-display"> Q{ nextQuestionIndex }</p>
                                 <p className="live-quiz__question f-title">{ question.question }</p>
                             </div>
                             <CurrentQuestion

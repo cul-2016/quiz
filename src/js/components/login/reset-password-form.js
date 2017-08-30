@@ -17,7 +17,6 @@ const ResetPasswordForm = ({
     let submitButtonClasses = classnames("button", {
         "is-loading": isRequesting === true,
         "button__disabled": !doPasswordsMatch || passwordsEmpty,
-        "button__primary": doPasswordsMatch && !passwordsEmpty
     });
 
     let passwordMatchClasses = classnames("form__input", {
@@ -37,10 +36,10 @@ const ResetPasswordForm = ({
 
     return (
         <section className="login">
-            <div className="content__body">
+            <div className="content__body content__body--login">
 
               <div className="header">
-                <h1 className="f-headline f-headline--primary"><img src="/Yellow.svg"></img></h1>
+                <h1 className="f-headline f-headline--primary"><img src="/assets/logo/Login_signup_icon.svg"></img></h1>
                 <h3 className="f-headline"> Realtime Quizzes for better lectures </h3>
               </div>
                 <div className="form">
@@ -62,12 +61,15 @@ const ResetPasswordForm = ({
                             onChange={ (e) => handleConfirmedPasswordChange(e.target.value) }
                             type="password" />
 
+                        <br />
+                        <br />
+
                         <button className={ submitButtonClasses }
                                 onClick={ () => handleSubmitNewPassword(password, code) }>
                             Submit
                         </button>
-                        <p className="f-body f-body--dark"> Already have an Account? </p>
-                        <div> <Link className="f-body" to="/register-student"> Sign Up </Link> </div>
+                        <p className="f-body"> Already have an Account? </p>
+                        <div> <Link className="f-body f-body--dark" to="/register-student"> Sign Up </Link> </div>
 
                     </div>
                 </div>

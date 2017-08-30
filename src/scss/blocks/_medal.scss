@@ -16,17 +16,18 @@
 }
 
 .medal-small {
-    height: 1.6rem;
-    width: 1.4rem;
+    height: 2.25rem;
+    width: 2rem;
+    background-size: cover;
 
   &--gold {
-      background: url(../../public/assets/medals/small-gold.svg);
+      background-image: url(../../public/assets/medals/small-gold-medal.svg);
   }
   &--silver {
-      background: url(../../public/assets/medals/small-silver.svg);
+      background-image: url(../../public/assets/medals/small-silver-medal.svg);
   }
   &--bronze {
-      background: url(../../public/assets/medals/small-bronze.svg);
+      background-image: url(../../public/assets/medals/small-bronze-medal.svg);
   }
 
 }
