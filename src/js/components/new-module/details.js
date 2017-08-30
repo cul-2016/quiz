@@ -39,7 +39,7 @@ class Details extends React.Component {
         return (
             <div className="section column">
 
-                <label className="f-label form__label">Name</label>
+                <label className="f-label f-label--50 form__label">Name</label>
                 <input
                     className="form__input form__input--new-module"
                     placeholder="e.g. Analytics"
@@ -47,7 +47,7 @@ class Details extends React.Component {
                     type="text"
                     onChange={ (e) => handleInputChange('name', e.target.value) } />
 
-                <label className="f-label form__label">Module Code (4 Letters)</label>
+                <label className="f-label f-label--50 form__label">Module Code (4 Letters)</label>
 
                 <p className="control has-icon has-icon-right">
                     <input

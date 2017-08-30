@@ -124,6 +124,11 @@
     &--dark {
         color: $black;
     }
+
+    &--50 {
+        color: $black;
+        opacity: 0.5;
+    }
 }
 
 .f-small-body {

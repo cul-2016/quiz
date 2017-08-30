@@ -26,7 +26,7 @@ class Medals extends React.Component {
         return (
             <div className="new-module-medals section column">
 
-                <h3 className="f-body f-body--light">
+                <h3 className="f-body f-body--50">
                     Set the scores needed for different medals
                 </h3>
 
@@ -36,7 +36,7 @@ class Medals extends React.Component {
                           <p className="medal-small medal-small--bronze"></p>
                           <p className="f-small-body f-small-body--light">Bronze</p>
                         </div>
-                        <span className="f-body f-body--light">0 to </span>
+                        <span className="f-body f-body--50">0 to </span>
                         <input
                             className="form__input form__input--medal"
                             name="bronze"
@@ -50,7 +50,7 @@ class Medals extends React.Component {
                           <p className="medal-small medal-small--silver"></p>
                           <p className="f-small-body f-small-body--light">Silver</p>
                         </div>
-                        <p className="f-body f-body--light">{ `${this.props.medals[0]} to ${this.props.medals[1]} %` }</p>
+                        <p className="f-body f-body--50 medal-middle-values">{ `${this.props.medals[0]} to ${this.props.medals[1]} %` }</p>
                     </div>
                     <div className="medal-values--gold">
                         <div className="medal-values--header">
@@ -64,7 +64,7 @@ class Medals extends React.Component {
                             min="4" max="99"
                             defaultValue={ this.props.applyOffset(this.props.medals[1], 1) }
                             onChange={ (e) => this.props.updateMedalVals('gold', e.target.value) } />
-                          <span className="f-body f-body--light"> to 100</span>
+                        <span className="f-body f-body--50"> to 100</span>
 
                     </div>
                 </div>
