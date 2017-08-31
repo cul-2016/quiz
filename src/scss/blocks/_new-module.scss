@@ -1,23 +1,26 @@
 .new-module {
-  background-color: $black;
   min-height: 100vh;
   color: $white;
 
 }
 
+.save-module-container {
+    text-align: center;
+}
+
 .medal-values {
 
-    max-width: 21rem;
+    max-width: 33rem;
     height: 7rem;
 
     &--bronze {
         float:left;
-        width:7rem;
+        width:11rem;
     }
     &--silver {
         display: inline-block;
         margin:0 auto;
-        width:7rem;
+        width:11rem;
 
         .f-body {
             line-height: 3rem;
@@ -25,7 +28,11 @@
     }
     &--gold {
         float:right;
-        width:7rem;
+        width:11rem;
+    }
+
+    .medal-middle-values {
+        margin-top: 2rem;
     }
 
     .medal-values--header {
@@ -35,6 +42,7 @@
       .medal-small {
         position: absolute;
         float: left;
+        left: 1rem;
       }
 
       .f-small-body {
@@ -44,16 +52,22 @@
     }
 }
 
+.new-module-medals {
+    margin-bottom: 3rem;
+}
+
 .new-module-medals, .trophies {
   .f-body {
-    color: white;
+    color: $black;
   }
 }
 
 .new-module-trophies {
-  width: 25rem;
   display: inline-block;
   padding: 0.5rem 0;
+  text-align: center;
+  width: 28%;
+  margin-left: -2rem;
 
   .trophy__small--new-module {
     margin: 0.5rem 0.5rem 0.5rem 0;
@@ -63,6 +77,5 @@
   }
 
   .form__input--trophy {
-      float: right;
   }
 }
