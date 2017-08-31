@@ -14,7 +14,7 @@ const Review = ({ isFetchingReview, question, numQuestions, currentQuizIndex, is
             <div>
                 <ul className="navbar navbar--invisible">
                     <li className="navbar__item">
-                        <Link to={ `${params.module_id}/lecturer` } className="f-body navbar__link navbar__link--left navbar__link--quit">
+                        <Link to={ `${params.module_id}/lecturer` } className="button">
                           Quit
                         </Link>
                     </li>
@@ -22,26 +22,26 @@ const Review = ({ isFetchingReview, question, numQuestions, currentQuizIndex, is
             </div>
             {
                 question &&
-                <div className="content" >
+                <div className="content content__body" >
                     <div className="live-quiz__question-wrapper">
-                        <p className="live-quiz__question-number f-display"> Q{ currentQuizIndex + 1 }.</p>
+                        <p className="live-quiz__question-number f-display"> Q{ currentQuizIndex + 1 }</p>
                         <p className="live-quiz__question f-title">{ question.question }</p>
                     </div>
                     <ShowAnswer
                         isAnswerShowing={ isAnswerShowing }
                         data={ question }
                         isSurvey={ isSurvey } />
+                    <ReviewButtons
+                        isAnswerShowing={ isAnswerShowing }
+                        numQuestions={ numQuestions }
+                        currentQuizIndex={ currentQuizIndex }
+                        handleIsAnswerShowing={ handleIsAnswerShowing }
+                        handleIncrementCurrentQuizIndex={ handleIncrementCurrentQuizIndex }
+                        endReview={ endReview }
+                        params={ params }
+                        isSurvey={ isSurvey } />
                 </div>
             }
-            <ReviewButtons
-                isAnswerShowing={ isAnswerShowing }
-                numQuestions={ numQuestions }
-                currentQuizIndex={ currentQuizIndex }
-                handleIsAnswerShowing={ handleIsAnswerShowing }
-                handleIncrementCurrentQuizIndex={ handleIncrementCurrentQuizIndex }
-                endReview={ endReview }
-                params={ params }
-                isSurvey={ isSurvey } />
         </div>
     );
 };

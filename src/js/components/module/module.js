@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import Details from './details.js';
 import Quizzes from './quizzes.js';
 const  Surveys = Quizzes;
-import Spinner from '../general/spinner';
+import applyOffset from '../../lib/applyOffset';
 
 const Module = ({
     location,
@@ -18,21 +18,10 @@ const Module = ({
     handleSubmitImportCode }) => {
 
     return (
-        <div>
-        {
-            isFetchingModule && <Spinner/>
-        }
-        {
-            !isFetchingModule &&
-            <div>
-                <div className="container module content__body">
+        <div className="container">
 
-                    <Details name={ module.name }
-                        module_id={ module.module_id }
-                        num_enrolled={ module.num_enrolled }
-                        trophies={ module.trophies }
-                        medals={ module.medals }/>
-
+            <div className="module">
+                <div className="content__body content__body--quiz">
                     <Quizzes quizzes={ quizzes }
                         location={ location }
                         sendQuizInvite={ sendQuizInvite }
@@ -47,6 +36,72 @@ const Module = ({
                         module_id={ module.module_id }
                         handleSetIsSurvey={ handleSetIsSurvey }
                         handleGenerateShareId={ handleGenerateShareId }/>
+                </div>
+                <div className="content__body--info">
+
+                    <div className="card">
+                        <img className="icon__svg" src="/assets/leaderboard/leader_board_icon.svg"></img>
+                        <Link className="module__button__link" to={ `${module.module_id}/leaderboard` } >
+                            <button className="button">
+                                <span>View Leaderboard</span>
+                            </button>
+                        </Link>
+                    </div>
+
+                    <div className="card">
+                        <img className="icon__svg" src="/assets/view_students_icon.svg"></img>
+                        <Link className="module__button__link" to={ `${module.module_id}/members` } >
+                            <button className="button">
+                                <span>View Students</span>
+                            </button>
+                        </Link>
+                    </div>
+
+                    <div className="card card__medals">
+
+                        <h3 className="f-title">Medal Threshold</h3>
+                        <div className="content__body--medals">
+                            <img className="icon__svg--medals" src="/assets/medals/bronze_medal.svg"></img>
+                            <h3 className="f-small-label"> Bronze </h3>
+                            <h3 className="f-small-label"> 0 - { applyOffset(module.medals.condition[0], -1) }% </h3>
+                        </div>
+
+                        <div className="content__body--medals">
+                            <img className="icon__svg--medals" src="/assets/medals/silver_medal.svg"></img>
+                            <h3 className="f-small-label">Silver </h3>
+                            <h3 className="f-small-label">{ module.medals.condition[0] }  - { module.medals.condition[1] }% </h3>
+                        </div>
+
+                        <div className="content__body--medals">
+                            <img className="icon__svg--medals" src="/assets/medals/gold_medal.svg"></img>
+                            <h3 className="f-small-label"> Gold </h3>
+                            <h3 className="f-small-label"> { applyOffset(module.medals.condition[1], 1) } - 100% </h3>
+                        </div>
+
+                    </div>
+
+
+
+
+
+                </div>
+            </div>
+
+
+
+
+
+
+            <div>
+                <div className="module content__body">
+
+
+                <Details name={ module.name }
+                    module_id={ module.module_id }
+                    num_enrolled={ module.num_enrolled }
+                    trophies={ module.trophies }
+                    medals={ module.medals }/>
+
 
                     <Link className="module__button__link" to={ `${module.module_id}/new-quiz` } >
                         <button className="button button__secondary quizzes__button">
@@ -80,7 +135,6 @@ const Module = ({
                     </div>
                 </div>
             </div>
-        }
         </div>
     );
 };

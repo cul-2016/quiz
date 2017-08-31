@@ -1,16 +1,57 @@
-.content {
+.app {
+  background-color: $grey;
+  background-image: url(../../public/assets/app_bg.svg);
+  min-height: 100vh;
+  padding-bottom: 1rem;
     &--pattern-background {
-        height: 100vh;
         background-size: cover;
     }
     &--join-quiz {
         background-image: url(../../public/background-join-quiz.svg);
     }
+
+    &--login {
+      background-image: url('/Login_bg_pattern.svg');
+      background-position: center;
+      background-size: cover;
+    }
 }
+
+
 
 .content__body {
-    max-width: 52rem;
-    padding: 0 2rem; /* to make a max content width of 50rem (800px) */
-    margin: 2.5rem auto 0;
+  box-sizing: border-box;
+  max-width: 73rem;
+  margin: 5rem auto;
+  background-color: $white;
+  border-radius: 0.625rem;
+  padding: 5rem;
+  -webkit-box-shadow: 0px 11px 70px 12px rgba(0, 0, 0, 0.04);
+  -moz-box-shadow: 0px 11px 70px 12px rgba(0, 0, 0, 0.04);
+  box-shadow: 0px 11px 70px 12px rgba(0, 0, 0, 0.04);
+
+  &--login {
+    background-color: $white-75;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 50%;
+    margin: 0;
+    padding: 3rem 5rem;
+  }
 }
 
+
+@media screen and (max-width: 768px) {
+    .content__body {
+        padding: 1rem;
+        margin: 0rem auto;
+        &--login {
+            left: auto;
+            position: relative;
+            top: auto;
+            transform: none;
+            padding: 2rem 1rem;
+        }
+    }
+}

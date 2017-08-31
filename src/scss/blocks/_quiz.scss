@@ -1,4 +1,7 @@
-.quiz {}
+.quiz {
+    background-color: $white;
+    text-align: center;
+}
 .quiz__item {
     width: 80%;
     height: 5rem;
@@ -24,6 +27,16 @@
     }
 }
 
+.quiz__item-container {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border: 1px solid $dark-grey;
+    border-radius: 10px;
+    margin: 0.5rem;
+    background-color: $white;
+    display: inline-block;
+}
+
 .quiz__item__score {
     &--postion {
         position: absolute;
@@ -37,7 +50,7 @@
         position: relative;
         top: 1rem;
         margin: auto;
-        background: url(../../public/assets/medals/small-gold.svg);
+        background: url(../../public/assets/medals/small-gold-medal.svg);
         background-size: 3rem;
     }
     &--medal--silver {
@@ -46,7 +59,7 @@
         position: relative;
         top: 1rem;
         margin: auto;
-        background: url(../../public/assets/medals/small-silver.svg);
+        background: url(../../public/assets/medals/small-silver-medal.svg);
         background-size: 3rem;
     }
     &--medal--bronze {
@@ -55,7 +68,7 @@
         position: relative;
         top: 1rem;
         margin: auto;
-        background: url(../../public/assets/medals/small-bronze.svg);
+        background: url(../../public/assets/medals/small-bronze-medal.svg);
         background-size: 3rem;
     }
 

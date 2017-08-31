@@ -47,7 +47,7 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                             <li className="navbar__item">
                                 <Link
                                     to={ `${params.module_id}/lecturer` }
-                                    className="f-body navbar__link navbar__link--left navbar__link--quit"
+                                    className="f-body navbar__link navbar__link--left navbar__link--quit button"
                                     onClick={ () => handleAbortQuiz(quiz_id) }
                                 >
                                   Quit
@@ -120,7 +120,7 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                             <li className="navbar__item">
                                 <Link
                                     to={ `${params.module_id}/student` }
-                                    className="navbar__link navbar__link--left navbar__link--quit "
+                                    className="navbar__link navbar__link--left navbar__link--quit button"
                                 >
                                     Quit
                                 </Link>
@@ -162,16 +162,16 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                             <li className="navbar__item">
                                 <Link
                                     to={ `${params.module_id}/lecturer` }
-                                    className="f-body navbar__link navbar__link--left navbar__link--quit"
+                                    className="f-body navbar__link navbar__link--left navbar__link--quit button"
                                     onClick={ () => handleAbortQuiz(quiz_id) }
                                 >
                                   Quit
                                 </Link>
                             </li>
                         </ul>
-                        <div className="content">
+                        <div className="content content__body">
                             <div className="live-quiz__question-wrapper">
-                                <p className="live-quiz__question-number f-display"> Q{ nextQuestionIndex }.</p>
+                                <p className="live-quiz__question-number f-display"> Q{ nextQuestionIndex }</p>
                                 <p className="live-quiz__question f-title">{ question.question }</p>
                             </div>
                             <CurrentQuestion

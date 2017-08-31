@@ -17,25 +17,23 @@ const Nav = ({ location, is_lecturer, is_super_admin }) => {
 
     return (
         <ul className={ navClasses}>
-
+          <div className="navbar__inner">
             <div className="navbar__container">
-            <li className="navbar__item navbar__item--left" onClick={ () => hashHistory.push('/dashboard') }>
-                <p className="navbar__link navbar__link--left">
-                    Home
-                </p>
-            </li>
-            { is_super_admin && is_lecturer &&
-              <li className="navbar__item navbar__item--left" onClick={ () => hashHistory.push('/super-admin') }>
-                  <p className="navbar__link navbar__link--left">
-                      Super Admin Dashboard
-                  </p>
+              <li className="navbar__item navbar__item--home" onClick={ () => hashHistory.push('/dashboard') }>
+                  <img src="/assets/logo/nav_icon.svg" className="navbar__img"></img>
               </li>
-            }
-            <li className="navbar__item navbar__item--right" onClick={ logout }>
-                <p className="navbar__link navbar__link--right">
+              { is_super_admin && is_lecturer &&
+                <li className="navbar__item navbar__item--dashboard" onClick={ () => hashHistory.push('/super-admin') }>
+                    <img src="/assets/nav_dashboard_icon.svg" className=""></img>
+                    <span className="navbar__link">Admin Dashboard</span>
+                </li>
+              }
+              <li className="navbar__item navbar__item--right" onClick={ logout }>
+                <button className="button">
                     Logout
-                </p>
-            </li>
+                </button>
+              </li>
+            </div>
           </div>
         </ul>
     );

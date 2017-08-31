@@ -36,30 +36,26 @@ class Trophies extends React.Component {
         let mappedTrophies = this.props.trophies.trophy_name.map((name, i) => {
 
             return (
-                <div key={ i }>
-
-                    <div className="new-module-trophies">
-                      <p className="trophy__small--new-module"> </p>
-                      <p className="f-small-body f-small-body--primary">{ normaliseText(name) }</p>
+                <div key={ i } className="new-module-trophies">
+                  <img src={`/assets/trophy/${name}.svg`} className="new-module-trophy" />
+                  <div>
+                      <p className="new-module-trophy-name f-small-body--primary">{ normaliseText(name) }</p>
+                  </div>
+                  <div>
                       <input
-                        className="form__input form__input--trophy"
-                        type="number"
-                        min="1"
-                        max="100"
-                        defaultValue={ this.props.trophies.condition[i] }
-                        onChange={ (e) => this.props.updateTrophyVals(name, e.target.value) } />
-                    </div>
-                 </div>
-
+                          className="form__input form__input--trophy"
+                          type="number"
+                          min="1"
+                          max="100"
+                          defaultValue={ this.props.trophies.condition[i] }
+                          onChange={ (e) => this.props.updateTrophyVals(name, e.target.value) } />
+                  </div>
+                </div>
             );
         });
 
         return (
             <div className="trophies">
-                <h3 className="f-body f-body--light">
-                    Trophies
-                </h3>
-
                 <div className={ toggleClassnamesTrophies }>
                     <p>
                         { text.trophy.trophies }

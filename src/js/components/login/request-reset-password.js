@@ -7,7 +7,7 @@ const ResetPassword = ({ resetPassword, handleEmailChange, handleResetPassword }
     let isEmailValid = /.+@.+\..+/.test(resetPassword.email);
     let isEmailEmpty = resetPassword.email.length === 0;
 
-    let submitButtonClasses = classnames("button button__primary", {
+    let submitButtonClasses = classnames("button", {
         "is-loading": resetPassword.isRequesting === true,
         "is-disabled": !isEmailValid
     });
@@ -28,9 +28,9 @@ const ResetPassword = ({ resetPassword, handleEmailChange, handleResetPassword }
 
     return (
         <section className="login">
-            <div className="content__body">
+            <div className="content__body content__body--login">
               <div className="header">
-                  <h1 className="f-headline"><img src="/Yellow.svg"></img></h1>
+                  <h1 className="f-headline"><img src="/assets/logo/Login_signup_icon.svg"></img></h1>
                   <h3 className="f-headline"> Realtime Quizzes for better lectures </h3>
               </div>
               <div className="form">
@@ -53,8 +53,8 @@ const ResetPassword = ({ resetPassword, handleEmailChange, handleResetPassword }
                         onClick={ () => { handleResetPassword(resetPassword.email); } }>
                     Send Email
                 </button>
-                <p className="f-body f-body--dark"> Already have an Account? </p>
-                <div> <Link className="f-body" to="/register-student"> Sign Up </Link> </div>
+                <p className="f-body"> Already have an Account? </p>
+                <div> <Link className="f-body f-body--dark" to="/register-student"> Sign Up </Link> </div>
 
                   </div>
             </div>
