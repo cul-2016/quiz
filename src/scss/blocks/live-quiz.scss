@@ -122,7 +122,6 @@
 // FOOTER
 
     .live-quiz__footer {
-        background-color: $gold;
         padding:2rem;
     }
 
@@ -151,7 +150,6 @@
 }
 
 .student-view__questions {
-    background-color: $gold;
     min-height: 100vh;
 
     .question {
@@ -161,11 +159,10 @@
         padding: 1rem 2rem;
     }
     .f-body {
-        padding: 0 2rem 2rem 2rem;
+        padding: 1rem 1rem 1rem 1rem;
     }
     .live-quiz__answers-wrapper {
-        background-color: $gold;
-        border-top: 3px solid $dark-gold;
+        border-top: 3px solid $blue;
         padding: 1rem 0;
     }
 

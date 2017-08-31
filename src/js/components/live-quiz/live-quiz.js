@@ -120,7 +120,7 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                             <li className="navbar__item">
                                 <Link
                                     to={ `${params.module_id}/student` }
-                                    className="navbar__link navbar__link--left navbar__link--quit "
+                                    className="navbar__link navbar__link--left navbar__link--quit button"
                                 >
                                     Quit
                                 </Link>
