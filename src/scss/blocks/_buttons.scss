@@ -1,11 +1,10 @@
 .button {
     display: inline-block;
-    padding: 0.5rem 1rem; /* a bit of space on top and a bit more on the sides of the word(s) */
+    padding: 0.5rem 2rem; /* a bit of space on top and a bit more on the sides of the word(s) */
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance:  none; /* Removes NATIVE styling (esp. when .button is an input)*/
-    box-shadow: inset 0 -3px 0 0 $grey;
-    border-radius: 3px;
+    border-radius: 2.5rem;
     font-weight: 400;
     font-size: 1rem;   /* This (and partly line-height) should determine the majority of the height of the element */
     line-height: 2;
@@ -13,12 +12,30 @@
     text-decoration: none;
     text-transform: capitalize;
     text-align: center;
-    color: $black;
-    background-color: #F5F5F5;
-    border: 1px solid #3E3E3E;
+    color: $white;
+    background-color: $blue;
+    border: 1px solid $white;
+    color: $white;
+    -moz-transition: all .2s ease-in;
+    -o-transition: all .2s ease-in;
+    -webkit-transition: all .2s ease-in;
+    transition: all .2s ease-in;
+    cursor: pointer;
 
         &:active {
             box-shadow: none;
+            padding-top: 0.35rem;
+            padding-bottom: 0.15rem;
+        }
+
+        &:hover {
+            -moz-transition: all .2s ease-in;
+            -o-transition: all .2s ease-in;
+            -webkit-transition: all .2s ease-in;
+            transition: all .2s ease-in;
+            background-color: $white;
+            color: $blue;
+            border: 1px solid $blue;
         }
 
     &--large {
@@ -31,10 +48,14 @@
         padding-right: 3rem;
     }
 
+    &__icon {
+        padding: 0.75rem 1rem 0.25rem 1rem;
+        border-radius: 100%;
+    }
+
     &__primary {
-        background-color: $gold;
-        color: $black;
-        box-shadow: inset 0 -3px 0 0 $dark-gold;
+        background-color: $salmon;
+        color: $white;
 
         &--large {
             font-size: 1.5rem;
@@ -42,10 +63,20 @@
         }
     }
 
+    &__primary:hover {
+        -moz-transition: all .2s ease-in;
+        -o-transition: all .2s ease-in;
+        -webkit-transition: all .2s ease-in;
+        transition: all .2s ease-in;
+        background-color: $white;
+        color: $salmon;
+        border: 1px solid $salmon;
+    }
+
     &__secondary {
-        background-color: $blue;
-        color: white;
-        box-shadow: inset 0 -3px 0 0 $dark-blue;
+        background-color: $white;
+        color: $blue;
+        border: 1px solid $blue;
 
         &--large {
             font-size: 1.5rem;
@@ -92,6 +123,7 @@
         max-width: 62rem;
         margin: auto;
         padding: 0 2rem;
+        margin-top: 1rem;
         &--centered {
             text-align: center;
         }
@@ -104,9 +136,9 @@
       pointer-events: none;
       cursor: not-allowed;
       background-color: $white;
-      color: $black;
+      color: $blue;
       box-shadow: none;
-      padding: 1rem 2rem;
-      margin: 1rem auto;
+      margin: 0 auto;
+      border: 1px solid $blue;
     }
 }

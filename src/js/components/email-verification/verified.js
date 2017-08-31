@@ -7,7 +7,7 @@ const VerifiedComponent = ({ params }) => {
         <div className="login">
             <div className="content__body">
               <div className="header">
-                  <h1 className="f-headline"><img src="/Yellow.svg"></img></h1>
+                  <h1 className="f-headline"><img src="/assets/logo/Login_signup_icon.svg"></img></h1>
                   {
                     isVerified ?
                     <h3 className="f-headline">Thank you for verifying</h3> :

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="106px" height="106px" viewBox="0 0 106 106" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>view_students_icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard-6" transform="translate(-21.000000, -23.000000)">
+            <g id="leader_board" transform="translate(22.000000, 24.000000)">
+                <g id="oval" transform="translate(1.000000, 1.000000)"></g>
+                <g id="b-love" transform="translate(21.000000, 17.000000)" fill-rule="nonzero">
+                    <g id="book-open" transform="translate(15.000000, 0.000000)" fill="#D8BC48">
+                        <path d="M31,4 L30,4 L30,1 C30,0.447 29.552,0 29,0 C21.317,0 17.496,2.347 15.995,3.611 C14.481,2.352 10.633,0 3,0 C2.448,0 2,0.447 2,1 L2,4 L1,4 C0.448,4 0,4.447 0,5 L0,27 C0,27.553 0.448,28 1,28 L31,28 C31.552,28 32,27.553 32,27 L32,5 C32,4.447 31.552,4 31,4 Z M4,2.015 C11.096,2.226 14.205,4.655 15,5.404 L15,17 L17,17 L17,5.398 C17.776,4.655 20.841,2.225 28,2.015 L28,21.014 C21.028,21.208 17.451,23.409 16.005,24.612 C14.571,23.403 11.017,21.206 4,21.014 L4,2.015 Z" id="Shape"></path>
+                    </g>
+                    <circle id="Oval" fill="#2574A9" cx="49" cy="39" r="7"></circle>
+                    <circle id="Oval" fill="#2574A9" cx="13" cy="39" r="7"></circle>
+                    <path d="M23.542,52.726 C21.441,51.482 17.907,50 13,50 C8.028,50 4.511,51.478 2.436,52.717 C0.934,53.613 0,55.26 0,57.014 L0,63 C0,63.553 0.448,64 1,64 L25,64 C25.552,64 26,63.553 26,63 L26,57.035 C26,55.273 25.058,53.621 23.542,52.726 Z" id="Shape" fill="#2574A9"></path>
+                    <path d="M59.542,52.726 C57.441,51.482 53.907,50 49,50 C44.028,50 40.511,51.478 38.436,52.717 C36.934,53.613 36,55.26 36,57.014 L36,63 C36,63.553 36.448,64 37,64 L61,64 C61.552,64 62,63.553 62,63 L62,57.035 C62,55.273 61.058,53.621 59.542,52.726 Z" id="Shape" fill="#2574A9"></path>
+                </g>
+                <circle id="Oval-3" stroke="#2574A9" cx="52" cy="52" r="52"></circle>
+                <circle id="Oval-3" stroke="#2574A9" cx="52" cy="52" r="49"></circle>
+            </g>
+        </g>
+    </g>
+</svg>

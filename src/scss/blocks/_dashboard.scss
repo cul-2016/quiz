@@ -1,12 +1,5 @@
 .dashboard {
     text-align: center;
-    background-color: $white;
-    min-height: 100vh;
-
-    .content__body {
-      margin: 0 auto;
-      padding-top: 2rem;
-    }
 
     .display {
         padding: 2rem 0 1rem 0;
@@ -21,6 +14,19 @@
       box-sizing: border-box;
     }
 
+    .card {
+        padding: 0 1rem;
+      .module__name {
+        display: inline-block;
+        width: 70%;
+      }
+      .module__id {
+        width: 30%;
+        display: inline-block;
+        text-align: right;
+      }
+    }
+
     .form__input--add-module {
         display: inline-block;
         max-width: 6rem;
@@ -29,16 +35,8 @@
         height: 4.1rem;
     }
 
-    .card__secondary {
+    &__student--module {
         text-align: center;
-
-        .button__secondary {
-            max-width: 10rem;
-            padding: 0.984rem;
-            display: inline-block;
-            box-sizing: border-box;
-            margin: 0.5rem;
-        }
     }
 
     &__tc {
@@ -46,19 +44,32 @@
     }
 }
 
-.dashboard__lecturer {
-
-    .fa-plus:before {
-        padding-right: 1rem;
-    }
-}
-
-
 @media (min-width: 769px) {
   .dashboard {
 
+      .card {
+          padding: 0 3rem;
+          -moz-transition: all .2s ease-in;
+          -o-transition: all .2s ease-in;
+          -webkit-transition: all .2s ease-in;
+          transition: all .2s ease-in;
+      }
+
+      .card:hover {
+          border: 1px solid $blue; 
+      }
       .f-display, .dashboard__lecturer {
         text-align: left;
+      }
+
+      &__lecturer--title {
+          display: inline-block;
+          min-width: 70%;
+      }
+      &__lecturer--icon {
+          display: inline-block;
+          min-width: 30%;
+          text-align: right;
       }
 
       .module__header {
@@ -79,18 +90,7 @@
         }
 
       }
-      .card {
-        margin: 0;
-        .module__name {
-          display: inline-block;
-          width: 70%;
-        }
-        .module__id {
-          width: 30%;
-          display: inline-block;
-          text-align: right;
-        }
-      }
+
 
       &__tc {
           padding-top: 1rem;

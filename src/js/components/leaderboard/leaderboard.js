@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
-import classnames from 'classnames';
 
 const Leaderboard = ({ mainData, medalScores, quiz_id_list, medalCondition, params }) => { //eslint-disable-line no-unused-vars
 
@@ -38,59 +37,41 @@ const Leaderboard = ({ mainData, medalScores, quiz_id_list, medalCondition, para
             }
         });
 
-        let rowClass = classnames({
-            "leaderboard__row--odd": rankingNumbers[i] % 2 !== 0,
-            "leaderboard__row--even": rankingNumbers[i] % 2 === 0
-        });
-
         return (
-          <tr key={i} className={ rowClass }>
-              <td className="f-body"> { rankingNumbers[i] } </td>
-              <td className="f-body"> { user.username } </td>
-              <td className="f-body"> { bronzeTotal} </td>
-              <td className="f-body"> { silverTotal } </td>
-              <td className="f-body"> { goldTotal } </td>
-              <td className="f-body"> { firstQuiz } </td>
-              <td className="f-body"> { highScore } </td>
-              <td className="f-body"> { overallScore } </td>
-              <td className="f-body"> { participation } </td>
-              <td className="f-body"> { parseFloat(user.total_score) } </td>
+          <tr key={i} className="leaderboard__row">
+              <td className="leaderboard__cell f-body"> { rankingNumbers[i] } </td>
+              <td className="leaderboard__cell leaderboard__cell--tl f-body"> { user.username } </td>
+              <td className="leaderboard__cell leaderboard__cell--tl f-body"> { firstQuiz } { highScore } { overallScore } { participation } </td>
+              <td className="leaderboard__cell f-body"> { bronzeTotal} </td>
+              <td className="leaderboard__cell f-body"> { silverTotal } </td>
+              <td className="leaderboard__cell f-body"> { goldTotal } </td>
+              <td className="leaderboard__cell leaderboard__cell--narrow f-body"> [diff] </td>
+              <td className="leaderboard__cell leaderboard__cell--narrow f-body"> { parseFloat(user.total_score) } </td>
           </tr>
         );
     });
 
     return (
         <div className="leaderboard">
-               <div>
-                   <ul className="navbar navbar--invisible">
-                       <li className="navbar__item">
-                           <Link to={ `${params.module_id}/lecturer` } className="f-body navbar__link navbar__link--left navbar__link--quit">
-                             Back
-                           </Link>
-                       </li>
-                   </ul>
-               </div>
                <div className="content__body">
-                    <h1 className="f-headline">Module Leaderboard</h1>
-                    <table>
-                        <thead>
+                    <div className="leaderboard__image"></div>
+                    <table className="leaderboard__table">
+                        <thead className="leaderboard__header">
                             <tr>
-                                <th className="f-body f-body--white">Pos</th>
-                                <th className="f-body f-body--white">Name</th>
-                                <th>
+                                <th className="leaderboard__cell leaderboard__cell--header leaderboard__cell--narrow f-body f-body--white">#</th>
+                                <th className="leaderboard__cell leaderboard__cell--header leaderboard__cell--tl f-body f-body--white">Name</th>
+                                <th className="leaderboard__cell leaderboard__cell--header leaderboard__cell--tl f-body f-body--white">Badges</th>
+                                <th className="leaderboard__cell leaderboard__cell--header leaderboard__cell--narrow">
                                   <p className="medal-small medal-small--bronze"></p>
                                 </th>
-                                <th>
+                                <th className="leaderboard__cell leaderboard__cell--header leaderboard__cell--narrow">
                                   <p className="medal-small medal-small--silver"></p>
                                 </th>
-                                <th>
+                                <th className="leaderboard__cell leaderboard__cell--header leaderboard__cell--narrow">
                                   <p className="medal-small medal-small--gold"></p>
                                 </th>
-                                <th className="f-body f-body--white">first quiz</th>
-                                <th className="f-body f-body--white">high score</th>
-                                <th className="f-body f-body--white">overall score</th>
-                                <th className="f-body f-body--white">participation</th>
-                                <th className="f-body f-body--white">Score</th>
+                                <th className="leaderboard__cell leaderboard__cell--header leaderboard__cell--narrow f-body f-body--white">Trend</th>
+                                <th className="leaderboard__cell leaderboard__cell--header leaderboard__cell--narrow f-body f-body--white">Score</th>
                             </tr>
                         </thead>
                         <tbody>
