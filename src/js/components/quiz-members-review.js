@@ -28,7 +28,7 @@ const QuizMemberReview = ({ questions, params, isFetchingQuizMembers }) => {
 
                   <ul className="navbar navbar--invisible">
                       <li className="navbar__item">
-                          <Link to={ `${params.module_id}/${params.quiz_id}/members` } className="f-body navbar__link navbar__link--left navbar__link--quit">
+                          <Link to={ `${params.module_id}/${params.quiz_id}/members` } className="f-body navbar__link navbar__link--left navbar__link--quit button">
                             Back
                           </Link>
                       </li>

@@ -110,7 +110,7 @@ class QuizMembers extends Component {
 
                       <ul className="navbar navbar--invisible">
                           <li className="navbar__item">
-                              <Link to={ `${this.props.params.module_id}/lecturer` } className="f-body navbar__link navbar__link--left navbar__link--quit">
+                              <Link to={ `${this.props.params.module_id}/lecturer` } className="f-body navbar__link navbar__link--left navbar__link--quit button">
                                 Back
                               </Link>
                           </li>
