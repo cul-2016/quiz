@@ -40,11 +40,6 @@
             .live-quiz__total-replies {
                 color: $salmon;
             }
-            .live-quiz__letter {
-                height: 67px;
-                line-height: 20px;
-                width: 67px;
-            }
         }
 
         &--response {
@@ -55,9 +50,6 @@
             .live-quiz__letter {
                 color: $white;
                 border-color: $white;
-                height: 67px;
-                line-height: 20px;
-                width: 67px;
             }
             .live-quiz__total-replies {
                 color: $white;
