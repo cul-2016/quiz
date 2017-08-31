@@ -8,6 +8,7 @@
       padding: 0;
 
       &--quiz {
+        padding: 2rem;
         margin: 0.5rem;
         min-width: 51.75rem;
         box-sizing: border-box;
@@ -105,9 +106,10 @@
   }
 
   &__err-message {
+    line-height: 1rem;
     display: block;
     margin-top: 0.5rem;
-    background-color: $pink;
+    background-color: $salmon;
     padding: 0.5rem;
     border-radius: 2px;
     color: white;

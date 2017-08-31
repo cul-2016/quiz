@@ -22,6 +22,10 @@ const Module = ({
 
             <div className="module">
                 <div className="content__body content__body--quiz">
+                    <h1 className="f-display">{ module.name }</h1>
+                    <h4 className="f-body f-body--primary">{ module.module_id }</h4>
+                    <div className="line module__line"></div>
+
                     <Quizzes quizzes={ quizzes }
                         location={ location }
                         sendQuizInvite={ sendQuizInvite }
@@ -78,6 +82,30 @@ const Module = ({
                             <h3 className="f-small-label"> { applyOffset(module.medals.condition[1], 1) } - 100% </h3>
                         </div>
 
+                    </div>
+
+                    <div className="card card__medals">
+                        <h3 className="f-title">Import Quiz/Survey</h3>
+                        <div>
+                            <input
+                                className="form__input form__input--import"
+                                placeholder="CODE"
+                                name="share_id"
+                                type="text"
+                                onChange={ (e) => handleImportCode(e.target.value) } />
+                        </div>
+                        <div>
+                            <button
+                            className="button button__secondary quizzes__button"
+                            onClick={ () => {
+                                handleSubmitImportCode(module.importCode, module.module_id);
+                            }}>
+                                Import Survey/Quiz
+                            </button>
+                            { module.error &&
+                                <p className="module__err-message">No quiz or survey <br /> found with this code</p>
+                            }
+                        </div>
                     </div>
 
 
