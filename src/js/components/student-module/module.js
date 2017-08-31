@@ -96,7 +96,7 @@ const StudentModule = ({ location,
 
                 <p className="f-headline"> { module.name } </p>
                 <p className="f-title f-title--primary"> { module.module_id } </p>
-                { isQuizOpen &&
+                { !isQuizOpen &&
                     <div className="live-quiz-button">
                         <img src="/assets/logo/nav_icon.svg" className="live-quiz-button-logo" />
                         <div onClick={ (e) => { handleAnimation(e, livePath); }} className="live-quiz-button-text">
