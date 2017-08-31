@@ -10,7 +10,7 @@
       &--quiz {
         padding: 2rem;
         margin: 0.5rem;
-        min-width: 51.75rem;
+        max-width: 51.75rem;
         box-sizing: border-box;
         display: inline-block;
       }
@@ -174,7 +174,6 @@
   }
 
   .f-body {
-    float: left;
     margin-top: 0.7rem;
     font-size: 1.8rem;
     line-height: 2rem;

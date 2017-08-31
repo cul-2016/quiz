@@ -23,8 +23,22 @@ const Module = ({
             <div className="module">
                 <div className="content__body content__body--quiz">
                     <h1 className="f-display">{ module.name }</h1>
+                    <div className="dashboard__lecturer">
+                    <div className="dashboard__lecturer--title">
                     <h4 className="f-body f-body--primary">{ module.module_id }</h4>
-                    <div className="line module__line"></div>
+                    </div><div className="dashboard__lecturer--icon">
+                    <Link className="module__button__link" to={ `${module.module_id}/new-quiz` }>
+                    <button className="button">
+                    <span className="icon">
+                    <i className="fa fa-plus" />
+                    </span>
+                    <span>Add a new Survey/Quiz</span>
+                    </button>
+                    </Link>
+                    </div>
+                    </div>
+
+                    <div className="line"></div>
 
                     <Quizzes quizzes={ quizzes }
                         location={ location }
@@ -106,60 +120,6 @@ const Module = ({
                                 <p className="module__err-message">No quiz or survey <br /> found with this code</p>
                             }
                         </div>
-                    </div>
-
-
-
-
-
-                </div>
-            </div>
-
-
-
-
-
-
-            <div>
-                <div className="module content__body">
-
-
-                <Details name={ module.name }
-                    module_id={ module.module_id }
-                    num_enrolled={ module.num_enrolled }
-                    trophies={ module.trophies }
-                    medals={ module.medals }/>
-
-
-                    <Link className="module__button__link" to={ `${module.module_id}/new-quiz` } >
-                        <button className="button button__secondary quizzes__button">
-                            <span className="icon">
-                                <i className="fa fa-plus" />
-                            </span>
-                            <span>Add a new Survey/Quiz</span>
-                        </button>
-                    </Link>
-                    <div className="or-container">
-                      <div className="horizontal-spacer"></div>
-                      <div className="or">OR</div>
-                      <div className="horizontal-spacer"></div>
-                    </div>
-                    <div className="import-container">
-                        <input
-                            className="form__input form__input--import"
-                            placeholder="CODE"
-                            name="share_id"
-                            type="text"
-                            onChange={ (e) => handleImportCode(e.target.value) } />
-
-                        <button
-                            className="button button__secondary quizzes__button"
-                            onClick={ () => {
-                                handleSubmitImportCode(module.importCode, module.module_id);
-                            }} >Import Survey/Quiz</button>
-                        { module.error &&
-                            <p className="module__err-message">No quiz or survey found with this code</p>
-                        }
                     </div>
                 </div>
             </div>
