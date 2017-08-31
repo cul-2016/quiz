@@ -84,47 +84,6 @@
     margin-bottom: 4.5rem;
 }
 
-.quiz__status-indicator { /* quiz view - is quiz live right now or not? */
-    display: block;
-    position: relative;
-
-    &--live {
-        margin: 0 0 1rem 1.5rem;
-        &:before {
-            content: "";
-            position: absolute;
-            left: -1.5rem;
-            bottom: 50%;
-            transform: translateY(50%);
-            width: 1rem;
-            height: 1rem;
-            background: radial-gradient(circle, $off-white 0%, $light-pink 30%, $pink 100%);
-            box-shadow: 0 0 6px 1px $light-pink;
-            border: 2px solid $red;
-            box-sizing: border-box;
-            border-radius: 50%;
-        }
-    }
-    &--off {
-        margin: 0 0 1rem 1.5rem;
-        color: $dark-grey;
-        &:before {
-            content: "";
-            position: absolute;
-            left: -1.5rem;
-            bottom: 50%;
-            transform: translateY(50%);
-            width: 1rem;
-            height: 1rem;
-            background: radial-gradient(circle, $off-white 0%, $grey 30%, $dark-grey 100%);
-            box-shadow: 0 0 6px 1px $grey;
-            border: 2px solid $black;
-            box-sizing: border-box;
-            border-radius: 50%;
-        }
-    }
-}
-
 .quiz__titles-icon {
     display: block;
     float: left;

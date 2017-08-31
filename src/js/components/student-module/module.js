@@ -77,15 +77,13 @@ const StudentModule = ({ location,
     let url = location.pathname.split('/');
     let livePath = isQuizOpen ? `/${url[1]}/${url[2]}/live` : location.pathname;
 
-    let totalTrophies = 0;
-
-    if (trophies_awarded) {
-        Object.keys(trophies_awarded).map((key) => {
-            if (trophies_awarded[key]) {
-                totalTrophies += 1;
-            }
-        });
-    }
+    console.log(trophies_awarded);
+    const trophyList = Object.keys(trophies_awarded).map((trophy, i) => {
+        let awarded = trophies_awarded[trophy] ? "" : "_grey";
+        return (
+            <img key={i} src={`/assets/trophy/${trophy}${awarded}.svg`} className="trophyItem" />
+        );
+    });
 
     return (
         <div>
@@ -98,26 +96,21 @@ const StudentModule = ({ location,
 
                 <p className="f-headline"> { module.name } </p>
                 <p className="f-title f-title--primary"> { module.module_id } </p>
-                <div className={ buttonAreaClasses }>
-                    <p onClick={ (e) => { handleAnimation(e, livePath); }} className={ buttonClasses }>
-                        Join Live Quiz
-                    </p>
+                { isQuizOpen &&
+                    <div className="live-quiz-button">
+                        <img src="/assets/logo/nav_icon.svg" className="live-quiz-button-logo" />
+                        <div onClick={ (e) => { handleAnimation(e, livePath); }} className="live-quiz-button-text">
+                            Join <span className="live-quiz-button-text-live">Live</span> Quiz
+                        </div>
+                    </div>
+                }
+                <div className="trophy-container">
+                    {trophyList}
                 </div>
-                <div className="trophy">
-                    <label> Trophies </label>
-                    <div className="trophy__small"> </div>
-                    <span className="f-body"> {totalTrophies}/4 </span>
-                </div>
-                <Link className="button button__secondary button__icon--right" to={ `${module.module_id}/student/performance` }>
-                        My Performance
-                        <span className="icon">
-                          <i className="fa fa-chevron-right" />
-                        </span>
+                <Link className="my-performance-button" to={ `${module.module_id}/student/performance` }>
+                    My Performance
                 </Link>
-
-                <div className="line line__tertiary"></div>
-
-                <div className="quiz">
+                <div className="quiz quizzes-container">
                     { mappedQuizzes }
                 </div>
 
