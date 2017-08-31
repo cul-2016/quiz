@@ -8,8 +8,9 @@
       padding: 0;
 
       &--quiz {
+        padding: 2rem;
         margin: 0.5rem;
-        min-width: 51.75rem;
+        max-width: 51.75rem;
         box-sizing: border-box;
         display: inline-block;
       }
@@ -62,7 +63,21 @@
   }
 
 
-
+  .module__code {
+      display: inline-block;
+      width: 100%;
+      &--id {
+          display: inline-block;
+          min-width: 50%;
+          float:left;
+      }
+      &--new-quiz {
+          display: inline-block;
+          min-width: 50%;
+          float:right;
+          text-align: right;
+      }
+  }
   .or-container {
       text-align: center;
       padding: 1rem;
@@ -105,9 +120,10 @@
   }
 
   &__err-message {
+    line-height: 1rem;
     display: block;
     margin-top: 0.5rem;
-    background-color: $pink;
+    background-color: $salmon;
     padding: 0.5rem;
     border-radius: 2px;
     color: white;
@@ -172,7 +188,6 @@
   }
 
   .f-body {
-    float: left;
     margin-top: 0.7rem;
     font-size: 1.8rem;
     line-height: 2rem;
