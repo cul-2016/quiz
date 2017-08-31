@@ -23,19 +23,22 @@ const Module = ({
             <div className="module">
                 <div className="content__body content__body--quiz">
                     <h1 className="f-display">{ module.name }</h1>
-                    <div className="dashboard__lecturer">
-                    <div className="dashboard__lecturer--title">
-                    <h4 className="f-body f-body--primary">{ module.module_id }</h4>
-                    </div><div className="dashboard__lecturer--icon">
-                    <Link className="module__button__link" to={ `${module.module_id}/new-quiz` }>
-                    <button className="button">
-                    <span className="icon">
-                    <i className="fa fa-plus" />
-                    </span>
-                    <span>Add a new Survey/Quiz</span>
-                    </button>
-                    </Link>
-                    </div>
+
+
+                    <div className="module__code">
+                        <div className="module__code--id">
+                            <h4 className="f-body f-body--primary">{ module.module_id }</h4>
+                        </div>
+                        <div className="module__code--new-quiz">
+                            <Link to={ `${module.module_id}/new-quiz` }>
+                                <button className="button">
+                                    <span className="icon">
+                                        <i className="fa fa-plus" />
+                                    </span>
+                                    <span>Add a new Survey/Quiz</span>
+                                </button>
+                            </Link>
+                        </div>
                     </div>
 
                     <div className="line"></div>

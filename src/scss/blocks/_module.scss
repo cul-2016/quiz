@@ -63,7 +63,21 @@
   }
 
 
-
+  .module__code {
+      display: inline-block;
+      width: 100%;
+      &--id {
+          display: inline-block;
+          min-width: 50%;
+          float:left;
+      }
+      &--new-quiz {
+          display: inline-block;
+          min-width: 50%;
+          float:right;
+          text-align: right;
+      }
+  }
   .or-container {
       text-align: center;
       padding: 1rem;
