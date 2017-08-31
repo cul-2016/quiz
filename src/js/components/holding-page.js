@@ -8,7 +8,7 @@ const HoldingPage = ({ is_lecturer, params }) => {
 
           <ul className="navbar navbar--invisible">
               <li className="navbar__item">
-                  <Link to={ `${params.module_id}/${is_lecturer ? 'lecturer' : 'student'}` } className="f-body navbar__link navbar__link--left navbar__link--quit">
+                  <Link to={ `${params.module_id}/${is_lecturer ? 'lecturer' : 'student'}` } className="f-body navbar__link navbar__link--left navbar__link--quit button">
                     Quit
                   </Link>
               </li>
