@@ -32,9 +32,8 @@ const StudentModule = ({ location,
         });
 
         return (
-            <div key={i} className="card">
-
-                <div key={i} className="quiz__item">
+            <div key={i} className="quiz__item-container">
+                <div className="quiz__item">
 
                     <div className="quiz__item__score">
                     <span className="f-small-label f-small-label--dark quiz__item__score--postion">{ i + 1 }</span>
@@ -105,7 +104,7 @@ const StudentModule = ({ location,
                     </p>
                 </div>
                 <div className="trophy">
-                    <label className="f-label"> Trophies </label>
+                    <label> Trophies </label>
                     <div className="trophy__small"> </div>
                     <span className="f-body"> {totalTrophies}/4 </span>
                 </div>
