@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import { hashHistory, Link } from 'react-router';
-import classnames from 'classnames';
 import Tabs from './tabs'; //eslint-disable-line no-unused-vars
 import Spinner from '../general/spinner';
 import Trophies from './trophies'; //eslint-disable-line no-unused-vars
@@ -42,7 +41,7 @@ const StudentModule = ({ location,
                 </div>
                 <div className="quiz__item-button-container">
                     <Link to={`/${module.module_id}/student/revise/${quiz.quiz_id}`}>
-                        <button className="button"> Revise </button>
+                        <div className="button"> Revise </div>
                     </Link>
                 </div>
             </div>
