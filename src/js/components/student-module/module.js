@@ -77,7 +77,6 @@ const StudentModule = ({ location,
     let url = location.pathname.split('/');
     let livePath = isQuizOpen ? `/${url[1]}/${url[2]}/live` : location.pathname;
 
-    console.log(trophies_awarded);
     const trophyList = Object.keys(trophies_awarded).map((trophy, i) => {
         let awarded = trophies_awarded[trophy] ? "" : "_grey";
         return (
@@ -96,7 +95,7 @@ const StudentModule = ({ location,
 
                 <p className="f-headline"> { module.name } </p>
                 <p className="f-title f-title--primary"> { module.module_id } </p>
-                { !isQuizOpen &&
+                { isQuizOpen &&
                     <div className="live-quiz-button">
                         <img src="/assets/logo/nav_icon.svg" className="live-quiz-button-logo" />
                         <div onClick={ (e) => { handleAnimation(e, livePath); }} className="live-quiz-button-text">
