@@ -7,19 +7,6 @@
 
 export function elastic (selector) {
 
-    // TweenMax.staggerFrom(
-    //     selector,
-    //     0.5,
-    //     {
-    //         y: 150,
-    //         opacity: 0,
-    //         ease: Back.easeOut.config(2, 0.5),
-    //         delay: 1.5, scale: 0
-    //     },
-    //     0.8
-    // );
-
-    // FOR TWO BADGES
     const tl = new TimelineMax();
 
 
@@ -61,13 +48,8 @@ export function studentResultsWithBadges () {
 
 export function fadeOutThenIn (selector) {
 
-    console.log(selector);
     const tl = new TimelineMax();
-    console.log(tl);
-    tl.add(TweenMax.to(selector, 0, { ease: Circ.easeOut, opacity: 0 }));
-    tl.add(TweenMax.to(selector, 0.3, { y: 1000 }));
-    tl.add(TweenMax.to(selector, 0.3, { ease: Circ.easeIn, opacity: 1 }));
-    tl.add(TweenMax.to(selector, 0.3, { y: 100 }));
+    tl.add(TweenMax.to(selector, 0.3, { ease: Circ.easeOut, opacity: 0 }));
     tl.add(TweenMax.to(selector, 0.3, { ease: Circ.easeIn, opacity: 1 }));
 }
 

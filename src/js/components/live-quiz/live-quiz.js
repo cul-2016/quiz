@@ -10,6 +10,8 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                     handleSelection, response, name, //eslint-disable-line no-unused-vars
                     numParticipants, handleAbortQuiz, params, review }) => {
 
+                        console.log('-------->', nextQuestionIndex);
+
     return (
         <section className="live-quiz container">
                 {
@@ -114,7 +116,7 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                     </div>
                 }
                 {
-                    isQuizStarted && question && !is_lecturer &&
+                    isQuizStarted && !is_lecturer && question &&
                     <div className="student-view__questions">
                         <ul className="navbar navbar__light navbar__light--tertiary">
                             <li className="navbar__item">
@@ -128,14 +130,17 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                         </ul>
 
                         <div className="question">
-                            <p className="f-subheader"> Q{ nextQuestionIndex }.</p>
-                            <p className="f-body">{ question.question }</p>
+                            <div className="live-quiz__question-number-container">
+                                <p className="f-display live-quiz__question-number-mobile"> Q{ question.order_id }</p>
+                                <p className="f-body">{ question.question }</p>
+                            </div>
                         </div>
 
                         <CurrentQuestion
                             data={ question }
                             handleSelection={ handleSelection }
-                            response={ response }/>
+                            response={ response }
+                            isLecturer={ is_lecturer }/>
 
                         <div className="live-quiz__footer">
                             <div className="logo logo--footer"></div>
@@ -177,7 +182,8 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                             <CurrentQuestion
                                 data={ question }
                                 handleSelection={ handleSelection }
-                                response={ response }/>
+                                response={ response }
+                                isLecturer={ is_lecturer }/>
                             <LiveQuizButtons
                                 is_lecturer={ is_lecturer }
                                 numQuestions={ numQuestions }

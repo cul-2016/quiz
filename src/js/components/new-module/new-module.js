@@ -41,12 +41,12 @@ const NewModule = ({ isValidatingModuleID, moduleIDExists,
                         module_id_length={ module_id.length }
                         handleCodeInputChange={ handleCodeInputChange }
                         handleInputChange={ handleInputChange } />
-                      <p className="line line--primary"></p>
+                      <p className="line-primary--short-grey"></p>
                       <h2 className="f-title"> Medals {/*and Trophies */} </h2>
                       <Medals medals={ medals }
                         updateMedalVals={ updateMedalVals }
                         applyOffset={ applyOffset }/>
-                    <p className="line line--primary"></p>
+                    <p className="line-primary--short-grey"></p>
                     <div>
                         <Trophies trophies={ trophies }
                             updateTrophyVals={ updateTrophyVals }
