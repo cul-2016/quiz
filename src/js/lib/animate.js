@@ -29,7 +29,7 @@ export function fadeOutThenIn (selector) {
 
     const tl = new TimelineMax();
     tl.add(TweenMax.to(selector, 0.3, { ease: Circ.easeOut, opacity: 0 }));
-    tl.add(TweenMax.to(selector, 0.3, { ease: Circ.easeIn, opacity: 1, backgroundColor: '#42afe3' }));
+    tl.add(TweenMax.to(selector, 0.3, { ease: Circ.easeIn, opacity: 1 }));
 }
 
 /**

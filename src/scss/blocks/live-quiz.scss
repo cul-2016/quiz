@@ -21,6 +21,18 @@
         margin-right: 1rem;
     }
 
+    .live-quiz__question-number-mobile {
+        background-color: $blue;
+        border-radius: 10px;
+        color: $white;
+        padding: 0 0.75rem 0 0.5rem;
+        display: inline-block;
+    }
+
+    .live-quiz__question-number-container {
+        text-align: center;
+    }
+
 // ANSWERS
 
     .live-quiz__answers-wrapper {} /* aesthetic purpose */
@@ -34,6 +46,38 @@
         box-sizing: border-box;
         max-width: 29rem; /* 464px */
         margin: 1rem; /* 464 + 16 + 16 = 496px in total */
+
+        &--wrong {
+
+            .live-quiz__total-replies {
+                color: $salmon;
+            }
+        }
+
+        &--response {
+            background-color: $blue;
+            box-shadow: none;
+            border: 1px solid $blue;
+            // when a repsponse is given the letter changes colour
+            .live-quiz__letter {
+                color: $white;
+                border-color: $white;
+            }
+            .live-quiz__total-replies {
+                color: $white;
+            }
+            .live-quiz__answer-text {
+                color: $white;
+            }
+        }
+    }
+
+    .live-quiz__answer-mobile {
+        display: inline-block; /* centered by parent wrapper */
+        box-sizing: border-box;
+        max-width: 29rem; /* 464px */
+        margin-left: 0.5rem; /* 464 + 16 + 16 = 496px in total */
+        margin-right: 0.5rem; /* 464 + 16 + 16 = 496px in total */
 
         &--wrong {
 
