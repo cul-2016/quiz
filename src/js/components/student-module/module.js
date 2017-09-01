@@ -12,47 +12,38 @@ const StudentModule = ({ location,
                         quiz_id, question, response, //eslint-disable-line no-unused-vars
                         handleJoiningQuiz, params, module,
                         review, history }) => { //eslint-disable-line no-unused-vars
-    let buttonAreaClasses = classnames("quiz-button section has-text-centered transparent-background", {
-        "animated-infinite pulse": isQuizOpen
-    });
-
-    let buttonClasses = classnames("quiz__status-indicator quiz__status-indicator--live f-subheader f-subheader--tertiary", {
-        "quiz__status-indicator--live": isQuizOpen,
-        "quiz__status-indicator--off": !isQuizOpen
-    });
 
     let mappedQuizzes = !isFetchingModule && history.map((quiz, i) => {
 
         const medalConditions = module.medals.condition;
         let percentageScore = Math.round(quiz.score / quiz.num_questions * 100);
-        let medalClass = classnames({
-            "quiz__item__score--medal--gold": percentageScore >= medalConditions[1],
-            "quiz__item__score--medal--silver": percentageScore >= medalConditions[0] && percentageScore < medalConditions[1],
-            "quiz__item__score--medal--bronze": percentageScore < medalConditions[0] && percentageScore >= 0
-        });
+
+        let medal = percentageScore >= medalConditions[1] ? "gold" : percentageScore >= medalConditions[0] && percentageScore < medalConditions[1] ? "silver" : "bronze";
 
         return (
             <div key={i} className="quiz__item-container">
-                <div className="quiz__item">
-
-                    <div className="quiz__item__score">
-                    <span className="f-small-label f-small-label--dark quiz__item__score--postion">{ i + 1 }</span>
-                    <div className={ medalClass }> </div>
-                    <div className="quiz__item__score--percent">{ percentageScore }%</div>
+                <div className="quiz__item-wrapper">
+                    <div className="quiz__item">
+                        <div className="quiz__item-result-container">
+                            <div className="quiz__item-medal-container">
+                                <img src={`/assets/medals/${medal}_medal.svg`} />
+                            </div>
+                            <div className="quiz__item-text-container">
+                                <div className="f-body--heavy"> { quiz.name } </div>
+                                <div>
+                                    <div className="quiz__item-percentage-score">{ percentageScore }%</div>
+                                    <Link to={`/${module.module_id}/student/history/${quiz.quiz_id}`}>
+                                        <div className="f-body--primary quiz__item-button-underline">Review my answers</div>
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div className="quiz__item__name"> { quiz.name } </div>
-
                 </div>
-                <div className="quiz__item__buttons">
-                    <Link to={`/${module.module_id}/student/history/${quiz.quiz_id}`}>
-                        <button className="button button__secondary">
-                                Review
-                        </button>
-                    </Link>
+                <div className="quiz__item-button-container">
                     <Link to={`/${module.module_id}/student/revise/${quiz.quiz_id}`}>
-                        <button className="button button__secondary"> Revise </button>
+                        <button className="button"> Revise </button>
                     </Link>
-
                 </div>
             </div>
         );
@@ -110,6 +101,7 @@ const StudentModule = ({ location,
                     My Performance
                 </Link>
                 <div className="quiz quizzes-container">
+                    <div className="quiz-results-title">Results</div>
                     { mappedQuizzes }
                 </div>
 

@@ -2,11 +2,16 @@
     background-color: $white;
     text-align: center;
 }
+
+.quiz__item-button-underline {
+    text-decoration: underline;
+    display: inline-block;
+    font-size: 0.8rem;
+    padding-left: 0.5rem;
+}
+
 .quiz__item {
-    width: 80%;
-    height: 5rem;
     position: relative;
-    margin: 1rem auto;
 
     &__score {
         border-radius: 5px;
@@ -30,11 +35,35 @@
 .quiz__item-container {
     padding-top: 1rem;
     padding-bottom: 1rem;
-    border: 1px solid $dark-grey;
+    border: 1px solid $blue;
     border-radius: 10px;
-    margin: 0.5rem;
     background-color: $white;
     display: inline-block;
+    width: 95%;
+    margin-bottom: 0.5rem;
+    text-align: left;
+    background-color: rgba(247, 255, 247, 1);
+}
+
+.quiz__item-medal-container {
+    display: inline-block;
+    float: left;
+}
+
+.quiz__item-percentage-score {
+    display: inline-block;
+}
+
+.quiz__item-result-container {
+    text-align: left;
+    padding-left: 1rem;
+}
+
+.quiz__item-text-container {
+    display: inline-block;
+    text-align: left;
+    padding-left: 1rem;
+    float: left;
 }
 
 .quiz__item__score {
@@ -118,4 +147,21 @@
     &--center {
         text-align: center;
     }
+}
+
+.quiz__item-button-container {
+    text-align: center;
+}
+
+.quiz__item-wrapper {
+    display: inline-block;
+}
+
+.quiz-results-title {
+    margin-bottom: 1rem;
+}
+
+.quizzes-container {
+    padding-top: 1rem;
+    background-color: rgba(247, 255, 247, 1);
 }
