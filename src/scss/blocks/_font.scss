@@ -27,7 +27,7 @@
     text-transform: capitalize;
     line-height: 1.25;
     letter-spacing: -1px;
-    color: $black;
+    color: $blue;
 
     &--primary {
         color: $blue;
@@ -48,6 +48,7 @@
 
     &--primary {
         color: $blue;
+        font-weight: 700;
     }
 
     &--secondary {
@@ -63,7 +64,7 @@
     font-size: 1.25rem;
     font-weight: bold;
     line-height: 1.25;
-    color: $black;
+    color: $blue;
 
     &--tertiary {
         color: $red;
