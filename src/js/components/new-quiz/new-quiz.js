@@ -45,11 +45,13 @@ const NewQuiz = ({
 
               <div>
                   <ul className="navbar navbar--invisible">
+                    <div className="navbar__inner">
                       <li className="navbar__item navbar__item--onlyone">
                           <Link to={ `${params.module_id}/lecturer` } className="f-body navbar__link">
                             Back
                           </Link>
                       </li>
+                    </div>  
                   </ul>
               </div>
 

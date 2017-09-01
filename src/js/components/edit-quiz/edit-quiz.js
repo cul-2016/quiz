@@ -28,11 +28,13 @@ const EditQuiz = ({ questions, isUpdatingQuiz, name,
             <div className="edit-quiz">
                 <div>
                     <ul className="navbar navbar--invisible">
+                      <div className="navbar__inner">
                         <li className="navbar__item navbar__item--onlyone">
                             <Link onClick={ () => store.dispatch(clearNewQuizState()) } to={ `${params.module_id}/lecturer` } className="f-body navbar__link button">
                               Back
                             </Link>
                         </li>
+                      </div>
                     </ul>
                 </div>
                 <div className="content__body">

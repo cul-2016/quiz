@@ -42,11 +42,13 @@ export default class Result extends Component {
             <div className="result">
 
               <ul className="navbar navbar--invisible">
+                <div className="navbar__inner">
                    <li className="navbar__item navbar__item--onlyone">
                        <Link to={ `${module_id}/student` } className="f-body navbar__link">
                          Back
                        </Link>
                    </li>
+                </div>
                </ul>
                 <p className="logo logo--large"></p>
                 <p className="f-display f-display--tertiary"> Quiz Complete </p>

@@ -18,6 +18,7 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                     !isQuizStarted && !is_lecturer &&
                     <div className="student-view">
                         <ul className="navbar navbar--invisible">
+                          <div className="navbar__inner">
                              <li className="navbar__item navbar__item--onlyone">
                                  <Link
                                     to={ `${params.module_id}/student` }
@@ -26,6 +27,7 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                                    Quit
                                  </Link>
                              </li>
+                           </div>
                          </ul>
 
                         <p className="f-subheader f-subheader--tertiary">Joining...</p>
@@ -46,6 +48,7 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                     <div className="content content--pattern-background content--join-quiz">
 
                         <ul className="navbar navbar--invisible">
+                          <div className="navbar__inner">
                             <li className="navbar__item navbar__item--onlyone">
                                 <Link
                                     to={ `${params.module_id}/lecturer` }
@@ -55,6 +58,7 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                                   Quit
                                 </Link>
                             </li>
+                          </div>
                         </ul>
                         <div className="content__body">
 
@@ -164,6 +168,7 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                     isQuizStarted && question && is_lecturer &&
                     <div>
                         <ul className="navbar navbar--invisible">
+                          <div className="navbar__inner">
                             <li className="navbar__item navbar__item--onlyone">
                                 <Link
                                     to={ `${params.module_id}/lecturer` }
@@ -173,6 +178,7 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                                   Quit
                                 </Link>
                             </li>
+                          </div>
                         </ul>
                         <div className="content content__body">
                             <div className="live-quiz__question-wrapper">
