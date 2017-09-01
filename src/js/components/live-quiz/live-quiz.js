@@ -10,6 +10,8 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                     handleSelection, response, name, //eslint-disable-line no-unused-vars
                     numParticipants, handleAbortQuiz, params, review }) => {
 
+                        console.log('-------->', nextQuestionIndex);
+
     return (
         <section className="live-quiz container">
                 {
@@ -47,7 +49,7 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                             <li className="navbar__item">
                                 <Link
                                     to={ `${params.module_id}/lecturer` }
-                                    className="f-body navbar__link navbar__link--left navbar__link--quit"
+                                    className="f-body navbar__link navbar__link--left navbar__link--quit button"
                                     onClick={ () => handleAbortQuiz(quiz_id) }
                                 >
                                   Quit
@@ -58,8 +60,8 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
 
                             <div className="quiz__titles">
                                 <span className="quiz__status-indicator quiz__status-indicator--live f-subheader f-subheader--tertiary">Live Now</span>
-                                <img className="quiz__titles-icon" src="Yellow.svg" alt="Letter Q Icon"/>
-                                <h1 className="quiz__name f-display f-display--tertiary">{name}</h1>
+                                <img className="quiz__titles-icon" src="/assets/logo/Login_signup_icon.svg" alt="Letter Q Icon"/>
+                                <h1 className="quiz__name f-display">{name}</h1>
                             </div>
 
                             <p className="quiz__cta f-title">
@@ -114,13 +116,13 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                     </div>
                 }
                 {
-                    isQuizStarted && question && !is_lecturer &&
+                    isQuizStarted && !is_lecturer && question &&
                     <div className="student-view__questions">
                         <ul className="navbar navbar__light navbar__light--tertiary">
                             <li className="navbar__item">
                                 <Link
                                     to={ `${params.module_id}/student` }
-                                    className="navbar__link navbar__link--left navbar__link--quit "
+                                    className="navbar__link navbar__link--left navbar__link--quit button"
                                 >
                                     Quit
                                 </Link>
@@ -128,14 +130,17 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                         </ul>
 
                         <div className="question">
-                            <p className="f-subheader"> Q{ nextQuestionIndex }.</p>
-                            <p className="f-body">{ question.question }</p>
+                            <div className="live-quiz__question-number-container">
+                                <p className="f-display live-quiz__question-number-mobile"> Q{ question.order_id }</p>
+                                <p className="f-body">{ question.question }</p>
+                            </div>
                         </div>
 
                         <CurrentQuestion
                             data={ question }
                             handleSelection={ handleSelection }
-                            response={ response }/>
+                            response={ response }
+                            isLecturer={ is_lecturer }/>
 
                         <div className="live-quiz__footer">
                             <div className="logo logo--footer"></div>
@@ -162,22 +167,23 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                             <li className="navbar__item">
                                 <Link
                                     to={ `${params.module_id}/lecturer` }
-                                    className="f-body navbar__link navbar__link--left navbar__link--quit"
+                                    className="f-body navbar__link navbar__link--left navbar__link--quit button"
                                     onClick={ () => handleAbortQuiz(quiz_id) }
                                 >
                                   Quit
                                 </Link>
                             </li>
                         </ul>
-                        <div className="content">
+                        <div className="content content__body">
                             <div className="live-quiz__question-wrapper">
-                                <p className="live-quiz__question-number f-display"> Q{ nextQuestionIndex }.</p>
+                                <p className="live-quiz__question-number f-display"> Q{ nextQuestionIndex }</p>
                                 <p className="live-quiz__question f-title">{ question.question }</p>
                             </div>
                             <CurrentQuestion
                                 data={ question }
                                 handleSelection={ handleSelection }
-                                response={ response }/>
+                                response={ response }
+                                isLecturer={ is_lecturer }/>
                             <LiveQuizButtons
                                 is_lecturer={ is_lecturer }
                                 numQuestions={ numQuestions }

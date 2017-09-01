@@ -29,7 +29,8 @@ const ShowAnswer = ({ isAnswerShowing, data, isSurvey }) => {
     let answersWithResponse = answersArray.map((letter, i) => {
 
         let classes = classnames("card live-quiz__answer", {
-            "live-quiz__answer--response": !isSurvey && isAnswerShowing && letter === data.correct_answer.toLowerCase()
+            "live-quiz__answer--response": !isSurvey && isAnswerShowing && letter === data.correct_answer.toLowerCase(),
+            "live-quiz__answer--wrong": !isSurvey && isAnswerShowing && letter !== data.correct_answer.toLowerCase()
         });
         return (
             <div key={ i } className={ classes }>

@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import classnames from 'classnames';
 
-const CurrentQuestion = ({ data, response, handleSelection }) => {
+const CurrentQuestion = ({ data, response, handleSelection, isLecturer }) => {
 
 
     let answersArray = Object.keys(data);
@@ -12,14 +12,14 @@ const CurrentQuestion = ({ data, response, handleSelection }) => {
                 .sort();
 
     let answers = answersArray.map((letter, i) => {
-
-        let classes = classnames("card live-quiz__answer", {
+        let device = isLecturer ? "live-quiz__answer" : "live-quiz__answer-mobile";
+        let classes = classnames(`card ${device}`, {
             "live-quiz__answer--response": letter === response
         });
         return (
             <div key={ i } className={ classes } onClick={ () => handleSelection && handleSelection(letter) }>
                 <div className="live-quiz__answer-inner">
-                    <span className="live-quiz__letter f-title f-title--light">{ `${letter}` }</span>
+                    <span className="live-quiz__letter">{ `${letter}` }</span>
                     <span className="live-quiz__answer-text f-body">{ `${data[letter]}` }</span>
                 </div>
             </div>

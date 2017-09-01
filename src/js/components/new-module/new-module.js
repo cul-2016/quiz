@@ -17,7 +17,7 @@ const NewModule = ({ isValidatingModuleID, moduleIDExists,
         return !isNaN(originalValue) ? originalValue + offset : '-';
     }
 
-    let validationClasses = classnames("button button__primary f-subheader", {
+    let validationClasses = classnames("button button__primary", {
         "button__disabled": validateForm(name, module_id, moduleIDExists, medals, trophies)
     });
 
@@ -26,13 +26,14 @@ const NewModule = ({ isValidatingModuleID, moduleIDExists,
               <div className="new-module">
                   <ul className="navbar navbar--invisible">
                     <li className="navbar__item">
-                      <Link to={ `/dashboard` } className="navbar__link navbar__link--left navbar__link--back">
+                      <Link to={ `/dashboard` } className="navbar__link navbar__link--left navbar__link--back button">
                         Back
                       </Link>
                     </li>
                   </ul>
                   <div className="content__body">
                     <h2 className="f-headline f-headline--primary"> New Module </h2>
+                    <p className="line-primary--long-grey"></p>
                     <div className="columns">
                       <Details module_id={ module_id }
                         moduleIDExists={ moduleIDExists }
@@ -40,20 +41,25 @@ const NewModule = ({ isValidatingModuleID, moduleIDExists,
                         module_id_length={ module_id.length }
                         handleCodeInputChange={ handleCodeInputChange }
                         handleInputChange={ handleInputChange } />
-                      <p className="line line--primary"></p>
-                      <h2 className="f-subheader f-subheader--light"> Medals {/*and Trophies */} </h2>
+                      <p className="line-primary--short-grey"></p>
+                      <h2 className="f-title"> Medals {/*and Trophies */} </h2>
                       <Medals medals={ medals }
                         updateMedalVals={ updateMedalVals }
                         applyOffset={ applyOffset }/>
-                      <Trophies trophies={ trophies }
-                        updateTrophyVals={ updateTrophyVals }
-                        applyOffset={ applyOffset } />
-
-                      <p className="line line--primary"></p>
+                    <p className="line-primary--short-grey"></p>
+                    <div>
+                        <Trophies trophies={ trophies }
+                            updateTrophyVals={ updateTrophyVals }
+                            applyOffset={ applyOffset } />
                     </div>
-                      <button className={ validationClasses } onClick={ submit }>
-                        Save Module
-                      </button>
+
+                    </div>
+                    <br />
+                    <div className="save-module-container">
+                        <button className={ validationClasses } onClick={ submit }>
+                            Save Module
+                        </button>
+                    </div>
 
                   </div>
               </div>

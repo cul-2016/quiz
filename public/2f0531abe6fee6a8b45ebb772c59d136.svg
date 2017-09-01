@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="58px" height="62px" viewBox="0 0 58 62" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>bronze_medal</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard-7" transform="translate(-15.000000, -11.000000)">
+            <g id="bronze_medal" transform="translate(15.000000, 11.000000)">
+                <g id="award-55">
+                    <path d="M57.781,10.375 L49.781,0.375 C49.591,0.138 49.304,0 49,0 L9,0 C8.696,0 8.409,0.138 8.219,0.375 L0.219,10.375 C-0.063,10.728 -0.074,11.224 0.191,11.588 L14.297,30.984 C11.614,34.26 46.386,34.26 43.702,30.983 L57.808,11.587 C58.074,11.224 58.062,10.728 57.781,10.375 Z" id="Path" fill="#2574A9"></path>
+                    <path d="M29,24 C28.077,24 27.177,24.089 26.289,24.216 L17.832,12 L40.173,12 L31.719,24.218 C30.829,24.089 29.926,24 29,24 Z M8.942,2.673 L24.157,24.649 C20.911,25.507 17.998,27.187 15.675,29.477 L2.257,11.029 L8.942,2.673 Z M42.325,29.477 C40.004,27.189 37.094,25.51 33.851,24.651 L49.058,2.673 L55.742,11.029 L42.325,29.477 Z" id="Shape" fill="#FFFFFF" fill-rule="nonzero"></path>
+                    <circle id="Oval" fill="#CD7F32" cx="29" cy="43" r="19"></circle>
+                    <path d="M29,52 C24.038,52 20,47.963 20,43 C20,38.037 24.038,34 29,34 C33.962,34 38,38.037 38,43 C38,47.963 33.962,52 29,52 Z" id="Path" fill="#FFFFFF"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

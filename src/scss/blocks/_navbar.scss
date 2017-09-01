@@ -1,67 +1,56 @@
 .navbar {
     width: 100%;
-    background-color: $light-blue;
-    box-shadow: inset 0 -2px 0 0 $dark-blue, 0 1px 0 0 $black;
+    background-color: $blue;
     font-size: 1rem;
-    display: table;
-    table-layout: fixed;
+
+    height: 5rem;
+
+    &__inner { // comes imediately after the .navbar
+      max-width: 73rem;
+      margin: auto;
+    }
 
     &__container {
-      max-width: 52rem;
-      padding: 0 2rem;
-      margin: 0 auto;
-
-
+      display: table;
+      table-layout: fixed;
+      height: 5rem;
+      width: 100%;
     }
 
     &__item {
-        &--left {
-          float: left;
+      display: table-cell;
+      vertical-align: middle;
+      cursor: pointer;
+        &--home {
+          width: 5rem;
+        }
+        &--dashboard {
+          width: auto;
+          &::before {
+            display: inline-block;
+            content: "";
+            height: 100%;
+            vertical-align: middle;
+          }
+          > * {
+            display: inline-block;
+            vertical-align: middle;
+          }
         }
         &--right {
-          float: right;
+          padding-right: 1rem;
+          text-align: right;
         }
     }
 
+    &__img {
+      display: block;
+      max-width: 100%;
+    }
+
     &__link {
-        padding: 1rem;
-        line-height: 1.4rem;
-        color: $black;
-        cursor: pointer;
-
-        &--left {
-            float: left;
-        }
-
-        &--right {
-            float: right;
-            margin-right: 15%;
-        }
-
-        &--back {
-            border-bottom: 2px solid $white;
-            color: $white;
-        }
-        &--back--dark {
-            border-bottom: 2px solid $black;
-            color: $black;
-        }
-        &--quit {
-            color: $red;
-            position: relative;
-
-            &::after { /* simulates underline on word */
-                content: "";
-                display: inline-block;
-                position: absolute;
-                width: 2.25rem;
-                height: 0.125rem;
-                bottom: 0.5rem;
-                left: 50%;
-                transform: translateX(-50%);
-                background-color: $red;
-            }
-        }
+        color: $white;
+        padding: 0 0.5rem;
     }
 
     &__secondary {
@@ -76,9 +65,23 @@
     &--invisible {
         box-shadow: none;
         background: none;
-        max-width: 62rem; /* 960px + 32px */
-        padding: 0 0 0 2rem; /* supports screens smaller than 960px */
+        max-width: 78rem; /* 960px + 32px */
+        padding: 2rem 0 0 2rem; /* supports screens smaller than 960px */
         margin: auto;
         box-sizing: border-box;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .navbar {
+        &__item {
+            &--home {
+              padding-left: 1rem;
+            }
+            &--right {
+              padding-right: 1rem;
+              text-align: right;
+            }
+        }
     }
 }

@@ -3,7 +3,7 @@ import React from 'react';
 const PrivacyMessageComponent = () => {
     return (
         <div className="privacy">
-            <h1 className="f-headline"><img src="/Yellow.svg"></img></h1>
+            <h1 className="f-headline"><img src="/assets/logo/Login_signup_icon.svg"></img></h1>
             <div className="content__body">
                   <div className="form">
                       <h2 className="title">What data do we collect, and how do we use it?</h2>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="53px" height="53px" viewBox="0 0 53 53" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>dashboard_tile_logo</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.4">
+        <g id="dashboard_tile_logo" transform="translate(-15.000000, -15.000000)" fill="#2574A9">
+            <g id="QUOLD_1" transform="translate(15.000000, 15.000000)">
+                <g id="Logo-dark">
+                    <path d="M38.9533626,32.0401052 C39.7244486,30.3237142 40.153405,28.4203081 40.153405,26.4167138 C40.153405,18.8301488 34.0032789,12.6800226 26.4167138,12.6800226 C18.8301488,12.6800226 12.6800226,18.8301488 12.6800226,26.4167138 C12.6800226,34.0032789 18.8301488,40.153405 26.4167138,40.153405 C27.3143248,40.153405 28.1918275,40.0673116 29.041415,39.9029319 L22.499478,31.2214882 L32.6006203,23.6097314 L38.9533626,32.0401052 Z M26.4167138,52.8334276 C11.8271656,52.8334276 0,41.006262 0,26.4167138 C0,11.8271656 11.8271656,0 26.4167138,0 C41.006262,0 52.8334276,11.8271656 52.8334276,26.4167138 C52.8334276,41.006262 41.006262,52.8334276 26.4167138,52.8334276 Z" id="Combined-Shape"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

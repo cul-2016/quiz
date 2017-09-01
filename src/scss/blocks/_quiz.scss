@@ -1,9 +1,17 @@
-.quiz {}
+.quiz {
+    background-color: $white;
+    text-align: center;
+}
+
+.quiz__item-button-underline {
+    text-decoration: underline;
+    display: inline-block;
+    font-size: 0.8rem;
+    padding-left: 0.5rem;
+}
+
 .quiz__item {
-    width: 80%;
-    height: 5rem;
     position: relative;
-    margin: 1rem auto;
 
     &__score {
         border-radius: 5px;
@@ -24,6 +32,40 @@
     }
 }
 
+.quiz__item-container {
+    padding-top: 1rem;
+    padding-bottom: 0.5rem;
+    border: 1px solid $blue;
+    border-radius: 10px;
+    background-color: $white;
+    display: inline-block;
+    width: 95%;
+    margin-bottom: 0.5rem;
+    text-align: left;
+    background-color: rgba(247, 255, 247, 1);
+}
+
+.quiz__item-medal-container {
+    display: inline-block;
+    float: left;
+}
+
+.quiz__item-percentage-score {
+    display: inline-block;
+}
+
+.quiz__item-result-container {
+    text-align: left;
+    padding-left: 1rem;
+}
+
+.quiz__item-text-container {
+    display: inline-block;
+    text-align: left;
+    padding-left: 1rem;
+    float: left;
+}
+
 .quiz__item__score {
     &--postion {
         position: absolute;
@@ -37,7 +79,7 @@
         position: relative;
         top: 1rem;
         margin: auto;
-        background: url(../../public/assets/medals/small-gold.svg);
+        background: url(../../public/assets/medals/small-gold-medal.svg);
         background-size: 3rem;
     }
     &--medal--silver {
@@ -46,7 +88,7 @@
         position: relative;
         top: 1rem;
         margin: auto;
-        background: url(../../public/assets/medals/small-silver.svg);
+        background: url(../../public/assets/medals/small-silver-medal.svg);
         background-size: 3rem;
     }
     &--medal--bronze {
@@ -55,7 +97,7 @@
         position: relative;
         top: 1rem;
         margin: auto;
-        background: url(../../public/assets/medals/small-bronze.svg);
+        background: url(../../public/assets/medals/small-bronze-medal.svg);
         background-size: 3rem;
     }
 
@@ -69,47 +111,6 @@
 
 .quiz__titles {
     margin-bottom: 4.5rem;
-}
-
-.quiz__status-indicator { /* quiz view - is quiz live right now or not? */
-    display: block;
-    position: relative;
-
-    &--live {
-        margin: 0 0 1rem 1.5rem;
-        &:before {
-            content: "";
-            position: absolute;
-            left: -1.5rem;
-            bottom: 50%;
-            transform: translateY(50%);
-            width: 1rem;
-            height: 1rem;
-            background: radial-gradient(circle, $off-white 0%, $light-pink 30%, $pink 100%);
-            box-shadow: 0 0 6px 1px $light-pink;
-            border: 2px solid $red;
-            box-sizing: border-box;
-            border-radius: 50%;
-        }
-    }
-    &--off {
-        margin: 0 0 1rem 1.5rem;
-        color: $dark-grey;
-        &:before {
-            content: "";
-            position: absolute;
-            left: -1.5rem;
-            bottom: 50%;
-            transform: translateY(50%);
-            width: 1rem;
-            height: 1rem;
-            background: radial-gradient(circle, $off-white 0%, $grey 30%, $dark-grey 100%);
-            box-shadow: 0 0 6px 1px $grey;
-            border: 2px solid $black;
-            box-sizing: border-box;
-            border-radius: 50%;
-        }
-    }
 }
 
 .quiz__titles-icon {
@@ -146,4 +147,21 @@
     &--center {
         text-align: center;
     }
+}
+
+.quiz__item-button-container {
+    text-align: center;
+}
+
+.quiz__item-wrapper {
+    display: inline-block;
+}
+
+.quiz-results-title {
+    margin-bottom: 1rem;
+}
+
+.quizzes-container {
+    padding-top: 1rem;
+    background-color: rgba(247, 255, 247, 1);
 }

@@ -1,9 +1,13 @@
 .form {
 
+    &__field {
+      margin: 1rem 0rem;
+    }
+
     &__label {
       display: block;
       text-align: left;
-      padding: 1rem 0;
+      padding: 0.25rem 0rem;
 
       &--new-quiz {
         display: inline-block;
@@ -14,15 +18,15 @@
 
     &__input {
         box-sizing: border-box;
-        border: 1px solid $black;
+        border: 1px solid $blue;
         height: 2.9375rem;
         font-size: 1rem;
         width: 100%;
         background-color: $white;
         color: $black;
-        font-family: ubuntu;
-        border-radius: 2px;
+        border-radius: 0.625rem;
         padding: 0.5rem;
+        outline: none;
 
 
         &--edit-score {
@@ -78,7 +82,8 @@
         }
 
         &--medal {
-          max-width: 3rem;
+          max-width: 3.5rem;
+          margin-top: 2rem;
         }
         &--trophy {
           width: 4rem;
