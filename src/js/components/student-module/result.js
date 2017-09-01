@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import { hashHistory } from 'react-router';
 import showNavbar from '../../lib/showNavbar';
-import { elastic, fadeOutThenIn } from '../../lib/animate';
+import { elastic, fadeOutThenIn, studentResultsWithBadges } from '../../lib/animate';
 import { Link } from 'react-router';
 import classnames from 'classnames';
 
@@ -20,8 +20,7 @@ export default class Result extends Component {
 
 
     componentDidMount () {
-
-        elastic('.trophy-container');
+        studentResultsWithBadges();
     }
 
     render () {

@@ -31,6 +31,29 @@ export function elastic (selector) {
 
 }
 
+export function studentResultsWithBadges () {
+
+    const tl = new TimelineMax();
+
+    tl.add(TweenMax.to('.f-headline', 0, { opacity: 0, y: -200 }));
+    tl.add(TweenMax.to('.result__badges', 0, { opacity: 0 }));
+    tl.add(TweenMax.to('.result__score--no-badges', 0, { opacity: 0 }));
+    tl.add(TweenMax.to('.result__score', 0, { opacity: 0 }));
+    tl.add(TweenMax.to('.button', 0, { opacity: 0 }));
+    tl.add(TweenMax.fromTo('.app', 0.1, { x: -1, scale: 1.01 }, { x: 2, clearProps: "x", repeat: 20, scale: 1 }));
+    tl.add(TweenMax.to('.button', 0, { y: 500 }));
+
+    tl.add(TweenMax.to('.f-headline', 1, { opacity: 1, y: 0 }));
+    tl.add(TweenMax.to('.result__badges', 0.2, { opacity: 1 }));
+    tl.add(TweenMax.staggerFromTo('.result__badges__container--badge', 1.2, { scale: 0, rotation: 0 }, { scale: 1, opacity: 1, rotation: 1440, ease: Elastic.easeOut.config(1, 0.75) }, 0.5));
+    tl.add(TweenMax.to('.result__score--no-badges', 0.2, { opacity: 1 }));
+    tl.add(TweenMax.to('.result__score', 0.2, { opacity: 1 }));
+    tl.add(TweenMax.fromTo('.result__score--medal', 0.01, { x: -2 }, { x: 2, clearProps: "x", repeat: 20 }));
+    tl.add(TweenMax.fromTo('.result__score--medal--no-badges', 0.01, { x: -2 }, { x: 2, clearProps: "x", repeat: 20 }));
+    tl.add(TweenMax.to('.button', 0.5, { opacity: 1, y: 0 }));
+
+}
+
 /**
  * Adds a fade out/fade in transition to a DOM element
  * @param {string} selector - JQuery-style selector for the target DOM element(s)
