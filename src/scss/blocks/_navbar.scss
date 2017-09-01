@@ -40,6 +40,10 @@
         &--right {
           text-align: right;
         }
+        &--onlyone > .navbar__link { /* ! assumes navbar__link follows navbar__item in markup */
+          padding: 1.75rem; /* 28px - precise for a 5rem height navbar */
+          display: inline-block;
+        }
     }
 
     &__img {
@@ -52,20 +56,17 @@
         padding: 0 0.5rem;
     }
 
-    &__secondary {
+    &__secondary { /* ! should be modifier */
         box-shadow: none;
         background-color: $blue;
     }
-    &__light {
+    &__light { /* ! should be modifier */
         box-shadow: none;
         background-color: $white;
 
     }
     &--invisible {
-        box-shadow: none;
-        background: none;
-        max-width: 78rem; /* 960px + 32px */
-        padding: 2rem 0 0 2rem; /* supports screens smaller than 960px */
+        max-width: 73rem; /* 1,168px matches normal navbar with inner and container elements */
         margin: auto;
         box-sizing: border-box;
     }

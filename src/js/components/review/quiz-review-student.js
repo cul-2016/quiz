@@ -6,8 +6,8 @@ const QuizReviewStudent = ({ review, showAnswer, params }) =>
     <div className="review-quiz-student">
 
           <ul className="navbar navbar--invisible">
-               <li className="navbar__item">
-                 <Link to={ `${params.module_id}/student` } className="navbar__link navbar__link--left navbar__link--back">
+               <li className="navbar__item navbar__item--onlyone">
+                 <Link to={ `${params.module_id}/student` } className="f-body navbar__link">
                      Back
                    </Link>
                </li>

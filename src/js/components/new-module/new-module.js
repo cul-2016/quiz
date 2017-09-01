@@ -25,8 +25,8 @@ const NewModule = ({ isValidatingModuleID, moduleIDExists,
     return (
               <div className="new-module">
                   <ul className="navbar navbar--invisible">
-                    <li className="navbar__item">
-                      <Link to={ `/dashboard` } className="navbar__link navbar__link--left navbar__link--back button">
+                    <li className="navbar__item navbar__item--onlyone">
+                      <Link to={ `/dashboard` } className="f-body navbar__link">
                         Back
                       </Link>
                     </li>

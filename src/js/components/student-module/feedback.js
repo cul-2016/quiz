@@ -11,8 +11,8 @@ const Feedback = ({ ranking, quizzes, participation, module }) => {
     return (
         <div className="performance">
             <ul className="navbar navbar--invisible">
-                 <li className="navbar__item">
-                     <Link to={ `${module.module_id}/student` } className="navbar__link navbar__link--left navbar__link--back">
+                 <li className="navbar__item navbar__item--onlyone">
+                     <Link to={ `${module.module_id}/student` } className="f-body navbar__link">
                        Back
                      </Link>
                  </li>
