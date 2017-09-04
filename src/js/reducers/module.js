@@ -17,7 +17,7 @@ export const initialState = {
     isQuizOpen: false,
     isRemovingMember: false,
     isGeneratingShareId: false,
-    importCode: null,
+    importCode: '',
     isSubmittingImportCode: false
 };
 

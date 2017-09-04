@@ -30,7 +30,7 @@ const EditQuiz = ({ questions, isUpdatingQuiz, name,
                     <ul className="navbar navbar--invisible">
                       <div className="navbar__inner">
                         <li className="navbar__item navbar__item--onlyone">
-                            <Link onClick={ () => store.dispatch(clearNewQuizState()) } to={ `${params.module_id}/lecturer` } className="f-body navbar__link button">
+                            <Link onClick={ () => store.dispatch(clearNewQuizState()) } to={ `${params.module_id}/lecturer` } className="f-body navbar__link">
                               Back
                             </Link>
                         </li>
@@ -63,7 +63,7 @@ const EditQuiz = ({ questions, isUpdatingQuiz, name,
                         onClick={ handleIsLastQuiz } />
                     </div>
                   */}
-                  <div className="line line__tertiary"></div>
+                  <div className="line"></div>
                   <SortableComponent
                     questions={ questions }
                     isSurvey={ isSurvey }

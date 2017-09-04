@@ -72,6 +72,10 @@
     }
 
     &__secondary {
+        -moz-transition: all .2s ease-in;
+        -o-transition: all .2s ease-in;
+        -webkit-transition: all .2s ease-in;
+        transition: all .2s ease-in;
         background-color: $white;
         color: $blue;
         border: 1px solid $blue;
@@ -80,6 +84,15 @@
             font-size: 1.5rem;
             line-height: 2;
         }
+    }
+    &__secondary:hover {
+        -moz-transition: all .2s ease-in;
+        -o-transition: all .2s ease-in;
+        -webkit-transition: all .2s ease-in;
+        transition: all .2s ease-in;
+        background-color: $blue;
+        color: $white;
+        border: 1px solid $blue;
     }
 
     &__tertiary {

@@ -51,7 +51,7 @@ const NewQuiz = ({
                             Back
                           </Link>
                       </li>
-                    </div>  
+                    </div>
                   </ul>
               </div>
 
@@ -91,7 +91,7 @@ const NewQuiz = ({
                               <p className="f-small-body f-small-body--dark"> Check this box if this is the last quiz in a series </p>
                           </div>
                         */}
-                        <div className="line line__tertiary"></div>
+                        <div className="line"></div>
 
                     </div>
                     <SortableComponent
@@ -103,7 +103,7 @@ const NewQuiz = ({
                       />
 
                     <div className="new-quiz--buttons">
-                      <button className="button button--add-question" onClick={ handleAddQuestion }>
+                      <button className="button button__secondary button--add-question" onClick={ handleAddQuestion }>
                         Add Question
                       </button>
                       <button className={ submitClasses }

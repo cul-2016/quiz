@@ -22,7 +22,7 @@ const Quizzes = ({
                 key={ index } >
                 <div className="quizzes__container--id">
                     <img className="quizzes__container--id-icon" src="/assets/dashboard_tile_logo.svg"></img>
-                    <h3 className="f-label quizzes__container--id-index">{ index + 1 }</h3>
+                    <h3 className="f-subheader quizzes__container--id-index">{ index + 1 }</h3>
                 </div>
                 <div className="quizzes__container--details">
                     <div className="f-body module-quiz__name">{ quiz.name }</div>
