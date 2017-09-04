@@ -7,11 +7,13 @@ const HoldingPage = ({ is_lecturer, params }) => {
       <div className="content content--pattern-background content--join-quiz">
 
           <ul className="navbar navbar--invisible">
-              <li className="navbar__item">
-                  <Link to={ `${params.module_id}/${is_lecturer ? 'lecturer' : 'student'}` } className="f-body navbar__link navbar__link--left navbar__link--quit button">
+            <div className="navbar__inner">
+              <li className="navbar__item navbar__item--onlyone">
+                  <Link to={ `${params.module_id}/${is_lecturer ? 'lecturer' : 'student'}` } className="f-body navbar__link button">
                     Quit
                   </Link>
               </li>
+            </div>
           </ul>
 
           <div className="content__body">
