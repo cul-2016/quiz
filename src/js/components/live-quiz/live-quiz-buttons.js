@@ -6,7 +6,7 @@ const LiveQuizButtons = ({ is_lecturer, numQuestions, nextQuestionIndex,
                            isResponseSubmitted, startQuiz, endQuiz, //eslint-disable-line no-unused-vars
                            quiz_id, response, review, handleAbortQuiz }) => { //eslint-disable-line no-unused-vars
 
-    let startButtonClasses = classnames("button button--large button__primary start-quiz-button", {
+    let startButtonClasses = classnames("button button--large start-quiz-button", {
         "display-none": !is_lecturer || isQuizStarted
     });
 
