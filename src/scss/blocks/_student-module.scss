@@ -10,10 +10,8 @@
         position: relative;
         background-color: #F4494D;
         border-radius: 500px;
-        padding-left: 3.5rem;
-        padding-right: 2rem;
-        padding-top: 0.5rem;
-        padding-bottom: 0.5rem;
+        padding: 0.5rem 2rem 0.5rem 3.5rem;
+        margin: 1rem auto;
     }
 
     .live-quiz-button-text {
@@ -40,13 +38,12 @@
     }
 
     .trophy-container {
-        padding-top: 1rem;
         margin-bottom: 1rem;
     }
 
     .trophyItem {
-        width: 36%;
-        margin: 1rem;
+        width: 45%;
+        margin: 0.5rem;
     }
 
     .quiz-button {
@@ -54,12 +51,13 @@
     }
 
     .quizzes-container {
-        margin-top: 3rem;
+        border-top: 3px solid $blue;
+        margin-top: 1rem;
     }
 
     .f-headline {
     }
-    .f-title, .button, .trophy {
+    .button, .trophy {
         margin: 0.5rem 1rem;
     }
 

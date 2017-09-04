@@ -9,7 +9,7 @@ const HoldingPage = ({ is_lecturer, params }) => {
           <ul className="navbar navbar--invisible">
             <div className="navbar__inner">
               <li className="navbar__item navbar__item--onlyone">
-                  <Link to={ `${params.module_id}/${is_lecturer ? 'lecturer' : 'student'}` } className="f-body navbar__link button">
+                  <Link to={ `${params.module_id}/${is_lecturer ? 'lecturer' : 'student'}` } className="f-body navbar__link">
                     Quit
                   </Link>
               </li>
@@ -18,15 +18,18 @@ const HoldingPage = ({ is_lecturer, params }) => {
 
           <div className="content__body">
               <div className="quiz__titles">
-                  <span className="quiz__status-indicator quiz__status-indicator--off f-subheader f-subheader--tertiary">Live Now</span>
-                  <img className="quiz__titles-icon" src="/assets/logo/Login_signup_icon.svg" alt="Letter Q Icon"/>
-                  <h1 className="quiz__name f-display"> When you are ready, click the button below to review the quiz with your students.</h1>
+                  <div>
+                      <img className="holding-logo" src="/assets/dashboard_tile_logo.svg" alt="Letter Q Icon"/>
+                  </div>
+                  <h1 className="quiz__name f-headline"> When you are ready, click the button below to review the quiz with your students.</h1>
               </div>
-              <Link to={ `${params.module_id}/${params.quiz_id}/review` }>
-                  <button className="button button--large button__primary start-quiz-button">
-                      Review the quiz
-                  </button>
-              </Link>
+              <div className="quiz__titles-holding-button">
+                  <Link to={ `${params.module_id}/${params.quiz_id}/review` }>
+                      <button className="button button--large button__primary start-quiz-button">
+                          Review the quiz
+                      </button>
+                  </Link>
+              </div>
           </div>
         </div>
     );

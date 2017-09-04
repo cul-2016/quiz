@@ -54,7 +54,7 @@ const SortableQuestionItem = SortableElement(({ question, handleInputChange, han
             <SortableDragHandle />
             <label className="form__label--new-quiz f-subheader">{ i + 1 }.</label>
             <textarea className="form__input form__input--new-quiz-question" type="text" value={ question.question } onChange={ (e) => handleInputChange('question', e.target.value, i) } placeholder='Question'></textarea>
-            <div className="line--new-quiz"></div>
+            <div className="line"></div>
 
             { ['a', 'b', 'c', 'd'].map((value, idx) =>
                 <Option { ...{ key: `option-${idx}`,
@@ -62,7 +62,7 @@ const SortableQuestionItem = SortableElement(({ question, handleInputChange, han
                 }} />
             ) }
 
-            <button className="button is-danger" onClick={ () => { handleDeleteQuestion(i); } }> Delete Question </button>
+            <button className="button button__primary" onClick={ () => { handleDeleteQuestion(i); } }> Delete Question </button>
 
         </div>
     );

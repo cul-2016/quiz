@@ -113,7 +113,7 @@ const Module = ({
                         </div>
                         <div>
                             <button
-                            className="button button__secondary quizzes__button"
+                            className={ `button button__secondary quizzes__button ${ !module.importCode ? 'button__disabled' : '' }` }
                             onClick={ () => {
                                 handleSubmitImportCode(module.importCode, module.module_id);
                             }}>

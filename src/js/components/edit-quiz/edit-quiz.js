@@ -18,7 +18,7 @@ const EditQuiz = ({ questions, isUpdatingQuiz, name,
         const { question, a, b, correct_answer } = questionObj;
         return Boolean(question && a && b && (correct_answer || isSurvey));
     }).every((elem) => elem);
-    const submitClasses = classnames("button button__tertiary", {
+    const submitClasses = classnames("button button", {
         "button__disabled": !name || questionsValidation === false
     });
     const quizNameClasses = classnames("f-label", {

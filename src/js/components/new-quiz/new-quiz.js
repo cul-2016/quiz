@@ -22,7 +22,7 @@ const NewQuiz = ({
         const { question, a, b, correct_answer } = questionObj;
         return Boolean(question && a && b && (correct_answer || isSurvey));
     }).every((elem) => elem);
-    const submitClasses = classnames("button button__tertiary", {
+    const submitClasses = classnames("button", {
         "button__disabled": !name || questionsValidation === false,
     });
     const lastQuizIconClasses = classnames("fa", {

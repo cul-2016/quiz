@@ -25,7 +25,7 @@ const App = ({ children, location, username,
         }
         {
             !loading && error &&
-                <div>
+                <div className={ customClasses }>
                     <Nav location={ location } username={ username } is_lecturer={ is_lecturer } is_super_admin={ is_super_admin } />
                     { children }
                     <ErrorMessage

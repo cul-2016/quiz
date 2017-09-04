@@ -119,7 +119,7 @@ class QuizMembers extends Component {
                       </ul>
 
                       <div className="content__body">
-                        <Link className="button button__primary review-quiz-button" to={ `${params.module_id}/${params.quiz_id}/members/quiz-review` }>Quiz Review</Link>
+                        <Link className="button review-quiz-button" to={ `${params.module_id}/${params.quiz_id}/members/quiz-review` }>Quiz Review</Link>
                           <p className="f-headline">Students&#39; Individual Scores</p>
                           <p className="f-title">In {quizName}</p>
                         <section className="members">

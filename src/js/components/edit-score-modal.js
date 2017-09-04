@@ -27,10 +27,10 @@ const EditScoreModal = ({ members, member_key, quiz_id, module_id, handleUpdateS
                   type="number"
                   placeholder="0"
                   />
-                <button className="button button__primary" onClick={ () => { handleEditScore(module_id, quiz_id, user_id, score); hide(); } }>
+              <button className="button button__primary" onClick={ () => { handleEditScore(module_id, quiz_id, user_id, score); hide(); } }>
                     Edit Score
                   </button>
-                  <button className="button button__tertiary" onClick={ () => { hide(); } }>
+                  <button className="button" onClick={ () => { hide(); } }>
                     Cancel
                   </button>
             </div>

@@ -83,8 +83,8 @@ const StudentModule = ({ location,
             !isFetchingModule && !isFetchingFeedback && !isFetchingStudentHistory &&
             <div className="student-module">
 
-                <p className="f-headline"> { module.name } </p>
-                <p className="f-title f-title--primary"> { module.module_id } </p>
+                <p className="f-title f-title--primary"> { module.name } </p>
+                <p className="f-label"> { module.module_id } </p>
                 { isQuizOpen &&
                     <div className="live-quiz-button">
                         <img src="/assets/logo/nav_icon.svg" className="live-quiz-button-logo" />

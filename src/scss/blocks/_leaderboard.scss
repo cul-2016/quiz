@@ -27,6 +27,10 @@
       background-color: $blue;
       color: $white;
     }
+
+    &__username {
+        width: 20rem;
+    }
     &__row:nth-child(odd) {
       background-color: $white;
     }
@@ -54,5 +58,8 @@
           text-align: left;
         }
     }
-
+    &__trophy {
+        width: 5rem;
+        margin-right: 0.5rem;
+    }
 }

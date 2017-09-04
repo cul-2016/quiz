@@ -174,7 +174,7 @@ export const submitImportCode = (import_code, module_id) => {
                     dispatch(submitImportCodeFailure(response.data.message));
                     setTimeout(() => {
                         dispatch(clearErrorMessage());
-                    }, 5000);
+                    }, 2500);
                 } else {
                     dispatch(submitImportCodeSuccess());
                     dispatch(getModule(module_id, true));

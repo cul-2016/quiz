@@ -138,12 +138,14 @@ export function module (state = initialState, action ) {
         });
     case actionsTypes.SUBMIT_IMPORT_CODE_SUCCESS:
         return update(state, {
-            isSubmittingImportCode: { $set: false }
+            isSubmittingImportCode: { $set: false },
+            importCode: { $set: '' }
         });
     case actionsTypes.SUBMIT_IMPORT_CODE_FAILURE:
         return update(state, {
             isSubmittingImportCode: { $set: false },
-            error: { $set: action.error }
+            error: { $set: action.error },
+            importCode: { $set: '' }
         });
     case actionsTypes.CLEAR_ERROR_MESSAGE:
         return update(state, {

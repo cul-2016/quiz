@@ -53,7 +53,7 @@ const Question = ({ idx, question, is_lecturer }) => {
             <div className="card">
                 <div className="question">
                     <p className="f-body">Q{idx + 1}.</p>
-                    <p className="small-body">{question.question}</p>
+                    <p className="f-small-body">{question.question}</p>
                 </div>
                 <div className={ aClasses }>
                   <span className="f-label"> A </span>

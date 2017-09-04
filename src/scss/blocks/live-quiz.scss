@@ -167,26 +167,41 @@
 
 .student-view {
     text-align: center;
-    background-color: $blue;
     height: 100vh;
+
+
 
     .holding-message {
         padding: 3rem 1rem;
-        border-top: 1px solid $black;
-        border-bottom: 1px solid $black;
+        border-top: 1px solid $blue;
+        border-bottom: 1px solid $blue;
         background-color: $white;
+    }
+
+    .holding-logo {
+        width: 5rem;
+        margin: 1rem auto;
     }
 
     .hint {
         padding: 1rem;
         background-color: $white;
-        border-bottom: 1px solid $black;
+        border-bottom: 1px solid $blue;
         text-align: left;
     }
 }
 
 .student-view__questions {
     min-height: 100vh;
+
+    .card {
+        padding: 0;
+    }
+    
+    .live-quiz__answer-inner {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
 
     .question {
       background-color: $white;

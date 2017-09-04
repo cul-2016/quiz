@@ -15,18 +15,21 @@ const QuizReviseStudent = ({ review, showAnswer, params }) =>
              </div>
            </ul>
 
-          <p className="f-headline f-headline--light"> My Answers </p>
-          {
-            review.questions.map((question, idx) =>
-                <ReviseQuestion {...{
-                    key: `student-question-${idx}`,
-                    question,
-                    idx,
-                    is_lecturer: false,
-                    showAnswer
-                }}/>
-            )
-          }
+          <p className="f-title f-title--primary"> My Answers </p>
+
+          <div className="review-quiz-student-container">
+            {
+                review.questions.map((question, idx) =>
+                  <ReviseQuestion {...{
+                      key: `student-question-${idx}`,
+                      question,
+                      idx,
+                      is_lecturer: false,
+                      showAnswer
+                  }}/>
+                )
+            }
+          </div>
     </div>
 ;
 

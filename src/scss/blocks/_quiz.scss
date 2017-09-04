@@ -39,10 +39,10 @@
     border-radius: 10px;
     background-color: $white;
     display: inline-block;
-    width: 95%;
+    width: 90%;
     margin-bottom: 0.5rem;
     text-align: left;
-    background-color: rgba(247, 255, 247, 1);
+    background-color: $white;
 }
 
 .quiz__item-medal-container {
@@ -110,7 +110,16 @@
 /* Live Quiz (lecturer/live) */
 
 .quiz__titles {
-    margin-bottom: 4.5rem;
+    text-align: center;
+    margin-bottom: 3rem;
+
+    .holding-logo {
+        width: 5rem;
+    }
+
+    &-holding-button {
+        text-align: center;
+    }
 }
 
 .quiz__titles-icon {
@@ -120,7 +129,6 @@
 
 .quiz__name {
     display: inline;
-    margin-left: 1rem;
     line-height: 4.375rem; /* 70px - same size as titles-icon */
 }
 
@@ -163,5 +171,5 @@
 
 .quizzes-container {
     padding-top: 1rem;
-    background-color: rgba(247, 255, 247, 1);
+    background-color: $white;
 }

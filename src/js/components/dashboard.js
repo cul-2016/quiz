@@ -41,7 +41,7 @@ class Dashboard extends Component {
               <div className="content__body">
                 <div className="dashboard__lecturer">
                     <div className="dashboard__lecturer--title">
-                        <h2 className="f-display"> Modules </h2>
+                        <h2 className="f-headline f-headline--primary"> Modules </h2>
                     </div>
                     {
                         is_lecturer &&

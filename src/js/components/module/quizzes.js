@@ -22,16 +22,16 @@ const Quizzes = ({
                 key={ index } >
                 <div className="quizzes__container--id">
                     <img className="quizzes__container--id-icon" src="/assets/dashboard_tile_logo.svg"></img>
-                    <h3 className="quizzes__container--id-index">{ index + 1 }</h3>
+                    <h3 className="f-label quizzes__container--id-index">{ index + 1 }</h3>
                 </div>
                 <div className="quizzes__container--details">
-                    <div className="f-header module-quiz__name">{ quiz.name }</div>
-                    <div className="module-quiz__questions">{ `${ +quiz.num_questions } Question${ +quiz.num_questions === 1 ? '' : 's'}` }</div>
+                    <div className="f-body module-quiz__name">{ quiz.name }</div>
+                    <div className="f-body--primary module-quiz__questions">{ `${ +quiz.num_questions } Question${ +quiz.num_questions === 1 ? '' : 's'}` }</div>
                     {
                         quiz.share_id === null
                         ?
                         <div
-                        className="f-body--link module-quiz__name"
+                        className="f-body--link f-body--dark module-quiz__name"
                         onClick={ () => {
                             handleGenerateShareId(quiz.quiz_id, quiz.survey_id, module_id);
                         }}>
@@ -39,7 +39,7 @@ const Quizzes = ({
                         </div>
                         :
                         <div
-                        className="f-header module-quiz__name">
+                        className="f-body f-body--dark module-quiz__name">
                             Share Code: {quiz.share_id}
                         </div>
                     }
@@ -98,7 +98,7 @@ const Quizzes = ({
 
                     {
                       quiz.is_presented
-                      ? <div className="quizzes__container--actions-icons">{ +quiz.num_entries } <br/> entries </div>
+                      ? <div className="f-body f-body--dark quizzes__container--actions-info">{ +quiz.num_entries } <br/> entries </div>
                       : <div
                             className="quizzes__container--actions-icons"
                             onClick={ (e) => {

@@ -35,7 +35,7 @@ const NewModule = ({ isValidatingModuleID, moduleIDExists,
                   </ul>
                   <div className="content__body">
                     <h2 className="f-headline f-headline--primary"> New Module </h2>
-                    <p className="line-primary--long-grey"></p>
+                    <p className="line"></p>
                     <div className="columns">
                       <Details module_id={ module_id }
                         moduleIDExists={ moduleIDExists }
@@ -44,12 +44,13 @@ const NewModule = ({ isValidatingModuleID, moduleIDExists,
                         handleCodeInputChange={ handleCodeInputChange }
                         handleInputChange={ handleInputChange } />
                       <p className="line-primary--short-grey"></p>
-                      <h2 className="f-title"> Medals {/*and Trophies */} </h2>
+                      <h2 className="f-subheader"> Medals </h2>
                       <Medals medals={ medals }
                         updateMedalVals={ updateMedalVals }
                         applyOffset={ applyOffset }/>
                     <p className="line-primary--short-grey"></p>
                     <div>
+                        <h2 className="f-subheader"> Trophies </h2>
                         <Trophies trophies={ trophies }
                             updateTrophyVals={ updateTrophyVals }
                             applyOffset={ applyOffset } />

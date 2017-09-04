@@ -9,7 +9,7 @@ const UserTable = ({ users, handleDeleteUser, title, superAdminId }) => {
                 <td className="f-body"> { user.username } </td>
                 <td>
                     <button
-                    className={`button module__button button__tertiary ${(!user.email.includes('@') && user.username.includes('Anon:')) || (superAdminId === user.user_id) ? 'button__disabled' : ''}` }
+                    className={`button module__button button__primary ${(!user.email.includes('@') && user.username.includes('Anon:')) || (superAdminId === user.user_id) ? 'button__disabled' : ''}` }
                     onClick={() => { handleDeleteUser(user.user_id); }}>
                         Delete
                     </button>
