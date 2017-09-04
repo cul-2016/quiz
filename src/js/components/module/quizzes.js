@@ -98,7 +98,7 @@ const Quizzes = ({
 
                     {
                       quiz.is_presented
-                      ? <div className="f-body f-body--dark quizzes__container--actions-icons">{ +quiz.num_entries } <br/> entries </div>
+                      ? <div className="f-body f-body--dark quizzes__container--actions-info">{ +quiz.num_entries } <br/> entries </div>
                       : <div
                             className="quizzes__container--actions-icons"
                             onClick={ (e) => {

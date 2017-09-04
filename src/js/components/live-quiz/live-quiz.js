@@ -58,7 +58,7 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                         <div className="content__body">
 
                             <div className="quiz__titles">
-                                <span className="quiz__status-indicator quiz__status-indicator--live f-subheader f-subheader--tertiary">Live Now</span>
+                                <span className="quiz__status-indicator quiz__status-indicator--live f-headline f-headline--secondary">Live Now</span>
                                 <img className="quiz__titles-icon" src="/assets/logo/Login_signup_icon.svg" alt="Letter Q Icon"/>
                                 <h1 className="quiz__name f-display">{name}</h1>
                             </div>

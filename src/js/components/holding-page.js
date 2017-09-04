@@ -16,7 +16,7 @@ const HoldingPage = ({ is_lecturer, params }) => {
 
           <div className="content__body">
               <div className="quiz__titles">
-                  <span className="quiz__status-indicator quiz__status-indicator--off f-subheader f-subheader--tertiary">Live Now</span>
+                  <span className="quiz__status-indicator quiz__status-indicator--off f-healine f-healine--secondary">Live Now</span>
                   <img className="quiz__titles-icon" src="/assets/logo/Login_signup_icon.svg" alt="Letter Q Icon"/>
                   <h1 className="quiz__name f-display"> When you are ready, click the button below to review the quiz with your students.</h1>
               </div>
