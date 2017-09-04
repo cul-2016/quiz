@@ -21,10 +21,10 @@ const Leaderboard = ({ mainData, medalScores, quiz_id_list, medalCondition, para
         let bronzeTotal = 0;
         let silverTotal = 0;
         let goldTotal = 0;
-        let firstQuiz = user.first_quiz ? 'yes' : 'no';
-        let highScore = user.high_score ? 'yes' : 'no';
-        let overallScore = user.overall_score ? 'yes' : 'no';
-        let participation = user.participation ? 'yes' : 'no';
+        let firstQuiz = user.first_quiz;
+        let highScore = user.high_score;
+        let overallScore = user.overall_score;
+        let participation = user.participation;
 
 
         userScores.map((quiz) => {
@@ -39,13 +39,18 @@ const Leaderboard = ({ mainData, medalScores, quiz_id_list, medalCondition, para
 
         return (
           <tr key={i} className="leaderboard__row">
-              <td className="leaderboard__cell f-body"> { rankingNumbers[i] } </td>
-              <td className="leaderboard__cell leaderboard__cell--tl f-body"> { user.username } </td>
-              <td className="leaderboard__cell leaderboard__cell--tl f-body"> { firstQuiz } { highScore } { overallScore } { participation } </td>
-              <td className="leaderboard__cell f-body"> { bronzeTotal} </td>
-              <td className="leaderboard__cell f-body"> { silverTotal } </td>
-              <td className="leaderboard__cell f-body"> { goldTotal } </td>
-              <td className="leaderboard__cell leaderboard__cell--narrow f-body"> { parseFloat(user.total_score) } </td>
+              <td className="leaderboard__cell f-subheader"> { rankingNumbers[i] } </td>
+              <td className="leaderboard__cell leaderboard__cell--tl f-subheader leaderboard__username"> { user.username } </td>
+              <td className="leaderboard__cell leaderboard__cell--tl f-subheader">
+                  <img className="leaderboard__trophy" src={`/assets/trophy/first_quiz${firstQuiz ? '' : '_grey'}.svg`} />
+                  <img className="leaderboard__trophy" src={`/assets/trophy/high_score${highScore ? '' : '_grey'}.svg`} />
+                  <img className="leaderboard__trophy" src={`/assets/trophy/overall_score${overallScore ? '' : '_grey'}.svg`} />
+                  <img className="leaderboard__trophy" src={`/assets/trophy/participation${participation ? '' : '_grey'}.svg`} />
+               </td>
+              <td className="leaderboard__cell f-subheader"> { bronzeTotal} </td>
+              <td className="leaderboard__cell f-subheader"> { silverTotal } </td>
+              <td className="leaderboard__cell f-subheader"> { goldTotal } </td>
+              <td className="leaderboard__cell leaderboard__cell--narrow f-subheader"> { parseFloat(user.total_score) } </td>
           </tr>
         );
     });

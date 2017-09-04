@@ -9,7 +9,7 @@ const HoldingPage = ({ is_lecturer, params }) => {
           <ul className="navbar navbar--invisible">
             <div className="navbar__inner">
               <li className="navbar__item navbar__item--onlyone">
-                  <Link to={ `${params.module_id}/${is_lecturer ? 'lecturer' : 'student'}` } className="f-body navbar__link button">
+                  <Link to={ `${params.module_id}/${is_lecturer ? 'lecturer' : 'student'}` } className="f-body navbar__link">
                     Quit
                   </Link>
               </li>
