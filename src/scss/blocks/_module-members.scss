@@ -1,54 +1,55 @@
-.module-members {
-
-    .section {
-        margin-top: 1rem;
-    }
+.section { /* ! should be in a separate file */
+  margin-top: 2rem;
 }
 
 
 .member {
-    margin: 0.5rem 0;
+    padding: 0.25rem 0.5rem;
+    display: table;
+    table-layout: auto;
+    width: 100%;
+    &:nth-child(even) {
+      background-color: $blue-20;
+    }
 
-
-
+    .quiz__details {
+        display: inline-block;
+        padding: 0 1rem;
+    }
     .f-body {
       cursor: default;
     }
-    .member__details {
-        display: inline-block;
+    &__details, &__view-details, &__view-remove-member {
+      display: table-cell;
+      vertical-align: middle;
+    }
+    &__details {
         width: 70%;
     }
-    .member__view-details {
-      width: 15%;
-      display: inline-block;
+    &__view-details {
       text-align: right;
-      padding-right: 1rem;
       box-sizing: border-box;
 
           .f-body {
               padding-right: 0.5rem;
           }
     }
-    .member__view-remove-member {
-      width: 15%;
-      display: inline-block;
+    &__view-remove-member {
       text-align: right;
     }
 
-
-    .quiz__details, .member__quiz__header {
+    &__quizheader {
         display: inline-block;
         padding: 0 1rem;
     }
 
-    .member__quiz__details {
+    &__quizdetails {
         position: relative;
-        background-color: #FDFDFD;
-        border: 1px solid rgba(1, 22, 39, 0.25);
-        border-radius: 10px;
-        text-align: left;
-        padding: 1rem;
-        margin: 0.75rem 0;
+        width: 100%;
+        margin: 0.5rem 0rem;
+        padding: 1rem 0.5rem;
+        border: 1px solid $black-25-opacity; /* same as on .card */
+        border-radius: 0.625rem; /* same as on .card */
 
         .close-button {
           position: absolute;
@@ -57,18 +58,21 @@
         }
     }
 
-    .remove__student {
+    &__removestudent {
         position: relative;
-        background-color: #FDFDFD;
-        border: 1px solid rgba(1, 22, 39, 0.25);
-        border-radius: 10px;
-        text-align: left;
+        width: 100%;
+        margin: 0.5rem 0rem;
         padding: 1rem;
-        margin: 0.75rem 0;
+        border: 1px solid $black-25-opacity; /* same as on .card */
+        border-radius: 0.625rem; /* same as on .card */
 
         .button {
-          margin: 1rem 0.5rem;
+          margin: 1rem 0.5rem 0rem;
         }
     }
 
+}
+
+.modal {
+  display: table-row;
 }

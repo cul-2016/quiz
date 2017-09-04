@@ -52,7 +52,7 @@
     }
 
     &__primary {
-        background-color: $salmon;
+        background-color: $bright-red;
         color: $white;
 
         &--large {
@@ -67,8 +67,8 @@
         -webkit-transition: all .2s ease-in;
         transition: all .2s ease-in;
         background-color: $white;
-        color: $salmon;
-        border: 1px solid $salmon;
+        color: $bright-red;
+        border: 1px solid $bright-red;
     }
 
     &__secondary {

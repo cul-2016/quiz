@@ -17,14 +17,16 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                     !isQuizStarted && !is_lecturer &&
                     <div className="student-view">
                         <ul className="navbar navbar--invisible">
-                             <li className="navbar__item">
+                          <div className="navbar__inner">
+                             <li className="navbar__item navbar__item--onlyone">
                                  <Link
                                     to={ `${params.module_id}/student` }
-                                    className="navbar__link navbar__link--left navbar__link--back"
+                                    className="f-body navbar__link"
                                  >
                                    Quit
                                  </Link>
                              </li>
+                           </div>
                          </ul>
 
                         <p className="f-headline">Joining...</p>
@@ -35,7 +37,7 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                         </div>
                         <div className="hint">
                             <p className="f-label f-label--dark"> Hint </p>
-                            <p className="f-body f-body--secondary"> During the quiz, you can change your answer as many times as you like, as long as it's before the next question appears.</p>
+                            <p className="f-body f-body--secondary"> During the quiz, you can change your answer as many times as you like, as long as it&#39;s before the next question appears.</p>
                         </div>
 
                     </div>
@@ -45,15 +47,17 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                     <div className="content content--pattern-background content--join-quiz">
 
                         <ul className="navbar navbar--invisible">
-                            <li className="navbar__item">
+                          <div className="navbar__inner">
+                            <li className="navbar__item navbar__item--onlyone">
                                 <Link
                                     to={ `${params.module_id}/lecturer` }
-                                    className="f-body navbar__link navbar__link--left navbar__link--quit button"
+                                    className="f-body navbar__link"
                                     onClick={ () => handleAbortQuiz(quiz_id) }
                                 >
                                   Quit
                                 </Link>
                             </li>
+                          </div>
                         </ul>
                         <div className="content__body">
 
@@ -118,10 +122,10 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                     isQuizStarted && !is_lecturer && question &&
                     <div className="student-view__questions">
                         <ul className="navbar navbar__light navbar__light--tertiary">
-                            <li className="navbar__item">
+                            <li className="navbar__item navbar__item--onlyone">
                                 <Link
                                     to={ `${params.module_id}/student` }
-                                    className="navbar__link navbar__link--left navbar__link--quit button"
+                                    className="f-body navbar__link"
                                 >
                                     Quit
                                 </Link>
@@ -163,15 +167,17 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                     isQuizStarted && question && is_lecturer &&
                     <div>
                         <ul className="navbar navbar--invisible">
-                            <li className="navbar__item">
+                          <div className="navbar__inner">
+                            <li className="navbar__item navbar__item--onlyone">
                                 <Link
                                     to={ `${params.module_id}/lecturer` }
-                                    className="f-body navbar__link navbar__link--left navbar__link--quit button"
+                                    className="f-body navbar__link"
                                     onClick={ () => handleAbortQuiz(quiz_id) }
                                 >
                                   Quit
                                 </Link>
                             </li>
+                          </div>
                         </ul>
                         <div className="content content__body">
                             <div className="live-quiz__question-wrapper">

@@ -45,7 +45,6 @@ const Leaderboard = ({ mainData, medalScores, quiz_id_list, medalCondition, para
               <td className="leaderboard__cell f-body"> { bronzeTotal} </td>
               <td className="leaderboard__cell f-body"> { silverTotal } </td>
               <td className="leaderboard__cell f-body"> { goldTotal } </td>
-              <td className="leaderboard__cell leaderboard__cell--narrow f-body"> [diff] </td>
               <td className="leaderboard__cell leaderboard__cell--narrow f-body"> { parseFloat(user.total_score) } </td>
           </tr>
         );
@@ -53,32 +52,40 @@ const Leaderboard = ({ mainData, medalScores, quiz_id_list, medalCondition, para
 
     return (
         <div className="leaderboard">
-               <div className="content__body">
-                    <div className="leaderboard__image"></div>
-                    <table className="leaderboard__table">
-                        <thead className="leaderboard__header">
-                            <tr>
-                                <th className="leaderboard__cell leaderboard__cell--header leaderboard__cell--narrow f-body f-body--white">#</th>
-                                <th className="leaderboard__cell leaderboard__cell--header leaderboard__cell--tl f-body f-body--white">Name</th>
-                                <th className="leaderboard__cell leaderboard__cell--header leaderboard__cell--tl f-body f-body--white">Badges</th>
-                                <th className="leaderboard__cell leaderboard__cell--header leaderboard__cell--narrow">
-                                  <p className="medal-small medal-small--bronze"></p>
-                                </th>
-                                <th className="leaderboard__cell leaderboard__cell--header leaderboard__cell--narrow">
-                                  <p className="medal-small medal-small--silver"></p>
-                                </th>
-                                <th className="leaderboard__cell leaderboard__cell--header leaderboard__cell--narrow">
-                                  <p className="medal-small medal-small--gold"></p>
-                                </th>
-                                <th className="leaderboard__cell leaderboard__cell--header leaderboard__cell--narrow f-body f-body--white">Trend</th>
-                                <th className="leaderboard__cell leaderboard__cell--header leaderboard__cell--narrow f-body f-body--white">Score</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                          { mappedLeaderboard }
-                        </tbody>
-                  </table>
-              </div>
+            <ul className="navbar navbar--invisible">
+                <div className="navbar__inner">
+                    <li className="navbar__item navbar__item--onlyone">
+                        <Link to={ `${params.module_id}/lecturer` } className="f-body navbar__link">
+                            Back
+                        </Link>
+                    </li>
+                </div>
+            </ul>
+           <div className="content__body">
+                <div className="leaderboard__image"></div>
+                <table className="leaderboard__table">
+                    <thead className="leaderboard__header">
+                        <tr>
+                            <th className="leaderboard__cell leaderboard__cell--header leaderboard__cell--narrow f-body f-body--white">#</th>
+                            <th className="leaderboard__cell leaderboard__cell--header leaderboard__cell--tl f-body f-body--white">Name</th>
+                            <th className="leaderboard__cell leaderboard__cell--header leaderboard__cell--tl f-body f-body--white">Badges</th>
+                            <th className="leaderboard__cell leaderboard__cell--header leaderboard__cell--narrow">
+                              <p className="medal-small medal-small--bronze"></p>
+                            </th>
+                            <th className="leaderboard__cell leaderboard__cell--header leaderboard__cell--narrow">
+                              <p className="medal-small medal-small--silver"></p>
+                            </th>
+                            <th className="leaderboard__cell leaderboard__cell--header leaderboard__cell--narrow">
+                              <p className="medal-small medal-small--gold"></p>
+                            </th>
+                            <th className="leaderboard__cell leaderboard__cell--header leaderboard__cell--narrow f-body f-body--white">Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      { mappedLeaderboard }
+                    </tbody>
+              </table>
+          </div>
         </div>
     );
 };

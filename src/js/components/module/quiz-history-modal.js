@@ -25,8 +25,8 @@ const QuizHistoryModal = ({ isVisible, history, hide, username, member }) => {
             { !history && <Spinner /> }
             {
                 history &&
-                <div className="member__quiz__details">
-                    <div className="member__quiz__header">
+                <div className="member__quizdetails">
+                    <div className="member__quizheader">
                       <p className="f-small-body f-small-body--grey">  Quiz </p>
                       <p className="f-small-body f-small-body--grey"> Score </p>
                       <p className="f-small-body f-small-body--grey"> % </p>
