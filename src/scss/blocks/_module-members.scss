@@ -8,7 +8,9 @@
 
 .member {
     margin: 0.5rem 0;
-    
+
+
+
     .f-body {
       cursor: default;
     }
@@ -41,11 +43,12 @@
 
     .member__quiz__details {
         position: relative;
-        width: 100%;
-        margin: 0.5rem 0 1rem 0;
-        padding: 1rem 2rem;
-        box-shadow: inset 0 -4px 0 0 $grey;
-        border: 1px solid #3E3E3E;
+        background-color: #FDFDFD;
+        border: 1px solid rgba(1, 22, 39, 0.25);
+        border-radius: 10px;
+        text-align: left;
+        padding: 1rem;
+        margin: 0.75rem 0;
 
         .close-button {
           position: absolute;
@@ -56,11 +59,12 @@
 
     .remove__student {
         position: relative;
-        width: 100%;
-        margin: 0.5rem 0 1rem 0;
-        padding: 1rem 2rem;
-        box-shadow: inset 0 -4px 0 0 $grey;
-        border: 1px solid #3E3E3E;
+        background-color: #FDFDFD;
+        border: 1px solid rgba(1, 22, 39, 0.25);
+        border-radius: 10px;
+        text-align: left;
+        padding: 1rem;
+        margin: 0.75rem 0;
 
         .button {
           margin: 1rem 0.5rem;

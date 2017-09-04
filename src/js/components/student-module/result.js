@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import { hashHistory } from 'react-router';
 import showNavbar from '../../lib/showNavbar';
-import { elastic, fadeOutThenIn, studentResultsWithBadges } from '../../lib/animate';
+import { studentResultsWithBadges } from '../../lib/animate';
 import { Link } from 'react-router';
 import classnames from 'classnames';
 
@@ -73,10 +73,12 @@ export default class Result extends Component {
                  <div className="result__score--percentScore">
                     <h3 className="result__score--percentScore f-title f-title--primary">{ percentageScore } <span className="f-subheader">%</span></h3>
                  </div>
-                 <div className="result__score--totalScore">
-                    <h3 className="result__score--totalScore f-title f-title--primary">{ `${ score} / ${Math.round((score * 100)  /  percentageScore) }` }</h3>
-                 </div>
-
+                 {
+                     percentageScore !== 0 &&
+                     <div className="result__score--totalScore">
+                         <h3 className="result__score--totalScore f-title f-title--primary">{ `${ score } / ${Math.round((score * 100)  /  percentageScore) }` }</h3>
+                     </div>
+                 }
                  </div>
 
                 <Link  className="button" to={ `${module_id}/student`}>

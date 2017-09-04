@@ -76,7 +76,7 @@ class ReviseQuestion extends Component {
                       { chosenAnswer('d') }
                     </div>
                 </div>
-                <button onClick={ () => this.setState({ isAnswerShowing: !isAnswerShowing }) }className="button button__primary">
+                <button onClick={ () => this.setState({ isAnswerShowing: !isAnswerShowing }) }className="button">
                     { `${isAnswerShowing ? 'Hide Answer' : 'View Answer' }` }
                 </button>
             </div>

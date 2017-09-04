@@ -56,6 +56,9 @@ class Trophies extends React.Component {
 
         return (
             <div className="trophies">
+                <h3 className="f-body f-body--50">
+                    Set the scores needed for different trophies
+                </h3>
                 <div className={ toggleClassnamesTrophies }>
                     <p>
                         { text.trophy.trophies }

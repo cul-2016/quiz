@@ -1,28 +1,37 @@
 .review-quiz-student {
-  background-color: $blue;
   min-height: 100vh;
   text-align: center;
+
+  .review-quiz-student-container {
+      border-top: 3px solid #2574A9;
+      margin-top: 1rem;
+      padding: 1rem 0;
+      background-color: #FDFDFD;
+  }
 
     .f-headline {
       margin-top: 1rem;
     }
     .card {
       padding: 0;
+      margin: 0.5rem;
       width: inherit;
+      line-height: 1rem;
+      border: 1px solid $blue;
     }
     .question {
         padding: 1rem;
-        border-bottom: 1px solid $black;
+        border-bottom: 1px solid $blue;
     }
     .answer {
         padding: 0.75rem;
     }
 
     .same_answer {
-        background: linear-gradient(90deg, #98F0F0 0%, #FFE7AB 100%);
+        background: linear-gradient(90deg, $grey 0%, $grey 100%);
     }
     .user_answer {
-        background-color: #98F0F0;
+        background-color: $grey;
     }
     .chosen-answer {
         float:right;

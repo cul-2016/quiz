@@ -39,10 +39,10 @@
     border-radius: 10px;
     background-color: $white;
     display: inline-block;
-    width: 95%;
+    width: 90%;
     margin-bottom: 0.5rem;
     text-align: left;
-    background-color: rgba(247, 255, 247, 1);
+    background-color: $white;
 }
 
 .quiz__item-medal-container {
@@ -163,5 +163,5 @@
 
 .quizzes-container {
     padding-top: 1rem;
-    background-color: rgba(247, 255, 247, 1);
+    background-color: $white;
 }

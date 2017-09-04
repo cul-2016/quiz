@@ -16,7 +16,7 @@ const RemoveStudentModal = ({ module_id, handleRemovingMember, user_id, isVisibl
                   <button className="button button__primary" onClick={ () => { handleRemovingMember(user_id, module_id); hide(); } }>
                       Remove User
                     </button>
-                    <button className="button button__tertiary" onClick={ () => { hide(); } }>
+                    <button className="button" onClick={ () => { hide(); } }>
                       Cancel
                     </button>
                 </div>

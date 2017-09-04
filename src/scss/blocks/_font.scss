@@ -30,7 +30,8 @@
     color: $blue;
 
     &--primary {
-        color: $blue;
+        color: $black;
+        font-weight: normal;
     }
     &--secondary {
         color: $red;
@@ -47,7 +48,7 @@
     color: $blue;
 
     &--primary {
-        color: $blue;
+        color: $black;
         font-weight: 700;
     }
 
@@ -107,10 +108,12 @@
     }
     &--dark {
       color: $blue;
+      font-weight: bold;
     }
     &--link {
       text-decoration: underline;
       color: $blue;
+      cursor: pointer;
     }
 
 }
@@ -119,10 +122,11 @@
     font-size: 0.875rem; // 14px
     line-height: 1.25;
     letter-spacing: 1px;
-    color: $grey;
+    color: $blue;
+    font-weight: bold;
 
 
-    &--dark {
+    &--primary {
         color: $black;
     }
 
@@ -160,9 +164,12 @@
     font-size: 0.625rem;
     font-weight: bold;
     line-height: 1;
-    color: $black;
+    color: $blue;
     text-align: center;
 
+    &--primary {
+        color: $black;
+    }
     &--dark {
         color: $black;
     }

@@ -66,6 +66,7 @@
   .module__code {
       display: inline-block;
       width: 100%;
+      margin: 1rem auto 0;
       &--id {
           display: inline-block;
           min-width: 50%;
@@ -152,8 +153,8 @@
   }
 
   &__headline {
-    margin: 1rem 2rem;
-    color: $black;
+    margin: 0.5rem auto;
+    color: $blue;
   }
 
   &__buttons {
@@ -187,11 +188,6 @@
     margin: 0;
   }
 
-  .f-body {
-    margin-top: 0.7rem;
-    font-size: 1.8rem;
-    line-height: 2rem;
-  }
 
   .quizzes {
     margin: 2rem 0;

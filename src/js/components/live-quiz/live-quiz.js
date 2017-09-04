@@ -10,7 +10,6 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                     handleSelection, response, name, //eslint-disable-line no-unused-vars
                     numParticipants, handleAbortQuiz, params, review }) => {
 
-                        console.log('-------->', nextQuestionIndex);
 
     return (
         <section className="live-quiz container">
@@ -28,8 +27,8 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                              </li>
                          </ul>
 
-                        <p className="f-subheader f-subheader--tertiary">Joining...</p>
-                        <p className="logo logo--large logo--large--animated"></p>
+                        <p className="f-headline">Joining...</p>
+                        <img className="holding-logo" src="/assets/dashboard_tile_logo.svg" />
                         <div className="holding-message">
                             <p className="f-title"> Waiting for all participants</p>
                             <p className="f-body"> The quiz will start momentarily</p>

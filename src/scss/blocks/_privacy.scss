@@ -1,10 +1,18 @@
 .privacy {
 
     min-height: 100vh;
-    background: url('/pattern_background.png') no-repeat center center fixed;
     background-size: cover;
     text-align: center;
     line-height: 1.5rem;
+
+    .f-headline {
+        text-align: center;
+    }
+
+    .holding-logo {
+        width: 6rem;
+        margin: 1rem;
+    }
 
     ul {
         list-style: disc;

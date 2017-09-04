@@ -25,7 +25,6 @@ class Medals extends React.Component {
 
         return (
             <div className="new-module-medals section column">
-                <br />
                 <h3 className="f-body f-body--50">
                     Set the scores needed for different medals
                 </h3>
