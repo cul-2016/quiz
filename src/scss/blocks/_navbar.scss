@@ -38,6 +38,7 @@
           }
         }
         &--right {
+          padding-right: 1rem;
           text-align: right;
         }
         &--onlyone > .navbar__link { /* ! assumes navbar__link follows navbar__item in markup */
