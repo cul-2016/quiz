@@ -27,7 +27,7 @@ const mapDispatchToProps = (dispatch) => ({
     startQuiz: () => {
 
         let nextQuestion = getNextQuestion(store);
-
+        console.log('---------', nextQuestion);
         emitSendNextQuestion(socketClient, nextQuestion, () => {
 
             dispatch(startQuiz());
@@ -37,6 +37,7 @@ const mapDispatchToProps = (dispatch) => ({
     nextQuestion: () => {
 
         let nextQuestion = getNextQuestion(store);
+        console.log('***********', nextQuestion);
 
         emitSendNextQuestion(socketClient, nextQuestion, () => {
 

@@ -18,7 +18,7 @@ const EditQuiz = ({ questions, isUpdatingQuiz, name,
         const { question, a, b, correct_answer } = questionObj;
         return Boolean(question && a && b && (correct_answer || isSurvey));
     }).every((elem) => elem);
-    const submitClasses = classnames("button button__tertiary", {
+    const submitClasses = classnames("button button", {
         "button__disabled": !name || questionsValidation === false
     });
     const quizNameClasses = classnames("f-label", {
@@ -28,11 +28,13 @@ const EditQuiz = ({ questions, isUpdatingQuiz, name,
             <div className="edit-quiz">
                 <div>
                     <ul className="navbar navbar--invisible">
-                        <li className="navbar__item">
-                            <Link onClick={ () => store.dispatch(clearNewQuizState()) } to={ `${params.module_id}/lecturer` } className="f-body navbar__link navbar__link--left navbar__link--quit">
+                      <div className="navbar__inner">
+                        <li className="navbar__item navbar__item--onlyone">
+                            <Link onClick={ () => store.dispatch(clearNewQuizState()) } to={ `${params.module_id}/lecturer` } className="f-body navbar__link">
                               Back
                             </Link>
                         </li>
+                      </div>
                     </ul>
                 </div>
                 <div className="content__body">
@@ -61,7 +63,7 @@ const EditQuiz = ({ questions, isUpdatingQuiz, name,
                         onClick={ handleIsLastQuiz } />
                     </div>
                   */}
-                  <div className="line line__tertiary"></div>
+                  <div className="line"></div>
                   <SortableComponent
                     questions={ questions }
                     isSurvey={ isSurvey }

@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import Details from './details.js';
 import Quizzes from './quizzes.js';
 const  Surveys = Quizzes;
-import Spinner from '../general/spinner';
+import applyOffset from '../../lib/applyOffset';
 
 const Module = ({
     location,
@@ -18,20 +18,30 @@ const Module = ({
     handleSubmitImportCode }) => {
 
     return (
-        <div>
-        {
-            isFetchingModule && <Spinner/>
-        }
-        {
-            !isFetchingModule &&
-            <div>
-                <div className="container module content__body">
+        <div className="container">
 
-                    <Details name={ module.name }
-                        module_id={ module.module_id }
-                        num_enrolled={ module.num_enrolled }
-                        trophies={ module.trophies }
-                        medals={ module.medals }/>
+            <div className="module">
+                <div className="content__body content__body--quiz">
+                    <h1 className="f-display">{ module.name }</h1>
+
+
+                    <div className="module__code">
+                        <div className="module__code--id">
+                            <h4 className="f-body f-body--primary">{ module.module_id }</h4>
+                        </div>
+                        <div className="module__code--new-quiz">
+                            <Link to={ `${module.module_id}/new-quiz` }>
+                                <button className="button">
+                                    <span className="icon">
+                                        <i className="fa fa-plus" />
+                                    </span>
+                                    <span>Add a new Survey/Quiz</span>
+                                </button>
+                            </Link>
+                        </div>
+                    </div>
+
+                    <div className="line"></div>
 
                     <Quizzes quizzes={ quizzes }
                         location={ location }
@@ -47,40 +57,75 @@ const Module = ({
                         module_id={ module.module_id }
                         handleSetIsSurvey={ handleSetIsSurvey }
                         handleGenerateShareId={ handleGenerateShareId }/>
+                </div>
+                <div className="content__body--info">
 
-                    <Link className="module__button__link" to={ `${module.module_id}/new-quiz` } >
-                        <button className="button button__secondary quizzes__button">
-                            <span className="icon">
-                                <i className="fa fa-plus" />
-                            </span>
-                            <span>Add a new Survey/Quiz</span>
-                        </button>
-                    </Link>
-                    <div className="or-container">
-                      <div className="horizontal-spacer"></div>
-                      <div className="or">OR</div>
-                      <div className="horizontal-spacer"></div>
+                    <div className="card">
+                        <img className="icon__svg" src="/assets/leaderboard/leader_board_icon.svg"></img>
+                        <Link className="module__button__link" to={ `${module.module_id}/leaderboard` } >
+                            <button className="button">
+                                <span>View Leaderboard</span>
+                            </button>
+                        </Link>
                     </div>
-                    <div className="import-container">
-                        <input
-                            className="form__input form__input--import"
-                            placeholder="CODE"
-                            name="share_id"
-                            type="text"
-                            onChange={ (e) => handleImportCode(e.target.value) } />
 
-                        <button
-                            className="button button__secondary quizzes__button"
+                    <div className="card">
+                        <img className="icon__svg" src="/assets/view_students_icon.svg"></img>
+                        <Link className="module__button__link" to={ `${module.module_id}/members` } >
+                            <button className="button">
+                                <span>View Students</span>
+                            </button>
+                        </Link>
+                    </div>
+
+                    <div className="card card__medals">
+
+                        <h3 className="f-title">Medal Threshold</h3>
+                        <div className="content__body--medals">
+                            <img className="icon__svg--medals" src="/assets/medals/bronze_medal.svg"></img>
+                            <h3 className="f-small-label"> Bronze </h3>
+                            <h3 className="f-small-label"> 0 - { applyOffset(module.medals.condition[0], -1) }% </h3>
+                        </div>
+
+                        <div className="content__body--medals">
+                            <img className="icon__svg--medals" src="/assets/medals/silver_medal.svg"></img>
+                            <h3 className="f-small-label">Silver </h3>
+                            <h3 className="f-small-label">{ module.medals.condition[0] }  - { module.medals.condition[1] }% </h3>
+                        </div>
+
+                        <div className="content__body--medals">
+                            <img className="icon__svg--medals" src="/assets/medals/gold_medal.svg"></img>
+                            <h3 className="f-small-label"> Gold </h3>
+                            <h3 className="f-small-label"> { applyOffset(module.medals.condition[1], 1) } - 100% </h3>
+                        </div>
+
+                    </div>
+
+                    <div className="card card__medals">
+                        <h3 className="f-title">Import Quiz/Survey</h3>
+                        <div>
+                            <input
+                                className="form__input form__input--import"
+                                placeholder="CODE"
+                                name="share_id"
+                                type="text"
+                                onChange={ (e) => handleImportCode(e.target.value) } />
+                        </div>
+                        <div>
+                            <button
+                            className={ `button button__secondary quizzes__button ${ !module.importCode ? 'button__disabled' : '' }` }
                             onClick={ () => {
                                 handleSubmitImportCode(module.importCode, module.module_id);
-                            }} >Import Survey/Quiz</button>
-                        { module.error &&
-                            <p className="module__err-message">No quiz or survey found with this code</p>
-                        }
+                            }}>
+                                Import Survey/Quiz
+                            </button>
+                            { module.error &&
+                                <p className="module__err-message">No quiz or survey <br /> found with this code</p>
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
-        }
         </div>
     );
 };

@@ -22,9 +22,11 @@
     .edit__user__score {
         width: 80%;
         margin: 0.5rem 0 1rem 0;
-        padding: 1rem 2rem;
-        box-shadow: inset 0 -4px 0 0 $grey;
-        border: 1px solid #3E3E3E;
+        background-color: #FDFDFD;
+        border: 1px solid rgba(1, 22, 39, 0.25);
+        border-radius: 10px;
+        text-align: left;
+        padding: 1rem;
 
         .button {
           margin: 1rem 1rem 0 0;
@@ -67,10 +69,10 @@
 
     .correct_answer {
         background-color: #F1F1F1;
-        border: 2px solid $dark-gold;
+        border: 2px solid $blue;
 
         .f-title {
-            color: $dark-gold;
+            color: $blue;
         }
 
         .answer {

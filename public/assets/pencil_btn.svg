@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="48px" height="48px" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>pencil_btn</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-9.000000, -9.000000)" stroke="#2574A9">
+            <g id="pencil_btn" transform="translate(9.000000, 9.000000)">
+                <g id="pencil" transform="translate(11.000000, 8.000000)" stroke-width="2" stroke-linecap="square">
+                    <path d="M18,4 L25,11" id="Shape"></path>
+                    <path d="M1,21 L8,28" id="Shape"></path>
+                    <path d="M4.5,24.5 L21.5,7.5" id="Shape"></path>
+                    <path d="M8,28 L0,29 L1,21 L20.586,1.414 C21.367,0.633 22.633,0.633 23.414,1.414 L27.586,5.586 C28.367,6.367 28.367,7.633 27.586,8.414 L8,28 Z" id="Shape"></path>
+                </g>
+                <circle id="Oval-5" cx="24" cy="24" r="23.5"></circle>
+            </g>
+        </g>
+    </g>
+</svg>

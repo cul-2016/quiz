@@ -3,10 +3,10 @@ import React from 'react';
 const PrivacyMessageComponent = () => {
     return (
         <div className="privacy">
-            <h1 className="f-headline"><img src="/Yellow.svg"></img></h1>
+            <h1 className="f-headline"><img className="holding-logo" src="/assets/dashboard_tile_logo.svg" /></h1>
             <div className="content__body">
                   <div className="form">
-                      <h2 className="title">What data do we collect, and how do we use it?</h2>
+                      <h2 className="f-title">What data do we collect, and how do we use it?</h2>
                       <br />
                       <div className="subtitle">
                           When you sign up, you enter your email address, a nickname, and a password. We also record your
@@ -57,20 +57,20 @@ const PrivacyMessageComponent = () => {
                           </li>
                       </ul>
                       <br />
-                      <h2 className="title">How long is the data held for? Can I delete it?</h2>
+                      <h2 className="f-title">How long is the data held for? Can I delete it?</h2>
                       <br />
                       <div className="subtitle">
                           We hold your data for the time you have an account with us. If you no longer want an account with
                           us and want to have any identifiable data deleted, we can sort that: email hello@quodl.co.uk.
                       </div>
                       <br />
-                      <h2 className="title">Where is the data held?</h2>
+                      <h2 className="f-title">Where is the data held?</h2>
                       <br />
                       <div className="subtitle">
                           The data you submit is held within the EU.
                       </div>
                       <br />
-                      <h2 className="title">Can I have a copy of my data?</h2>
+                      <h2 className="f-title">Can I have a copy of my data?</h2>
                       <br />
                       <div className="subtitle">
                           Yes. You can see virtually all the data we hold when you are logged in: The scores and answers on
@@ -78,7 +78,7 @@ const PrivacyMessageComponent = () => {
                           that is associated with your email address, email: hello@quodl.co.uk.
                       </div>
                       <br />
-                      <h2 className="title">Can I object to the use of my data?</h2>
+                      <h2 className="f-title">Can I object to the use of my data?</h2>
                       <br />
                       <div className="subtitle">
                           We may use your data for administering the quizzes, identifying students who are doing very well or
@@ -87,7 +87,7 @@ const PrivacyMessageComponent = () => {
                           are no longer able to take part in quizzes.
                       </div>
                       <br />
-                      <h2 className="title">Do you use the data for automated decision making?</h2>
+                      <h2 className="f-title">Do you use the data for automated decision making?</h2>
                       <br />
                       <div className="subtitle">
                           People are sometimes worried about their data being used to make significant decisions
@@ -97,7 +97,7 @@ const PrivacyMessageComponent = () => {
                           interventions – if that were done it would be with human intervention by your institution).
                       </div>
                       <br />
-                      <h2 className="title">Cookies</h2>
+                      <h2 className="f-title">Cookies</h2>
                       <br />
                       <div className="subtitle">
                           Like most websites, this site uses cookies. This allows you to navigate the site, look at your results

@@ -1,11 +1,11 @@
 .new-quiz {
-    background-color: $light-gold;
     min-height: 100vh;
 
     .card {
         margin: 1rem 0 1rem 0;
         width: inherit;
         position: relative;
+        padding: 2rem;
     }
 
     .line {
@@ -38,11 +38,9 @@
 
     .new-quiz--buttons {
         text-align: center;
-        max-width: 54rem;
 
         .button {
-          display: block;
-          margin: 1rem auto;
+          margin: 1rem;
         }
     }
     &--drag-handle {

@@ -1,0 +1,68 @@
+.quizzes__container {
+
+    border: 1px solid $black-25-opacity;
+	border-radius: 10px;
+    box-sizing: border-box;
+    margin-bottom: 1rem;
+    -moz-transition: all .2s ease-in;
+    -o-transition: all .2s ease-in;
+    -webkit-transition: all .2s ease-in;
+    transition: all .2s ease-in;
+    position: relative;
+    &--id {
+        min-width: 5rem;
+        height: 5rem;
+        display: inline-block;
+        box-sizing: border-box;
+        vertical-align: middle;
+
+        &-icon {
+            position: absolute;
+            top: 1.25rem;
+            left: 1.25rem;
+            vertical-align: middle;
+
+        }
+        &-index {
+            position: absolute;
+            top: 2rem;
+            left: 2.5rem;
+            vertical-align: middle;
+        }
+    }
+
+    &--details {
+        min-width: 24.75rem;
+        text-align: left;
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        box-sizing: border-box;
+        vertical-align: middle;
+
+    }
+
+    &--actions {
+        min-width: 17rem;
+        display: inline-block;
+        box-sizing: border-box;
+        vertical-align: middle;
+
+        &-icons {
+            padding: 0 1rem;
+            display: inline-block;
+            cursor: pointer;
+            vertical-align: middle;
+        }
+
+        &-info {
+            padding: 0 1rem;
+            display: inline-block;
+            vertical-align: middle;
+        }
+    }
+}
+
+
+.quizzes__container:hover {
+border: 1px solid $blue;
+}

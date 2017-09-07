@@ -6,14 +6,18 @@ const App = ({ children, location, username,
                error, isCookieAccepted, handleCookieMessage, //eslint-disable-line no-unused-vars
                handleErrorClearance, is_lecturer, is_super_admin, loading }) => {
 
+    const checkPath = (path) => {
+        return path === '/' || path.includes('/register') || path.includes('reset-password');
+    };
+    const customClasses = `app ${checkPath(location.pathname) ? 'app--login' : ''}`;
     return (
         <div>
         {
             loading && !error &&
-            <div className="content">
-                <div className="content__body">
+            <div className={ customClasses }>
+                <div className="loading__body">
                     <div className="loading">
-                        <img className="f-headline" src="/Yellow.svg" />
+                        <img className="f-headline" src="/assets/logo/Login_signup_icon.svg" />
                         <p className="f-title">Loading ...</p>
                     </div>
                 </div>
@@ -21,7 +25,7 @@ const App = ({ children, location, username,
         }
         {
             !loading && error &&
-                <div>
+                <div className={ customClasses }>
                     <Nav location={ location } username={ username } is_lecturer={ is_lecturer } is_super_admin={ is_super_admin } />
                     { children }
                     <ErrorMessage
@@ -31,7 +35,7 @@ const App = ({ children, location, username,
         }
         {
             !loading && !error &&
-            <div>
+            <div className={ customClasses }>
                 <Nav location={ location } username={ username } is_lecturer={ is_lecturer } is_super_admin={ is_super_admin }  />
                 { children }
             </div>

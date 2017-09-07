@@ -13,35 +13,37 @@ const Review = ({ isFetchingReview, question, numQuestions, currentQuizIndex, is
             }
             <div>
                 <ul className="navbar navbar--invisible">
-                    <li className="navbar__item">
-                        <Link to={ `${params.module_id}/lecturer` } className="f-body navbar__link navbar__link--left navbar__link--quit">
+                  <div className="navbar__inner">
+                    <li className="navbar__item navbar__item--onlyone">
+                        <Link to={ `${params.module_id}/lecturer` } className="f-body navbar__link">
                           Quit
                         </Link>
                     </li>
+                  </div>
                 </ul>
             </div>
             {
                 question &&
-                <div className="content" >
+                <div className="content content__body" >
                     <div className="live-quiz__question-wrapper">
-                        <p className="live-quiz__question-number f-display"> Q{ currentQuizIndex + 1 }.</p>
+                        <p className="live-quiz__question-number f-display"> Q{ currentQuizIndex + 1 }</p>
                         <p className="live-quiz__question f-title">{ question.question }</p>
                     </div>
                     <ShowAnswer
                         isAnswerShowing={ isAnswerShowing }
                         data={ question }
                         isSurvey={ isSurvey } />
+                    <ReviewButtons
+                        isAnswerShowing={ isAnswerShowing }
+                        numQuestions={ numQuestions }
+                        currentQuizIndex={ currentQuizIndex }
+                        handleIsAnswerShowing={ handleIsAnswerShowing }
+                        handleIncrementCurrentQuizIndex={ handleIncrementCurrentQuizIndex }
+                        endReview={ endReview }
+                        params={ params }
+                        isSurvey={ isSurvey } />
                 </div>
             }
-            <ReviewButtons
-                isAnswerShowing={ isAnswerShowing }
-                numQuestions={ numQuestions }
-                currentQuizIndex={ currentQuizIndex }
-                handleIsAnswerShowing={ handleIsAnswerShowing }
-                handleIncrementCurrentQuizIndex={ handleIncrementCurrentQuizIndex }
-                endReview={ endReview }
-                params={ params }
-                isSurvey={ isSurvey } />
         </div>
     );
 };

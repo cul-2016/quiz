@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="48px" height="48px" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>eye_btn</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard-2" transform="translate(-9.000000, -14.000000)" stroke="#2574A9">
+            <g id="eye_btn" transform="translate(9.000000, 14.000000)">
+                <g id="eye-19" transform="translate(10.000000, 16.000000)" stroke-width="2" stroke-linecap="square">
+                    <path d="M0,8 C0,8 6.3,0 14,0 C21.6,0 28,8 28,8 C28,8 21.6,16 14,16 C6.4,16 0,8 0,8 Z" id="Shape"></path>
+                    <circle id="Oval" cx="14" cy="6" r="6"></circle>
+                    <path d="M14,8 C12.9,8 12,7.1 12,6" id="Shape"></path>
+                </g>
+                <circle id="Oval-5" cx="24" cy="24" r="23.5"></circle>
+            </g>
+        </g>
+    </g>
+</svg>

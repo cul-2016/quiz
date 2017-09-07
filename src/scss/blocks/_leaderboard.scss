@@ -1,38 +1,65 @@
 .leaderboard {
-  background-color: $white;
   min-height: 100vh;
 
-  .f-headline {
-    max-width: 35rem;
-    margin: auto;
-    text-align: center;
-  }
+    .content__body {
+      padding: 1rem;
+      min-height: 50rem;
+    }
+    .medal-small {
+      margin: auto;
+    }
 
-  table {
-    width: 45rem;
-    margin: 1rem auto;
-    text-align: center;
-  }
-  thead {
-    background-color: $black;
-    color: $white;
-  }
+    &__image {
+      background-image: url(../../public/assets/leaderboard/leader_board_icon.svg);
+      width: 6rem;
+      height: 6rem;
+      background-size: cover;
+      margin: 1rem auto;
+    }
 
-  .leaderboard__row--odd {
-    background-color: white;
-    color: black;
-  }
-  .leaderboard__row--even {
-    background-color: $light-blue;
-    color: black;
-  }
+    &__table {
+      width: 100%;
+      table-layout: auto;
+      text-align: center;
+    }
 
-  th, td {
-    padding: 1rem;
-}
+    &__header {
+      background-color: $blue;
+      color: $white;
+    }
 
-  .medal-small {
-    margin: auto;
-  }
+    &__username {
+        width: 20rem;
+    }
+    &__row:nth-child(odd) {
+      background-color: $white;
+    }
+    &__row:nth-child(even) {
+      background-color: $blue-20;
+    }
 
+    &__cell {
+      vertical-align: middle;
+      line-height: 1.75rem;
+      padding: 0.75rem 1rem;
+        &--header {
+          padding: 1rem;
+          &:first-child {
+            border-top-left-radius: 0.625rem;
+          }
+          &:last-child {
+            border-top-right-radius: 0.625rem;
+          }
+        }
+        &--narrow {
+          width: 2rem;
+        }
+        &--tl {
+          text-align: left;
+        }
+    }
+    &__trophy {
+        width: 5rem;
+        margin-right: 0.5rem;
+    }
 }

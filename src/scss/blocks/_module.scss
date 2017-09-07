@@ -1,8 +1,84 @@
 .module {
   margin: 3rem auto;
-  border: 1px solid;
-  padding: 2rem 4rem;
+  max-width: 73rem;
+  box-sizing: border-box;
 
+  .content__body {
+      margin-bottom: 1rem;
+      padding: 0;
+
+      &--quiz {
+        padding: 2rem;
+        margin: 0.5rem;
+        min-width: 51.75rem;
+        box-sizing: border-box;
+        display: inline-block;
+      }
+
+      &--info {
+        min-width: 19.25rem;
+        margin: 0.5rem;
+        box-sizing: border-box;
+        display: inline-block;
+        vertical-align: top;
+
+      }
+
+      &--medals {
+          max-width: 6.4rem;
+          display: inline-block;
+        //   vertical-align: middle;
+      }
+  }
+
+
+  .card {
+      margin: 0;
+      margin-bottom: 1rem;
+      border: none;
+      padding: 0;
+  }
+
+  .card__medals {
+      text-align: center;
+
+      .f-title {
+          padding: 1rem;
+      }
+  }
+
+  .icon__svg {
+      display: block;
+      margin: 0 auto;
+      min-width: 10rem;
+      padding-top: 2rem;
+
+      &--medals {
+          display: inline-block;
+          min-width: 4rem;
+          padding-left: 0.5rem;
+          padding-right: 0.5rem;
+          vertical-align: middle;
+      }
+  }
+
+
+  .module__code {
+      display: inline-block;
+      width: 100%;
+      margin: 1rem auto 0;
+      &--id {
+          display: inline-block;
+          min-width: 50%;
+          float:left;
+      }
+      &--new-quiz {
+          display: inline-block;
+          min-width: 50%;
+          float:right;
+          text-align: right;
+      }
+  }
   .or-container {
       text-align: center;
       padding: 1rem;
@@ -45,9 +121,10 @@
   }
 
   &__err-message {
+    line-height: 1rem;
     display: block;
     margin-top: 0.5rem;
-    background-color: $pink;
+    background-color: $bright-red;
     padding: 0.5rem;
     border-radius: 2px;
     color: white;
@@ -76,8 +153,8 @@
   }
 
   &__headline {
-    margin: 1rem 2rem;
-    color: $dark-grey;
+    margin: 0.5rem auto;
+    color: $blue;
   }
 
   &__buttons {
@@ -111,12 +188,6 @@
     margin: 0;
   }
 
-  .f-body {
-    float: left;
-    margin-top: 0.7rem;
-    font-size: 1.8rem;
-    line-height: 2rem;
-  }
 
   .quizzes {
     margin: 2rem 0;

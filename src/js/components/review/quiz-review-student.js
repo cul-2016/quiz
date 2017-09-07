@@ -6,25 +6,29 @@ const QuizReviewStudent = ({ review, showAnswer, params }) =>
     <div className="review-quiz-student">
 
           <ul className="navbar navbar--invisible">
-               <li className="navbar__item">
-                 <Link to={ `${params.module_id}/student` } className="navbar__link navbar__link--left navbar__link--back">
+            <div className="navbar__inner">
+               <li className="navbar__item navbar__item--onlyone">
+                 <Link to={ `${params.module_id}/student` } className="f-body navbar__link">
                      Back
                    </Link>
                </li>
+              </div>
            </ul>
 
-          <p className="f-headline f-headline--light"> My Answers </p>
-          {
-            review.questions.map((question, idx) =>
-                <Question {...{
-                    key: `student-question-${idx}`,
-                    question,
-                    idx,
-                    is_lecturer: false,
-                    showAnswer
-                }}/>
-            )
-          }
+          <p className="f-title f-title--primary"> My Answers </p>
+          <div className="review-quiz-student-container">
+              {
+                review.questions.map((question, idx) =>
+                    <Question {...{
+                        key: `student-question-${idx}`,
+                        question,
+                        idx,
+                        is_lecturer: false,
+                        showAnswer
+                    }}/>
+                )
+              }
+          </div>
     </div>
 ;
 
