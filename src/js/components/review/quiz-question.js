@@ -37,22 +37,22 @@ const Question = ({ idx, question, is_lecturer, showAnswer }) => {
             </div>
 
             <div className={ aClasses }>
-                <p className="letter f-title f-title--light "> A </p>
+                <p className="letter f-title"> A </p>
                 <p className="answer f-body"> { question.a } </p>
                 <p className="num_responses f-subheader">{ `( ${+question.a_responses} )` }</p>
             </div>
             <div className={ bClasses }>
-                <p className="letter f-title f-title--light "> B </p>
+                <p className="letter f-title"> B </p>
                 <p className="answer f-body"> { question.b } </p>
                 <p className="num_responses f-subheader">{ `( ${+question.b_responses} )` }</p>
             </div>
             <div className={ cClasses }>
-                <p className="letter f-title f-title--light "> C </p>
+                <p className="letter f-title"> C </p>
                 <p className="answer f-body"> { question.c } </p>
                 <p className="num_responses f-subheader">{ `( ${+question.c_responses} )` }</p>
             </div>
             <div className={ dClasses }>
-                <p className="letter f-title f-title--light "> D </p>
+                <p className="letter f-title"> D </p>
                 <p className="answer f-body"> { question.d } </p>
                 <p className="num_responses f-subheader">{ `( ${+question.d_responses} )` }</p>
             </div>

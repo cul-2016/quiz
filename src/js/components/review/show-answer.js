@@ -7,6 +7,7 @@ const ShowAnswer = ({ isAnswerShowing, data, isSurvey }) => {
     let answersArray = Object.keys(data);
     let responsesArray = Object.keys(data);
     answersArray.splice(answersArray.indexOf(surveyOrQuiz), 1);
+    answersArray.splice(answersArray.indexOf('order_id'), 1);
     answersArray.splice(answersArray.indexOf('question_id'), 1);
     answersArray.splice(answersArray.indexOf('question'), 1);
     answersArray.splice(answersArray.indexOf('correct_answer'), 1);
@@ -18,6 +19,7 @@ const ShowAnswer = ({ isAnswerShowing, data, isSurvey }) => {
 
     responsesArray.splice(responsesArray.indexOf(surveyOrQuiz), 1);
     responsesArray.splice(responsesArray.indexOf('question_id'), 1);
+    responsesArray.splice(responsesArray.indexOf('order_id'), 1);
     responsesArray.splice(responsesArray.indexOf('question'), 1);
     responsesArray.splice(responsesArray.indexOf('correct_answer'), 1);
     responsesArray.splice(responsesArray.indexOf('a'), 1);

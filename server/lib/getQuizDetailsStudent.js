@@ -58,14 +58,14 @@ const getQuizDetailsStudent = (client, quiz_id, user_id, callback) => {
 
     const questionsQuery = [
         'SELECT',
-        'q.question, q.a, q.b, q.c, q.d, q.correct_answer, q.question_id, r.response, r.user_id',
+        'q.question, q.a, q.b, q.c, q.d, q.correct_answer, q.question_id, r.response, r.user_id, q.order_id',
         'FROM',
         'questions as q',
         'LEFT OUTER JOIN',
         'responses as r',
         'on q.question_id = r.question_id',
         'WHERE q.quiz_id = $1',
-        'ORDER BY q.question_id'
+        'ORDER BY q.order_id'
     ].join(' ');
 
     query(client, questionsQuery, [quiz_id], (error, questions) => {
