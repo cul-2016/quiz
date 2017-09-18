@@ -19,12 +19,12 @@ const Question = ({ idx, question, is_lecturer, showAnswer }) => {
         "wrong_answer": showWrongAnswer('b')
     });
     let cClasses = classnames("response box", {
-        "display-none": question.c === undefined || question.c === null,
+        "display-none": question.c === undefined || question.c === null || question.c === "",
         "correct_answer": showAnswers && 'c' === correct_answer.toLowerCase(),
         "wrong_answer": showWrongAnswer('c')
     });
     let dClasses = classnames("response box", {
-        "display-none": question.d === undefined || question.d === null,
+        "display-none": question.d === undefined || question.d === null || question.d === "",
         "correct_answer": showAnswers && 'd' === correct_answer.toLowerCase(),
         "wrong_answer": showWrongAnswer('d')
     });

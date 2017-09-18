@@ -30,12 +30,12 @@ class ReviseQuestion extends Component {
             "wrong_answer": showWrongAnswer('b') && isAnswerShowing
         });
         let cClasses = classnames("answer", {
-            "display-none": question.c === undefined || question.c === null,
+            "display-none": question.c === undefined || question.c === null || question.c === "",
             "same_answer": 'c' === correct_answer.toLowerCase() && isAnswerShowing,
             "wrong_answer": showWrongAnswer('c') && isAnswerShowing
         });
         let dClasses = classnames("answer", {
-            "display-none": question.d === undefined  || question.d === null,
+            "display-none": question.d === undefined  || question.d === null || question.d === "",
             "same_answer": 'd' === correct_answer.toLowerCase() && isAnswerShowing,
             "wrong_answer": showWrongAnswer('d') && isAnswerShowing
         });
