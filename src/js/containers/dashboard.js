@@ -10,6 +10,7 @@ const mapStateToProps = (state) => ({
     modules: state.dashboard.data,
     is_lecturer: state.user.is_lecturer,
     module_id: state.joinModule.module_id,
+    joinModuleError: state.joinModule.error,
     moduleIDExists: state.newModule.moduleIDExists
 });
 

@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import classnames from 'classnames';
 
-const JoinModule = ({ module_id, moduleIDExists, handleInputChange, handleJoinModule }) => {
+const JoinModule = ({ module_id, moduleIDExists, handleInputChange, handleJoinModule, error }) => {
 
     let joinModuleClass = classnames("button is-warning login-button", {
         "is-disabled": module_id && !moduleIDExists && module_id.length !== 4
