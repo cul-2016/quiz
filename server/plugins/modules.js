@@ -268,10 +268,10 @@ exports.register = (server, options, next) => {
 
                         joinModule(pool, module_id.toUpperCase(), user_id, (error, result) => {
 
-                            if (error.detail) {
-                                reply({ message: 'Module does not exist' });
-                            } else if (result) {
+                            if (!error) {
                                 reply(result);
+                            } else if (error.detail) {
+                                reply({ message: 'Module does not exist' });
                             } else {
                                 reply(error);
                             }
