@@ -16,14 +16,17 @@ const CurrentQuestion = ({ data, response, handleSelection, isLecturer }) => {
         let classes = classnames(`card ${device}`, {
             "live-quiz__answer--response": letter === response
         });
-        return (
-            <div key={ i } className={ classes } onClick={ () => handleSelection && handleSelection(letter) }>
+
+        if (data[letter] !== "") {
+            return (
+                <div key={ i } className={ classes } onClick={ () => handleSelection && handleSelection(letter) }>
                 <div className="live-quiz__answer-inner">
-                    <span className="live-quiz__letter">{ `${letter}` }</span>
-                    <span className="live-quiz__answer-text f-body">{ `${data[letter]}` }</span>
+                <span className="live-quiz__letter">{ `${letter}` }</span>
+                <span className="live-quiz__answer-text f-body">{ `${data[letter]}` }</span>
                 </div>
-            </div>
-        );
+                </div>
+            );
+        }
 
     });
 

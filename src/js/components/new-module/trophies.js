@@ -11,7 +11,8 @@ class Trophies extends React.Component {
             participation: false,
             overall_score: false,
             high_score: false,
-            first_quiz: false
+            first_quiz: false,
+            trophyUnits: ["Number of quizzes taken", "Total score across all quizzes", "Percent correct on any one quiz", "Number of quizzes taken"]
         };
     }
 
@@ -49,6 +50,9 @@ class Trophies extends React.Component {
                           max="100"
                           defaultValue={ this.props.trophies.condition[i] }
                           onChange={ (e) => this.props.updateTrophyVals(name, e.target.value) } />
+                  </div>
+                  <div>
+                      <p className="new-module-trophy-name f-small-body">{ this.state.trophyUnits[i] }</p>
                   </div>
                 </div>
             );

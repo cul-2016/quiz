@@ -23,7 +23,8 @@ test('`getQuizReview` gets list of questions for a quiz review', (t) => {
                 b_responses: '0',
                 c_responses: '1',
                 d_responses: '0',
-                correct_answer: 'a'
+                correct_answer: 'a',
+                order_id: 1
             },
             {
                 question_id: 2,
@@ -37,7 +38,8 @@ test('`getQuizReview` gets list of questions for a quiz review', (t) => {
                 b_responses: '1',
                 c_responses: '1',
                 d_responses: '0',
-                correct_answer: 'a'
+                correct_answer: 'a',
+                order_id: 2
             }];
         const quiz_id = 1;
         const isSurvey = false;
@@ -70,7 +72,8 @@ test('`getQuizReview` gets list of questions for a quiz review', (t) => {
                 b_responses: '0',
                 c_responses: '1',
                 d_responses: '1',
-                correct_answer: null
+                correct_answer: null,
+                order_id: 1
             },
             {
                 question_id: 33,
@@ -82,7 +85,8 @@ test('`getQuizReview` gets list of questions for a quiz review', (t) => {
                 b_responses: '2',
                 c_responses: '0',
                 d_responses: '0',
-                correct_answer: null
+                correct_answer: null,
+                order_id: 2
             }
         ];
         const survey_id = 1;

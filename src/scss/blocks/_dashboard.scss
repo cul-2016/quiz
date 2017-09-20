@@ -37,6 +37,10 @@
 
     &__student--module {
         text-align: center;
+
+        .module__err-message {
+            margin-bottom: 1rem;
+        }
     }
 
     &__tc {
@@ -56,7 +60,7 @@
       }
 
       .card:hover {
-          border: 1px solid $blue; 
+          border: 1px solid $blue;
       }
       .f-display, .dashboard__lecturer {
         text-align: left;

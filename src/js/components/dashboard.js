@@ -16,7 +16,7 @@ class Dashboard extends Component {
 
     render () {
 
-        let { modules, is_lecturer, module_id, handleInputChange, handleJoinModule } = this.props;
+        let { modules, is_lecturer, module_id, handleInputChange, handleJoinModule, joinModuleError } = this.props;
 
 
         let moduleList = modules.map((module, i) => {
@@ -72,6 +72,10 @@ class Dashboard extends Component {
                           onClick={ () => handleJoinModule() }>
                           Add A Module
                       </button>
+                      {
+                          joinModuleError &&
+                          <p className="module__err-message">No module found<br />  with this code</p>
+                      }
                   </div>
                   </div>
                 }
@@ -94,7 +98,8 @@ Dashboard.propTypes = {
     is_lecturer: PropTypes.bool.isRequired,
     module_id: PropTypes.string,
     handleInputChange: PropTypes.func.isRequired,
-    handleJoinModule: PropTypes.func.isRequired
+    handleJoinModule: PropTypes.func.isRequired,
+    joinModuleError: PropTypes.string
 };
 
 export default Dashboard;

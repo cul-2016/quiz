@@ -267,8 +267,14 @@ exports.register = (server, options, next) => {
                     if (module_id !== undefined) {
 
                         joinModule(pool, module_id.toUpperCase(), user_id, (error, result) => {
-                            const verdict = error || result;
-                            reply(verdict);
+
+                            if (!error) {
+                                reply(result);
+                            } else if (error.detail) {
+                                reply({ message: 'Module does not exist' });
+                            } else {
+                                reply(error);
+                            }
                         });
                     } else {
                         reply(new Error('module_id is not defined'));
