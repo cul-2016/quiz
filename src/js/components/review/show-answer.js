@@ -34,15 +34,17 @@ const ShowAnswer = ({ isAnswerShowing, data, isSurvey }) => {
             "live-quiz__answer--response": !isSurvey && isAnswerShowing && letter === data.correct_answer.toLowerCase(),
             "live-quiz__answer--wrong": !isSurvey && isAnswerShowing && letter !== data.correct_answer.toLowerCase()
         });
-        return (
-            <div key={ i } className={ classes }>
+        if (data[letter] !== "") {            
+            return (
+                <div key={ i } className={ classes }>
                 <div className="live-quiz__answer-inner">
-                    <span className="live-quiz__letter f-title f-title--light">{ `${letter}` }</span>
-                    <span className="live-quiz__answer-text f-body">{ `${data[letter]}` }</span>
-                    <span className="live-quiz__total-replies f-title">{ `${+data[responsesArray[i]]}`}</span>
+                <span className="live-quiz__letter f-title f-title--light">{ `${letter}` }</span>
+                <span className="live-quiz__answer-text f-body">{ `${data[letter]}` }</span>
+                <span className="live-quiz__total-replies f-title">{ `${+data[responsesArray[i]]}`}</span>
                 </div>
-            </div>
-        );
+                </div>
+            );
+        }
 
     });
     return (
