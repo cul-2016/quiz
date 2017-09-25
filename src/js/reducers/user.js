@@ -47,6 +47,7 @@ function setUserDetails (state, action) {
         email: { $set: action.data.email },
         username: { $set: action.data.username },
         is_lecturer: { $set: action.data.is_lecturer },
-        is_super_admin: { $set: action.data.is_super_admin }
+        is_super_admin: { $set: action.data.is_super_admin },
+        isFetchingUser: { $set: false }
     });
 }
