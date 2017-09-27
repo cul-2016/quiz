@@ -144,6 +144,40 @@ test('TOGGLE_IS_SURVEY works', (t) => {
     const result = reducer(initialState, action);
     t.deepEqual(result, expected);
 });
+
+
+test('QUESTION_ORDER works', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(newQuizState);
+    let questions = [{ question_id: 1 }, { question_id: 2 }];
+    let oldIndex = 1;
+    let newIndex = 2;
+    const action = {
+        type: 'QUESTION_ORDER',
+        data: { questions, oldIndex, newIndex }
+    };
+
+    const expected = Object.assign({}, newQuizState,
+        {
+            name: undefined,
+            questions: [{ question_id: 1 }, undefined, { question_id: 2 }],
+            is_last_quiz: false,
+            isSurvey: false,
+            isSavingQuiz: false,
+            isUpdatingQuiz: false,
+            isFetchingQuizDetails: false,
+            error: undefined, 
+            deletedQuestions: []
+        }
+    );
+
+    const result = reducer(initialState, action);
+    t.deepEqual(result, expected);
+});
+
+
 // -----
 // SAVE QUIZ
 // -----

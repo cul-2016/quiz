@@ -12,7 +12,7 @@ function getUserByID (client, user_id, callback) {
     var userValue = [user_id];
 
     query(client, userQuery, userValue, (error, response) => {
-
+        /* istanbul ignore if */
         if (error) {
             return callback(error);
         }

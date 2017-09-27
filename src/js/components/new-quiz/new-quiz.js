@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
-import Questions from './questions';
+import SortableComponent from './questions';
 import classnames from 'classnames';
 
 
@@ -14,14 +14,15 @@ const NewQuiz = ({
     handleIsLastQuiz,
     handleIsSurvey,
     location,
-    params
+    params,
+    handleQuestionOrder
 }) => {
 
     const questionsValidation = questions.map((questionObj) => {
         const { question, a, b, correct_answer } = questionObj;
         return Boolean(question && a && b && (correct_answer || isSurvey));
     }).every((elem) => elem);
-    const submitClasses = classnames("button button__tertiary", {
+    const submitClasses = classnames("button", {
         "button__disabled": !name || questionsValidation === false,
     });
     const lastQuizIconClasses = classnames("fa", {
@@ -44,11 +45,13 @@ const NewQuiz = ({
 
               <div>
                   <ul className="navbar navbar--invisible">
-                      <li className="navbar__item">
-                          <Link to={ `${params.module_id}/lecturer` } className="f-body navbar__link navbar__link--left navbar__link--quit">
+                    <div className="navbar__inner">
+                      <li className="navbar__item navbar__item--onlyone">
+                          <Link to={ `${params.module_id}/lecturer` } className="f-body navbar__link">
                             Back
                           </Link>
                       </li>
+                    </div>
                   </ul>
               </div>
 
@@ -88,18 +91,19 @@ const NewQuiz = ({
                               <p className="f-small-body f-small-body--dark"> Check this box if this is the last quiz in a series </p>
                           </div>
                         */}
-                        <div className="line line__tertiary"></div>
+                        <div className="line"></div>
 
                     </div>
-                    <Questions
+                    <SortableComponent
                       questions={ questions }
                       isSurvey={ isSurvey }
                       handleInputChange={ handleInputChange }
                       handleDeleteQuestion={ handleDeleteQuestion }
+                      handleQuestionOrder={ handleQuestionOrder }
                       />
 
                     <div className="new-quiz--buttons">
-                      <button className="button button--add-question" onClick={ handleAddQuestion }>
+                      <button className="button button__secondary button--add-question" onClick={ handleAddQuestion }>
                         Add Question
                       </button>
                       <button className={ submitClasses }
@@ -129,7 +133,8 @@ NewQuiz.propTypes = {
     handleIsLastQuiz: PropTypes.func.isRequired,
     handleIsSurvey: PropTypes.func.isRequired,
     location: PropTypes.object.isRequired,
-    params: PropTypes.object.isRequired
+    params: PropTypes.object.isRequired,
+    handleQuestionOrder: PropTypes.func.isRequired
 };
 
 

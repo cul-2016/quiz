@@ -13,7 +13,7 @@ function getTotalScoresAndTrophies (client, module_id, callback) {
     var moduleValue = [module_id];
 
     query(client, queries.getTotalScoresAndTrophies, moduleValue, (error, response) => {
-
+        /* istanbul ignore if */
         if (error) {
             console.error(error);
             return callback(error);

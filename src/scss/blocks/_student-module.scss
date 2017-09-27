@@ -1,15 +1,65 @@
 .student-module {
-    background-color: $white;
+    text-align: center;
     height: 100vh;
+    background-color: $white-50;
+    padding-top: 2rem;
+
+    .live-quiz-button {
+        display: inline-block;
+        color: #FDFDFD;
+        position: relative;
+        background-color: #F4494D;
+        border-radius: 500px;
+        padding: 0.5rem 2rem 0.5rem 3.5rem;
+        margin: 1rem auto;
+    }
+
+    .live-quiz-button-text {
+        font-size: 1rem;
+        font-weight: 700;
+    }
+
+    .live-quiz-button-text-live {
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+    }
+
+    .live-quiz-button-logo {
+        width: 1.5rem;
+        position: absolute;
+        left: 1rem;
+        top: 0.5rem;
+    }
+
+    .my-performance-button {
+        color: $blue;
+        text-decoration: underline;
+        font-weight: 700;
+    }
+
+    .trophy-container {
+        margin-bottom: 1rem;
+        margin: auto;
+        max-width: 40rem;
+    }
+
+    .trophyItem {
+        max-width: 9rem;
+        margin: 0.5rem;
+    }
 
     .quiz-button {
-      margin-left: 1rem; 
+      margin-left: 1rem;
+    }
+
+    .quizzes-container {
+        border-top: 3px solid $blue;
+        margin-top: 1rem;
     }
 
     .f-headline {
-        margin-top: 2rem;
     }
-    .f-headline, .f-title, .button, .trophy {
+    .button, .trophy {
         margin: 0.5rem 1rem;
     }
 

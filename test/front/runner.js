@@ -12,6 +12,7 @@ import './actions/result.test.js';
 import './actions/review.test.js';
 import './actions/student-history.test.js';
 import './actions/user.test.js';
+import './actions/super-admin.test.js';
 
 import './actions/live-quiz/abort-quiz.test.js';
 import './actions/live-quiz/end-quiz.test.js';
@@ -38,6 +39,7 @@ import './reducers/result.test.js';
 import './reducers/review.test.js';
 import './reducers/student-history.test.js';
 import './reducers/user.test.js';
+import './reducers/super-admin.test.js';
 
 import './reducers/new-module/add-new-module.test.js';
 import './reducers/new-module/update-input-values.js';

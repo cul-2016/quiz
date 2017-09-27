@@ -1,19 +1,24 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
-import Questions from '../new-quiz/questions';
+import SortableComponent from '../new-quiz/questions';
 import classnames from 'classnames';
 import { store } from '../../store';
 import { clearNewQuizState } from '../../actions/new-quiz';
 
 
-const EditQuiz = ({ questions, isUpdatingQuiz, name, is_last_quiz, deletedQuestions, handleAddQuestion, handleInputChange, handleQuizNameChange, handleEditQuiz, handleDeleteQuestion, handleIsLastQuiz, params }) => {
+const EditQuiz = ({ questions, isUpdatingQuiz, name,
+                    is_last_quiz, deletedQuestions, handleAddQuestion,
+                    handleInputChange, handleQuizNameChange, handleEditQuiz,
+                    handleDeleteQuestion, handleIsLastQuiz, params,
+                    handleQuestionOrder
+                }) => {
 
     const isSurvey = params.survey_id ? true : false;
     const questionsValidation = questions.map((questionObj) => {
         const { question, a, b, correct_answer } = questionObj;
         return Boolean(question && a && b && (correct_answer || isSurvey));
     }).every((elem) => elem);
-    const submitClasses = classnames("button button__tertiary", {
+    const submitClasses = classnames("button button", {
         "button__disabled": !name || questionsValidation === false
     });
     const quizNameClasses = classnames("f-label", {
@@ -23,11 +28,13 @@ const EditQuiz = ({ questions, isUpdatingQuiz, name, is_last_quiz, deletedQuesti
             <div className="edit-quiz">
                 <div>
                     <ul className="navbar navbar--invisible">
-                        <li className="navbar__item">
-                            <Link onClick={ () => store.dispatch(clearNewQuizState()) } to={ `${params.module_id}/lecturer` } className="f-body navbar__link navbar__link--left navbar__link--quit">
+                      <div className="navbar__inner">
+                        <li className="navbar__item navbar__item--onlyone">
+                            <Link onClick={ () => store.dispatch(clearNewQuizState()) } to={ `${params.module_id}/lecturer` } className="f-body navbar__link">
                               Back
                             </Link>
                         </li>
+                      </div>
                     </ul>
                 </div>
                 <div className="content__body">
@@ -56,12 +63,13 @@ const EditQuiz = ({ questions, isUpdatingQuiz, name, is_last_quiz, deletedQuesti
                         onClick={ handleIsLastQuiz } />
                     </div>
                   */}
-                  <div className="line line__tertiary"></div>
-                  <Questions
+                  <div className="line"></div>
+                  <SortableComponent
                     questions={ questions }
                     isSurvey={ isSurvey }
                     handleInputChange={ handleInputChange }
                     handleDeleteQuestion={ handleDeleteQuestion }
+                    handleQuestionOrder={ handleQuestionOrder }
                     />
                   <div className="new-quiz--buttons">
                     <button className="button button--add-question" onClick={ handleAddQuestion }>
@@ -89,6 +97,7 @@ EditQuiz.propTypes = {
     handleEditQuiz: PropTypes.func.isRequired,
     handleDeleteQuestion: PropTypes.func.isRequired,
     handleIsLastQuiz: PropTypes.func.isRequired,
+    handleQuestionOrder: PropTypes.func.isRequired,
     params: PropTypes.object
 };
 

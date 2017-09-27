@@ -20,13 +20,13 @@ const Question = ({ idx, question, is_lecturer }) => {
         "wrong_answer": showWrongAnswer('b')
     });
     let cClasses = classnames("answer", {
-        "display-none": question.c === undefined || question.c === null,
+        "display-none": question.c === undefined || question.c === null || question.c === "",
         "same_answer": 'c' === correct_answer.toLowerCase()  && 'c' === response,
         "user_answer": 'c' === response && correct_answer.toLowerCase() !== 'c',
         "wrong_answer": showWrongAnswer('c')
     });
     let dClasses = classnames("answer", {
-        "display-none": question.d === undefined  || question.d === null,
+        "display-none": question.d === undefined  || question.d === null || question.d === "",
         "same_answer": 'd' === correct_answer.toLowerCase()  && 'd' === response,
         "user_answer": 'd' === response && correct_answer.toLowerCase() !== 'd',
         "wrong_answer": showWrongAnswer('d')
@@ -53,7 +53,7 @@ const Question = ({ idx, question, is_lecturer }) => {
             <div className="card">
                 <div className="question">
                     <p className="f-body">Q{idx + 1}.</p>
-                    <p className="small-body">{question.question}</p>
+                    <p className="f-small-body">{question.question}</p>
                 </div>
                 <div className={ aClasses }>
                   <span className="f-label"> A </span>

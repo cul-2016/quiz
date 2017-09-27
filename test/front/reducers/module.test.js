@@ -232,3 +232,170 @@ test('REMOVE_MODULE_MEMBER_FAILURE works', (t) => {
 
     t.deepEqual(result, expected);
 });
+
+//
+// GENERATE SHARE ID Reducers
+//
+
+test('UPDATE_IMPORT_CODE works', (t) => {
+
+    t.plan(1);
+    const initialState = deepFreeze(moduleState);
+
+    const action = {
+        type: 'UPDATE_IMPORT_CODE',
+        code: 'samplecode'
+    };
+
+    const expected = Object.assign({}, moduleState, {
+        importCode: 'samplecode'
+    });
+
+    const result = reducer(initialState, action);
+    t.deepEqual(result, expected);
+
+});
+
+test('GENERATE_SHARE_ID_REQUEST works', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(moduleState);
+
+    const action = {
+        type: 'GENERATE_SHARE_ID_REQUEST',
+    };
+    const expected = Object.assign({}, moduleState, { isGeneratingShareId: true });
+
+    const result = reducer(initialState, action);
+    t.deepEqual(result, expected);
+});
+
+test('GENERATE_SHARE_ID_SUCCESS works', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(moduleState);
+
+    const action = {
+        type: 'GENERATE_SHARE_ID_SUCESS'
+    };
+    const expected = Object.assign({}, moduleState, {
+        isGeneratingShareId: false,
+    });
+
+    const result = reducer(initialState, action);
+
+    t.deepEqual(result, expected);
+});
+
+test('GENERATE_SHARE_ID_FAILURE works', (t) => {
+
+    t.plan(1);
+    const failureResponse = {
+        response: { status: 500 },
+        message: 'Sorry, something went wrong!'
+    };
+
+    const initialState = deepFreeze(moduleState);
+
+    const action = {
+        type: 'GENERATE_SHARE_ID_FAILURE',
+        error: failureResponse
+    };
+    const expected = Object.assign({}, moduleState, { error: failureResponse, isGeneratingShareId: false });
+
+    const result = reducer(initialState, action);
+
+    t.deepEqual(result, expected);
+});
+//
+// SUBMIT IMOPRT CODE Reducers
+//
+
+test('UPDATE_IMPORT_CODE works', (t) => {
+
+    t.plan(1);
+    const initialState = deepFreeze(moduleState);
+
+    const action = {
+        type: 'UPDATE_IMPORT_CODE',
+        code: 'samplecode'
+    };
+
+    const expected = Object.assign({}, moduleState, {
+        importCode: 'samplecode'
+    });
+
+    const result = reducer(initialState, action);
+    t.deepEqual(result, expected);
+
+});
+
+test('SUBMIT_IMPORT_CODE_REQUEST works', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(moduleState);
+
+    const action = {
+        type: 'SUBMIT_IMPORT_CODE_REQUEST',
+    };
+    const expected = Object.assign({}, moduleState, { isSubmittingImportCode: true });
+
+    const result = reducer(initialState, action);
+    t.deepEqual(result, expected);
+});
+
+test('SUBMIT_IMPORT_CODE_SUCCESS works', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(moduleState);
+
+    const action = {
+        type: 'SUBMIT_IMPORT_CODE_SUCCESS'
+    };
+    const expected = Object.assign({}, moduleState, {
+        isSubmittingImportCode: false,
+    });
+
+    const result = reducer(initialState, action);
+
+    t.deepEqual(result, expected);
+});
+
+test('SUBMIT_IMPORT_CODE_FAILURE works', (t) => {
+
+    t.plan(1);
+    const failureResponse = {
+        response: { status: 500 },
+        message: 'Sorry, something went wrong!'
+    };
+
+    const initialState = deepFreeze(moduleState);
+
+    const action = {
+        type: 'SUBMIT_IMPORT_CODE_FAILURE',
+        error: failureResponse
+    };
+    const expected = Object.assign({}, moduleState, { error: failureResponse, isSubmittingImportCode: false });
+
+    const result = reducer(initialState, action);
+
+    t.deepEqual(result, expected);
+});
+
+test('CLEAR_ERROR_MESSAGE', (t) => {
+    t.plan(1);
+
+    const initialState = deepFreeze(Object.assign({}, moduleState, { error: 'import code doesnt exists' }));
+
+    const action = {
+        type: 'CLEAR_ERROR_MESSAGE'
+    };
+    const expected = moduleState;
+    const result = reducer(initialState, action);
+    t.deepEqual(result, expected);
+
+});

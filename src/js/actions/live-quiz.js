@@ -33,6 +33,7 @@ export const TOGGLE_MESSAGE_VISIBILITY = 'TOGGLE_MESSAGE_VISIBILITY';
 export const UPDATE_NUM_PARTICIPANTS = 'UPDATE_NUM_PARTICIPANTS';
 
 export const SET_IS_SURVEY = 'SET_IS_SURVEY';
+export const RESET_LIVE_QUIZ_STATE = 'RESET_LIVE_QUIZ_STATE';
 
 /***
  * GET QUIZ QUESTIONS
@@ -227,4 +228,8 @@ export const updateNumParticipants = (numParticipants) => ({
 export const setIsSurvey = (quiz_id, survey_id) => ({
     type: SET_IS_SURVEY,
     isSurvey: survey_id ? true : false
+});
+
+export const resetLiveQuizState = () => ({
+    type: RESET_LIVE_QUIZ_STATE
 });

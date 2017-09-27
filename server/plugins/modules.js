@@ -14,6 +14,8 @@ const hasStudentSubmitted = require('../lib/hasStudentSubmitted');
 const getBestAndWorstQuiz = require('../lib/getBestAndWorstQuiz');
 const getParticipationRate = require('../lib/getParticipationRate');
 const getStudentHistory = require('../lib/getStudentHistory.js');
+const generateShareId = require('../lib/generateShareId.js');
+const submitImportCode = require('../lib/submitImportCode.js').submitImportCode;
 
 const jwt = require('jsonwebtoken');
 const Joi = require('joi');
@@ -78,6 +80,7 @@ exports.register = (server, options, next) => {
                     const { user_id } = decoded.user_details;
                     const { module_id } = request.query;
 
+                    /* istanbul ignore if */
                     if (!module_id) {
                         return reply(new Error('module_id must be defined'));
                     }
@@ -263,9 +266,15 @@ exports.register = (server, options, next) => {
                     const { user_id } = decoded.user_details;
                     if (module_id !== undefined) {
 
-                        joinModule(pool, module_id, user_id, (error, result) => {
-                            const verdict = error || result;
-                            reply(verdict);
+                        joinModule(pool, module_id.toUpperCase(), user_id, (error, result) => {
+
+                            if (!error) {
+                                reply(result);
+                            } else if (error.detail) {
+                                reply({ message: 'Module does not exist' });
+                            } else {
+                                reply(error);
+                            }
                         });
                     } else {
                         reply(new Error('module_id is not defined'));
@@ -310,6 +319,51 @@ exports.register = (server, options, next) => {
                 removeModuleMember(pool, module_id, parsed_user_id, (error, modules) => {
                     const verdict = error || modules;
                     reply(verdict);
+                });
+            }
+        },
+        {
+            method: 'POST',
+            path: '/generate-share-id',
+            config: {
+                validate: {
+                    payload: {
+                        quiz_id: Joi.number(),
+                        survey_id: Joi.number()
+                    }
+                }
+            },
+            handler: (request, reply) => {
+                const { quiz_id, survey_id } = request.payload;
+
+                generateShareId(pool, quiz_id, survey_id, (error, response) => {
+
+                    const verdict = error || typeof response === 'object';
+                    reply(verdict);
+                });
+            }
+        },
+        {
+            method: 'POST',
+            path: '/submit-import-code',
+            config: {
+                validate: {
+                    payload: {
+                        import_code: Joi.string(),
+                        module_id: Joi.string()
+                    }
+                }
+            },
+            handler: (request, reply) => {
+                const { import_code, module_id } = request.payload;
+
+                submitImportCode(pool, import_code, module_id, (error, response) => {
+                    if (response === false) {
+                        reply({ message: 'Quiz does not exist' });
+                    } else {
+                        const verdict = error || typeof response === 'object';
+                        reply(verdict);
+                    }
                 });
             }
         }

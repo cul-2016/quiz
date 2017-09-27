@@ -16,6 +16,8 @@ function composeUpdateQuestionStatement (rows, callback) {
         valueClause.push('$' + params.length);
         params.push(row.quiz_id);
         valueClause.push('$' + params.length);
+        params.push(row.order_id);
+        valueClause.push('$' + params.length);
         params.push(row.question);
         valueClause.push('$' + params.length);
         params.push(row.a);
@@ -32,7 +34,7 @@ function composeUpdateQuestionStatement (rows, callback) {
     }
 
     callback(null, {
-        text: 'INSERT INTO questions (question_id, quiz_id, question, a, b, c, d, correct_answer) VALUES ' + chunks.join(', ') + 'ON CONFLICT (question_id) DO UPDATE SET question = EXCLUDED.question, a = EXCLUDED.a, b = EXCLUDED.b, c = EXCLUDED.c, d = EXCLUDED.d, correct_answer = EXCLUDED.correct_answer;',
+        text: 'INSERT INTO questions (question_id, quiz_id, order_id, question, a, b, c, d, correct_answer) VALUES ' + chunks.join(', ') + 'ON CONFLICT (question_id) DO UPDATE SET order_id = EXCLUDED.order_id, question = EXCLUDED.question, a = EXCLUDED.a, b = EXCLUDED.b, c = EXCLUDED.c, d = EXCLUDED.d, correct_answer = EXCLUDED.correct_answer;',
         values: params
     });
 

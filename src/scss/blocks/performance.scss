@@ -1,13 +1,29 @@
 .performance {
-    background-color: $blue;
     height: 100%;
     min-height: 100vh;
+
+    .performance-container {
+        border-top: 3px solid #2574A9;
+        margin-top: 1rem;
+        padding: 1rem 0;
+        background-color: #FDFDFD;
+    }
 
     .f-subheader {
         text-align: center;
         padding: 1rem;
     }
-     .f-title {
+     .f-title, .f-label {
         text-align: center;
+    }
+
+    .f-title {
+        margin-top: 1rem;
+    }
+
+    .card {
+        margin: 0.75rem 0.5rem;
+        padding: 1rem 0.5rem;
+
     }
 }

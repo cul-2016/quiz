@@ -9,6 +9,7 @@ function hashPassword (password, callback) {
 
     var saltRounds = 10;
     bcrypt.hash(password, saltRounds, (error, hashedPassword) => {
+        /* istanbul ignore if */
         if (error) {
             callback(error);
         }

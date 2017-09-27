@@ -1,12 +1,5 @@
 .dashboard {
     text-align: center;
-    background-color: $white;
-    min-height: 100vh;
-
-    .content__body {
-      margin: 0 auto;
-      padding-top: 2rem;
-    }
 
     .display {
         padding: 2rem 0 1rem 0;
@@ -21,34 +14,66 @@
       box-sizing: border-box;
     }
 
-    .form__input--add-module {
+    .card {
+        padding: 0 1rem;
+      .module__name {
+        display: inline-block;
+        width: 70%;
+      }
+      .module__id {
         width: 30%;
-        float: left;
-        margin-left: 1.2rem;
+        display: inline-block;
+        text-align: right;
+      }
     }
 
-    .card__secondary {
+    .form__input--add-module {
+        display: inline-block;
+        max-width: 6rem;
+        box-sizing: border-box;
+        margin: 0.5rem;
+        height: 4.1rem;
+    }
+
+    &__student--module {
         text-align: center;
 
-        .button__secondary {
-          padding: 0.984rem;
+        .module__err-message {
+            margin-bottom: 1rem;
         }
     }
-}
 
-.dashboard__lecturer {
-
-    .fa-plus:before {
-        padding-right: 1rem;
+    &__tc {
+        padding-top: 0;
     }
 }
-
 
 @media (min-width: 769px) {
   .dashboard {
 
+      .card {
+          padding: 0 3rem;
+          -moz-transition: all .2s ease-in;
+          -o-transition: all .2s ease-in;
+          -webkit-transition: all .2s ease-in;
+          transition: all .2s ease-in;
+      }
+
+      .card:hover {
+          border: 1px solid $blue;
+      }
       .f-display, .dashboard__lecturer {
         text-align: left;
+      }
+
+      &__lecturer--title {
+          display: inline-block;
+          min-width: 70%;
+      }
+      &__lecturer--icon {
+          display: inline-block;
+          min-width: 30%;
+          text-align: right;
       }
 
       .module__header {
@@ -69,17 +94,10 @@
         }
 
       }
-      .card {
-        margin: 0;
-        .module__name {
-          display: inline-block;
-          width: 70%;
-        }
-        .module__id {
-          width: 30%;
-          display: inline-block;
-          text-align: right;
-        }
+
+
+      &__tc {
+          padding-top: 1rem;
       }
   }
 }

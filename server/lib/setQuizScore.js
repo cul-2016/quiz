@@ -15,7 +15,7 @@ function setQuizScore (client, user_id, quiz_id, score, callback) {
     var values = [user_id, quiz_id, score];
 
     query(client, queries.setQuizScore, values, (error) => {
-
+        /* istanbul ignore if */
         if (error) {
             console.error(error);
             return callback(error);

@@ -16,7 +16,7 @@ function editScore (client, user_id, quiz_id, score, callback) {
     var values = [user_id, quiz_id, score];
 
     query(client, queryText, values, (error, response) => {
-
+        /* istanbul ignore if */
         if (error) {
             console.error(error);
             return callback(error);

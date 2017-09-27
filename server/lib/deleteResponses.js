@@ -13,7 +13,7 @@ function deleteResponses (client, quiz_id, callback) {
     var moduleValue = [quiz_id];
 
     query(client, queries.deleteResponses, moduleValue, (error, response) => {
-
+        /* istanbul ignore if */
         if (error) {
             console.error(error);
             return callback(error);

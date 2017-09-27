@@ -1,12 +1,11 @@
 .card {
-    background-color: $off-white;
-    box-shadow: inset 0 -4px 0 0 $grey, 0 4px 5px 0 $grey-40-opacity;
-    border: 1px solid $black;
-    border-radius: 3px;
-    width: 80%;
-    margin: 1rem auto;
-    padding: 1rem;
+    background-color: $white;
+    border: 1px solid $black-25-opacity;
+    border-radius: 0.625rem;
     text-align: left;
+    line-height: 6.44rem;
+    padding: 0 3rem;
+    margin: 0.75rem 0;
 
     &__secondary {
         background-color: $dark-blue;

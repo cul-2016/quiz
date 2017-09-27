@@ -1,7 +1,6 @@
 import test from 'tape';
-import { user as userState } from '../../utils/reducer-fixtures';
+import { initialState as userState, user as reducer } from '../../../src/js/reducers/user';
 import { userDetails as data } from '../../utils/reducer-fixtures';
-import reducer from '../../../src/js/reducers/user';
 import deepFreeze from '../../utils/deepFreeze';
 import { getUserDetailsError as error } from '../../utils/action-fixtures';
 

@@ -12,7 +12,7 @@ function getIsLastQuiz (client, quiz_id, callback) {
 
     var quizquery = 'SELECT is_last_quiz FROM quizzes WHERE quiz_id = $1;';
     query(client, quizquery, [quiz_id], (error, response) => {
-
+        /* istanbul ignore if */
         if (error) {
             console.error(error);
             return callback(error);

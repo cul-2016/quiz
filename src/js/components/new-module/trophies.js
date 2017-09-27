@@ -9,9 +9,10 @@ class Trophies extends React.Component {
         this.state = {
             trophies: false,
             participation: false,
-            overall_average: false,
+            overall_score: false,
             high_score: false,
-            first_quiz: false
+            first_quiz: false,
+            trophyUnits: ["Number of quizzes taken", "Total score across all quizzes", "Percent correct on any one quiz", "Number of quizzes taken"]
         };
     }
 
@@ -36,30 +37,32 @@ class Trophies extends React.Component {
         let mappedTrophies = this.props.trophies.trophy_name.map((name, i) => {
 
             return (
-                <div key={ i }>
-
-                    <div className="new-module-trophies">
-                      <p className="trophy__small--new-module"> </p>
-                      <p className="f-small-body f-small-body--primary">{ normaliseText(name) }</p>
+                <div key={ i } className="new-module-trophies">
+                  <img src={`/assets/trophy/${name}.svg`} className="new-module-trophy" />
+                  <div>
+                      <p className="new-module-trophy-name f-small-body--primary">{ normaliseText(name) }</p>
+                  </div>
+                  <div>
                       <input
-                        className="form__input form__input--trophy"
-                        type="number"
-                        min="1"
-                        max="100"
-                        defaultValue={ this.props.trophies.condition[i] }
-                        onChange={ (e) => this.props.updateTrophyVals(name, e.target.value) } />
-                    </div>
-                 </div>
-
+                          className="form__input form__input--trophy"
+                          type="number"
+                          min="1"
+                          max="100"
+                          defaultValue={ this.props.trophies.condition[i] }
+                          onChange={ (e) => this.props.updateTrophyVals(name, e.target.value) } />
+                  </div>
+                  <div>
+                      <p className="new-module-trophy-name f-small-body">{ this.state.trophyUnits[i] }</p>
+                  </div>
+                </div>
             );
         });
 
         return (
             <div className="trophies">
-                <h3 className="f-body f-body--light">
-                    Trophies
+                <h3 className="f-body f-body--50">
+                    Set the scores needed for different trophies
                 </h3>
-
                 <div className={ toggleClassnamesTrophies }>
                     <p>
                         { text.trophy.trophies }

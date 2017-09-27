@@ -109,15 +109,17 @@ class QuizMembers extends Component {
                     <div className="quiz-members container average">
 
                       <ul className="navbar navbar--invisible">
-                          <li className="navbar__item">
-                              <Link to={ `${this.props.params.module_id}/lecturer` } className="f-body navbar__link navbar__link--left navbar__link--quit">
+                        <div className="navbar__inner">
+                          <li className="navbar__item navbar__item--onlyone">
+                              <Link to={ `${this.props.params.module_id}/lecturer` } className="f-body navbar__link">
                                 Back
                               </Link>
                           </li>
+                        </div>
                       </ul>
 
                       <div className="content__body">
-                        <Link className="button button__primary review-quiz-button" to={ `${params.module_id}/${params.quiz_id}/members/quiz-review` }>Quiz Review</Link>
+                        <Link className="button review-quiz-button" to={ `${params.module_id}/${params.quiz_id}/members/quiz-review` }>Quiz Review</Link>
                           <p className="f-headline">Students&#39; Individual Scores</p>
                           <p className="f-title">In {quizName}</p>
                         <section className="members">

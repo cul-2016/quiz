@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>nav_dashboard_icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="New" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="dashboard-30" fill-rule="nonzero" fill="#FFFFFF">
+            <path d="M12,0 C5.383,0 0,5.383 0,12 C0,18.617 5.383,24 12,24 C18.617,24 24,18.617 24,12 C24,5.383 18.617,0 12,0 Z M11,3 L13,3 L13,6 L11,6 L11,3 Z M6,13 L3,13 L3,11 L6,11 L6,13 Z M12,15 C10.346,15 9,13.654 9,12 C9,11.538 9.113,11.106 9.3,10.715 L4.909,6.323 L6.323,4.909 L10.714,9.301 C11.106,9.114 11.538,9 12,9 C13.654,9 15,10.346 15,12 C15,13.654 13.654,15 12,15 Z M15.536,7.05 L17.657,4.929 L19.071,6.343 L16.95,8.464 L15.536,7.05 Z M18,13 L18,11 L21,11 L21,13 L18,13 Z" id="Shape"></path>
+        </g>
+    </g>
+</svg>

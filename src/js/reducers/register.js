@@ -9,7 +9,8 @@ const initialState = {
     isRegistering: false,
     error: undefined,
     userIsRegistered: undefined,
-    userExists: false
+    userExists: false,
+    tcAgreed: false
 };
 
 
@@ -36,6 +37,15 @@ export default function register (state = initialState, action ) {
     case actionsTypes.REGISTERING_USER_FAILURE:
         return update(state, {
             isRegistering: { $set: false },
+            error: { $set: action.error }
+        });
+
+    case actionsTypes.TOGGLE_TC_AGREED:
+        return update(state, {
+            tcAgreed: { $set: !state.tcAgreed }
+        });
+    case actionsTypes.SHOW_TC_AGREED_ERROR:
+        return update(state, {
             error: { $set: action.error }
         });
 

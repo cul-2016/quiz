@@ -19,7 +19,7 @@ var MINIMUM_QUIZZES = 3;
 function getBestAndWorstQuiz (client, user_id, module_id, callback) {
     // get this student's scores
     getQuizScores(client, user_id, module_id, (error, studentScores) => {
-
+        /* istanbul ignore if */
         if (error) {
             console.error(error);
             return callback(error);
@@ -29,25 +29,25 @@ function getBestAndWorstQuiz (client, user_id, module_id, callback) {
         }
         // get mean scores for each quiz
         getMeanQuizScores(client, module_id, (error, meanScores) => {
-
+            /* istanbul ignore if */
             if (error) {
                 console.error(error);
                 return callback(error);
             }
             getSignedDifference(studentScores, meanScores, (error, difference) => {
-
+                /* istanbul ignore if */
                 if (error) {
                     console.error(error);
                     return callback(error);
                 }
                 getMinAndMaxValues(difference, (error, values) => {
-
+                    /* istanbul ignore if */
                     if (error) {
                         console.error(error);
                         return callback(error);
                     }
                     mapQuizIDToName(client, values, module_id, (error, names) => {
-
+                        /* istanbul ignore if */
                         if (error) {
                             console.error(error);
                             return callback(error);

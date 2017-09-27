@@ -47,13 +47,13 @@ const ReviewButtons = ({ isAnswerShowing, handleIsAnswerShowing, handleIncrement
             </button>
 
             <Link to={`${params.module_id}/lecturer`} className={ finishButtonClasses } onClick={ endReview }>
-                <button className="button button__tertiary">
+                <button className="button button__primary">
                     Finish
                 </button>
             </Link>
 
             <Link to={`${params.module_id}/leaderboard`} className={ leaderboardButtonClasses } onClick={ endReview }>
-                <button className="button button__secondary">
+                <button className="button">
                     View Leaderboard
                 </button>
             </Link>

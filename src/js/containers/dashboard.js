@@ -10,6 +10,7 @@ const mapStateToProps = (state) => ({
     modules: state.dashboard.data,
     is_lecturer: state.user.is_lecturer,
     module_id: state.joinModule.module_id,
+    joinModuleError: state.joinModule.error,
     moduleIDExists: state.newModule.moduleIDExists
 });
 
@@ -17,12 +18,7 @@ const mapDispatchToProps = (dispatch) => ({
 
     handleInputChange: (value) => {
         const upperCaseValue = value.toUpperCase();
-
-        dispatch(inputChange(upperCaseValue));
-
-        if (value && value.length === 4) {
-            dispatch(validateModuleID(upperCaseValue));
-        }
+        dispatch(inputChange(value));
     },
     handleJoinModule: () => {
         let module_id = store.getState().joinModule.module_id;

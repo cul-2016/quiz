@@ -12,12 +12,12 @@ export default function getNewTrophies (oldTrophyState, newTrophyState) {
     const trophyNames = Object.keys(oldTrophyState);
 
     if (isEqual(oldTrophyState, newTrophyState)) {
-        return null;
+        return [];
     } else {
         return Object.keys(newTrophyState).reduce((acc, trophy, i) => {
 
             if (newTrophyState[trophy] && !oldTrophyState[trophy]) {
-            
+
                 acc.push(trophyNames[i]);
             }
             return acc;

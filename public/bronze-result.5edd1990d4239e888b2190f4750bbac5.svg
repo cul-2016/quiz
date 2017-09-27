@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="101px" height="140px" viewBox="0 0 101 140" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
+    <title>Medal / Bronze</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="79.3566559%" y1="15.4659239%" x2="21.2314716%" y2="83.3904181%" id="linearGradient-1">
+            <stop stop-color="#E29159" offset="0%"></stop>
+            <stop stop-color="#9E5420" offset="16.2986835%"></stop>
+            <stop stop-color="#CB7133" offset="90.2393033%"></stop>
+            <stop stop-color="#7A3B0F" offset="100%"></stop>
+        </linearGradient>
+        <circle id="path-2" cx="50.5" cy="88.7200012" r="50.5"></circle>
+        <mask id="mask-3" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="101" height="101" fill="white">
+            <use xlink:href="#path-2"></use>
+        </mask>
+    </defs>
+    <g id="Typography" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Icons" transform="translate(-337.000000, -985.000000)">
+            <g id="Medal-/-Bronze" transform="translate(337.000000, 985.000000)">
+                <polyline id="Rectangle-8-Copy-5" fill="#A0071F" points="54.0444606 0.220001221 76.9884337 0.995984062 63.9439732 91.2200012 41 90.4440184"></polyline>
+                <polyline id="Rectangle-8-Copy-4" fill="#C10F2B" points="23 0.995984062 45.9439732 0.220001221 58.9884337 90.4440184 36.0444606 91.2200012"></polyline>
+                <use id="Oval-3-Copy-2" stroke="#3E3E3E" mask="url(#mask-3)" stroke-width="6" fill="url(#linearGradient-1)" xlink:href="#path-2"></use>
+                <text id="BRONZE" font-family="Ubuntu-Bold, Ubuntu" font-size="20" font-weight="bold" letter-spacing="-0.625" fill="#3E3E3E">
+                    <tspan x="12.045" y="96.2200012">BRONZE</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>

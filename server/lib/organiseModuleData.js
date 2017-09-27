@@ -61,8 +61,8 @@ function organiseModuleData (is_lecturer, module_id, data, callback) {
             trophies_awarded: {
                 first_quiz: data[0].first_quiz,
                 high_score: data[0].high_score,
-                overall_average: data[0].overall_average,
-                participation: data[0].participation
+                participation: data[0].participation,
+                overall_score: data[0].overall_score
             }
         };
     }

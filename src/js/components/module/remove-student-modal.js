@@ -11,12 +11,12 @@ const RemoveStudentModal = ({ module_id, handleRemovingMember, user_id, isVisibl
 
     return (
         <div className={ modalClasses }>
-                <div className="remove__student">
+                <div className="member__removestudent">
                   <p className="f-body">  Are you sure you would like to delete { username }? </p>
                   <button className="button button__primary" onClick={ () => { handleRemovingMember(user_id, module_id); hide(); } }>
                       Remove User
                     </button>
-                    <button className="button button__tertiary" onClick={ () => { hide(); } }>
+                    <button className="button" onClick={ () => { hide(); } }>
                       Cancel
                     </button>
                 </div>

@@ -19,9 +19,8 @@ function getReview (client, id, isSurvey, callback) {
         getQuizReviewQuery = queries.getSurveyReview;
     }
 
-    console.log(getQuizReviewQuery, '<<<<<<<<<<');
     query(client, getQuizReviewQuery, idArray, (error, response) => {
-
+        /* istanbul ignore if */
         if (error) {
             console.error(error);
             return callback(error);

@@ -1,0 +1,111 @@
+.privacy {
+
+    min-height: 100vh;
+    background-size: cover;
+    text-align: center;
+    line-height: 1.5rem;
+
+    .f-headline {
+        text-align: center;
+    }
+
+    .holding-logo {
+        width: 6rem;
+        margin: 1rem;
+    }
+
+    ul {
+        list-style: disc;
+        text-align: left;
+    }
+
+    li {
+        padding-bottom: 10px;
+    }
+
+    .content__body {
+      position: relative;
+      margin: 0 auto;
+      padding-bottom: 1rem;
+    }
+
+    .header {
+      padding-top: 1rem;
+    }
+
+    .headline {
+        margin: 0 0 0.5rem 0;
+        padding: 1rem;
+    }
+
+    .button__primary {
+        padding: 1rem 2rem;
+        margin: 1rem auto;
+    }
+
+
+    &__err-message {
+      display: block;
+      margin-top: 2rem;
+      background-color: $pink;
+      padding: 0.5rem;
+      border-radius: 2px;
+      color: white;
+    }
+
+    .f-body {
+      margin: 0.5rem 0;
+    }
+
+    .forgotten-password {
+      margin: 0.5rem 0;
+    }
+
+    .form__field {
+        &__tc {
+            padding-top: 1rem;
+            span.f-body {
+                padding-left: 0.5rem;
+            }
+        }
+    }
+
+    .subtitle {
+        font-size: 1.1rem;
+        text-align: left;
+    }
+
+    .title {
+        font-size: 1.5rem;
+    }
+
+}
+
+
+@media (min-width: 769px) {
+  .privacy {
+      text-align: left;
+      ul {
+        list-style: disc;
+        text-align: left;
+        padding-left: 1.5rem;
+      }
+
+      .form__field {
+          padding: 0 2rem;
+      }
+      .f-body {
+        margin: 0;
+      }
+
+      .content__body {
+        position: relative;
+        max-width: 60rem;
+        margin: auto;
+
+        .title {
+          line-height: 1.25;
+        }
+      }
+  }
+}

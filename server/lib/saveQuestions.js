@@ -17,7 +17,7 @@ function saveQuestions (client, id, questions, { isSurvey }, callback) {
         }
 
         preparedQuery(client, builtStatement, (error, response) => {
-
+            /* istanbul ignore if */
             if (error) {
                 return callback(error);
             }

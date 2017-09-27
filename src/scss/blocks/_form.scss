@@ -1,12 +1,17 @@
 .form {
 
+    &__field {
+      margin: 1rem 0rem;
+    }
+
     &__label {
       display: block;
       text-align: left;
-      padding: 1rem 0;
+      padding: 0.25rem 0rem;
 
       &--new-quiz {
         display: inline-block;
+        vertical-align: middle;
         text-align: left;
         width: 2.75rem;
       }
@@ -14,15 +19,15 @@
 
     &__input {
         box-sizing: border-box;
-        border: 1px solid $black;
+        border: 1px solid $blue;
         height: 2.9375rem;
         font-size: 1rem;
         width: 100%;
         background-color: $white;
         color: $black;
-        font-family: ubuntu;
-        border-radius: 2px;
+        border-radius: 0.625rem;
         padding: 0.5rem;
+        outline: none;
 
 
         &--edit-score {
@@ -40,6 +45,7 @@
             letter-spacing: 0.3rem;
             padding: 0.25rem 0.5rem;
             text-align: center;
+            text-transform: uppercase;
 
             &::-webkit-input-placeholder {
                 color: $grey;
@@ -61,8 +67,6 @@
           padding: 0.25rem 0.5rem;
           max-width: 43rem;
           height: 3.875rem;
-          border: 1px solid $black;
-          border-radius: 2px;
           font-size: 1rem;
           line-height: 1.375rem;
         }
@@ -70,17 +74,18 @@
           padding: 0.25rem 0.5rem;
           max-width: 38rem;
           height: 3.875rem;
-          border: 1px solid $black;
-          border-radius: 2px;
           font-size: 1rem;
           line-height: 1.375rem;
+          display: inline-block;
+          vertical-align: middle;
         }
 
         &--medal {
-          max-width: 2.5rem;
+          max-width: 3.5rem;
+          margin-top: 2rem;
         }
         &--trophy {
-          width: 3.5rem;
+          width: 4rem;
           height: 2.5rem
         }
 
@@ -99,9 +104,9 @@
 
     &__radio--off {
         width: 3rem;
-        position: absolute;
-        top: 0;
-        right: 0;
+        display: inline-block;
+        vertical-align: middle;
+        margin: 0 2rem;
         &--circle {
             width: 1.5rem;
             height: 1.5rem;
@@ -124,13 +129,13 @@
 
     &__radio--on {
         width: 3rem;
-        position: absolute;
-        top: 0;
-        right: 0;
+        display: inline-block;
+        vertical-align: middle;
+        margin: 0 2rem;
         &--circle {
             width: 1.5rem;
             height: 1.5rem;
-            background-color: #45C5C5;
+            background-color: #388bc3;
             border: 1px solid #3E3E3E;
             box-shadow: inset 0 -1px 0 0 #757575;
             border-radius: 3rem;
@@ -141,8 +146,8 @@
         &--cylinder {
             width: 2.625rem;
             height: 0.9375rem;
-            background-color: #45C5C5;
-            box-shadow: inset 0 1px 0 0 #059A9A;
+            background-color: $blue;
+            box-shadow: inset 0 1px 0 0 $blue;
             border-radius: 0.625rem;
             position: relative;
             top: 1.2rem;

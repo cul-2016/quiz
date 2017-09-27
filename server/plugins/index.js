@@ -10,6 +10,7 @@ const Auth = require('./authenticate-user.js');
 const modules = require('./modules.js');
 const users = require('./users.js');
 const quizes = require('./quizes.js');
+const superAdmin = require('./super-admin.js');
 
 const plugins = [
     Inert,
@@ -21,7 +22,8 @@ const plugins = [
 
     modules,
     users,
-    quizes
+    quizes,
+    superAdmin
 ];
 
 module.exports = plugins;

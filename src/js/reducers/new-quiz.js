@@ -1,6 +1,6 @@
 import update from 'react-addons-update';
 import * as actionsTypes from '../actions/new-quiz';
-
+import { arrayMove } from 'react-sortable-hoc';
 export const initialState = {
     name: undefined,
     questions: [],
@@ -24,6 +24,11 @@ export function newQuiz (state = initialState, action) {
         return update(state, {
             questions: { $splice: [[action.index, 1]] },
             deletedQuestions: { $push: [state.questions[action.index].question_id] }
+        });
+
+    case actionsTypes.QUESTION_ORDER:
+        return update(state, {
+            questions: { $set: arrayMove(action.data.questions, action.data.oldIndex, action.data.newIndex) }
         });
 
     case actionsTypes.UPDATE_VALUE:

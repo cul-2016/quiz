@@ -14,7 +14,7 @@ function updateIsLastQuiz (client, module_id, quiz_id, callback) {
     var values = [module_id, quiz_id];
 
     query(client, queryText, values, (error, response) => {
-
+        /* istanbul ignore if */
         if (error) {
             return callback(error);
         }

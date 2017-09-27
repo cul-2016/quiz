@@ -8,7 +8,6 @@ export const JOIN_MODULE_SUCCESS = 'JOIN_MODULE_SUCCESS';
 export const JOIN_MODULE_FAILURE = 'JOIN_MODULE_FAILURE';
 export const CLEAR_JOIN_MODULE = 'CLEAR_JOIN_MODULE';
 
-
 export const inputChange = (value) => ({
     type: INPUT_CHANGE,
     value
@@ -20,9 +19,16 @@ export function joinModule (module_id) {
 
         dispatch(joinModuleRequest());
         request.get(dispatch)(`/join-module?module_id=${module_id}`)
-            .then(() => {
-                dispatch(joinModuleSuccess());
-                dispatch(getDashboard());
+            .then((response) => {
+                if (response.data.message) {
+                    dispatch(joinModuleFailure(response.data.message));
+                    setTimeout(() => {
+                        dispatch(clearJoinModule());
+                    }, 2500);
+                } else {
+                    dispatch(joinModuleSuccess());
+                    dispatch(getDashboard());
+                }
             })
             .catch((error) => {
                 dispatch(joinModuleFailure(error));

@@ -5,28 +5,29 @@
     display: block;
 
     &--silver {
-      background: url(../../public/assets/medals/silver-result.svg)
+      background: url(../../public/assets/medals/silver_medal.svg)
     }
     &--bronze {
-      background: url(../../public/assets/medals/bronze-result.svg)
+      background: url(../../public/assets/medals/bronze_medal.svg)
     }
     &--gold {
-      background: url(../../public/assets/medals/gold-result.svg)
+      background: url(../../public/assets/medals/gold_medal.svg)
     }
 }
 
 .medal-small {
-    height: 1.6rem;
-    width: 1.4rem;
+    height: 3.25rem;
+    width: 3rem;
+    background-size: cover;
 
   &--gold {
-      background: url(../../public/assets/medals/small-gold.svg);
+      background-image: url(../../public/assets/medals/small-gold-medal.svg);
   }
   &--silver {
-      background: url(../../public/assets/medals/small-silver.svg);
+      background-image: url(../../public/assets/medals/small-silver-medal.svg);
   }
   &--bronze {
-      background: url(../../public/assets/medals/small-bronze.svg);
+      background-image: url(../../public/assets/medals/small-bronze-medal.svg);
   }
 
 }
