@@ -13,7 +13,7 @@ exports.register = (server, options, next) => {
     // do after all tests and are implemented
     // and we can test it runs on heroku and circle
 
-    const config = { max: '20', idleTimeoutMillis: 3000 };
+    const config = { idleTimeoutMillis: 3000 };
 
     if (env.CIRCLE_CI || env.TESTING) {
         config.database = env.CIRCLE_CI ? 'circle_test' : 'testing';
