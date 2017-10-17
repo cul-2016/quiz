@@ -20,7 +20,7 @@ if (process.env.CIRCLE_CI) {
     };
 }
 
-config.max = '20';
+// config.max = '20'; removing the max config for now
 config.idleTimeoutMillis = 3000;
 
 module.exports = new pg.Pool(config);
