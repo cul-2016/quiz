@@ -1,0 +1,62 @@
+config:
+  target: 'https://cul-app.herokuapp.com'
+  phases:
+    - duration: 10
+      arrivalRate: 10
+    - duration: 10
+      arrivalRate: 15
+    - duration: 10
+      arrivalRate: 20
+    - duration: 10
+      arrivalRate: 25
+    - duration: 10
+      arrivalRate: 30
+    - duration: 10
+      arrivalRate: 40
+    - duration: 10
+      arrivalRate: 50
+    - duration: 10
+      arrivalRate: 60
+    - duration: 10
+      arrivalRate: 70
+    - duration: 10
+      arrivalRate: 80
+    - duration: 10
+      arrivalRate: 90
+  defaults:
+    headers:
+      Cookie: "get cookie from headers in the live app for user student@city.ac.uk and paste it here"
+scenarios:
+  - flow:
+    - post:
+        url: "/save-student-response"
+        json:
+          id: "1"
+          isSurvey: "false"
+          question_id: "1"
+          response: "a"
+          user_id: "1"
+    - post:
+        url: "/save-student-response"
+        json:
+          id: "1"
+          isSurvey: "false"
+          question_id: "2"
+          response: "b"
+          user_id: "1"
+    - post:
+        url: "/save-student-response"
+        json:
+          id: "1"
+          isSurvey: "false"
+          question_id: "3"
+          response: "c"
+          user_id: "1"
+    - post:
+        url: "/save-student-response"
+        json:
+          id: "1"
+          isSurvey: "false"
+          question_id: "4"
+          response: "c"
+          user_id: "1"
