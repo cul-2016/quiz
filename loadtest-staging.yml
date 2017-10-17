@@ -21,7 +21,7 @@ config:
       rampTo: 80
   defaults:
     headers:
-      Cookie: "io=3gZEaQAPLPPbkN55AAAB; token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2RldGFpbHMiOnsidXNlcl9pZCI6MSwiZW1haWwiOiJzdHVkZW50QGNpdHkuYWMudWsiLCJpc19sZWN0dXJlciI6ZmFsc2UsImlzX3N1cGVyX2FkbWluIjpmYWxzZSwidXNlcm5hbWUiOiJzdHVkZW50IiwiaXNfdmVyaWZpZWQiOnRydWUsInZlcmlmaWNhdGlvbl9jb2RlIjpudWxsLCJyZXNldF9wYXNzd29yZF9jb2RlIjpudWxsLCJleHBpcnlfY29kZSI6bnVsbH0sInVpZCI6IjdmMTVkYWUwLWIzNGEtMTFlNy04ZTJiLWMzNjAyODE0NjhmMyIsInNjb3BlIjpbIiJdLCJpYXQiOjE1MDgyNTE4MTl9.m94qC3sqVndVPxuOF8wQvJ8vFVbELe6UY27AAyLmQks; cul_is_cookie_accepted=true"
+      Cookie: "get cookie from headers in the live app for user student@city.ac.uk and paste it here"
 scenarios:
   - flow:
     - post:

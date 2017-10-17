@@ -25,7 +25,7 @@ config:
       arrivalRate: 90
   defaults:
     headers:
-      Cookie: "token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2RldGFpbHMiOnsidXNlcl9pZCI6MSwiZW1haWwiOiJzdHVkZW50QGNpdHkuYWMudWsiLCJpc19sZWN0dXJlciI6ZmFsc2UsInVzZXJuYW1lIjoic3R1ZGVudCIsImlzX3ZlcmlmaWVkIjp0cnVlLCJ2ZXJpZmljYXRpb25fY29kZSI6bnVsbCwicmVzZXRfcGFzc3dvcmRfY29kZSI6bnVsbCwiZXhwaXJ5X2NvZGUiOm51bGwsImlzX3N1cGVyX2FkbWluIjpmYWxzZX0sInVpZCI6IjM4MGFmZDgwLWIyNTgtMTFlNy1iNWY2LTkxMDA0MDBmYWVjNCIsInNjb3BlIjpbIiJdLCJpYXQiOjE1MDgxNDc3NjJ9.IYvNscYM6r8VpWWiDmxSFErrpwZX0nDYpgXR4SMcr_w; cul_is_cookie_accepted=true; io=YnbBKDPomDPRyNsOAAFf"
+      Cookie: "get cookie from headers in the live app for user student@city.ac.uk and paste it here"
 scenarios:
   - flow:
     - post:
