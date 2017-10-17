@@ -11,6 +11,7 @@ const modules = require('./modules.js');
 const users = require('./users.js');
 const quizes = require('./quizes.js');
 const superAdmin = require('./super-admin.js');
+const loadTest = require('./load-test.js');
 
 const plugins = [
     Inert,
@@ -23,7 +24,7 @@ const plugins = [
     modules,
     users,
     quizes,
-    superAdmin
+    loadTest
 ];
 
 module.exports = plugins;

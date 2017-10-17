@@ -1,0 +1,29 @@
+config:
+  target: 'http://localhost:9000'
+  phases:
+    - duration: 10
+      arrivalRate: 1
+    - duration: 10
+      arrivalRate: 5
+    - duration: 10
+      arrivalRate: 10
+    - duration: 10
+      arrivalRate: 15
+    - duration: 10
+      arrivalRate: 20
+    - duration: 10
+      arrivalRate: 25
+    - duration: 10
+      arrivalRate: 30
+scenarios:
+  - flow:
+    - get:
+        url: "/load-test/6"
+    - get:
+        url: "/load-test/7"
+    - get:
+        url: "/load-test/8"
+    - get:
+        url: "/load-test/9"
+    - get:
+        url: "/load-test/10"
