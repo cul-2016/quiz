@@ -157,3 +157,27 @@ These listeners are located in `src/js/lib/subscriptions.js`.
 *  If `!isQuizStarted`, two additional actions are dispatched (before `SET_NEXT_QUESTION`):
     2. `SET_QUIZ_DETAILS`
     3. `START_QUIZ`
+
+
+
+### Load Testing
+
+##### We are using artillery for load testing the application. You'll find three files in the root directory with the prefix of `loadtest`.
+- local
+- staging
+- production
+
+Here are the list of steps that you'll need to take for stress Testing
+1. install `artillery` with `npm i -g artillery`
+2. get cookie from the app. You'll need to login to each version of the app as student@city.ac.uk and then use the cookie.
+3. Paste this cookie in the related `loadtest` file. You will need to replace the following text `get cookie from headers in the live app for user student@city.ac.uk and paste it here` with your new cookie
+4. run the following command to run the loadtests and pipe the results into a .txt file `artillery run loadtest-{version}.yml > loadtest-{version}.txt`
+5. Once the loadtesting is complete you can view the results in the `.txt` file.
+
+### Our finding on the load testing
+
+##### Staging
+The staging version of the app is hosted on basic heroku with no paid options. (free postgres w/ option of 10 max concurrent connections). We reach saturation point in phase 6 of the load testing where it starts to throw errors when it reaches ~60 concurrent users
+
+##### Live
+The live version of the app is hosted on 1 dyno @ $25 with a paid standard-0 database @ $50 which can have 120 concurrent connections. We reached a saturation point somewhere between 320 - 500 concurrent users where it started to throw erros. This is approximately a six fold increase.
