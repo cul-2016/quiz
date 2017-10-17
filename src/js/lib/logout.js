@@ -7,15 +7,14 @@ import axios from 'axios';
 */
 export default function logout () {
 
-    clearBrowser(() => {
-
-        store.dispatch(logoutAction());
-        // removing user token from redis cache
-        axios.post('/logout')
-        .catch((error) => {
-            console.log(error);
-        });
-        hashHistory.push('/');
+  axios.post('/logout')
+    .then(() => {
+      clearBrowser(() => {
+          store.dispatch(logoutAction());
+      });
+    })
+    .catch((error) => {
+      console.log(error);
     });
 }
 

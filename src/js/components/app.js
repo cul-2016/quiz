@@ -13,7 +13,6 @@ const App = ({ children, location, username,
     return (
         <div>
         {
-            /*
             loading && !error &&
             <div className={ customClasses }>
                 <div className="loading__body">
@@ -23,7 +22,6 @@ const App = ({ children, location, username,
                     </div>
                 </div>
             </div>
-            */
         }
         {
             !loading && error &&

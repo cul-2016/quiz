@@ -17,6 +17,7 @@ import update from 'react-addons-update';
 import { feedback } from './feedback';
 import { studentHistory } from './student-history';
 import { superAdmin } from './super-admin';
+import { hashHistory } from 'react-router';
 
 const appReducer = combineReducers({
     user,
@@ -42,6 +43,8 @@ const rootReducer = (state, action) => {
     if (action.type === 'LOGOUT') {
 
         state = undefined;
+        hashHistory.push('/');
+
     }
 
     if (action.type === 'CLEAR_ERROR') {

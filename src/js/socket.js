@@ -6,7 +6,7 @@ import { openQuiz, closeQuiz } from './actions/module';
 import { setIsSurvey } from './actions/live-quiz';
 import { setQuizDetails, startQuiz, endQuiz, setNextQuestion, updateNumParticipants, resetLiveQuizState } from './actions/live-quiz';
 import showNavbar from './lib/showNavbar';
-// import { fadeOutThenIn } from './lib/animate';
+import { fadeOutThenIn } from './lib/animate';
 
 let uri = process.env.DEVELOPMENT ? `${location.protocol}//${location.hostname}:9000` : '';
 export const socketClient = io(uri);
@@ -42,7 +42,7 @@ socketClient.on('receive_next_question', (questionObj) => {
 
     console.log("received next question", questionObj.nextQuestion);
 
-    // fadeOutThenIn('.live-quiz'); commenting out for testing purpose during large live quiz.
+    fadeOutThenIn('.live-quiz'); commenting out for testing purpose during large live quiz.
     let isQuizStarted = store.getState().liveQuiz.isQuizStarted;
 
     setTimeout(() => {
@@ -60,7 +60,7 @@ socketClient.on('receive_end_of_quiz', (idObj) => {
     const { quiz_id, isSurvey } = idObj;
     console.log('received end of quiz notification', quiz_id);
 
-    // fadeOutThenIn('.live-quiz'); commenting out for testing purpose during large live quiz.
+    fadeOutThenIn('.live-quiz'); commenting out for testing purpose during large live quiz.
 
     const module_id = store.getState().module.module_id;
 
