@@ -1,6 +1,6 @@
 dependencies:
   pre:
-    - npm install -g npm
+    - npm install -g npm@5.2.0
 machine:
   node:
     version: 6.9.1
