@@ -19,7 +19,7 @@ import { studentHistory } from './student-history';
 import { superAdmin } from './super-admin';
 import { hashHistory } from 'react-router';
 
-const appReducer = combineReducers({
+export const appReducer = combineReducers({
     user,
     login,
     resetPassword,
@@ -39,12 +39,16 @@ const appReducer = combineReducers({
     superAdmin
 });
 
-const rootReducer = (state, action) => {
+export const rootReducer = (state, action) => {
     if (action.type === 'LOGOUT') {
 
         state = undefined;
         hashHistory.push('/');
 
+    }
+
+    if (action.type === 'CLEAR_INITIAL_STATE') {
+      state = undefined;
     }
 
     if (action.type === 'CLEAR_ERROR') {
@@ -56,5 +60,3 @@ const rootReducer = (state, action) => {
 
     return appReducer(state, action);
 };
-
-export default rootReducer;
