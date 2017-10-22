@@ -124,7 +124,7 @@ test('LOGOUT works', (t) => {
     const action = {
         type: 'LOGOUT',
     };
-    const expected = Object.assign({},appReducer);
+    const expected = Object.assign({}, appReducer({}, 'LOGOUT'));
     const result = rootReducer(initialState, action);
 
     t.deepEqual(result, expected);
@@ -145,7 +145,7 @@ test('CLEAR_INITIAL_STATE works', (t) => {
     const action = {
         type: 'CLEAR_INITIAL_STATE',
     };
-    const expected = Object.assign({},appReducer);
+    const expected = Object.assign({}, appReducer({}, 'CLEAR_INITIAL_STATE'));
     const result = rootReducer(initialState, action);
 
     t.deepEqual(result, expected);
