@@ -10,6 +10,7 @@ export const AUTHENTICATE_USER_SUCCESS = 'AUTHENTICATE_USER_SUCCESS';
 export const AUTHENTICATE_USER_FAILURE = 'AUTHENTICATE_USER_FAILURE';
 
 export const LOGOUT = 'LOGOUT';
+export const CLEAR_INITIAL_STATE = 'CLEAR_INITIAL_STATE';
 export const INCORRECT_USER_DETAILS = 'INCORRECT_USER_DETAILS';
 
 const basicUpdate = (type) => (value) => ({ type, value });
@@ -63,6 +64,10 @@ export const authenticateUserFailure = (error) => ({
 
 export const logout = () => ({
     type: LOGOUT
+});
+
+export const clearInitialState = () => ({
+    type: CLEAR_INITIAL_STATE
 });
 
 export const incorrectUserDetails = (data) => ({

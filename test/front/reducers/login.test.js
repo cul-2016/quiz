@@ -5,6 +5,7 @@ import {
     initialState as loginState,
     login as reducer
 }  from '../../../src/js/reducers/login';
+import { rootReducer, appReducer } from '../../../src/js/reducers/root-reducer';
 import deepFreeze from '../../utils/deepFreeze';
 
 
@@ -108,7 +109,7 @@ test('AUTHENTICATE_USER_FAILURE works', (t) => {
     t.deepEqual(result, expected);
 });
 
-test.skip('LOGOUT works', (t) => {
+test('LOGOUT works', (t) => {
 
     t.plan(1);
 
@@ -123,13 +124,29 @@ test.skip('LOGOUT works', (t) => {
     const action = {
         type: 'LOGOUT',
     };
+    const expected = Object.assign({}, appReducer({}, 'LOGOUT'));
+    const result = rootReducer(initialState, action);
 
-    const expected = Object.assign({},
-        { user: Object.assign({}, states.user) },
-        { login: Object.assign({}, loginState) },
-        { dashboard: Object.assign({}, states.dashboard) }
+    t.deepEqual(result, expected);
+});
+
+test('CLEAR_INITIAL_STATE works', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(
+        Object.assign({},
+            { user: Object.assign({}, states.user, { user_id: 10 }) },
+            { login: Object.assign({}, loginState, { email: "testing@email.com" }) },
+            { dashboard: Object.assign({}, states.dashboard, { data: 'some arbitrary data' }) }
+        )
     );
-    const result = reducer(initialState, action);
+
+    const action = {
+        type: 'CLEAR_INITIAL_STATE',
+    };
+    const expected = Object.assign({}, appReducer({}, 'CLEAR_INITIAL_STATE'));
+    const result = rootReducer(initialState, action);
 
     t.deepEqual(result, expected);
 });

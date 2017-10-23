@@ -12,7 +12,7 @@ import { getQuizDetailsStudent } from '../actions/review';
 import { getLeaderboard } from '../actions/leaderboard';
 import { getFeedback } from '../actions/feedback';
 import { getStudentHistory } from '../actions/student-history';
-import { logout } from '../actions/login';
+import { clearInitialState } from '../actions/login';
 import { getSuperAdminDashboard } from '../actions/super-admin';
 
 /**
@@ -304,7 +304,7 @@ export function leaveRoom (nextState, replace, callback) {
 
 export function clearState (nextState, replace, callback) {
 
-    store.dispatch(logout());
+    store.dispatch(clearInitialState());
     callback();
 }
 

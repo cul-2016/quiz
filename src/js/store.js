@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
-import rootReducer from './reducers/root-reducer';
+import { rootReducer } from './reducers/root-reducer';
 import { loadState, saveState } from './lib/localStorageState';
 import throttle from 'lodash/throttle';
 
