@@ -194,3 +194,15 @@ test('logout creates the correct action', (t) => {
     const actual = deepFreeze(actions.logout());
     t.deepEqual(actual, expected);
 });
+
+test('clearInitialState creates the correct action', (t) => {
+
+    t.plan(1);
+
+    const expected = {
+        type: actions.CLEAR_INITIAL_STATE
+    };
+
+    const actual = deepFreeze(actions.clearInitialState());
+    t.deepEqual(actual, expected);
+});
