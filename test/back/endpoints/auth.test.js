@@ -60,10 +60,7 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
     { url: '/get-quiz-details-student?quiz_id=1' },
 
 // user tests
-    { url: '/get-user-details' },
-
-// authenticate-user plugin
-    { url: '/logout', method: 'post' }
+    { url: '/get-user-details' }
 ].forEach((endpoint) => {
     test(endpoint.url + ' endpoint returns 401 due to user_id not defined in decoded token', (t) => {
         t.plan(1);

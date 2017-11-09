@@ -48,10 +48,9 @@ exports.register = (server, options, next) => {
                                 const uid = uuid();
                                 const client = server.app.redisCli;
 
-                                client.setAsync(userDetails[0].user_id.toString(), uid)
+                                const twoWeeks = 60 * 60 * 24 * 14;
+                                client.setAsync(userDetails[0].user_id.toString(), uid, 'EX', twoWeeks)
                                     .then(() => {
-                                        const twoWeeks = 60 * 60 * 24 * 14;
-                                        client.expire(userDetails[0].user_id.toString(), twoWeeks);
                                         const userObject = { user_details: userDetails[0], uid: uid, scope: [userDetails[0].is_super_admin ? "super-admin" : ""] };
                                         const token = jwt.sign(userObject, process.env.JWT_SECRET);
                                         const options = { path: "/", isSecure: false, isHttpOnly: false };
@@ -70,15 +69,25 @@ exports.register = (server, options, next) => {
         {
             method: 'POST',
             path: '/logout',
+            config: {
+              auth: {
+                mode: 'try'
+              },
+            },
             handler: (request, reply) => {
-                jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
+
+                if (request.auth.credentials) {
+                  jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
                     if (error) { return reply(error); }
                     const client = server.app.redisCli;
 
                     client.delAsync(decoded.user_details.user_id)
                     .then( () => reply("user deleted"))
                     .catch( () => reply("error deleting user from redis"));
-                });
+                  });
+                } else {
+                  reply("user deleted").unstate('token');
+                }
             }
         }
     ]);
