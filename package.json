@@ -65,7 +65,7 @@
     "es6-promise": "^4.1.1",
     "eslint": "^3.19.0",
     "file-loader": "^0.9.0",
-    "hapi": "^16.5.2",
+    "hapi": "^16.6.2",
     "hapi-auth-jwt2": "^7.3.0",
     "hapi-require-https": "^2.0.10",
     "hoek": "^4.2.0",
