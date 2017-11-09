@@ -65,6 +65,22 @@ One off deployment Script to be run after the end of Sprint 6:
 This is to ensure that the trophy for overall_average has been updated to overall_score.
 **without this the app will crash, but will only need to be run once and once only on the live version of the app and every time the staging database is reset on the staging site**
 
+## AWS Database
+
+The live database is a postgresql instance, hosted on aws (rds). The class of the instance is db.t2.small during the week, and, using an aws lambda, is downgraded to db.t2.micro at the weekend, when the app will see the least use.
+
+The upgrade/downgrade class and schedule can be edited on aws:
+* To edit the class the database instance is up/downgraded to, you can change the environment variables of the lambda `modifyRDSInstanceClass`. The environment variables are as follows:
+  * `instance` - The name of the database instance.
+  * `upgrade` - The class to upgrade the instance to.
+  * `downgrade` - The class to downgrade the instance to.
+* To edit the schedule at which the database is up/downgraded you will need to add/edit/remove rules on aws `CloudWatch`. Rules should be set to trigger on a `schedule`, using a cron expression. For help figuring out the cron expression for the period you want to use (daily, weekly etc.), you can use https://crontab.guru/. The target of the rules should be set to the `modifyRDSInstanceClass` lambda, with a constant json input of `{"grade": required_term}`, where `required_term` is either `"upgrade"` or `"downgrade"`.
+* Up/downgrading the database will cause a short period of downtime on the database (between 1 and 5 minutes), so it should not be set to happen too often.
+
+Backups are automated to happen daily between 22:00 and 22:30. This window can be changed, but backups do not cause any significant downtime (a few seconds at most).
+
+To manually modify the instance specifications, select the instance on the aws rds page, and choose `modify` from the `instance actions`. Any changes made here will occur during the maintenance window (Saturday 3:00am - 3:30am, but changeable) unless `Apply Immediately` is selected.
+
 ## Directory Structure
 ```
 ├── server
