@@ -368,7 +368,8 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
             (name, person, cb) => cb(null)
         );
 
-        server.inject(options)
+        initDb()
+        .then(() => server.inject(options))
         .then((response) => {
             email.restore();
             if (response.statusCode === 302) {
