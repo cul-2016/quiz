@@ -59,11 +59,9 @@ exports.register = (server, options, next) => {
 
                                         const uid = uuid();
 
-                                        redisCli.setAsync(userDetails[0].user_id.toString(), uid)
+                                        const twoWeeks = 60 * 60 * 24 * 14;
+                                        redisCli.setAsync(userDetails[0].user_id.toString(), uid, 'EX', twoWeeks)
                                             .then(() => {
-
-                                                const twoWeeks = 60 * 60 * 24 * 14;
-                                                redisCli.expire(userDetails[0].user_id.toString(), twoWeeks);
                                                 const userObject = { user_details: userDetails[0], uid: uid };
                                                 const token = jwt.sign(userObject, process.env.JWT_SECRET);
                                                 const options = { path: "/", isSecure: false, isHttpOnly: false };
