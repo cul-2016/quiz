@@ -135,8 +135,11 @@ export function fetchModule (nextState, replace, callback) {
         store.dispatch(getModule(module_id, is_lecturer));
 
         if (is_lecturer === false) {
-            store.dispatch(getFeedback(module_id));
-            store.dispatch(getStudentHistory(undefined, module_id));
+            if (nextState.location.pathname.includes('performance')) {
+                store.dispatch(getFeedback(module_id));
+            } else {
+                store.dispatch(getStudentHistory(undefined, module_id));
+            }
         }
     }
     callback();
