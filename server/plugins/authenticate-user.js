@@ -70,23 +70,22 @@ exports.register = (server, options, next) => {
             method: 'POST',
             path: '/logout',
             config: {
-              auth: {
-                mode: 'try'
-              },
+                auth: {
+                    mode: 'try'
+                },
             },
             handler: (request, reply) => {
-
                 if (request.auth.credentials) {
-                  jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
-                    if (error) { return reply(error); }
-                    const client = server.app.redisCli;
+                    jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
+                        if (error) { return reply(error); }
+                        const client = server.app.redisCli;
 
-                    client.delAsync(decoded.user_details.user_id)
-                    .then( () => reply("user deleted"))
-                    .catch( () => reply("error deleting user from redis"));
-                  });
+                        client.delAsync(decoded.user_details.user_id)
+                        .then( () => reply("user deleted"))
+                        .catch( () => reply("error deleting user from redis"));
+                    });
                 } else {
-                  reply("user deleted").unstate('token');
+                    reply("user deleted").unstate('token');
                 }
             }
         }

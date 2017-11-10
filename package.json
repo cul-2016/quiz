@@ -6,27 +6,37 @@
   "scripts": {
     "start": "node server/start.js",
     "start:dev": "nodemon server/start.js",
-    "webpack-watch": "webpack --config ./webpack.watch.config.js --progress --colors --watch",
+    "webpack-watch":
+      "webpack --config ./webpack.watch.config.js --progress --colors --watch",
     "dev": "node ./src/utils/dev-server.js",
-    "build": "webpack --config ./webpack.production.config.js --colors --progress",
-    "lint": "node_modules/eslint/bin/eslint.js 'src/**/*.js' 'server/**/*.js' 'test/**/*.js' --fix",
+    "build":
+      "webpack --config ./webpack.production.config.js --colors --progress",
+    "lint":
+      "node_modules/eslint/bin/eslint.js 'src/**/*.js' 'server/**/*.js' 'test/**/*.js' --fix",
     "postgres": "postgres -D /usr/local/var/postgres",
     "heroku:production:postgres": "heroku pg:psql --app cul-app",
     "heroku:staging:postgres": "heroku pg:psql --app cul-app-staging Database",
-    "load-staging-schema": "heroku pg:psql --app cul-app-staging Database < ./test/utils/test-schema-local.txt",
-    "coverage": "export TESTING=true && ./node_modules/.bin/babel-node ./node_modules/babel-istanbul/lib/cli.js cover tape --require ./test/utils/jsdom.js 'test/runner.js'",
-    "check-coverage": "./node_modules/.bin/babel-node ./node_modules/babel-istanbul/lib/cli.js check-coverage",
-    "test": "export TESTING=true && node_modules/.bin/tape -r babel-register --require ./test/utils/jsdom.js 'test/runner.js' | tap-spec",
-    "test:front": "export TESTING=true && node_modules/.bin/tape -r babel-register --require ./test/utils/jsdom.js 'test/front/runner.js' | tap-spec",
+    "load-staging-schema":
+      "heroku pg:psql --app cul-app-staging Database < ./test/utils/test-schema-local.txt",
+    "coverage":
+      "export TESTING=true && ./node_modules/.bin/babel-node ./node_modules/babel-istanbul/lib/cli.js cover tape --require ./test/utils/jsdom.js 'test/runner.js'",
+    "check-coverage":
+      "./node_modules/.bin/babel-node ./node_modules/babel-istanbul/lib/cli.js check-coverage",
+    "test":
+      "export TESTING=true && node_modules/.bin/tape -r babel-register --require ./test/utils/jsdom.js 'test/runner.js' | tap-spec",
+    "test:front":
+      "export TESTING=true && node_modules/.bin/tape -r babel-register --require ./test/utils/jsdom.js 'test/front/runner.js' | tap-spec",
     "test:front:watch": "nodemon -w src -w test/front -x 'npm run test:front'",
-    "test:back": "export TESTING=true && node_modules/.bin/tape test/back/runner.js | tap-spec",
+    "test:back":
+      "export TESTING=true && node_modules/.bin/tape test/back/runner.js | tap-spec",
     "test:back:watch": "nodemon -w server -w test/back -x 'npm run test:back'",
     "migrations": "node callMigrations",
-    "postinstall": "webpack --config ./webpack.production.config.js --progress --colors && npm run migrations",
+    "postinstall":
+      "webpack --config ./webpack.production.config.js --progress --colors && npm run migrations",
     "make-docs": "./node_modules/.bin/jsdoc -c ./conf.json -r"
   },
   "engines": {
-    "node": "6.11.0",
+    "node": "6.11.1",
     "npm": "5.3.0"
   },
   "repository": {
@@ -65,7 +75,7 @@
     "es6-promise": "^4.1.1",
     "eslint": "^3.19.0",
     "file-loader": "^0.9.0",
-    "hapi": "^16.5.2",
+    "hapi": "^16.6.2",
     "hapi-auth-jwt2": "^7.3.0",
     "hapi-require-https": "^2.0.10",
     "hoek": "^4.2.0",

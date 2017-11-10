@@ -236,7 +236,7 @@ test('/authenticate-user endpoint returns error for delAsync Redis call', (t) =>
     {
         method: 'post',
         url: '/generate-share-id',
-        expected: { statusCode: 400, error: 'Bad Request', message: '"value" must be an object', validation: { source: 'payload', keys: ['value'] } }
+        expected: { statusCode: 400, error: 'Bad Request', message: '"value" must be an object', validation: { source: 'payload', keys: [''] } }
     },
     {
         method: 'post',
