@@ -92,7 +92,7 @@ CREATE TABLE IF NOT EXISTS responses (
     survey_id INTEGER,
     question_id INTEGER NOT NULL,
     response CHAR(1) NOT NULL,
-    PRIMARY KEY (user_id, question_id)
+    PRIMARY KEY (question_id, user_id)
 );
 
 /* scores */
@@ -102,6 +102,9 @@ CREATE TABLE IF NOT EXISTS scores (
     score INTEGER NOT NULL,
     PRIMARY KEY (user_id, quiz_id)
 );
+
+/* adding an index for scores */
+CREATE INDEX scores_idx ON scores (quiz_id, user_id, score);
 
 /* module_members */
 CREATE TABLE IF NOT EXISTS module_members (
