@@ -60,10 +60,7 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
     { url: '/get-quiz-details-student?quiz_id=1' },
 
 // user tests
-    { url: '/get-user-details' },
-
-// authenticate-user plugin
-    { url: '/logout', method: 'post' }
+    { url: '/get-user-details' }
 ].forEach((endpoint) => {
     test(endpoint.url + ' endpoint returns 401 due to user_id not defined in decoded token', (t) => {
         t.plan(1);
@@ -78,7 +75,6 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
 
             return Promise.resolve();
         })
-        .then(() => simulateAuth())
         .then(() => {
             const faketoken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2RldGFpbHMiOnsiZW1haWwiOiJsZWN0dXJlckBjaXR5LmFjLnVrIiwiaXNfbGVjdHVyZXIiOnRydWUsInVzZXJuYW1lIjoibGVjdHVyZXIiLCJpc192ZXJpZmllZCI6dHJ1ZSwidmVyaWZpY2F0aW9uX2NvZGUiOm51bGwsInJlc2V0X3Bhc3N3b3JkX2NvZGUiOm51bGwsImV4cGlyeV9jb2RlIjpudWxsfSwidWlkIjoiNTQ3NmYyMzAtZDQzNy0xMWU2LThmMDYtOGRmNTk1ZjYyYmIzIiwiaWF0IjoxNDgzNzI0NDc4fQ.iNGYZZtYuBLo8Qbf1NnApt4qNMoczpWw991yIzdraxE';
 
@@ -114,7 +110,6 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
 
             return Promise.resolve();
         })
-        .then(() => simulateAuth())
         .then(() => {
             const faketoken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2RldGFpbHMiOnsidXNlcl9pZCI6MiwiZW1haWwiOiJsZWN0dXJlckBjaXR5LmFjLnVrIiwiaXNfbGVjdHVyZXIiOnRydWUsInVzZXJuYW1lIjoibGVjdHVyZXIiLCJpc192ZXJpZmllZCI6dHJ1ZSwidmVyaWZpY2F0aW9uX2NvZGUiOm51bGwsInJlc2V0X3Bhc3N3b3JkX2NvZGUiOm51bGwsImV4cGlyeV9jb2RlIjpudWxsfSwidWlkIjoiODhiZjI2ZDAtZDQzNi0xMWU2LWFkYjAtZWQxZmMzc29oaWwiLCJpYXQiOjE0ODM3MjQxMzZ9.eIUlEMiXltreNapzBhDwbQjfF0YwWPqFE5qCyxS51aE';
 
@@ -358,7 +353,9 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
     { url: '/save-user', method: 'post', payload: franzCreds },
     { url: '/submit-new-password', method: 'post', payload: { code: 'reset-password-code-2', password: 'testing' } },
     { url: '/reset-password-request', method: 'post', payload: { email: 'sohilpandya@foundersandcoders.com' } },
-    { url: '/verification?code=testing-verification-code-lecturer', method: 'get', payload: verificationCreds }
+    { url: '/verification?code=testing-verification-code-lecturer', method: 'get', payload: verificationCreds },
+// authenticate-user plugin
+    { url: '/logout', method: 'post' },
 ].forEach((endpoint) => {
     test('`' + endpoint.url + '` endpoint returns true when password matches', (t) => {
         t.plan(1);
@@ -371,7 +368,8 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
             (name, person, cb) => cb(null)
         );
 
-        server.inject(options)
+        initDb()
+        .then(() => server.inject(options))
         .then((response) => {
             email.restore();
             if (response.statusCode === 302) {
@@ -386,6 +384,77 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
         });
     });
 
+});
+
+[
+    { url: '/logout', method: 'POST' },
+].forEach((endpoint) => {
+    test(endpoint.url + ' with credentials', (t) => {
+        t.plan(1);
+
+        initDb()
+            .then(() => {
+                email = sinon.stub(
+                    sendemail,
+                    'email',
+                    (name, person, cb) => cb(null)
+                );
+
+                return Promise.resolve();
+            })
+            .then(() => simulateAuth())
+            .then((token) => {
+
+                const options = {
+                    method: endpoint.method || 'get',
+                    url: endpoint.url,
+                    payload: endpoint.payload,
+                    headers: { Authorization: token, cookie: 'token=' + token },
+                };
+
+                return server.inject(options);
+            })
+            .then((response) => {
+                email.restore();
+                t.equal(response.statusCode, 200, '200 status code');
+            })
+            .catch((err) => {
+                email.restore();
+                t.error(err);
+            });
+    });
+
+    test(endpoint.url + ' without credentials', (t) => {
+        t.plan(1);
+
+        initDb()
+            .then(() => {
+                email = sinon.stub(
+                    sendemail,
+                    'email',
+                    (name, person, cb) => cb(null)
+                );
+
+                return Promise.resolve();
+            })
+            .then(() => {
+                const options = {
+                    method: endpoint.method || 'get',
+                    url: endpoint.url,
+                    payload: endpoint.payload,
+                };
+
+                return server.inject(options);
+            })
+            .then((response) => {
+                email.restore();
+                t.equal(response.statusCode, 200, '200 status code');
+            })
+            .catch((err) => {
+                email.restore();
+                t.error(err);
+            });
+    });
 });
 
 test.onFinish(() => {

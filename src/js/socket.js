@@ -47,10 +47,9 @@ socketClient.on('receive_next_question', (questionObj) => {
 
     setTimeout(() => {
         if (!isQuizStarted) {
-
-            store.dispatch(setQuizDetails(questionObj.quiz_id, questionObj.name));
             store.dispatch(startQuiz());
         }
+        store.dispatch(setQuizDetails(questionObj.quiz_id, questionObj.name));
         store.dispatch(setNextQuestion(questionObj.nextQuestion));
     }, 300);
 
