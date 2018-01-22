@@ -17,6 +17,7 @@
     ul {
         list-style: disc;
         text-align: left;
+        padding-left: 1rem;
     }
 
     li {
@@ -26,7 +27,7 @@
     .content__body {
       position: relative;
       margin: 0 auto;
-      padding-bottom: 1rem;
+      padding: 2rem;
     }
 
     .header {

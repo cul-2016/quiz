@@ -121,23 +121,13 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                 {
                     isQuizStarted && !is_lecturer && question &&
                     <div className="student-view__questions">
-                        <ul className="navbar navbar__light navbar__light--tertiary">
-                            <li className="navbar__item navbar__item--onlyone">
-                                <Link
-                                    to={ `${params.module_id}/student` }
-                                    className="f-body navbar__link"
-                                >
-                                    Quit
-                                </Link>
-                            </li>
-                        </ul>
 
-                        <div className="question">
-                            <div className="live-quiz__question-number-container">
-                                <p className="f-display live-quiz__question-number-mobile"> Q{ question.order_id }</p>
-                                <p className="f-body">{ question.question }</p>
-                            </div>
+                    <div className="question">
+                        <div className="live-quiz__question-number-container  live-quiz__answer-inner">
+                            <span className="f-display live-quiz__question-number-mobile">Q{question.order_id}  </span>
+                            <span className="live-quiz__answer-text f-body">  { question.question }</span>
                         </div>
+                    </div>
 
                         <CurrentQuestion
                             data={ question }

@@ -39,4 +39,13 @@
     .f-label {
       padding-right: 0.5rem;
     }
+
+    @media (min-width:48rem) {
+            .review-quiz-student-container {
+                max-width: 48rem;
+                margin: auto;
+                padding: 2rem;
+                border-radius: 0.625rem;
+            }
+    }
 }
