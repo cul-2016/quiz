@@ -32,8 +32,7 @@ class Medals extends React.Component {
                 <div className="medal-values">
                     <div className="medal-values--bronze">
                         <div className="medal-values--header">
-                          <p className="medal-small medal-small--bronze"></p>
-                          <p className="f-small-body f-small-body--light">Bronze</p>
+                          <p className="new-module-medal-small new-module-medal-small--bronze"></p>
                         </div>
                         <span className="f-body f-body--50">0 to </span>
                         <input
@@ -46,15 +45,13 @@ class Medals extends React.Component {
                     </div>
                     <div className="medal-values--silver">
                         <div className="medal-values--header">
-                          <p className="medal-small medal-small--silver"></p>
-                          <p className="f-small-body f-small-body--light">Silver</p>
+                          <p className="new-module-medal-small new-module-medal-small--silver"></p>
                         </div>
-                        <p className="f-body f-body--50 medal-middle-values">{ `${this.props.medals[0]} to ${this.props.medals[1]} %` }</p>
+                        <p className="f-body f-body--50">{ `${this.props.medals[0]} to ${this.props.medals[1]} %` }</p>
                     </div>
                     <div className="medal-values--gold">
                         <div className="medal-values--header">
-                          <p className="medal-small medal-small--gold"></p>
-                          <p className="f-small-body f-small-body--light">Gold</p>
+                          <p className="new-module-medal-small new-module-medal-small--gold"></p>
                         </div>
                         <input
                             className="form__input form__input--medal"

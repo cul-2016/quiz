@@ -71,18 +71,19 @@
           line-height: 1.375rem;
         }
         &--new-quiz-answer {
-          padding: 0.25rem 0.5rem;
+          padding: 0.25rem 0.75rem;
           max-width: 38rem;
-          height: 3.875rem;
+          height: 1.875rem;
           font-size: 1rem;
           line-height: 1.375rem;
           display: inline-block;
           vertical-align: middle;
+          resize: vertical;
+          max-height: 4.65rem;
         }
 
         &--medal {
           max-width: 3.5rem;
-          margin-top: 2rem;
         }
         &--trophy {
           width: 4rem;
@@ -154,4 +155,9 @@
         }
     }
 
+}
+
+textarea, input {
+  font-family: inherit;
+  font-size: inherit;
 }

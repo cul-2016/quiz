@@ -111,9 +111,9 @@
 
 
     .live-quiz__letter { /* A,B,C, or D */
-        padding-top: 2rem;
         box-sizing: border-box;
-        display: inline-block;
+        display: table-cell;
+        vertical-align: middle;
         text-transform: capitalize;
         font-size: 3rem;
         font-weight: 700;
@@ -197,7 +197,7 @@
     .card {
         padding: 0;
     }
-    
+
     .live-quiz__answer-inner {
         padding-top: 0;
         padding-bottom: 0;
@@ -205,6 +205,7 @@
 
     .question {
       background-color: $white;
+      padding: 1rem;
     }
     .f-subheader {
         padding: 1rem 2rem;
