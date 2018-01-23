@@ -68,6 +68,7 @@ const Leaderboard = ({ mainData, medalScores, quiz_id_list, medalCondition, para
             </ul>
            <div className="content__body">
                 <div className="leaderboard__image"></div>
+                { mappedLeaderboard.length > 0 ?
                 <table className="leaderboard__table">
                     <thead className="leaderboard__header">
                         <tr>
@@ -90,6 +91,9 @@ const Leaderboard = ({ mainData, medalScores, quiz_id_list, medalCondition, para
                       { mappedLeaderboard }
                     </tbody>
               </table>
+              :
+              <div className="f-display leaderboard__no-score">No results yet</div>
+          }
           </div>
         </div>
     );

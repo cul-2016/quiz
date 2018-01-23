@@ -35,6 +35,7 @@ export function registeringUser (email, username, password, is_lecturer) {
                 if (response.data.message) {
                     dispatch(registeringUserFailure(response.data.message));
                 } else if (response.data.emailSent) {
+                    dispatch(registeringUserSuccess(true));
                     hashHistory.push('/please-verify');
                 } else {
                     dispatch(registeringUserSuccess(true));
