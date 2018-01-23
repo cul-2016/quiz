@@ -65,7 +65,8 @@ export function module (state = initialState, action ) {
                 module_id: { $set: action.data.module_id },
                 name: { $set: action.data.name },
                 medals: { $set: action.data.medals },
-                trophies_awarded: { $set: action.data.trophies_awarded }
+                trophies_awarded: { $set: action.data.trophies_awarded },
+                trophies: { $set: action.data.trophies }
             });
         }
         if (action.is_test) {

@@ -13,7 +13,7 @@ const mapStateToProps = (state) => {
         isFetchingModule: state.module.isFetchingModule,
         isFetchingFeedback: state.feedback.isFetchingFeedback,
         isFetchingStudentHistory: state.studentHistory.isFetchingStudentHistory,
-        trophies: state.module.trophies_awarded && Object.keys(state.module.trophies_awarded).sort(),
+        trophies: state.module.trophies,
         trophies_awarded: state.module.trophies_awarded,
         username: state.user.username,
         isQuizOpen: state.module.isQuizOpen,

@@ -4,6 +4,7 @@ import Tabs from './tabs'; //eslint-disable-line no-unused-vars
 import Spinner from '../general/spinner';
 import Trophies from './trophies'; //eslint-disable-line no-unused-vars
 
+
 const StudentModule = ({ location,
                         trophies, trophies_awarded, //eslint-disable-line no-unused-vars
                         isFetchingModule, isFetchingFeedback, //eslint-disable-line no-unused-vars
@@ -48,6 +49,16 @@ const StudentModule = ({ location,
         );
     });
 
+    const trophyDescription = (value, i) => {
+        const arr = [
+            `Complete ${value} quiz`,
+            `Get ${value} percentage`,
+            `Take ${value} quizzes`,
+            `Get ${value} score overall`
+        ];
+        return arr[i];
+    };
+
     let handleAnimation = (e, livePath) => {
         e.preventDefault();
 
@@ -70,7 +81,10 @@ const StudentModule = ({ location,
     const trophyList = Object.keys(trophies_awarded).map((trophy, i) => {
         let awarded = trophies_awarded[trophy] ? "" : "_grey";
         return (
-            <img key={i} src={`/assets/trophy/${trophy}${awarded}.svg`} className="trophyItem" />
+            <div className="trophyItem">
+                <img key={i} src={`/assets/trophy/${trophy}${awarded}.svg`} className="trophyItem--trophy" />
+                <p className="f-small-label"> { trophyDescription(trophies.condition[i], i) } </p>
+            </div>
         );
     });
 
