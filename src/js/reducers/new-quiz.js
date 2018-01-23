@@ -50,6 +50,11 @@ export function newQuiz (state = initialState, action) {
             isSurvey: { $set: !state.isSurvey }
         });
 
+    case actionsTypes.DISPLAY_ERROR:
+        return update(state, {
+            error: { $set: action.error }
+        });
+
     case actionsTypes.SAVE_QUIZ_REQUEST:
         return update(state, {
             isSavingQuiz: { $set: true }

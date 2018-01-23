@@ -64,4 +64,10 @@
         cursor: -moz-grabbing;
         pointer-events: auto;
     }
+
+    .error-container {
+        max-width: 35rem;
+        text-align: center;
+        margin: auto;
+    }
 }
