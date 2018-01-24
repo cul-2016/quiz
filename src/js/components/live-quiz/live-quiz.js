@@ -177,6 +177,13 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                             </div>
                             <Timer
                                 question={ question }
+                                numQuestions={ numQuestions }
+                                nextQuestionIndex={ nextQuestionIndex }
+                                review={ review }
+                                quiz_id={ quiz_id }
+                                handleAbortQuiz={ handleAbortQuiz }
+                                endQuiz={ endQuiz }
+                                nextQuestion={ nextQuestion }
                             />
                             <CurrentQuestion
                                 data={ question }

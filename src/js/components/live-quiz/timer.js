@@ -43,10 +43,19 @@ class Timer extends Component {
                 duration: this.state.duration - 1
             });
         } else {
-            //call the next qiestion
             clearInterval(this.timerID);
             this.setState({
-                isTimerRunning: false
+                isTimerRunning: true
+            }, () => {
+                if (this.props.nextQuestionIndex !== this.props.numQuestions) {
+                    this.props.nextQuestion();
+                }
+                else if (this.props.nextQuestionIndex === this.props.numQuestions && this.props.review) {
+                    this.props.handleAbortQuiz(this.props.quiz_id);
+                }
+                else {
+                    this.props.endQuiz(this.props.quiz_id);
+                }
             });
         }
     }
@@ -100,7 +109,14 @@ class Timer extends Component {
 
 
 Timer.propTypes = {
-    question: PropTypes.object
+    question: PropTypes.object,
+    numQuestions: PropTypes.number,
+    nextQuestionIndex: PropTypes.number,
+    nextQuestion: PropTypes.func,
+    endQuiz: PropTypes.func,
+    quiz_id: PropTypes.number,
+    review: PropTypes.bool,
+    handleAbortQuiz: PropTypes.func
 };
 
 
