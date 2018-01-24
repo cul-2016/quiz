@@ -17,6 +17,9 @@ class Timer extends Component {
             () => this.counter(),
             1000
         );
+        this.setState({
+            isTimerRunning: true
+        });
     }
 
     componentWillReceiveProps (nextProps) {
@@ -25,7 +28,8 @@ class Timer extends Component {
             clearInterval(this.timerID);
             this.setState({
                 duration: 10,
-                question: nextProps.question
+                question: nextProps.question,
+                isTimerRunning: true
             }, () => {
                 this.timerID = setInterval(
                     () => this.counter(),
@@ -41,7 +45,6 @@ class Timer extends Component {
     }
 
     counter () {
-
         if (this.state.duration > 0) {
             this.setState({
                 duration: this.state.duration - 1
@@ -49,18 +52,39 @@ class Timer extends Component {
         } else {
             //call the next qiestion
             clearInterval(this.timerID);
+            this.setState({
+                isTimerRunning: false
+            });
         }
     }
+
+    incrementCounter () {
+        this.setState({
+            duration: this.state.duration + 5
+        });
+    }
+
+    decrementCounter () {
+        if (this.state.duration > 15) {
+            this.setState({
+                duration: this.state.duration - 5
+            });
+        }
+    }
+
+
 
     render () {
         return (
           <div>
             Timer! Here!
-            { this.state.duration }
+            <div className="button" onClick={() => { this.decrementCounter(); } }>-</div>
+            <div className="f-display">{ this.state.duration }</div>
+            <div className="button" onClick={() => { this.incrementCounter(); } }>+</div>
           </div>
         );
     }
-};
+}
 
 
 Timer.propTypes = {
