@@ -18,7 +18,6 @@ function getModuleForStudent (client, user_id, module_id, callback) {
             console.error(error);
             return callback(error);
         }
-        const mainData = main.rows;
 
         query(client, queries.getModuleForStudent.medals, [module_id], (error, medals) => {
             /* istanbul ignore if */
@@ -26,15 +25,27 @@ function getModuleForStudent (client, user_id, module_id, callback) {
                 console.error(error);
                 return callback(error);
             }
-            const medalsData = medals.rows;
-            const allData = mainData.concat(medalsData);
 
-            organiseModuleData(false, module_id, allData, (error, data) => {
+            query(client, queries.getModuleForLecturer.trophies, [module_id], (error, trophies) => {
                 /* istanbul ignore if */
                 if (error) {
-                    throw error;
+                    console.error(error);
+                    return callback(error);
                 }
-                callback(null, data);
+                // const allData = mainData.concat(medalsData);
+                const allData = {
+                    trophies_awarded: main.rows[0],
+                    medals: medals.rows,
+                    trophies: trophies.rows
+                };
+
+                organiseModuleData(false, module_id, allData, (error, data) => {
+                    /* istanbul ignore if */
+                    if (error) {
+                        throw error;
+                    }
+                    callback(null, data);
+                });
             });
         });
     });

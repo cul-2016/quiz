@@ -168,11 +168,26 @@ test('QUESTION_ORDER works', (t) => {
             isSavingQuiz: false,
             isUpdatingQuiz: false,
             isFetchingQuizDetails: false,
-            error: undefined, 
+            error: undefined,
             deletedQuestions: []
         }
     );
 
+    const result = reducer(initialState, action);
+    t.deepEqual(result, expected);
+});
+
+test('DISPLAY_ERROR works', (t) => {
+    t.plan(1);
+    const initialState = deepFreeze(newQuizState);
+    const error = {
+        message: 'something has gone wrong'
+    };
+    const action = {
+        type: 'DISPLAY_ERROR',
+        error
+    };
+    const expected = Object.assign({}, newQuizState, { error });
     const result = reducer(initialState, action);
     t.deepEqual(result, expected);
 });

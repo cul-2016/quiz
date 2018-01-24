@@ -9,7 +9,8 @@ import {
     clearNewQuizState,
     toggleIsLastQuiz,
     toggleIsSurvey,
-    questionOrder
+    questionOrder,
+    displayError
 } from '../actions/new-quiz';
 import { hashHistory } from 'react-router';
 
@@ -17,7 +18,8 @@ import { hashHistory } from 'react-router';
 const mapStateToProps = (state) => ({
 
     newQuiz: state.newQuiz,
-    username: state.user.username
+    username: state.user.username,
+    error: state.newQuiz.error
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -36,6 +38,10 @@ const mapDispatchToProps = (dispatch) => ({
 
     handleQuizNameChange: (value) => {
         dispatch(updateQuizName(value));
+    },
+
+    handleError: (error) => {
+        dispatch(displayError(error));
     },
 
     handleSaveQuiz: (module_id, quizName, questions, is_last_quiz) => {

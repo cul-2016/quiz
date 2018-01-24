@@ -104,6 +104,19 @@ test('questionOrder action creator returns the expected action', (t) => {
     t.deepEqual(actual, expected);
 });
 
+test('displayError action creaor returns the expected action', (t) => {
+
+    t.plan(1);
+    const error = {
+        message: 'something has gone wrong'
+    };
+    const expected = {
+        type: actions.DISPLAY_ERROR,
+        error
+    };
+    const actual = actions.displayError(error);
+    t.deepEqual(actual, expected);
+});
 // -----
 // SAVING NEW QUIZ
 // -----
