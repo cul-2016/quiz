@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import CurrentQuestion from './current-question';
-import LiveQuizButtons from './live-quiz-buttons.js';
+import LiveQuizButtons from './live-quiz-buttons';
+import Timer from './timer';
 
 const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                     nextQuestion, isQuizStarted, submitResponse, //eslint-disable-line no-unused-vars
@@ -174,6 +175,9 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                                 <p className="live-quiz__question-number f-display"> Q{ nextQuestionIndex }</p>
                                 <p className="live-quiz__question f-title">{ question.question }</p>
                             </div>
+                            <Timer
+                                question={ question }
+                            />
                             <CurrentQuestion
                                 data={ question }
                                 handleSelection={ handleSelection }
