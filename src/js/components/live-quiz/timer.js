@@ -12,29 +12,22 @@ class Timer extends Component {
         };
     }
 
-    componentDidMount () {
-        this.timerID = setInterval(
-            () => this.counter(),
-            1000
-        );
-        this.setState({
-            isTimerRunning: true
-        });
-    }
-
     componentWillReceiveProps (nextProps) {
-        if (nextProps.question.question_id !== this.props.question.question_id) {
-            //do something. duration
+        if ((nextProps.question.question_id !== this.props.question.question_id) && this.state.isTimerRunning) {
             clearInterval(this.timerID);
             this.setState({
                 duration: 10,
                 question: nextProps.question,
-                isTimerRunning: true
             }, () => {
                 this.timerID = setInterval(
                     () => this.counter(),
                     1000
                 );
+            });
+        } else if ((nextProps.question.question_id !== this.props.question.question_id) && !this.state.isTimerRunning) {
+            this.setState({
+                duration: 10,
+                question: nextProps.question,
             });
         }
         return true;
@@ -72,6 +65,25 @@ class Timer extends Component {
         }
     }
 
+    toggleCounter () {
+        if (!this.state.isTimerRunning) {
+            this.setState({
+                isTimerRunning: true
+            }, () => {
+                this.timerID = setInterval(
+                    () => this.counter(),
+                    1000
+                );
+            });
+        }
+        else {
+            clearInterval(this.timerID);
+            this.setState({
+                isTimerRunning: false
+            });
+        }
+    }
+
 
 
     render () {
@@ -79,7 +91,7 @@ class Timer extends Component {
           <div>
             Timer! Here!
             <div className="button" onClick={() => { this.decrementCounter(); } }>-</div>
-            <div className="f-display">{ this.state.duration }</div>
+            <div className="f-display" onClick={() => { this.toggleCounter(); } }>{ this.state.duration }</div>
             <div className="button" onClick={() => { this.incrementCounter(); } }>+</div>
           </div>
         );
