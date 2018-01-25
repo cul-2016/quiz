@@ -161,8 +161,65 @@
         padding:2rem;
     }
 
+// TIMER
 
+.live-quiz__timer-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
 
+.live-quiz__timer {
+    border: 2px solid #2574A9;
+    border-radius: 50%;
+    padding: 1.75rem;
+    margin: 0 1rem 0 1rem;
+    min-width: 4rem;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.live-quiz__timer-decrement {
+    height: 3rem;
+    cursor: pointer;
+    padding: 1rem 0 1rem 1rem;
+}
+
+.live-quiz__timer-increment {
+    height: 3rem;
+    cursor: pointer;
+    padding: 1rem 1rem 1rem 0;
+}
+
+.live-quiz__controls {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.live-quiz-buttons__container {
+    justify-content: center;
+    margin: 2rem 0 2rem 0;
+}
+
+@media(min-width: 697px) {
+    .live-quiz__controls {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .live-quiz-buttons__container {
+        width: 50%;
+        margin: 0;
+    }
+
+    .live-quiz__timer-container {
+        width: 50%;
+        justify-content: start;
+    }
+}
 // OVERRIDES
 
 .student-view {

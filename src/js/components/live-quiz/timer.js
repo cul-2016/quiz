@@ -1,5 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 
+import decrementIcon from '../../../../public/assets/timer/arrow-left.svg';
+import incrementIcon from '../../../../public/assets/timer/arrow-right.svg';
+
 class Timer extends Component {
 
     constructor (props) {
@@ -103,11 +106,14 @@ class Timer extends Component {
 
     render () {
         return (
-          <div>
-            Timer! Here!
-            <div className="button" onClick={() => { this.decrementCounter(); } }>-</div>
-            <div className="f-display" onClick={() => { this.toggleCounter(); } }>{ this.state.duration }</div>
-            <div className="button" onClick={() => { this.incrementCounter(); } }>+</div>
+          <div className="live-quiz__timer-container">
+            <div onClick={() => { this.decrementCounter(); } }>
+                <img src={ decrementIcon } alt="decrement counter" className="live-quiz__timer-decrement"/>
+            </div>
+            <div className="f-display live-quiz__timer" onClick={() => { this.toggleCounter(); } }>{ this.state.duration }</div>
+            <div onClick={() => { this.incrementCounter(); } }>
+                <img src={ incrementIcon } alt="increment counter" className="live-quiz__timer-increment"/>
+            </div>
           </div>
         );
     }

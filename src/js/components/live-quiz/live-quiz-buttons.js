@@ -29,7 +29,7 @@ class LiveQuizButtons extends Component {
 
         let nextButtonClasses = classnames("button button__secondary", {
             "display-none": !is_lecturer || nextQuestionIndex === 0 || nextQuestionIndex === numQuestions,
-            "button__disabled": this.state.nextButtonDisabled  
+            "button__disabled": this.state.nextButtonDisabled
         });
 
         let endButtonClasses = classnames("button button--large button__primary", {
@@ -46,7 +46,6 @@ class LiveQuizButtons extends Component {
                 <div className="button__wrapper button__wrapper--right">
                     <button disabled={this.state.nextButtonDisabled} className={ nextButtonClasses }
                     onClick={ () => {
-                        console.log('clicking button');
                         nextQuestion();
                         this.disableNextButton();
                         setTimeout(() => { this.disableNextButton(); }, 1000); }

@@ -175,35 +175,39 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                                 <p className="live-quiz__question-number f-display"> Q{ nextQuestionIndex }</p>
                                 <p className="live-quiz__question f-title">{ question.question }</p>
                             </div>
-                            <Timer
-                                question={ question }
-                                numQuestions={ numQuestions }
-                                nextQuestionIndex={ nextQuestionIndex }
-                                review={ review }
-                                quiz_id={ quiz_id }
-                                handleAbortQuiz={ handleAbortQuiz }
-                                endQuiz={ endQuiz }
-                                nextQuestion={ nextQuestion }
-                            />
                             <CurrentQuestion
                                 data={ question }
                                 handleSelection={ handleSelection }
                                 response={ response }
                                 isLecturer={ is_lecturer }/>
-                            <LiveQuizButtons
-                                is_lecturer={ is_lecturer }
-                                numQuestions={ numQuestions }
-                                nextQuestion={ nextQuestion }
-                                nextQuestionIndex={ nextQuestionIndex }
-                                isQuizStarted={ isQuizStarted }
-                                isSavingResponse={ isSavingResponse }
-                                isResponseSubmitted={ isResponseSubmitted }
-                                startQuiz={ startQuiz }
-                                endQuiz={ endQuiz }
-                                quiz_id={ quiz_id }
-                                review={ review }
-                                handleAbortQuiz={ handleAbortQuiz }
-                                response={ response } />
+                            <div className="live-quiz__controls">
+                                <Timer
+                                    question={ question }
+                                    numQuestions={ numQuestions }
+                                    nextQuestionIndex={ nextQuestionIndex }
+                                    review={ review }
+                                    quiz_id={ quiz_id }
+                                    handleAbortQuiz={ handleAbortQuiz }
+                                    endQuiz={ endQuiz }
+                                    nextQuestion={ nextQuestion }
+                                />
+                                <div className="live-quiz-buttons__container">
+                                    <LiveQuizButtons
+                                        is_lecturer={ is_lecturer }
+                                        numQuestions={ numQuestions }
+                                        nextQuestion={ nextQuestion }
+                                        nextQuestionIndex={ nextQuestionIndex }
+                                        isQuizStarted={ isQuizStarted }
+                                        isSavingResponse={ isSavingResponse }
+                                        isResponseSubmitted={ isResponseSubmitted }
+                                        startQuiz={ startQuiz }
+                                        endQuiz={ endQuiz }
+                                        quiz_id={ quiz_id }
+                                        review={ review }
+                                        handleAbortQuiz={ handleAbortQuiz }
+                                        response={ response } />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 }
