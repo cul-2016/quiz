@@ -13,6 +13,7 @@ class Timer extends Component {
             duration: 10, // mutated
             customDuration: 10, // not mutated
             defaultDuration: 10, // not mutated
+            warning: false,
             question: this.props.question
         };
     }
@@ -24,6 +25,7 @@ class Timer extends Component {
             this.setState({
                 duration: this.state.customDuration,
                 question: nextProps.question,
+                warning: false
             }, () => {
                 this.timerID = setInterval(
                     () => this.counter(),
@@ -44,7 +46,13 @@ class Timer extends Component {
     }
 
     counter () {
-        if (this.state.duration > 0) {
+        if (this.state.duration <= 6 && !this.state.warning) {
+            this.setState({
+                duration: this.state.duration - 1,
+                warning: true
+            });
+        }
+        else if (this.state.duration > 0) {
             this.setState({
                 duration: this.state.duration - 1
             });
@@ -110,7 +118,7 @@ class Timer extends Component {
             <div onClick={() => { this.decrementCounter(); } }>
                 <img src={ decrementIcon } alt="decrement counter" className="live-quiz__timer-decrement"/>
             </div>
-            <div className="f-display live-quiz__timer" onClick={() => { this.toggleCounter(); } }>{ this.state.duration }</div>
+            <div className={`f-display live-quiz__timer ${this.state.warning ? 'live-quiz__timer--warning' : ''}`} onClick={() => { this.toggleCounter(); } }>{ this.state.duration }</div>
             <div onClick={() => { this.incrementCounter(); } }>
                 <img src={ incrementIcon } alt="increment counter" className="live-quiz__timer-increment"/>
             </div>

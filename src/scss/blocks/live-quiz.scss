@@ -171,7 +171,7 @@
 }
 
 .live-quiz__timer {
-    border: 2px solid #2574A9;
+    border: 2px solid $blue;
     border-radius: 50%;
     padding: 1.75rem;
     margin: 0 1rem 0 1rem;
@@ -179,6 +179,11 @@
     display: flex;
     justify-content: center;
     cursor: pointer;
+
+    &--warning {
+        color: $bright-red;
+        border: 2px solid $bright-red;
+    }
 }
 
 .live-quiz__timer-decrement {
