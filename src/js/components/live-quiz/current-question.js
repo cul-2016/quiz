@@ -3,7 +3,6 @@ import classnames from 'classnames';
 
 const CurrentQuestion = ({ data, response, handleSelection, isLecturer }) => {
 
-
     let answersArray = Object.keys(data);
 
     answersArray.splice(answersArray.indexOf('question'), 1);

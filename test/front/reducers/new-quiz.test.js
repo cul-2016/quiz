@@ -29,7 +29,8 @@ test('ADD_QUESTION works', (t) => {
                 b: undefined,
                 c: undefined,
                 d: undefined,
-                correct_answer: undefined
+                correct_answer: undefined,
+                more_information: undefined
             }]
         }
     );

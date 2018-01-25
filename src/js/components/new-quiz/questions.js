@@ -61,7 +61,14 @@ const SortableQuestionItem = SortableElement(({ question, handleInputChange, han
                     question, value, idx: i, isSurvey, handleInputChange
                 }} />
             ) }
-
+            <div>
+                <textarea
+                placeholder="More information for students when reviewing"
+                className="form__input form__input--new-quiz-answer"
+                onChange={(e) => handleInputChange('more_information', e.target.value, i)}
+                value={ question.more_information || "" }
+                />
+            </div>
             <button className="button button__primary" onClick={ () => { handleDeleteQuestion(i); } }> Delete Question </button>
 
         </div>

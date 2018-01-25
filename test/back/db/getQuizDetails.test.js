@@ -20,7 +20,8 @@ test('`getQuizDetails` gets quiz name and questions for a given quiz', (t) => {
                     b: 'Cardiff',
                     c: 'Edinburgh',
                     d: 'Doncaster',
-                    correct_answer: 'a'
+                    correct_answer: 'a',
+                    more_information: null
                 }, {
                     question_id: 2,
                     order_id: 2,
@@ -29,7 +30,8 @@ test('`getQuizDetails` gets quiz name and questions for a given quiz', (t) => {
                     b: 'Cardiff',
                     c: 'Edinburgh',
                     d: 'Doncaster',
-                    correct_answer: 'a'
+                    correct_answer: 'a',
+                    more_information: null
                 }
             ],
             is_last_quiz: false };

@@ -183,7 +183,8 @@ const questions = [
         b: 'Tokyo',
         c: 'New York',
         d: 'Paris',
-        correct_answer: 'a'
+        correct_answer: 'a',
+        more_information: null
     }
 ];
 
