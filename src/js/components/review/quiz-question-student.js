@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import classnames from 'classnames';
+import linkify from '../../lib/linkify';
 
 const Question = ({ idx, question, is_lecturer }) => {
 
@@ -49,36 +50,44 @@ const Question = ({ idx, question, is_lecturer }) => {
     };
 
     return (
-        <div key={ idx }>
-            <div className="card">
-                <div className="question">
-                    <p className="f-body">Q{idx + 1}.</p>
-                    <p className="f-small-body">{question.question}</p>
-                </div>
-                <div className={ aClasses }>
-                  <span className="f-label"> A </span>
-                  <span className="f-small-body"> { question.a } </span>
-                  { chosenAnswer('a') }
-                </div>
-                <div className={ bClasses }>
-                  <span className="f-label"> B </span>
-                  <span className="f-small-body"> { question.b } </span>
-                  { chosenAnswer('b') }
-                </div>
-                <div className={ cClasses }>
-                  <span className="f-label"> C </span>
-                  <span className="f-small-body"> { question.c } </span>
-                  { chosenAnswer('c') }
-                </div>
-                <div className={ dClasses }>
-                  <span className="f-label"> D </span>
-                  <span className="f-small-body"> { question.d } </span>
-                  { chosenAnswer('d') }
-                </div>
+        <div className="card" key={idx}>
+            <div className="question">
+                <p className="f-body">Q{idx + 1}.</p>
+                <p className="f-small-body">{question.question}</p>
             </div>
+            <div className={ aClasses }>
+                <span className="f-label"> A </span>
+                <span className="f-small-body"> { question.a } </span>
+                { chosenAnswer('a') }
+            </div>
+            <div className={ bClasses }>
+                <span className="f-label"> B </span>
+                <span className="f-small-body"> { question.b } </span>
+                { chosenAnswer('b') }
+            </div>
+            <div className={ cClasses }>
+                <span className="f-label"> C </span>
+                <span className="f-small-body"> { question.c } </span>
+                { chosenAnswer('c') }
+            </div>
+            <div className={ dClasses }>
+                <span className="f-label"> D </span>
+                <span className="f-small-body"> { question.d } </span>
+                { chosenAnswer('d') }
+            </div>
+            {
+                question.more_information
+                    ? <div className='question'>
+                        <p className='f-label'>More information</p>
+                        <p className='f-small-body'>{linkify(question.more_information)}</p>
+                    </div>
+                    : null
+            }
+
         </div>
     );
 };
+
 
 Question.propTypes = {
     idx: PropTypes.number.isRequired,

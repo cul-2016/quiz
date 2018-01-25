@@ -38,7 +38,8 @@ const getQuestionsForUser = (user_id, rows) => {
             c: question.c,
             d: question.d,
             correct_answer: question.correct_answer,
-            response: question.response
+            response: question.response,
+            more_information: question.more_information,
         }));
 
 };
@@ -58,7 +59,7 @@ const getQuizDetailsStudent = (client, quiz_id, user_id, callback) => {
 
     const questionsQuery = [
         'SELECT',
-        'q.question, q.a, q.b, q.c, q.d, q.correct_answer, q.question_id, r.response, r.user_id, q.order_id',
+        'q.question, q.a, q.b, q.c, q.d, q.correct_answer, q.question_id, q.more_information, r.response, r.user_id, q.order_id',
         'FROM',
         'questions as q',
         'LEFT OUTER JOIN',
