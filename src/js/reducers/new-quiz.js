@@ -119,7 +119,8 @@ export const handleAddQuestion = (state, action) => { //eslint-disable-line no-u
         b: undefined,
         c: undefined,
         d: undefined,
-        correct_answer: undefined
+        correct_answer: undefined,
+        more_information: undefined
     };
     return update(state, {
         questions: { $push: [newQuestions] }

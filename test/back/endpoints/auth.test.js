@@ -158,6 +158,9 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
             return server.inject(options);
         })
         .then((response) => {
+            if (response.statusCode === 400) {
+                console.log(response);
+            }
             email.restore();
             t.equal(response.statusCode, 200, '200 status code');
         })

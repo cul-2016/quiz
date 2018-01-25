@@ -30,11 +30,13 @@ function composeQuestionStatement (id, rows, { isSurvey }, callback) {
         // nullify correct_answer for surveys
         params.push(isSurvey ? null : row.correct_answer);
         valueClause.push('$' + params.length);
+        params.push(row.more_information);
+        valueClause.push('$' + params.length);
         chunks.push('(' + valueClause.join(', ') + ')');
     }
 
     callback(null, {
-        text: `INSERT INTO questions (${quizIdOrSurveyId}, order_id, question, a, b, c, d, correct_answer) VALUES ` + chunks.join(', '),
+        text: `INSERT INTO questions (${quizIdOrSurveyId}, order_id, question, a, b, c, d, correct_answer, more_information) VALUES ` + chunks.join(', '),
         values: params
     });
 
