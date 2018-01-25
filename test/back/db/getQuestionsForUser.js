@@ -8,7 +8,8 @@ const question1WithoutId = {
     b: 'bbbbbbbb',
     c: 'ccccccccccccccc',
     d: 'ddddddddddddddddddd',
-    correct_answer: 'a'
+    correct_answer: 'a',
+    more_information: 'a',
 };
 
 const question2WithoutId = {
@@ -18,6 +19,7 @@ const question2WithoutId = {
     c: 'cc',
     d: 'dd',
     correct_answer: 'b',
+    more_information: 'a',
 };
 
 const question1 = Object.assign({ question_id: 53 }, question1WithoutId);
