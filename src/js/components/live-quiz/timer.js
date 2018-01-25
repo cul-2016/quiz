@@ -7,16 +7,19 @@ class Timer extends Component {
 
         this.state = {
             isTimerRunning: false,
-            duration: 10,
+            duration: 10, // mutated
+            customDuration: 10, // not mutated
+            defaultDuration: 10, // not mutated
             question: this.props.question
         };
     }
 
     componentWillReceiveProps (nextProps) {
+        // reset timer on new question
         if ((nextProps.question.question_id !== this.props.question.question_id) && this.state.isTimerRunning) {
             clearInterval(this.timerID);
             this.setState({
-                duration: 10,
+                duration: this.state.customDuration,
                 question: nextProps.question,
             }, () => {
                 this.timerID = setInterval(
@@ -26,7 +29,7 @@ class Timer extends Component {
             });
         } else if ((nextProps.question.question_id !== this.props.question.question_id) && !this.state.isTimerRunning) {
             this.setState({
-                duration: 10,
+                duration: this.state.customDuration,
                 question: nextProps.question,
             });
         }
@@ -45,7 +48,8 @@ class Timer extends Component {
         } else {
             clearInterval(this.timerID);
             this.setState({
-                isTimerRunning: true
+                isTimerRunning: true, // set timer to run automatically on the next question
+                duration: this.state.customDuration
             }, () => {
                 if (this.props.nextQuestionIndex !== this.props.numQuestions) {
                     this.props.nextQuestion();
@@ -62,14 +66,16 @@ class Timer extends Component {
 
     incrementCounter () {
         this.setState({
-            duration: this.state.duration + 5
+            duration: this.state.duration + 5,
+            customDuration: this.state.customDuration + 5,
         });
     }
 
     decrementCounter () {
         if (this.state.duration > 15) {
             this.setState({
-                duration: this.state.duration - 5
+                duration: this.state.duration - 5,
+                customDuration: this.state.customDuration - 5
             });
         }
     }
