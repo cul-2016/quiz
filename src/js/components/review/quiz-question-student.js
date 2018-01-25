@@ -79,7 +79,7 @@ const Question = ({ idx, question, is_lecturer }) => {
                 question.more_information
                     ? <div className='question'>
                         <p className='f-label'>More information</p>
-                        <p className='f-small-body'>{linkify(question.more_information)}</p>
+                        <p className='f-label--primary'>{linkify(question.more_information)}</p>
                     </div>
                     : null
             }

@@ -11,7 +11,7 @@ export default (str) => {
         return matches.reduce((acc, match) => {
             const a = acc
                 .concat(parts[0])
-                .concat(<a href={match} target="_blank">{match}</a>);
+                .concat(<a className="f-label link" href={match} target="_blank">{match}</a>);
 
             parts.splice(0, 1);
 
