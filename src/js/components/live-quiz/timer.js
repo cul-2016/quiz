@@ -10,9 +10,9 @@ class Timer extends Component {
 
         this.state = {
             isTimerRunning: false,
-            duration: 10, // mutated
-            customDuration: 10, // not mutated
-            defaultDuration: 10, // not mutated
+            duration: 30, // mutated
+            customDuration: 30, // not mutated
+            defaultDuration: 30, // not mutated
             warning: false,
             question: this.props.question
         };
