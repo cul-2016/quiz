@@ -137,8 +137,9 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                             isLecturer={ is_lecturer }/>
 
                         <div className="live-quiz__footer">
-                            <div className="logo logo--footer"></div>
+                            <img src="/assets/logo/Login_signup_icon.svg"></img>
                         </div>
+
 
                         <LiveQuizButtons
                             is_lecturer={ is_lecturer }
