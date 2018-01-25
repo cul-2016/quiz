@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import CurrentQuestion from './current-question';
-import LiveQuizButtons from './live-quiz-buttons.js';
+import LiveQuizButtons from './live-quiz-buttons';
+import Timer from './timer';
 
 const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                     nextQuestion, isQuizStarted, submitResponse, //eslint-disable-line no-unused-vars
@@ -179,20 +180,34 @@ const LiveQuiz = ({ is_lecturer, question, nextQuestionIndex,
                                 handleSelection={ handleSelection }
                                 response={ response }
                                 isLecturer={ is_lecturer }/>
-                            <LiveQuizButtons
-                                is_lecturer={ is_lecturer }
-                                numQuestions={ numQuestions }
-                                nextQuestion={ nextQuestion }
-                                nextQuestionIndex={ nextQuestionIndex }
-                                isQuizStarted={ isQuizStarted }
-                                isSavingResponse={ isSavingResponse }
-                                isResponseSubmitted={ isResponseSubmitted }
-                                startQuiz={ startQuiz }
-                                endQuiz={ endQuiz }
-                                quiz_id={ quiz_id }
-                                review={ review }
-                                handleAbortQuiz={ handleAbortQuiz }
-                                response={ response } />
+                            <div className="live-quiz__controls">
+                                <Timer
+                                    question={ question }
+                                    numQuestions={ numQuestions }
+                                    nextQuestionIndex={ nextQuestionIndex }
+                                    review={ review }
+                                    quiz_id={ quiz_id }
+                                    handleAbortQuiz={ handleAbortQuiz }
+                                    endQuiz={ endQuiz }
+                                    nextQuestion={ nextQuestion }
+                                />
+                                <div className="live-quiz-buttons__container">
+                                    <LiveQuizButtons
+                                        is_lecturer={ is_lecturer }
+                                        numQuestions={ numQuestions }
+                                        nextQuestion={ nextQuestion }
+                                        nextQuestionIndex={ nextQuestionIndex }
+                                        isQuizStarted={ isQuizStarted }
+                                        isSavingResponse={ isSavingResponse }
+                                        isResponseSubmitted={ isResponseSubmitted }
+                                        startQuiz={ startQuiz }
+                                        endQuiz={ endQuiz }
+                                        quiz_id={ quiz_id }
+                                        review={ review }
+                                        handleAbortQuiz={ handleAbortQuiz }
+                                        response={ response } />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 }
