@@ -19,7 +19,6 @@ const RadioButton = ({ question, value, idx, handleInputChange }) => {
 
     return (
             <div className={ sliderClass }>
-              <p className="f-small-body f-small-body--grey">correct</p>
             <div onClick={ () => handleInputChange('correct_answer', value, idx) }>
               <div className={ sliderCylinderClass }></div>
               <div className= { sliderCircleClass }></div>
@@ -30,19 +29,23 @@ const RadioButton = ({ question, value, idx, handleInputChange }) => {
 
 const InputChanger = ({ question, value, idx, handleInputChange }) => <textarea { ...{
     type: "text",
-    className: "form__input form__input--new-quiz-answer",
+    className: "answer form__input",
     value: question[value] || "",
     onChange: (e) => handleInputChange(value, e.target.value, idx),
     placeholder: value
 } } />;
 
 const Option = ({ question, value, idx, isSurvey, handleInputChange }) =>
-    <div className="form__radio">
-        <label className="f-title form__label form__label--new-quiz">{ value.toUpperCase() }</label>
-            <InputChanger {...{ question, value, idx, handleInputChange }}/>
+    <div className="answer__container">
+        <div className="answer__label__container">
+            <div className="answer__label f-title" aria-labelledby="answer option" >{ value.toUpperCase() }</div>
             { !isSurvey &&
                 <RadioButton {...{ question, value, idx, handleInputChange }}/>
             }
+        </div>
+
+        <InputChanger {...{ question, value, idx, handleInputChange }}/>
+
     </div>;
 
 
@@ -52,24 +55,28 @@ const SortableQuestionItem = SortableElement(({ question, handleInputChange, han
     return (
         <div key={ `question-${i}` } className="card">
             <SortableDragHandle />
-            <label className="form__label--new-quiz f-subheader">{ i + 1 }.</label>
-            <textarea className="form__input form__input--new-quiz-question" type="text" value={ question.question } onChange={ (e) => handleInputChange('question', e.target.value, i) } placeholder='Question'></textarea>
-            <div className="line"></div>
-
-            { ['a', 'b', 'c', 'd'].map((value, idx) =>
-                <Option { ...{ key: `option-${idx}`,
-                    question, value, idx: i, isSurvey, handleInputChange
-                }} />
-            ) }
-            <div>
+            <div className="question__container">
+                <label className="question__label f-subheader">{ i + 1 }.</label>
+                <textarea className="question form__input" type="text" value={ question.question } onChange={ (e) => handleInputChange('question', e.target.value, i) } placeholder='Question'></textarea>
+            </div>
+            <div className="answers__container">
+                { ['a', 'b', 'c', 'd'].map((value, idx) =>
+                    <Option { ...{ key: `option-${idx}`,
+                        question, value, idx: i, isSurvey, handleInputChange
+                    }} />
+                ) }
+            </div>
+            <div className="answers__additional-info__container">
                 <textarea
                 placeholder="More information for students when reviewing"
-                className="form__input form__input--new-quiz-answer"
+                className="answers__additional-info form__input"
                 onChange={(e) => handleInputChange('more_information', e.target.value, i)}
                 value={ question.more_information || "" }
                 />
             </div>
-            <button className="button button__primary" onClick={ () => { handleDeleteQuestion(i); } }> Delete Question </button>
+            <div className="answer__button__container">
+                <button className="button button__primary answer__button f-small-body--slim" onClick={ () => { handleDeleteQuestion(i); } }> Delete Question </button>
+            </div>
 
         </div>
     );
