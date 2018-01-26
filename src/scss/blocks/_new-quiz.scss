@@ -5,16 +5,13 @@
         margin: 1rem 0 1rem 0;
         width: inherit;
         position: relative;
-        padding: 2rem;
+        padding: 1rem 2rem 1rem 1rem;
+        line-height: 0;
     }
 
     .line {
         padding: 0;
         margin: 1rem 0;
-    }
-
-    .button {
-        margin: 0.5rem 0 0 0;
     }
 
     .form__input--new-module {
@@ -45,7 +42,8 @@
     }
     &--drag-handle {
         position: absolute;
-        right: 1rem;
+        right: 0.5rem;
+        top: 1rem;
         cursor: move;
         cursor: grab;
         cursor: -webkit-grab;
