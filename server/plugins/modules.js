@@ -37,20 +37,20 @@ exports.register = (server, options, next) => {
             handler: (request, reply) => {
                 const { module_id } = request.query;
 
-                getTotalScoresAndTrophies(pool, module_id, (error, mainData) => {
+                getTotalScoresAndTrophies(pool, module_id, (sTrophyError, mainData) => {
                     /* istanbul ignore if */
-                    if (error) {
-                        return reply(error);
+                    if (sTrophyError) {
+                        return reply(sTrophyError);
                     }
-                    getScoresForLeaderboard(pool, module_id, (error, scores) => {
+                    getScoresForLeaderboard(pool, module_id, (lScoreError, scores) => {
                         /* istanbul ignore if */
-                        if (error) {
-                            return reply(error);
+                        if (lScoreError) {
+                            return reply(lScoreError);
                         }
-                        getQuizIDList(pool, module_id, (error, quiz_id_list) => {
+                        getQuizIDList(pool, module_id, (qIdError, quiz_id_list) => {
                             /* istanbul ignore if */
-                            if (error) {
-                                return reply(error);
+                            if (qIdError) {
+                                return reply(qIdError);
                             }
                             reply({
                                 medalScores: scores,
