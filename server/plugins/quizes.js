@@ -87,6 +87,7 @@ exports.register = (server, options, next) => {
                                 Joi.string(),
                                 Joi.any().valid(null)
                             ),
+                            order_id: Joi.number().required(),
                             correct_answer: Joi.alternatives().try(
                                 Joi.string(),
                                 Joi.any().valid(null)
@@ -96,7 +97,8 @@ exports.register = (server, options, next) => {
                                 Joi.any().valid(null)
                             ),
                         }),
-                        isSurvey: Joi.boolean()
+                        isSurvey: Joi.boolean(),
+                        is_last_quiz: Joi.boolean()
                     }
                 }
             },
@@ -118,6 +120,8 @@ exports.register = (server, options, next) => {
                             /* istanbul ignore if */
                             if (error) {
                                 console.error(error);
+                                console.log(error);
+
                             }
                             var verdict = error || response;
                             return reply(verdict);
