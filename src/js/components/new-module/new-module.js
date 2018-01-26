@@ -8,8 +8,8 @@ import validateForm from '../../lib/validateForm';
 
 const NewModule = ({ isValidatingModuleID, moduleIDExists,
                      medals, trophies, updateMedalVals, updateTrophyVals,
-                     handleInputChange, handleCodeInputChange, submit,
-                     module_id, name }) => {
+                     toggleDisableTrophies, handleInputChange, handleCodeInputChange,
+                     submit, module_id, name }) => {
 
 
     function applyOffset (originalValue, offset) {
@@ -53,6 +53,7 @@ const NewModule = ({ isValidatingModuleID, moduleIDExists,
                         <h2 className="f-subheader"> Trophies </h2>
                         <Trophies trophies={ trophies }
                             updateTrophyVals={ updateTrophyVals }
+                            toggleDisableTrophies={ toggleDisableTrophies }
                             applyOffset={ applyOffset } />
                     </div>
 
@@ -76,6 +77,7 @@ NewModule.propTypes = {
     trophies: PropTypes.object.isRequired,
     updateMedalVals: PropTypes.func.isRequired,
     updateTrophyVals: PropTypes.func.isRequired,
+    toggleDisableTrophies: PropTypes.func.isRequired,
     handleInputChange: PropTypes.func.isRequired,
     handleCodeInputChange: PropTypes.func.isRequired,
     submit: PropTypes.func.isRequired,

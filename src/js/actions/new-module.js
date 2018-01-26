@@ -9,6 +9,7 @@ export const UPDATE_TROPHY_VALUES = 'UPDATE_TROPHY_VALUES';
 export const ADD_NEW_MODULE_REQUEST = 'ADD_NEW_MODULE_REQUEST';
 export const ADD_NEW_MODULE_SUCCESS = 'ADD_NEW_MODULE_SUCCESS';
 export const ADD_NEW_MODULE_FAILURE = 'ADD_NEW_MODULE_FAILURE';
+export const TOGGLE_DISABLE_TROPHIES = 'TOGGLE_DISABLE_TROPHIES';
 
 
 export const validateModuleID = (id) => (dispatch) => {
@@ -55,6 +56,10 @@ export const updateMedalValues = (medal, value) => ({
 export const updateTrophyValues = (trophy, value) => ({
     type: UPDATE_TROPHY_VALUES,
     trophy, value
+});
+
+export const toggleDisableTrophies = () => ({
+    type: TOGGLE_DISABLE_TROPHIES,
 });
 
 /***
