@@ -229,7 +229,8 @@ exports.register = (server, options, next) => {
                         trophies: Joi.object().keys({
                             condition: Joi.array().required(),
                             trophy_name: Joi.array().required()
-                        })
+                        }),
+                        uses_trophies: Joi.boolean().default(true),
                     }
                 }
             },
@@ -238,9 +239,9 @@ exports.register = (server, options, next) => {
                     /* istanbul ignore if */
                     if (error) { return reply(error); }
                     const { user_id } = decoded.user_details;
-                    const { module_id, name, medals, trophies } = request.payload;
+                    const { module_id, name, medals, trophies, uses_trophies } = request.payload;
 
-                    saveModule(pool, module_id, user_id, name, medals, trophies, (error, result) => {
+                    saveModule(pool, module_id, user_id, name, medals, uses_trophies, trophies, (error, result) => {
                         const verdict = error || result;
                         reply(verdict);
                     });
