@@ -5,7 +5,9 @@ import getNewTrophies from '../../lib/getNewTrophies';
 
 
 const mapStateToProps = (state) => ({
-    newTrophies: state.result.newTrophyState && getNewTrophies(store.getState().module.trophies_awarded, store.getState().result.newTrophyState),
+    newTrophies: state.module.uses_trophies
+        && state.result.newTrophyState
+        && getNewTrophies(store.getState().module.trophies_awarded, store.getState().result.newTrophyState),
     score: state.result.score,
     percentageScore: state.result.percentageScore,
     medalConditions: state.module.medals.condition,
