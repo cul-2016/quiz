@@ -13,6 +13,7 @@ const mapStateToProps = (state) => {
         isFetchingModule: state.module.isFetchingModule,
         isFetchingFeedback: state.feedback.isFetchingFeedback,
         isFetchingStudentHistory: state.studentHistory.isFetchingStudentHistory,
+        uses_trophies: state.module.uses_trophies,
         trophies: state.module.trophies,
         trophies_awarded: state.module.trophies_awarded,
         username: state.user.username,

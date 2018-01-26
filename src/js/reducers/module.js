@@ -5,6 +5,7 @@ export const initialState = {
     module_id: undefined,
     name: undefined,
     medals: undefined,
+    uses_trophies: undefined,
     trophies: undefined,
     num_enrolled: undefined,
     trophies_awarded: undefined,
@@ -53,6 +54,7 @@ export function module (state = initialState, action ) {
                 name: { $set: action.data.name },
                 medals: { $set: action.data.medals },
                 trophies: { $set: action.data.trophies },
+                uses_trophies: { $set: action.data.uses_trophies },
                 num_enrolled: { $set: action.data.num_enrolled },
                 quizzes: { $set: action.data.quizzes },
                 surveys: { $set: action.data.surveys }
@@ -65,6 +67,7 @@ export function module (state = initialState, action ) {
                 module_id: { $set: action.data.module_id },
                 name: { $set: action.data.name },
                 medals: { $set: action.data.medals },
+                uses_trophies: { $set: action.data.uses_trophies },
                 trophies_awarded: { $set: action.data.trophies_awarded },
                 trophies: { $set: action.data.trophies }
             });

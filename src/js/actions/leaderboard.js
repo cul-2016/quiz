@@ -30,7 +30,8 @@ export const getLeaderboardSuccess = (data) => ({
     type: GET_LEADERBOARD_SUCCESS,
     mainData: data.mainData,
     medalScores: data.medalScores,
-    quiz_id_list: data.quiz_id_list
+    quiz_id_list: data.quiz_id_list,
+    uses_trophies: data.uses_trophies,
 });
 
 export const getLeaderboardFailure = (error) => ({

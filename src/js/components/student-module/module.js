@@ -6,7 +6,7 @@ import Trophies from './trophies'; //eslint-disable-line no-unused-vars
 
 
 const StudentModule = ({ location,
-                        trophies, trophies_awarded, //eslint-disable-line no-unused-vars
+                        uses_trophies, trophies, trophies_awarded, //eslint-disable-line no-unused-vars
                         isFetchingModule, isFetchingFeedback, //eslint-disable-line no-unused-vars
                         isFetchingStudentHistory, isQuizOpen, //eslint-disable-line no-unused-vars
                         quiz_id, question, response, //eslint-disable-line no-unused-vars
@@ -81,7 +81,7 @@ const StudentModule = ({ location,
     const trophyList = Object.keys(trophies_awarded).map((trophy, i) => {
         let awarded = trophies_awarded[trophy] ? "" : "_grey";
         return (
-            <div className="trophyItem">
+            <div className="trophyItem" key={trophy}>
                 <img key={i} src={`/assets/trophy/${trophy}${awarded}.svg`} className="trophyItem--trophy" />
                 <p className="f-small-label"> { trophyDescription(trophies.condition[i], i) } </p>
             </div>
@@ -108,7 +108,7 @@ const StudentModule = ({ location,
                     </div>
                 }
                 <div className="trophy-container">
-                    {trophyList}
+                    {uses_trophies && trophyList}
                 </div>
                 <Link className="my-performance-button" to={ `${module.module_id}/student/performance` }>
                     My Performance
