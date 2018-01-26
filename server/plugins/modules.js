@@ -195,13 +195,13 @@ exports.register = (server, options, next) => {
                     const { is_lecturer, user_id } = decoded.user_details;
 
                     if (is_lecturer) {
-                        getModuleForLecturer(pool, module_id, (error, module) => {
-                            const verdict = error || module;
+                        getModuleForLecturer(pool, module_id, (error, mod) => {
+                            const verdict = error || mod;
                             reply(verdict);
                         });
                     } else {
-                        getModuleForStudent(pool, user_id, module_id, (error, module) => {
-                            const verdict = error || module;
+                        getModuleForStudent(pool, user_id, module_id, (error, mod) => {
+                            const verdict = error || mod;
                             reply(verdict);
                         });
                     }
