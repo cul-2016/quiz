@@ -52,10 +52,24 @@ exports.register = (server, options, next) => {
                             if (qIdError) {
                                 return reply(qIdError);
                             }
-                            reply({
-                                medalScores: scores,
-                                mainData: mainData,
-                                quiz_id_list: quiz_id_list
+                            pool.connect((connErr, client, done) => {
+                                if (connErr) {
+                                    return reply(connErr);
+                                }
+
+                                client.query('SELECT uses_trophies FROM modules WHERE module_id = $1', [module_id], (queryErr, result) => {
+                                    if (queryErr) {
+                                        return reply(queryErr);
+                                    }
+                                    done();
+
+                                    reply({
+                                        medalScores: scores,
+                                        mainData: mainData,
+                                        quiz_id_list: quiz_id_list,
+                                        uses_trophies: result.rowCount ? result.rows[0].uses_trophies : true,
+                                    });
+                                });
                             });
                         });
                     });
