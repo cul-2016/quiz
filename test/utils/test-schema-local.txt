@@ -35,7 +35,8 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS modules (
     module_id CHAR(4) PRIMARY KEY,
     user_id INTEGER NOT NULL,
-    name TEXT NOT NULL
+    name TEXT NOT NULL,
+    uses_trophies BOOLEAN NOT NULL DEFAULT TRUE
 );
 
 /* medals */
