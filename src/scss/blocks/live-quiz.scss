@@ -1,4 +1,6 @@
-.live-quiz {}
+.live-quiz {
+    will-change: transform, opacity;
+}
 
 // QUESTION
 
@@ -159,6 +161,7 @@
 
     .live-quiz__footer {
         padding:2rem;
+        text-align: center;
     }
 
 // TIMER
@@ -230,6 +233,8 @@
 .student-view {
     text-align: center;
     height: 100vh;
+    will-change: transform, opacity;
+
 
 
 
