@@ -37,25 +37,41 @@ exports.register = (server, options, next) => {
             handler: (request, reply) => {
                 const { module_id } = request.query;
 
-                getTotalScoresAndTrophies(pool, module_id, (error, mainData) => {
+                getTotalScoresAndTrophies(pool, module_id, (sTrophyError, mainData) => {
                     /* istanbul ignore if */
-                    if (error) {
-                        return reply(error);
+                    if (sTrophyError) {
+                        return reply(sTrophyError);
                     }
-                    getScoresForLeaderboard(pool, module_id, (error, scores) => {
+                    getScoresForLeaderboard(pool, module_id, (lScoreError, scores) => {
                         /* istanbul ignore if */
-                        if (error) {
-                            return reply(error);
+                        if (lScoreError) {
+                            return reply(lScoreError);
                         }
-                        getQuizIDList(pool, module_id, (error, quiz_id_list) => {
+                        getQuizIDList(pool, module_id, (qIdError, quiz_id_list) => {
                             /* istanbul ignore if */
-                            if (error) {
-                                return reply(error);
+                            if (qIdError) {
+                                return reply(qIdError);
                             }
-                            reply({
-                                medalScores: scores,
-                                mainData: mainData,
-                                quiz_id_list: quiz_id_list
+                            pool.connect((connErr, client, done) => {
+                                /* istanbul ignore if */
+                                if (connErr) {
+                                    return reply(connErr);
+                                }
+
+                                client.query('SELECT uses_trophies FROM modules WHERE module_id = $1', [module_id], (queryErr, result) => {
+                                    /* istanbul ignore if */
+                                    if (queryErr) {
+                                        return reply(queryErr);
+                                    }
+                                    done();
+
+                                    reply({
+                                        medalScores: scores,
+                                        mainData: mainData,
+                                        quiz_id_list: quiz_id_list,
+                                        uses_trophies: result.rowCount ? result.rows[0].uses_trophies : true,
+                                    });
+                                });
                             });
                         });
                     });
@@ -181,13 +197,13 @@ exports.register = (server, options, next) => {
                     const { is_lecturer, user_id } = decoded.user_details;
 
                     if (is_lecturer) {
-                        getModuleForLecturer(pool, module_id, (error, module) => {
-                            const verdict = error || module;
+                        getModuleForLecturer(pool, module_id, (error, mod) => {
+                            const verdict = error || mod;
                             reply(verdict);
                         });
                     } else {
-                        getModuleForStudent(pool, user_id, module_id, (error, module) => {
-                            const verdict = error || module;
+                        getModuleForStudent(pool, user_id, module_id, (error, mod) => {
+                            const verdict = error || mod;
                             reply(verdict);
                         });
                     }
@@ -229,7 +245,8 @@ exports.register = (server, options, next) => {
                         trophies: Joi.object().keys({
                             condition: Joi.array().required(),
                             trophy_name: Joi.array().required()
-                        })
+                        }),
+                        uses_trophies: Joi.boolean().default(true),
                     }
                 }
             },
@@ -238,9 +255,9 @@ exports.register = (server, options, next) => {
                     /* istanbul ignore if */
                     if (error) { return reply(error); }
                     const { user_id } = decoded.user_details;
-                    const { module_id, name, medals, trophies } = request.payload;
+                    const { module_id, name, medals, trophies, uses_trophies } = request.payload;
 
-                    saveModule(pool, module_id, user_id, name, medals, trophies, (error, result) => {
+                    saveModule(pool, module_id, user_id, name, medals, uses_trophies, trophies, (error, result) => {
                         const verdict = error || result;
                         reply(verdict);
                     });

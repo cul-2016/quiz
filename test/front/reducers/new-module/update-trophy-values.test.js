@@ -23,3 +23,21 @@ test('UPDATE_TROPHY_VALUES works', (t) => {
     const result = reducer(initialState, action);
     t.deepEqual(result, expected);
 });
+
+
+test('TOGGLE_DISABLE_TROPHIES works', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(newModuleState);
+
+    const action = {
+        type: 'TOGGLE_DISABLE_TROPHIES',
+    };
+    const expected = update(newModuleState, {
+        trophiesDisabled: { $set: true }
+    });
+
+    const result = reducer(initialState, action);
+    t.deepEqual(result, expected);
+});

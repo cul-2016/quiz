@@ -40,7 +40,8 @@ test('GET_LEADERBOARD_SUCCESS works', (t) => {
         type: 'GET_LEADERBOARD_SUCCESS',
         mainData,
         medalScores,
-        quiz_id_list
+        quiz_id_list,
+        uses_trophies: true,
     };
 
     const actual = reducer(initialState, action);

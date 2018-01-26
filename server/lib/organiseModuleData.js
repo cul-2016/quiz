@@ -58,6 +58,7 @@ function organiseModuleData (is_lecturer, module_id, data, callback) {
                 medal_name: ['bronze', 'silver', 'gold'],
                 condition: [data.medals[0].condition, data.medals[1].condition]
             },
+            uses_trophies: data.trophies_awarded.uses_trophies,
             trophies_awarded: {
                 first_quiz: data.trophies_awarded.first_quiz,
                 high_score: data.trophies_awarded.high_score,

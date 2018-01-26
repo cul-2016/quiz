@@ -305,7 +305,7 @@ test('/authenticate-user endpoint returns error for delAsync Redis call', (t) =>
     {
         method: 'get',
         url: '/get-module?module_id=TEST',
-        expected: { module_id: 'TEST', name: 'test module', medals: { medal_name: ['bronze', 'silver', 'gold'], condition: [39, 69] }, trophies_awarded: { first_quiz: false, high_score: false, participation: false, overall_score: false }, trophies: { trophy_name: ['first_quiz', 'high_score', 'overall_score', 'participation'], condition: [1, 100, 2, 2] } }
+        expected: { module_id: 'TEST', name: 'test module', medals: { medal_name: ['bronze', 'silver', 'gold'], condition: [39, 69] }, uses_trophies: true, trophies_awarded: { first_quiz: false, high_score: false, participation: false, overall_score: false }, trophies: { trophy_name: ['first_quiz', 'high_score', 'overall_score', 'participation'], condition: [1, 100, 2, 2] } }
     },
     {
         method: 'get',

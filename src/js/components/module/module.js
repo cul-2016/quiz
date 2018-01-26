@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
-import Details from './details.js';
 import Quizzes from './quizzes.js';
 const  Surveys = Quizzes;
 import applyOffset from '../../lib/applyOffset';

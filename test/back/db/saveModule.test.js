@@ -16,9 +16,10 @@ test('`saveModule` a module to the database works ok', (t) => {
         const expectedCommand = 'INSERT';
         const module_id = "MOD1";
         const user_id = 1;
+        const uses_trophies = true;
         const name = "Test Module";
 
-        saveModule(pool, module_id, user_id, name, medals, trophies, (error, response) => {
+        saveModule(pool, module_id, user_id, name, medals, uses_trophies, trophies, (error, response) => {
             t.equal(error, expectedError, 'error is null, module is saved to db correctly.');
             t.deepEqual(response.command, expectedCommand, 'Correct command of INSERT, module is saved to db correctly');
         });

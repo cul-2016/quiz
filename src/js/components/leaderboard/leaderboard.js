@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
-const Leaderboard = ({ mainData, medalScores, quiz_id_list, medalCondition, params }) => { //eslint-disable-line no-unused-vars
+const Leaderboard = ({ mainData, medalScores, quiz_id_list, uses_trophies, medalCondition, params }) => { //eslint-disable-line no-unused-vars
 
     let rankingNumbers = mainData.map((user, i) => {
         if (i === 0){
@@ -41,12 +41,15 @@ const Leaderboard = ({ mainData, medalScores, quiz_id_list, medalCondition, para
           <tr key={i} className="leaderboard__row">
               <td className="leaderboard__cell f-subheader"> { rankingNumbers[i] } </td>
               <td className="leaderboard__cell leaderboard__cell--tl f-subheader leaderboard__username"> { user.username } </td>
-              <td className="leaderboard__cell leaderboard__cell--tl f-subheader">
-                  <img className="leaderboard__trophy" src={`/assets/trophy/first_quiz${firstQuiz ? '' : '_grey'}.svg`} />
-                  <img className="leaderboard__trophy" src={`/assets/trophy/high_score${highScore ? '' : '_grey'}.svg`} />
-                  <img className="leaderboard__trophy" src={`/assets/trophy/overall_score${overallScore ? '' : '_grey'}.svg`} />
-                  <img className="leaderboard__trophy" src={`/assets/trophy/participation${participation ? '' : '_grey'}.svg`} />
-               </td>
+              {
+                    uses_trophies
+                    && <td className="leaderboard__cell leaderboard__cell--tl f-subheader">
+                        <img className="leaderboard__trophy" src={`/assets/trophy/first_quiz${firstQuiz ? '' : '_grey'}.svg`} />
+                        <img className="leaderboard__trophy" src={`/assets/trophy/high_score${highScore ? '' : '_grey'}.svg`} />
+                        <img className="leaderboard__trophy" src={`/assets/trophy/overall_score${overallScore ? '' : '_grey'}.svg`} />
+                        <img className="leaderboard__trophy" src={`/assets/trophy/participation${participation ? '' : '_grey'}.svg`} />
+                    </td>
+              }
               <td className="leaderboard__cell f-subheader"> { bronzeTotal} </td>
               <td className="leaderboard__cell f-subheader"> { silverTotal } </td>
               <td className="leaderboard__cell f-subheader"> { goldTotal } </td>
@@ -74,7 +77,9 @@ const Leaderboard = ({ mainData, medalScores, quiz_id_list, medalCondition, para
                         <tr>
                             <th className="leaderboard__cell leaderboard__cell--header leaderboard__cell--narrow f-body f-body--white">#</th>
                             <th className="leaderboard__cell leaderboard__cell--header leaderboard__cell--tl f-body f-body--white">Name</th>
-                            <th className="leaderboard__cell leaderboard__cell--header leaderboard__cell--tl f-body f-body--white">Badges</th>
+                            {
+                                uses_trophies && <th className="leaderboard__cell leaderboard__cell--header leaderboard__cell--tl f-body f-body--white">Badges</th>
+                            }
                             <th className="leaderboard__cell leaderboard__cell--header leaderboard__cell--narrow">
                               <p className="medal-small medal-small--bronze"></p>
                             </th>
@@ -103,6 +108,7 @@ Leaderboard.propTypes = {
     mainData: PropTypes.array,
     medalScores: PropTypes.array,
     quiz_id_list: PropTypes.array,
+    uses_trophies: PropTypes.bool,
     medalCondition: PropTypes.array,
     params: PropTypes.object.isRequired
 };
