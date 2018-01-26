@@ -53,11 +53,13 @@ exports.register = (server, options, next) => {
                                 return reply(qIdError);
                             }
                             pool.connect((connErr, client, done) => {
+                                /* istanbul ignore if */
                                 if (connErr) {
                                     return reply(connErr);
                                 }
 
                                 client.query('SELECT uses_trophies FROM modules WHERE module_id = $1', [module_id], (queryErr, result) => {
+                                    /* istanbul ignore if */
                                     if (queryErr) {
                                         return reply(queryErr);
                                     }
