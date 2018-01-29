@@ -100,6 +100,7 @@ const Quizzes = ({
                       quiz.is_presented
                       ? <div className="f-body f-body--dark quizzes__container--actions-info">{ +quiz.num_entries } <br/> entries </div>
                       : <div
+                            id="ga-live-quiz-run"
                             className="quizzes__container--actions-icons"
                             onClick={ (e) => {
                                 e.stopPropagation();

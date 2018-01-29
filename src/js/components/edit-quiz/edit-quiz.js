@@ -75,7 +75,7 @@ const EditQuiz = ({ questions, isUpdatingQuiz, name,
                     <button className="button button--add-question" onClick={ handleAddQuestion }>
                       Add Question
                     </button>
-                    <button className={ submitClasses } onClick={ () => handleEditQuiz(params.module_id, params.quiz_id, params.survey_id, name, questions, deletedQuestions, is_last_quiz) }>
+                    <button id="ga-edit-quiz" className={ submitClasses } onClick={ () => handleEditQuiz(params.module_id, params.quiz_id, params.survey_id, name, questions, deletedQuestions, is_last_quiz) }>
                       Save and Exit
                     </button>
                   </div>
