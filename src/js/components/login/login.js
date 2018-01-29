@@ -51,7 +51,7 @@ const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthentic
                 <div className={ login.email && !isEmail(login.email) ? 'f-body--warning' : 'display-none' }>
                   Invalid Email Address
                 </div>
-                <button onClick={ handleOnSubmit } className="button">Log in</button>
+                <button id="ga-signin" onClick={ handleOnSubmit } className="button">Log in</button>
 
                 <div className="login__links">
                     <p className="f-body"> Don&#39;t have an Account? </p>

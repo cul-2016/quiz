@@ -58,7 +58,7 @@ class Dashboard extends Component {
                 </div>
                 {
                   !is_lecturer &&
-                  <div className="card">
+                  <div id="ga-student-module" className="card">
                   <div className="dashboard__student--module">
                       <input
                           className="form__input form__input--add-module"
