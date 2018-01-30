@@ -20,9 +20,34 @@ const NewQuiz = ({
 }) => {
 
     const questionsValidation = questions.map((questionObj) => {
-        const { question, a, b, correct_answer } = questionObj;
-        return Boolean(question && a && b && (correct_answer || isSurvey));
+        const { question, a, b } = questionObj;
+        return Boolean(question && a && b);
     }).every((elem) => elem);
+    const questionsToggleValidation = questions.map((questionObj) => {
+        const { correct_answer } = questionObj;
+        return Boolean(correct_answer || isSurvey);
+    }).every((elem) => elem);
+
+    const handleErrorMessage = () => {
+        if (questionsValidation && questionsToggleValidation && name) {
+            handleSaveQuiz(
+                location.pathname.split('/')[1],
+                name,
+                questions,
+                is_last_quiz,
+                isSurvey
+            );
+        } else if (!questionsValidation) {
+            handleError({ message: 'Please ensure that all questions have at least two options' });
+        } else if (!questionsToggleValidation) {
+            handleError({ message: 'Please ensure that you have indicated the correct answer for each question' });
+        } else if (!name) {
+            handleError({ message: 'Please ensure that you have provided a name' });
+        } else {
+            handleError({ message: 'Please ensure that all questions have at least two options, and you have you have indicated the correct answer for all questions.' });
+        }
+    }
+
     const surveyIconClasses = classnames("fa", {
         "fa-square": !isSurvey,
         "fa-check-square": isSurvey
@@ -93,26 +118,17 @@ const NewQuiz = ({
                       handleQuestionOrder={ handleQuestionOrder }
                       />
 
+                    <div className="error-container f-body--warning">
+                        {error && error.message}
+                    </div>
                     <div className="new-quiz--buttons">
                       <button className="button button__secondary button--add-question" onClick={ handleAddQuestion }>
                         Add Question
                       </button>
                       <button id="ga-add-quiz" className="button"
-                        onClick={ () => { questionsValidation && name ? handleSaveQuiz(
-                          location.pathname.split('/')[1],
-                          name,
-                          questions,
-                          is_last_quiz,
-                          isSurvey
-                      )
-                        :
-                        handleError({ message: 'Please ensure that all questions have at least two options, and you have you have indicated the correct answer for all questions.' });}
-                     }>
+                        onClick={ () => handleErrorMessage() }>
                         Save and Exit
                       </button>
-                    </div>
-                    <div className="error-container f-body--warning">
-                        { error && error.message }
                     </div>
               </div>
             </div>
