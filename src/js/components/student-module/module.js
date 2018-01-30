@@ -32,7 +32,9 @@ const StudentModule = ({ location,
                                 <div className="f-body--heavy"> { quiz.name } </div>
                                 <div>
                                     <div className="quiz__item-percentage-score">{ percentageScore }%</div>
-                                    <Link to={`/${module.module_id}/student/history/${quiz.quiz_id}`}>
+                                    <Link
+                                    id="ga-review-revise-quiz"
+                                    to={`/${module.module_id}/student/history/${quiz.quiz_id}`}>
                                         <div className="f-body--primary quiz__item-button-underline">Review my answers</div>
                                     </Link>
                                 </div>
@@ -41,7 +43,9 @@ const StudentModule = ({ location,
                     </div>
                 </div>
                 <div className="quiz__item-button-container">
-                    <Link to={`/${module.module_id}/student/revise/${quiz.quiz_id}`}>
+                    <Link
+                    id="ga-review-revise-quiz"
+                    to={`/${module.module_id}/student/revise/${quiz.quiz_id}`}>
                         <div className="button"> Revise </div>
                     </Link>
                 </div>

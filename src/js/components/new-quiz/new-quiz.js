@@ -97,7 +97,7 @@ const NewQuiz = ({
                       <button className="button button__secondary button--add-question" onClick={ handleAddQuestion }>
                         Add Question
                       </button>
-                      <button className="button"
+                      <button id="ga-add-quiz" className="button"
                         onClick={ () => { questionsValidation && name ? handleSaveQuiz(
                           location.pathname.split('/')[1],
                           name,

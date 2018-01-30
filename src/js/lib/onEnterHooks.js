@@ -15,6 +15,9 @@ import { getStudentHistory } from '../actions/student-history';
 import { clearInitialState } from '../actions/login';
 import { getSuperAdminDashboard } from '../actions/super-admin';
 
+import ReactGA from 'react-ga';
+ReactGA.initialize('UA-113135812-1');
+
 /**
  * Checks if user is authenticated.  Redirects  to '/' if they're not
  * Is used as an onEnter hook for React Router
@@ -36,7 +39,7 @@ export function authenticate (nextState, replace, callback) {
         replace('/app-loading');
         callback(false);
     } else {
-
+        ReactGA.pageview(nextState.location.pathname);
         callback();
     }
 }
