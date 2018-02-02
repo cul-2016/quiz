@@ -58,20 +58,15 @@ class Timer extends Component {
             });
         } else {
             clearInterval(this.timerID);
-            this.setState({
-                isTimerRunning: true, // set timer to run automatically on the next question
-                duration: this.state.customDuration
-            }, () => {
-                if (this.props.nextQuestionIndex !== this.props.numQuestions) {
-                    this.props.nextQuestion();
-                }
-                else if (this.props.nextQuestionIndex === this.props.numQuestions && this.props.review) {
-                    this.props.handleAbortQuiz(this.props.quiz_id);
-                }
-                else {
-                    this.props.endQuiz(this.props.quiz_id);
-                }
-            });
+            if (this.props.nextQuestionIndex !== this.props.numQuestions) {
+                this.props.nextQuestion();
+            }
+            else if (this.props.nextQuestionIndex === this.props.numQuestions && this.props.review) {
+                this.props.handleAbortQuiz(this.props.quiz_id);
+            }
+            else {
+                this.props.endQuiz(this.props.quiz_id);
+            }
         }
     }
 
