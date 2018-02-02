@@ -176,7 +176,7 @@
 .live-quiz__timer {
     border: 2px solid $blue;
     border-radius: 50%;
-    padding: 1.75rem;
+    padding: 1.25rem;
     margin: 0 1rem 0 1rem;
     min-width: 4rem;
     display: flex;
@@ -184,9 +184,25 @@
     cursor: pointer;
 
     &--warning {
-        color: $bright-red;
         border: 2px solid $bright-red;
+        color: $white;
+        background: $bright-red;
+        animation: pulse 2s infinite;
+        animation-timing-function: ease-in-out;
     }
+
+    @keyframes pulse {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(0.8);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+
 }
 
 .live-quiz__timer-decrement {
