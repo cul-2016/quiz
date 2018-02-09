@@ -15,6 +15,7 @@ const initialState = {
         ],
         condition: [3, 10, 100, 1]
     },
+    trophiesDisabled: false,
     error: undefined,
     moduleIDExists: undefined,
     validationProblem: false,
@@ -45,6 +46,9 @@ export default function newModule (state = initialState, action) {
 
     case actionTypes.UPDATE_TROPHY_VALUES:
         return updateTrophyValues(state, action);
+
+    case actionTypes.TOGGLE_DISABLE_TROPHIES:
+        return toggleDisableTrophies(state);
 
     case actionTypes.ADD_NEW_MODULE_REQUEST:
         return update(state, {
@@ -106,5 +110,11 @@ function updateTrophyValues (state, action) {
         trophies: {
             condition: { $splice: [[index, 1, action.value]] }
         }
+    });
+}
+
+function toggleDisableTrophies (state) {
+    return update(state, {
+        trophiesDisabled: { $set: !state.trophiesDisabled },
     });
 }

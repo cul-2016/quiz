@@ -10,7 +10,7 @@ var query = require('./query');
 
 function getQuizDetails (client, survey_id, callback) {
 
-    var questionsQuery = 'SELECT question_id, order_id, question, a, b, c, d, correct_answer FROM questions WHERE survey_id = $1 ORDER BY order_id, question_id;';
+    var questionsQuery = 'SELECT question_id, order_id, question, a, b, c, d, correct_answer, more_information FROM questions WHERE survey_id = $1 ORDER BY order_id, question_id;';
     query(client, questionsQuery, [survey_id], (error, questions) => {
         /* istanbul ignore if */
         if (error) {

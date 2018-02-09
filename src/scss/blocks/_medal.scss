@@ -31,3 +31,18 @@
   }
 
 }
+
+.new-module-medal-small {
+    height: 4.5rem;
+    width: 4.25rem;
+    background-size: cover;
+    &--gold {
+        background-image: url(../../public/assets/medals/small-gold-medal.svg);
+    }
+    &--silver {
+        background-image: url(../../public/assets/medals/small-silver-medal.svg);
+    }
+    &--bronze {
+        background-image: url(../../public/assets/medals/small-bronze-medal.svg);
+    }
+}

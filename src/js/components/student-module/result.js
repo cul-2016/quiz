@@ -3,7 +3,6 @@ import { hashHistory } from 'react-router';
 import showNavbar from '../../lib/showNavbar';
 import { studentResultsWithBadges } from '../../lib/animate';
 import { Link } from 'react-router';
-import classnames from 'classnames';
 
 export default class Result extends Component {
 
@@ -29,13 +28,6 @@ export default class Result extends Component {
         let { score, medalConditions, percentageScore, params } = this.props; //eslint-disable-line
 
         let module_id = params.module_id;
-        let quiz_id = params.quiz_id;
-
-        let medalClass = classnames("medal-result", {
-            "medal-result--gold": percentageScore >= medalConditions[1],
-            "medal-result--silver": percentageScore >= medalConditions[0] && percentageScore < medalConditions[1],
-            "medal-result--bronze": percentageScore < medalConditions[0] && percentageScore >= 0
-        });
 
         const calcMedal = () => {
             if (percentageScore >= medalConditions[1]) {

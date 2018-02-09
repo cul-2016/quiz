@@ -46,6 +46,12 @@
     .trophyItem {
         max-width: 9rem;
         margin: 0.5rem;
+        display: inline-block;
+
+        &--trophy {
+            max-width: 9rem;
+            display: inline-block;
+        }
     }
 
     .quiz-button {

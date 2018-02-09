@@ -6,6 +6,7 @@ export const initialState = {
     mainData: [],
     medalScores: [],
     quiz_id_list: [],
+    uses_trophies: true,
     isFetchingLeaderboard: false,
     error: undefined
 };
@@ -25,7 +26,8 @@ export function leaderboard (state = initialState, action) {
             isFetchingLeaderboard: { $set: false },
             mainData: { $set: action.mainData },
             medalScores: { $set: action.medalScores },
-            quiz_id_list: { $set: action.quiz_id_list }
+            quiz_id_list: { $set: action.quiz_id_list },
+            uses_trophies: { $set: action.uses_trophies },
         });
 
 

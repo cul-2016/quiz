@@ -4,8 +4,9 @@ import Tabs from './tabs'; //eslint-disable-line no-unused-vars
 import Spinner from '../general/spinner';
 import Trophies from './trophies'; //eslint-disable-line no-unused-vars
 
+
 const StudentModule = ({ location,
-                        trophies, trophies_awarded, //eslint-disable-line no-unused-vars
+                        uses_trophies, trophies, trophies_awarded, //eslint-disable-line no-unused-vars
                         isFetchingModule, isFetchingFeedback, //eslint-disable-line no-unused-vars
                         isFetchingStudentHistory, isQuizOpen, //eslint-disable-line no-unused-vars
                         quiz_id, question, response, //eslint-disable-line no-unused-vars
@@ -31,7 +32,9 @@ const StudentModule = ({ location,
                                 <div className="f-body--heavy"> { quiz.name } </div>
                                 <div>
                                     <div className="quiz__item-percentage-score">{ percentageScore }%</div>
-                                    <Link to={`/${module.module_id}/student/history/${quiz.quiz_id}`}>
+                                    <Link
+                                    id="ga-review-revise-quiz"
+                                    to={`/${module.module_id}/student/history/${quiz.quiz_id}`}>
                                         <div className="f-body--primary quiz__item-button-underline">Review my answers</div>
                                     </Link>
                                 </div>
@@ -40,13 +43,25 @@ const StudentModule = ({ location,
                     </div>
                 </div>
                 <div className="quiz__item-button-container">
-                    <Link to={`/${module.module_id}/student/revise/${quiz.quiz_id}`}>
+                    <Link
+                    id="ga-review-revise-quiz"
+                    to={`/${module.module_id}/student/revise/${quiz.quiz_id}`}>
                         <div className="button"> Revise </div>
                     </Link>
                 </div>
             </div>
         );
     });
+
+    const trophyDescription = (value, i) => {
+        const arr = [
+            `Complete ${value} quiz`,
+            `Get ${value} percentage`,
+            `Take ${value} quizzes`,
+            `Get ${value} score overall`
+        ];
+        return arr[i];
+    };
 
     let handleAnimation = (e, livePath) => {
         e.preventDefault();
@@ -70,7 +85,10 @@ const StudentModule = ({ location,
     const trophyList = Object.keys(trophies_awarded).map((trophy, i) => {
         let awarded = trophies_awarded[trophy] ? "" : "_grey";
         return (
-            <img key={i} src={`/assets/trophy/${trophy}${awarded}.svg`} className="trophyItem" />
+            <div className="trophyItem" key={trophy}>
+                <img key={i} src={`/assets/trophy/${trophy}${awarded}.svg`} className="trophyItem--trophy" />
+                <p className="f-small-label"> { trophyDescription(trophies.condition[i], i) } </p>
+            </div>
         );
     });
 
@@ -94,7 +112,7 @@ const StudentModule = ({ location,
                     </div>
                 }
                 <div className="trophy-container">
-                    {trophyList}
+                    {uses_trophies && trophyList}
                 </div>
                 <Link className="my-performance-button" to={ `${module.module_id}/student/performance` }>
                     My Performance

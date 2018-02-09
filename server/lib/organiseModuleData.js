@@ -53,17 +53,32 @@ function organiseModuleData (is_lecturer, module_id, data, callback) {
 
         organisedData = {
             module_id: module_id,
-            name: data[0].name,
+            name: data.trophies_awarded.name,
             medals: {
                 medal_name: ['bronze', 'silver', 'gold'],
-                condition: [data[1].condition, data[2].condition]
+                condition: [data.medals[0].condition, data.medals[1].condition]
             },
+            uses_trophies: data.trophies_awarded.uses_trophies,
             trophies_awarded: {
-                first_quiz: data[0].first_quiz,
-                high_score: data[0].high_score,
-                participation: data[0].participation,
-                overall_score: data[0].overall_score
-            }
+                first_quiz: data.trophies_awarded.first_quiz,
+                high_score: data.trophies_awarded.high_score,
+                participation: data.trophies_awarded.participation,
+                overall_score: data.trophies_awarded.overall_score
+            },
+            trophies: {
+                trophy_name: [
+                    data.trophies[0].trophy_name,
+                    data.trophies[1].trophy_name,
+                    data.trophies[2].trophy_name,
+                    data.trophies[3].trophy_name
+                ],
+                condition: [
+                    parseInt(data.trophies[0].condition, 10),
+                    parseInt(data.trophies[1].condition, 10),
+                    parseInt(data.trophies[2].condition, 10),
+                    parseInt(data.trophies[3].condition, 10),
+                ]
+            },
         };
     }
 

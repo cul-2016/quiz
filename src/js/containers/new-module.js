@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { updateMedalValues, updateTrophyValues, updateTextValues, validateModuleID, addNewModule } from '../actions/new-module';
+import { updateMedalValues, updateTrophyValues, toggleDisableTrophies, updateTextValues, validateModuleID, addNewModule } from '../actions/new-module';
 import NewModule from '../components/new-module/new-module';
 import { store } from '../store';
 import { hashHistory } from 'react-router';
@@ -46,6 +46,11 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(updateTrophyValues(trophy, value));
     },
 
+    toggleDisableTrophies: () => {
+
+        dispatch(toggleDisableTrophies());
+    },
+
     submit: () => {
 
         if (!store.getState().newModule.validationProblem) {
@@ -56,6 +61,7 @@ const mapDispatchToProps = (dispatch) => ({
                 { module_id: currentState.module_id },
                 { name: currentState.name },
                 { trophies: currentState.trophies },
+                { uses_trophies: !currentState.trophiesDisabled },
                 {
                     medals: {
                         medal_name: ["bronze", "silver", "gold"],

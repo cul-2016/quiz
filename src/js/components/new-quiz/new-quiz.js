@@ -11,27 +11,43 @@ const NewQuiz = ({
     handleInputChange,
     handleQuizNameChange,
     handleSaveQuiz,
-    handleIsLastQuiz,
     handleIsSurvey,
     location,
     params,
-    handleQuestionOrder
+    handleQuestionOrder,
+    handleError,
+    error
 }) => {
 
     const questionsValidation = questions.map((questionObj) => {
-        const { question, a, b, correct_answer } = questionObj;
-        return Boolean(question && a && b && (correct_answer || isSurvey));
+        const { question, a, b } = questionObj;
+        return Boolean(question && a && b);
     }).every((elem) => elem);
-    const submitClasses = classnames("button", {
-        "button__disabled": !name || questionsValidation === false,
-    });
-    const lastQuizIconClasses = classnames("fa", {
-        "fa-square": !is_last_quiz,
-        "fa-check-square": is_last_quiz
-    });
-    const lastQuizClasses = classnames("button", {
-        "button__secondary": is_last_quiz
-    });
+    const questionsToggleValidation = questions.map((questionObj) => {
+        const { correct_answer } = questionObj;
+        return Boolean(correct_answer || isSurvey);
+    }).every((elem) => elem);
+
+    const handleErrorMessage = () => {
+        if (questionsValidation && questionsToggleValidation && name) {
+            handleSaveQuiz(
+                location.pathname.split('/')[1],
+                name,
+                questions,
+                is_last_quiz,
+                isSurvey
+            );
+        } else if (!questionsValidation) {
+            handleError({ message: 'Please ensure that all questions have at least two options' });
+        } else if (!questionsToggleValidation) {
+            handleError({ message: 'Please ensure that you have indicated the correct answer for each question' });
+        } else if (!name) {
+            handleError({ message: 'Please ensure that you have provided a name' });
+        } else {
+            handleError({ message: 'Please ensure that all questions have at least two options, and you have you have indicated the correct answer for all questions.' });
+        }
+    }
+
     const surveyIconClasses = classnames("fa", {
         "fa-square": !isSurvey,
         "fa-check-square": isSurvey
@@ -102,18 +118,15 @@ const NewQuiz = ({
                       handleQuestionOrder={ handleQuestionOrder }
                       />
 
+                    <div className="error-container f-body--warning">
+                        {error && error.message}
+                    </div>
                     <div className="new-quiz--buttons">
                       <button className="button button__secondary button--add-question" onClick={ handleAddQuestion }>
                         Add Question
                       </button>
-                      <button className={ submitClasses }
-                        onClick={ () => handleSaveQuiz(
-                          location.pathname.split('/')[1],
-                          name,
-                          questions,
-                          is_last_quiz,
-                          isSurvey
-                        ) }>
+                      <button id="ga-add-quiz" className="button"
+                        onClick={ () => handleErrorMessage() }>
                         Save and Exit
                       </button>
                     </div>
@@ -130,11 +143,12 @@ NewQuiz.propTypes = {
     handleInputChange: PropTypes.func.isRequired,
     handleQuizNameChange: PropTypes.func.isRequired,
     handleSaveQuiz: PropTypes.func.isRequired,
-    handleIsLastQuiz: PropTypes.func.isRequired,
     handleIsSurvey: PropTypes.func.isRequired,
     location: PropTypes.object.isRequired,
     params: PropTypes.object.isRequired,
-    handleQuestionOrder: PropTypes.func.isRequired
+    handleQuestionOrder: PropTypes.func.isRequired,
+    handleError: PropTypes.func.isRequired,
+    error: PropTypes.object
 };
 
 

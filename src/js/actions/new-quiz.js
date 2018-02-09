@@ -8,6 +8,7 @@ export const CLEAR_NEW_QUIZ_STATE = 'CLEAR_NEW_QUIZ_STATE';
 export const TOGGLE_IS_LAST_QUIZ = 'TOGGLE_IS_LAST_QUIZ';
 export const TOGGLE_IS_SURVEY = 'TOGGLE_IS_SURVEY';
 export const QUESTION_ORDER = 'QUESTION_ORDER';
+export const DISPLAY_ERROR = 'DISPLAY_ERROR';
 
 export const SAVE_QUIZ_REQUEST = 'SAVE_QUIZ_REQUEST';
 export const SAVE_QUIZ_SUCCESS = 'SAVE_QUIZ_SUCCESS';
@@ -61,6 +62,11 @@ export const questionOrder = (questions, oldIndex, newIndex) => ({
     data: {
         questions, oldIndex, newIndex
     }
+});
+
+export const displayError = (error) =>({
+    type: DISPLAY_ERROR,
+    error
 });
 
 //

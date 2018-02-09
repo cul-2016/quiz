@@ -25,6 +25,8 @@
     }
     .answer {
         padding: 0.75rem;
+        width: auto;
+        min-height: auto;
     }
 
     .same_answer {
@@ -38,5 +40,18 @@
     }
     .f-label {
       padding-right: 0.5rem;
+    }
+    .link {
+        text-decoration: underline;
+        font-weight: normal;
+    }
+
+    @media (min-width:48rem) {
+            .review-quiz-student-container {
+                max-width: 48rem;
+                margin: auto;
+                padding: 2rem;
+                border-radius: 0.625rem;
+            }
     }
 }

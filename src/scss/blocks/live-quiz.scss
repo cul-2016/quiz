@@ -1,4 +1,6 @@
-.live-quiz {}
+.live-quiz {
+    will-change: transform, opacity;
+}
 
 // QUESTION
 
@@ -111,9 +113,9 @@
 
 
     .live-quiz__letter { /* A,B,C, or D */
-        padding-top: 2rem;
         box-sizing: border-box;
-        display: inline-block;
+        display: table-cell;
+        vertical-align: middle;
         text-transform: capitalize;
         font-size: 3rem;
         font-weight: 700;
@@ -159,15 +161,96 @@
 
     .live-quiz__footer {
         padding:2rem;
+        text-align: center;
     }
 
+// TIMER
 
+.live-quiz__timer-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
 
+.live-quiz__timer {
+    border: 2px solid $blue;
+    border-radius: 50%;
+    padding: 1.25rem;
+    margin: 0 1rem 0 1rem;
+    min-width: 4rem;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+
+    &--warning {
+        border: 2px solid $bright-red;
+        color: $white;
+        background: $bright-red;
+        animation: pulse 2s infinite;
+        animation-timing-function: ease-in-out;
+    }
+
+    @keyframes pulse {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(0.8);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+
+}
+
+.live-quiz__timer-decrement {
+    height: 3rem;
+    cursor: pointer;
+    padding: 1rem 0 1rem 1rem;
+}
+
+.live-quiz__timer-increment {
+    height: 3rem;
+    cursor: pointer;
+    padding: 1rem 1rem 1rem 0;
+}
+
+.live-quiz__controls {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.live-quiz-buttons__container {
+    justify-content: center;
+    margin: 2rem 0 2rem 0;
+}
+
+@media(min-width: 697px) {
+    .live-quiz__controls {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .live-quiz-buttons__container {
+        width: 50%;
+        margin: 0;
+    }
+
+    .live-quiz__timer-container {
+        width: 50%;
+        justify-content: start;
+    }
+}
 // OVERRIDES
 
 .student-view {
     text-align: center;
     height: 100vh;
+    will-change: transform, opacity;
+
 
 
 
@@ -197,7 +280,7 @@
     .card {
         padding: 0;
     }
-    
+
     .live-quiz__answer-inner {
         padding-top: 0;
         padding-bottom: 0;
@@ -205,6 +288,7 @@
 
     .question {
       background-color: $white;
+      padding: 1rem;
     }
     .f-subheader {
         padding: 1rem 2rem;

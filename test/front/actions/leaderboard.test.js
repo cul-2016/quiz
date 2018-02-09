@@ -42,14 +42,16 @@ test('getLeaderboardSuccess creates the correct action', (t) => {
     const data = {
         mainData,
         medalScores,
-        quiz_id_list
+        quiz_id_list,
+        uses_trophies: false,
     };
 
     const expected = {
         type: actions.GET_LEADERBOARD_SUCCESS,
         mainData,
         medalScores,
-        quiz_id_list
+        quiz_id_list,
+        uses_trophies: false,
     };
 
     const actual = deepFreeze(actions.getLeaderboardSuccess(data));

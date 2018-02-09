@@ -67,9 +67,43 @@ exports.register = (server, options, next) => {
         {
             method: 'POST',
             path: '/save-quiz',
+            config: {
+                response: {
+                    failAction: 'log'
+                },
+                validate: {
+                    payload: {
+                        module_id: Joi.string().required(),
+                        name: Joi.string().required(),
+                        questions: Joi.array().items({
+                            question: Joi.string().required(),
+                            a: Joi.string().required(),
+                            b: Joi.string().required(),
+                            c: Joi.alternatives().try(
+                                Joi.string(),
+                                Joi.any().valid(null)
+                            ),
+                            d: Joi.alternatives().try(
+                                Joi.string(),
+                                Joi.any().valid(null)
+                            ),
+                            order_id: Joi.number().required(),
+                            correct_answer: Joi.alternatives().try(
+                                Joi.string(),
+                                Joi.any().valid(null)
+                            ),
+                            more_information: Joi.alternatives().try(
+                                Joi.string(),
+                                Joi.any().valid(null)
+                            ),
+                        }),
+                        isSurvey: Joi.boolean(),
+                        is_last_quiz: Joi.boolean()
+                    }
+                }
+            },
             handler: (request, reply) => {
                 const { module_id, name, questions, isSurvey, is_last_quiz = false } = request.payload;
-
                 const saveQuestionsFlow = (pool, id, { isSurvey }) => {
                     if (questions.length === 0) {
                         if (!isSurvey && is_last_quiz) {
@@ -86,6 +120,8 @@ exports.register = (server, options, next) => {
                             /* istanbul ignore if */
                             if (error) {
                                 console.error(error);
+                                console.log(error);
+
                             }
                             var verdict = error || response;
                             return reply(verdict);

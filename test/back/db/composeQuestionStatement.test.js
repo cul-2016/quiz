@@ -18,7 +18,8 @@ test('composeQuestionStatement returns the correctly formatted object (quiz)', (
                 b: 'b',
                 c: 'c',
                 d: 'd',
-                correct_answer: 'a' },
+                correct_answer: 'a',
+                more_information: null },
             {
                 order_id: 2,
                 question: 'Two',
@@ -26,12 +27,13 @@ test('composeQuestionStatement returns the correctly formatted object (quiz)', (
                 b: 'b',
                 c: 'c',
                 d: 'd',
-                correct_answer: 'b'
+                correct_answer: 'b',
+                more_information: null
             }];
 
         const expected = {
-            text: 'INSERT INTO questions (quiz_id, order_id, question, a, b, c, d, correct_answer) VALUES ($1, $2, $3, $4, $5, $6, $7, $8), ($9, $10, $11, $12, $13, $14, $15, $16)',
-            values: [1, 1, 'One', 'a', 'b', 'c', 'd', 'a', 1, 2, 'Two', 'a', 'b', 'c', 'd', 'b']
+            text: 'INSERT INTO questions (quiz_id, order_id, question, a, b, c, d, correct_answer, more_information) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9), ($10, $11, $12, $13, $14, $15, $16, $17, $18)',
+            values: [1, 1, 'One', 'a', 'b', 'c', 'd', 'a', null, 1, 2, 'Two', 'a', 'b', 'c', 'd', 'b', null]
         };
         composeQuestionStatement(quiz_id, arrayQuestions, { is_survey: false }, (error, response) => {
             t.deepEqual(response, expected);
@@ -53,7 +55,9 @@ test('composeQuestionStatement returns the correctly formatted object (survey)',
                 b: 'b',
                 c: 'c',
                 d: 'd',
-                correct_answer: 'a' },
+                correct_answer: 'a',
+                more_information: null
+            },
             {
                 order_id: 2,
                 question: 'Two',
@@ -61,12 +65,13 @@ test('composeQuestionStatement returns the correctly formatted object (survey)',
                 b: 'b',
                 c: 'c',
                 d: 'd',
-                correct_answer: 'b'
+                correct_answer: 'b',
+                more_information: null
             }];
 
         const expected = {
-            text: 'INSERT INTO questions (quiz_id, order_id, question, a, b, c, d, correct_answer) VALUES ($1, $2, $3, $4, $5, $6, $7, $8), ($9, $10, $11, $12, $13, $14, $15, $16)',
-            values: [1, 1, 'One', 'a', 'b', 'c', 'd', 'a', 1, 2, 'Two', 'a', 'b', 'c', 'd', 'b']
+            text: 'INSERT INTO questions (quiz_id, order_id, question, a, b, c, d, correct_answer, more_information) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9), ($10, $11, $12, $13, $14, $15, $16, $17, $18)',
+            values: [1, 1, 'One', 'a', 'b', 'c', 'd', 'a', null, 1, 2, 'Two', 'a', 'b', 'c', 'd', 'b', null]
         };
         composeQuestionStatement(survey_id, arrayQuestions, { is_survey: true }, (error, response) => {
             t.deepEqual(response, expected);

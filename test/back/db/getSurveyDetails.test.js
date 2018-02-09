@@ -21,7 +21,8 @@ test('`getSurveyDetails` gets survey name and questions for a given survey', (t)
                     d: 'Mind blown',
                     question: 'How do you feel about this module?',
                     question_id: 32,
-                    order_id: 1
+                    order_id: 1,
+                    more_information: null
                 },
                 {
                     a: 'No',
@@ -31,7 +32,8 @@ test('`getSurveyDetails` gets survey name and questions for a given survey', (t)
                     d: null,
                     question: 'Would you recommend this lecturer?',
                     question_id: 33,
-                    order_id: 2
+                    order_id: 2,
+                    more_information: null
                 }
             ]
         };
