@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import UserTable from './user-table';
+import { Link } from 'react-router';
 
 const SuperAdminDashboard = ({
     students,
@@ -17,6 +18,13 @@ const SuperAdminDashboard = ({
     return (
       <div>
           <div style={buttonContainerStyle}>
+                <Link to="/super-admin/client">
+                    <button
+                        className="button module__button"
+                        >
+                        Add a Client
+                    </button>
+                </Link>
               <button
                   className="button module__button button__primary"
                   onClick={ () => { handleDownloadData(`/super-admin/full-question-set`); } }

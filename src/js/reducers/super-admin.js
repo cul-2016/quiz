@@ -5,6 +5,13 @@ import * as actionTypes from '../actions/super-admin';
 export const initialState = {
     students: [],
     lecturers: [],
+    manageClient: {
+        name: '',
+        email: '',
+        accountType: null,
+        paid: false,
+        code: null
+    },
     isFetchingSuperAdminDashboard: false,
     isDeletingUser: false,
     isDownloadingData: false,
