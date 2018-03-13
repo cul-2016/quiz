@@ -8,6 +8,8 @@ export const initialState = {
     manageClient: {
         name: '',
         email: '',
+        institution: '',
+        department: '',
         accountType: null,
         paid: false,
         code: null
@@ -67,6 +69,13 @@ export function superAdmin (state = initialState, action) {
         return update(state, {
             isDownloadingData: { $set: false },
             error: { $set: action.error }
+        });
+
+    case actionTypes.UPDATE_INPUT:
+        return update(state, {
+            manageClient: {
+                [action.name]: { $set: action.value }
+            }
         });
 
     default:

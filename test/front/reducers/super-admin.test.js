@@ -170,3 +170,22 @@ test('DOWNLOAD_DATA_FAILURE works', (t) => {
 
     t.deepEqual(result, expected);
 });
+
+test('UPDATE_INPUT works when user enters a value', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(superAdminState);
+
+    const email = 'test@city.ac.uk';
+    const action = {
+        type: 'UPDATE_INPUT',
+        value: email,
+        name: 'email'
+    };
+
+    const expected = { ...superAdminState, manageClient: { ...superAdminState.manageClient, email } };
+
+    const result = reducer(initialState, action);
+    t.deepEqual(result, expected);
+});

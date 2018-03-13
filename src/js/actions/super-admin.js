@@ -1,5 +1,6 @@
 import request from '../lib/request.js';
 
+export const UPDATE_INPUT = 'UPDATE_INPUT';
 export const GET_SUPER_ADMIN_DASHBOARD_REQUEST = 'GET_SUPER_ADMIN_DASHBOARD_REQUEST';
 export const GET_SUPER_ADMIN_DASHBOARD_SUCCESS = 'GET_SUPER_ADMIN_DASHBOARD_SUCCESS';
 export const GET_SUPER_ADMIN_DASHBOARD_FAILURE = 'GET_SUPER_ADMIN_DASHBOARD_FAILURE';
@@ -87,4 +88,10 @@ export const downloadDataSuccess = () => ({
 export const downloadDataFailure = (error) => ({
     type: DOWNLOAD_DATA_FAILURE,
     error
+});
+
+export const updateInput = (value, name) => ({
+    value,
+    name,
+    type: UPDATE_INPUT
 });

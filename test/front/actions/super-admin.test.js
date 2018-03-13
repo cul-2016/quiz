@@ -5,6 +5,8 @@ import * as actions from '../../../src/js/actions/super-admin';
 import { superAdminDashboardData } from '../../utils/data-fixtures';
 // modules that get stubbed with sinon
 import axios from 'axios';
+import deepFreeze from '../../utils/deepFreeze';
+
 
 const createSandbox = sinon.sandbox.create;
 
@@ -189,4 +191,56 @@ test('downloadData async action FAILURE', (t) => {
         );
         sandbox.restore();
     }, 300);
+});
+
+
+test('updateInput action works when name is being inputted', (t) => {
+
+    t.plan(1);
+
+    const value = 'testing name';
+    const name = 'name';
+    const expected = {
+        type: actions.UPDATE_INPUT,
+        value: 'testing name',
+        name: 'name'
+    };
+
+    const actual = deepFreeze(actions.updateInput(value, name));
+    t.deepEqual(actual, expected);
+
+});
+
+test('updateInput action works when email is being inputted', (t) => {
+
+    t.plan(1);
+
+    const value = 'testing@email.com';
+    const name = 'email';
+    const expected = {
+        type: actions.UPDATE_INPUT,
+        value: 'testing@email.com',
+        name: 'email'
+    };
+
+    const actual = deepFreeze(actions.updateInput(value, name));
+    t.deepEqual(actual, expected);
+
+});
+
+test('updateInput action works when accountType is being selected', (t) => {
+
+    t.plan(1);
+
+    const value = 'group admin';
+    const name = 'accountType';
+    const expected = {
+        type: actions.UPDATE_INPUT,
+        value: 'group admin',
+        name: 'accountType'
+    };
+
+    const actual = deepFreeze(actions.updateInput(value, name));
+    t.deepEqual(actual, expected);
+
 });
