@@ -1,9 +1,11 @@
 import request from '../lib/request.js';
+import { hashHistory } from '../lib/request.js';
 
 export const SUBMIT_CLIENT_REQUEST = 'SUBMIT_CLIENT_REQUEST';
 export const SUBMIT_CLIENT_SUCCESS = 'SUBMIT_CLIENT_SUCCESS';
 export const SUBMIT_CLIENT_FAILURE = 'SUBMIT_CLIENT_FAILURE';
 export const UPDATE_INPUT = 'UPDATE_INPUT';
+export const DISPLAY_ERROR = 'DISPLAY_ERROR';
 export const GET_SUPER_ADMIN_DASHBOARD_REQUEST = 'GET_SUPER_ADMIN_DASHBOARD_REQUEST';
 export const GET_SUPER_ADMIN_DASHBOARD_SUCCESS = 'GET_SUPER_ADMIN_DASHBOARD_SUCCESS';
 export const GET_SUPER_ADMIN_DASHBOARD_FAILURE = 'GET_SUPER_ADMIN_DASHBOARD_FAILURE';
@@ -13,7 +15,6 @@ export const DELETE_USER_FAILURE = 'DELETE_USER_FAILURE';
 export const DOWNLOAD_DATA_REQUEST = 'DOWNLOAD_DATA_REQUEST';
 export const DOWNLOAD_DATA_SUCCESS = 'DOWNLOAD_DATA_SUCCESS';
 export const DOWNLOAD_DATA_FAILURE = 'DOWNLOAD_DATA_FAILURE';
-
 
 
 
@@ -28,8 +29,9 @@ export const submitClient = ({ name, email, institution, department, accountType
     };
     dispatch(submitClientRequest());
     request.post(dispatch)('/super-admin/client', payload)
-        .then((response) => {
-            dispatch(submitClientSuccess(response.data));
+        .then(() => {
+            dispatch(submitClientSuccess());
+            hashHistory.push('/super-admin');
         })
         .catch((error) => {
             dispatch(submitClientFailure(error));
@@ -40,9 +42,8 @@ export const submitClientRequest = () => ({
     type: SUBMIT_CLIENT_REQUEST
 });
 
-export const submitClientSuccess = (data) => ({
-    type: SUBMIT_CLIENT_SUCCESS,
-    data
+export const submitClientSuccess = () => ({
+    type: SUBMIT_CLIENT_SUCCESS
 });
 
 export const submitClientFailure = (error) => ({
@@ -134,4 +135,9 @@ export const updateInput = (value, name) => ({
     value,
     name,
     type: UPDATE_INPUT
+});
+
+export const displayError = (error) => ({
+    type: DISPLAY_ERROR,
+    error
 });

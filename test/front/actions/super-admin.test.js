@@ -6,6 +6,7 @@ import { superAdminDashboardData } from '../../utils/data-fixtures';
 // modules that get stubbed with sinon
 import axios from 'axios';
 import deepFreeze from '../../utils/deepFreeze';
+import { hashHistory } from 'react-router';
 
 
 const createSandbox = sinon.sandbox.create;
@@ -243,4 +244,91 @@ test('updateInput action works when accountType is being selected', (t) => {
     const actual = deepFreeze(actions.updateInput(value, name));
     t.deepEqual(actual, expected);
 
+});
+
+test('submitClient async action SUCCESS', (t) => {
+
+    t.plan(2);
+
+    const { dispatch, queue } = createThunk();
+    const sandbox = createSandbox();
+
+    const successPromise = new Promise(resolve => resolve(
+        { data: { message: 'data has been successfully posted and user has been sent the email.' } }
+    ));
+
+    sandbox.stub(axios, 'post').returns(successPromise);
+    const hashHistorySpy = sandbox.spy(hashHistory, 'push');
+
+    dispatch(actions.submitClient('name', 'email', 'institution', 'department', 'accountType', 'paid'));
+
+    setTimeout(() => {
+        t.deepEqual(
+            queue.shift(),
+            { type: actions.SUBMIT_CLIENT_REQUEST },
+            'flags getSuperAdmin request'
+        );
+        t.deepEqual(
+            queue.shift(),
+            { type: actions.SUBMIT_CLIENT_SUCCESS },
+            'flags getSuperAdmin success'
+        );
+        // t.ok(hashHistorySpy.calledWith('/super-admin'), 'redirects to super-admin');
+        sandbox.restore();
+    }, 300);
+});
+
+test('submitClient async action SUCCESS', (t) => {
+
+    t.plan(2);
+
+    const customError = {
+        response: { status: 500 },
+        message: 'Sorry, something went wrong!'
+    };
+
+    const failurePromise = Promise.reject(customError);
+
+    const { dispatch, queue } = createThunk();
+    const sandbox = createSandbox();
+
+    sandbox.stub(axios, 'post').returns(failurePromise);
+    const hashHistorySpy = sandbox.spy(hashHistory, 'push');
+
+    dispatch(actions.submitClient('name', 'email', 'institution', 'department', 'accountType', 'paid'));
+
+    setTimeout(() => {
+        t.deepEqual(
+            queue.shift(),
+            { type: actions.SUBMIT_CLIENT_REQUEST },
+            'flags getSuperAdmin request'
+        );
+        t.deepEqual(
+            queue.shift(),
+            {
+                type: actions.SUBMIT_CLIENT_FAILURE,
+                error: {
+                    response: { status: 500 },
+                    message: 'Sorry, something went wrong!'
+                }
+            },
+            'flags getSuperAdmin success'
+        );
+        // t.ok(hashHistorySpy.calledWith('/super-admin'), 'redirects to super-admin');
+        sandbox.restore();
+    }, 300);
+});
+
+test('displayError action creaor returns the expected action', (t) => {
+
+    t.plan(1);
+    const error = {
+        message: 'something has gone wrong'
+    };
+    const expected = {
+        type: actions.DISPLAY_ERROR,
+        error
+    };
+    const actual = actions.displayError(error);
+    t.deepEqual(actual, expected);
 });

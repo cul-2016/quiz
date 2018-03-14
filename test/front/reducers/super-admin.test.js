@@ -189,3 +189,72 @@ test('UPDATE_INPUT works when user enters a value', (t) => {
     const result = reducer(initialState, action);
     t.deepEqual(result, expected);
 });
+
+test('SUBMIT_CLIENT_REQUEST works', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(superAdminState);
+
+    const action = {
+        type: 'SUBMIT_CLIENT_REQUEST',
+    };
+    const expected = {
+        ...superAdminState,
+        isSavingClient: true
+    };
+
+    const result = reducer(initialState, action);
+    t.deepEqual(result, expected);
+});
+
+test('SUBMIT_CLIENT_SUCCESS works', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(superAdminState);
+
+    const action = {
+        type: 'SUBMIT_CLIENT_SUCCESS'
+    };
+    const expected = {
+        ...superAdminState
+    };
+    const result = reducer(initialState, action);
+
+    t.deepEqual(result, expected);
+});
+
+test('SUBMIT_CLIENT_FAILURE works', (t) => {
+
+    t.plan(1);
+
+    const initialState = deepFreeze(superAdminState);
+
+    const action = {
+        type: 'SUBMIT_CLIENT_FAILURE',
+        error
+    };
+    const expected = {
+        ...superAdminState,
+        error
+    };
+    const result = reducer(initialState, action);
+
+    t.deepEqual(result, expected);
+});
+
+test('DISPLAY_ERROR works', (t) => {
+    t.plan(1);
+    const initialState = deepFreeze(superAdminState);
+    const error = {
+        message: 'something has gone wrong'
+    };
+    const action = {
+        type: 'DISPLAY_ERROR',
+        error
+    };
+    const expected = Object.assign({}, superAdminState, { error });
+    const result = reducer(initialState, action);
+    t.deepEqual(result, expected);
+});
