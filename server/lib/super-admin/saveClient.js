@@ -13,12 +13,12 @@ function saveClient (client, payload, callback) {
 
     var value = [payload.name, payload.email, payload.institution, payload.department, payload.accountType, payload.paid, payload.code];
 
-    query(client, queryText, value, (error) => {
+    query(client, queryText, value, (error, response) => {
         /* istanbul ignore if */
         if (error) {
             return callback(error);
         }
-        return callback(null);
+        return callback(null, response);
     });
 }
 
