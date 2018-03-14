@@ -33,13 +33,26 @@ export function superAdmin (state = initialState, action) {
         return update(state, {
             isFetchingSuperAdminDashboard: { $set: false },
             students: { $set: action.data.students },
-            lecturers: { $set: action.data.lecturers }
+            lecturers: { $set: action.data.lecturers },
+            clients: { $set: action.data.clients }
         });
 
     case actionTypes.GET_SUPER_ADMIN_DASHBOARD_FAILURE:
         return update(state, {
             isFetchingSuperAdminDashboard: { $set: false },
             error: { $set: action.error }
+        });
+
+    case actionTypes.EDIT_USER:
+        return update(state, {
+            manageClient: {
+                name: { $set: action.user.name },
+                email: { $set: action.user.email },
+                institution: { $set: action.user.institution },
+                department: { $set: action.user.department },
+                accountType: { $set: action.user.account_type },
+                paid: { $set: action.user.paid }
+            }
         });
 
     case actionTypes.DELETE_USER_REQUEST:

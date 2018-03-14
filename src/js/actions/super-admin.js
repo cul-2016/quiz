@@ -1,4 +1,5 @@
 import request from '../lib/request.js';
+import { hashHistory } from 'react-router';
 
 export const SUBMIT_CLIENT_REQUEST = 'SUBMIT_CLIENT_REQUEST';
 export const SUBMIT_CLIENT_SUCCESS = 'SUBMIT_CLIENT_SUCCESS';
@@ -7,6 +8,7 @@ export const UPDATE_INPUT = 'UPDATE_INPUT';
 export const GET_SUPER_ADMIN_DASHBOARD_REQUEST = 'GET_SUPER_ADMIN_DASHBOARD_REQUEST';
 export const GET_SUPER_ADMIN_DASHBOARD_SUCCESS = 'GET_SUPER_ADMIN_DASHBOARD_SUCCESS';
 export const GET_SUPER_ADMIN_DASHBOARD_FAILURE = 'GET_SUPER_ADMIN_DASHBOARD_FAILURE';
+export const EDIT_USER = 'EDIT_USER';
 export const DELETE_USER_REQUEST = 'DELETE_USER_REQUEST';
 export const DELETE_USER_SUCCESS = 'DELETE_USER_SUCCESS';
 export const DELETE_USER_FAILURE = 'DELETE_USER_FAILURE';
@@ -28,8 +30,9 @@ export const submitClient = ({ name, email, institution, department, accountType
     };
     dispatch(submitClientRequest());
     request.post(dispatch)('/super-admin/client', payload)
-        .then((response) => {
-            dispatch(submitClientSuccess(response.data));
+        .then(() => {
+            dispatch(submitClientSuccess());
+            hashHistory.push('/super-admin');
         })
         .catch((error) => {
             dispatch(submitClientFailure(error));
@@ -40,9 +43,9 @@ export const submitClientRequest = () => ({
     type: SUBMIT_CLIENT_REQUEST
 });
 
-export const submitClientSuccess = (data) => ({
-    type: SUBMIT_CLIENT_SUCCESS,
-    data
+export const submitClientSuccess = () => ({
+    type: SUBMIT_CLIENT_SUCCESS
+
 });
 
 export const submitClientFailure = (error) => ({
@@ -75,6 +78,11 @@ export const getSuperAdminDashboardSuccess = (data) => ({
 export const getSuperAdminDashboardFailure = (error) => ({
     type: GET_SUPER_ADMIN_DASHBOARD_FAILURE,
     error
+});
+
+export const editUser = (user) => ({
+    type: EDIT_USER,
+    user
 });
 
 export const deleteUser = (user_id) => (dispatch) => {

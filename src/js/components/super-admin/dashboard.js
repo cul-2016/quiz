@@ -5,7 +5,9 @@ import { Link } from 'react-router';
 const SuperAdminDashboard = ({
     students,
     lecturers,
+    clients,
     handleDeleteUser,
+    handleEditUser,
     handleDownloadData,
     superAdminId
 }) => {
@@ -39,6 +41,7 @@ const SuperAdminDashboard = ({
               </button>
           </div>
           <div className="leaderboard">
+              <UserTable users={ clients } title={ "clients" } handleEditUser={ handleEditUser }/>
               <UserTable users={ lecturers } superAdminId={ superAdminId } title={ "lecturers" } handleDeleteUser={ handleDeleteUser } />
               <UserTable users={ students } title={ "students" } handleDeleteUser={ handleDeleteUser } />
           </div>
@@ -49,7 +52,9 @@ const SuperAdminDashboard = ({
 SuperAdminDashboard.propTypes = {
     students: PropTypes.array,
     lecturers: PropTypes.array,
+    clients: PropTypes.array,
     handleDeleteUser: PropTypes.func,
+    handleEditUser: PropTypes.func,
     handleDownloadData: PropTypes.func,
     superAdminId: PropTypes.number
 };
