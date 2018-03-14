@@ -4,7 +4,7 @@ module.exports = ({ username, email }, cb) => {
     var person = {
         username,
         email,
-        subject: "Welcome to City Uni :)"
+        subject: "Welcome to Quodl"
     };
     sendEmail.email('student-welcome', person, cb);
 };

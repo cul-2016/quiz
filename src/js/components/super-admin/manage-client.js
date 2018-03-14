@@ -3,7 +3,7 @@ import Input from '../general/Input';
 import RadioInput from '../general/radio-input';
 
 
-const SuperAdminManageClient = ({ name, email, institution, department, accountType, paid, code, updateInput }) => {
+const SuperAdminManageClient = ({ name, email, institution, department, accountType, paid, code, updateInput, submitClient }) => {
 
     return (
         <div className="manage-client content__body">
@@ -51,14 +51,6 @@ const SuperAdminManageClient = ({ name, email, institution, department, accountT
                       type="radio"
                       name={accountType}
                       radioType='accountType'
-                      value="group lecturer"
-                    />
-                    <RadioInput
-                      updateInput={updateInput}
-                      className="form__input"
-                      type="radio"
-                      name={accountType}
-                      radioType='accountType'
                       value="group admin"
                     />
                 </div>
@@ -80,11 +72,19 @@ const SuperAdminManageClient = ({ name, email, institution, department, accountT
                       value="false"
                     />
                 </div>
+                <button
+                    onClick={ (e) => {
+                        e.preventDefault();
+                        submitClient({ name, email, institution, department, accountType, paid });
+                    }}
+                    className="button">
 
+                    Save Client
+                </button>
 
             </form>
         </div>
-    )
+    );
 };
 
 

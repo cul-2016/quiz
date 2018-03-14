@@ -1,5 +1,8 @@
 import request from '../lib/request.js';
 
+export const SUBMIT_CLIENT_REQUEST = 'SUBMIT_CLIENT_REQUEST';
+export const SUBMIT_CLIENT_SUCCESS = 'SUBMIT_CLIENT_SUCCESS';
+export const SUBMIT_CLIENT_FAILURE = 'SUBMIT_CLIENT_FAILURE';
 export const UPDATE_INPUT = 'UPDATE_INPUT';
 export const GET_SUPER_ADMIN_DASHBOARD_REQUEST = 'GET_SUPER_ADMIN_DASHBOARD_REQUEST';
 export const GET_SUPER_ADMIN_DASHBOARD_SUCCESS = 'GET_SUPER_ADMIN_DASHBOARD_SUCCESS';
@@ -10,6 +13,43 @@ export const DELETE_USER_FAILURE = 'DELETE_USER_FAILURE';
 export const DOWNLOAD_DATA_REQUEST = 'DOWNLOAD_DATA_REQUEST';
 export const DOWNLOAD_DATA_SUCCESS = 'DOWNLOAD_DATA_SUCCESS';
 export const DOWNLOAD_DATA_FAILURE = 'DOWNLOAD_DATA_FAILURE';
+
+
+
+
+export const submitClient = ({ name, email, institution, department, accountType, paid }) => (dispatch) => {
+    const payload = {
+        name,
+        email,
+        institution,
+        department,
+        accountType,
+        paid
+    };
+    dispatch(submitClientRequest());
+    request.post(dispatch)('/super-admin/client', payload)
+        .then((response) => {
+            dispatch(submitClientSuccess(response.data));
+        })
+        .catch((error) => {
+            dispatch(submitClientFailure(error));
+        });
+};
+
+export const submitClientRequest = () => ({
+    type: SUBMIT_CLIENT_REQUEST
+});
+
+export const submitClientSuccess = (data) => ({
+    type: SUBMIT_CLIENT_SUCCESS,
+    data
+});
+
+export const submitClientFailure = (error) => ({
+    type: SUBMIT_CLIENT_FAILURE,
+    error
+});
+
 
 export const getSuperAdminDashboard = () => (dispatch) => {
     dispatch(getSuperAdminDashboardRequest());

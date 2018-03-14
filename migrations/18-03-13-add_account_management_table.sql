@@ -1,4 +1,4 @@
-CREATE TYPE account_types AS ENUM ('group admin', 'group lecturer', 'individual lecturer');
+CREATE TYPE account_types AS ENUM ('group admin', 'individual lecturer');
 
 /* account_management */
 CREATE TABLE IF NOT EXISTS account_management (

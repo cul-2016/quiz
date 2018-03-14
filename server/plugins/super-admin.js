@@ -2,9 +2,12 @@ import getAllUsers from '../lib/getAllUsers';
 import deleteUser from '../lib/deleteUser';
 import getFullQuestionSet from '../lib/getFullQuestionSet';
 import getFullAnswerSet from '../lib/getFullAnswerSet';
+import saveClient from '../lib/super-admin/saveClient';
 import Joi from 'joi';
 import Papa from 'papaparse';
-
+import shortid from 'shortid';
+import groupAdminWelcome from '../lib/email/group-admin-welcome';
+import individualLecturerWelcome from '../lib/email/individual-lecturer-welcome';
 
 exports.register = (server, options, next) => {
     const { pool } = server.app;
@@ -26,6 +29,52 @@ exports.register = (server, options, next) => {
                     const lecturers = users.filter(user => user.is_lecturer);
                     const students = users.filter(user => !user.is_lecturer);
                     reply({ lecturers, students });
+                });
+            }
+        },
+        {
+            method: 'POST',
+            path: '/super-admin/client',
+            config: {
+                auth: {
+                    scope: 'super-admin'
+                }
+            },
+            handler: (request, reply) => {
+
+                const payload = request.payload;
+                // if group_admin, then generate code and attach to payload before saving saveClient
+                if (payload.accountType === 'group admin') {
+                    const code = shortid.generate();
+                    payload.code = code;
+                } else {
+                    payload.code = null;
+                }
+                // save information to database in new account management table
+                saveClient(pool, request.payload, (error) => {
+                    if (error) { return reply(error); }
+                    else {
+
+                        if (payload.accountType === 'group admin') {
+                            groupAdminWelcome({ name: payload.name, email: payload.email, code: payload.code }, (error) => {
+                                if (error) { return reply(error); }
+                                else {
+                                    return reply({ message: 'data has been successfully posted and user has been sent the email.' });
+                                }
+                            });
+                        } else {
+                            individualLecturerWelcome({ name: payload.name, email: payload.email }, (error) => {
+                                if (error) { return reply(error); }
+                                else {
+                                    return reply({ message: 'data has been successfully posted and user has been sent the email.' });
+                                }
+                            });
+                        }
+                        // IF group admin
+                        // then send email with code
+                        // if normal lecturer
+                        // then send email with no code.
+                    }
                 });
             }
         },
