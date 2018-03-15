@@ -3,7 +3,22 @@ import Input from '../general/Input';
 import RadioInput from '../general/radio-input';
 
 
-const SuperAdminManageClient = ({ name, email, institution, department, accountType, paid, code, updateInput, submitClient }) => {
+const SuperAdminManageClient = ({ name, email, institution, department, accountType, paid, code, updateInput, submitClient, displayError, error }) => {
+  
+    const handleSubmitClient = () => {
+        if (name && email && accountType && paid) {
+            submitClient({ name, email, institution, department, accountType, paid });
+        } else if (!name) {
+            displayError({ message: 'Please enter a name for the client before saving' });
+        } else if (!email) {
+            displayError({ message: 'Please enter an email for the client before saving' });
+        } else if (!accountType) {
+            displayError({ message: 'Please select an account type for the client before saving' });
+        } else {
+            displayError({ message: 'Please select if the client has paid before saving' });
+        }
+    }
+
     return (
         <div className="manage-client content__body">
             <form className="form">
@@ -58,7 +73,7 @@ const SuperAdminManageClient = ({ name, email, institution, department, accountT
                 <div className="form__radio-group">
                     <RadioInput
                       updateInput={updateInput}
-                      className="form__input"
+                      className="form__input form__radio-individual-input"
                       type="radio"
                       name={paid}
                       radioType='paid'
@@ -67,7 +82,7 @@ const SuperAdminManageClient = ({ name, email, institution, department, accountT
                     />
                     <RadioInput
                       updateInput={updateInput}
-                      className="form__input"
+                      className="form__input form__radio-individual-input"
                       type="radio"
                       name={paid}
                       radioType='paid'
@@ -75,13 +90,15 @@ const SuperAdminManageClient = ({ name, email, institution, department, accountT
                       labelName="No"
                     />
                 </div>
+                <div className="error-container f-body--warning">
+                    {error && error.message}
+                </div>
                 <button
                     onClick={ (e) => {
                         e.preventDefault();
-                        submitClient({ name, email, institution, department, accountType, paid });
+                        handleSubmitClient();
                     }}
                     className="button">
-
                     Save Client
                 </button>
 
@@ -99,7 +116,10 @@ SuperAdminManageClient.propTypes = {
     accountType: PropTypes.string,
     paid: PropTypes.bool.isRequired,
     code: PropTypes.string,
-    updateInput: PropTypes.func.isRequired
+    updateInput: PropTypes.func.isRequired,
+    submitClient: PropTypes.func.isRequired,
+    displayError: PropTypes.func.isRequired,
+    error: PropTypes.string,
 };
 
 

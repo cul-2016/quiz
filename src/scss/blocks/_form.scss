@@ -104,6 +104,20 @@
       position: relative;
     }
 
+    &__radio-group {
+      display: flex;
+    }
+
+    &__radio-individual {
+      display: flex;
+      align-items: center;
+
+      &-input {
+        width: 3rem;
+      }
+    }
+
+
     &__radio--off {
         width: 3rem;
         display: inline-block;

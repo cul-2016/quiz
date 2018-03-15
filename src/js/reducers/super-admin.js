@@ -16,6 +16,7 @@ export const initialState = {
     },
     isFetchingSuperAdminDashboard: false,
     isDeletingUser: false,
+    isSavingClient: false,
     isDownloadingData: false,
     error: undefined
 };
@@ -89,6 +90,25 @@ export function superAdmin (state = initialState, action) {
             manageClient: {
                 [action.name]: { $set: action.value }
             }
+        });
+
+    case actionTypes.DISPLAY_ERROR:
+        return update(state, {
+            error: { $set: action.error }
+        });
+
+    case actionTypes.SUBMIT_CLIENT_REQUEST:
+        return update(state, {
+            isSavingClient: { $set: true }
+        });
+
+    case actionTypes.SUBMIT_CLIENT_SUCCESS:
+        return initialState;
+
+    case actionTypes.SUBMIT_CLIENT_FAILURE:
+        return update(state, {
+            isSavingClient: { $set: false },
+            error: { $set: action.error }
         });
 
     default:

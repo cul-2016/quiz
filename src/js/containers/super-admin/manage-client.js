@@ -11,6 +11,7 @@ const mapStateToProps = (state) => ({
     accountType: state.superAdmin.manageClient.accountType,
     paid: state.superAdmin.manageClient.paid,
     code: state.superAdmin.manageClient.code,
+    error: state.superAdmin.error
 })
 
 const SuperAdminManageClientContainer = connect(mapStateToProps, actions)(SuperAdminManageClient);

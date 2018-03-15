@@ -19,7 +19,7 @@ Input.propTypes = {
     updateInput: PropTypes.func.isRequired,
     className: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
+    name: PropTypes.string,
     value: PropTypes.string,
 };
 
