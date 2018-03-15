@@ -102,8 +102,7 @@ export function superAdmin (state = initialState, action) {
 
     case actionTypes.SUBMIT_CLIENT_REQUEST:
         return update(state, {
-            isSavingClient: { $set: true },
-            isEditingClient: { $set: false }
+            isSavingClient: { $set: true }
         });
 
     case actionTypes.SUBMIT_CLIENT_SUCCESS:
