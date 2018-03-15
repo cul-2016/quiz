@@ -260,6 +260,27 @@ test('DISPLAY_ERROR works', (t) => {
     t.deepEqual(result, expected);
 });
 
+test('EDIT_CLIENT works', (t) => {
+    t.plan(1);
+    const initialState = deepFreeze(superAdminState);
+    const client = {
+        name: 'name',
+        email: 'email',
+        institution: 'institution',
+        department: 'department',
+        accountType: 'accountType',
+        paid: 'paid',
+        code: null
+    };
+    const action = {
+        type: 'EDIT_CLIENT',
+        client
+    };
+    const expected = Object.assign({}, superAdminState, { manageClient: client });
+    const result = reducer(initialState, action);
+    t.deepEqual(result, expected);
+});
+
 test('CLEAR_CLIENT_FORM works', (t) => {
     t.plan(1);
     const initialState = deepFreeze(superAdminState);

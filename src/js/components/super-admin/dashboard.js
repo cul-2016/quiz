@@ -7,7 +7,7 @@ const SuperAdminDashboard = ({
     lecturers,
     clients,
     handleDeleteUser,
-    handleEditUser,
+    handleEditClient,
     handleDownloadData,
     superAdminId,
     handleClearClientForm
@@ -43,7 +43,7 @@ const SuperAdminDashboard = ({
               </button>
           </div>
           <div className="leaderboard">
-              <UserTable users={ clients } title={ "clients" } handleEditUser={ handleEditUser }/>
+              <UserTable users={ clients } title={ "clients" } handleEditClient={ handleEditClient }/>
               <UserTable users={ lecturers } superAdminId={ superAdminId } title={ "lecturers" } handleDeleteUser={ handleDeleteUser } />
               <UserTable users={ students } title={ "students" } handleDeleteUser={ handleDeleteUser } />
           </div>
@@ -56,7 +56,7 @@ SuperAdminDashboard.propTypes = {
     lecturers: PropTypes.array,
     clients: PropTypes.array,
     handleDeleteUser: PropTypes.func,
-    handleEditUser: PropTypes.func,
+    handleEditClient: PropTypes.func,
     handleDownloadData: PropTypes.func,
     handleClearClientForm: PropTypes.func,
     superAdminId: PropTypes.number

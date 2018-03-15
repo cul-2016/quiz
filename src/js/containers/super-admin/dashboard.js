@@ -16,8 +16,8 @@ const mapDispatchToProps = (dispatch) => ({
     handleDownloadData: (url) => {
         dispatch(actions.downloadData(url));
     },
-    handleEditUser: (data) => {
-        dispatch(actions.editUser(data));
+    handleEditClient: (data) => {
+        dispatch(actions.editClient(data));
     },
     handleClearClientForm: () => {
         dispatch(actions.clearClientForm());

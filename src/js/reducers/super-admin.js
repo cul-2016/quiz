@@ -44,15 +44,15 @@ export function superAdmin (state = initialState, action) {
             error: { $set: action.error }
         });
 
-    case actionTypes.EDIT_USER:
+    case actionTypes.EDIT_CLIENT:
         return update(state, {
             manageClient: {
-                name: { $set: action.user.name },
-                email: { $set: action.user.email },
-                institution: { $set: action.user.institution },
-                department: { $set: action.user.department },
-                accountType: { $set: action.user.account_type },
-                paid: { $set: action.user.paid }
+                name: { $set: action.client.name },
+                email: { $set: action.client.email },
+                institution: { $set: action.client.institution },
+                department: { $set: action.client.department },
+                accountType: { $set: action.client.accountType },
+                paid: { $set: action.client.paid }
             }
         });
 

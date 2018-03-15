@@ -10,7 +10,7 @@ export const CLEAR_CLIENT_FORM = 'CLEAR_CLIENT_FORM';
 export const GET_SUPER_ADMIN_DASHBOARD_REQUEST = 'GET_SUPER_ADMIN_DASHBOARD_REQUEST';
 export const GET_SUPER_ADMIN_DASHBOARD_SUCCESS = 'GET_SUPER_ADMIN_DASHBOARD_SUCCESS';
 export const GET_SUPER_ADMIN_DASHBOARD_FAILURE = 'GET_SUPER_ADMIN_DASHBOARD_FAILURE';
-export const EDIT_USER = 'EDIT_USER';
+export const EDIT_CLIENT = 'EDIT_CLIENT';
 export const DELETE_USER_REQUEST = 'DELETE_USER_REQUEST';
 export const DELETE_USER_SUCCESS = 'DELETE_USER_SUCCESS';
 export const DELETE_USER_FAILURE = 'DELETE_USER_FAILURE';
@@ -80,9 +80,9 @@ export const getSuperAdminDashboardFailure = (error) => ({
     error
 });
 
-export const editUser = (user) => ({
-    type: EDIT_USER,
-    user
+export const editClient = (client) => ({
+    type: EDIT_CLIENT,
+    client
 });
 
 export const deleteUser = (user_id) => (dispatch) => {

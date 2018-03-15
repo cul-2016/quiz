@@ -333,6 +333,25 @@ test('displayError action creator returns the expected action', (t) => {
     t.deepEqual(actual, expected);
 });
 
+test('editClient action creator returns the expected action', (t) => {
+
+    t.plan(1);
+    const client = {
+        name: 'name',
+        email: 'email',
+        institution: 'institution',
+        department: 'department',
+        accountType: 'accountType',
+        paid: 'paid'
+    };
+    const expected = {
+        type: actions.EDIT_CLIENT,
+        client
+    };
+    const actual = actions.editClient(client);
+    t.deepEqual(actual, expected);
+});
+
 test('clearClientForm action creator returns the expected action', (t) => {
 
     t.plan(1);
@@ -342,3 +361,4 @@ test('clearClientForm action creator returns the expected action', (t) => {
     const actual = actions.clearClientForm();
     t.deepEqual(actual, expected);
 });
+
