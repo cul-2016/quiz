@@ -126,6 +126,14 @@ const Signup = ({ register, updateInputField, registeringUser, toggleTcAgreed, l
                 <p className="f-body">
                   Already have an account?
                   <Link className="login__link f-body f-body--link" to="/"> Please sign in here </Link>
+                  {
+                      !is_lecturer &&
+                      <Link className="login__link f-body f-body--link" to="/register-lecturer"> or sign up as a lecturer </Link>
+                  }
+                  {
+                      is_lecturer &&
+                      <Link className="login__link f-body f-body--link" to="/register-student"> or sign up as a student </Link>
+                  }
                 </p>
               </div>
 

@@ -14,8 +14,9 @@ function saveUser (pool, email, password, is_lecturer, username, verification_co
     var userQuery;
     var userArray;
     if (is_lecturer) {
-        userQuery = 'INSERT INTO users (email, password, is_lecturer, username, verification_code) VALUES ( $1, $2, $3, $4, $5 );';
-        userArray = [email, password, is_lecturer, username, verification_code];
+        var expiry = Date.now() + (7 * 24 * 60 * 60 * 1000); // 7 days current trial length
+        userQuery = 'INSERT INTO users (email, password, is_lecturer, username, verification_code, trial_expiry_time) VALUES ( $1, $2, $3, $4, $5, $6 );';
+        userArray = [email, password, is_lecturer, username, verification_code, expiry];
     } else {
         userQuery = 'INSERT INTO users (email, password, username, is_verified) VALUES ( $1, $2, $3, $4);';
         userArray = [email, password, username, true];

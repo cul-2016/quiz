@@ -74,7 +74,7 @@ const Root = ({ store }) => (
                     path="register-student"
                     component={ SignupContainer } />
                 <Route
-                    path="register-lecturer-invite-only"
+                    path="register-lecturer"
                     component={ SignupContainer } />
                 <Route
                     path="please-verify"
