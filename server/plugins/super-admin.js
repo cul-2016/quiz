@@ -24,6 +24,7 @@ exports.register = (server, options, next) => {
             },
             handler: (request, reply) => {
                 getAllUsers(pool, (error, users) => {
+                    /* istanbul ignore if */
                     if (error) {
                         reply(error);
                     }
@@ -31,6 +32,7 @@ exports.register = (server, options, next) => {
                     const students = users.filter(user => !user.is_lecturer);
 
                     getClients(pool, (error, clients) => {
+                        /* istanbul ignore if */
                         if (error) {
                             reply(error);
                         }
@@ -60,11 +62,13 @@ exports.register = (server, options, next) => {
                 }
                 // save information to database in new account management table
                 saveClient(pool, request.payload, (error) => {
+                    /* istanbul ignore if */
                     if (error) { return reply(error); }
                     else {
 
                         if (payload.accountType === 'group admin') {
                             groupAdminWelcome({ name: payload.name, email: payload.email, code: payload.code }, (error) => {
+                                /* istanbul ignore if */
                                 if (error) { return reply(error); }
                                 else {
                                     return reply({ message: 'data has been successfully posted and user has been sent the email.' });
@@ -72,16 +76,13 @@ exports.register = (server, options, next) => {
                             });
                         } else {
                             individualLecturerWelcome({ name: payload.name, email: payload.email }, (error) => {
+                                /* istanbul ignore if */
                                 if (error) { return reply(error); }
                                 else {
                                     return reply({ message: 'data has been successfully posted and user has been sent the email.' });
                                 }
                             });
                         }
-                        // IF group admin
-                        // then send email with code
-                        // if normal lecturer
-                        // then send email with no code.
                     }
                 });
             }
@@ -101,6 +102,7 @@ exports.register = (server, options, next) => {
             },
             handler: (request, reply) => {
                 deleteUser(pool, request.payload.user_id, (error, response) => {
+                    /* istanbul ignore if */
                     if (error) reply(error);
                     if (response) reply(true);
                 });
@@ -117,6 +119,7 @@ exports.register = (server, options, next) => {
             handler: (request, reply) => {
 
                 getFullQuestionSet(pool, (error, response) => {
+                    /* istanbul ignore if */
                     if (error) reply(error);
                     var CSV = Papa.unparse(response);
                     reply(CSV)
@@ -136,6 +139,7 @@ exports.register = (server, options, next) => {
             handler: (request, reply) => {
 
                 getFullAnswerSet(pool, (error, response) => {
+                    /* istanbul ignore if */
                     if (error) reply(error);
                     var CSV = Papa.unparse(response);
                     reply(CSV)
