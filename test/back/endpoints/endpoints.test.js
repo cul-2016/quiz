@@ -223,6 +223,32 @@ test('/authenticate-user endpoint returns error for delAsync Redis call', (t) =>
     },
     {
         method: 'post',
+        url: '/super-admin/client',
+        payload: {
+            name: 'name',
+            email: 'email@email.com',
+            institution: 'institution',
+            department: 'department',
+            accountType: 'group admin',
+            paid: true
+        },
+        expected: { message: 'data has been successfully posted and user has been sent the email.' }
+    },
+    {
+        method: 'post',
+        url: '/super-admin/client',
+        payload: {
+            name: 'name',
+            email: 'email@email.com',
+            institution: 'institution',
+            department: 'department',
+            accountType: 'individual lecturer',
+            paid: true
+        },
+        expected: { message: 'data has been successfully posted and user has been sent the email.' }
+    },
+    {
+        method: 'post',
         url: '/generate-share-id',
         payload: { quiz_id: 1 },
         expected: true
