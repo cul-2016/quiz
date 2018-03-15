@@ -12,7 +12,6 @@ const EditQuiz = ({ questions, isUpdatingQuiz, name,
                     handleDeleteQuestion, handleIsLastQuiz, params,
                     handleQuestionOrder
                 }) => {
-
     const isSurvey = params.survey_id ? true : false;
     const questionsValidation = questions.map((questionObj) => {
         const { question, a, b, correct_answer } = questionObj;

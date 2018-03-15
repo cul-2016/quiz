@@ -8,6 +8,7 @@ import Papa from 'papaparse';
 import shortid from 'shortid';
 import groupAdminWelcome from '../lib/email/group-admin-welcome';
 import individualLecturerWelcome from '../lib/email/individual-lecturer-welcome';
+import getClients from '../lib/super-admin/getClients';
 
 exports.register = (server, options, next) => {
     const { pool } = server.app;
@@ -28,7 +29,14 @@ exports.register = (server, options, next) => {
                     }
                     const lecturers = users.filter(user => user.is_lecturer);
                     const students = users.filter(user => !user.is_lecturer);
-                    reply({ lecturers, students });
+
+                    getClients(pool, (error, clients) => {
+                        if (error) {
+                            reply(error);
+                        }
+                        // otherwise return the clients
+                        reply({ lecturers, students, clients });
+                    });
                 });
             }
         },

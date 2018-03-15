@@ -240,6 +240,11 @@ ALTER TABLE module_members
     ON DELETE CASCADE;
 
 
+/********* insert account_management ********/
+INSERT INTO account_management (name, email, institution, department, account_type, paid, code)
+VALUES ('jsalmon', 'jessica@city.ac.uk' , 'FAC' , 'Ten', 'group admin', true, 'xyz'),
+        ('spandya', 'sohil@caf.ac.uk' , '' , '', 'individual lecturer', false, 'abc');
+
 /********* insert users ********/
 
 INSERT INTO users (email, username, password, is_verified)

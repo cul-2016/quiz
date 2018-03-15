@@ -37,7 +37,8 @@ test('GET_SUPER_ADMIN_DASHBOARD_SUCCESS works', (t) => {
         ...superAdminState,
         isFetchingSuperAdminDashboard: false,
         students: data.students,
-        lecturers: data.lecturers
+        lecturers: data.lecturers,
+        clients: data.clients
     };
     const result = reducer(initialState, action);
 
@@ -258,3 +259,4 @@ test('DISPLAY_ERROR works', (t) => {
     const result = reducer(initialState, action);
     t.deepEqual(result, expected);
 });
+

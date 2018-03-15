@@ -4,9 +4,7 @@ import RadioInput from '../general/radio-input';
 
 
 const SuperAdminManageClient = ({ name, email, institution, department, accountType, paid, code, updateInput, submitClient, displayError, error }) => {
-
-
-
+  
     const handleSubmitClient = () => {
         if (name && email && accountType && paid) {
             submitClient({ name, email, institution, department, accountType, paid });
@@ -60,6 +58,7 @@ const SuperAdminManageClient = ({ name, email, institution, department, accountT
                       name={accountType}
                       radioType='accountType'
                       value="individual lecturer"
+                      labelName="individual lecturer"
                     />
                     <RadioInput
                       updateInput={updateInput}
@@ -68,6 +67,7 @@ const SuperAdminManageClient = ({ name, email, institution, department, accountT
                       name={accountType}
                       radioType='accountType'
                       value="group admin"
+                      labelName="group admin"
                     />
                 </div>
                 <div className="form__radio-group">
@@ -77,7 +77,8 @@ const SuperAdminManageClient = ({ name, email, institution, department, accountT
                       type="radio"
                       name={paid}
                       radioType='paid'
-                      value="true"
+                      value={true}
+                      labelName="Yes"
                     />
                     <RadioInput
                       updateInput={updateInput}
@@ -85,7 +86,8 @@ const SuperAdminManageClient = ({ name, email, institution, department, accountT
                       type="radio"
                       name={paid}
                       radioType='paid'
-                      value="false"
+                      value={false}
+                      labelName="No"
                     />
                 </div>
                 <div className="error-container f-body--warning">
