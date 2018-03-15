@@ -66,7 +66,7 @@ exports.register = (server, options, next) => {
                     if (error) { return reply(error); }
                     else {
 
-                        if (payload.accountType === 'group admin') {
+                        if (payload.accountType === 'group admin' && !payload.isEditingClient ) {
                             groupAdminWelcome({ name: payload.name, email: payload.email, code: payload.code }, (error) => {
                                 /* istanbul ignore if */
                                 if (error) { return reply(error); }
@@ -74,7 +74,7 @@ exports.register = (server, options, next) => {
                                     return reply({ message: 'data has been successfully posted and user has been sent the email.' });
                                 }
                             });
-                        } else {
+                        } else if (payload.accountType === 'individual lecturer' && !payload.isEditingClient) {
                             individualLecturerWelcome({ name: payload.name, email: payload.email }, (error) => {
                                 /* istanbul ignore if */
                                 if (error) { return reply(error); }
@@ -82,6 +82,8 @@ exports.register = (server, options, next) => {
                                     return reply({ message: 'data has been successfully posted and user has been sent the email.' });
                                 }
                             });
+                        } else {
+                            return reply({ message: 'user has been updated, but no email has been sent' });
                         }
                     }
                 });

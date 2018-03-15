@@ -20,14 +20,15 @@ export const DOWNLOAD_DATA_FAILURE = 'DOWNLOAD_DATA_FAILURE';
 
 
 
-export const submitClient = ({ name, email, institution, department, accountType, paid }) => (dispatch) => {
+export const submitClient = ({ name, email, institution, department, accountType, paid, isEditingClient }) => (dispatch) => {
     const payload = {
         name,
         email,
         institution,
         department,
         accountType,
-        paid
+        paid,
+        isEditingClient
     };
     dispatch(submitClientRequest());
     request.post(dispatch)('/super-admin/client', payload)

@@ -230,7 +230,8 @@ test('/authenticate-user endpoint returns error for delAsync Redis call', (t) =>
             institution: 'institution',
             department: 'department',
             accountType: 'group admin',
-            paid: true
+            paid: true,
+            isEditingClient: false,
         },
         expected: { message: 'data has been successfully posted and user has been sent the email.' }
     },
@@ -243,9 +244,24 @@ test('/authenticate-user endpoint returns error for delAsync Redis call', (t) =>
             institution: 'institution',
             department: 'department',
             accountType: 'individual lecturer',
-            paid: true
+            paid: true,
+            isEditingClient: false,
         },
         expected: { message: 'data has been successfully posted and user has been sent the email.' }
+    },
+    {
+        method: 'post',
+        url: '/super-admin/client',
+        payload: {
+            name: 'name',
+            email: 'email@email.com',
+            institution: 'institution',
+            department: 'department',
+            accountType: 'individual lecturer',
+            paid: true,
+            isEditingClient: true,
+        },
+        expected: { message: 'user has been updated, but no email has been sent' }
     },
     {
         method: 'post',
