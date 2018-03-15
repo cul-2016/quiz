@@ -6,6 +6,7 @@ export const SUBMIT_CLIENT_SUCCESS = 'SUBMIT_CLIENT_SUCCESS';
 export const SUBMIT_CLIENT_FAILURE = 'SUBMIT_CLIENT_FAILURE';
 export const UPDATE_INPUT = 'UPDATE_INPUT';
 export const DISPLAY_ERROR = 'DISPLAY_ERROR';
+export const CLEAR_CLIENT_FORM = 'CLEAR_CLIENT_FORM';
 export const GET_SUPER_ADMIN_DASHBOARD_REQUEST = 'GET_SUPER_ADMIN_DASHBOARD_REQUEST';
 export const GET_SUPER_ADMIN_DASHBOARD_SUCCESS = 'GET_SUPER_ADMIN_DASHBOARD_SUCCESS';
 export const GET_SUPER_ADMIN_DASHBOARD_FAILURE = 'GET_SUPER_ADMIN_DASHBOARD_FAILURE';
@@ -146,4 +147,8 @@ export const updateInput = (value, name) => ({
 export const displayError = (error) => ({
     type: DISPLAY_ERROR,
     error
+});
+
+export const clearClientForm = () => ({
+    type: CLEAR_CLIENT_FORM,
 });

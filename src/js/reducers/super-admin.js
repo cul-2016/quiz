@@ -111,6 +111,19 @@ export function superAdmin (state = initialState, action) {
             error: { $set: action.error }
         });
 
+    case actionTypes.CLEAR_CLIENT_FORM:
+        return update(state, {
+            manageClient: {
+                name: { $set: '' },
+                email: { $set: '' },
+                institution: { $set: '' },
+                department: { $set: '' },
+                accountType: { $set: null },
+                paid: { $set: false },
+                code: { $set: null }
+            }
+        });
+
     default:
         return state;
     }

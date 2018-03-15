@@ -260,3 +260,15 @@ test('DISPLAY_ERROR works', (t) => {
     t.deepEqual(result, expected);
 });
 
+test('CLEAR_CLIENT_FORM works', (t) => {
+    t.plan(1);
+    const initialState = deepFreeze(superAdminState);
+    const action = {
+        type: 'CLEAR_CLIENT_FORM'
+    };
+
+    const expected = Object.assign({}, superAdminState);
+    const result = reducer(initialState, action);
+    t.deepEqual(result, expected);
+});
+

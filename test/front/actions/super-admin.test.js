@@ -319,7 +319,7 @@ test('submitClient async action SUCCESS', (t) => {
     }, 300);
 });
 
-test('displayError action creaor returns the expected action', (t) => {
+test('displayError action creator returns the expected action', (t) => {
 
     t.plan(1);
     const error = {
@@ -330,5 +330,15 @@ test('displayError action creaor returns the expected action', (t) => {
         error
     };
     const actual = actions.displayError(error);
+    t.deepEqual(actual, expected);
+});
+
+test('clearClientForm action creator returns the expected action', (t) => {
+
+    t.plan(1);
+    const expected = {
+        type: actions.CLEAR_CLIENT_FORM
+    };
+    const actual = actions.clearClientForm();
     t.deepEqual(actual, expected);
 });

@@ -9,7 +9,8 @@ const SuperAdminDashboard = ({
     handleDeleteUser,
     handleEditUser,
     handleDownloadData,
-    superAdminId
+    superAdminId,
+    handleClearClientForm
 }) => {
 
     const buttonContainerStyle = {
@@ -22,6 +23,7 @@ const SuperAdminDashboard = ({
           <div style={buttonContainerStyle}>
                 <Link to="/super-admin/client">
                     <button
+                        onClick={() => handleClearClientForm() }
                         className="button module__button"
                         >
                         Add a Client
@@ -56,6 +58,7 @@ SuperAdminDashboard.propTypes = {
     handleDeleteUser: PropTypes.func,
     handleEditUser: PropTypes.func,
     handleDownloadData: PropTypes.func,
+    handleClearClientForm: PropTypes.func,
     superAdminId: PropTypes.number
 };
 

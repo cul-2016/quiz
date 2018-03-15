@@ -18,6 +18,9 @@ const mapDispatchToProps = (dispatch) => ({
     },
     handleEditUser: (data) => {
         dispatch(actions.editUser(data));
+    },
+    handleClearClientForm: () => {
+        dispatch(actions.clearClientForm());
     }
 });
 
