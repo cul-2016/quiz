@@ -17,6 +17,7 @@ export const initialState = {
     isFetchingSuperAdminDashboard: false,
     isDeletingUser: false,
     isSavingClient: false,
+    isEditingClient: false,
     isDownloadingData: false,
     error: undefined
 };
@@ -53,7 +54,9 @@ export function superAdmin (state = initialState, action) {
                 department: { $set: action.client.department },
                 accountType: { $set: action.client.accountType },
                 paid: { $set: action.client.paid }
-            }
+            },
+            isEditingClient: { $set: true }
+
         });
 
     case actionTypes.DELETE_USER_REQUEST:
@@ -99,7 +102,8 @@ export function superAdmin (state = initialState, action) {
 
     case actionTypes.SUBMIT_CLIENT_REQUEST:
         return update(state, {
-            isSavingClient: { $set: true }
+            isSavingClient: { $set: true },
+            isEditingClient: { $set: false }
         });
 
     case actionTypes.SUBMIT_CLIENT_SUCCESS:
@@ -121,7 +125,8 @@ export function superAdmin (state = initialState, action) {
                 accountType: { $set: null },
                 paid: { $set: false },
                 code: { $set: null }
-            }
+            },
+            isEditingClient: { $set: false }
         });
 
     default:

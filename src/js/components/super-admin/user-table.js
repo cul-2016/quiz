@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
-const UserTable = ({ users, handleDeleteUser, handleEditUser, title, superAdminId }) => {
+const UserTable = ({ users, handleDeleteUser, handleEditClient, title, superAdminId }) => {
     const table = users.map((user, i) => {
         return (
             <tr key={ i } className={`leaderboard__row--${i % 2 === 0 || i === 0 ? 'even' : 'odd'}` }>
@@ -12,7 +12,7 @@ const UserTable = ({ users, handleDeleteUser, handleEditUser, title, superAdminI
                     <Link to='/super-admin/client'>
                         <button
                         className="button module__button button__primary"
-                        onClick={ () => { handleEditUser(user); }}>
+                        onClick={ () => { handleEditClient(user); }}>
                             Edit
                         </button>
                     </Link>
@@ -49,7 +49,7 @@ const UserTable = ({ users, handleDeleteUser, handleEditUser, title, superAdminI
 UserTable.propTypes = {
     users: PropTypes.array,
     handleDeleteUser: PropTypes.func,
-    handleEditUser: PropTypes.func,
+    handleEditClient: PropTypes.func,
     title: PropTypes.string,
     superAdminId: PropTypes.number
 };

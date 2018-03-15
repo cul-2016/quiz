@@ -12,7 +12,6 @@ const SuperAdminDashboard = ({
     superAdminId,
     handleClearClientForm
 }) => {
-
     const buttonContainerStyle = {
         textAlign: 'center',
         padding: '1rem'

@@ -276,7 +276,7 @@ test('EDIT_CLIENT works', (t) => {
         type: 'EDIT_CLIENT',
         client
     };
-    const expected = Object.assign({}, superAdminState, { manageClient: client });
+    const expected = Object.assign({}, superAdminState, { manageClient: client, isEditingClient: true });
     const result = reducer(initialState, action);
     t.deepEqual(result, expected);
 });

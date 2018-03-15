@@ -3,8 +3,9 @@ import Input from '../general/Input';
 import RadioInput from '../general/radio-input';
 
 
-const SuperAdminManageClient = ({ name, email, institution, department, accountType, paid, code, updateInput, submitClient, displayError, error }) => {
-  
+const SuperAdminManageClient = ({ name, isEditingClient, email, institution, department, accountType, paid, code, updateInput, submitClient, displayError, error }) => {
+
+        console.log(isEditingClient, 'edit client')
     const handleSubmitClient = () => {
         if (name && email && accountType && paid) {
             submitClient({ name, email, institution, department, accountType, paid });
@@ -50,26 +51,34 @@ const SuperAdminManageClient = ({ name, email, institution, department, accountT
                   name="department"
                   value={ department }
                 />
-                <div className="form__radio-group">
-                    <RadioInput
-                      updateInput={updateInput}
-                      className="form__input"
-                      type="radio"
-                      name={accountType}
-                      radioType='accountType'
-                      value="individual lecturer"
-                      labelName="individual lecturer"
-                    />
-                    <RadioInput
-                      updateInput={updateInput}
-                      className="form__input"
-                      type="radio"
-                      name={accountType}
-                      radioType='accountType'
-                      value="group admin"
-                      labelName="group admin"
-                    />
-                </div>
+
+                { !isEditingClient &&
+                    <div>
+                    <p className="f-body f-body--heavy">Account Type</p>
+                        <div className="form__radio-group">
+                            <RadioInput
+                            updateInput={updateInput}
+                            className="form__input"
+                            type="radio"
+                            name={accountType}
+                            radioType='accountType'
+                            value="individual lecturer"
+                            labelName="individual lecturer"
+                            />
+                            <RadioInput
+                            updateInput={updateInput}
+                            className="form__input"
+                            type="radio"
+                            name={accountType}
+                            radioType='accountType'
+                            value="group admin"
+                            labelName="group admin"
+                            />
+                        </div>
+                    </div>
+                }
+
+                <p className="f-body f-body--heavy">Client Paid</p>
                 <div className="form__radio-group">
                     <RadioInput
                       updateInput={updateInput}
@@ -90,6 +99,7 @@ const SuperAdminManageClient = ({ name, email, institution, department, accountT
                       labelName="No"
                     />
                 </div>
+
                 <div className="error-container f-body--warning">
                     {error && error.message}
                 </div>
@@ -118,6 +128,7 @@ SuperAdminManageClient.propTypes = {
     code: PropTypes.string,
     updateInput: PropTypes.func.isRequired,
     submitClient: PropTypes.func.isRequired,
+    isEditingClient: PropTypes.bool,
     displayError: PropTypes.func.isRequired,
     error: PropTypes.string,
 };
