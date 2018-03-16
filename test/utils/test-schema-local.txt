@@ -244,7 +244,9 @@ ALTER TABLE module_members
 /********* insert account_management ********/
 INSERT INTO account_management (name, email, institution, department, account_type, paid, code)
 VALUES ('jsalmon', 'jessica@city.ac.uk' , 'FAC' , 'Ten', 'group admin', true, 'xyz'),
-        ('spandya', 'sohil@caf.ac.uk' , '' , '', 'individual lecturer', false, 'abc');
+        ('spandya', 'sohil@caf.ac.uk' , '' , '', 'individual lecturer', false, 'abc'),
+        ('individualpaidlecturer', 'individualpaidlecturer@city.ac.uk' , '' , '', 'individual lecturer', true, null),
+        ('individualunpaidlecturer', 'individualunpaidlecturer@city.ac.uk' , '' , '', 'individual lecturer', false, null);
 
 /********* insert users ********/
 
@@ -314,6 +316,12 @@ INSERT INTO users (email, username, password, is_verified, reset_password_code, 
 INSERT INTO users (email, username, password, is_lecturer, is_verified, trial_expiry_time)
 VALUES ('trialexpired@city.ac.uk', 'lecturer', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, true, 1521132897603),
        ('trialneverexpires@city.ac.uk', 'lecturer', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, true, 7569133001720);
+
+/*** Individual paid lecturer ***/
+INSERT INTO users (email, username, password, is_lecturer, is_verified, trial_expiry_time)
+VALUES ('individualpaidlecturer@city.ac.uk', 'lecturer', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, true, 1521132897603),
+        ('individualunpaidlecturer@city.ac.uk', 'lecturer', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, true, 1521132897603);
+
 
 /********* insert modules ********/
 
