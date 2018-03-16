@@ -102,12 +102,6 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
 
         initDb()
         .then(() => {
-            email = sinon.stub(
-                sendemail,
-                'email',
-                (name, person, cb) => cb(null)
-            );
-
             return Promise.resolve();
         })
         .then(() => {
@@ -123,11 +117,9 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
             return server.inject(options);
         })
         .then((response) => {
-            email.restore();
             t.equal(response.statusCode, 401, '401 status code for ' + endpoint.url);
         })
         .catch((err) => {
-            email.restore();
             t.error(err);
         });
     });
