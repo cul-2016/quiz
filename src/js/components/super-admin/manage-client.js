@@ -6,7 +6,7 @@ import RadioInput from '../general/radio-input';
 const SuperAdminManageClient = ({ name, isEditingClient, email, institution, department, accountType, paid, code, updateInput, submitClient, displayError, error }) => {
 
     const handleSubmitClient = () => {
-        if (name && email && paid && (accountType || isEditingClient)) {
+        if (name && email && (accountType || isEditingClient)) {
             submitClient({ name, email, institution, department, accountType, paid, isEditingClient });
         } else if (!name) {
             displayError({ message: 'Please enter a name for the client before saving' });
@@ -14,10 +14,8 @@ const SuperAdminManageClient = ({ name, isEditingClient, email, institution, dep
             displayError({ message: 'Please enter an email for the client before saving' });
         } else if (!isEditingClient && !accountType ) {
             displayError({ message: 'Please select an account type for the client before saving' });
-        } else {
-            displayError({ message: 'Please select if the client has paid before saving' });
         }
-    }
+    };
 
     return (
         <div className="manage-client content__body">

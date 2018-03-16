@@ -22,7 +22,7 @@ const CurrentQuestion = ({ data, response, handleSelection, isLecturer }) => {
                 key={ i }
                 id="ga-submit-answer"
                 className={ classes }
-                onClick={ () => { console.log('clicked'); handleSelection && handleSelection(letter) }}>
+                onClick={ () => { handleSelection && handleSelection(letter); }}>
                 <div className="live-quiz__answer-inner">
                 <span className="live-quiz__letter">{ `${letter}` }</span>
                 <span className="live-quiz__answer-text f-body">{ `${data[letter]}` }</span>

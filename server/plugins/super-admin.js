@@ -9,6 +9,8 @@ import shortid from 'shortid';
 import groupAdminWelcome from '../lib/email/group-admin-welcome';
 import individualLecturerWelcome from '../lib/email/individual-lecturer-welcome';
 import getClients from '../lib/super-admin/getClients';
+import getUserByEmail from '../lib/getUserByEmail';
+
 
 exports.register = (server, options, next) => {
     const { pool } = server.app;
@@ -60,6 +62,19 @@ exports.register = (server, options, next) => {
                 } else {
                     payload.code = null;
                 }
+
+                if (payload.paid === false) {
+                    getUserByEmail(pool, payload.email, (error, user) => {
+                        if (error) {
+                            /* istanbul ignore if */
+                            if (error) { return reply(error); }
+                        }
+                        else {
+                            server.app.redisCli.del(user[0].user_id);
+                        }
+                    });
+                }
+
                 // save information to database in new account management table
                 saveClient(pool, request.payload, (error) => {
                     /* istanbul ignore if */

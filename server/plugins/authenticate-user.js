@@ -24,7 +24,7 @@ exports.register = (server, options, next) => {
                 const email = request.payload.email;
                 const password = request.payload.password;
                 getUserByEmail(pool, email, (error, userDetails) => {
-                    console.log(userDetails, 'user details');
+                    
                     /* istanbul ignore if */
                     if (error) {
                         reply(error);

@@ -1,13 +1,10 @@
+
 import React, { PropTypes } from 'react';
 import logout from '../../lib/logout';
 
 const ErrorMessage = ({ error, handleErrorClearance }) => {
 
-    console.log(error.response.data);
-    console.log(error && error.response && error.response.data && error.response.data.statusCode === 401);
-
     if (error && error.response && error.response.data && error.response.data.statusCode === 401) {
-        console.log('logged out called???')
         logout();
     }
 
