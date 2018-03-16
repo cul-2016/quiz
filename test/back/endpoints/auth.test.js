@@ -97,6 +97,41 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
         });
     });
 
+    test(endpoint.url + ' endpoint returns 401 due to trial_expiry_time being in the past', (t) => {
+        t.plan(1);
+
+        initDb()
+        .then(() => {
+            email = sinon.stub(
+                sendemail,
+                'email',
+                (name, person, cb) => cb(null)
+            );
+
+            return Promise.resolve();
+        })
+        .then(() => {
+            const faketoken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2RldGFpbHMiOnsidXNlcl9pZCI6MzQsImVtYWlsIjoidHJpYWxleHBpcmVkQGNpdHkuYWMudWsiLCJpc19sZWN0dXJlciI6dHJ1ZSwiaXNfc3VwZXJfYWRtaW4iOmZhbHNlLCJ1c2VybmFtZSI6ImxlY3R1cmVyIiwiaXNfdmVyaWZpZWQiOnRydWUsInZlcmlmaWNhdGlvbl9jb2RlIjpudWxsLCJyZXNldF9wYXNzd29yZF9jb2RlIjpudWxsLCJleHBpcnlfY29kZSI6bnVsbCwidHJpYWxfZXhwaXJ5X3RpbWUiOiIxNTIxMjE3NDkwNzA4In0sInVpZCI6IjdhYTMxMTAwLTI5MzYtMTFlOC05ZWUzLTM1MmY5NzM2ZjRmNSIsInNjb3BlIjpbIiJdLCJpYXQiOjE1MjEyMTc0NTl9.RNiXCljTuPazu5IkKLzhpyUBJF6j-MTZLe3OL4QO5d4';
+
+            const options = {
+                method: endpoint.method || 'get',
+                url: endpoint.url,
+                payload: endpoint.payload,
+                headers: { Authorization: faketoken }
+            };
+
+            return server.inject(options);
+        })
+        .then((response) => {
+            email.restore();
+            t.equal(response.statusCode, 401, '401 status code for ' + endpoint.url);
+        })
+        .catch((err) => {
+            email.restore();
+            t.error(err);
+        });
+    });
+
     test(endpoint.url + ' endpoint returns 401 due to fake token', (t) => {
         t.plan(1);
 
