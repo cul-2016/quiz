@@ -107,7 +107,7 @@ test('/authenticate-user endpoint returns error for delAsync Redis call', (t) =>
             email: 'lecturer@city.ac.uk',
             password: 'testinglecDSFD',
         },
-        expected: { message: 'please enter a valid email or password' }
+        expected: { message: 'Please enter a valid email or password' }
     },
     {
         method: 'post',
@@ -116,7 +116,7 @@ test('/authenticate-user endpoint returns error for delAsync Redis call', (t) =>
             email: 'blah@city.ac.uk',
             password: 'testinglecDSFD',
         },
-        expected: { message: 'sorry, this user does not exist' }
+        expected: { message: 'Sorry, this user does not exist' }
     },
     {
         method: 'post',
@@ -125,7 +125,7 @@ test('/authenticate-user endpoint returns error for delAsync Redis call', (t) =>
             email: 'not-authenticated-user@city.ac.uk',
             password: 'testinglecturer',
         },
-        expected: { message: 'user is not verified' }
+        expected: { message: 'User is not verified' }
     },
     {
         method: 'post',

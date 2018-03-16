@@ -24,12 +24,16 @@ exports.register = (server, options, next) => {
                 const email = request.payload.email;
                 const password = request.payload.password;
                 getUserByEmail(pool, email, (error, userDetails) => {
+
                     /* istanbul ignore if */
                     if (error) {
                         reply(error);
                     } else if (userDetails.length !== 1) {
-                        reply({ message: "sorry, this user does not exist" });
-                    } else {
+                        reply({ message: "Sorry, this user does not exist" });
+                    } else if (userDetails[0].trial_expiry_time && userDetails[0].trial_expiry_time < Date.now()) {
+                        reply({ message: "Sorry, your trial has expired, please contact Quodl to upgrade your free account"})
+                    }
+                    else {
                         const hashedPassword = userDetails[0].password;
                         validatePassword(password, hashedPassword, (error, response) => {
                             /* istanbul ignore if */
@@ -37,10 +41,10 @@ exports.register = (server, options, next) => {
                                 reply(error);
                             }
                             else if (!response) {
-                                reply({ message: "please enter a valid email or password" });
+                                reply({ message: "Please enter a valid email or password" });
                             }
                             else if (!userDetails[0].is_verified) {
-                                reply({ message: "user is not verified" });
+                                reply({ message: "User is not verified" });
                             }
                             else {
                                 delete userDetails[0].password;

@@ -45,7 +45,7 @@ const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthentic
                     ></input>
                   <Link className="login__link login__link--left f-body f-body--link" to="/request-reset-password"> Forgotten Password</Link>
                 </div>
-                <div className={ login.userIsAuthenticated ? 'display-none' : 'f-body--warning' }>
+                <div className={ `${login.userIsAuthenticated ? 'display-none' : 'f-body--warning'} login-warning` }>
                   { login.message }
                 </div>
                 <div className={ login.email && !isEmail(login.email) ? 'f-body--warning' : 'display-none' }>
