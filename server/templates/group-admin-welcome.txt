@@ -1,0 +1,8 @@
+Hello!
+
+Thank you for joining Quodl, to start using the site you need to create your account
+Please visit http://quodl.co.uk/ and register using the following email:{{email}} and code:{{code}} in order to access quodl
+Once you have signed up, you can share the code with the rest of your team so that they can sign up using the code
+
+
+Quodl http://quodl.co.uk/

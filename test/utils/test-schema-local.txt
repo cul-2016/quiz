@@ -9,13 +9,31 @@ DROP TABLE IF EXISTS questions CASCADE;
 DROP TABLE IF EXISTS responses CASCADE;
 DROP TABLE IF EXISTS scores CASCADE;
 DROP TABLE IF EXISTS module_members CASCADE;
+DROP TABLE IF EXISTS account_management CASCADE;
 
 DROP SEQUENCE IF EXISTS user_id_seq;
 DROP SEQUENCE IF EXISTS quiz_id_seq;
 DROP SEQUENCE IF EXISTS survey_id_seq;
 DROP SEQUENCE IF EXISTS question_id_seq;
 
+DROP TYPE IF EXISTS account_types CASCADE;
+
 /********* create tables ********/
+
+
+CREATE TYPE account_types AS ENUM ('group admin', 'individual lecturer');
+
+/* account_management */
+CREATE TABLE IF NOT EXISTS account_management (
+    account_management_id SERIAL PRIMARY KEY,
+    name TEXT NOT NULL,
+    email TEXT NOT NULL UNIQUE,
+    institution TEXT NOT NULL,
+    department TEXT NOT NULL,
+    account_type account_types,
+    paid BOOLEAN DEFAULT FALSE NOT NULL,
+    code TEXT
+);
 
 /* users */
 CREATE TABLE IF NOT EXISTS users (
@@ -221,6 +239,11 @@ ALTER TABLE module_members
     REFERENCES users (user_id)
     ON DELETE CASCADE;
 
+
+/********* insert account_management ********/
+INSERT INTO account_management (name, email, institution, department, account_type, paid, code)
+VALUES ('jsalmon', 'jessica@city.ac.uk' , 'FAC' , 'Ten', 'group admin', true, 'xyz'),
+        ('spandya', 'sohil@caf.ac.uk' , '' , '', 'individual lecturer', false, 'abc');
 
 /********* insert users ********/
 

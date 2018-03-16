@@ -1,14 +1,59 @@
 import request from '../lib/request.js';
+import { hashHistory } from 'react-router';
 
+export const SUBMIT_CLIENT_REQUEST = 'SUBMIT_CLIENT_REQUEST';
+export const SUBMIT_CLIENT_SUCCESS = 'SUBMIT_CLIENT_SUCCESS';
+export const SUBMIT_CLIENT_FAILURE = 'SUBMIT_CLIENT_FAILURE';
+export const UPDATE_INPUT = 'UPDATE_INPUT';
+export const DISPLAY_ERROR = 'DISPLAY_ERROR';
+export const CLEAR_CLIENT_FORM = 'CLEAR_CLIENT_FORM';
 export const GET_SUPER_ADMIN_DASHBOARD_REQUEST = 'GET_SUPER_ADMIN_DASHBOARD_REQUEST';
 export const GET_SUPER_ADMIN_DASHBOARD_SUCCESS = 'GET_SUPER_ADMIN_DASHBOARD_SUCCESS';
 export const GET_SUPER_ADMIN_DASHBOARD_FAILURE = 'GET_SUPER_ADMIN_DASHBOARD_FAILURE';
+export const EDIT_CLIENT = 'EDIT_CLIENT';
 export const DELETE_USER_REQUEST = 'DELETE_USER_REQUEST';
 export const DELETE_USER_SUCCESS = 'DELETE_USER_SUCCESS';
 export const DELETE_USER_FAILURE = 'DELETE_USER_FAILURE';
 export const DOWNLOAD_DATA_REQUEST = 'DOWNLOAD_DATA_REQUEST';
 export const DOWNLOAD_DATA_SUCCESS = 'DOWNLOAD_DATA_SUCCESS';
 export const DOWNLOAD_DATA_FAILURE = 'DOWNLOAD_DATA_FAILURE';
+
+
+
+export const submitClient = ({ name, email, institution, department, accountType, paid, isEditingClient }) => (dispatch) => {
+    const payload = {
+        name,
+        email,
+        institution,
+        department,
+        accountType,
+        paid,
+        isEditingClient
+    };
+    dispatch(submitClientRequest());
+    request.post(dispatch)('/super-admin/client', payload)
+        .then(() => {
+            dispatch(submitClientSuccess());
+            hashHistory.push('/super-admin');
+        })
+        .catch((error) => {
+            dispatch(submitClientFailure(error));
+        });
+};
+
+export const submitClientRequest = () => ({
+    type: SUBMIT_CLIENT_REQUEST
+});
+
+export const submitClientSuccess = () => ({
+    type: SUBMIT_CLIENT_SUCCESS
+});
+
+export const submitClientFailure = (error) => ({
+    type: SUBMIT_CLIENT_FAILURE,
+    error
+});
+
 
 export const getSuperAdminDashboard = () => (dispatch) => {
     dispatch(getSuperAdminDashboardRequest());
@@ -34,6 +79,11 @@ export const getSuperAdminDashboardSuccess = (data) => ({
 export const getSuperAdminDashboardFailure = (error) => ({
     type: GET_SUPER_ADMIN_DASHBOARD_FAILURE,
     error
+});
+
+export const editClient = (client) => ({
+    type: EDIT_CLIENT,
+    client
 });
 
 export const deleteUser = (user_id) => (dispatch) => {
@@ -87,4 +137,19 @@ export const downloadDataSuccess = () => ({
 export const downloadDataFailure = (error) => ({
     type: DOWNLOAD_DATA_FAILURE,
     error
+});
+
+export const updateInput = (value, name) => ({
+    value,
+    name,
+    type: UPDATE_INPUT
+});
+
+export const displayError = (error) => ({
+    type: DISPLAY_ERROR,
+    error
+});
+
+export const clearClientForm = () => ({
+    type: CLEAR_CLIENT_FORM,
 });

@@ -5,8 +5,19 @@ import * as actionTypes from '../actions/super-admin';
 export const initialState = {
     students: [],
     lecturers: [],
+    manageClient: {
+        name: '',
+        email: '',
+        institution: '',
+        department: '',
+        accountType: null,
+        paid: false,
+        code: null
+    },
     isFetchingSuperAdminDashboard: false,
     isDeletingUser: false,
+    isSavingClient: false,
+    isEditingClient: false,
     isDownloadingData: false,
     error: undefined
 };
@@ -24,13 +35,28 @@ export function superAdmin (state = initialState, action) {
         return update(state, {
             isFetchingSuperAdminDashboard: { $set: false },
             students: { $set: action.data.students },
-            lecturers: { $set: action.data.lecturers }
+            lecturers: { $set: action.data.lecturers },
+            clients: { $set: action.data.clients }
         });
 
     case actionTypes.GET_SUPER_ADMIN_DASHBOARD_FAILURE:
         return update(state, {
             isFetchingSuperAdminDashboard: { $set: false },
             error: { $set: action.error }
+        });
+
+    case actionTypes.EDIT_CLIENT:
+        return update(state, {
+            manageClient: {
+                name: { $set: action.client.name },
+                email: { $set: action.client.email },
+                institution: { $set: action.client.institution },
+                department: { $set: action.client.department },
+                accountType: { $set: action.client.accountType },
+                paid: { $set: action.client.paid }
+            },
+            isEditingClient: { $set: true }
+
         });
 
     case actionTypes.DELETE_USER_REQUEST:
@@ -60,6 +86,46 @@ export function superAdmin (state = initialState, action) {
         return update(state, {
             isDownloadingData: { $set: false },
             error: { $set: action.error }
+        });
+
+    case actionTypes.UPDATE_INPUT:
+        return update(state, {
+            manageClient: {
+                [action.name]: { $set: action.value }
+            }
+        });
+
+    case actionTypes.DISPLAY_ERROR:
+        return update(state, {
+            error: { $set: action.error }
+        });
+
+    case actionTypes.SUBMIT_CLIENT_REQUEST:
+        return update(state, {
+            isSavingClient: { $set: true }
+        });
+
+    case actionTypes.SUBMIT_CLIENT_SUCCESS:
+        return initialState;
+
+    case actionTypes.SUBMIT_CLIENT_FAILURE:
+        return update(state, {
+            isSavingClient: { $set: false },
+            error: { $set: action.error }
+        });
+
+    case actionTypes.CLEAR_CLIENT_FORM:
+        return update(state, {
+            manageClient: {
+                name: { $set: '' },
+                email: { $set: '' },
+                institution: { $set: '' },
+                department: { $set: '' },
+                accountType: { $set: null },
+                paid: { $set: false },
+                code: { $set: null }
+            },
+            isEditingClient: { $set: false }
         });
 
     default:
