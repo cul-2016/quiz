@@ -12,9 +12,9 @@ exports.register = (server, options, next) => {
 
             server.app.redisCli.getAsync(decoded.user_details.user_id)
                 .then((res) => {
-                  const twoWeeks = 60 * 60 * 24 * 14;
-                  server.app.redisCli.expire(decoded.user_details.user_id.toString(), twoWeeks)
-                  res === decoded.uid
+                    const twoWeeks = 60 * 60 * 24 * 14;
+                    server.app.redisCli.expire(decoded.user_details.user_id.toString(), twoWeeks);
+                    res === decoded.uid
                   ? callback(null, true)
                   : callback(null, false);
                 })

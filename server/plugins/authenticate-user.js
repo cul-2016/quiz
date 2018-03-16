@@ -31,7 +31,7 @@ exports.register = (server, options, next) => {
                     } else if (userDetails.length !== 1) {
                         reply({ message: "Sorry, this user does not exist" });
                     } else if (userDetails[0].trial_expiry_time && userDetails[0].trial_expiry_time < Date.now()) {
-                        reply({ message: "Sorry, your trial has expired, please contact Quodl to upgrade your free account"})
+                        reply({ message: "Sorry, your trial has expired, please contact Quodl to upgrade your free account" });
                     }
                     else {
                         const hashedPassword = userDetails[0].password;

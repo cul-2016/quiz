@@ -129,6 +129,15 @@ test('/authenticate-user endpoint returns error for delAsync Redis call', (t) =>
     },
     {
         method: 'post',
+        url: '/authenticate-user',
+        payload: {
+            email: 'trialexpired@city.ac.uk',
+            password: 'testinglecturer',
+        },
+        expected: { message: 'Sorry, your trial has expired, please contact Quodl to upgrade your free account' }
+    },
+    {
+        method: 'post',
         url: '/reset-password-request',
         payload: { email: 'fake@fake.com' },
         expected: { message: 'Sorry the email does not exist' }
