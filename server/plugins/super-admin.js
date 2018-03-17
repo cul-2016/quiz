@@ -63,14 +63,15 @@ exports.register = (server, options, next) => {
                     payload.code = null;
                 }
 
+
                 if (payload.paid === false) {
                     getUserByEmail(pool, payload.email, (error, user) => {
-                        if (error) {
-                            /* istanbul ignore if */
-                            if (error) { return reply(error); }
-                        }
+                        /* istanbul ignore if */
+                        if (error) { return reply(error); }
                         else {
-                            server.app.redisCli.del(user[0].user_id);
+                            if (user.length > 0) {
+                                server.app.redisCli.del(user[0].user_id);
+                            }
                         }
                     });
                 }
