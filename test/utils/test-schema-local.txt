@@ -43,6 +43,7 @@ CREATE TABLE IF NOT EXISTS users (
     is_lecturer BOOLEAN DEFAULT FALSE NOT NULL,
     is_super_admin BOOLEAN DEFAULT FALSE NOT NULL,
     username TEXT,
+    group_code TEXT DEFAULT NULL,
     is_verified BOOLEAN DEFAULT FALSE NOT NULL,
     verification_code TEXT,
     reset_password_code TEXT,

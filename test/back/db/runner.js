@@ -33,7 +33,7 @@ require('./getStudentPercentageScore.test.js');
 require('./getSurveyDetails.test.js');
 require('./getSurveyQuestions.test.js');
 require('./getTotalScoresAndTrophies.test.js');
-require('./getUser.test.js');
+require('./getUserByEmail.test.js');
 require('./getUserByID.test.js');
 require('./hasStudentSubmitted.test.js');
 require('./hashPassword.test.js');

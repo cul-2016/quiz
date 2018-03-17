@@ -28,12 +28,13 @@ exports.register = (server, options, next) => {
                         email: Joi.string().email().required(),
                         password: Joi.string().required(),
                         is_lecturer: Joi.boolean().strict().required(),
-                        username: Joi.string()
+                        username: Joi.string(),
+                        group_code: Joi.string().allow(null)
                     }
                 }
             },
             handler: (request, reply) => {
-                const { email, password, is_lecturer, username = '' } = request.payload;
+                const { email, password, is_lecturer, username = '', group_code = null } = request.payload;
                 const verification_code = is_lecturer ? uuid() : null;
                 const validEmailMessage = { message: 'Please enter a valid email address' };
 
@@ -43,9 +44,10 @@ exports.register = (server, options, next) => {
                         if (error) {
                             return reply(error);
                         }
-                        saveUser(pool, email, hashedPassword, is_lecturer, username, verification_code, (error, result) => { // eslint-disable-line no-unused-vars
+                        saveUser(pool, email, hashedPassword, is_lecturer, username, group_code, verification_code, (error, result) => { // eslint-disable-line no-unused-vars
                             /* istanbul ignore if */
                             if (error) {
+                                console.log(error)
                                 return reply(error);
                             }
                             else if (!is_lecturer) {

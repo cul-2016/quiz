@@ -14,7 +14,8 @@ test('`saveUser` successfully saves a lecturer', (t) => {
         const expectedError = null; // testing if the error is null so that the client has saved user correctly.
         const expectedCommand = 'INSERT';
         const verification_code = uuid();
-        saveUser(pool, 'sohilpandya@me.com', 'test', true, '', verification_code, (error, response) => {
+        const group_code = '123abc';
+        saveUser(pool, 'sohilpandya@me.com', 'test', true, '', group_code, verification_code, (error, response) => {
             t.deepEquals(error, expectedError, 'error is null, lecturer is saved to db correctly.');
             t.deepEquals(response.command, expectedCommand, 'Correct command of INSERT, lecturer is saved to db correctly');
         });
@@ -29,7 +30,7 @@ test('`saveUser` successfully saves a student', (t) => {
     .then(() => {
         const expectedError = null;
         const expectedCommand = 'INSERT';
-        saveUser(pool, 'teststudent@city.ac.uk', 'teststudent', false, 'teststudent', null, (error, response) => {
+        saveUser(pool, 'teststudent@city.ac.uk', 'teststudent', false, 'teststudent', '', null, (error, response) => {
             t.deepEquals(error, expectedError, 'error is null, student is saved to db correctly.');
             t.deepEquals(response.command, expectedCommand, 'Correct command of INSERT, student is saved to db correctly');
         });

@@ -92,6 +92,7 @@ test('/authenticate-user endpoint returns error for delAsync Redis call', (t) =>
             is_lecturer: true,
             user_id: 28,
             username: 'lecturer',
+            group_code: null,
             is_verified: true,
             expiry_code: null,
             verification_code: null,
@@ -180,7 +181,8 @@ test('/authenticate-user endpoint returns error for delAsync Redis call', (t) =>
             email: 'sohilpandya1990@gmail.com',
             password: 'testingstudent',
             is_lecturer: false,
-            username: 'testingstudent'
+            username: 'testingstudent',
+            group_code: null
         },
         expected: {
             email: 'sohilpandya1990@gmail.com',
@@ -190,6 +192,7 @@ test('/authenticate-user endpoint returns error for delAsync Redis call', (t) =>
             reset_password_code: null,
             user_id: 38,
             username: 'testingstudent',
+            group_code: null,
             verification_code: null,
             is_super_admin: false,
             trial_expiry_time: null,
@@ -238,7 +241,7 @@ test('/authenticate-user endpoint returns error for delAsync Redis call', (t) =>
     {
         method: 'get',
         url: '/get-user-details',
-        expected: { email: 'lecturer@city.ac.uk', expiry_code: null, is_lecturer: true, is_super_admin: true, is_verified: true, reset_password_code: null, user_id: 2, username: 'lecturer', verification_code: null, trial_expiry_time: null }
+        expected: { email: 'lecturer@city.ac.uk', expiry_code: null, is_lecturer: true, is_super_admin: true, is_verified: true, reset_password_code: null, user_id: 2, username: 'lecturer', group_code: null, verification_code: null, trial_expiry_time: null }
     },
     {
         method: 'get',
@@ -438,7 +441,7 @@ test('/authenticate-user endpoint returns error for delAsync Redis call', (t) =>
     {
         method: 'get',
         url: '/get-user-details',
-        expected: { email: 'student@city.ac.uk', expiry_code: null, is_lecturer: false, is_super_admin: false, is_verified: true, reset_password_code: null, user_id: 1, username: 'student', verification_code: null, trial_expiry_time: null }
+        expected: { email: 'student@city.ac.uk', expiry_code: null, is_lecturer: false, is_super_admin: false, is_verified: true, reset_password_code: null, user_id: 1, username: 'student', group_code: null, verification_code: null, trial_expiry_time: null }
     }
 ].forEach((endpoint) => {
     test(endpoint.url + ' endpoint returns correct payload', (t) => {

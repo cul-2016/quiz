@@ -10,7 +10,8 @@ const initialState = {
     error: undefined,
     userIsRegistered: undefined,
     userExists: false,
-    tcAgreed: false
+    tcAgreed: false,
+    group_code: ''
 };
 
 
