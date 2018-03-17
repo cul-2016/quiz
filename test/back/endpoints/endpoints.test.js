@@ -133,6 +133,15 @@ test('/authenticate-user endpoint returns error for delAsync Redis call', (t) =>
         method: 'post',
         url: '/authenticate-user',
         payload: {
+            email: 'individualunpaidlecturer@city.ac.uk',
+            password: 'testinglecturer',
+        },
+        expected: { message: "Sorry, you haven't made your last payment. Please contact Quodl" }
+    },
+    {
+        method: 'post',
+        url: '/authenticate-user',
+        payload: {
             email: 'trialexpired@city.ac.uk',
             password: 'testinglecturer',
         },
@@ -383,7 +392,7 @@ test('/authenticate-user endpoint returns error for delAsync Redis call', (t) =>
 
             return Promise.resolve();
         })
-        .then(() => simulateAuth())
+        .then(() => simulateAuth('lecturer@city.ac.uk'))
         .then((token) => {
             const options = {
                 method: endpoint.method,
@@ -445,7 +454,7 @@ test('/authenticate-user endpoint returns error for delAsync Redis call', (t) =>
 
             return Promise.resolve();
         })
-        .then(() => simulateAuthStudents())
+        .then(() => simulateAuthStudents('lecturer@city.ac.uk'))
         .then((token) => {
             const options = {
                 method: endpoint.method,

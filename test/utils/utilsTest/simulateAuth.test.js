@@ -8,7 +8,7 @@ const initDb = require('../initDb.js')(pool, redisCli);
 tape('simulateAuth returns a token', (t) => {
     t.plan(1);
     initDb()
-    .then(() => simulateAuth())
+    .then(() => simulateAuth('lecturer@city.ac.uk'))
     .then((token) => {
         t.ok(token);
     });
