@@ -270,6 +270,7 @@ test('EDIT_CLIENT works', (t) => {
         department: 'department',
         accountType: 'accountType',
         paid: 'paid',
+        userLimit: null,
         code: null
     };
     const action = {
