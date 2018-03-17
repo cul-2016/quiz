@@ -10,5 +10,5 @@ CREATE TABLE IF NOT EXISTS account_management (
     account_type account_types,
     paid BOOLEAN DEFAULT FALSE NOT NULL,
     user_limit INT,
-    code TEXT
+    group_code TEXT
 );

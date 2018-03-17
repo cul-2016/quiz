@@ -65,3 +65,4 @@ require('./generateShareId.test.js');
 require('./submitImportCode.test.js');
 require('./super-admin/saveClient.test.js');
 require('./super-admin/getClients.test.js');
+require('./validateGroupLecturerByCode.test.js');

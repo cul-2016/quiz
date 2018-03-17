@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS account_management (
     account_type account_types,
     paid BOOLEAN DEFAULT FALSE NOT NULL,
     user_limit INT,
-    code TEXT
+    group_code TEXT
 );
 
 /* users */
@@ -244,11 +244,12 @@ ALTER TABLE module_members
 
 
 /********* insert account_management ********/
-INSERT INTO account_management (name, email, institution, department, account_type, paid, user_limit, code)
+INSERT INTO account_management (name, email, institution, department, account_type, paid, user_limit, group_code)
 VALUES ('jsalmon', 'jessica@city.ac.uk' , 'FAC' , 'Ten', 'group admin', true, 100, 'xyz'),
         ('spandya', 'sohil@caf.ac.uk' , '' , '', 'individual lecturer', false, null, 'abc'),
         ('individualpaidlecturer', 'individualpaidlecturer@city.ac.uk' , '' , '', 'individual lecturer', true, null, null),
-        ('individualunpaidlecturer', 'individualunpaidlecturer@city.ac.uk' , '' , '', 'individual lecturer', false, null, null);
+        ('individualunpaidlecturer', 'individualunpaidlecturer@city.ac.uk' , '' , '', 'individual lecturer', false, null, null),
+        ('groupadmin', 'groupadmin@city.ac.uk' , '' , '', 'group admin', true, 1000, 'groupadminsecretcode');
 
 /********* insert users ********/
 
@@ -323,6 +324,11 @@ VALUES ('trialexpired@city.ac.uk', 'lecturer', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/
 INSERT INTO users (email, username, password, is_lecturer, is_verified, trial_expiry_time)
 VALUES ('individualpaidlecturer@city.ac.uk', 'lecturer', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, true, 1521132897603),
         ('individualunpaidlecturer@city.ac.uk', 'lecturer', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, true, 1521132897603);
+
+/*** Group lecturer part of a group ***/
+INSERT INTO users (email, username, password, is_lecturer, is_verified, group_code )
+VALUES ('grouplecturer1@city.ac.uk', 'grouplecturer1', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, true, 'groupadminsecretcode' ),
+        ('grouplecturer2@city.ac.uk', 'grouplecturer1', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, true, 'groupadminsecretcode' );
 
 
 /********* insert modules ********/
