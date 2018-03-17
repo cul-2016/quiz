@@ -12,6 +12,7 @@ export const initialState = {
         department: '',
         accountType: null,
         paid: false,
+        userLimit: null,
         code: null
     },
     isFetchingSuperAdminDashboard: false,

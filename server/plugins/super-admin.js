@@ -55,6 +55,7 @@ exports.register = (server, options, next) => {
             handler: (request, reply) => {
 
                 const payload = request.payload;
+
                 // if group_admin, then generate code and attach to payload before saving saveClient
                 if (payload.accountType === 'group admin') {
                     const code = shortid.generate();

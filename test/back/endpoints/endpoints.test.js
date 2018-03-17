@@ -288,12 +288,12 @@ test('/authenticate-user endpoint returns error for delAsync Redis call', (t) =>
                  { user_id: 31, email: 'validexpiry@city.ac.uk', is_lecturer: false, username: 'valid-password-expiry' },
                  { user_id: 26, email: 'verify-student@city.ac.uk', is_lecturer: false, username: 'verify-student' }
              ],
-         clients: [
-             { account_management_id: 1, name: 'jsalmon', email: 'jessica@city.ac.uk', institution: 'FAC', department: 'Ten', account_type: 'group admin', paid: true, code: 'xyz' },
-             { account_management_id: 2, name: 'spandya', email: 'sohil@caf.ac.uk', institution: '', department: '', account_type: 'individual lecturer', paid: false, code: 'abc' },
-             { account_management_id: 3, name: 'individualpaidlecturer', email: 'individualpaidlecturer@city.ac.uk', institution: '', department: '', account_type: 'individual lecturer', paid: true, code: null },
-             { account_management_id: 4, name: 'individualunpaidlecturer', email: 'individualunpaidlecturer@city.ac.uk', institution: '', department: '', account_type: 'individual lecturer', paid: false, code: null }
-         ]
+            clients: [
+                { account_management_id: 1, name: 'jsalmon', email: 'jessica@city.ac.uk', institution: 'FAC', department: 'Ten', account_type: 'group admin', paid: true, user_limit: 100, code: 'xyz' },
+                { account_management_id: 2, name: 'spandya', email: 'sohil@caf.ac.uk', institution: '', department: '', account_type: 'individual lecturer', paid: false, user_limit: null, code: 'abc' },
+                { account_management_id: 3, name: 'individualpaidlecturer', email: 'individualpaidlecturer@city.ac.uk', institution: '', department: '', account_type: 'individual lecturer', paid: true, user_limit: null, code: null },
+                { account_management_id: 4, name: 'individualunpaidlecturer', email: 'individualunpaidlecturer@city.ac.uk', institution: '', department: '', account_type: 'individual lecturer', paid: false, user_limit: null, code: null }
+            ]
         }
     },
     {

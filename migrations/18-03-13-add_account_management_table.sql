@@ -9,5 +9,6 @@ CREATE TABLE IF NOT EXISTS account_management (
     department TEXT NOT NULL,
     account_type account_types,
     paid BOOLEAN DEFAULT FALSE NOT NULL,
+    user_limit INT,
     code TEXT
 );
