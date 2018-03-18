@@ -9,7 +9,8 @@ const users = [
         is_verified: true,
         expiry_code: null,
         verification_code: null,
-        reset_password_code: null
+        reset_password_code: null,
+        trial_expiry_time: null
     }
 ];
 

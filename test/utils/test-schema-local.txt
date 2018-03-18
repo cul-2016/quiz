@@ -46,7 +46,8 @@ CREATE TABLE IF NOT EXISTS users (
     is_verified BOOLEAN DEFAULT FALSE NOT NULL,
     verification_code TEXT,
     reset_password_code TEXT,
-    expiry_code BIGINT
+    expiry_code BIGINT,
+    trial_expiry_time BIGINT
 );
 
 /* modules */
@@ -307,6 +308,12 @@ INSERT INTO users (email, username, password, is_verified, reset_password_code, 
 /*** User for resetting pasword endpoint test ***/
 INSERT INTO users (email, username, password, is_verified, reset_password_code, expiry_code)
     VALUES ('reset-password-endpoint@city.ac.uk', 'reset-password', '$2a$10$UnvUuW91Jh6.zWQi3G/2J.HLDTomSqJHxvBC.TYx/Bj8HZa.AAm4K', true, 'reset-password-code-endpoint', 1741536250477);
+
+
+/*** New trial users ***/
+INSERT INTO users (email, username, password, is_lecturer, is_verified, trial_expiry_time)
+VALUES ('trialexpired@city.ac.uk', 'lecturer', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, true, 1521132897603),
+       ('trialneverexpires@city.ac.uk', 'lecturer', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, true, 7569133001720);
 
 /********* insert modules ********/
 
