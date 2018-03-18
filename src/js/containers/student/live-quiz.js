@@ -40,7 +40,7 @@ const mapDispatchToProps = (dispatch) => ({
             question_id: store.getState().liveQuiz.questions[0].question_id,
             response: data
         };
-        console.log('saveing response', responseData);
+
         dispatch(saveResponse(responseData));
     }
 });

@@ -1,6 +1,6 @@
 const test = require('tape');
 const getUserByID = require('../../../server/lib/getUserByID');
-const expectedRows = require('../../utils/data-fixtures').users;
+const expectedRows = require('../../utils/data-fixtures').usersById;
 const pool = require('../../utils/dbClient.js');
 const redisCli = require('../../utils/configureRedis.js');
 const initDb = require('../../utils/initDb.js')(pool, redisCli);

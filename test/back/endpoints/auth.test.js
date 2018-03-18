@@ -104,14 +104,14 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
         .then(() => {
             return Promise.resolve();
         })
-        .then(() => {
-            const faketoken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2RldGFpbHMiOnsidXNlcl9pZCI6MzQsImVtYWlsIjoidHJpYWxleHBpcmVkQGNpdHkuYWMudWsiLCJpc19sZWN0dXJlciI6dHJ1ZSwiaXNfc3VwZXJfYWRtaW4iOmZhbHNlLCJ1c2VybmFtZSI6ImxlY3R1cmVyIiwiaXNfdmVyaWZpZWQiOnRydWUsInZlcmlmaWNhdGlvbl9jb2RlIjpudWxsLCJyZXNldF9wYXNzd29yZF9jb2RlIjpudWxsLCJleHBpcnlfY29kZSI6bnVsbCwidHJpYWxfZXhwaXJ5X3RpbWUiOiIxNTIxMjE3NDkwNzA4In0sInVpZCI6IjdhYTMxMTAwLTI5MzYtMTFlOC05ZWUzLTM1MmY5NzM2ZjRmNSIsInNjb3BlIjpbIiJdLCJpYXQiOjE1MjEyMTc0NTl9.RNiXCljTuPazu5IkKLzhpyUBJF6j-MTZLe3OL4QO5d4';
+        .then(() => simulateAuth('trialexpired@city.ac.uk'))
+        .then((token) => {
 
             const options = {
                 method: endpoint.method || 'get',
                 url: endpoint.url,
                 payload: endpoint.payload,
-                headers: { Authorization: faketoken }
+                headers: { Authorization: token, cookie: 'token=' + token }
             };
 
             return server.inject(options);
@@ -172,7 +172,7 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
 
             return Promise.resolve();
         })
-        .then(() => simulateAuth())
+        .then(() => simulateAuth('lecturer@city.ac.uk'))
         .then((token) => {
 
             const options = {
@@ -432,7 +432,7 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
 
                 return Promise.resolve();
             })
-            .then(() => simulateAuth())
+            .then(() => simulateAuth('lecturer@city.ac.uk'))
             .then((token) => {
 
                 const options = {

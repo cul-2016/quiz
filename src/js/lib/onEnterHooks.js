@@ -175,7 +175,6 @@ export function fetchQuizReview (nextState, replace, callback) {
     if (validCookieExists()) {
         const isSurvey = store.getState().liveQuiz.isSurvey;
         const quiz_id = nextState.params.quiz_id;
-        console.log(isSurvey, quiz_id);
         store.dispatch(getQuizReview(quiz_id, isSurvey));
     }
     callback();
