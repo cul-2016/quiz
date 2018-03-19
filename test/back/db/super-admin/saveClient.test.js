@@ -23,7 +23,6 @@ test('`saveClient` saved the new client to the account management table', (t) =>
             );
 
             const expectedError = null;
-            const expectedCommand = 'INSERT';
             const payload = {
                 name: 'sohil',
                 email: 'sohilpandya@me.com',
@@ -33,13 +32,24 @@ test('`saveClient` saved the new client to the account management table', (t) =>
                 paid: true,
                 code: 'verysecretcode'
             };
+            const expected = [{
+                account_management_id: 8,
+                name: 'sohil',
+                email: 'sohilpandya@me.com',
+                institution: 'UCL',
+                department: 'Physics',
+                account_type: 'group admin',
+                paid: true,
+                user_limit: null,
+                group_code: 'verysecretcode'
+            }];
 
             saveClient(pool, payload, (error, response) => {
                 if (error) {
                     console.error(error);
                 }
                 t.equal(error, expectedError, 'error is null, module is saved to db correctly.');
-                t.deepEqual(response.command, expectedCommand, 'Correct command of INSERT, module is saved to db correctly');
+                t.deepEqual(response, expected, 'correct Data being returned from db');
                 email.restore();
             });
         });

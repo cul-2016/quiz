@@ -24,35 +24,38 @@ exports.register = (server, options, next) => {
                 const email = request.payload.email;
                 const password = request.payload.password;
                 getUserByEmail(pool, email, (error, userDetails) => {
-                    
+
                     /* istanbul ignore if */
                     if (error) {
-                        reply(error);
+                        return reply(error);
                     }
                     else if (userDetails.length !== 1) {
-                        reply({ message: "Sorry, this user does not exist" });
+                        return reply({ message: "Sorry, this user does not exist" });
                     }
                     else if (userDetails[0].paid === false) {
                         // when user has not paid
-                        reply({ message: "Sorry, you haven't made your last payment. Please contact Quodl" });
+                        return reply({ message: "Sorry, you haven't made your last payment. Please contact Quodl" });
                     }
                     else if (!userDetails[0].paid && userDetails[0].trial_expiry_time && userDetails[0].trial_expiry_time < Date.now()) {
                         // when trial has expired and they haven't paid
-                        reply({ message: "Sorry, your trial has expired, please contact Quodl to upgrade your free account" });
+                        return reply({ message: "Sorry, your trial has expired, please contact Quodl to upgrade your free account" });
                     }
-
+                    else if (userDetails[0].group_admin_has_paid === false) {
+                        // check if group_admin has paid, show message if they havent.
+                        return reply({ message: "Your institution has not made the latest payment. Please contact your adminstrator" });
+                    }
                     else {
                         const hashedPassword = userDetails[0].password;
                         validatePassword(password, hashedPassword, (error, response) => {
                             /* istanbul ignore if */
                             if (error) {
-                                reply(error);
+                                return reply(error);
                             }
                             else if (!response) {
-                                reply({ message: "Please enter a valid email or password" });
+                                return reply({ message: "Please enter a valid email or password" });
                             }
                             else if (!userDetails[0].is_verified) {
-                                reply({ message: "User is not verified" });
+                                return reply({ message: "User is not verified" });
                             }
                             else {
                                 delete userDetails[0].password;
@@ -66,7 +69,7 @@ exports.register = (server, options, next) => {
                                         const userObject = { user_details: userDetails[0], uid: uid, scope: [userDetails[0].is_super_admin ? "super-admin" : ""] };
                                         const token = jwt.sign(userObject, process.env.JWT_SECRET);
                                         const options = { path: "/", isSecure: false, isHttpOnly: false };
-                                        reply(userDetails[0])
+                                        return reply(userDetails[0])
                                             .header("Authorization", token)
                                             .state('token', token, options)
                                             .state('cul_is_cookie_accepted', 'true', options);
