@@ -190,7 +190,7 @@ test('/authenticate-user endpoint returns error for delAsync Redis call', (t) =>
             is_lecturer: false,
             is_verified: true,
             reset_password_code: null,
-            user_id: 38,
+            user_id: 40,
             username: 'testingstudent',
             group_code: null,
             verification_code: null,
@@ -249,6 +249,8 @@ test('/authenticate-user endpoint returns error for delAsync Redis call', (t) =>
         expected: {
             lecturers: [
                 { user_id: 28, email: 'authenticate-user@city.ac.uk', is_lecturer: true, username: 'lecturer' },
+                { user_id: 38, email: 'grouplecturer1@city.ac.uk', is_lecturer: true, username: 'grouplecturer1' },
+                { user_id: 39, email: 'grouplecturer2@city.ac.uk', is_lecturer: true, username: 'grouplecturer1' },
                 { user_id: 36, email: 'individualpaidlecturer@city.ac.uk', is_lecturer: true, username: 'lecturer' },
                 { user_id: 37, email: 'individualunpaidlecturer@city.ac.uk', is_lecturer: true, username: 'lecturer' },
                 { user_id: 2, email: 'lecturer@city.ac.uk', is_lecturer: true, username: 'lecturer' },
@@ -256,8 +258,7 @@ test('/authenticate-user endpoint returns error for delAsync Redis call', (t) =>
                 { user_id: 34, email: 'trialexpired@city.ac.uk', is_lecturer: true, username: 'lecturer' },
                 { user_id: 35, email: 'trialneverexpires@city.ac.uk', is_lecturer: true, username: 'lecturer' },
                 { user_id: 27, email: 'verification@email.com', is_lecturer: true, username: 'lecturer-test-verify' },
-                { user_id: 25, email: 'verify-lecturer@city.ac.uk', is_lecturer: true, username: 'verify-lecturer' }
-            ],
+                { user_id: 25, email: 'verify-lecturer@city.ac.uk', is_lecturer: true, username: 'verify-lecturer' }],
              students: [
                  { user_id: 11, email: 'apu@simpsons.com', is_lecturer: false, username: 'Apu' },
                  { user_id: 8, email: 'bart@simpsons.com', is_lecturer: false, username: 'Bart' },
@@ -289,10 +290,11 @@ test('/authenticate-user endpoint returns error for delAsync Redis call', (t) =>
                  { user_id: 26, email: 'verify-student@city.ac.uk', is_lecturer: false, username: 'verify-student' }
              ],
             clients: [
-                { account_management_id: 1, name: 'jsalmon', email: 'jessica@city.ac.uk', institution: 'FAC', department: 'Ten', account_type: 'group admin', paid: true, user_limit: 100, code: 'xyz' },
-                { account_management_id: 2, name: 'spandya', email: 'sohil@caf.ac.uk', institution: '', department: '', account_type: 'individual lecturer', paid: false, user_limit: null, code: 'abc' },
-                { account_management_id: 3, name: 'individualpaidlecturer', email: 'individualpaidlecturer@city.ac.uk', institution: '', department: '', account_type: 'individual lecturer', paid: true, user_limit: null, code: null },
-                { account_management_id: 4, name: 'individualunpaidlecturer', email: 'individualunpaidlecturer@city.ac.uk', institution: '', department: '', account_type: 'individual lecturer', paid: false, user_limit: null, code: null }
+                { account_management_id: 1, name: 'jsalmon', email: 'jessica@city.ac.uk', institution: 'FAC', department: 'Ten', account_type: 'group admin', paid: true, user_limit: 100, group_code: 'xyz' },
+                { account_management_id: 2, name: 'spandya', email: 'sohil@caf.ac.uk', institution: '', department: '', account_type: 'individual lecturer', paid: false, user_limit: null, group_code: 'abc' },
+                { account_management_id: 3, name: 'individualpaidlecturer', email: 'individualpaidlecturer@city.ac.uk', institution: '', department: '', account_type: 'individual lecturer', paid: true, user_limit: null, group_code: null },
+                { account_management_id: 4, name: 'individualunpaidlecturer', email: 'individualunpaidlecturer@city.ac.uk', institution: '', department: '', account_type: 'individual lecturer', paid: false, user_limit: null, group_code: null },
+                { account_management_id: 5, name: 'groupadmin', email: 'groupadmin@city.ac.uk', institution: '', department: '', account_type: 'group admin', paid: true, user_limit: 1000, group_code: 'groupadminsecretcode' }
             ]
         }
     },

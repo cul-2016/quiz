@@ -4,7 +4,7 @@ const pool = require('../../utils/dbClient.js');
 const redisCli = require('../../utils/configureRedis.js');
 const initDb = require('../../utils/initDb.js')(pool, redisCli);
 
-test.only('`validateGroupLecturerByCode` get validates the code and also returns the total number of users already using that code', (t) => {
+test('`validateGroupLecturerByCode` get validates the code and also returns the total number of users already using that code', (t) => {
 
     t.plan(1);
 
