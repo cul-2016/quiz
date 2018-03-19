@@ -249,7 +249,8 @@ VALUES ('jsalmon', 'jessica@city.ac.uk' , 'FAC' , 'Ten', 'group admin', true, 10
         ('spandya', 'sohil@caf.ac.uk' , '' , '', 'individual lecturer', false, null, 'abc'),
         ('individualpaidlecturer', 'individualpaidlecturer@city.ac.uk' , '' , '', 'individual lecturer', true, null, null),
         ('individualunpaidlecturer', 'individualunpaidlecturer@city.ac.uk' , '' , '', 'individual lecturer', false, null, null),
-        ('groupadmin', 'groupadmin@city.ac.uk' , '' , '', 'group admin', true, 1000, 'groupadminsecretcode');
+        ('groupadmin', 'groupadmin@city.ac.uk' , '' , '', 'group admin', true, 1000, 'groupadminsecretcode'),
+        ('userlimitreached', 'userlimitreached@city.ac.uk' , 'UCL' , 'SSEES', 'group admin', true, 1, 'limitreached');
 
 /********* insert users ********/
 
@@ -326,9 +327,14 @@ VALUES ('individualpaidlecturer@city.ac.uk', 'lecturer', '$2a$10$3xJ58ADV1YvwSia
         ('individualunpaidlecturer@city.ac.uk', 'lecturer', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, true, 1521132897603);
 
 /*** Group lecturer part of a group ***/
-INSERT INTO users (email, username, password, is_lecturer, is_verified, group_code )
+INSERT INTO users (email, username, password, is_lecturer, is_verified, group_code)
 VALUES ('grouplecturer1@city.ac.uk', 'grouplecturer1', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, true, 'groupadminsecretcode' ),
         ('grouplecturer2@city.ac.uk', 'grouplecturer1', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, true, 'groupadminsecretcode' );
+
+/*** Group lecturer and admin part of a group that reached its user limit ***/
+INSERT INTO users (email, username, password, is_lecturer, is_verified, group_code)
+VALUES ('userlimitreached@city.ac.uk', 'userlimitreached', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, true, 'limitreached' );
+
 
 
 /********* insert modules ********/

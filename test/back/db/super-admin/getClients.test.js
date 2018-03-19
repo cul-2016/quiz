@@ -15,7 +15,9 @@ test('`getClients` gets list of all the clients in the application', (t) => {
                 { account_management_id: 2, name: 'spandya', email: 'sohil@caf.ac.uk', institution: '', department: '', account_type: 'individual lecturer', paid: false, user_limit: null, group_code: 'abc' },
                 { account_management_id: 3, name: 'individualpaidlecturer', email: 'individualpaidlecturer@city.ac.uk', institution: '', department: '', account_type: 'individual lecturer', paid: true, user_limit: null, group_code: null },
                 { account_management_id: 4, name: 'individualunpaidlecturer', email: 'individualunpaidlecturer@city.ac.uk', institution: '', department: '', account_type: 'individual lecturer', paid: false, user_limit: null, group_code: null },
-                { account_management_id: 5, name: 'groupadmin', email: 'groupadmin@city.ac.uk', institution: '', department: '', account_type: 'group admin', paid: true, user_limit: 1000, group_code: 'groupadminsecretcode' }];
+                { account_management_id: 5, name: 'groupadmin', email: 'groupadmin@city.ac.uk', institution: '', department: '', account_type: 'group admin', paid: true, user_limit: 1000, group_code: 'groupadminsecretcode' },
+                { account_management_id: 6, name: 'userlimitreached', email: 'userlimitreached@city.ac.uk', institution: 'UCL', department: 'SSEES', account_type: 'group admin', paid: true, user_limit: 1, group_code: 'limitreached' }
+            ];
 
             getClients(pool, (error, response) => {
 

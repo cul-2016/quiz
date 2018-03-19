@@ -11,7 +11,7 @@ const initialState = {
     userIsRegistered: undefined,
     userExists: false,
     tcAgreed: false,
-    group_code: ''
+    group_code: ""
 };
 
 
