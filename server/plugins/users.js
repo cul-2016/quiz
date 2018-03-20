@@ -39,13 +39,13 @@ exports.register = (server, options, next) => {
                 const verification_code = is_lecturer ? uuid() : null;
                 const validEmailMessage = { message: 'Please enter a valid email address' };
 
-                const saveUserFlow = () => {
+                const saveUserFlow = (is_group_admin = false) => {
                     hashPassword(password, (error, hashedPassword) => {
                         /* istanbul ignore if */
                         if (error) {
                             return reply(error);
                         }
-                        saveUser(pool, email, hashedPassword, is_lecturer, username, group_code, verification_code, (error, result) => { // eslint-disable-line no-unused-vars
+                        saveUser(pool, email, hashedPassword, is_lecturer, username, group_code, verification_code, is_group_admin, (error, result) => { // eslint-disable-line no-unused-vars
                             /* istanbul ignore if */
                             if (error) {
                                 return reply(error);
@@ -111,7 +111,11 @@ exports.register = (server, options, next) => {
                                             // no tests as we do not want to get the bounce on Amazon SES
                                             return reply(validEmailMessage);
                                         } else {
-                                            saveUserFlow();
+                                            console.log(groupAccountInfo[0], '<<< groupacctouninfo');
+
+                                            const is_group_admin = groupAccountInfo[0] && groupAccountInfo[0].admin_email === email ? true : false;
+
+                                            saveUserFlow(is_group_admin);
                                             return reply({ emailSent: true });
                                         }
                                     });

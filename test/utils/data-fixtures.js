@@ -12,6 +12,7 @@ const users = [{
     expiry_code: null,
     trial_expiry_time: null,
     group_admin_has_paid: null,
+    is_group_admin: false,
     account_type: null,
     paid: null }
 ];
@@ -29,7 +30,8 @@ const usersById = [{
     reset_password_code: null,
     expiry_code: null,
     trial_expiry_time: null,
-    group_admin_has_paid: null
+    group_admin_has_paid: null,
+    is_group_admin: false
 }];
 
 
