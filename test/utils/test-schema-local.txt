@@ -336,7 +336,8 @@ VALUES ('grouplecturer1@city.ac.uk', 'grouplecturer1', '$2a$10$3xJ58ADV1YvwSiaRX
 
 /*** Group lecturer and admin part of a group that reached its user limit ***/
 INSERT INTO users (email, username, password, is_lecturer, is_verified, group_code, group_admin_has_paid, is_group_admin)
-VALUES ('userlimitreached@city.ac.uk', 'userlimitreached', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, true, 'limitreached', true, true);
+VALUES ('userlimitreached@city.ac.uk', 'userlimitreached', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, true, 'limitreached', true, true),
+       ('groupadmin@city.ac.uk', 'groupadmin', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, true, 'groupadminsecretcode', true, true);
 
 /*** Group lecturer whose admin has not paid ***/
 INSERT INTO users (email, username, password, is_lecturer, is_verified, group_code, group_admin_has_paid)

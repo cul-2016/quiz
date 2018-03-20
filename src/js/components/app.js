@@ -4,7 +4,7 @@ import ErrorMessage from './general/error-message';
 
 const App = ({ children, location, username,
                error, isCookieAccepted, handleCookieMessage, //eslint-disable-line no-unused-vars
-               handleErrorClearance, is_lecturer, is_super_admin, loading }) => {
+               handleErrorClearance, is_lecturer, is_super_admin, is_group_admin, loading }) => {
 
     const checkPath = (path) => {
         return path === '/' || path.includes('/register') || path.includes('reset-password');
@@ -26,7 +26,7 @@ const App = ({ children, location, username,
         {
             !loading && error &&
                 <div className={ customClasses }>
-                    <Nav location={ location } username={ username } is_lecturer={ is_lecturer } is_super_admin={ is_super_admin } />
+                    <Nav location={ location } username={ username } is_lecturer={ is_lecturer } is_super_admin={ is_super_admin } is_group_admin={ is_group_admin } />
                     { children }
                     <ErrorMessage
                         error={ error }
@@ -36,7 +36,7 @@ const App = ({ children, location, username,
         {
             !loading && !error &&
             <div className={ customClasses }>
-                <Nav location={ location } username={ username } is_lecturer={ is_lecturer } is_super_admin={ is_super_admin }  />
+                <Nav location={ location } username={ username } is_lecturer={ is_lecturer } is_super_admin={ is_super_admin } is_group_admin={ is_group_admin }  />
                 { children }
             </div>
         }
@@ -54,6 +54,7 @@ App.propTypes = {
     handleErrorClearance: PropTypes.func.isRequired,
     is_lecturer: PropTypes.bool,
     is_super_admin: PropTypes.bool,
+    is_group_admin: PropTypes.bool,
     loading: PropTypes.bool
 };
 
