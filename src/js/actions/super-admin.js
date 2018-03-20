@@ -20,7 +20,7 @@ export const DOWNLOAD_DATA_FAILURE = 'DOWNLOAD_DATA_FAILURE';
 
 
 
-export const submitClient = ({ name, email, institution, department, accountType, paid, isEditingClient }) => (dispatch) => {
+export const submitClient = ({ name, email, institution, department, accountType, paid, userLimit, isEditingClient }) => (dispatch) => {
     const payload = {
         name,
         email,
@@ -28,6 +28,7 @@ export const submitClient = ({ name, email, institution, department, accountType
         department,
         accountType,
         paid,
+        userLimit,
         isEditingClient
     };
     dispatch(submitClientRequest());

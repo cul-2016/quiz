@@ -10,6 +10,7 @@ const compareResetPasswordCodeAndExpiry = require('../lib/compareResetPasswordCo
 const updatePassword = require('../lib/updatePassword.js');
 const resetPasswordRequestEmail = require('../lib/email/reset-password-request-email');
 const saveExpiringTokenForUser = require('../lib/saveExpiringTokenForUser');
+const validateGroupLecturerByCode = require('../lib/validateGroupLecturerByCode');
 
 const jwt = require('jsonwebtoken');
 const Joi = require('joi');
@@ -28,12 +29,13 @@ exports.register = (server, options, next) => {
                         email: Joi.string().email().required(),
                         password: Joi.string().required(),
                         is_lecturer: Joi.boolean().strict().required(),
-                        username: Joi.string()
+                        username: Joi.string(),
+                        group_code: Joi.string().allow('')
                     }
                 }
             },
             handler: (request, reply) => {
-                const { email, password, is_lecturer, username = '' } = request.payload;
+                const { email, password, is_lecturer, username = '', group_code = null } = request.payload;
                 const verification_code = is_lecturer ? uuid() : null;
                 const validEmailMessage = { message: 'Please enter a valid email address' };
 
@@ -43,7 +45,7 @@ exports.register = (server, options, next) => {
                         if (error) {
                             return reply(error);
                         }
-                        saveUser(pool, email, hashedPassword, is_lecturer, username, verification_code, (error, result) => { // eslint-disable-line no-unused-vars
+                        saveUser(pool, email, hashedPassword, is_lecturer, username, group_code, verification_code, (error, result) => { // eslint-disable-line no-unused-vars
                             /* istanbul ignore if */
                             if (error) {
                                 return reply(error);
@@ -87,19 +89,33 @@ exports.register = (server, options, next) => {
                         return reply({ message: 'user exists' });
                     } else {
                         if (is_lecturer) {
-                            verifyLecturerEmail({
-                                email,
-                                verificationLink: `${process.env.SERVER_ROUTE}/verification?code=${verification_code}`
-                            }, (err) => {
-                                /* istanbul ignore if */
-                                if (err) {
-                                    // no tests as we do not want to get the bounce on Amazon SES
-                                    return reply(validEmailMessage);
-                                } else {
-                                    saveUserFlow();
-                                    return reply({ emailSent: true });
-                                }
 
+                            validateGroupLecturerByCode(pool, group_code, (error, groupAccountInfo) => {
+                                /* istanbul ignore if */
+                                if (error) {
+                                    return reply(error);
+                                }
+                                else if (group_code && groupAccountInfo.length === 0) {
+                                    return reply({ message: 'The code you have entered is invalid' });
+                                }
+                                else if (group_code && groupAccountInfo[0].users_with_code === groupAccountInfo[0].user_limit) {
+                                    return reply({ message: 'Your institution has reached the maximum number of accounts. Please contact your adminstrator' });
+                                }
+                                else {
+                                    verifyLecturerEmail({
+                                        email,
+                                        verificationLink: `${process.env.SERVER_ROUTE}/verification?code=${verification_code}`
+                                    }, (err) => {
+                                        /* istanbul ignore if */
+                                        if (err) {
+                                            // no tests as we do not want to get the bounce on Amazon SES
+                                            return reply(validEmailMessage);
+                                        } else {
+                                            saveUserFlow();
+                                            return reply({ emailSent: true });
+                                        }
+                                    });
+                                }
                             });
                         }
                         else {

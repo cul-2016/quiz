@@ -5,11 +5,13 @@ const users = [{
     is_lecturer: false,
     is_super_admin: false,
     username: 'student',
+    group_code: null,
     is_verified: true,
     verification_code: null,
     reset_password_code: null,
     expiry_code: null,
     trial_expiry_time: null,
+    group_admin_has_paid: null,
     account_type: null,
     paid: null }
 ];
@@ -21,11 +23,13 @@ const usersById = [{
     is_lecturer: false,
     is_super_admin: false,
     username: 'student',
+    group_code: null,
     is_verified: true,
     verification_code: null,
     reset_password_code: null,
     expiry_code: null,
     trial_expiry_time: null,
+    group_admin_has_paid: null
 }];
 
 

@@ -1,0 +1,2 @@
+ALTER TABLE users
+  ADD COLUMN group_code TEXT DEFAULT NULL;

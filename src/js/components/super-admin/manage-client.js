@@ -1,19 +1,24 @@
 import React, { PropTypes } from 'react';
 import Input from '../general/Input';
 import RadioInput from '../general/radio-input';
+import isEmail from 'validator/lib/isEmail';
 
 
-const SuperAdminManageClient = ({ name, isEditingClient, email, institution, department, accountType, paid, code, updateInput, submitClient, displayError, error }) => {
+const SuperAdminManageClient = ({ name, isEditingClient, email, institution, department, accountType, paid, code, userLimit, updateInput, submitClient, displayError, error }) => {
 
     const handleSubmitClient = () => {
-        if (name && email && (accountType || isEditingClient)) {
-            submitClient({ name, email, institution, department, accountType, paid, isEditingClient });
+        if (name &&
+            isEmail(email) &&
+            ((accountType === 'group admin' && userLimit || accountType === 'individual lecturer') || isEditingClient)) {
+            submitClient({ name, email, institution, department, accountType, paid, userLimit, isEditingClient });
         } else if (!name) {
             displayError({ message: 'Please enter a name for the client before saving' });
-        } else if (!email) {
+        } else if (!email || !isEmail(email)) {
             displayError({ message: 'Please enter an email for the client before saving' });
         } else if (!isEditingClient && !accountType ) {
             displayError({ message: 'Please select an account type for the client before saving' });
+        } else if (accountType === 'group admin' && !userLimit) {
+            displayError({ message: 'Please provide a user limit before saving' });
         }
     };
 
@@ -71,6 +76,17 @@ const SuperAdminManageClient = ({ name, isEditingClient, email, institution, dep
                             value="group admin"
                             labelName="group admin"
                             />
+                            {
+                                accountType === 'group admin' &&
+                                <Input
+                                    updateInput={updateInput}
+                                    className="form__input"
+                                    type="number"
+                                    name="userLimit"
+                                    value={userLimit}
+                                    labelName="User Limit"
+                                />
+                            }
                         </div>
                     </div>
                 }
@@ -122,6 +138,7 @@ SuperAdminManageClient.propTypes = {
     department: PropTypes.string,
     accountType: PropTypes.string,
     paid: PropTypes.bool.isRequired,
+    userLimit: PropTypes.string,
     code: PropTypes.string,
     updateInput: PropTypes.func.isRequired,
     submitClient: PropTypes.func.isRequired,

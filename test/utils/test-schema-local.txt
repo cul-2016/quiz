@@ -32,7 +32,8 @@ CREATE TABLE IF NOT EXISTS account_management (
     department TEXT NOT NULL,
     account_type account_types,
     paid BOOLEAN DEFAULT FALSE NOT NULL,
-    code TEXT
+    user_limit INT,
+    group_code TEXT
 );
 
 /* users */
@@ -43,11 +44,13 @@ CREATE TABLE IF NOT EXISTS users (
     is_lecturer BOOLEAN DEFAULT FALSE NOT NULL,
     is_super_admin BOOLEAN DEFAULT FALSE NOT NULL,
     username TEXT,
+    group_code TEXT DEFAULT NULL,
     is_verified BOOLEAN DEFAULT FALSE NOT NULL,
     verification_code TEXT,
     reset_password_code TEXT,
     expiry_code BIGINT,
-    trial_expiry_time BIGINT
+    trial_expiry_time BIGINT,
+    group_admin_has_paid BOOLEAN DEFAULT NULL
 );
 
 /* modules */
@@ -242,11 +245,14 @@ ALTER TABLE module_members
 
 
 /********* insert account_management ********/
-INSERT INTO account_management (name, email, institution, department, account_type, paid, code)
-VALUES ('jsalmon', 'jessica@city.ac.uk' , 'FAC' , 'Ten', 'group admin', true, 'xyz'),
-        ('spandya', 'sohil@caf.ac.uk' , '' , '', 'individual lecturer', false, 'abc'),
-        ('individualpaidlecturer', 'individualpaidlecturer@city.ac.uk' , '' , '', 'individual lecturer', true, null),
-        ('individualunpaidlecturer', 'individualunpaidlecturer@city.ac.uk' , '' , '', 'individual lecturer', false, null);
+INSERT INTO account_management (name, email, institution, department, account_type, paid, user_limit, group_code)
+VALUES ('jsalmon', 'jessica@city.ac.uk' , 'FAC' , 'Ten', 'group admin', true, 100, 'xyz'),
+        ('spandya', 'sohil@caf.ac.uk' , '' , '', 'individual lecturer', false, null, 'abc'),
+        ('individualpaidlecturer', 'individualpaidlecturer@city.ac.uk' , '' , '', 'individual lecturer', true, null, null),
+        ('individualunpaidlecturer', 'individualunpaidlecturer@city.ac.uk' , '' , '', 'individual lecturer', false, null, null),
+        ('groupadmin', 'groupadmin@city.ac.uk' , '' , '', 'group admin', true, 1000, 'groupadminsecretcode'),
+        ('groupadminnotpaid', 'groupadminnotpaid@city.ac.uk' , '' , '', 'group admin', true, 1000, 'notpaidsecretcode'),
+        ('userlimitreached', 'userlimitreached@city.ac.uk' , 'UCL' , 'SSEES', 'group admin', false, 1, 'limitreached');
 
 /********* insert users ********/
 
@@ -321,6 +327,19 @@ VALUES ('trialexpired@city.ac.uk', 'lecturer', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/
 INSERT INTO users (email, username, password, is_lecturer, is_verified, trial_expiry_time)
 VALUES ('individualpaidlecturer@city.ac.uk', 'lecturer', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, true, 1521132897603),
         ('individualunpaidlecturer@city.ac.uk', 'lecturer', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, true, 1521132897603);
+
+/*** Group lecturer part of a group ***/
+INSERT INTO users (email, username, password, is_lecturer, is_verified, group_code, group_admin_has_paid)
+VALUES ('grouplecturer1@city.ac.uk', 'grouplecturer1', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, true, 'groupadminsecretcode', true),
+        ('grouplecturer2@city.ac.uk', 'grouplecturer1', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, true, 'groupadminsecretcode', true);
+
+/*** Group lecturer and admin part of a group that reached its user limit ***/
+INSERT INTO users (email, username, password, is_lecturer, is_verified, group_code, group_admin_has_paid)
+VALUES ('userlimitreached@city.ac.uk', 'userlimitreached', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, true, 'limitreached', true);
+
+/*** Group lecturer whose admin has not paid ***/
+INSERT INTO users (email, username, password, is_lecturer, is_verified, group_code, group_admin_has_paid)
+VALUES ('grouplectureradminnotpaid@city.ac.uk', 'grouplectureradminnotpaid', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, true, 'notpaidsecretcode', false);
 
 
 /********* insert modules ********/

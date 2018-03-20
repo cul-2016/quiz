@@ -17,8 +17,7 @@ export const updateInputField = (inputKey, value) => ({
     inputKey
 });
 
-export function registeringUser (email, username, password, is_lecturer) {
-
+export function registeringUser (email, username, password, is_lecturer, group_code) {
     return (dispatch) => {
 
         dispatch(registeringUserRequest());
@@ -27,7 +26,8 @@ export function registeringUser (email, username, password, is_lecturer) {
             email,
             username,
             password,
-            is_lecturer
+            is_lecturer,
+            group_code
         };
 
         request.post(dispatch)('/save-user', payload)

@@ -7,7 +7,6 @@ import lowerCaseBeforeAt from '../lib/lowerCaseBeforeAt.js';
 const Signup = ({ register, updateInputField, registeringUser, toggleTcAgreed, location, showTcAgreedError }) => {
 
     const isEmailValid = isEmail(register.email);
-
     const is_lecturer = location.pathname !== '/register-student';
 
     let invalidEmailClasses = classnames("help is-danger", {
@@ -36,7 +35,8 @@ const Signup = ({ register, updateInputField, registeringUser, toggleTcAgreed, l
                 lowerCaseBeforeAt(register.email).trim(),
                 register.username,
                 register.password,
-                is_lecturer
+                is_lecturer,
+                register.group_code
             );
         } else if (!register.tcAgreed) {
             showTcAgreedError();
@@ -75,7 +75,17 @@ const Signup = ({ register, updateInputField, registeringUser, toggleTcAgreed, l
                   onChange={ (e) => updateInputField("username", e.target.value)}
                   type="username"/>
               </div>
-
+              { is_lecturer &&
+                  <div className="form__field f-body">
+                    <label className="form__label">Code (if registering under an institutional account)</label>
+                    <input
+                      onKeyDown={ submitOnEnter }
+                      className="form__input"
+                      value={ register.group_code }
+                      onChange={ (e) => updateInputField("group_code", e.target.value)}
+                      type="code"/>
+                  </div>
+              }
               <div className="form__field f-body">
                 <label className="form__label">Choose a password</label>
                 <input
