@@ -17,6 +17,7 @@ import update from 'react-addons-update';
 import { feedback } from './feedback';
 import { studentHistory } from './student-history';
 import { superAdmin } from './super-admin';
+import { groupAdmin } from './group-admin';
 import { hashHistory } from 'react-router';
 
 export const appReducer = combineReducers({
@@ -36,7 +37,8 @@ export const appReducer = combineReducers({
     leaderboard,
     feedback,
     studentHistory,
-    superAdmin
+    superAdmin,
+    groupAdmin
 });
 
 export const rootReducer = (state, action) => {

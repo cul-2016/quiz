@@ -14,14 +14,14 @@ test('`updateGroupLecturerPaidColumn` saved the new client to the account manage
             const paid = false;
             const group_code = 'groupadminsecretcode';
             const expectedError = null;
-
+            const expected = [{ user_id: 38 }, { user_id: 39 }, { user_id: 41 }, { user_id: 43 }];
 
             updateGroupLecturerPaidColumn(pool, paid, group_code, (error, response) => {
                 if (error) {
                     console.error(error);
                 }
                 t.equal(error, expectedError, 'error is null, module is saved to db correctly.');
-                t.deepEqual(response, [{ user_id: 38 }, { user_id: 39 }], 'Correct command of INSERT, module is saved to db correctly');
+                t.deepEqual(response, expected, 'Correct command of INSERT, module is saved to db correctly');
             });
         });
 });

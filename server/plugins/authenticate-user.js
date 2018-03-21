@@ -32,6 +32,10 @@ exports.register = (server, options, next) => {
                     else if (userDetails.length !== 1) {
                         return reply({ message: "Sorry, this user does not exist" });
                     }
+                    else if (!userDetails[0].is_user_active) {
+                        // user has been deactivated by group admin
+                        return reply({ message: "Sorry, your account has been deactivated, please contact your administrator to restore access" });
+                    }
                     else if (userDetails[0].paid === false) {
                         // when user has not paid
                         return reply({ message: "Sorry, you haven't made your last payment. Please contact Quodl" });
@@ -66,7 +70,7 @@ exports.register = (server, options, next) => {
                                 const twoWeeks = 60 * 60 * 24 * 14;
                                 client.setAsync(userDetails[0].user_id.toString(), uid, 'EX', twoWeeks)
                                     .then(() => {
-                                        const userObject = { user_details: userDetails[0], uid: uid, scope: [userDetails[0].is_super_admin ? "super-admin" : ""] };
+                                        const userObject = { user_details: userDetails[0], uid: uid, scope: [userDetails[0].is_super_admin ? "super-admin" : "", userDetails[0].is_group_admin ? "group-admin" : ""] };
                                         const token = jwt.sign(userObject, process.env.JWT_SECRET);
                                         const options = { path: "/", isSecure: false, isHttpOnly: false };
                                         return reply(userDetails[0])

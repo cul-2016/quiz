@@ -15,7 +15,7 @@ test('`saveUser` successfully saves a lecturer', (t) => {
         const expectedCommand = 'INSERT';
         const verification_code = uuid();
         const group_code = '123abc';
-        saveUser(pool, 'sohilpandya@me.com', 'test', true, '', group_code, verification_code, (error, response) => {
+        saveUser(pool, 'sohilpandya@me.com', 'test', true, '', group_code, verification_code, false, (error, response) => {
             t.deepEquals(error, expectedError, 'error is null, lecturer is saved to db correctly.');
             t.deepEquals(response.command, expectedCommand, 'Correct command of INSERT, lecturer is saved to db correctly');
         });
@@ -30,7 +30,7 @@ test('`saveUser` successfully saves a student', (t) => {
     .then(() => {
         const expectedError = null;
         const expectedCommand = 'INSERT';
-        saveUser(pool, 'teststudent@city.ac.uk', 'teststudent', false, 'teststudent', '', null, (error, response) => {
+        saveUser(pool, 'teststudent@city.ac.uk', 'teststudent', false, 'teststudent', '', null, false, (error, response) => {
             t.deepEquals(error, expectedError, 'error is null, student is saved to db correctly.');
             t.deepEquals(response.command, expectedCommand, 'Correct command of INSERT, student is saved to db correctly');
         });

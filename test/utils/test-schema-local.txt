@@ -50,7 +50,9 @@ CREATE TABLE IF NOT EXISTS users (
     reset_password_code TEXT,
     expiry_code BIGINT,
     trial_expiry_time BIGINT,
-    group_admin_has_paid BOOLEAN DEFAULT NULL
+    group_admin_has_paid BOOLEAN DEFAULT NULL,
+    is_group_admin BOOLEAN DEFAULT FALSE NOT NULL,
+    is_user_active BOOLEAN DEFAULT TRUE NOT NULL
 );
 
 /* modules */
@@ -313,7 +315,7 @@ INSERT INTO users (email, username, password, is_verified, reset_password_code, 
     VALUES ('expiredpassword@city.ac.uk', 'expired-password', '$2a$10$UnvUuW91Jh6.zWQi3G/2J.HLDTomSqJHxvBC.TYx/Bj8HZa.AAm4K', true, 'reset-password-code-2', 1482166876770);
 
 
-/*** User for resetting pasword endpoint test ***/
+/*** User for resetting password endpoint test ***/
 INSERT INTO users (email, username, password, is_verified, reset_password_code, expiry_code)
     VALUES ('reset-password-endpoint@city.ac.uk', 'reset-password', '$2a$10$UnvUuW91Jh6.zWQi3G/2J.HLDTomSqJHxvBC.TYx/Bj8HZa.AAm4K', true, 'reset-password-code-endpoint', 1741536250477);
 
@@ -334,12 +336,18 @@ VALUES ('grouplecturer1@city.ac.uk', 'grouplecturer1', '$2a$10$3xJ58ADV1YvwSiaRX
         ('grouplecturer2@city.ac.uk', 'grouplecturer1', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, true, 'groupadminsecretcode', true);
 
 /*** Group lecturer and admin part of a group that reached its user limit ***/
-INSERT INTO users (email, username, password, is_lecturer, is_verified, group_code, group_admin_has_paid)
-VALUES ('userlimitreached@city.ac.uk', 'userlimitreached', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, true, 'limitreached', true);
+INSERT INTO users (email, username, password, is_lecturer, is_verified, group_code, group_admin_has_paid, is_group_admin)
+VALUES ('userlimitreached@city.ac.uk', 'userlimitreached', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, true, 'limitreached', true, true),
+       ('groupadmin@city.ac.uk', 'groupadmin', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, true, 'groupadminsecretcode', true, true);
 
 /*** Group lecturer whose admin has not paid ***/
 INSERT INTO users (email, username, password, is_lecturer, is_verified, group_code, group_admin_has_paid)
 VALUES ('grouplectureradminnotpaid@city.ac.uk', 'grouplectureradminnotpaid', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, true, 'notpaidsecretcode', false);
+
+/*** Group lecturer whose has been deactivated ***/
+INSERT INTO users (email, username, password, is_lecturer, is_verified, group_code, group_admin_has_paid, is_user_active)
+VALUES ('deactivatedlecturer@city.ac.uk', 'deactivatedlecturer', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, true, 'groupadminsecretcode', false, false);
+
 
 
 /********* insert modules ********/

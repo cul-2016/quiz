@@ -9,15 +9,16 @@ var query = require('../query');
 * @param {string} username - username for the given student or lecturer
 * @param {string} group_code - code which associates a lecturer to a particular group (e.g. a university department)
 * @param {string} verification_code - uuid code necessary for verification url sent via email
+* @param {string} is_group_admin - boolean denoting whether the user is a group_admin or not
 * @param {Function} callback - callback function.
 */
-function saveUser (pool, email, password, is_lecturer, username, group_code, verification_code, callback) {
+function saveUser (pool, email, password, is_lecturer, username, group_code, verification_code, is_group_admin, callback) {
     var userQuery;
     var userArray;
     if (is_lecturer) {
-        var expiry = Date.now() + (7 * 24 * 60 * 60 * 1000); // 7 days current trial length
-        userQuery = 'INSERT INTO users (email, password, is_lecturer, username, group_code, verification_code, trial_expiry_time) VALUES ( $1, $2, $3, $4, $5, $6, $7 );';
-        userArray = [email, password, is_lecturer, username, group_code, verification_code, expiry];
+        var expiry = Date.now() + (91 * 24 * 60 * 60 * 1000); // 3 Month Trial
+        userQuery = 'INSERT INTO users (email, password, is_lecturer, username, group_code, verification_code, is_group_admin, trial_expiry_time) VALUES ( $1, $2, $3, $4, $5, $6, $7, $8 );';
+        userArray = [email, password, is_lecturer, username, group_code, verification_code, is_group_admin, expiry];
     } else {
         userQuery = 'INSERT INTO users (email, password, username, is_verified) VALUES ( $1, $2, $3, $4);';
         userArray = [email, password, username, true];
