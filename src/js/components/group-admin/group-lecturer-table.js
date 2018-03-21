@@ -6,7 +6,6 @@ const GroupLecturerTable = ({ users, user_limit, user_count, updateUserIsActive 
         return (
             <tr key={ i } className={`leaderboard__row--${i % 2 === 0 || i === 0 ? 'even' : 'odd'}` }>
                 <td className="f-body"> { user.email } </td>
-                <td className="f-body"> { user.username } </td>
                 <td>
                     <RadioButton
                         is_user_active={user.is_user_active}
@@ -21,12 +20,22 @@ const GroupLecturerTable = ({ users, user_limit, user_count, updateUserIsActive 
     return (
         <div className="content__body">
             <h1 className="f-headline">Group Lecturers</h1>
+            <div>
+                {
+                    user_count &&
+                    <p className="f-subheader"> You have used <span className="f-subheader--tertiary">{user_count} / {user_limit}</span> seats for this account </p>
+                }
+                {
+                    user_count && user_count === user_limit &&
+                    <p> You have used all your seats, please contact Quodl to upgrade the account or deactivate some users to free up spaces </p>
+                }
+            </div>
+            <div className="line" />
             <table>
                 <thead>
                     <tr>
-                        <th className="f-body f-body--white">Email</th>
-                        <th className="f-body f-body--white">Username</th>
-                        <th className="f-body f-body--white"></th>
+                        <th className="f-body f-body--heavy">Email</th>
+                        <th className="f-body f-body--heavy">User Active</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -38,7 +47,7 @@ const GroupLecturerTable = ({ users, user_limit, user_count, updateUserIsActive 
 };
 
 const RadioButton = ({ is_user_active, user_limit, user_count, updateUserIsActive, user_id }) => {
-    
+
     const sliderClass = classnames({
         "form__radio--off": !is_user_active,
         "form__radio--on": is_user_active
