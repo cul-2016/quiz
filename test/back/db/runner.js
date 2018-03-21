@@ -67,3 +67,5 @@ require('./super-admin/saveClient.test.js');
 require('./super-admin/getClients.test.js');
 require('./super-admin/updateGroupLecturerPaidColumn.test.js');
 require('./validateGroupLecturerByCode.test.js');
+require('./group-admin/updateUserIsActive.test.js');
+require('./group-admin/getGroupAccountLimitInformation.test.js');

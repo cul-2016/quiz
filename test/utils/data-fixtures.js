@@ -14,8 +14,9 @@ const users = [{
     group_admin_has_paid: null,
     is_group_admin: false,
     account_type: null,
-    paid: null }
-];
+    paid: null,
+    is_user_active: true
+}];
 
 const usersById = [{
     user_id: 1,
@@ -31,7 +32,8 @@ const usersById = [{
     expiry_code: null,
     trial_expiry_time: null,
     group_admin_has_paid: null,
-    is_group_admin: false
+    is_group_admin: false,
+    is_user_active: true
 }];
 
 

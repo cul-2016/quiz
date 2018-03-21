@@ -344,6 +344,11 @@ VALUES ('userlimitreached@city.ac.uk', 'userlimitreached', '$2a$10$3xJ58ADV1YvwS
 INSERT INTO users (email, username, password, is_lecturer, is_verified, group_code, group_admin_has_paid)
 VALUES ('grouplectureradminnotpaid@city.ac.uk', 'grouplectureradminnotpaid', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, true, 'notpaidsecretcode', false);
 
+/*** Group lecturer whose has been deactivated ***/
+INSERT INTO users (email, username, password, is_lecturer, is_verified, group_code, group_admin_has_paid, is_user_active)
+VALUES ('deactivatedlecturer@city.ac.uk', 'deactivatedlecturer', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, true, 'groupadminsecretcode', false, false);
+
+
 
 /********* insert modules ********/
 
