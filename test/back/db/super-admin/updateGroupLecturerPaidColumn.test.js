@@ -21,7 +21,7 @@ test('`updateGroupLecturerPaidColumn` saved the new client to the account manage
                     console.error(error);
                 }
                 t.equal(error, expectedError, 'error is null, module is saved to db correctly.');
-                t.deepEqual(response, [{ user_id: 38 }, { user_id: 39 }], 'Correct command of INSERT, module is saved to db correctly');
+                t.deepEqual(response, [{ user_id: 38 }, { user_id: 39 }, { user_id: 41 }], 'Correct command of INSERT, module is saved to db correctly');
             });
         });
 });

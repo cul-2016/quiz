@@ -12,7 +12,7 @@ test('`validateGroupLecturerByCode` get validates the code and also returns the 
         .then(() => {
             const group_code = 'groupadminsecretcode';
             const expectedRows = [
-                { users_with_code: 2, user_limit: 1000, group_code: 'groupadminsecretcode', admin_email: 'groupadmin@city.ac.uk' }
+                { users_with_code: 3, user_limit: 1000, group_code: 'groupadminsecretcode', admin_email: 'groupadmin@city.ac.uk' }
             ];
 
             validateGroupLecturerByCode(pool, group_code, (error, response) => {
