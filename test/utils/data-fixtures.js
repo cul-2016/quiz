@@ -492,6 +492,21 @@ const superAdminDashboardData = {
     clients: []
 };
 
+const groupAdminDashboardData = {
+    lecturer: [{
+        user_id: 2,
+        email: 'lecturer@city.ac.uk',
+        is_lecturer: true,
+        is_super_admin: true,
+        username: 'student',
+        is_verified: true,
+        expiry_code: null,
+        verification_code: null,
+        reset_password_code: null
+    }],
+    userAccountLimitInformation: { user_limit: 1000, count: 500 }
+};
+
 
 module.exports = {
     users,
@@ -522,5 +537,6 @@ module.exports = {
     updateQuizOptionsPayload,
     questionsAnswers,
     moduleInfo,
-    superAdminDashboardData
+    superAdminDashboardData,
+    groupAdminDashboardData
 };
