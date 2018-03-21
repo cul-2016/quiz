@@ -51,7 +51,8 @@ CREATE TABLE IF NOT EXISTS users (
     expiry_code BIGINT,
     trial_expiry_time BIGINT,
     group_admin_has_paid BOOLEAN DEFAULT NULL,
-    is_group_admin BOOLEAN DEFAULT FALSE NOT NULL
+    is_group_admin BOOLEAN DEFAULT FALSE NOT NULL,
+    is_user_active BOOLEAN DEFAULT TRUE NOT NULL
 );
 
 /* modules */

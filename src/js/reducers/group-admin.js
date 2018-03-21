@@ -4,8 +4,10 @@ import * as actionTypes from '../actions/group-admin';
 
 export const initialState = {
     lecturers: [],
+    user_count: undefined,
+    user_limit: undefined,
     isFetchingGroupAdminDashboard: false,
-    isDeletingLecturer: false,
+    isUpdatingUser: false,
     error: undefined
 };
 
@@ -24,6 +26,8 @@ export function groupAdmin (state = initialState, action) {
         return update(state, {
             isFetchingGroupAdminDashboard: { $set: false },
             lecturers: { $set: action.data.lecturers },
+            user_count: { $set: action.data.userAccountLimitInformation.count },
+            user_limit: { $set: action.data.userAccountLimitInformation.user_limit }
         });
 
     case actionTypes.GET_GROUP_ADMIN_DASHBOARD_FAILURE:
@@ -32,18 +36,18 @@ export function groupAdmin (state = initialState, action) {
             error: { $set: action.error }
         });
 
-    case actionTypes.DELETE_LECTURER_REQUEST:
+    case actionTypes.UPDATE_USER_IS_ACTIVE_REQUEST:
         return update(state, {
-            isDeletingLecturer: { $set: true }
+            isUpdatingUser: { $set: true }
         });
 
-    case actionTypes.DELETE_LECTURER_SUCCESS:
+    case actionTypes.UPDATE_USER_IS_ACTIVE_SUCCESS:
         return update(state, {
-            isDeletingLecturer: { $set: false }
+            isUpdatingUser: { $set: false }
         });
-    case actionTypes.DELETE_LECTURER_FAILURE:
+    case actionTypes.UPDATE_USER_IS_ACTIVE_FAILURE:
         return update(state, {
-            isDeletingLecturer: { $set: false },
+            isUpdatingUser: { $set: false },
             error: { $set: action.error }
         });
 

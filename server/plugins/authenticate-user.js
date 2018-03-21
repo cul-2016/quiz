@@ -32,6 +32,10 @@ exports.register = (server, options, next) => {
                     else if (userDetails.length !== 1) {
                         return reply({ message: "Sorry, this user does not exist" });
                     }
+                    else if (!userDetails[0].is_user_active) {
+                        // user has been deactivated by group admin
+                        return reply({ message: "Sorry, your account has been deactivated, please contact your administrator to restore access" });
+                    }
                     else if (userDetails[0].paid === false) {
                         // when user has not paid
                         return reply({ message: "Sorry, you haven't made your last payment. Please contact Quodl" });

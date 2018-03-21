@@ -14,7 +14,7 @@ function validateGroupLecturerByCode (client, group_code, callback) {
     const queryString = `SELECT new_table.users_with_code, new_table.user_limit, new_table.group_code, new_table.admin_email
 FROM(
     SELECT count(users.group_code)::int AS users_with_code, account_management.user_limit AS user_limit, account_management.group_code AS group_code, account_management.email AS admin_email
-    FROM users RIGHT JOIN account_management ON users.group_code = account_management.group_code WHERE account_management.group_code = $1
+    FROM users RIGHT JOIN account_management ON users.group_code = account_management.group_code WHERE account_management.group_code = $1 AND users.is_user_active = true
 	GROUP BY account_management.user_limit, users.group_code, account_management.group_code, account_management.email
 ) AS new_table;`;
 

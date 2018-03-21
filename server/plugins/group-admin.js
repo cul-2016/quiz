@@ -1,7 +1,8 @@
 const jwt = require('jsonwebtoken');
-const getLecturersByGroupCode = require('../lib/group-admin/getLecturersByGroupCode');
 const Joi = require('joi');
-const deleteUser = require('../lib/deleteUser');
+const getLecturersByGroupCode = require('../lib/group-admin/getLecturersByGroupCode');
+const updateUserIsActive = require('../lib/group-admin/updateUserIsActive');
+const getGroupAccountLimitInformation = require('../lib/group-admin/getGroupAccountLimitInformation');
 
 exports.register = (server, options, next) => {
 
@@ -29,8 +30,16 @@ exports.register = (server, options, next) => {
                         /* istanbul ignore if */
                         if (err) { return reply(err); }
                         else {
-                            const filteredLecturers = lecturers.filter((lecturer) => { return lecturer.user_id !== user_id; })
-                            reply({ lecturers: filteredLecturers });
+
+                            getGroupAccountLimitInformation(pool, group_code, (err, userAccountLimitInformation) => {
+                                /* istanbul ignore if */
+                                if (err) { return reply(err); }
+                                else {
+
+                                    const filteredLecturers = lecturers.filter((lecturer) => { return lecturer.user_id !== user_id; });
+                                    reply({ lecturers: filteredLecturers, userAccountLimitInformation: userAccountLimitInformation[0] });
+                                }
+                            });
                         }
                     });
                 });
@@ -38,7 +47,7 @@ exports.register = (server, options, next) => {
         },
         {
             method: 'POST',
-            path: '/group-admin/delete',
+            path: '/group-admin/update',
             config: {
                 validate: {
                     payload: {
@@ -50,10 +59,16 @@ exports.register = (server, options, next) => {
                 }
             },
             handler: (request, reply) => {
-                deleteUser(pool, request.payload.user_id, (error, response) => {
+                const { user_id } = request.payload;
+                updateUserIsActive(pool, user_id, (error, user) => {
                     /* istanbul ignore if */
                     if (error) reply(error);
-                    if (response) reply(true);
+                    else {
+                        if (!user.is_user_active) {
+                            redisCli.del(user_id);
+                        }
+                        reply(true);
+                    }
                 });
             }
         }
