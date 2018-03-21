@@ -16,7 +16,7 @@ function saveUser (pool, email, password, is_lecturer, username, group_code, ver
     var userQuery;
     var userArray;
     if (is_lecturer) {
-        var expiry = Date.now() + (7 * 24 * 60 * 60 * 1000); // 7 days current trial length
+        var expiry = Date.now() + (91 * 24 * 60 * 60 * 1000); // 3 Month Trial
         userQuery = 'INSERT INTO users (email, password, is_lecturer, username, group_code, verification_code, is_group_admin, trial_expiry_time) VALUES ( $1, $2, $3, $4, $5, $6, $7, $8 );';
         userArray = [email, password, is_lecturer, username, group_code, verification_code, is_group_admin, expiry];
     } else {
