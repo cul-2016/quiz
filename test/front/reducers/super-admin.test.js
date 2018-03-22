@@ -260,7 +260,7 @@ test('DISPLAY_ERROR works', (t) => {
     t.deepEqual(result, expected);
 });
 
-test.only('EDIT_CLIENT works', (t) => {
+test('EDIT_CLIENT works', (t) => {
     t.plan(1);
     const initialState = deepFreeze(superAdminState);
     const client = {
