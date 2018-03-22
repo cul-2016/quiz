@@ -90,6 +90,17 @@ const SuperAdminManageClient = ({ name, isEditingClient, email, institution, dep
                         </div>
                     </div>
                 }
+                {
+                    isEditingClient && userLimit &&
+                        <Input
+                            updateInput={updateInput}
+                            className="form__input"
+                            type="number"
+                            name="userLimit"
+                            value={userLimit}
+                            labelName="User Limit"
+                        />
+                }
 
                 <p className="f-body f-body--heavy">Client Paid</p>
                 <div className="form__radio-group">

@@ -260,10 +260,20 @@ test('DISPLAY_ERROR works', (t) => {
     t.deepEqual(result, expected);
 });
 
-test('EDIT_CLIENT works', (t) => {
+test.only('EDIT_CLIENT works', (t) => {
     t.plan(1);
     const initialState = deepFreeze(superAdminState);
     const client = {
+        name: 'name',
+        email: 'email',
+        institution: 'institution',
+        department: 'department',
+        accountType: 'accountType',
+        paid: 'paid',
+        user_limit: null,
+        code: null
+    };
+    const expectedManageClientState = {
         name: 'name',
         email: 'email',
         institution: 'institution',
@@ -277,7 +287,7 @@ test('EDIT_CLIENT works', (t) => {
         type: 'EDIT_CLIENT',
         client
     };
-    const expected = Object.assign({}, superAdminState, { manageClient: client, isEditingClient: true });
+    const expected = Object.assign({}, superAdminState, { manageClient: expectedManageClientState, isEditingClient: true });
     const result = reducer(initialState, action);
     t.deepEqual(result, expected);
 });

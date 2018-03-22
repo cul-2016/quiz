@@ -54,7 +54,8 @@ export function superAdmin (state = initialState, action) {
                 institution: { $set: action.client.institution },
                 department: { $set: action.client.department },
                 accountType: { $set: action.client.accountType },
-                paid: { $set: action.client.paid }
+                paid: { $set: action.client.paid },
+                userLimit: { $set: action.client.user_limit }
             },
             isEditingClient: { $set: true }
 
