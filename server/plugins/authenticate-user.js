@@ -37,11 +37,11 @@ exports.register = (server, options, next) => {
                         return reply({ message: "Sorry, your account has been deactivated, please contact your administrator to restore access" });
                     }
                     else if (userDetails[0].paid === false) {
-                        // when user has not paid
+                        // when individual lecturer has not paid
                         return reply({ message: "Sorry, you haven't made your last payment. Please contact Quodl" });
                     }
                     else if (!userDetails[0].paid && userDetails[0].trial_expiry_time && userDetails[0].trial_expiry_time < Date.now()) {
-                        // when trial has expired and they haven't paid
+                        // when indivudual lecturers trial has expired and they haven't paid
                         return reply({ message: "Sorry, your trial has expired, please contact Quodl to upgrade your free account" });
                     }
                     else if (userDetails[0].group_admin_has_paid === false) {

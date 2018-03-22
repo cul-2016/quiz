@@ -10,22 +10,31 @@ var query = require('./query');
 
 function validateGroupLecturerByCode (client, group_code, callback) {
 
+
+    const queryString1 = `select count(*)::int from users where users.group_code = $1 AND users.is_user_active = true;`;
+
+    const queryString2 = `SELECT user_limit, group_code, paid, email FROM account_management WHERE account_management.group_code = $1;`;
     const queryArray = [group_code];
-    const queryString = `SELECT new_table.users_with_code, new_table.user_limit, new_table.group_code, new_table.admin_email
-FROM(
-    SELECT count(users.group_code)::int AS users_with_code, account_management.user_limit AS user_limit, account_management.group_code AS group_code, account_management.email AS admin_email
-    FROM users RIGHT JOIN account_management ON users.group_code = account_management.group_code WHERE account_management.group_code = $1 AND users.is_user_active = true
-	GROUP BY account_management.user_limit, users.group_code, account_management.group_code, account_management.email
-) AS new_table;`;
 
-
-    query(client, queryString, queryArray, (error, response) => {
+    query(client, queryString1, queryArray, (error, actualUserCountWithCode) => {
         /* istanbul ignore if */
         if (error) {
             console.log(error);
             return callback(error);
+        } else {
+
+
+            query(client, queryString2, queryArray, (error, response) => {
+                /* istanbul ignore if */
+                if (error) {
+                    console.log(error);
+                    return callback(error);
+                }
+                callback(null, { accountDetails: response.rows, actualUserCountWithCode: actualUserCountWithCode.rows[0] });
+            });
         }
-        callback(null, response.rows);
+
+
     });
 }
 

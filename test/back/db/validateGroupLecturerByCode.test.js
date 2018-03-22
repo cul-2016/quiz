@@ -11,9 +11,10 @@ test('`validateGroupLecturerByCode` get validates the code and also returns the 
     initDb()
         .then(() => {
             const group_code = 'groupadminsecretcode';
-            const expectedRows = [
-                { users_with_code: 3, user_limit: 1000, group_code: 'groupadminsecretcode', admin_email: 'groupadmin@city.ac.uk' }
-            ];
+            const expectedRows = {
+                accountDetails: [{ user_limit: 1000, group_code: 'groupadminsecretcode', paid: true, email: 'groupadmin@city.ac.uk' }],
+                actualUserCountWithCode: { count: 3 }
+            };
 
             validateGroupLecturerByCode(pool, group_code, (error, response) => {
 

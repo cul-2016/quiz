@@ -39,13 +39,13 @@ exports.register = (server, options, next) => {
                 const verification_code = is_lecturer ? uuid() : null;
                 const validEmailMessage = { message: 'Please enter a valid email address' };
 
-                const saveUserFlow = (is_group_admin = false) => {
+                const saveUserFlow = (is_group_admin = false, group_admin_has_paid = null) => {
                     hashPassword(password, (error, hashedPassword) => {
                         /* istanbul ignore if */
                         if (error) {
                             return reply(error);
                         }
-                        saveUser(pool, email, hashedPassword, is_lecturer, username, group_code, verification_code, is_group_admin, (error, result) => { // eslint-disable-line no-unused-vars
+                        saveUser(pool, email, hashedPassword, is_lecturer, username, group_code, verification_code, is_group_admin, group_admin_has_paid, (error, result) => { // eslint-disable-line no-unused-vars
                             /* istanbul ignore if */
                             if (error) {
                                 return reply(error);
@@ -95,10 +95,10 @@ exports.register = (server, options, next) => {
                                 if (error) {
                                     return reply(error);
                                 }
-                                else if (group_code && groupAccountInfo.length === 0) {
+                                else if (group_code && groupAccountInfo.accountDetails.length === 0) {
                                     return reply({ message: 'The code you have entered is invalid' });
                                 }
-                                else if (group_code && groupAccountInfo[0].users_with_code === groupAccountInfo[0].user_limit) {
+                                else if (group_code && groupAccountInfo.actualUserCountWithCode.count === groupAccountInfo.accountDetails[0].user_limit) {
                                     return reply({ message: 'Your institution has reached the maximum number of accounts. Please contact your adminstrator' });
                                 }
                                 else {
@@ -111,11 +111,9 @@ exports.register = (server, options, next) => {
                                             // no tests as we do not want to get the bounce on Amazon SES
                                             return reply(validEmailMessage);
                                         } else {
-                                            console.log(groupAccountInfo[0], '<<< groupacctouninfo');
-
-                                            const is_group_admin = groupAccountInfo[0] && groupAccountInfo[0].admin_email === email ? true : false;
-
-                                            saveUserFlow(is_group_admin);
+                                            const is_group_admin = groupAccountInfo.accountDetails[0] && groupAccountInfo.accountDetails[0].admin_email === email ? true : false;
+                                            const paid = groupAccountInfo.accountDetails[0] && groupAccountInfo.accountDetails[0].paid;
+                                            saveUserFlow(is_group_admin, paid);
                                             return reply({ emailSent: true });
                                         }
                                     });
