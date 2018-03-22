@@ -29,7 +29,7 @@ exports.register = (server, options, next) => {
                         email: Joi.string().email().required(),
                         password: Joi.string().required(),
                         is_lecturer: Joi.boolean().strict().required(),
-                        username: Joi.string(),
+                        username: Joi.string().allow(''),
                         group_code: Joi.string().allow('')
                     }
                 }
