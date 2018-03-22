@@ -38,7 +38,7 @@ exports.register = (server, options, next) => {
                     }
                     else if (userDetails[0].paid === false) {
                         // when individual lecturer has not paid
-                        return reply({ message: "Sorry, you haven't made your last payment. Please contact Quodl" });
+                        return reply({ message: "Your subscription has expired. Please email hello@quodl.co.uk to renew." });
                     }
                     else if (!userDetails[0].paid && userDetails[0].trial_expiry_time && userDetails[0].trial_expiry_time < Date.now()) {
                         // when indivudual lecturers trial has expired and they haven't paid
@@ -46,7 +46,7 @@ exports.register = (server, options, next) => {
                     }
                     else if (userDetails[0].group_admin_has_paid === false) {
                         // check if group_admin has paid, show message if they havent.
-                        return reply({ message: "Your institution has not made the latest payment. Please contact your adminstrator" });
+                        return reply({ message: "Your institution's subscription has expired. To continue using Quodl, please contact your administrator, or email hello@quodl.co.uk" });
                     }
                     else {
                         const hashedPassword = userDetails[0].password;

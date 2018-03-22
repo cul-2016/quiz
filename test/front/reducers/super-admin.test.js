@@ -270,6 +270,16 @@ test('EDIT_CLIENT works', (t) => {
         department: 'department',
         accountType: 'accountType',
         paid: 'paid',
+        user_limit: null,
+        code: null
+    };
+    const expectedManageClientState = {
+        name: 'name',
+        email: 'email',
+        institution: 'institution',
+        department: 'department',
+        accountType: 'accountType',
+        paid: 'paid',
         userLimit: null,
         code: null
     };
@@ -277,7 +287,7 @@ test('EDIT_CLIENT works', (t) => {
         type: 'EDIT_CLIENT',
         client
     };
-    const expected = Object.assign({}, superAdminState, { manageClient: client, isEditingClient: true });
+    const expected = Object.assign({}, superAdminState, { manageClient: expectedManageClientState, isEditingClient: true });
     const result = reducer(initialState, action);
     t.deepEqual(result, expected);
 });

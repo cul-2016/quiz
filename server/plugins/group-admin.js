@@ -36,8 +36,7 @@ exports.register = (server, options, next) => {
                                 if (err) { return reply(err); }
                                 else {
 
-                                    const filteredLecturers = lecturers.filter((lecturer) => { return lecturer.user_id !== user_id; });
-                                    reply({ lecturers: filteredLecturers, userAccountLimitInformation: userAccountLimitInformation[0] });
+                                    reply({ lecturers, userAccountLimitInformation: userAccountLimitInformation[0] });
                                 }
                             });
                         }

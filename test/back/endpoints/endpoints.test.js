@@ -149,7 +149,7 @@ test('/authenticate-user endpoint returns error for delAsync Redis call', (t) =>
             email: 'individualunpaidlecturer@city.ac.uk',
             password: 'testinglecturer',
         },
-        expected: { message: "Sorry, you haven't made your last payment. Please contact Quodl" }
+        expected: { message: 'Your subscription has expired. Please email hello@quodl.co.uk to renew.' }
     },
     {
         method: 'post',
@@ -167,7 +167,7 @@ test('/authenticate-user endpoint returns error for delAsync Redis call', (t) =>
             email: 'grouplectureradminnotpaid@city.ac.uk',
             password: 'testinglecturer',
         },
-        expected: { message: "Your institution has not made the latest payment. Please contact your adminstrator" }
+        expected: { message: 'Your institution\'s subscription has expired. To continue using Quodl, please contact your administrator, or email hello@quodl.co.uk' }
     },
     {
         method: 'post',
@@ -428,13 +428,14 @@ test('/authenticate-user endpoint returns error for delAsync Redis call', (t) =>
     {
         method: 'get',
         url: '/admin-dashboard',
-        expected: { lecturers: [ { user_id: 38, email: 'grouplecturer1@city.ac.uk', is_verified: true, is_user_active: true }, { user_id: 39, email: 'grouplecturer2@city.ac.uk', is_verified: true, is_user_active: true }, { user_id: 43, email: 'deactivatedlecturer@city.ac.uk', is_verified: true, is_user_active: false } ], userAccountLimitInformation: { count: 3, user_limit: 1000 } }
+        expected: { lecturers: [{ user_id: 38, email: 'grouplecturer1@city.ac.uk', is_verified: true, is_user_active: true }, { user_id: 39, email: 'grouplecturer2@city.ac.uk', is_verified: true, is_user_active: true }, { user_id: 41, email: 'groupadmin@city.ac.uk', is_verified: true, is_user_active: true }, { user_id: 43, email: 'deactivatedlecturer@city.ac.uk', is_verified: true, is_user_active: false }], userAccountLimitInformation: { count: 3, user_limit: 1000 } }
+
     },
     {
         method: 'post',
         payload: { user_id: 38 },
         url: '/group-admin/update',
-        expected: true 
+        expected: true
     },
 ].forEach((endpoint) => {
     test(endpoint.url + ' endpoint returns expected payload', (t) => {
