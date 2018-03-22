@@ -28,7 +28,7 @@ const Signup = ({ register, updateInputField, registeringUser, toggleTcAgreed, l
         if (isEmailValid
             && register.tcAgreed
             && register.password
-            && register.username
+            && (!register.username && is_lecturer ? true : register.username)
             && register.password === register.confirmPassword
         ) {
             registeringUser(
@@ -65,19 +65,21 @@ const Signup = ({ register, updateInputField, registeringUser, toggleTcAgreed, l
                 <span className={ invalidEmailClasses }>This email is invalid</span>
               </div>
 
-
-              <div className="form__field f-body">
-                <label className="form__label">Choose a public nickname (for the leaderboard)</label>
-                <input
-                  onKeyDown={ submitOnEnter }
-                  className="form__input"
-                  value={ register.username }
-                  onChange={ (e) => updateInputField("username", e.target.value)}
-                  type="username"/>
-              </div>
+              {
+                  !is_lecturer &&
+                  <div className="form__field f-body">
+                    <label className="form__label">Choose a public nickname (for the leaderboard)</label>
+                    <input
+                      onKeyDown={ submitOnEnter }
+                      className="form__input"
+                      value={ register.username }
+                      onChange={ (e) => updateInputField("username", e.target.value)}
+                      type="username"/>
+                  </div>
+              }
               { is_lecturer &&
                   <div className="form__field f-body">
-                    <label className="form__label">Code (if registering under an institutional account)</label>
+                    <label className="form__label">Code (if your institution has given you one)</label>
                     <input
                       onKeyDown={ submitOnEnter }
                       className="form__input"
