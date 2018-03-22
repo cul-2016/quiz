@@ -9,7 +9,7 @@ const SuperAdminManageClient = ({ name, isEditingClient, email, institution, dep
     const handleSubmitClient = () => {
         if (name &&
             isEmail(email) &&
-            ((accountType === 'group admin' && userLimit || accountType === 'individual lecturer') || isEditingClient)) {
+            ((accountType === 'group admin' && userLimit || accountType === 'individual lecturer') || (isEditingClient && userLimit))) {
             submitClient({ name, email, institution, department, accountType, paid, userLimit, isEditingClient });
         } else if (!name) {
             displayError({ message: 'Please enter a name for the client before saving' });
@@ -91,7 +91,7 @@ const SuperAdminManageClient = ({ name, isEditingClient, email, institution, dep
                     </div>
                 }
                 {
-                    isEditingClient && userLimit &&
+                    isEditingClient && accountType === 'group admin' &&
                         <Input
                             updateInput={updateInput}
                             className="form__input"

@@ -23,21 +23,21 @@ const Nav = ({ location, is_lecturer, is_super_admin, is_group_admin }) => {
                   <img src="/assets/logo/nav_icon.svg" className="navbar__img"></img>
               </li>
               { is_super_admin && is_lecturer &&
-                <li className="navbar__item navbar__item--dashboard" onClick={ () => hashHistory.push('/super-admin') }>
-                    <img src="/assets/nav_dashboard_icon.svg" className=""></img>
-                    <span className="navbar__link">Super Admin Dashboard</span>
+                <li className="navbar__item navbar__item--dashboard">
+                    <img onClick={() => hashHistory.push('/super-admin')} src="/assets/nav_dashboard_icon.svg" className=""></img>
+                        <span onClick={() => hashHistory.push('/super-admin')} className="navbar__link pointer">Super Admin Dashboard</span>
                 </li>
               }
               { is_group_admin &&
-                <li className="navbar__item navbar__item--dashboard" onClick={ () => hashHistory.push('/admin-dashboard') }>
-                    <img src="/assets/nav_dashboard_icon.svg" className=""></img>
-                    <span className="navbar__link">Admin Dashboard</span>
+                <li className="navbar__item navbar__item--dashboard">
+                    <img onClick={() => hashHistory.push('/admin-dashboard')} src="/assets/nav_dashboard_icon.svg" className=""></img>
+                        <span onClick={() => hashHistory.push('/admin-dashboard')} className="navbar__link pointer">Admin Dashboard</span>
                 </li>
               }
-              <li className="navbar__item navbar__item--right" onClick={ logout }>
-                <button className="button">
-                    Logout
-                </button>
+              <li className="navbar__item navbar__item--right" >
+                    <button onClick={logout} className="button pointer">
+                        Logout
+                    </button>
               </li>
             </div>
           </div>

@@ -111,7 +111,7 @@ exports.register = (server, options, next) => {
                                             // no tests as we do not want to get the bounce on Amazon SES
                                             return reply(validEmailMessage);
                                         } else {
-                                            const is_group_admin = groupAccountInfo.accountDetails[0] && groupAccountInfo.accountDetails[0].admin_email === email ? true : false;
+                                            const is_group_admin = groupAccountInfo.accountDetails[0] && groupAccountInfo.accountDetails[0].email === email ? true : false;
                                             const paid = groupAccountInfo.accountDetails[0] && groupAccountInfo.accountDetails[0].paid;
                                             saveUserFlow(is_group_admin, paid);
                                             return reply({ emailSent: true });
