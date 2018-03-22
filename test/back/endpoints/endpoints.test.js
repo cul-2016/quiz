@@ -149,7 +149,7 @@ test('/authenticate-user endpoint returns error for delAsync Redis call', (t) =>
             email: 'individualunpaidlecturer@city.ac.uk',
             password: 'testinglecturer',
         },
-        expected: { message: "Sorry, you haven't made your last payment. Please contact Quodl" }
+        expected: { message: 'Your subscription has expired. Please email hello@quodl.co.uk to renew.' }
     },
     {
         method: 'post',
@@ -167,7 +167,7 @@ test('/authenticate-user endpoint returns error for delAsync Redis call', (t) =>
             email: 'grouplectureradminnotpaid@city.ac.uk',
             password: 'testinglecturer',
         },
-        expected: { message: "Your institution has not made the latest payment. Please contact your adminstrator" }
+        expected: { message: 'Your institution\'s subscription has expired. To continue using Quodl, please contact your administrator, or email hello@quodl.co.uk' }
     },
     {
         method: 'post',
