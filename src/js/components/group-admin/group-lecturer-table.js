@@ -1,18 +1,21 @@
 import React, { PropTypes } from 'react';
 import classnames from 'classnames';
 
-const GroupLecturerTable = ({ users, user_limit, user_count, updateUserIsActive }) => {
+const GroupLecturerTable = ({ users, user_limit, user_count, updateUserIsActive, groupAdminId }) => {
     const table = users.map((user, i) => {
         return (
             <tr key={ i } className={`leaderboard__row--${i % 2 === 0 || i === 0 ? 'even' : 'odd'}` }>
                 <td className="f-body"> { user.email } </td>
                 <td>
-                    <RadioButton
-                        is_user_active={user.is_user_active}
-                        user_limit={user_limit}
-                        user_count={user_count}
-                        updateUserIsActive={updateUserIsActive}
-                        user_id={user.user_id}/>
+                    {
+                        user.user_id !== groupAdminId ?
+                        <RadioButton
+                            is_user_active={user.is_user_active}
+                            user_limit={user_limit}
+                            user_count={user_count}
+                            updateUserIsActive={updateUserIsActive}
+                            user_id={user.user_id}/> : <div />
+                    }
                 </td>
             </tr>
         );
@@ -91,7 +94,8 @@ GroupLecturerTable.propTypes = {
     users: PropTypes.array,
     user_limit: PropTypes.number,
     user_count: PropTypes.number,
-    updateUserIsActive: PropTypes.func
+    updateUserIsActive: PropTypes.func,
+    groupAdminId: PropTypes.number
 };
 
 export default GroupLecturerTable;
