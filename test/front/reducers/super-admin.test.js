@@ -268,7 +268,7 @@ test('EDIT_CLIENT works', (t) => {
         email: 'email',
         institution: 'institution',
         department: 'department',
-        accountType: 'accountType',
+        account_type: 'accountType',
         paid: 'paid',
         user_limit: null,
         code: null

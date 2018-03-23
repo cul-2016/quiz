@@ -53,7 +53,7 @@ export function superAdmin (state = initialState, action) {
                 email: { $set: action.client.email },
                 institution: { $set: action.client.institution },
                 department: { $set: action.client.department },
-                accountType: { $set: action.client.accountType },
+                accountType: { $set: action.client.account_type },
                 paid: { $set: action.client.paid },
                 userLimit: { $set: action.client.user_limit }
             },
