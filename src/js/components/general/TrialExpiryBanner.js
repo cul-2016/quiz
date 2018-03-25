@@ -22,7 +22,7 @@ const TrialExpiryBanner = ({ location, trial_expiry_time, paid }) => {
         <div className={ trialExpiryBannerClasses }>
             { (trialDaysRemaining <= 30 && !paid ) &&
                 <div className="trial-expiry-banner">
-                    <p>This free trial will expire in { trialDaysRemaining } { trialDaysRemaining == 1 ? 'day' : 'days' }. Please make sure you upgrade or finish running all your quizzes before then. </p>
+                <p>This free trial will expire in { trialDaysRemaining } { trialDaysRemaining == 1 ? 'day' : 'days' } - you will not be able to log in after that point. Please make sure you upgrade or finish running all your quizzes before then. </p>
                 </div>
             }
         </div>
