@@ -40,6 +40,7 @@ export JWT_SECRET=<secret>
 ```
 and run `source local.env`
  - Start the server with: `npm start`
+ - In another terminal window run `npm run webpack-watch` 
  - Visit `http://localhost:9000` to get started
 
 ## Testing
@@ -48,22 +49,26 @@ and run `source local.env`
  - Then run `npm test`
  - You can check code coverage locally with `npm run coverage`
 
-## Deployment
+## Overview 
 
-To setup the database schema on HEROKU, use the following command:
-```bash
-heroku pg:psql --app (APPNAME) DATABASE < ./path/to/schema
-```
-(See the `load-staging-schema` script in the package if unsure)
+The app has a staging version and a production version.
 
-To connect a remote database instance to pgAdmin:
-- go to `File > Add Server`.
-- then follow this instructions at link: http://stackoverflow.com/questions/11769860/connect-to-a-heroku-database-with-pgadmin
-
-One off deployment Script to be run after the end of Sprint 6:
-`UPDATE trophies SET trophy_name = 'overall_score' where trophy_name = 'overall_average';`
-This is to ensure that the trophy for overall_average has been updated to overall_score.
-**without this the app will crash, but will only need to be run once and once only on the live version of the app and every time the staging database is reset on the staging site**
+**Staging version:**
+* Runs of the staging branch with automatic deployment
+* Heroku Free Plan with psql and redis also on Heroku free plan
+* When running the local version of the app we are connected to the same staging psql database. 
+**Production version:**
+*  Runs of the master branch with automatic deployment. 
+* Heroku standard plan for the server
+* AWS RDB plan for PSQL
+* Redis free plan on Heroku 
+ 
+ ## Migrations
+ 
+ * Add migration to the `migrations` folder with the following format: `yy-mm-dd_update_table_name`
+ * This migration will run automatically when the master branch is deployed (auto deploy when master branch is on) 
+ * **staging** version of the app doesn’t follow the same procedure, it uses the `test-scheme-local.txt` located in `/test/utils/test-schema-local.txt`which will also need to be updated with the same information as that in the newly added migration file. 
+    * you will then need to run `npm run load-staging-schema` to get this new schema on the staging version of the app. 
 
 ## AWS Database
 
@@ -196,4 +201,4 @@ Here are the list of steps that you'll need to take for stress Testing
 The staging version of the app is hosted on basic heroku with no paid options. (free postgres w/ option of 10 max concurrent connections). We reach saturation point in phase 6 of the load testing where it starts to throw errors when it reaches ~60 concurrent users
 
 ##### Live
-The live version of the app is hosted on 1 dyno @ $25 with a paid standard-0 database @ $50 which can have 120 concurrent connections. We reached a saturation point somewhere between 320 - 500 concurrent users where it started to throw erros. This is approximately a six fold increase.
+The live version of the app is hosted on 1 dyno @ $25 with. We reached a saturation point somewhere between 320 - 500 concurrent users where it started to throw erros. This is approximately a six fold increase.
