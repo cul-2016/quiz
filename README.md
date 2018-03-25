@@ -128,7 +128,7 @@ To manually modify the instance specifications, select the instance on the aws r
 
 **Super Admin**
 - Lecturer with super admin privilege.
-- Able to view and delete all users on the platform (Cleints, Lectuerers & Students)
+- Able to view and delete all users on the platform (Clients, Lecturers & Students)
 - Able to Add and Edit clients on the platform
 - Able to download Question Data
 - Able to download Answer Data
