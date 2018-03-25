@@ -40,7 +40,7 @@ export JWT_SECRET=<secret>
 ```
 and run `source local.env`
  - Start the server with: `npm start`
- - In another terminal window run `npm run webpack-watch` 
+ - In another terminal window run `npm run webpack-watch`
  - Visit `http://localhost:9000` to get started
 
 ## Testing
@@ -49,23 +49,23 @@ and run `source local.env`
  - Then run `npm test`
  - You can check code coverage locally with `npm run coverage`
 
-## Overview 
+## Overview
 
 The app has a staging version and a production version.
 
 **Staging version:**
 * Runs of the staging branch with automatic deployment
 * Heroku Free Plan with psql and redis also on Heroku free plan
-* When running the local version of the app we are connected to the same staging psql database 
+* When running the local version of the app we are connected to the same staging psql database
 
 **Production version:**
 *  Runs off of the master branch with automatic deployment
 * Heroku standard plan for the server
 * AWS RDB plan for PSQL
-* Redis free plan on Heroku 
- 
+* Redis free plan on Heroku
+
  ## Migrations
- 
+
  * Add migration to the `migrations` folder with the following format: `yy-mm-dd_update_table_name`
  * This migration will run automatically when the master branch is deployed (we have auto deploy on master branch)
  * **staging** version of the app doesn’t follow the same procedure, it uses the `test-schema-local.txt` located in `/test/utils/test-schema-local.txt`which will also need to be updated with the same information as that in the newly added migration file
@@ -123,6 +123,43 @@ To manually modify the instance specifications, select the instance on the aws r
 ```
 
 ## General information
+
+#### Account Types
+
+**Super Admin**
+- Lecturer with super admin privilege.
+- Able to view and delete all users on the platform (Cleints, Lectuerers & Students)
+- Able to Add and Edit clients on the platform
+- Able to download Question Data
+- Able to download Answer Data
+
+
+**Client**
+- Paid user with either an `individual lecturer` or `group admin` account type.
+- Super admin can control access by turning paid to `No` for:
+  - individual lectuerers or,
+  - A whole institution
+- Super admin can also limit the number of lecturers a given group can have.
+
+
+**Lecturers**
+- Add/Edit modules and quizzes/surveys
+- Share/Run Live Quizzes
+- View Details about particular quizzes
+- View Leaderboard
+  - **group lecturer**
+  - Has admin dashboard
+  - Can view all lecturers that are part of the group
+  - Can enable/disable access for lecturers in the list
+
+
+**Students**
+- Join Modules
+- Participate in Quiz
+- Review and Review Quizzes
+- View personalised feedback for each module
+- View Trophies they've aquired for each module
+
 
 #### State hydration
 
