@@ -56,9 +56,10 @@ The app has a staging version and a production version.
 **Staging version:**
 * Runs of the staging branch with automatic deployment
 * Heroku Free Plan with psql and redis also on Heroku free plan
-* When running the local version of the app we are connected to the same staging psql database. 
+* When running the local version of the app we are connected to the same staging psql database 
+
 **Production version:**
-*  Runs of the master branch with automatic deployment. 
+*  Runs off of the master branch with automatic deployment
 * Heroku standard plan for the server
 * AWS RDB plan for PSQL
 * Redis free plan on Heroku 
@@ -66,9 +67,9 @@ The app has a staging version and a production version.
  ## Migrations
  
  * Add migration to the `migrations` folder with the following format: `yy-mm-dd_update_table_name`
- * This migration will run automatically when the master branch is deployed (auto deploy when master branch is on) 
- * **staging** version of the app doesn’t follow the same procedure, it uses the `test-scheme-local.txt` located in `/test/utils/test-schema-local.txt`which will also need to be updated with the same information as that in the newly added migration file. 
-    * you will then need to run `npm run load-staging-schema` to get this new schema on the staging version of the app. 
+ * This migration will run automatically when the master branch is deployed (we have auto deploy on master branch)
+ * **staging** version of the app doesn’t follow the same procedure, it uses the `test-schema-local.txt` located in `/test/utils/test-schema-local.txt`which will also need to be updated with the same information as that in the newly added migration file
+    * you will then need to run `npm run load-staging-schema` to get this new schema on the staging version of the app
 
 ## AWS Database
 
@@ -195,10 +196,10 @@ Here are the list of steps that you'll need to take for stress Testing
 4. run the following command to run the loadtests and pipe the results into a .txt file `artillery run loadtest-{version}.yml > loadtest-{version}.txt`
 5. Once the loadtesting is complete you can view the results in the `.txt` file.
 
-### Our finding on the load testing
+### Our findings on the load testing
 
 ##### Staging
 The staging version of the app is hosted on basic heroku with no paid options. (free postgres w/ option of 10 max concurrent connections). We reach saturation point in phase 6 of the load testing where it starts to throw errors when it reaches ~60 concurrent users
 
 ##### Live
-The live version of the app is hosted on 1 dyno @ $25 with. We reached a saturation point somewhere between 320 - 500 concurrent users where it started to throw erros. This is approximately a six fold increase.
+The live version of the app is hosted on 1 dyno @ $25. We reached a saturation point somewhere between 320 - 500 concurrent users where it started to throw errors. This is approximately a six fold increase.
