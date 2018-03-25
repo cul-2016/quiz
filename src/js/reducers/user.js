@@ -10,6 +10,7 @@ export const initialState = {
     is_super_admin: undefined,
     isFetchingUser: false,
     trial_expiry_time: undefined,
+    paid: undefined,
     isCookieAccepted: isCookieMessageRequired(),
     error: undefined,
     is_group_admin: undefined
@@ -52,6 +53,7 @@ function setUserDetails (state, action) {
         is_super_admin: { $set: action.data.is_super_admin },
         isFetchingUser: { $set: false },
         is_group_admin: { $set: action.data.is_group_admin },
-        trial_expiry_time: { $set: action.data.trial_expiry_time }
+        trial_expiry_time: { $set: action.data.trial_expiry_time },
+        paid: { $set: action.data.paid }
     });
 }
