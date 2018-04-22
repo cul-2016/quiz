@@ -1,9 +1,9 @@
 Thank you for registering to take part in quizzes!
-You can access your account via this link: http://quodl.co.uk/
+You can access your account via this link: {{url}}
 
 You are registered with the following details:
 
     - email: {{email}}
     - username: {{username}}
 
-http://quodl.co.uk/ Quodl
+{{url}} Quodl

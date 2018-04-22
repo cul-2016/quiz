@@ -4,7 +4,8 @@ module.exports = ({ username, email }, cb) => {
     var person = {
         username,
         email,
-        subject: "Welcome to Quodl"
+        subject: "Welcome to Quodl",
+        url: process.env.SERVER_ROUTE
     };
     sendEmail.email('student-welcome', person, cb);
 };

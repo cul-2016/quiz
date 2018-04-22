@@ -4,7 +4,9 @@ module.exports = ({ name, email, code }, cb) => {
     var person = {
         email,
         subject: "Time to setup your Quodl account!",
-        code
+        code,
+        url: process.env.SERVER_ROUTE,
+        registerURL: `${process.env.SERVER_ROUTE}/#/register-lecturer`
     };
     sendEmail.email('individual-lecturer-welcome', person, cb);
 };

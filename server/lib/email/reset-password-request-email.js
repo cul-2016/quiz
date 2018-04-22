@@ -5,7 +5,8 @@ module.exports = ({ name, email, resetPasswordLink }, cb) => {
         name,
         email,
         subject: "Reset password request for Quodl",
-        resetPasswordLink
+        resetPasswordLink,
+        url: process.env.SERVER_ROUTE
     };
     sendEmail.email('reset-password', person, cb);
 };
