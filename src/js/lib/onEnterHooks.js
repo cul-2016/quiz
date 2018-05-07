@@ -14,6 +14,7 @@ import { getFeedback } from '../actions/feedback';
 import { getStudentHistory } from '../actions/student-history';
 import { clearInitialState } from '../actions/login';
 import { getSuperAdminDashboard } from '../actions/super-admin';
+import { getGroupAdminDashboard } from '../actions/group-admin';
 
 import ReactGA from 'react-ga';
 ReactGA.initialize('UA-113135812-1');
@@ -175,7 +176,6 @@ export function fetchQuizReview (nextState, replace, callback) {
     if (validCookieExists()) {
         const isSurvey = store.getState().liveQuiz.isSurvey;
         const quiz_id = nextState.params.quiz_id;
-        console.log(isSurvey, quiz_id);
         store.dispatch(getQuizReview(quiz_id, isSurvey));
     }
     callback();
@@ -328,6 +328,24 @@ export function fetchSuperAdminDashboard (nextState, replace, callback) {
         replace('/');
     } else {
         store.dispatch(getSuperAdminDashboard());
+    }
+    callback();
+}
+
+/**
+ * fetches all users that belong to a group admin.  Redirects  to '/' if they're not authorised
+ * Is used as an onEnter hook for React Router
+ * Matches the signature of a React Router hook: https://github.com/reactjs/react-router/blob/master/docs/API.md#onenternextstate-replace-callback
+ * @param {object} nextState - the next router state
+ * @param {function} replace - function to redirect to another path
+ * @param {function} callback - (optional) can be used to make the transition block
+ */
+export function fetchGroupAdminDashboard (nextState, replace, callback) {
+
+    if (!validCookieExists()) {
+        replace('/');
+    } else {
+        store.dispatch(getGroupAdminDashboard());
     }
     callback();
 }

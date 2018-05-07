@@ -20,7 +20,6 @@
     &__item {
       display: table-cell;
       vertical-align: middle;
-      cursor: pointer;
         &--home {
           width: 5rem;
         }
@@ -69,6 +68,10 @@
     &--invisible {
         margin: auto;
         box-sizing: border-box;
+    }
+
+    .pointer {
+      cursor: pointer;
     }
 }
 

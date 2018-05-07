@@ -1,17 +1,41 @@
-const users = [
-    {
-        user_id: 1,
-        email: 'student@city.ac.uk',
-        password: '$2a$10$UnvUuW91Jh6.zWQi3G/2J.HLDTomSqJHxvBC.TYx/Bj8HZa.AAm4K',
-        is_lecturer: false,
-        is_super_admin: false,
-        username: 'student',
-        is_verified: true,
-        expiry_code: null,
-        verification_code: null,
-        reset_password_code: null
-    }
-];
+const users = [{
+    user_id: 1,
+    email: 'student@city.ac.uk',
+    password: '$2a$10$UnvUuW91Jh6.zWQi3G/2J.HLDTomSqJHxvBC.TYx/Bj8HZa.AAm4K',
+    is_lecturer: false,
+    is_super_admin: false,
+    username: 'student',
+    group_code: null,
+    is_verified: true,
+    verification_code: null,
+    reset_password_code: null,
+    expiry_code: null,
+    trial_expiry_time: null,
+    group_admin_has_paid: null,
+    is_group_admin: false,
+    account_type: null,
+    paid: null,
+    is_user_active: true
+}];
+
+const usersById = [{
+    user_id: 1,
+    email: 'student@city.ac.uk',
+    password: '$2a$10$UnvUuW91Jh6.zWQi3G/2J.HLDTomSqJHxvBC.TYx/Bj8HZa.AAm4K',
+    is_lecturer: false,
+    is_super_admin: false,
+    username: 'student',
+    group_code: null,
+    is_verified: true,
+    verification_code: null,
+    reset_password_code: null,
+    expiry_code: null,
+    trial_expiry_time: null,
+    group_admin_has_paid: null,
+    is_group_admin: false,
+    is_user_active: true
+}];
+
 
 const userDetails = {
     user_id: 1,
@@ -464,12 +488,29 @@ const superAdminDashboardData = {
         expiry_code: null,
         verification_code: null,
         reset_password_code: null
-    }]
+    }],
+    clients: []
+};
+
+const groupAdminDashboardData = {
+    lecturer: [{
+        user_id: 2,
+        email: 'lecturer@city.ac.uk',
+        is_lecturer: true,
+        is_super_admin: true,
+        username: 'student',
+        is_verified: true,
+        expiry_code: null,
+        verification_code: null,
+        reset_password_code: null
+    }],
+    userAccountLimitInformation: { user_limit: 1000, count: 500 }
 };
 
 
 module.exports = {
     users,
+    usersById,
     userDetails,
     feedback,
     dashboardData,
@@ -496,5 +537,6 @@ module.exports = {
     updateQuizOptionsPayload,
     questionsAnswers,
     moduleInfo,
-    superAdminDashboardData
+    superAdminDashboardData,
+    groupAdminDashboardData
 };

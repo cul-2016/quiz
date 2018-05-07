@@ -92,11 +92,18 @@ test('/authenticate-user endpoint returns error for delAsync Redis call', (t) =>
             is_lecturer: true,
             user_id: 28,
             username: 'lecturer',
+            group_code: null,
             is_verified: true,
             expiry_code: null,
             verification_code: null,
             reset_password_code: null,
-            is_super_admin: false
+            is_super_admin: false,
+            trial_expiry_time: null,
+            account_type: null,
+            paid: null,
+            group_admin_has_paid: null,
+            is_group_admin: false,
+            is_user_active: true
         }
     },
     {
@@ -106,7 +113,7 @@ test('/authenticate-user endpoint returns error for delAsync Redis call', (t) =>
             email: 'lecturer@city.ac.uk',
             password: 'testinglecDSFD',
         },
-        expected: { message: 'please enter a valid email or password' }
+        expected: { message: 'Please enter a valid email or password' }
     },
     {
         method: 'post',
@@ -115,7 +122,16 @@ test('/authenticate-user endpoint returns error for delAsync Redis call', (t) =>
             email: 'blah@city.ac.uk',
             password: 'testinglecDSFD',
         },
-        expected: { message: 'sorry, this user does not exist' }
+        expected: { message: 'Sorry, this user does not exist' }
+    },
+    {
+        method: 'post',
+        url: '/authenticate-user',
+        payload: {
+            email: 'deactivatedlecturer@city.ac.uk',
+            password: 'groupadminsecretcode',
+        },
+        expected: { message: 'Sorry, your account has been deactivated, please contact your administrator to restore access' }
     },
     {
         method: 'post',
@@ -124,7 +140,34 @@ test('/authenticate-user endpoint returns error for delAsync Redis call', (t) =>
             email: 'not-authenticated-user@city.ac.uk',
             password: 'testinglecturer',
         },
-        expected: { message: 'user is not verified' }
+        expected: { message: 'User is not verified' }
+    },
+    {
+        method: 'post',
+        url: '/authenticate-user',
+        payload: {
+            email: 'individualunpaidlecturer@city.ac.uk',
+            password: 'testinglecturer',
+        },
+        expected: { message: 'Your subscription has expired. Please email hello@quodl.co.uk to renew.' }
+    },
+    {
+        method: 'post',
+        url: '/authenticate-user',
+        payload: {
+            email: 'trialexpired@city.ac.uk',
+            password: 'testinglecturer',
+        },
+        expected: { message: 'Sorry, your trial has expired, please contact Quodl to upgrade your free account' }
+    },
+    {
+        method: 'post',
+        url: '/authenticate-user',
+        payload: {
+            email: 'grouplectureradminnotpaid@city.ac.uk',
+            password: 'testinglecturer',
+        },
+        expected: { message: 'Your institution\'s subscription has expired. To continue using Quodl, please contact your administrator, or email hello@quodl.co.uk' }
     },
     {
         method: 'post',
@@ -156,10 +199,39 @@ test('/authenticate-user endpoint returns error for delAsync Redis call', (t) =>
         method: 'post',
         url: '/save-user',
         payload: {
+            email: 'overlimitlecturer@city.ac.uk',
+            password: 'testinglecturer',
+            is_lecturer: true,
+            username: 'overlimitlecturer',
+            group_code: 'limitreached'
+        },
+        expected: {
+            message: 'Your institution has reached the maximum number of accounts. Please contact your adminstrator'
+        }
+    },
+    {
+        method: 'post',
+        url: '/save-user',
+        payload: {
+            email: 'invalidgroupcodelecturer@city.ac.uk',
+            password: 'testinglecturer',
+            is_lecturer: true,
+            username: 'invalidgroupcodelecturer',
+            group_code: 'invalidgroupcode'
+        },
+        expected: {
+            message: 'The code you have entered is invalid'
+        }
+    },
+    {
+        method: 'post',
+        url: '/save-user',
+        payload: {
             email: 'sohilpandya1990@gmail.com',
             password: 'testingstudent',
             is_lecturer: false,
-            username: 'testingstudent'
+            username: 'testingstudent',
+            group_code: ''
         },
         expected: {
             email: 'sohilpandya1990@gmail.com',
@@ -167,10 +239,17 @@ test('/authenticate-user endpoint returns error for delAsync Redis call', (t) =>
             is_lecturer: false,
             is_verified: true,
             reset_password_code: null,
-            user_id: 34,
+            user_id: 44,
             username: 'testingstudent',
+            group_code: null,
             verification_code: null,
-            is_super_admin: false
+            is_super_admin: false,
+            trial_expiry_time: null,
+            account_type: null,
+            paid: null,
+            group_admin_has_paid: null,
+            is_group_admin: false,
+            is_user_active: true
         }
     },
     {
@@ -214,12 +293,69 @@ test('/authenticate-user endpoint returns error for delAsync Redis call', (t) =>
     {
         method: 'get',
         url: '/get-user-details',
-        expected: { email: 'lecturer@city.ac.uk', expiry_code: null, is_lecturer: true, is_super_admin: true, is_verified: true, reset_password_code: null, user_id: 2, username: 'lecturer', verification_code: null }
+        expected: { email: 'lecturer@city.ac.uk', expiry_code: null, is_lecturer: true, is_super_admin: true, is_verified: true, reset_password_code: null, user_id: 2, username: 'lecturer', group_code: null, verification_code: null, trial_expiry_time: null, group_admin_has_paid: null, is_group_admin: false, is_user_active: true }
     },
     {
         method: 'get',
         url: '/super-admin',
-        expected: { lecturers: [{ email: 'authenticate-user@city.ac.uk', is_lecturer: true, user_id: 28, username: 'lecturer' }, { email: 'lecturer@city.ac.uk', is_lecturer: true, user_id: 2, username: 'lecturer' }, { email: 'not-authenticated-user@city.ac.uk', is_lecturer: true, user_id: 29, username: 'lecturer' }, { email: 'verification@email.com', is_lecturer: true, user_id: 27, username: 'lecturer-test-verify' }, { email: 'verify-lecturer@city.ac.uk', is_lecturer: true, user_id: 25, username: 'verify-lecturer' }], students: [{ email: 'apu@simpsons.com', is_lecturer: false, user_id: 11, username: 'Apu' }, { email: 'bart@simpsons.com', is_lecturer: false, user_id: 8, username: 'Bart' }, { email: 'comicbookguy@simpsons.com', is_lecturer: false, user_id: 19, username: 'Comic Book Guy' }, { email: 'drnick@simpsons.com', is_lecturer: false, user_id: 23, username: 'Dr Nick' }, { email: 'expiredpassword@city.ac.uk', is_lecturer: false, user_id: 32, username: 'expired-password' }, { email: 'homer@simpsons.com', is_lecturer: false, user_id: 5, username: 'Homer' }, { email: 'krusty@simpsons.com', is_lecturer: false, user_id: 20, username: 'Krusty' }, { email: 'lisa@simpsons.com', is_lecturer: false, user_id: 7, username: 'Lisa' }, { email: 'maggie@simpsons.com', is_lecturer: false, user_id: 9, username: 'Maggie' }, { email: 'marge@simpsons.com', is_lecturer: false, user_id: 6, username: 'Marge' }, { email: 'milhouse@simpsons.com', is_lecturer: false, user_id: 15, username: 'Milhouse' }, { email: 'mina@city.ac.uk', is_lecturer: false, user_id: 4, username: 'Mina' }, { email: 'mrburns@simpsons.com', is_lecturer: false, user_id: 13, username: 'Mr Burns' }, { email: 'ned@simpsons.com', is_lecturer: false, user_id: 10, username: 'Ned' }, { email: 'nelson@simpsons.com', is_lecturer: false, user_id: 16, username: 'Nelson' }, { email: 'patty@simpsons.com', is_lecturer: false, user_id: 17, username: 'Patty' }, { email: 'principalskinner@simpsons.com', is_lecturer: false, user_id: 24, username: 'Principal Skinner' }, { email: 'reset-password-endpoint@city.ac.uk', is_lecturer: false, user_id: 33, username: 'reset-password' }, { email: 'revlovejoy@simpsons.com', is_lecturer: false, user_id: 14, username: 'Rev Lovejoy' }, { email: 'selma@simpsons.com', is_lecturer: false, user_id: 18, username: 'Selma' }, { email: 'sideshowbob@simpsons.com', is_lecturer: false, user_id: 21, username: 'Sideshow Bob' }, { email: 'sideshowmel@simpsons.com', is_lecturer: false, user_id: 22, username: 'Sideshow Mel' }, { email: 'smithers@simpsons.com', is_lecturer: false, user_id: 12, username: 'Smithers' }, { email: 'sohil@city.ac.uk', is_lecturer: false, user_id: 3, username: 'Sohil' }, { email: 'sohilpandya@foundersandcoders.com', is_lecturer: false, user_id: 30, username: 'reset-password-student' }, { email: 'student@city.ac.uk', is_lecturer: false, user_id: 1, username: 'student' }, { email: 'validexpiry@city.ac.uk', is_lecturer: false, user_id: 31, username: 'valid-password-expiry' }, { email: 'verify-student@city.ac.uk', is_lecturer: false, user_id: 26, username: 'verify-student' }] }
+        expected: { lecturers: [ { user_id: 28, email: 'authenticate-user@city.ac.uk', is_lecturer: true, username: 'lecturer' }, { user_id: 43, email: 'deactivatedlecturer@city.ac.uk', is_lecturer: true, username: 'deactivatedlecturer' }, { user_id: 41, email: 'groupadmin@city.ac.uk', is_lecturer: true, username: 'groupadmin' }, { user_id: 38, email: 'grouplecturer1@city.ac.uk', is_lecturer: true, username: 'grouplecturer1' }, { user_id: 39, email: 'grouplecturer2@city.ac.uk', is_lecturer: true, username: 'grouplecturer1' }, { user_id: 42, email: 'grouplectureradminnotpaid@city.ac.uk', is_lecturer: true, username: 'grouplectureradminnotpaid' }, { user_id: 36, email: 'individualpaidlecturer@city.ac.uk', is_lecturer: true, username: 'lecturer' }, { user_id: 37, email: 'individualunpaidlecturer@city.ac.uk', is_lecturer: true, username: 'lecturer' }, { user_id: 2, email: 'lecturer@city.ac.uk', is_lecturer: true, username: 'lecturer' }, { user_id: 29, email: 'not-authenticated-user@city.ac.uk', is_lecturer: true, username: 'lecturer' }, { user_id: 34, email: 'trialexpired@city.ac.uk', is_lecturer: true, username: 'lecturer' }, { user_id: 35, email: 'trialneverexpires@city.ac.uk', is_lecturer: true, username: 'lecturer' }, { user_id: 40, email: 'userlimitreached@city.ac.uk', is_lecturer: true, username: 'userlimitreached' }, { user_id: 27, email: 'verification@email.com', is_lecturer: true, username: 'lecturer-test-verify' }, { user_id: 25, email: 'verify-lecturer@city.ac.uk', is_lecturer: true, username: 'verify-lecturer' } ], students: [ { user_id: 11, email: 'apu@simpsons.com', is_lecturer: false, username: 'Apu' }, { user_id: 8, email: 'bart@simpsons.com', is_lecturer: false, username: 'Bart' }, { user_id: 19, email: 'comicbookguy@simpsons.com', is_lecturer: false, username: 'Comic Book Guy' }, { user_id: 23, email: 'drnick@simpsons.com', is_lecturer: false, username: 'Dr Nick' }, { user_id: 32, email: 'expiredpassword@city.ac.uk', is_lecturer: false, username: 'expired-password' }, { user_id: 5, email: 'homer@simpsons.com', is_lecturer: false, username: 'Homer' }, { user_id: 20, email: 'krusty@simpsons.com', is_lecturer: false, username: 'Krusty' }, { user_id: 7, email: 'lisa@simpsons.com', is_lecturer: false, username: 'Lisa' }, { user_id: 9, email: 'maggie@simpsons.com', is_lecturer: false, username: 'Maggie' }, { user_id: 6, email: 'marge@simpsons.com', is_lecturer: false, username: 'Marge' }, { user_id: 15, email: 'milhouse@simpsons.com', is_lecturer: false, username: 'Milhouse' }, { user_id: 4, email: 'mina@city.ac.uk', is_lecturer: false, username: 'Mina' }, { user_id: 13, email: 'mrburns@simpsons.com', is_lecturer: false, username: 'Mr Burns' }, { user_id: 10, email: 'ned@simpsons.com', is_lecturer: false, username: 'Ned' }, { user_id: 16, email: 'nelson@simpsons.com', is_lecturer: false, username: 'Nelson' }, { user_id: 17, email: 'patty@simpsons.com', is_lecturer: false, username: 'Patty' }, { user_id: 24, email: 'principalskinner@simpsons.com', is_lecturer: false, username: 'Principal Skinner' }, { user_id: 33, email: 'reset-password-endpoint@city.ac.uk', is_lecturer: false, username: 'reset-password' }, { user_id: 14, email: 'revlovejoy@simpsons.com', is_lecturer: false, username: 'Rev Lovejoy' }, { user_id: 18, email: 'selma@simpsons.com', is_lecturer: false, username: 'Selma' }, { user_id: 21, email: 'sideshowbob@simpsons.com', is_lecturer: false, username: 'Sideshow Bob' }, { user_id: 22, email: 'sideshowmel@simpsons.com', is_lecturer: false, username: 'Sideshow Mel' }, { user_id: 12, email: 'smithers@simpsons.com', is_lecturer: false, username: 'Smithers' }, { user_id: 3, email: 'sohil@city.ac.uk', is_lecturer: false, username: 'Sohil' }, { user_id: 30, email: 'sohilpandya@foundersandcoders.com', is_lecturer: false, username: 'reset-password-student' }, { user_id: 1, email: 'student@city.ac.uk', is_lecturer: false, username: 'student' }, { user_id: 31, email: 'validexpiry@city.ac.uk', is_lecturer: false, username: 'valid-password-expiry' }, { user_id: 26, email: 'verify-student@city.ac.uk', is_lecturer: false, username: 'verify-student' } ], clients: [ { account_management_id: 1, name: 'jsalmon', email: 'jessica@city.ac.uk', institution: 'FAC', department: 'Ten', account_type: 'group admin', paid: true, user_limit: 100, group_code: 'xyz' }, { account_management_id: 2, name: 'spandya', email: 'sohil@caf.ac.uk', institution: '', department: '', account_type: 'individual lecturer', paid: false, user_limit: null, group_code: 'abc' }, { account_management_id: 3, name: 'individualpaidlecturer', email: 'individualpaidlecturer@city.ac.uk', institution: '', department: '', account_type: 'individual lecturer', paid: true, user_limit: null, group_code: null }, { account_management_id: 4, name: 'individualunpaidlecturer', email: 'individualunpaidlecturer@city.ac.uk', institution: '', department: '', account_type: 'individual lecturer', paid: false, user_limit: null, group_code: null }, { account_management_id: 5, name: 'groupadmin', email: 'groupadmin@city.ac.uk', institution: '', department: '', account_type: 'group admin', paid: true, user_limit: 1000, group_code: 'groupadminsecretcode' }, { account_management_id: 6, name: 'groupadminnotpaid', email: 'groupadminnotpaid@city.ac.uk', institution: '', department: '', account_type: 'group admin', paid: true, user_limit: 1000, group_code: 'notpaidsecretcode' }, { account_management_id: 7, name: 'userlimitreached', email: 'userlimitreached@city.ac.uk', institution: 'UCL', department: 'SSEES', account_type: 'group admin', paid: false, user_limit: 1, group_code: 'limitreached' }
+        ] }
+    },
+    {
+        method: 'post',
+        url: '/super-admin/client',
+        payload: {
+            name: 'name',
+            email: 'email@email.com',
+            institution: 'institution',
+            department: 'department',
+            accountType: 'group admin',
+            paid: true,
+            isEditingClient: false,
+        },
+        expected: { message: 'data has been successfully posted and user has been sent the email.' }
+    },
+    {
+        method: 'post',
+        url: '/super-admin/client',
+        payload: {
+            name: 'name',
+            email: 'email@email.com',
+            institution: 'institution',
+            department: 'department',
+            accountType: 'individual lecturer',
+            paid: true,
+            isEditingClient: false,
+        },
+        expected: { message: 'data has been successfully posted and user has been sent the email.' }
+    },
+    {
+        method: 'post',
+        url: '/super-admin/client',
+        payload: {
+            name: 'name',
+            email: 'individualpaidlecturer@city.ac.uk',
+            institution: 'institution',
+            department: 'department',
+            accountType: 'individual lecturer',
+            paid: false,
+            isEditingClient: false,
+        },
+        expected: { message: 'data has been successfully posted and user has been sent the email.' }
+    },
+    {
+        method: 'post',
+        url: '/super-admin/client',
+        payload: {
+            name: 'name',
+            email: 'groupadminnotpaid@city.ac.uk',
+            institution: 'institution',
+            department: 'department',
+            accountType: 'individual lecturer',
+            paid: false,
+            isEditingClient: true,
+        },
+        expected: { message: 'user has been updated, but no email has been sent' }
     },
     {
         method: 'post',
@@ -264,7 +400,57 @@ test('/authenticate-user endpoint returns error for delAsync Redis call', (t) =>
 
             return Promise.resolve();
         })
-        .then(() => simulateAuth())
+        .then(() => simulateAuth('lecturer@city.ac.uk'))
+        .then((token) => {
+            const options = {
+                method: endpoint.method,
+                url: endpoint.url,
+                payload: endpoint.payload,
+                headers: { Authorization: token, cookie: 'token=' + token },
+            };
+            return server.inject(options);
+        })
+        .then((response) => {
+            email.restore();
+            t.deepEqual(response.result, endpoint.expected, 'payload is correct for ' + endpoint.url);
+        })
+        .catch((err) => {
+            email.restore();
+            t.error(err);
+        });
+    });
+});
+
+
+// Endpoint tests for Group Admins
+
+[
+    {
+        method: 'get',
+        url: '/admin-dashboard',
+        expected: { lecturers: [{ user_id: 38, email: 'grouplecturer1@city.ac.uk', is_verified: true, is_user_active: true }, { user_id: 39, email: 'grouplecturer2@city.ac.uk', is_verified: true, is_user_active: true }, { user_id: 43, email: 'deactivatedlecturer@city.ac.uk', is_verified: true, is_user_active: false }], userAccountLimitInformation: { count: 3, user_limit: 1000 } }
+    },
+    {
+        method: 'post',
+        payload: { user_id: 38 },
+        url: '/group-admin/update',
+        expected: true
+    },
+].forEach((endpoint) => {
+    test(endpoint.url + ' endpoint returns expected payload', (t) => {
+        t.plan(1);
+
+        initDb()
+        .then(() => {
+            email = sinon.stub(
+                sendemail,
+                'email',
+                (name, person, cb) => cb(null)
+            );
+
+            return Promise.resolve();
+        })
+        .then(() => simulateAuth('groupadmin@city.ac.uk'))
         .then((token) => {
             const options = {
                 method: endpoint.method,
@@ -310,7 +496,7 @@ test('/authenticate-user endpoint returns error for delAsync Redis call', (t) =>
     {
         method: 'get',
         url: '/get-user-details',
-        expected: { email: 'student@city.ac.uk', expiry_code: null, is_lecturer: false, is_super_admin: false, is_verified: true, reset_password_code: null, user_id: 1, username: 'student', verification_code: null }
+        expected: { email: 'student@city.ac.uk', expiry_code: null, is_lecturer: false, is_super_admin: false, is_verified: true, reset_password_code: null, user_id: 1, username: 'student', group_code: null, verification_code: null, trial_expiry_time: null, group_admin_has_paid: null, is_group_admin: false, is_user_active: true }
     }
 ].forEach((endpoint) => {
     test(endpoint.url + ' endpoint returns correct payload', (t) => {
@@ -326,7 +512,7 @@ test('/authenticate-user endpoint returns error for delAsync Redis call', (t) =>
 
             return Promise.resolve();
         })
-        .then(() => simulateAuthStudents())
+        .then(() => simulateAuthStudents('lecturer@city.ac.uk'))
         .then((token) => {
             const options = {
                 method: endpoint.method,

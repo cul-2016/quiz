@@ -1,5 +1,6 @@
 export const dashboardError = new Error('Failed to fetch dashboard data');
 export const superAdminDashboardError = new Error('Failed to fetch super admin dashboard data');
+export const groupAdminDashboardError = new Error('Failed to fetch group admin dashboard data');
 export const newModuleError = new Error('Failed to send module data to server');
 export const validateModuleIDError = new Error('Failed to validate module id');
 export const authenticateUserError = new Error('Failed to authenticate User');

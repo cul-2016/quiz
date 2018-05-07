@@ -5,6 +5,7 @@ import * as actions from '../../actions/super-admin';
 const mapStateToProps = (state) => ({
     students: state.superAdmin.students,
     lecturers: state.superAdmin.lecturers,
+    clients: state.superAdmin.clients,
     superAdminId: state.user.user_id
 });
 
@@ -14,6 +15,12 @@ const mapDispatchToProps = (dispatch) => ({
     },
     handleDownloadData: (url) => {
         dispatch(actions.downloadData(url));
+    },
+    handleEditClient: (data) => {
+        dispatch(actions.editClient(data));
+    },
+    handleClearClientForm: () => {
+        dispatch(actions.clearClientForm());
     }
 });
 

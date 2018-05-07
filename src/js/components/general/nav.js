@@ -5,10 +5,10 @@ import logout from '../../lib/logout';
 
 
 const hideNav = (path) => {
-    return path === "/" || path.match(/live|holding-page|result|review|register-student|please-verify|verification|reset-password|performance|history|revise|add-new-module|leaderboard|new-quiz|edit-quiz|edit-survey|members|register-lecturer-invite-only|privacy/);
+    return path === "/" || path.match(/live|holding-page|result|review|register-student|please-verify|verification|reset-password|performance|history|revise|add-new-module|leaderboard|new-quiz|edit-quiz|edit-survey|members|register-lecturer|privacy/);
 };
 
-const Nav = ({ location, is_lecturer, is_super_admin }) => {
+const Nav = ({ location, is_lecturer, is_super_admin, is_group_admin }) => {
 
     let navClasses = classnames("navbar", {
         "display-none": hideNav(location.pathname),
@@ -23,15 +23,21 @@ const Nav = ({ location, is_lecturer, is_super_admin }) => {
                   <img src="/assets/logo/nav_icon.svg" className="navbar__img"></img>
               </li>
               { is_super_admin && is_lecturer &&
-                <li className="navbar__item navbar__item--dashboard" onClick={ () => hashHistory.push('/super-admin') }>
-                    <img src="/assets/nav_dashboard_icon.svg" className=""></img>
-                    <span className="navbar__link">Admin Dashboard</span>
+                <li className="navbar__item navbar__item--dashboard">
+                    <img onClick={() => hashHistory.push('/super-admin')} src="/assets/nav_dashboard_icon.svg" className=""></img>
+                        <span onClick={() => hashHistory.push('/super-admin')} className="navbar__link pointer">Super Admin Dashboard</span>
                 </li>
               }
-              <li className="navbar__item navbar__item--right" onClick={ logout }>
-                <button className="button">
-                    Logout
-                </button>
+              { is_group_admin &&
+                <li className="navbar__item navbar__item--dashboard">
+                    <img onClick={() => hashHistory.push('/admin-dashboard')} src="/assets/nav_dashboard_icon.svg" className=""></img>
+                        <span onClick={() => hashHistory.push('/admin-dashboard')} className="navbar__link pointer">Admin Dashboard</span>
+                </li>
+              }
+              <li className="navbar__item navbar__item--right" >
+                    <button onClick={logout} className="button pointer">
+                        Logout
+                    </button>
               </li>
             </div>
           </div>
@@ -42,7 +48,8 @@ const Nav = ({ location, is_lecturer, is_super_admin }) => {
 Nav.propTypes = {
     location: PropTypes.object,
     is_lecturer: PropTypes.bool,
-    is_super_admin: PropTypes.bool
+    is_super_admin: PropTypes.bool,
+    is_group_admin: PropTypes.bool
 };
 
 export default Nav;

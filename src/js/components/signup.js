@@ -7,7 +7,6 @@ import lowerCaseBeforeAt from '../lib/lowerCaseBeforeAt.js';
 const Signup = ({ register, updateInputField, registeringUser, toggleTcAgreed, location, showTcAgreedError }) => {
 
     const isEmailValid = isEmail(register.email);
-
     const is_lecturer = location.pathname !== '/register-student';
 
     let invalidEmailClasses = classnames("help is-danger", {
@@ -29,14 +28,15 @@ const Signup = ({ register, updateInputField, registeringUser, toggleTcAgreed, l
         if (isEmailValid
             && register.tcAgreed
             && register.password
-            && register.username
+            && (!register.username && is_lecturer ? true : register.username)
             && register.password === register.confirmPassword
         ) {
             registeringUser(
                 lowerCaseBeforeAt(register.email).trim(),
                 register.username,
                 register.password,
-                is_lecturer
+                is_lecturer,
+                register.group_code
             );
         } else if (!register.tcAgreed) {
             showTcAgreedError();
@@ -65,17 +65,29 @@ const Signup = ({ register, updateInputField, registeringUser, toggleTcAgreed, l
                 <span className={ invalidEmailClasses }>This email is invalid</span>
               </div>
 
-
-              <div className="form__field f-body">
-                <label className="form__label">Choose a public nickname (for the leaderboard)</label>
-                <input
-                  onKeyDown={ submitOnEnter }
-                  className="form__input"
-                  value={ register.username }
-                  onChange={ (e) => updateInputField("username", e.target.value)}
-                  type="username"/>
-              </div>
-
+              {
+                  !is_lecturer &&
+                  <div className="form__field f-body">
+                    <label className="form__label">Choose a public nickname (for the leaderboard)</label>
+                    <input
+                      onKeyDown={ submitOnEnter }
+                      className="form__input"
+                      value={ register.username }
+                      onChange={ (e) => updateInputField("username", e.target.value)}
+                      type="username"/>
+                  </div>
+              }
+              { is_lecturer &&
+                  <div className="form__field f-body">
+                    <label className="form__label">Code (if your institution has given you one)</label>
+                    <input
+                      onKeyDown={ submitOnEnter }
+                      className="form__input"
+                      value={ register.group_code }
+                      onChange={ (e) => updateInputField("group_code", e.target.value)}
+                      type="code"/>
+                  </div>
+              }
               <div className="form__field f-body">
                 <label className="form__label">Choose a password</label>
                 <input
@@ -126,6 +138,14 @@ const Signup = ({ register, updateInputField, registeringUser, toggleTcAgreed, l
                 <p className="f-body">
                   Already have an account?
                   <Link className="login__link f-body f-body--link" to="/"> Please sign in here </Link>
+                  {
+                      !is_lecturer &&
+                      <Link className="login__link f-body f-body--link" to="/register-lecturer"> or sign up as a lecturer </Link>
+                  }
+                  {
+                      is_lecturer &&
+                      <Link className="login__link f-body f-body--link" to="/register-student"> or sign up as a student </Link>
+                  }
                 </p>
               </div>
 

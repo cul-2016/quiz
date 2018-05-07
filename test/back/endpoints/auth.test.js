@@ -97,6 +97,33 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
         });
     });
 
+    test(endpoint.url + ' endpoint returns 401 due to trial_expiry_time being in the past', (t) => {
+        t.plan(1);
+
+        initDb()
+        .then(() => {
+            return Promise.resolve();
+        })
+        .then(() => simulateAuth('trialexpired@city.ac.uk'))
+        .then((token) => {
+
+            const options = {
+                method: endpoint.method || 'get',
+                url: endpoint.url,
+                payload: endpoint.payload,
+                headers: { Authorization: token, cookie: 'token=' + token }
+            };
+
+            return server.inject(options);
+        })
+        .then((response) => {
+            t.equal(response.statusCode, 401, '401 status code for ' + endpoint.url);
+        })
+        .catch((err) => {
+            t.error(err);
+        });
+    });
+
     test(endpoint.url + ' endpoint returns 401 due to fake token', (t) => {
         t.plan(1);
 
@@ -145,7 +172,7 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
 
             return Promise.resolve();
         })
-        .then(() => simulateAuth())
+        .then(() => simulateAuth('lecturer@city.ac.uk'))
         .then((token) => {
 
             const options = {
@@ -405,7 +432,7 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
 
                 return Promise.resolve();
             })
-            .then(() => simulateAuth())
+            .then(() => simulateAuth('lecturer@city.ac.uk'))
             .then((token) => {
 
                 const options = {

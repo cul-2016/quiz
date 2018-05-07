@@ -34,6 +34,9 @@ import StudentLiveQuizContainer from './containers/student/live-quiz';
 import StudentQuizResultContainer from './containers/student/result';
 
 import SuperAdminDashboardContainer from './containers/super-admin/dashboard';
+import SuperAdminManageClientContainer from './containers/super-admin/manage-client';
+
+import GroupAdminDashboardContainer from './containers/group-admin/dashboard';
 
 import VerficationMessageComponent from './components/email-verification/verify-email-message.js';
 import PrivacyMessageComponent from './components/privacy-message.js';
@@ -72,7 +75,7 @@ const Root = ({ store }) => (
                     path="register-student"
                     component={ SignupContainer } />
                 <Route
-                    path="register-lecturer-invite-only"
+                    path="register-lecturer"
                     component={ SignupContainer } />
                 <Route
                     path="please-verify"
@@ -164,14 +167,22 @@ const Root = ({ store }) => (
                     onEnter={ composeHooks(hooks.authenticate, hooks.checkModuleOwner) }
                     path=":module_id/:quiz_id/history"
                     component={ QuizHistoryContainer } />
-                    <Route
-                        onEnter={ composeHooks(hooks.authenticate, hooks.fetchSuperAdminDashboard) }
-                        path="/super-admin"
-                        component={ SuperAdminDashboardContainer } />
+                <Route
+                    onEnter={ composeHooks(hooks.authenticate, hooks.fetchSuperAdminDashboard) }
+                    path="/super-admin"
+                    component={ SuperAdminDashboardContainer } />
+                <Route
+                    onEnter={ composeHooks(hooks.authenticate) }
+                    path="/super-admin/client"
+                    component={ SuperAdminManageClientContainer } />
                 <Route
                     onEnter={ composeHooks(hooks.authenticate, hooks.checkUserRole, hooks.fetchLeaderboard, hooks.checkModuleOwner) }
                     path=":module_id/leaderboard"
                     component={ LeaderboardContainer } />
+                <Route
+                    onEnter={ composeHooks(hooks.authenticate, hooks.fetchGroupAdminDashboard) }
+                    path="/admin-dashboard"
+                    component={ GroupAdminDashboardContainer } />
                 <Route path='/404' component={ NotFound } />
                 <Redirect from='*' to='/404' />
             </Route>

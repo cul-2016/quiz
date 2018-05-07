@@ -18,7 +18,6 @@ class Dashboard extends Component {
 
         let { modules, is_lecturer, module_id, handleInputChange, handleJoinModule, joinModuleError } = this.props;
 
-
         let moduleList = modules.map((module, i) => {
 
             let role = is_lecturer ? 'lecturer' : 'student';

@@ -10,7 +10,7 @@ test('`getAllUsers` gets list of all the users in the application', (t) => {
 
     initDb()
     .then(() => {
-        const expectedRows = 33;
+        const expectedRows = 43;
 
         getAllUsers(pool, (error, response) => {
 

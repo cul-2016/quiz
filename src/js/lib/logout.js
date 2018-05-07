@@ -14,7 +14,7 @@ export default function logout () {
       });
     })
     .catch((error) => {
-      console.log(error);
+      console.error(error);
     });
 }
 

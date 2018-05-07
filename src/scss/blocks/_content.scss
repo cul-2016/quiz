@@ -31,13 +31,14 @@
   box-shadow: 0px 11px 70px 12px rgba(0, 0, 0, 0.04);
 
   &--login {
+    width: 28rem;
     background-color: $white-75;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    left: 50%;
+    left: 45%;
     margin: 0;
-    padding: 3rem 5rem;
+    padding: 2rem 2rem;
   }
 }
 
