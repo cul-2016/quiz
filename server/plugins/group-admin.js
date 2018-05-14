@@ -1,8 +1,11 @@
 const jwt = require('jsonwebtoken');
 const Joi = require('joi');
+const Papa =  require('papaparse');
 const getLecturersByGroupCode = require('../lib/group-admin/getLecturersByGroupCode');
 const updateUserIsActive = require('../lib/group-admin/updateUserIsActive');
 const getGroupAccountLimitInformation = require('../lib/group-admin/getGroupAccountLimitInformation');
+const getFullGroupData = require('../lib/getFullGroupData');
+
 
 exports.register = (server, options, next) => {
 
@@ -71,7 +74,27 @@ exports.register = (server, options, next) => {
                     }
                 });
             }
-        }
+        },
+        {
+            method: 'GET',
+            path: '/group-admin/full-group-data',
+            config: {
+                auth: {
+                    scope: 'group-admin'
+                }
+            },
+            handler: (request, reply) => {
+                getFullGroupData(pool, request.auth.credentials.user_details.group_code, (error, response) => {
+                    /* istanbul ignore if */
+                    if (error) reply(error);
+                    var CSV = Papa.unparse(response);
+                    console.log(CSV);
+                    reply(CSV)
+                    .header('Content-Type', 'text/csv')
+                    .header('Content-Disposition', 'attachment; filename=full-group-data.csv');
+                });
+            }
+        },
     ]);
 
     next();
