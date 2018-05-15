@@ -354,7 +354,9 @@ VALUES ('deactivatedlecturer@city.ac.uk', 'deactivatedlecturer', '$2a$10$3xJ58AD
 INSERT INTO modules (module_id, user_id, name)
     VALUES ('TEST', 2, 'test module'),
            ('CENT', 2, 'Percentile'),
-           ('FAC8', 2, 'FAC8');
+           ('FAC8', 2, 'FAC8'),
+           ('GROU', 38, 'group test'),
+           ('GTWO', 38, 'group test 2');
 
 
 /********* insert medals ********/
@@ -399,7 +401,9 @@ INSERT INTO quizzes (module_id, name, is_presented)
            ('CENT', 'Arbitrary 2', true),
            ('CENT', 'Arbitrary 3', true),
            ('FAC8', 'Best Quiz EVER!', false),
-           ('FAC8', 'Quiz for testing abort functionality', false);
+           ('FAC8', 'Quiz for testing abort functionality', false),
+           ('GROU', 'Group quiz', true),
+           ('GTWO', 'Group quiz two', true);
 
 /********* insert surveys ********/
 
@@ -448,7 +452,9 @@ INSERT INTO questions (quiz_id, order_id, question, a, b, c, d, correct_answer)
            (7, 8, 'In which film did Roger Moore first play James Bond?', 'Live and Let Die', 'Diamonds Are Forever', 'Dr No', 'You Only Live Twice', 'a'),
            (7, 9, 'Who composed The Wedding March?', 'Grieg', 'Beethoven', 'Wagner', 'Mendelssohn', 'd'),
            (7, 10, 'What is Canada''s national animal?' , 'Bear', 'Beaver', 'Racoon', 'Deer', 'b'),
-           (8, 1, 'Question for Aborting Quiz?' , 'A', 'B', 'C', 'This one', 'd');
+           (8, 1, 'Question for Aborting Quiz?' , 'A', 'B', 'C', 'This one', 'd'),
+           (9, 1, 'Question for Groups?' , 'A', 'B', 'C', 'D', 'd'),
+           (10, 1, 'Question for Groups 2?' , 'A', 'B', 'C', 'D', 'd');
 
 /********* insert quiz responses ********/
 
@@ -587,7 +593,9 @@ INSERT INTO responses (user_id, quiz_id, question_id, response)
            (24, 3, 13, 'a'),
            (24, 3, 14, 'd'),
            (24, 3, 15, 'b'),
-           (24, 8, 31, 'b');
+           (24, 8, 31, 'b'),
+           (24, 9, 32, 'd'),
+           (23, 9, 33, 'd');
 
 
 /********* insert survey questions ********/
@@ -602,23 +610,23 @@ INSERT INTO questions (survey_id, order_id, question, a, b, c, d)
 /********* insert survey responses ********/
 
 INSERT INTO responses (user_id, survey_id, question_id, response)
-    VALUES (1, 1, 32, 'a'),
-           (2, 1, 32, 'a'),
-           (3, 1, 32, 'c'),
-           (4, 1, 32, 'd'),
+    VALUES (1, 1, 34, 'a'),
+           (2, 1, 34, 'a'),
+           (3, 1, 34, 'c'),
+           (4, 1, 34, 'd'),
 
-           (1, 1, 33, 'a'),
-           (2, 1, 33, 'b'),
-           (3, 1, 33, 'b'),
+           (1, 1, 35, 'a'),
+           (2, 1, 35, 'b'),
+           (3, 1, 35, 'b'),
 
-           (1, 2, 34, 'a'),
-           (2, 2, 34, 'b'),
-           (3, 2, 34, 'b'),
-           (4, 2, 34, 'c'),
+           (1, 2, 36, 'a'),
+           (2, 2, 36, 'b'),
+           (3, 2, 36, 'b'),
+           (4, 2, 36, 'c'),
 
-           (1, 2, 35, 'a'),
-           (2, 2, 35, 'a'),
-           (3, 2, 35, 'd');
+           (1, 2, 37, 'a'),
+           (2, 2, 37, 'a'),
+           (3, 2, 37, 'd');
 
 
 /********* insert module members ********/
@@ -687,6 +695,8 @@ INSERT INTO scores (user_id, quiz_id, score)
            (21, 3, 9),
            (22, 3, 9),
            (23, 3, 10),
-           (24, 3, 10);
+           (23, 10, 1),
+           (24, 3, 10),
+           (24, 9, 1);
 
 COMMIT;

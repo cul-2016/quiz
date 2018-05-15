@@ -61,7 +61,7 @@ test('`getQuizReview` gets list of questions for a quiz review', (t) => {
     .then(() => {
         const expectedRows = [
             {
-                question_id: 32,
+                question_id: 34,
                 survey_id: 1,
                 question: 'How do you feel about this module?',
                 a: 'Bad',
@@ -76,7 +76,7 @@ test('`getQuizReview` gets list of questions for a quiz review', (t) => {
                 order_id: 1
             },
             {
-                question_id: 33,
+                question_id: 35,
                 survey_id: 1,
                 question: 'Would you recommend this lecturer?',
                 a: 'No',

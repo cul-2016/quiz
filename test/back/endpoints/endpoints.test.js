@@ -461,6 +461,7 @@ test('/authenticate-user endpoint returns error for delAsync Redis call', (t) =>
             return server.inject(options);
         })
         .then((response) => {
+            console.log(response);
             email.restore();
             t.deepEqual(response.result, endpoint.expected, 'payload is correct for ' + endpoint.url);
         })
