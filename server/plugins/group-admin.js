@@ -88,7 +88,7 @@ exports.register = (server, options, next) => {
                     /* istanbul ignore if */
                     if (error) reply(error);
                     var CSV = Papa.unparse(response);
-                    console.log(CSV);
+
                     reply(CSV)
                     .header('Content-Type', 'text/csv')
                     .header('Content-Disposition', 'attachment; filename=full-group-data.csv');

@@ -471,6 +471,59 @@ test('/authenticate-user endpoint returns error for delAsync Redis call', (t) =>
     });
 });
 
+// Data download endpoints
+
+[{
+    method: 'get',
+    url: '/group-admin/full-group-data',
+    expected: { hello: 'world' },
+    auth: 'groupadmin@city.ac.uk'
+}, {
+    method: 'get',
+    url: '/super-admin/full-answer-set',
+    expected: { hello: 'world' },
+    auth: 'lecturer@city.ac.uk'
+}, {
+    method: 'get',
+    url: '/super-admin/full-question-set',
+    expected: { hello: 'world' },
+    auth: 'lecturer@city.ac.uk'
+}].forEach((endpoint) => {
+    test(endpoint.url + ' endpoint returns expected payload', (t) => {
+        t.plan(2);
+
+        initDb()
+        .then(() => {
+            email = sinon.stub(
+                sendemail,
+                'email',
+                (name, person, cb) => cb(null)
+            );
+
+            return Promise.resolve();
+        })
+        .then(() => simulateAuth(endpoint.auth))
+        .then((token) => {
+            const options = {
+                method: endpoint.method,
+                url: endpoint.url,
+                payload: endpoint.payload,
+                headers: { Authorization: token, cookie: 'token=' + token },
+            };
+            return server.inject(options);
+        })
+        .then((response) => {
+            email.restore();
+            t.ok(response.headers['content-type'].indexOf('text/csv') > -1);
+            t.equal(response.statusCode, 200);
+        })
+        .catch((err) => {
+            email.restore();
+            t.error(err);
+        });
+    });
+});
+
 // Endpoint Test for Students
 [
     {
