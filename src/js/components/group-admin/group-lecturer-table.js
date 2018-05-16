@@ -17,6 +17,10 @@ const GroupLecturerTable = ({ users, user_limit, user_count, updateUserIsActive,
                             user_id={user.user_id}/> : <div />
                     }
                 </td>
+                <td className="f-body"> { user.module_count } </td>
+                <td className="f-body"> { user.student_count } </td>
+                <td className="f-body"> { user.quiz_count } </td>
+                <td className="f-body"> { user.response_count } </td>
             </tr>
         );
     });
@@ -34,17 +38,23 @@ const GroupLecturerTable = ({ users, user_limit, user_count, updateUserIsActive,
                 }
             </div>
             <div className="line" />
-            <table>
+            <div className="group-lecturer-table__container">
+              <table className="group-lecturer-table">
                 <thead>
                     <tr>
                         <th className="f-body f-body--heavy">Email</th>
                         <th className="f-body f-body--heavy">User Active</th>
+                        <th className="f-body f-body--heavy">Number of Modules</th>
+                        <th className="f-body f-body--heavy">Number of Students</th>
+                        <th className="f-body f-body--heavy">Number of Quizzes</th>
+                        <th className="f-body f-body--heavy">Number of Responses</th>
                     </tr>
                 </thead>
                 <tbody>
                   { table }
                 </tbody>
               </table>
+            </div>
           </div>
     );
 };

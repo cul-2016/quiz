@@ -428,7 +428,11 @@ test('/authenticate-user endpoint returns error for delAsync Redis call', (t) =>
     {
         method: 'get',
         url: '/admin-dashboard',
-        expected: { lecturers: [{ user_id: 38, email: 'grouplecturer1@city.ac.uk', is_verified: true, is_user_active: true }, { user_id: 39, email: 'grouplecturer2@city.ac.uk', is_verified: true, is_user_active: true }, { user_id: 43, email: 'deactivatedlecturer@city.ac.uk', is_verified: true, is_user_active: false }], userAccountLimitInformation: { count: 3, user_limit: 1000 } }
+        expected: { lecturers: [
+          { user_id: 38, email: 'grouplecturer1@city.ac.uk', is_verified: true, is_user_active: true, module_count: '2', student_count: '2', quiz_count: '2', response_count: '2' },
+          { user_id: 39, email: 'grouplecturer2@city.ac.uk', is_verified: true, is_user_active: true, module_count: '0', student_count: '0', quiz_count: '0', response_count: '0' },
+          { user_id: 43, email: 'deactivatedlecturer@city.ac.uk', is_verified: true, is_user_active: false, module_count: '0', student_count: '0', quiz_count: '0', response_count: '0' }
+        ], userAccountLimitInformation: { count: 3, user_limit: 1000 } }
     },
     {
         method: 'post',
@@ -461,7 +465,6 @@ test('/authenticate-user endpoint returns error for delAsync Redis call', (t) =>
             return server.inject(options);
         })
         .then((response) => {
-            console.log(response);
             email.restore();
             t.deepEqual(response.result, endpoint.expected, 'payload is correct for ' + endpoint.url);
         })

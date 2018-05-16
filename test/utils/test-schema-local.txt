@@ -595,7 +595,7 @@ INSERT INTO responses (user_id, quiz_id, question_id, response)
            (24, 3, 15, 'b'),
            (24, 8, 31, 'b'),
            (24, 9, 32, 'd'),
-           (23, 9, 33, 'd');
+           (23, 10, 33, 'd');
 
 
 /********* insert survey questions ********/
@@ -656,7 +656,9 @@ INSERT INTO module_members (module_id, user_id)
            ('CENT', 21),
            ('CENT', 22),
            ('CENT', 23),
-           ('CENT', 24);
+           ('CENT', 24),
+           ('GTWO', 23),
+           ('GROU', 24);
 
 
 /********* insert scores ********/
