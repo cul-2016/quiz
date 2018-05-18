@@ -13,9 +13,11 @@ function getFullGroupData (client, groupCode, callback) {
       FROM scores inner join quizzes on quizzes.quiz_id = scores.quiz_id
       INNER JOIN modules on quizzes.module_id = modules.module_id
       INNER JOIN users ON users.user_id = modules.user_id
-      WHERE users.group_code = '${groupCode}'
+      WHERE users.group_code = $1
       GROUP BY scores.user_id, modules.module_id;`;
-    query(client, fullGroupDataQuery, [], (error, response) => {
+    var fullGroupDataParams = [groupCode];
+
+    query(client, fullGroupDataQuery, fullGroupDataParams, (error, response) => {
         /* istanbul ignore if */
         if (error) {
             console.error(error);
