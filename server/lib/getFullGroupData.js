@@ -9,12 +9,13 @@ var query = require('./query');
 
 function getFullGroupData (client, groupCode, callback) {
     var fullGroupDataQuery = `
-      SELECT SUM(scores.score) as score, COUNT(quizzes.quiz_id) as quizzes_taken, scores.user_id, modules.module_id
+      SELECT SUM(scores.score) as score, COUNT(quizzes.quiz_id) as quizzes_taken, scores.user_id, u_student.email, u_student.username, modules.module_id
       FROM scores inner join quizzes on quizzes.quiz_id = scores.quiz_id
       INNER JOIN modules on quizzes.module_id = modules.module_id
-      INNER JOIN users ON users.user_id = modules.user_id
-      WHERE users.group_code = $1
-      GROUP BY scores.user_id, modules.module_id;`;
+      INNER JOIN users u_lecturer ON u_lecturer.user_id = modules.user_id
+      INNER JOIN users u_student ON u_student.user_id = scores.user_id
+      WHERE u_lecturer.group_code = $1
+      GROUP BY scores.user_id, u_student.email, u_student.username, modules.module_id;`;
     var fullGroupDataParams = [groupCode];
 
     query(client, fullGroupDataQuery, fullGroupDataParams, (error, response) => {
@@ -27,7 +28,7 @@ function getFullGroupData (client, groupCode, callback) {
         var modules = [];
         var rows = response.rows.reduce((a, b) => {
             if (!a[b.user_id]) {
-                a[b.user_id] = { user_id: b.user_id };
+                a[b.user_id] = { user_email: b.email, user_nickname: b.username };
             }
             a[b.user_id][b.module_id + "_score"] = b.score;
             a[b.user_id][b.module_id + "_quizzes_taken"] = b.quizzes_taken;
