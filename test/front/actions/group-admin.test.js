@@ -129,3 +129,65 @@ test('updateUserIsActive async action FAILURE', (t) => {
         sandbox.restore();
     }, 300);
 });
+
+test('downloadData async action SUCCESS', (t) => {
+
+    t.plan(2);
+
+    const { dispatch, queue } = createThunk();
+    const sandbox = createSandbox();
+    const successPromise = new Promise(resolve => resolve({
+        request: {
+            responseURL: '/test'
+        }
+    } ));
+    sandbox.stub(axios, 'get').returns(successPromise);
+
+    dispatch(actions.downloadData('/test'));
+
+    setTimeout(() => {
+        t.deepEqual(
+            queue.shift(),
+            { type: actions.DOWNLOAD_DATA_REQUEST },
+            'flags downloadData request'
+        );
+        t.deepEqual(
+            queue.shift(),
+            { type: actions.DOWNLOAD_DATA_SUCCESS },
+            'flags downloadData success'
+        );
+        sandbox.restore();
+    }, 300);
+});
+
+test('downloadData async action FAILURE', (t) => {
+
+    t.plan(2);
+
+    const { dispatch, queue } = createThunk();
+
+    const customError = {
+        response: { status: 500 },
+        message: 'Sorry, something went wrong!',
+        reducerState: 'groupAdmin'
+    };
+
+    const axiosFailurePromise = Promise.reject(customError);
+    const sandbox = createSandbox();
+    sandbox.stub(axios, 'get').returns(axiosFailurePromise);
+
+    dispatch(actions.downloadData());
+    setTimeout(() => {
+        t.deepEqual(
+            queue.shift(),
+            { type: actions.DOWNLOAD_DATA_REQUEST },
+            'flags downloadData request'
+        );
+        t.deepEqual(
+            queue.shift(),
+            { type: actions.DOWNLOAD_DATA_FAILURE, error: customError },
+            'flags downloadData error'
+        );
+        sandbox.restore();
+    }, 300);
+});

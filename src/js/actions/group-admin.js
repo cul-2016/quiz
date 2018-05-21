@@ -8,6 +8,10 @@ export const UPDATE_USER_IS_ACTIVE_REQUEST = 'UPDATE_USER_IS_ACTIVE_REQUEST';
 export const UPDATE_USER_IS_ACTIVE_SUCCESS = 'UPDATE_USER_IS_ACTIVE_SUCCESS';
 export const UPDATE_USER_IS_ACTIVE_FAILURE = 'UPDATE_USER_IS_ACTIVE_FAILURE';
 
+export const DOWNLOAD_DATA_REQUEST = 'DOWNLOAD_DATA_REQUEST';
+export const DOWNLOAD_DATA_SUCCESS = 'DOWNLOAD_DATA_SUCCESS';
+export const DOWNLOAD_DATA_FAILURE = 'DOWNLOAD_DATA_FAILURE';
+
 export const getGroupAdminDashboard = () => (dispatch) => {
 
     dispatch(getGroupAdminDashboardRequest());
@@ -58,5 +62,32 @@ export const updateUserIsActiveSuccess = () => ({
 
 export const updateUserIsActiveFailure = (error) => ({
     type: UPDATE_USER_IS_ACTIVE_FAILURE,
+    error
+});
+
+export const downloadData = (url) => (dispatch) => {
+    dispatch(downloadDataRequest());
+    request.get(dispatch)(url)
+        .then((response) => {
+            window.location.href = response.request.responseURL;
+            dispatch(downloadDataSuccess());
+            dispatch(getGroupAdminDashboard());
+        })
+        .catch((error) => {
+            const customError = Object.assign({}, error, { reducerState: 'groupAdmin' });
+            dispatch(downloadDataFailure(customError));
+        });
+};
+
+export const downloadDataRequest = () => ({
+    type: DOWNLOAD_DATA_REQUEST
+});
+
+export const downloadDataSuccess = () => ({
+    type: DOWNLOAD_DATA_SUCCESS
+});
+
+export const downloadDataFailure = (error) => ({
+    type: DOWNLOAD_DATA_FAILURE,
     error
 });

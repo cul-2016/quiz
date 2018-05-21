@@ -10,7 +10,7 @@ test('`saveQuiz` returns the quiz id for the saved quiz', (t) => {
 
     initDb()
     .then(() => {
-        const expected = 9;
+        const expected = 11;
         const module_id = 'TEST';
         const name = 'Week 1 Test';
         const is_last_quiz = true;

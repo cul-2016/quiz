@@ -9,9 +9,16 @@ const mapStateToProps = (state) => ({
     groupAdminId: state.user.user_id
 });
 
+const mapDispatchToProps = (dispatch) => ({
+    updateUserIsActive: (user_id) => {
+        dispatch(actions.updateUserIsActive(user_id));
+    },
+    handleDownloadData: (url) => {
+        dispatch(actions.downloadData(url));
+    }
+});
 
 
-
-const GroupAdminDashboardContainer = connect(mapStateToProps, actions)(GroupAdminDashboard);
+const GroupAdminDashboardContainer = connect(mapStateToProps, mapDispatchToProps)(GroupAdminDashboard);
 
 export default GroupAdminDashboardContainer;
