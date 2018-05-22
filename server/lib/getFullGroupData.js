@@ -14,7 +14,7 @@ function getFullGroupData (client, groupCode, callback) {
       INNER JOIN modules on quizzes.module_id = modules.module_id
       INNER JOIN users u_lecturer ON u_lecturer.user_id = modules.user_id
       INNER JOIN users u_student ON u_student.user_id = scores.user_id
-      WHERE u_lecturer.group_code = $1
+      WHERE u_lecturer.group_code = $1 AND u_student.is_lecturer = false
       GROUP BY scores.user_id, u_student.email, u_student.username, modules.module_id;`;
     var fullGroupDataParams = [groupCode];
 
