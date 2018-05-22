@@ -7,7 +7,7 @@
 
       .group-lecturer-table {
         &__container {
-          overflow: scroll;
+          overflow: auto;
         }
 
         table-layout: fixed;
