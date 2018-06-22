@@ -8,7 +8,18 @@ var query = require('../query');
  */
 
 function getLecturersByGroupCode (client, group_code, callback) {
-    var queryText = 'SELECT user_id, email, is_verified, is_user_active FROM users WHERE group_code = $1';
+    var queryText = `
+      SELECT COUNT(DISTINCT(modules.module_id)) as module_count, COUNT(DISTINCT(module_members.user_id)) as student_count,
+      COUNT(DISTINCT(quizzes.quiz_id)) as quiz_count, COUNT(DISTINCT(responses)) as response_count,
+      users.user_id, users.email, users.is_verified, users.is_user_active
+      FROM modules
+      FULL JOIN users ON users.user_id = modules.user_id
+      FULL JOIN module_members ON module_members.module_id = modules.module_id
+      FULL JOIN quizzes ON quizzes.module_id = modules.module_id AND quizzes.is_presented = true
+      FULL JOIN responses ON responses.quiz_id = quizzes.quiz_id
+      WHERE users.group_code = $1
+      GROUP BY users.user_id`;
+
     var queryArray = [group_code];
 
     query(client, queryText, queryArray, (error, response) => {

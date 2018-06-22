@@ -4,6 +4,19 @@
     .content__body {
       padding: 1rem;
       min-height: 50rem;
+
+      .group-lecturer-table {
+        &__container {
+          overflow: auto;
+        }
+
+        table-layout: fixed;
+        min-width: 100%;
+
+        td {
+          text-align: center;
+        }
+      }
     }
     .medal-small {
       margin: auto;

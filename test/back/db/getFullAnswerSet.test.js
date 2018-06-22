@@ -10,7 +10,7 @@ test('`getFullAnswerSet` Gets datadump of all answer set', (t) => {
 
     initDb()
     .then(() => {
-        const expected = 149;
+        const expected = 151;
         getFullAnswerSet(pool, (error, response) => {
 
             if (error) {
