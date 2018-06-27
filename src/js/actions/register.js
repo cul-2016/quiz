@@ -17,7 +17,7 @@ export const updateInputField = (inputKey, value) => ({
     inputKey
 });
 
-export function registeringUser (email, username, password, is_lecturer, group_code) {
+export function registeringUser (email, username, password, is_lecturer, group_code, moduleId) {
     return (dispatch) => {
 
         dispatch(registeringUserRequest());
@@ -40,7 +40,11 @@ export function registeringUser (email, username, password, is_lecturer, group_c
                 } else {
                     dispatch(registeringUserSuccess(true));
                     dispatch(setUserDetails(response.data));
-                    hashHistory.push('/dashboard');
+                    if (moduleId) {
+                      hashHistory.push(`/${moduleId}/student`);
+                    } else {
+                      hashHistory.push('/dashboard');
+                    }
                 }
             })
             .catch(() => {

@@ -10,6 +10,7 @@ import ResetPasswordFormContainer from './containers/reset-password-form-contain
 import DashboardContainer from './containers/dashboard';
 import NewModuleContainer from './containers/new-module';
 import SignupContainer from './containers/signup';
+import MoodleSignupContainer from './containers/moodle-signup';
 import NewQuizContainer from './containers/new-quiz';
 import EditQuizContainer from './containers/edit-quiz';
 
@@ -74,6 +75,9 @@ const Root = ({ store }) => (
                 <Route
                     path="register-student"
                     component={ SignupContainer } />
+                <Route
+                    path="register-moodle-student"
+                    component={ MoodleSignupContainer } />
                 <Route
                     path="register-lecturer"
                     component={ SignupContainer } />

@@ -2,6 +2,7 @@ const lti = require('ims-lti');
 const getUserByMoodleID = require('../lib/getUserByMoodleID');
 const setSession = require('../lib/authentication/setSession');
 const saveUser = require('../lib/authentication/saveUser.js');
+const joinModule = require('../lib/joinModule.js');
 
 exports.register = (server, options, next) => {
   const { pool } = server.app;
@@ -39,15 +40,17 @@ exports.register = (server, options, next) => {
                 }
 
                 // TODO: modify create account screen for moodle users instead of just save user
-                return saveUser(pool, "test@test.com", "null", false, null, null, null, false, false, userId, function(err, res) {
+                return saveUser(pool, "test2@test.com", "null", false, null, null, null, false, false, userId, function(err, res) {
                   if (err) return reply(err);
                   return getUserByMoodleID(pool, userId, function(err, userDetails) {
-                    return setSession(server, userDetails[0], (err, token, options) => {
-                      return reply()
-                        .header("Authorization", token)
-                        .state('token', token, options)
-                        .state('cul_is_cookie_accepted', 'true', options)
-                        .redirect(`/#/${moduleId}/student`);
+                    return joinModule(pool, moduleId.toUpperCase(), userDetails[0].user_id, (error, result) => {
+                      return setSession(server, userDetails[0], (err, token, options) => {
+                        return reply()
+                          .header("Authorization", token)
+                          .state('token', token, options)
+                          .state('cul_is_cookie_accepted', 'true', options)
+                          .redirect(`/#/register-moodle-student?module=${moduleId}`);
+                      });
                     });
                   });
                 })
