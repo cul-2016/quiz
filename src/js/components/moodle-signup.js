@@ -4,8 +4,7 @@ import { Link } from 'react-router';
 import isEmail from 'validator/lib/isEmail';
 import lowerCaseBeforeAt from '../lib/lowerCaseBeforeAt.js';
 
-const Signup = ({ register, updateInputField, registeringUser, toggleTcAgreed, location, showTcAgreedError }) => {
-
+const Signup = ({ register, updateInputField, registeringUser, migrateUser, toggleTcAgreed, location, showTcAgreedError }) => {
     const isEmailValid = isEmail(register.email);
     const is_lecturer = location.pathname !== '/register-moodle-student';
 
@@ -28,6 +27,23 @@ const Signup = ({ register, updateInputField, registeringUser, toggleTcAgreed, l
                 lowerCaseBeforeAt(register.email).trim(),
                 register.username,
                 "",
+                is_lecturer,
+                register.group_code,
+                location.query.module
+            );
+        } else if (!register.tcAgreed) {
+            showTcAgreedError();
+        }
+    };
+
+    const handleOnMigrate = () => {
+        if (isEmailValid
+            && register.tcAgreed
+            && (!register.username && is_lecturer ? true : register.username)
+        ) {
+            migrateUser(
+                lowerCaseBeforeAt(register.email).trim(),
+                register.username,
                 is_lecturer,
                 register.group_code,
                 location.query.module
@@ -93,17 +109,30 @@ const Signup = ({ register, updateInputField, registeringUser, toggleTcAgreed, l
                   <span className="f-body">
                       I agree with the <Link className="f-body f-body--primary" target="_blank" to="/privacy">privacy statement</Link>, including the <Link className="f-body f-body--primary" target="_blank"  to="/privacy">use of cookies.</Link>
                   </span>
+                  { register.mergeUsers &&
+                    <span className="login__err-message">
+                      This account already exists. Would you like to migrate your account to Moodle?
+                    </span>
+                  }
                   { register.error &&
                     <span className="login__err-message">
                       { register.error }
                     </span>
                   }
               </div>
-              <button
-                className="button"
-                onClick={ handleOnSubmit }
-                >Register
-              </button>
+              { register.mergeUsers ?
+                <button
+                  className="button"
+                  onClick={ handleOnMigrate }
+                  >Migrate Account
+                </button>
+                :
+                <button
+                  className="button"
+                  onClick={ handleOnSubmit }
+                  >Register
+                </button>
+              }
 
             </div>
 

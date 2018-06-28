@@ -62,6 +62,9 @@ const Root = ({ store }) => (
                     path="privacy"
                     component={ PrivacyMessageComponent } />
                 <Route
+                    path="merge-users"
+                    component={ LoginContainer } />
+                <Route
                     onEnter={ hooks.clearState }
                     path="request-reset-password"
                     component={ RequestResetPasswordContainer } />

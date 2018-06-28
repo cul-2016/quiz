@@ -6,6 +6,7 @@ const studentWelcomeEmail = require('../lib/email/student-welcome-email.js');
 const getUserByEmail = require('../lib/getUserByEmail.js');
 const getUserByID = require('../lib/getUserByID.js');
 const updateUser = require('../lib/updateUser.js');
+const mergeUsers = require('../lib/mergeUsers.js');
 const hashPassword = require('../lib/authentication/hashPassword.js');
 const compareResetPasswordCodeAndExpiry = require('../lib/compareResetPasswordCodeAndExpiry.js');
 const updatePassword = require('../lib/updatePassword.js');
@@ -13,7 +14,9 @@ const resetPasswordRequestEmail = require('../lib/email/reset-password-request-e
 const saveExpiringTokenForUser = require('../lib/saveExpiringTokenForUser');
 const validateGroupLecturerByCode = require('../lib/validateGroupLecturerByCode');
 const getUserByMoodleID = require('../lib/getUserByMoodleID');
-const setSession = require('../lib/authentication/setSession')
+const setSession = require('../lib/authentication/setSession');
+const validatePassword = require('../lib/authentication/validatePassword');
+
 
 const jwt = require('jsonwebtoken');
 const Joi = require('joi');
@@ -35,8 +38,7 @@ exports.register = (server, options, next) => {
                       password: Joi.string().allow(''),
                       is_lecturer: Joi.boolean().strict().required(),
                       username: Joi.string().allow(''),
-                      group_code: Joi.string().allow(''),
-                      moduleId: Joi.string().allow('')
+                      group_code: Joi.string().allow('')
                   }
               }
             },
@@ -44,17 +46,23 @@ exports.register = (server, options, next) => {
               const { email, password, is_lecturer, username = '', group_code = null, moduleId } = request.payload;
               jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
                 if (decoded && decoded.user_details && decoded.user_details.moodle_id) {
-                  return updateUser(pool, decoded.user_details.user_id, {email, username}, function(err, res) {
-                    return getUserByMoodleID(pool, decoded.user_details.moodle_id, function(err, userDetails) {
-                      return setSession(server, userDetails[0], (err, token, options) => {
-                        return reply(userDetails[0])
+                  return getUserByEmail(pool, email, function(err, res) {
+                    if (res[0]) {
+                      return reply({mergeUsers: true})
+                    }
+                    return updateUser(pool, decoded.user_details.user_id, {email, username}, function(err, res) {
+                      return getUserByMoodleID(pool, decoded.user_details.moodle_id, function(err, userDetails) {
+                        return setSession(server, userDetails[0], (err, token, options) => {
+                          return reply(userDetails[0])
                           .header("Authorization", token)
                           .state('token', token, options)
                           .state('cul_is_cookie_accepted', 'true', options);
+                        });
                       });
                     });
-                  });
+                  })
                 }
+
                 const verification_code = is_lecturer ? uuid() : null;
                 const validEmailMessage = { message: 'Please enter a valid email address' };
 
@@ -296,7 +304,80 @@ exports.register = (server, options, next) => {
                 });
 
             }
+        },
+        {
+          method: 'POST',
+          path: '/migrate-user',
+          config: {
+            auth: {
+                mode: 'try'
+            },
+            validate: {
+                payload: {
+                    email: Joi.string().email().required(),
+                    password: Joi.string().required()
+                }
+            },
+            handler: (request, reply) => {
+              const email = request.payload.email;
+              const password = request.payload.password;
+              getUserByEmail(pool, email, (error, userDetails) => {
+                /* istanbul ignore if */
+                if (error) {
+                    return reply(error);
+                }
+                else if (userDetails.length !== 1) {
+                    return reply({ message: "Sorry, this user does not exist" });
+                }
+                else if (!userDetails[0].is_user_active) {
+                    // user has been deactivated by group admin
+                    return reply({ message: "Sorry, your account has been deactivated, please contact your administrator to restore access" });
+                }
+                else if (userDetails[0].paid === false) {
+                    // when individual lecturer has not paid
+                    return reply({ message: "Your subscription has expired. Please email hello@quodl.co.uk to renew." });
+                }
+                else if (!userDetails[0].paid && userDetails[0].trial_expiry_time && userDetails[0].trial_expiry_time < Date.now()) {
+                    // when indivudual lecturers trial has expired and they haven't paid
+                    return reply({ message: "Sorry, your trial has expired, please contact Quodl to upgrade your free account" });
+                }
+                else if (userDetails[0].group_admin_has_paid === false) {
+                    // check if group_admin has paid, show message if they havent.
+                    return reply({ message: "Your institution's subscription has expired. To continue using Quodl, please contact your administrator, or email hello@quodl.co.uk" });
+                } else {
+                    const hashedPassword = userDetails[0].password;
+                    validatePassword(password, hashedPassword, (error, response) => {
+                      /* istanbul ignore if */
+                      if (error) {
+                        return reply(error);
+                      } else if (!response) {
+                        return reply({ message: "Please enter a valid email or password" });
+                      } else if (!userDetails[0].is_verified) {
+                        return reply({ message: "User is not verified" });
+                      } else {
+                        delete userDetails[0].password;
+
+                        jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
+                          if (decoded && decoded.user_details && decoded.user_details.moodle_id) {
+                            return mergeUsers(pool, userDetails[0].email, decoded.user_details.user_id, decoded.user_details.moodle_id, function(err, res) {
+                              return getUserByMoodleID(pool, decoded.user_details.moodle_id, function(err, userDetails) {
+                                return setSession(server, userDetails[0], (err, token, options) => {
+                                  return reply(userDetails[0])
+                                    .header("Authorization", token)
+                                    .state('token', token, options)
+                                    .state('cul_is_cookie_accepted', 'true', options);
+                                });
+                              });
+                            });
+                          }
+                        });
+                      }
+                    });
+                  }
+                });
+            }
         }
+      }
     ]);
 
     next();

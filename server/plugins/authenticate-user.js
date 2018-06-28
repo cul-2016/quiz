@@ -1,6 +1,7 @@
 const validatePassword = require('../lib/authentication/validatePassword');
 const getUserByEmail = require('../lib/getUserByEmail');
 const setSession = require('../lib/authentication/setSession')
+const jwt = require('jsonwebtoken');
 
 const Joi = require('joi');
 
