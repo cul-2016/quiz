@@ -48,7 +48,7 @@ function getModuleForLecturer (client, module_id, callback) {
                                         console.error(error);
                                         return callback(error);
                                     }
-                                    query(client, queries.getModuleForLecturer.name, [module_id], (error, name) => {
+                                    query(client, queries.getModuleForLecturer.info, [module_id], (error, info) => {
                                         /* istanbul ignore if */
                                         if (error) {
                                             console.error(error);
@@ -60,7 +60,7 @@ function getModuleForLecturer (client, module_id, callback) {
                                             medals: medals.rows,
                                             trophies: trophies.rows,
                                             num_enrolled: num_enrolled.rows,
-                                            name: name.rows
+                                            info: info.rows
                                         };
 
                                         organiseModuleData(true, module_id, allData, (error, organisedData) => {

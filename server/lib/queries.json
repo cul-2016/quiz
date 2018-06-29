@@ -6,7 +6,7 @@
         "medals": "SELECT medals.medal_name, medals.condition FROM medals WHERE medals.module_id = ($1) ORDER BY condition",
         "trophies": "SELECT trophies.trophy_name, trophies.condition FROM trophies WHERE trophies.module_id = ($1) ORDER BY trophy_name",
         "num_enrolled": "SELECT COUNT(user_id) AS num_enrolled FROM module_members WHERE module_members.module_id = ($1)",
-        "name": "SELECT name FROM modules WHERE module_id = ($1)"
+        "info": "SELECT name, user_id FROM modules WHERE module_id = ($1)"
     },
     "getModuleForStudent": {
         "main": "SELECT modules.name, modules.uses_trophies, module_members.first_quiz, module_members.high_score, module_members.overall_score, module_members.participation FROM modules JOIN module_members ON modules.module_id = module_members.module_id WHERE modules.module_id = $2 AND module_members.user_id = $1;",

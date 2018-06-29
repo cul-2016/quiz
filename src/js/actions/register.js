@@ -2,6 +2,7 @@ import request from '../lib/request.js';
 import { hashHistory } from 'react-router';
 import { setUserDetails } from './user';
 import { mergeUser } from './login';
+import { createMoodleModule } from './new-module';
 
 
 export const UPDATE_INPUT_FIELD = 'UPDATE_INPUT_FIELD';
@@ -47,7 +48,20 @@ export function registeringUser (email, username, password, is_lecturer, group_c
                     dispatch(registeringUserSuccess(true));
                     dispatch(setUserDetails(response.data));
                     if (moduleId) {
-                      hashHistory.push(`/${moduleId}/student`);
+                      if (!is_lecturer) {
+                        hashHistory.push(`/${moduleId}/student`);
+                      } else {
+                        request.post(dispatch)(`/get-module?module-id=${moduleId}`)
+                          .then(response => {
+                            hashHistory.push(`/${moduleId}/lecturer`);
+                          })
+                          .catch(err => {
+                            if (err.response.status === 404) {
+                              dispatch(createMoodleModule(moduleId));
+                              hashHistory.push(`/add-new-module`);
+                            };
+                          })
+                      }
                     } else {
                       hashHistory.push('/dashboard');
                     }
