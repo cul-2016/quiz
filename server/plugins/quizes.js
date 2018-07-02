@@ -20,6 +20,7 @@ const getQuizDetails = require('../lib/getQuizDetails.js');
 const getSurveyDetails = require('../lib/getSurveyDetails.js');
 const editScore = require('../lib/editScore.js');
 const getQuizDetailsStudent = require('../lib/getQuizDetailsStudent.js').getQuizDetailsStudent;
+const updateMoodleGrade = require('../lib/updateMoodleGrade.js');
 
 const jwt = require('jsonwebtoken');
 const Joi = require('joi');
@@ -228,8 +229,10 @@ exports.register = (server, options, next) => {
 
 
                                     const verdict = error || { newTrophyState: newTrophyState, score: score };
-                                    console.log(verdict, '<<>><<><>><<>');
-                                    reply(verdict);
+
+                                    return updateMoodleGrade(pool, user_id, module_id, decoded.user_details.lti_payload, (err, res) => {
+                                      reply(verdict);
+                                    });
                                 });
                             });
                         });
