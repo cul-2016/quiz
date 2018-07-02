@@ -1,6 +1,7 @@
 import request from '../lib/request.js';
 import { hashHistory } from 'react-router';
 import { setUserDetails } from './user';
+import { store } from '../store';
 
 export const UPDATE_EMAIL = 'UPDATE_EMAIL';
 export const UPDATE_PASSWORD = 'UPDATE_PASSWORD';
@@ -14,6 +15,8 @@ export const CLEAR_INITIAL_STATE = 'CLEAR_INITIAL_STATE';
 export const INCORRECT_USER_DETAILS = 'INCORRECT_USER_DETAILS';
 
 export const MERGE_USER = 'MERGE_USER';
+export const ADD_REDIRECT = 'ADD_REDIRECT';
+export const CLEAR_REDIRECT = 'CLEAR_REDIRECT';
 
 const basicUpdate = (type) => (value) => ({ type, value });
 export const updateEmail = basicUpdate(UPDATE_EMAIL);
@@ -70,7 +73,13 @@ export function migrateUser (email, password) {
                 else {
                     dispatch(authenticateUserSuccess());
                     dispatch(setUserDetails(response.data));
-                    hashHistory.push('/dashboard');
+                    var redirect = store.getState().login.redirectTo
+                    if (redirect) {
+                      dispatch(clearRedirect());
+                      hashHistory.push(redirect);
+                    } else {
+                      hashHistory.push('/dashboard');
+                    }
                 }
             })
             .catch((error) => {
@@ -107,4 +116,13 @@ export const incorrectUserDetails = (data) => ({
 
 export const mergeUser = () => ({
   type: MERGE_USER
+});
+
+export const addRedirect = (redirect) => ({
+  type: ADD_REDIRECT,
+  redirect
+});
+
+export const clearRedirect = () => ({
+  type: CLEAR_REDIRECT
 });

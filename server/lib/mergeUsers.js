@@ -16,7 +16,7 @@ function mergeUsers (pool, email, userId, moodleId, callback) {
   var updateUserQuery = 'UPDATE users SET moodle_id = $1 WHERE email = $2 RETURNING user_id;';
   var updateUserValues = [moodleId, email];
 
-  var updateModuleQuery = 'UPDATE module_members SET user_id = $1 WHERE user_id = $2 AND NOT EXISTS (SELECT user_id from module_members WHERE user_id = $1);';
+  var updateModuleQuery = 'UPDATE module_members SET user_id = $1 WHERE user_id = $2 AND module_id NOT IN (SELECT module_id from module_members WHERE user_id = $1);';
 
   pool.connect((error, client, done) => {
     /* istanbul ignore if */

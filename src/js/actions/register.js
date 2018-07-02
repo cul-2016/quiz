@@ -1,7 +1,7 @@
 import request from '../lib/request.js';
 import { hashHistory } from 'react-router';
 import { setUserDetails } from './user';
-import { mergeUser } from './login';
+import { mergeUser, addRedirect } from './login';
 import { createMoodleModule } from './new-module';
 
 
@@ -38,6 +38,7 @@ export function registeringUser (email, username, password, is_lecturer, group_c
                 if (response.data.mergeUsers) {
                     dispatch(mergeUsers());
                     dispatch(mergeUser());
+                    dispatch(addRedirect(`/${moduleId}/${is_lecturer ? 'lecturer' : 'student'}`))
                     hashHistory.push('/merge-users')
                 } else if (response.data.message) {
                     dispatch(registeringUserFailure(response.data.message));
