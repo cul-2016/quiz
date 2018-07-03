@@ -185,7 +185,7 @@ const Root = ({ store }) => (
                     path="/super-admin/client"
                     component={ SuperAdminManageClientContainer } />
                 <Route
-                    onEnter={ composeHooks(hooks.authenticate, hooks.checkUserRole, hooks.fetchLeaderboard, hooks.checkModuleOwner) }
+                    onEnter={ composeHooks(hooks.fetchModule), composeHooks(hooks.fetchLeaderboard) }
                     path=":module_id/leaderboard"
                     component={ LeaderboardContainer } />
                 <Route
