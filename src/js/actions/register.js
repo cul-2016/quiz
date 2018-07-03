@@ -35,12 +35,7 @@ export function registeringUser (email, username, password, is_lecturer, group_c
 
         request.post(dispatch)('/save-user', payload)
             .then((response) => {
-                if (response.data.mergeUsers) {
-                    dispatch(mergeUsers());
-                    dispatch(mergeUser());
-                    dispatch(addRedirect(`/${moduleId}/${is_lecturer ? 'lecturer' : 'student'}`))
-                    hashHistory.push('/merge-users')
-                } else if (response.data.message) {
+                if (response.data.message) {
                     dispatch(registeringUserFailure(response.data.message));
                 } else if (response.data.emailSent) {
                     dispatch(registeringUserSuccess(true));

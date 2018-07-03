@@ -8,7 +8,7 @@ export const initialState = {
     userIsAuthenticated: undefined,
     error: undefined,
     isMerging: false,
-    redirectTo: "/LLLL/student"
+    redirectTo: undefined
 };
 
 export const login = (state = initialState, action ) => {

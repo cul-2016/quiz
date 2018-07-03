@@ -1,5 +1,6 @@
 import { store } from '../store';
 import { socketClient } from '../socket';
+import { hashHistory } from 'react-router';
 import validCookieExists from './validCookieExists';
 import { getModule, getModuleMembers } from '../actions/module';
 import { getDashboard } from '../actions/dashboard';
@@ -15,6 +16,7 @@ import { getStudentHistory } from '../actions/student-history';
 import { clearInitialState } from '../actions/login';
 import { getSuperAdminDashboard } from '../actions/super-admin';
 import { getGroupAdminDashboard } from '../actions/group-admin';
+import { createMoodleModule } from '../actions/new-module';
 
 import ReactGA from 'react-ga';
 ReactGA.initialize('UA-113135812-1');
@@ -141,7 +143,13 @@ export function fetchModule (nextState, replace, callback) {
               }
             }
             callback();
-          })
+          }).catch((err) => {
+            if (is_lecturer) {
+              store.dispatch(createMoodleModule(module_id));
+              hashHistory.push('/add-new-module');
+              callback();
+            }
+          });
 }
 
 /**

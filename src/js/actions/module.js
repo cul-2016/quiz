@@ -52,7 +52,7 @@ export const getModule = (module_id, is_lecturer) => {
             })
             .catch((error) => {
                 dispatch(getModuleFailure(error));
-                return Promise.reject();
+                return Promise.reject(error);
             });
     };
 };
