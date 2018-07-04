@@ -38,7 +38,7 @@ function getModuleForStudent (client, user_id, module_id, callback) {
                     medals: medals.rows,
                     trophies: trophies.rows
                 };
-                console.log(allData);
+
                 organiseModuleData(false, module_id, allData, (error, data) => {
                     /* istanbul ignore if */
                     if (error) {

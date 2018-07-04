@@ -229,10 +229,13 @@ exports.register = (server, options, next) => {
 
 
                                     const verdict = error || { newTrophyState: newTrophyState, score: score };
-
-                                    return updateMoodleGrade(pool, user_id, module_id, decoded.user_details.lti_payload, (err, res) => {
+                                    if (decoded.user_details.lti_payload) {
+                                      return updateMoodleGrade(pool, user_id, module_id, decoded.user_details.lti_payload, (err, res) => {
+                                        reply(verdict);
+                                      });
+                                    } else {
                                       reply(verdict);
-                                    });
+                                    }
                                 });
                             });
                         });

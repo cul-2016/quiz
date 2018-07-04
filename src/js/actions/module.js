@@ -44,7 +44,7 @@ export const getModule = (module_id, is_lecturer) => {
     return (dispatch) => {
 
         dispatch(getModuleRequest());
-
+        console.log("getting module?");
         return request.get(dispatch)(`get-module?is_lecturer=${is_lecturer}&module_id=${module_id}`)
             .then((response) => {
                 dispatch(getModuleSuccess(is_lecturer, response.data));

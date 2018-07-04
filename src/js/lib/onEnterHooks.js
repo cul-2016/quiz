@@ -133,23 +133,23 @@ export function fetchModule (nextState, replace, callback) {
     let module_id = nextState.params.module_id;
     let is_lecturer = store.getState().user.is_lecturer;
 
-        store.dispatch(getModule(module_id, is_lecturer))
-          .then(() => {
-            if (is_lecturer === false) {
-              if (nextState.location.pathname.includes('performance')) {
-                store.dispatch(getFeedback(module_id));
-              } else {
-                store.dispatch(getStudentHistory(undefined, module_id));
-              }
-            }
-            callback();
-          }).catch((err) => {
-            if (is_lecturer) {
-              store.dispatch(createMoodleModule(module_id));
-              hashHistory.push('/add-new-module');
-              callback();
-            }
-          });
+    store.dispatch(getModule(module_id, is_lecturer))
+      .then(() => {
+        if (is_lecturer === false) {
+          if (nextState.location.pathname.includes('performance')) {
+            store.dispatch(getFeedback(module_id));
+          } else {
+            store.dispatch(getStudentHistory(undefined, module_id));
+          }
+        }
+        callback();
+      }).catch((err) => {
+        if (is_lecturer) {
+          store.dispatch(createMoodleModule(module_id));
+          hashHistory.push('/add-new-module');
+          callback();
+        }
+      });
 }
 
 /**
