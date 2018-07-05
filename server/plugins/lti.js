@@ -4,6 +4,7 @@ const setSession = require('../lib/authentication/setSession');
 const saveUser = require('../lib/authentication/saveUser.js');
 const joinModule = require('../lib/joinModule.js');
 const getUserByEmail = require('../lib/getUserByEmail');
+const updateUser = require('../lib/updateUser.js');
 
 exports.register = (server, options, next) => {
   const { pool } = server.app;
@@ -27,43 +28,34 @@ exports.register = (server, options, next) => {
               var userId = request.payload.user_id;
               var isLecturer = request.payload.roles.indexOf('Instructor') > -1;
 
-              return getUserByEmail(pool, request.payload.lis_person_contact_email_primary, (error, userDetails) => {
-                if (userDetails[0] && userDetails[0].password) {
-                  var merge = true;
-                }
-
-                return getUserByMoodleID(pool, userId, function(err, userDetails) {
-                  if (err) return reply(err);
-
-                  if (userDetails.length) {
-                    if (userDetails[0].username || isLecturer) {
-                      return setSession(server, Object.assign({}, userDetails[0], {lti_payload: request.payload}), (err, token, options) => {
-                        return reply()
-                          .header("Authorization", token)
-                          .state('token', token, options)
-                          .state('cul_is_cookie_accepted', 'true', options)
-                          .redirect(`/#/${moduleId}/${isLecturer ? 'lecturer' : 'student'}`);
-                      });
-                    } else {
-                      return goToRegister(server, reply, userDetails, request, merge, isLecturer, moduleId);
-                    }
-                  }
-
-                  return saveUser(pool, request.payload.lis_person_contact_email_primary, null, isLecturer, null, null, null, false, false, userId, function(err, res) {
-                    if (err) return reply(err);
-
-                    return getUserByMoodleID(pool, userId, function(err, userDetails) {
-                      if (!isLecturer) {
-                        return joinModule(pool, moduleId.toUpperCase(), userDetails[0].user_id, (error, result) => {
-                          return goToRegister(server, reply, userDetails, request, merge, isLecturer, moduleId);
-                        });
-                      }
-                      return setSession(server, Object.assign({}, userDetails[0], {lti_payload: request.payload}), (err, token, options) => {
-                        return goToRegister(server, reply, userDetails, request, merge, isLecturer, moduleId);
-                      });
+              return getUserByMoodleID(pool, userId, function(err, userDetails) {
+                if (userDetails[0]) { // User has Moodle ID
+                  if (userDetails[0].merge_required) { // User requires merge
+                    return goToRegister(server, request, reply, userDetails[0], true, isLecturer, moduleId);
+                  } else { // User does not require merge
+                    return joinModule(pool, moduleId.toUpperCase(), userDetails[0].user_id, (error, result) => {
+                      return login(server, request, reply, userDetails[0], isLecturer, moduleId);
                     });
+                  }
+                } else { // User does not have Moodle ID
+                  return getUserByEmail(pool, request.payload.lis_person_contact_email_primary, (error, userDetails) => {
+                    if (userDetails[0]) { // User email exists in database
+                      return joinModule(pool, moduleId.toUpperCase(), userDetails[0].user_id, (error, result) => {
+                        return updateUser(pool, userDetails[0].user_id, {merge_required: true, moodle_id: userId}, function(err, res) {
+                          return goToRegister(server, request, reply, Object.assign({}, userDetails[0], {moodle_id: userId}) , true, isLecturer, moduleId);
+                        });
+                      });
+                    } else { //User email does not exist in database
+                      return saveUser(pool, request.payload.lis_person_contact_email_primary, null, isLecturer, null, null, null, false, false, userId, function(err, res) {
+                        return getUserByEmail(pool, request.payload.lis_person_contact_email_primary, (error, userDetails) => {
+                          return joinModule(pool, moduleId.toUpperCase(), userDetails[0].user_id, (error, result) => {
+                            return login(server, request, reply, userDetails[0], isLecturer, moduleId);
+                          });
+                        });
+                      });
+                    }
                   });
-                });
+                }
               });
             }
             return reply().code(400);
@@ -86,14 +78,28 @@ function isLTIRequest(payload) {
     && true
 }
 
-function goToRegister(server, reply, userDetails, request, merge, isLecturer, moduleId) {
-  return setSession(server, Object.assign({}, userDetails[0], {lti_payload: request.payload}), (err, token, options) => {
-    return reply()
-    .header("Authorization", token)
-    .state('token', token, options)
-    .state('cul_is_cookie_accepted', 'true', options)
-    .redirect(merge ? '/#/merge-users' : `/#/register-moodle-${isLecturer ? 'lecturer' : 'student'}?module=${moduleId}`);
-  });
+function goToRegister(server, request, reply, userDetails, merge, isLecturer, moduleId) {
+  return setSessionAndRedirect(
+    merge ? `/#/merge-users?module=${moduleId}` : `/#/register-moodle-${isLecturer ? 'lecturer' : 'student'}?module=${moduleId}`
+  )(server, request, reply, userDetails);
+}
+
+function login(server, request, reply, userDetails, isLecturer, moduleId) {
+  return setSessionAndRedirect(
+    `/#/${moduleId}/${isLecturer ? 'lecturer' : 'student'}`
+  )(server, request, reply, userDetails);
+}
+
+function setSessionAndRedirect(endpoint) {
+  return function(server, request, reply, userDetails) {
+    return setSession(server, Object.assign({}, userDetails, {lti_payload: request.payload}), (err, token, options) => {
+      return reply()
+        .header("Authorization", token)
+        .state('token', token, options)
+        .state('cul_is_cookie_accepted', 'true', options)
+        .redirect(endpoint);
+    });
+  }
 }
 
 exports.register.attributes = { pkg: { name: 'lti' } };

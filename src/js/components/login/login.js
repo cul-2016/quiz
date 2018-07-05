@@ -3,24 +3,19 @@ import { Link } from 'react-router';
 import isEmail from 'validator/lib/isEmail';
 import lowerCaseBeforeAt from '../../lib/lowerCaseBeforeAt.js';
 
-const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthenticateUser, handleMigrateUser }) => {
+const Login = ({ login, user, handleEmailChange, handlePasswordChange, location, handleAuthenticateUser, handleMigrateUser }) => {
+    const submit = login.isMerging ? () => handleMigrateUser(login.email, login.password, location.query.module) : () => handleAuthenticateUser(login.email, login.password);
 
     const submitOnEnter = (e) => {
         if (e.keyCode === 13 && isEmail(login.email) && login.password.length !== 0) {
-            handleAuthenticateUser(login.email, login.password);
+            submit();
         }
     };
 
     const handleOnSubmit = () => {
         if (isEmail(login.email) && login.password.length !== 0) {
-            handleAuthenticateUser(login.email, login.password);
+          submit();
         }
-    };
-
-    const handleMerge = () => {
-      if (isEmail(login.email) && login.password.length !== 0) {
-          handleMigrateUser(login.email, login.password);
-      }
     };
 
     return (
@@ -42,6 +37,7 @@ const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthentic
                     onChange={ (e) => handleEmailChange(lowerCaseBeforeAt(e.target.value).trim()) }
                     className="form__input"
                     type="text"
+                    defaultValue={login.isMerging ? user.email : ''}
                     ></input>
                 </div>
                 <div className="form__field f-body">
@@ -60,10 +56,7 @@ const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthentic
                 <div className={ login.email && !isEmail(login.email) ? 'f-body--warning' : 'display-none' }>
                   Invalid Email Address
                 </div>
-                { login.isMerging
-                  ? <button id="ga-signin" onClick={ handleMerge } className="button">Merge Accounts</button>
-                  : <button id="ga-signin" onClick={ handleOnSubmit } className="button">Log in</button>
-                }
+                <button id="ga-signin" onClick={ handleOnSubmit } className="button">{login.isMerging ? 'Merge Accounts' : 'Log In'}</button>
 
                 { !login.isMerging &&
                   <div className="login__links">

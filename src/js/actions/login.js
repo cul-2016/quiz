@@ -54,7 +54,7 @@ export function authenticateUser (email, password) {
     };
 }
 
-export function migrateUser (email, password) {
+export function migrateUser (email, password, moduleId) {
 
     return (dispatch) => {
 
@@ -62,7 +62,8 @@ export function migrateUser (email, password) {
 
         const payload = {
             email,
-            password
+            password,
+            moduleId
         };
 
         request.post(dispatch)('/migrate-user', payload)
@@ -71,18 +72,20 @@ export function migrateUser (email, password) {
                     dispatch(incorrectUserDetails(response.data.message));
                 }
                 else {
+                    let user = response.data;
                     dispatch(authenticateUserSuccess());
-                    dispatch(setUserDetails(response.data));
+                    dispatch(setUserDetails(user));
                     var redirect = store.getState().login.redirectTo
-                    if (redirect) {
+                    if (redirect || moduleId) {
                       dispatch(clearRedirect());
-                      hashHistory.push(redirect);
+                      hashHistory.push(redirect || `/${moduleId}/${user.isLecturer ? 'lecturer' : 'student'}`);
                     } else {
                       hashHistory.push('/dashboard');
                     }
                 }
             })
             .catch((error) => {
+                console.log(error);
                 dispatch(authenticateUserFailure(error));
             });
     };

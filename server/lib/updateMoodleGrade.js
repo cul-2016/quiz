@@ -36,10 +36,14 @@ function updateMoodleGrade (client, user_id, module_id, lti_payload, callback) {
           if (!is_valid || !provider.outcome_service) return false;
         });
 
-        return provider.outcome_service.send_replace_result(parseFloat(response.rows[0].module_percentage), (err, result) => {
-          if (err) console.log(err);
+        if (response.rows[0].module_percentage) {
+          return provider.outcome_service.send_replace_result(parseFloat(response.rows[0].module_percentage), (err, result) => {
+            if (err) console.log(err);
+            return callback(null, response);
+          })
+        } else {
           return callback(null, response);
-        })
+        }
     });
 }
 

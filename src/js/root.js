@@ -61,6 +61,7 @@ const Root = ({ store }) => (
                     path="privacy"
                     component={ PrivacyMessageComponent } />
                 <Route
+                    onEnter={ composeHooks(hooks.fetchUserDetails, hooks.autofillEmail, hooks.mergeUserPage) }
                     path="merge-users"
                     component={ LoginContainer } />
                 <Route

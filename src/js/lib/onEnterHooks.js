@@ -13,7 +13,7 @@ import { getQuizDetailsStudent } from '../actions/review';
 import { getLeaderboard } from '../actions/leaderboard';
 import { getFeedback } from '../actions/feedback';
 import { getStudentHistory } from '../actions/student-history';
-import { clearInitialState } from '../actions/login';
+import { clearInitialState, updateEmail, mergeUser } from '../actions/login';
 import { getSuperAdminDashboard } from '../actions/super-admin';
 import { getGroupAdminDashboard } from '../actions/group-admin';
 import { createMoodleModule } from '../actions/new-module';
@@ -348,4 +348,30 @@ export function fetchGroupAdminDashboard (nextState, replace, callback) {
         store.dispatch(getGroupAdminDashboard());
     }
     callback();
+}
+
+/**
+ * Changes login page to merge user page
+ * Is used as an onEnter hook for React Router
+ * Matches the signature of a React Router hook: https://github.com/reactjs/react-router/blob/master/docs/API.md#onenternextstate-replace-callback
+ * @param {object} nextState - the next router state
+ * @param {function} replace - function to redirect to another path
+ * @param {function} callback - (optional) can be used to make the transition block
+ */
+export function mergeUserPage (nextState, replace, callback) {
+  store.dispatch(mergeUser());
+  callback();
+}
+
+/**
+ * Automatically sets the state of the email input when merging users
+ * Is used as an onEnter hook for React Router
+ * Matches the signature of a React Router hook: https://github.com/reactjs/react-router/blob/master/docs/API.md#onenternextstate-replace-callback
+ * @param {object} nextState - the next router state
+ * @param {function} replace - function to redirect to another path
+ * @param {function} callback - (optional) can be used to make the transition block
+ */
+export function autofillEmail (nextState, replace, callback) {
+  store.dispatch(updateEmail(store.getState().user.email));
+  callback();
 }

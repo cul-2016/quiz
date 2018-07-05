@@ -16,6 +16,8 @@ const validateGroupLecturerByCode = require('../lib/validateGroupLecturerByCode'
 const getUserByMoodleID = require('../lib/getUserByMoodleID');
 const setSession = require('../lib/authentication/setSession');
 const validatePassword = require('../lib/authentication/validatePassword');
+const updateMoodleGrade = require('../lib/updateMoodleGrade.js');
+
 
 
 const jwt = require('jsonwebtoken');
@@ -315,15 +317,18 @@ exports.register = (server, options, next) => {
             validate: {
                 payload: {
                     email: Joi.string().email().required(),
-                    password: Joi.string().required()
+                    password: Joi.string().required(),
+                    moduleId: Joi.string()
                 }
             },
             handler: (request, reply) => {
               const email = request.payload.email;
               const password = request.payload.password;
+              const moduleId = request.payload.moduleId;
               getUserByEmail(pool, email, (error, userDetails) => {
                 /* istanbul ignore if */
                 if (error) {
+                    console.log(error);
                     return reply(error);
                 }
                 else if (userDetails.length !== 1) {
@@ -349,6 +354,7 @@ exports.register = (server, options, next) => {
                     validatePassword(password, hashedPassword, (error, response) => {
                       /* istanbul ignore if */
                       if (error) {
+                        console.log(error);
                         return reply(error);
                       } else if (!response) {
                         return reply({ message: "Please enter a valid email or password" });
@@ -360,16 +366,29 @@ exports.register = (server, options, next) => {
                         jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
                           if (decoded && decoded.user_details && decoded.user_details.moodle_id) {
                             return mergeUsers(pool, userDetails[0].email, decoded.user_details.user_id, decoded.user_details.moodle_id, function(err, res) {
+                              if (err) console.log(err);
                               return getUserByMoodleID(pool, decoded.user_details.moodle_id, function(err, userDetails) {
+                                if (err) console.log(err);
                                 return setSession(server, userDetails[0], (err, token, options) => {
-                                  return reply(userDetails[0])
-                                    .header("Authorization", token)
-                                    .state('token', token, options)
-                                    .state('cul_is_cookie_accepted', 'true', options);
+                                  if (err) console.log(err);
+                                  if (decoded.user_details.lti_payload) {
+                                    return updateMoodleGrade(pool, decoded.user_details.user_id, moduleId, decoded.user_details.lti_payload, (err, res) => {
+                                      return reply(userDetails[0])
+                                        .header("Authorization", token)
+                                        .state('token', token, options)
+                                        .state('cul_is_cookie_accepted', 'true', options);
+                                    });
+                                  } else {
+                                    return reply(userDetails[0])
+                                      .header("Authorization", token)
+                                      .state('token', token, options)
+                                      .state('cul_is_cookie_accepted', 'true', options);
+                                  }
                                 });
                               });
                             });
                           }
+                          return reply().code(500);
                         });
                       }
                     });
