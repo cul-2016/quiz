@@ -17,6 +17,7 @@ import { clearInitialState, updateEmail, mergeUser } from '../actions/login';
 import { getSuperAdminDashboard } from '../actions/super-admin';
 import { getGroupAdminDashboard } from '../actions/group-admin';
 import { createMoodleModule } from '../actions/new-module';
+import { updateInputField } from '../actions/register';
 
 import ReactGA from 'react-ga';
 ReactGA.initialize('UA-113135812-1');
@@ -114,7 +115,7 @@ export function fetchUserDetails (nextState, replace, callback) {
  */
 export function shouldUserRedirect (nextState, replace, callback) {
 
-    if (validCookieExists()) {
+    if (completedCookieExists()) {
         replace('/dashboard');
     }
     callback();
@@ -371,7 +372,20 @@ export function mergeUserPage (nextState, replace, callback) {
  * @param {function} replace - function to redirect to another path
  * @param {function} callback - (optional) can be used to make the transition block
  */
-export function autofillEmail (nextState, replace, callback) {
+export function autofillEmailLogin (nextState, replace, callback) {
   store.dispatch(updateEmail(store.getState().user.email));
+  callback();
+}
+
+/**
+ * Automatically sets the state of the email input when signing up moodle users
+ * Is used as an onEnter hook for React Router
+ * Matches the signature of a React Router hook: https://github.com/reactjs/react-router/blob/master/docs/API.md#onenternextstate-replace-callback
+ * @param {object} nextState - the next router state
+ * @param {function} replace - function to redirect to another path
+ * @param {function} callback - (optional) can be used to make the transition block
+ */
+export function autofillEmailSignup (nextState, replace, callback) {
+  store.dispatch(updateInputField('email', store.getState().user.email));
   callback();
 }

@@ -32,14 +32,24 @@ exports.register = (server, options, next) => {
                 if (userDetails[0]) { // User has Moodle ID
                   if (userDetails[0].merge_required) { // User requires merge
                     return goToRegister(server, request, reply, userDetails[0], true, isLecturer, moduleId);
-                  } else { // User does not require merge
+                  } else if (userDetails[0].username) { // User does not require merge
+                    if (isLecturer) {
+                      return login(server, request, reply, userDetails[0], isLecturer, moduleId);
+                    }
                     return joinModule(pool, moduleId.toUpperCase(), userDetails[0].user_id, (error, result) => {
                       return login(server, request, reply, userDetails[0], isLecturer, moduleId);
                     });
+                  } else {
+                    return goToRegister(server, request, reply, Object.assign({}, userDetails[0], {moodle_id: userId}), false, isLecturer, moduleId);
                   }
                 } else { // User does not have Moodle ID
                   return getUserByEmail(pool, request.payload.lis_person_contact_email_primary, (error, userDetails) => {
                     if (userDetails[0]) { // User email exists in database
+                      if (isLecturer) {
+                        return updateUser(pool, userDetails[0].user_id, {merge_required: true, moodle_id: userId}, function(err, res) {
+                          return goToRegister(server, request, reply, Object.assign({}, userDetails[0], {moodle_id: userId}) , true, isLecturer, moduleId);
+                        });
+                      }
                       return joinModule(pool, moduleId.toUpperCase(), userDetails[0].user_id, (error, result) => {
                         return updateUser(pool, userDetails[0].user_id, {merge_required: true, moodle_id: userId}, function(err, res) {
                           return goToRegister(server, request, reply, Object.assign({}, userDetails[0], {moodle_id: userId}) , true, isLecturer, moduleId);
@@ -48,8 +58,11 @@ exports.register = (server, options, next) => {
                     } else { //User email does not exist in database
                       return saveUser(pool, request.payload.lis_person_contact_email_primary, null, isLecturer, null, null, null, false, false, userId, function(err, res) {
                         return getUserByEmail(pool, request.payload.lis_person_contact_email_primary, (error, userDetails) => {
+                          if (isLecturer) {
+                            return goToRegister(server, request, reply, userDetails[0], false, isLecturer, moduleId);
+                          }
                           return joinModule(pool, moduleId.toUpperCase(), userDetails[0].user_id, (error, result) => {
-                            return login(server, request, reply, userDetails[0], isLecturer, moduleId);
+                            return goToRegister(server, request, reply, userDetails[0], false, isLecturer, moduleId);
                           });
                         });
                       });

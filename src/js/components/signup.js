@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 import isEmail from 'validator/lib/isEmail';
 import lowerCaseBeforeAt from '../lib/lowerCaseBeforeAt.js';
 
-const Signup = ({ register, updateInputField, registeringUser, toggleTcAgreed, location, showTcAgreedError }) => {
+const Signup = ({ register, user, updateInputField, registeringUser, toggleTcAgreed, location, showTcAgreedError }) => {
 
     const isEmailValid = isEmail(register.email);
     const is_lecturer = location.pathname.indexOf('student') === -1;
@@ -45,23 +45,6 @@ const Signup = ({ register, updateInputField, registeringUser, toggleTcAgreed, l
         }
     };
 
-    const handleOnMigrate = () => {
-        if (isEmailValid
-            && register.tcAgreed
-            && (!register.username && is_lecturer ? true : register.username)
-        ) {
-            migrateUser(
-                lowerCaseBeforeAt(register.email).trim(),
-                register.username,
-                is_lecturer,
-                register.group_code,
-                location.query.module
-            );
-        } else if (!register.tcAgreed) {
-            showTcAgreedError();
-        }
-    };
-
     return (
         <div className="login">
 
@@ -78,7 +61,7 @@ const Signup = ({ register, updateInputField, registeringUser, toggleTcAgreed, l
                 <input
                   onKeyDown={ submitOnEnter }
                   className="form__input"
-                  value={ register.email }
+                  defaultValue={ user.email || register.email }
                   onChange={ (e) => updateInputField("email", e.target.value) }
                   type="email" />
                 <span className={ invalidEmailClasses }>This email is invalid</span>
@@ -142,7 +125,7 @@ const Signup = ({ register, updateInputField, registeringUser, toggleTcAgreed, l
                   </span>
                   { register.mergeUsers &&
                     <span className="login__err-message">
-                      This account already exists. Would you like to migrate your account to Moodle?
+                      This account already exists. <Link to="/merge-users">Click here</Link> to migrate your account to Moodle?
                     </span>
                   }
                   { register.error &&
@@ -157,23 +140,15 @@ const Signup = ({ register, updateInputField, registeringUser, toggleTcAgreed, l
                     <span className="login__err-message"> Passwords are not matching </span>
                   }
               </div>
-              { register.mergeUsers ?
-                <button
-                  className="button"
-                  onClick={ handleOnMigrate }
-                  >Migrate Account
-                </button>
-                :
                 <button
                   className="button"
                   onClick={ handleOnSubmit }
                   >Register
                 </button>
-              }
               <div>
                 <p className="f-body">
                   Already have an account?
-                  <Link className="login__link f-body f-body--link" to="/"> Please sign in here </Link>
+                  <Link className="login__link f-body f-body--link" to={is_moodle ? `/merge-users?module=${location.query.module}` : "/"}> Please sign in here </Link>
                   {
                       !is_lecturer &&
                       <Link className="login__link f-body f-body--link" to="/register-lecturer"> or sign up as a lecturer </Link>

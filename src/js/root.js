@@ -61,7 +61,7 @@ const Root = ({ store }) => (
                     path="privacy"
                     component={ PrivacyMessageComponent } />
                 <Route
-                    onEnter={ composeHooks(hooks.fetchUserDetails, hooks.autofillEmail, hooks.mergeUserPage) }
+                    onEnter={ composeHooks(hooks.fetchUserDetails, hooks.autofillEmailLogin, hooks.mergeUserPage) }
                     path="merge-users"
                     component={ LoginContainer } />
                 <Route
@@ -79,6 +79,7 @@ const Root = ({ store }) => (
                     path="register-student"
                     component={ SignupContainer } />
                 <Route
+                    onEnter={ composeHooks(hooks.fetchUserDetails, hooks.autofillEmailSignup) }
                     path="register-moodle-student"
                     component={ SignupContainer } />
                 <Route

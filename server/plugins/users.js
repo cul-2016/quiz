@@ -48,18 +48,13 @@ exports.register = (server, options, next) => {
               const { email, password, is_lecturer, username = '', group_code = null, moduleId } = request.payload;
               jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
                 if (decoded && decoded.user_details && decoded.user_details.moodle_id) {
-                  return getUserByEmail(pool, email, function(err, res) {
-                    if (res[0]) {
-                      return reply({mergeUsers: true})
-                    }
-                    return updateUser(pool, decoded.user_details.user_id, {email, username}, function(err, res) {
-                      return getUserByMoodleID(pool, decoded.user_details.moodle_id, function(err, userDetails) {
-                        return setSession(server, userDetails[0], (err, token, options) => {
-                          return reply(userDetails[0])
-                          .header("Authorization", token)
-                          .state('token', token, options)
-                          .state('cul_is_cookie_accepted', 'true', options);
-                        });
+                  return updateUser(pool, decoded.user_details.user_id, {email, username}, function(err, res) {
+                    return getUserByMoodleID(pool, decoded.user_details.moodle_id, function(err, userDetails) {
+                      return setSession(server, userDetails[0], (err, token, options) => {
+                        return reply(userDetails[0])
+                        .header("Authorization", token)
+                        .state('token', token, options)
+                        .state('cul_is_cookie_accepted', 'true', options);
                       });
                     });
                   })
