@@ -24,7 +24,7 @@ exports.register = (server, options, next) => {
 
           return provider.valid_request(request, (err, isValid) => {
             if (isValid) {
-              var moduleId = request.payload.lis_course_section_sourcedid;
+              var moduleId = request.payload.custom_module;
               var userId = request.payload.user_id;
               var isLecturer = request.payload.roles.indexOf('Instructor') > -1;
 
@@ -32,7 +32,7 @@ exports.register = (server, options, next) => {
                 if (userDetails[0]) { // User has Moodle ID
                   if (userDetails[0].merge_required) { // User requires merge
                     return goToRegister(server, request, reply, userDetails[0], true, isLecturer, moduleId);
-                  } else if (userDetails[0].username) { // User does not require merge
+                  } else if (userDetails[0].username || userDetails[0].is_verified) { // User does not require merge
                     if (isLecturer) {
                       return login(server, request, reply, userDetails[0], isLecturer, moduleId);
                     }

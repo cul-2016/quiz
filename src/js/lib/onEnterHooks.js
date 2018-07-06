@@ -2,6 +2,7 @@ import { store } from '../store';
 import { socketClient } from '../socket';
 import { hashHistory } from 'react-router';
 import validCookieExists from './validCookieExists';
+import completedCookieExists from './completedCookieExists';
 import { getModule, getModuleMembers } from '../actions/module';
 import { getDashboard } from '../actions/dashboard';
 import { getUserDetails } from '../actions/user';
