@@ -240,3 +240,9 @@ The staging version of the app is hosted on basic heroku with no paid options. (
 
 ##### Live
 The live version of the app is hosted on 1 dyno @ $25. We reached a saturation point somewhere between 320 - 500 concurrent users where it started to throw errors. This is approximately a six fold increase.
+
+### LTI Integration
+
+Quodl is available to be used as an external tool in [Moodle](https://moodle.org/) through [LTI](https://www.imsglobal.org/activity/learning-tools-interoperability).
+
+For details on how to set this up, see the [LTI Integration guide](LTI.md)
