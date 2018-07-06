@@ -1,4 +1,8 @@
-### LTI Integration
+### Setting up LTI Integration
+
+Quodl is available to be used as an external tool in [Moodle](https://moodle.org/) through [LTI](https://www.imsglobal.org/activity/learning-tools-interoperability).
+
+To add Quodl as an external tool, follow these steps:
 
 On the module page you are adding Quodl to, click settings (the gear icon in the top right corner), and click 'Turn Editing On'
 <img width="1261" alt="Module page settings" src="https://user-images.githubusercontent.com/8939909/42373632-71993524-810d-11e8-879d-4f04a84e109f.png">
