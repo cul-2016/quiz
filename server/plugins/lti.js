@@ -17,7 +17,12 @@ exports.register = (server, options, next) => {
           auth: false
       },
       handler: (request, reply) => {
+
         if (isLTIRequest(request.payload)) {
+          if (request.headers && request.headers['x-forwarded-proto']) {
+            request.raw.req.protocol = request.headers['x-forwarded-proto'];
+          };
+
           var provider = new lti.Provider(
             request.payload.oauth_consumer_key, process.env.LTI_SECRET
           );
@@ -71,9 +76,11 @@ exports.register = (server, options, next) => {
                 }
               });
             }
+            console.log(err);
             return reply().code(400);
           });
         }
+        console.log("not lti");
         return reply().code(400);
       }
     }

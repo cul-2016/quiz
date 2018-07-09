@@ -35,7 +35,6 @@ ReactGA.initialize('UA-113135812-1');
 export function authenticate (nextState, replace, callback) {
 
     if (!validCookieExists()) {
-
         replace('/');
         callback(false);
     } else if (!store.getState().user.user_id) {
@@ -100,10 +99,15 @@ export function fetchUserDetails (nextState, replace, callback) {
 
     if (!validCookieExists()) {
         replace('/');
+        callback();
     } else {
-        store.dispatch(getUserDetails());
+        store.dispatch(getUserDetails())
+        .then(callback)
+        .catch((error) => {
+            console.log(error);
+        });
+        
     }
-    callback();
 }
 
 /**
