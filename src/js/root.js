@@ -86,6 +86,7 @@ const Root = ({ store }) => (
                     path="register-lecturer"
                     component={ SignupContainer } />
                 <Route
+                    onEnter={ composeHooks(hooks.fetchUserDetails, hooks.autofillEmailSignup) }
                     path="register-moodle-lecturer"
                     component={ SignupContainer } />
                 <Route

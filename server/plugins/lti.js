@@ -17,7 +17,7 @@ exports.register = (server, options, next) => {
           auth: false
       },
       handler: (request, reply) => {
-
+        console.log(request.payload);
         if (isLTIRequest(request.payload)) {
           if (request.headers && request.headers['x-forwarded-proto']) {
             request.raw.req.protocol = request.headers['x-forwarded-proto'];
@@ -32,6 +32,8 @@ exports.register = (server, options, next) => {
               var moduleId = request.payload.custom_module;
               var userId = request.payload.user_id;
               var isLecturer = request.payload.roles.indexOf('Instructor') > -1;
+
+              var moodleEmail = request.payload.lis_person_contact_email_primary.toLowerCase();
 
               return getUserByMoodleID(pool, userId, function(err, userDetails) {
                 if (userDetails[0]) { // User has Moodle ID
@@ -48,7 +50,7 @@ exports.register = (server, options, next) => {
                     return goToRegister(server, request, reply, Object.assign({}, userDetails[0], {moodle_id: userId}), false, isLecturer, moduleId);
                   }
                 } else { // User does not have Moodle ID
-                  return getUserByEmail(pool, request.payload.lis_person_contact_email_primary, (error, userDetails) => {
+                  return getUserByEmail(pool, moodleEmail, (error, userDetails) => {
                     if (userDetails[0]) { // User email exists in database
                       if (isLecturer) {
                         return updateUser(pool, userDetails[0].user_id, {merge_required: true, moodle_id: userId}, function(err, res) {
@@ -61,8 +63,8 @@ exports.register = (server, options, next) => {
                         });
                       });
                     } else { //User email does not exist in database
-                      return saveUser(pool, request.payload.lis_person_contact_email_primary, null, isLecturer, null, null, null, false, false, userId, function(err, res) {
-                        return getUserByEmail(pool, request.payload.lis_person_contact_email_primary, (error, userDetails) => {
+                      return saveUser(pool, moodleEmail, null, isLecturer, null, null, null, false, false, userId, function(err, res) {
+                        return getUserByEmail(pool, moodleEmail, (error, userDetails) => {
                           if (isLecturer) {
                             return goToRegister(server, request, reply, userDetails[0], false, isLecturer, moduleId);
                           }
