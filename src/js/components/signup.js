@@ -60,10 +60,12 @@ const Signup = ({ register, user, updateInputField, registeringUser, toggleTcAgr
                 <label className="form__label">Email address</label>
                 <input
                   onKeyDown={ submitOnEnter }
-                  className="form__input"
+                  className={"form__input" + (is_moodle && " disabled")}
                   defaultValue={ user.email || register.email }
                   onChange={ (e) => updateInputField("email", e.target.value) }
-                  type="email" />
+                  type="email"
+                  disabled={is_moodle}
+                   />
                 <span className={ invalidEmailClasses }>This email is invalid</span>
               </div>
 
