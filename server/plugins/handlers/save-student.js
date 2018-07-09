@@ -12,7 +12,6 @@ const setSession = require('../../lib/authentication/setSession');
 module.exports = function(request, reply, server, pool, redisCli) {
   const { email, password, is_lecturer, username = '', group_code = null, moduleId } = request.payload;
   jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
-
     const verification_code = is_lecturer ? uuid() : null;
     const validEmailMessage = { message: 'Please enter a valid email address' };
 
@@ -23,6 +22,7 @@ module.exports = function(request, reply, server, pool, redisCli) {
           return reply(error);
         }
         if (decoded && decoded.user_details && decoded.user_details.moodle_id) {
+
           return updateUser(pool, decoded.user_details.user_id, {email, username}, function(err, res) {
             return getUserByMoodleID(pool, decoded.user_details.moodle_id, function(err, userDetails) {
               return setSession(server, userDetails[0], (err, token, options) => {
@@ -75,7 +75,7 @@ module.exports = function(request, reply, server, pool, redisCli) {
       if (error) {
         return reply(error);
       }
-      if (userExists.length === 1) {
+      if (userExists.length === 1 && !decoded.user_details) {
         return reply({ message: 'user exists' });
       } else {
         return studentWelcomeEmail({
