@@ -26,16 +26,17 @@ const Signup = ({ register, user, updateInputField, registeringUser, toggleTcAgr
     };
 
     const handleOnSubmit = () => {
+
         if (isEmailValid
             && register.tcAgreed
-            && (register.password || is_moodle)
+            && (register.password)
             && (!register.username && is_lecturer ? true : register.username)
-            && (register.password === register.confirmPassword || is_moodle)
+            && (register.password === register.confirmPassword)
         ) {
             registeringUser(
                 lowerCaseBeforeAt(register.email).trim(),
                 register.username,
-                is_moodle ? '' : register.password,
+                register.password,
                 is_lecturer,
                 register.group_code,
                 location.query.module
@@ -60,7 +61,7 @@ const Signup = ({ register, user, updateInputField, registeringUser, toggleTcAgr
                 <label className="form__label">Email address</label>
                 <input
                   onKeyDown={ submitOnEnter }
-                  className={"form__input" + (is_moodle && " disabled")}
+                  className={"form__input " + (is_moodle ? "disabled" : "")}
                   defaultValue={ user.email || register.email }
                   onChange={ (e) => updateInputField("email", e.target.value) }
                   type="email"
@@ -92,7 +93,6 @@ const Signup = ({ register, user, updateInputField, registeringUser, toggleTcAgr
                       type="code"/>
                   </div>
               }
-              { !is_moodle &&
                 <div>
                   <div className="form__field f-body">
                     <label className="form__label">Choose a password</label>
@@ -114,7 +114,7 @@ const Signup = ({ register, user, updateInputField, registeringUser, toggleTcAgr
                       type="password" />
                   </div>
                 </div>
-              }
+              
               <div className="form__field f-body form__field__tc" >
                   <span
                   className="icon"

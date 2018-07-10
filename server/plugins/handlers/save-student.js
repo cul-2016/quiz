@@ -23,7 +23,7 @@ module.exports = function(request, reply, server, pool, redisCli) {
         }
         if (decoded && decoded.user_details && decoded.user_details.moodle_id) {
 
-          return updateUser(pool, decoded.user_details.user_id, {email, username}, function(err, res) {
+          return updateUser(pool, decoded.user_details.user_id, {email, username, password: hashedPassword}, function(err, res) {
             return getUserByMoodleID(pool, decoded.user_details.moodle_id, function(err, userDetails) {
               return setSession(server, userDetails[0], (err, token, options) => {
                 return reply(userDetails[0])
@@ -75,7 +75,7 @@ module.exports = function(request, reply, server, pool, redisCli) {
       if (error) {
         return reply(error);
       }
-      if (userExists.length === 1 && !decoded.user_details) {
+      if (userExists.length === 1 && !decoded) {
         return reply({ message: 'user exists' });
       } else {
         return studentWelcomeEmail({

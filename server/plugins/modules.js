@@ -208,6 +208,7 @@ exports.register = (server, options, next) => {
                     } else {
                         getModuleForStudent(pool, user_id, module_id, (error, mod) => {
                             const verdict = error || mod;
+                            console.log(error);
                             reply(verdict);
                         });
                     }
