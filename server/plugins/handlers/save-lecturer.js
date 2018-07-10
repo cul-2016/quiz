@@ -6,6 +6,8 @@ const verifyLecturerEmail = require('../../lib/email/lecturer-verification-email
 const getUserByEmail = require('../../lib/getUserByEmail.js');
 const updateUser = require('../../lib/updateUser.js');
 const validateGroupLecturerByCode = require('../../lib/validateGroupLecturerByCode');
+const getUserByMoodleID = require('../../lib/getUserByMoodleID');
+
 
 module.exports = function(request, reply, server, pool, redisCli) {
   const { email, password, is_lecturer, username = '', group_code = null, moduleId } = request.payload;
@@ -21,9 +23,20 @@ module.exports = function(request, reply, server, pool, redisCli) {
           return reply(error);
         }
         if (decoded && decoded.user_details && decoded.user_details.moodle_id) {
-          updateUser(pool, decoded.user_details.user_id, {email, username, password: hashedPassword, group_code, verification_code, is_group_admin, group_admin_has_paid}, function(err, res) {
-            if (err) {
-              return reply(err);
+          return getUserByMoodleID(pool, decoded.user_details.moodle_id, function(err, userDetails) {
+            if (userDetails[0]) {
+              updateUser(pool, userDetails[0].user_id, {email, username, password: hashedPassword, group_code, verification_code, is_group_admin, group_admin_has_paid}, function(err, res) {
+                if (err) {
+                  return reply(err);
+                }
+              });
+            } else {
+              saveUser(pool, email, hashedPassword, is_lecturer, username, group_code, verification_code, is_group_admin, group_admin_has_paid, null, (error, result) => { // eslint-disable-line no-unused-vars
+                /* istanbul ignore if */
+                if (error) {
+                  return reply(error);
+                }
+              });
             }
           });
         } else {

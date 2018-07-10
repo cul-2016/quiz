@@ -112,7 +112,7 @@ const Root = ({ store }) => (
                     path="app-loading"
                     component={ AppLoadingContainer } />
                 <Route
-                    onEnter={ composeHooks(hooks.authenticate, hooks.checkUserRole, hooks.fetchModule, hooks.checkModuleOwner) }
+                    onEnter={ composeHooks(hooks.fetchUserDetails, hooks.authenticate, hooks.checkUserRole, hooks.fetchModule, hooks.checkModuleOwner) }
                     path=":module_id/lecturer"
                     component={ ModuleContainer } />
                 <Route

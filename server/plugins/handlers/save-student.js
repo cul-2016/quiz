@@ -22,55 +22,26 @@ module.exports = function(request, reply, server, pool, redisCli) {
           return reply(error);
         }
         if (decoded && decoded.user_details && decoded.user_details.moodle_id) {
-
           return updateUser(pool, decoded.user_details.user_id, {email, username, password: hashedPassword}, function(err, res) {
             return getUserByMoodleID(pool, decoded.user_details.moodle_id, function(err, userDetails) {
-              return setSession(server, userDetails[0], (err, token, options) => {
-                return reply(userDetails[0])
-                .header("Authorization", token)
-                .state('token', token, options)
-                .state('cul_is_cookie_accepted', 'true', options);
-              });
+              if (userDetails[0]) {
+                return setSession(server, userDetails[0], (err, token, options) => {
+                  return reply(userDetails[0])
+                  .header("Authorization", token)
+                  .state('token', token, options)
+                  .state('cul_is_cookie_accepted', 'true', options);
+                });
+              } else {
+                return save(reply, pool, email, hashedPassword, is_lecturer, username, group_code, verification_code, is_group_admin, group_admin_has_paid, redisCli);
+              }
             });
           })
-        } else {
-          return saveUser(pool, email, hashedPassword, is_lecturer, username, group_code, verification_code, is_group_admin, group_admin_has_paid, null, (error, result) => { // eslint-disable-line no-unused-vars
-            /* istanbul ignore if */
-            if (error) {
-              return reply(error);
-            }
-            else {
-              return getUserByEmail(pool, email, (error, userDetails) => {
-                /* istanbul ignore if */
-                if (error) {
-                  return reply(error);
-                }
-                else {
-                  delete userDetails[0].password;
-
-                  const uid = uuid();
-
-                  const twoWeeks = 60 * 60 * 24 * 14;
-                  redisCli.setAsync(userDetails[0].user_id.toString(), uid, 'EX', twoWeeks)
-                  .then(() => {
-                    const userObject = { user_details: userDetails[0], uid: uid };
-                    const token = jwt.sign(userObject, process.env.JWT_SECRET);
-                    const options = { path: "/", isSecure: false, isHttpOnly: false };
-                    reply(userDetails[0])
-                    .header("Authorization", token)
-                    .state('token', token, options)
-                    .state('cul_is_cookie_accepted', 'true', options);
-                  })
-                  .catch((err) => reply(err));
-                }
-              });
-            }
-          });
         }
+        return save(reply, pool, email, hashedPassword, is_lecturer, username, group_code, verification_code, is_group_admin, group_admin_has_paid, redisCli);
       });
     };
 
-    getUserByEmail(pool, email, (error, userExists) => {
+    return getUserByEmail(pool, email, (error, userExists) => {
       /* istanbul ignore if */
       if (error) {
         return reply(error);
@@ -92,4 +63,39 @@ module.exports = function(request, reply, server, pool, redisCli) {
       }
     });
   })
+}
+
+function save(reply, pool, email, hashedPassword, is_lecturer, username, group_code, verification_code, is_group_admin, group_admin_has_paid, redisCli) {
+  return saveUser(pool, email, hashedPassword, is_lecturer, username, group_code, verification_code, is_group_admin, group_admin_has_paid, null, (error, result) => { // eslint-disable-line no-unused-vars
+    /* istanbul ignore if */
+    if (error) {
+      return reply(error);
+    }
+    else {
+      return getUserByEmail(pool, email, (error, userDetails) => {
+        /* istanbul ignore if */
+        if (error) {
+          return reply(error);
+        }
+        else {
+          delete userDetails[0].password;
+
+          const uid = uuid();
+
+          const twoWeeks = 60 * 60 * 24 * 14;
+          redisCli.setAsync(userDetails[0].user_id.toString(), uid, 'EX', twoWeeks)
+          .then(() => {
+            const userObject = { user_details: userDetails[0], uid: uid };
+            const token = jwt.sign(userObject, process.env.JWT_SECRET);
+            const options = { path: "/", isSecure: false, isHttpOnly: false };
+            return reply(userDetails[0])
+            .header("Authorization", token)
+            .state('token', token, options)
+            .state('cul_is_cookie_accepted', 'true', options);
+          })
+          .catch((err) => reply(err));
+        }
+      });
+    }
+  });
 }
