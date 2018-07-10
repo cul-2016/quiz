@@ -17,7 +17,6 @@ exports.register = (server, options, next) => {
           auth: false
       },
       handler: (request, reply) => {
-        console.log(request.payload);
         if (isLTIRequest(request.payload)) {
           if (request.headers && request.headers['x-forwarded-proto']) {
             request.raw.req.protocol = request.headers['x-forwarded-proto'];
@@ -82,7 +81,6 @@ exports.register = (server, options, next) => {
             return reply().code(400);
           });
         }
-        console.log("not lti");
         return reply().code(400);
       }
     }

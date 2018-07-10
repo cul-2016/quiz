@@ -25,7 +25,7 @@ const Signup = ({ register, user, updateInputField, registeringUser, toggleTcAgr
         }
     };
 
-    const handleOnSubmit = () => {
+    const handleOnSubmit = () => {        
 
         if (isEmailValid
             && register.tcAgreed

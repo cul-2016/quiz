@@ -119,8 +119,8 @@ export function fetchUserDetails (nextState, replace, callback) {
  * @param {function} callback - (optional) can be used to make the transition block
  */
 export function shouldUserRedirect (nextState, replace, callback) {
-
     if (completedCookieExists()) {
+
         replace('/dashboard');
     }
     callback();
