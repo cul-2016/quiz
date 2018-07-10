@@ -62,7 +62,7 @@ exports.register = (server, options, next) => {
                         });
                       });
                     } else { //User email does not exist in database
-                      return saveUser(pool, moodleEmail, null, isLecturer, null, null, null, false, false, userId, function(err, res) {
+                      return saveUser(pool, moodleEmail, null, isLecturer, null, null, null, false, null, userId, function(err, res) {
                         return getUserByEmail(pool, moodleEmail, (error, userDetails) => {
                           if (isLecturer) {
                             return goToRegister(server, request, reply, userDetails[0], false, isLecturer, moduleId);

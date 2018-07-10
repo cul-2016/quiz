@@ -21,7 +21,7 @@ module.exports = function(request, reply, server, pool, redisCli) {
           return reply(error);
         }
         if (decoded && decoded.user_details && decoded.user_details.moodle_id) {
-          updateUser(pool, decoded.user_details.user_id, {email, username, password: hashedPassword, group_code, verification_code}, function(err, res) {
+          updateUser(pool, decoded.user_details.user_id, {email, username, password: hashedPassword, group_code, verification_code, is_group_admin, group_admin_has_paid}, function(err, res) {
             if (err) {
               return reply(err);
             }
@@ -38,7 +38,6 @@ module.exports = function(request, reply, server, pool, redisCli) {
     };
 
     return getUserByEmail(pool, email, (error, userExists) => {
-      console.log(error, email, userExists);
       /* istanbul ignore if */
       if (error) {
         return reply(error);
