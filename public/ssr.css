@@ -1,0 +1,34 @@
+/*! CSS Used from: Embedded */
+body,div,p,a,img,ul,li{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;}
+ul{list-style:none;}
+a{text-decoration:none;}
+body{height:100%;font-size:1rem;margin:auto;}
+.button{display:inline-block;padding:0.5rem 2rem;-webkit-appearance:none;-moz-appearance:none;appearance:none;border-radius:2.5rem;font-weight:400;font-size:1rem;line-height:2;letter-spacing:0.4px;text-decoration:none;text-transform:capitalize;text-align:center;color:#FDFDFD;background-color:#2574A9;border:1px solid #FDFDFD;color:#FDFDFD;-moz-transition:all .2s ease-in;-o-transition:all .2s ease-in;-webkit-transition:all .2s ease-in;transition:all .2s ease-in;cursor:pointer;}
+.button:active{box-shadow:none;}
+.button:hover{-moz-transition:all .2s ease-in;-o-transition:all .2s ease-in;-webkit-transition:all .2s ease-in;transition:all .2s ease-in;background-color:#FDFDFD;color:#2574A9;border:1px solid #2574A9;}
+.app{background-color:#F2F2F2;background-image:url(https://5e7c1bd9.ngrok.io/331ef7531bcacc29443e26947f07ff77.svg);min-height:100vh;}
+.f-title{font-size:1.5rem;font-weight:300;line-height:1.25;color:#2574A9;}
+.f-title--primary{color:#011627;font-weight:700;}
+.f-label{font-size:0.875rem;line-height:1.25;letter-spacing:1px;color:#2574A9;font-weight:bold;}
+.f-small-label{font-size:0.625rem;font-weight:bold;line-height:1;color:#2574A9;text-align:center;}
+.navbar{width:100%;background-color:#2574A9;font-size:1rem;height:5rem;}
+.navbar__inner{max-width:73rem;margin:auto;}
+.navbar__container{display:table;table-layout:fixed;height:5rem;width:100%;}
+.navbar__item{display:table-cell;vertical-align:middle;}
+.navbar__item--home{width:5rem;}
+.navbar__item--right{padding-right:1rem;text-align:right;}
+.navbar__img{display:block;max-width:100%;}
+.navbar .pointer{cursor:pointer;}
+@media screen and (max-width: 768px){
+.navbar__item--home{padding-left:1rem;}
+.navbar__item--right{padding-right:1rem;text-align:right;}
+}
+.quiz{background-color:#FDFDFD;text-align:center;}
+.quiz-results-title{margin-bottom:1rem;}
+.quizzes-container{padding-top:1rem;background-color:#FDFDFD;}
+.student-module{text-align:center;height:100vh;background-color:rgba(253, 253, 253, 0.5);padding-top:2rem;}
+.student-module .my-performance-button{color:#2574A9;text-decoration:underline;font-weight:700;}
+.student-module .trophy-container{margin-bottom:1rem;margin:auto;max-width:40rem;}
+.student-module .trophyItem{max-width:9rem;margin:0.5rem;display:inline-block;}
+.student-module .trophyItem--trophy{max-width:9rem;display:inline-block;}
+.student-module .quizzes-container{border-top:3px solid #2574A9;margin-top:1rem;}

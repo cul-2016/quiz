@@ -5,6 +5,12 @@ const saveUser = require('../lib/authentication/saveUser.js');
 const joinModule = require('../lib/joinModule.js');
 const getUserByEmail = require('../lib/getUserByEmail');
 const updateUser = require('../lib/updateUser.js');
+import { renderToString } from 'react-dom/server';
+import LtiStudentModule from '../../src/js/components/student-module/lti-module.js';
+const getModuleForStudent = require('../lib/getModuleForStudent.js');
+const getStudentHistory = require('../lib/getStudentHistory.js');
+const template = require('../../public/template.js');
+
 
 exports.register = (server, options, next) => {
   const { pool } = server.app;
@@ -33,11 +39,32 @@ exports.register = (server, options, next) => {
               var isLecturer = request.payload.roles.indexOf('Instructor') > -1;
 
               var moodleEmail = request.payload.lis_person_contact_email_primary.toLowerCase();
+              let content;
 
               return getUserByMoodleID(pool, userId, function (err, userDetails) {
                 if (userDetails[0]) { // User has Moodle ID
+                  if (request.params.resource === "performance") {
+                    return getModuleForStudent(pool, userDetails[0].user_id, moduleId, (error, mod) => {
+                      if (error) {
+                        content = template("Performance", "Sorry, it looks like you haven't signed up to this module yet. Please go back to Moodle and log in to Quodl.");
+                      }
+
+                      getStudentHistory(pool, userDetails[0].user_id, moduleId, (error, history) => {
+                        if (error) {
+                          content = template("Performance", "Sorry, it looks like you haven't signed up to this module yet. Please go back to Moodle and log in to Quodl.");
+                        } else {
+                          content = template("Performance", renderToString(LtiStudentModule({ module: mod, history: history })));
+                        }
+                        return reply(content);
+                      });
+                    });
+                  }
                   return handleExistingMoodleUser(userDetails, server, request, reply, isLecturer, moduleId, userId, pool);
                 } else { // User does not have Moodle ID
+                  if (request.params.resource === "performance") {
+                    content = template("Performance", "Sorry, it looks like you haven't signed up to Quodl yet. Please go back to Moodle and sign up to Quodl.");
+                    return reply(content);
+                  }
                   return handleNewMoodleUser(userDetails, server, request, reply, isLecturer, moduleId, userId, pool, moodleEmail);
                 }
               });
