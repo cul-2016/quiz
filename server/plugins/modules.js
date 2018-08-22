@@ -16,6 +16,7 @@ const getParticipationRate = require('../lib/getParticipationRate');
 const getStudentHistory = require('../lib/getStudentHistory.js');
 const generateShareId = require('../lib/generateShareId.js');
 const submitImportCode = require('../lib/submitImportCode.js').submitImportCode;
+const createCategory = require('../lib/forum/createCategory.js');
 
 const jwt = require('jsonwebtoken');
 const Joi = require('joi');
@@ -256,17 +257,27 @@ exports.register = (server, options, next) => {
                 }
             },
             handler: (request, reply) => {
-                jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
-                    /* istanbul ignore if */
-                    if (error) { return reply(error); }
-                    const { user_id } = decoded.user_details;
-                    const { module_id, name, medals, trophies, uses_trophies } = request.payload;
+              jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
+                /* istanbul ignore if */
+                if (error) { return reply(error); }
+                const { user_id } = decoded.user_details;
+                const { module_id, name, medals, trophies, uses_trophies } = request.payload;
 
-                    saveModule(pool, module_id, user_id, name, medals, uses_trophies, trophies, (error, result) => {
-                        const verdict = error || result;
-                        reply(verdict);
-                    });
+                return createCategory(name, function (err, res) {
+                  let forum_cid;
+
+                  if (err) {
+                    console.log(err);
+                  } else {
+                    forum_cid = res.data.payload.cid;
+                  }
+
+                  return saveModule(pool, module_id, user_id, name, medals, uses_trophies, trophies, forum_cid, (error, result) => {
+                    const verdict = error || result;
+                    return reply(verdict);
+                  });
                 });
+              });
             }
         },
         {
