@@ -16,7 +16,7 @@ const getParticipationRate = require('../lib/getParticipationRate');
 const getStudentHistory = require('../lib/getStudentHistory.js');
 const generateShareId = require('../lib/generateShareId.js');
 const submitImportCode = require('../lib/submitImportCode.js').submitImportCode;
-const createCategory = require('../lib/forum/createCategory.js');
+const forum = require('../lib/forum');
 
 const jwt = require('jsonwebtoken');
 const Joi = require('joi');
@@ -260,10 +260,10 @@ exports.register = (server, options, next) => {
               jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
                 /* istanbul ignore if */
                 if (error) { return reply(error); }
-                const { user_id } = decoded.user_details;
+                const { user_id, forum_id } = decoded.user_details;
                 const { module_id, name, medals, trophies, uses_trophies } = request.payload;
 
-                return createCategory(name, function (err, res) {
+                return forum.createCategory(name, forum_id, function (err, res) {
                   let forum_cid;
 
                   if (err) {
