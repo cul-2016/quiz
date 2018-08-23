@@ -19,7 +19,13 @@ function joinModule (client, module_id, user_id, callback) {
             console.error(error);
             return callback(error);
         }
-        return callback(null, response);
+        query(client, queries.getModuleBasics, [module_id], (error, response) => {
+          if (error) {
+              console.error(error);
+              return callback(error);
+          }
+          return callback(null, response);
+        })
     });
 }
 

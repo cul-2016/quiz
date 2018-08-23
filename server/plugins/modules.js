@@ -17,6 +17,7 @@ const getStudentHistory = require('../lib/getStudentHistory.js');
 const generateShareId = require('../lib/generateShareId.js');
 const submitImportCode = require('../lib/submitImportCode.js').submitImportCode;
 const forum = require('../lib/forum');
+const defaultPrivileges = require('../lib/forum/defaultPrivileges.js');
 
 const jwt = require('jsonwebtoken');
 const Joi = require('joi');
@@ -296,13 +297,15 @@ exports.register = (server, options, next) => {
                     if (error) { return reply(error); }
 
                     const { module_id } = request.query;
-                    const { user_id } = decoded.user_details;
+                    const { user_id, forum_id } = decoded.user_details;
                     if (module_id !== undefined) {
 
                         joinModule(pool, module_id.toUpperCase(), user_id, (error, result) => {
-
                             if (!error) {
+                              return forum.addPrivileges(result.rows[0].forum_cid, [forum_id], defaultPrivileges.user, function (err, res) {
+                                if (err) console.log(err);
                                 reply(result);
+                              })
                             } else if (error.detail) {
                                 reply({ message: 'Module does not exist' });
                             } else {

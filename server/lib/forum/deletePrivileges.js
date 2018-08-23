@@ -6,6 +6,7 @@ module.exports = function (axios, cid, users, privileges, cb) {
     }
   })
   .then((res) => {
+    res.data.payload.cid = cid;
     if (cb) {
       return cb(null, res);
     }
