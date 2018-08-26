@@ -16,7 +16,6 @@ exports.register = (server, options, next) => {
       },
       handler: (request, reply) => {
         if (isLTIRequest(request.payload)) {
-
           var provider = new lti.Provider(
             request.payload.oauth_consumer_key, process.env.LTI_SECRET
           );
@@ -31,7 +30,7 @@ exports.register = (server, options, next) => {
                 if (err) return reply(err);
 
                 if (userDetails.length) {
-                  return setSession(server, userDetails[0], (err, token, options) => {
+                  return setSession(server, Object.assign({}, userDetails[0], {lti_payload: request.payload}), (err, token, options) => {
                     return reply()
                       .header("Authorization", token)
                       .state('token', token, options)
@@ -46,7 +45,7 @@ exports.register = (server, options, next) => {
                   return getUserByMoodleID(pool, userId, function(err, userDetails) {
                     if (!isLecturer) {
                       return joinModule(pool, moduleId.toUpperCase(), userDetails[0].user_id, (error, result) => {
-                        return setSession(server, userDetails[0], (err, token, options) => {
+                        return setSession(server, Object.assign({}, userDetails[0], {lti_payload: request.payload}), (err, token, options) => {
                           return reply()
                           .header("Authorization", token)
                           .state('token', token, options)
@@ -55,7 +54,7 @@ exports.register = (server, options, next) => {
                         });
                       });
                     }
-                    return setSession(server, userDetails[0], (err, token, options) => {
+                    return setSession(server, Object.assign({}, userDetails[0], {lti_payload: request.payload}), (err, token, options) => {
                       return reply()
                       .header("Authorization", token)
                       .state('token', token, options)
@@ -63,7 +62,7 @@ exports.register = (server, options, next) => {
                       .redirect(`/#/register-moodle-${isLecturer ? 'lecturer' : 'student'}?module=${moduleId}`);
                     });
                   });
-                })
+                });
               });
             }
             return reply().code(400);
