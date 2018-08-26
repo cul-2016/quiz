@@ -4,7 +4,7 @@ import * as actionsTypes from '../actions/module';
 export const initialState = {
     module_id: undefined,
     name: undefined,
-    medals: undefined,
+    medals: {},
     uses_trophies: undefined,
     trophies: undefined,
     num_enrolled: undefined,

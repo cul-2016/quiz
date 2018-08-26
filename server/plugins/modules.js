@@ -28,6 +28,7 @@ exports.register = (server, options, next) => {
             method: 'GET',
             path: '/get-leaderboard',
             config: {
+              auth: false,
                 validate: {
                     query: {
                         module_id: Joi.string().required()
@@ -181,6 +182,9 @@ exports.register = (server, options, next) => {
             method: 'GET',
             path: '/get-module',
             config: {
+                auth: {
+                  mode: 'try'
+                },
                 validate: {
                     query: {
                         module_id: Joi.string().required(),

@@ -28,11 +28,11 @@ const Leaderboard = ({ mainData, medalScores, quiz_id_list, uses_trophies, medal
 
 
         userScores.map((quiz) => {
-            if (quiz.percentage_score > 0 && quiz.percentage_score <= medalCondition[0]) {
+            if (quiz.percentage_score > 0 && medalCondition && quiz.percentage_score <= medalCondition[0]) {
                 bronzeTotal += 1;
-            } else if (quiz.percentage_score > medalCondition[0] && quiz.percentage_score <= medalCondition[1]) {
+            } else if (medalCondition && quiz.percentage_score > medalCondition[0] && quiz.percentage_score <= medalCondition[1]) {
                 silverTotal += 1;
-            } else if (quiz.percentage_score > medalCondition[1]) {
+            } else if (medalCondition && quiz.percentage_score > medalCondition[1]) {
                 goldTotal += 1;
             }
         });
@@ -60,7 +60,7 @@ const Leaderboard = ({ mainData, medalScores, quiz_id_list, uses_trophies, medal
 
     return (
         <div className="leaderboard">
-            <ul className="navbar navbar--invisible">
+            {window === top && <ul className="navbar navbar--invisible">
                 <div className="navbar__inner">
                     <li className="navbar__item navbar__item--onlyone">
                         <Link to={ `${params.module_id}/lecturer` } className="f-body navbar__link">
@@ -68,8 +68,8 @@ const Leaderboard = ({ mainData, medalScores, quiz_id_list, uses_trophies, medal
                         </Link>
                     </li>
                 </div>
-            </ul>
-           <div className="content__body">
+            </ul>}
+           <div className={"content__body" + (window == top ? "" : " no-margin-top") }>
                 <div className="leaderboard__image"></div>
                 { mappedLeaderboard.length > 0 ?
                 <table className="leaderboard__table">

@@ -270,12 +270,9 @@ export function fetchQuizDetailsStudent (nextState, replace, callback) {
  */
 
 export function fetchLeaderboard (nextState, replace, callback) {
+    const module_id = nextState.params.module_id;
+    store.dispatch(getLeaderboard(module_id));
 
-    if (validCookieExists()) {
-
-        const module_id = nextState.params.module_id;
-        store.dispatch(getLeaderboard(module_id));
-    }
     callback();
 }
 
