@@ -20,7 +20,7 @@ class Details extends React.Component {
 
     render () {
 
-        let { module_id, moduleIDExists, isValidatingModuleID, module_id_length, handleCodeInputChange, handleInputChange } = this.props;
+        let { module_id, moduleIDExists, isValidatingModuleID, module_id_length, handleCodeInputChange, handleInputChange, isMoodleModule } = this.props;
 
         const iconClasses = classnames("fa", {
             "fa-warning": moduleIDExists === true && !isValidatingModuleID && module_id_length === REQUIRED_ID_LENGTH,
@@ -50,7 +50,11 @@ class Details extends React.Component {
                 <br />
                 <label className="f-label f-label--50 form__label">Module Code (4 Letters)</label>
                 <p className="control has-icon has-icon-right">
-                    <input
+                    {isMoodleModule
+                      ? <div className="form__input form__input--new-module form__input--new-module--code">
+                          { module_id }
+                        </div>
+                      : <input
                         className="form__input form__input--new-module form__input--new-module--code"
                         placeholder="CODE"
                         value={ module_id }
@@ -58,6 +62,7 @@ class Details extends React.Component {
                         type="text"
                         maxLength="4"
                         onChange={ (e) => handleCodeInputChange('module_id', e.target.value) } />
+                    }
                     <i className={ iconClasses } />
                     <span className={ moduleIDHelpClasses }> This code already exists.  Please choose another.</span>
                 </p>

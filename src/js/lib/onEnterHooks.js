@@ -73,12 +73,9 @@ export function checkUserRole (nextState, replace, callback) {
  * @param {function} callback - (optional) can be used to make the transition block
  */
 export function checkModuleOwner (nextState, replace, callback) {
-    const module_id = nextState.params.module_id;
-    const modulesArray = store.getState().dashboard.data;
+    const state = store.getState();
+    const lecturerOwnsModule = state.module.owner === state.user.user_id;
 
-    const lecturerOwnsModule = modulesArray.some((module) => {
-        return module.module_id === module_id;
-    });
     if (!lecturerOwnsModule) {
         replace('/404');
         callback(false);
@@ -134,19 +131,17 @@ export function fetchModule (nextState, replace, callback) {
     let module_id = nextState.params.module_id;
     let is_lecturer = store.getState().user.is_lecturer;
 
-    if (validCookieExists()) {
-
-        store.dispatch(getModule(module_id, is_lecturer));
-
-        if (is_lecturer === false) {
-            if (nextState.location.pathname.includes('performance')) {
+        store.dispatch(getModule(module_id, is_lecturer))
+          .then(() => {
+            if (is_lecturer === false) {
+              if (nextState.location.pathname.includes('performance')) {
                 store.dispatch(getFeedback(module_id));
-            } else {
+              } else {
                 store.dispatch(getStudentHistory(undefined, module_id));
+              }
             }
-        }
-    }
-    callback();
+            callback();
+          })
 }
 
 /**

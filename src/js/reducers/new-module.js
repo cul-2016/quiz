@@ -20,7 +20,8 @@ const initialState = {
     moduleIDExists: undefined,
     validationProblem: false,
     isValidatingModuleID: false,
-    isSavingModule: undefined
+    isSavingModule: undefined,
+    isMoodleModule: false
 };
 
 export default function newModule (state = initialState, action) {
@@ -60,6 +61,12 @@ export default function newModule (state = initialState, action) {
         return update(state, {
             isSavingModule: { $set: false },
             error: { $set: action.error }
+        });
+
+    case actionTypes.MOODLE_MODULE:
+        return update(state, {
+          isMoodleModule: { $set: true },
+          module_id: { $set: action.moduleId }
         });
 
     default:

@@ -45,12 +45,14 @@ export const getModule = (module_id, is_lecturer) => {
 
         dispatch(getModuleRequest());
 
-        request.get(dispatch)(`get-module?is_lecturer=${is_lecturer}&module_id=${module_id}`)
+        return request.get(dispatch)(`get-module?is_lecturer=${is_lecturer}&module_id=${module_id}`)
             .then((response) => {
                 dispatch(getModuleSuccess(is_lecturer, response.data));
+                return Promise.resolve();
             })
             .catch((error) => {
                 dispatch(getModuleFailure(error));
+                return Promise.reject();
             });
     };
 };

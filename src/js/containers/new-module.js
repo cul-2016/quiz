@@ -12,6 +12,7 @@ const mapStateToProps = (state) => ({
     module_id: state.newModule.module_id,
     name: state.newModule.name,
     username: state.user.username,
+    isMoodleModule: state.newModule.isMoodleModule
 });
 
 const mapDispatchToProps = (dispatch) => ({

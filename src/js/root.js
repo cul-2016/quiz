@@ -61,6 +61,9 @@ const Root = ({ store }) => (
                     path="privacy"
                     component={ PrivacyMessageComponent } />
                 <Route
+                    path="merge-users"
+                    component={ LoginContainer } />
+                <Route
                     onEnter={ hooks.clearState }
                     path="request-reset-password"
                     component={ RequestResetPasswordContainer } />
@@ -75,7 +78,13 @@ const Root = ({ store }) => (
                     path="register-student"
                     component={ SignupContainer } />
                 <Route
+                    path="register-moodle-student"
+                    component={ SignupContainer } />
+                <Route
                     path="register-lecturer"
+                    component={ SignupContainer } />
+                <Route
+                    path="register-moodle-lecturer"
                     component={ SignupContainer } />
                 <Route
                     path="please-verify"
