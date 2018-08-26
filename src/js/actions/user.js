@@ -30,12 +30,14 @@ export const getUserDetails = () =>(dispatch) => {
 
     dispatch(getUserDetailsRequest());
 
-    request.get(dispatch)(`/get-user-details`)
+    return request.get(dispatch)(`/get-user-details`)
     .then((response) => {
         dispatch(getUserDetailsSuccess(response.data));
+        return Promise.resolve();
     })
     .catch((error) => {
         dispatch(getUserDetailsFailure(error));
+        return Promise.reject(error);
     });
 
 };

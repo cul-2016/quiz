@@ -182,9 +182,6 @@ exports.register = (server, options, next) => {
             method: 'GET',
             path: '/get-module',
             config: {
-                auth: {
-                  mode: 'try'
-                },
                 validate: {
                     query: {
                         module_id: Joi.string().required(),
@@ -195,7 +192,10 @@ exports.register = (server, options, next) => {
             handler: (request, reply) => {
                 jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
                     /* istanbul ignore if */
-                    if (error) { return reply(error); }
+                    if (error) {
+                      console.log(error);
+                      return reply(error);
+                    }
 
                     const { module_id } = request.query;
                     const { is_lecturer, user_id } = decoded.user_details;
@@ -208,6 +208,7 @@ exports.register = (server, options, next) => {
                     } else {
                         getModuleForStudent(pool, user_id, module_id, (error, mod) => {
                             const verdict = error || mod;
+                            console.log(error);
                             reply(verdict);
                         });
                     }

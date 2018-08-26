@@ -61,6 +61,7 @@ const Root = ({ store }) => (
                     path="privacy"
                     component={ PrivacyMessageComponent } />
                 <Route
+                    onEnter={ composeHooks(hooks.fetchUserDetails, hooks.autofillEmailLogin, hooks.mergeUserPage) }
                     path="merge-users"
                     component={ LoginContainer } />
                 <Route
@@ -78,12 +79,14 @@ const Root = ({ store }) => (
                     path="register-student"
                     component={ SignupContainer } />
                 <Route
+                    onEnter={ composeHooks(hooks.fetchUserDetails, hooks.autofillEmailSignup) }
                     path="register-moodle-student"
                     component={ SignupContainer } />
                 <Route
                     path="register-lecturer"
                     component={ SignupContainer } />
                 <Route
+                    onEnter={ composeHooks(hooks.fetchUserDetails, hooks.autofillEmailSignup) }
                     path="register-moodle-lecturer"
                     component={ SignupContainer } />
                 <Route
@@ -109,11 +112,11 @@ const Root = ({ store }) => (
                     path="app-loading"
                     component={ AppLoadingContainer } />
                 <Route
-                    onEnter={ composeHooks(hooks.authenticate, hooks.checkUserRole, hooks.fetchModule, hooks.checkModuleOwner) }
+                    onEnter={ composeHooks(hooks.fetchUserDetails, hooks.authenticate, hooks.checkUserRole, hooks.fetchModule, hooks.checkModuleOwner) }
                     path=":module_id/lecturer"
                     component={ ModuleContainer } />
                 <Route
-                    onEnter={ composeHooks(hooks.authenticate, hooks.fetchModule) }
+                    onEnter={ composeHooks(hooks.fetchUserDetails, hooks.authenticate, hooks.fetchModule) }
                     path=":module_id/student"
                     component={ StudentModuleContainer } />
                 <Route
@@ -185,7 +188,7 @@ const Root = ({ store }) => (
                     path="/super-admin/client"
                     component={ SuperAdminManageClientContainer } />
                 <Route
-                    onEnter={ composeHooks(hooks.fetchModule), composeHooks(hooks.fetchLeaderboard) }
+                    onEnter={ hooks.fetchLeaderboard }
                     path=":module_id/leaderboard"
                     component={ LeaderboardContainer } />
                 <Route

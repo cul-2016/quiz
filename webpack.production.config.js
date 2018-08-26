@@ -40,5 +40,9 @@ module.exports = {
                 NODE_ENV: JSON.stringify("production")
             }
         })
-    ]
+    ],
+    node: {
+      net: 'empty',
+      dns: 'empty'
+    }
 };

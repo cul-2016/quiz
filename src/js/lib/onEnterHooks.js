@@ -1,6 +1,8 @@
 import { store } from '../store';
 import { socketClient } from '../socket';
+import { hashHistory } from 'react-router';
 import validCookieExists from './validCookieExists';
+import completedCookieExists from './completedCookieExists';
 import { getModule, getModuleMembers } from '../actions/module';
 import { getDashboard } from '../actions/dashboard';
 import { getUserDetails } from '../actions/user';
@@ -12,9 +14,11 @@ import { getQuizDetailsStudent } from '../actions/review';
 import { getLeaderboard } from '../actions/leaderboard';
 import { getFeedback } from '../actions/feedback';
 import { getStudentHistory } from '../actions/student-history';
-import { clearInitialState } from '../actions/login';
+import { clearInitialState, updateEmail, mergeUser } from '../actions/login';
 import { getSuperAdminDashboard } from '../actions/super-admin';
 import { getGroupAdminDashboard } from '../actions/group-admin';
+import { createMoodleModule } from '../actions/new-module';
+import { updateInputField } from '../actions/register';
 
 import ReactGA from 'react-ga';
 ReactGA.initialize('UA-113135812-1');
@@ -31,7 +35,6 @@ ReactGA.initialize('UA-113135812-1');
 export function authenticate (nextState, replace, callback) {
 
     if (!validCookieExists()) {
-
         replace('/');
         callback(false);
     } else if (!store.getState().user.user_id) {
@@ -96,10 +99,15 @@ export function fetchUserDetails (nextState, replace, callback) {
 
     if (!validCookieExists()) {
         replace('/');
+        callback();
     } else {
-        store.dispatch(getUserDetails());
+        store.dispatch(getUserDetails())
+        .then(callback)
+        .catch((error) => {
+            console.log(error);
+        });
+        
     }
-    callback();
 }
 
 /**
@@ -111,8 +119,8 @@ export function fetchUserDetails (nextState, replace, callback) {
  * @param {function} callback - (optional) can be used to make the transition block
  */
 export function shouldUserRedirect (nextState, replace, callback) {
+    if (completedCookieExists()) {
 
-    if (validCookieExists()) {
         replace('/dashboard');
     }
     callback();
@@ -131,17 +139,23 @@ export function fetchModule (nextState, replace, callback) {
     let module_id = nextState.params.module_id;
     let is_lecturer = store.getState().user.is_lecturer;
 
-        store.dispatch(getModule(module_id, is_lecturer))
-          .then(() => {
-            if (is_lecturer === false) {
-              if (nextState.location.pathname.includes('performance')) {
-                store.dispatch(getFeedback(module_id));
-              } else {
-                store.dispatch(getStudentHistory(undefined, module_id));
-              }
-            }
-            callback();
-          })
+    store.dispatch(getModule(module_id, is_lecturer))
+      .then(() => {
+        if (is_lecturer === false) {
+          if (nextState.location.pathname.includes('performance')) {
+            store.dispatch(getFeedback(module_id));
+          } else {
+            store.dispatch(getStudentHistory(undefined, module_id));
+          }
+        }
+        callback();
+      }).catch((err) => {
+        if (is_lecturer) {
+          store.dispatch(createMoodleModule(module_id));
+          hashHistory.push('/add-new-module');
+          callback();
+        }
+      });
 }
 
 /**
@@ -340,4 +354,43 @@ export function fetchGroupAdminDashboard (nextState, replace, callback) {
         store.dispatch(getGroupAdminDashboard());
     }
     callback();
+}
+
+/**
+ * Changes login page to merge user page
+ * Is used as an onEnter hook for React Router
+ * Matches the signature of a React Router hook: https://github.com/reactjs/react-router/blob/master/docs/API.md#onenternextstate-replace-callback
+ * @param {object} nextState - the next router state
+ * @param {function} replace - function to redirect to another path
+ * @param {function} callback - (optional) can be used to make the transition block
+ */
+export function mergeUserPage (nextState, replace, callback) {
+  store.dispatch(mergeUser());
+  callback();
+}
+
+/**
+ * Automatically sets the state of the email input when merging users
+ * Is used as an onEnter hook for React Router
+ * Matches the signature of a React Router hook: https://github.com/reactjs/react-router/blob/master/docs/API.md#onenternextstate-replace-callback
+ * @param {object} nextState - the next router state
+ * @param {function} replace - function to redirect to another path
+ * @param {function} callback - (optional) can be used to make the transition block
+ */
+export function autofillEmailLogin (nextState, replace, callback) {
+  store.dispatch(updateEmail(store.getState().user.email));
+  callback();
+}
+
+/**
+ * Automatically sets the state of the email input when signing up moodle users
+ * Is used as an onEnter hook for React Router
+ * Matches the signature of a React Router hook: https://github.com/reactjs/react-router/blob/master/docs/API.md#onenternextstate-replace-callback
+ * @param {object} nextState - the next router state
+ * @param {function} replace - function to redirect to another path
+ * @param {function} callback - (optional) can be used to make the transition block
+ */
+export function autofillEmailSignup (nextState, replace, callback) {
+  store.dispatch(updateInputField('email', store.getState().user.email));
+  callback();
 }

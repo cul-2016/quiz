@@ -7,6 +7,9 @@ var query = require('./query');
  */
 
 function mergeUsers (pool, email, userId, moodleId, callback) {
+  var updateSameEmailUserQuery = 'UPDATE users SET merge_required = false WHERE email = $1 AND moodle_id = $2 RETURNING user_id;';
+  var updateSameEmailUserValues = [email, moodleId];
+
   var deleteMoodle = 'UPDATE users SET moodle_id = NULL WHERE user_id = $1;';
   var deleteMoodleValues = [userId];
 
@@ -25,24 +28,33 @@ function mergeUsers (pool, email, userId, moodleId, callback) {
     }
 
     client.query('BEGIN', (err) => {
-      if (error) return handleError(error, callback);
-      client.query(deleteMoodle, deleteMoodleValues, (error, res) => {
-        if (error) return handleError(error, callback);
-        client.query(updateUserQuery, updateUserValues, (error, res) => {
+      client.query(updateSameEmailUserQuery, updateSameEmailUserValues, (error, res) => {
+        if(res.rows[0]) {
           /* istanbul ignore if */
           if (error) return handleError(error, callback);
-          client.query(updateModuleQuery, [res.rows[0].user_id, userId], (error, res) => {
+          client.query('COMMIT', (err) => {
             if (error) return handleError(error, callback);
-            client.query(deleteQuery, deleteValues, (error, res) => {
+            return callback(null, true);
+          })
+        } else {
+          client.query(deleteMoodle, deleteMoodleValues, (error, res) => {
+            if (error) return handleError(error, callback);
+            client.query(updateUserQuery, updateUserValues, (error, res) => {
               if (error) return handleError(error, callback);
-              client.query('COMMIT', (err) => {
+              client.query(updateModuleQuery, [res.rows[0].user_id, userId], (error, res) => {
                 if (error) return handleError(error, callback);
-                return callback(null, true);
-              })
-            })
+                client.query(deleteQuery, deleteValues, (error, res) => {
+                  if (error) return handleError(error, callback);
+                  client.query('COMMIT', (err) => {
+                    if (error) return handleError(error, callback);
+                    return callback(null, true);
+                  })
+                })
+              });
+            });
           });
-        });
-      });
+        }
+      })
     })
   });
 }

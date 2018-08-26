@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 import isEmail from 'validator/lib/isEmail';
 import lowerCaseBeforeAt from '../lib/lowerCaseBeforeAt.js';
 
-const Signup = ({ register, updateInputField, registeringUser, toggleTcAgreed, location, showTcAgreedError }) => {
+const Signup = ({ register, user, updateInputField, registeringUser, toggleTcAgreed, location, showTcAgreedError }) => {
 
     const isEmailValid = isEmail(register.email);
     const is_lecturer = location.pathname.indexOf('student') === -1;
@@ -25,34 +25,18 @@ const Signup = ({ register, updateInputField, registeringUser, toggleTcAgreed, l
         }
     };
 
-    const handleOnSubmit = () => {
+    const handleOnSubmit = () => {        
+
         if (isEmailValid
             && register.tcAgreed
-            && (register.password || is_moodle)
+            && (register.password)
             && (!register.username && is_lecturer ? true : register.username)
-            && (register.password === register.confirmPassword || is_moodle)
+            && (register.password === register.confirmPassword)
         ) {
             registeringUser(
                 lowerCaseBeforeAt(register.email).trim(),
                 register.username,
-                is_moodle ? '' : register.password,
-                is_lecturer,
-                register.group_code,
-                location.query.module
-            );
-        } else if (!register.tcAgreed) {
-            showTcAgreedError();
-        }
-    };
-
-    const handleOnMigrate = () => {
-        if (isEmailValid
-            && register.tcAgreed
-            && (!register.username && is_lecturer ? true : register.username)
-        ) {
-            migrateUser(
-                lowerCaseBeforeAt(register.email).trim(),
-                register.username,
+                register.password,
                 is_lecturer,
                 register.group_code,
                 location.query.module
@@ -77,10 +61,12 @@ const Signup = ({ register, updateInputField, registeringUser, toggleTcAgreed, l
                 <label className="form__label">Email address</label>
                 <input
                   onKeyDown={ submitOnEnter }
-                  className="form__input"
-                  value={ register.email }
+                  className={"form__input " + (is_moodle ? "disabled" : "")}
+                  defaultValue={ user.email || register.email }
                   onChange={ (e) => updateInputField("email", e.target.value) }
-                  type="email" />
+                  type="email"
+                  disabled={is_moodle}
+                   />
                 <span className={ invalidEmailClasses }>This email is invalid</span>
               </div>
 
@@ -107,7 +93,6 @@ const Signup = ({ register, updateInputField, registeringUser, toggleTcAgreed, l
                       type="code"/>
                   </div>
               }
-              { !is_moodle &&
                 <div>
                   <div className="form__field f-body">
                     <label className="form__label">Choose a password</label>
@@ -129,7 +114,7 @@ const Signup = ({ register, updateInputField, registeringUser, toggleTcAgreed, l
                       type="password" />
                   </div>
                 </div>
-              }
+              
               <div className="form__field f-body form__field__tc" >
                   <span
                   className="icon"
@@ -142,7 +127,7 @@ const Signup = ({ register, updateInputField, registeringUser, toggleTcAgreed, l
                   </span>
                   { register.mergeUsers &&
                     <span className="login__err-message">
-                      This account already exists. Would you like to migrate your account to Moodle?
+                      This account already exists. <Link to="/merge-users">Click here</Link> to migrate your account to Moodle?
                     </span>
                   }
                   { register.error &&
@@ -157,23 +142,15 @@ const Signup = ({ register, updateInputField, registeringUser, toggleTcAgreed, l
                     <span className="login__err-message"> Passwords are not matching </span>
                   }
               </div>
-              { register.mergeUsers ?
-                <button
-                  className="button"
-                  onClick={ handleOnMigrate }
-                  >Migrate Account
-                </button>
-                :
                 <button
                   className="button"
                   onClick={ handleOnSubmit }
                   >Register
                 </button>
-              }
               <div>
                 <p className="f-body">
                   Already have an account?
-                  <Link className="login__link f-body f-body--link" to="/"> Please sign in here </Link>
+                  <Link className="login__link f-body f-body--link" to={is_moodle ? `/merge-users?module=${location.query.module}` : "/"}> Please sign in here </Link>
                   {
                       !is_lecturer &&
                       <Link className="login__link f-body f-body--link" to="/register-lecturer"> or sign up as a lecturer </Link>

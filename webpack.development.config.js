@@ -42,5 +42,9 @@ module.exports = {
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin()
-    ]
+    ],
+    node: {
+      net: 'empty',
+      dns: 'empty'
+    }
 };

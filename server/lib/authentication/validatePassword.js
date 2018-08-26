@@ -10,9 +10,10 @@ function validatePassword (password, hashedPassword, callback) {
     bcrypt.compare(password, hashedPassword, (error, response) => {
         /* istanbul ignore if */
         if (error) {
-            callback(error);
+          console.log(error);
+          return callback(error);
         }
-        callback(null, response);
+        return callback(null, response);
     });
 }
 

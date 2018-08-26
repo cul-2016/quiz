@@ -3,7 +3,8 @@ import Login from '../components/login/login';
 import { updateEmail, updatePassword, authenticateUser, migrateUser } from '../actions/login';
 
 const mapStateToProps = (state) => ({
-    login: state.login
+    login: state.login,
+    user: state.user
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -17,8 +18,8 @@ const mapDispatchToProps = (dispatch) => ({
     handleAuthenticateUser: (email, password) => {
         dispatch(authenticateUser(email, password));
     },
-    handleMigrateUser: (email, password) => {
-        dispatch(migrateUser(email, password));
+    handleMigrateUser: (email, password, moduleId) => {
+        dispatch(migrateUser(email, password, moduleId));
     }
 });
 
