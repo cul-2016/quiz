@@ -75,7 +75,7 @@
     "joi": "^10.6.0",
     "json-loader": "^0.5.7",
     "jsonwebtoken": "^7.4.2",
-    "lodash": "^4.15.0",
+    "lodash": "^4.17.5",
     "node-sass": "^4.5.3",
     "papaparse": "^4.3.5",
     "pg": "^6.4.1",
