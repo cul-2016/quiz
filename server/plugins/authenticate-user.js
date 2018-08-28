@@ -1,7 +1,8 @@
 const validatePassword = require('../lib/authentication/validatePassword');
 const getUserByEmail = require('../lib/getUserByEmail');
-const uuid = require('uuid/v1');
+const setSession = require('../lib/authentication/setSession')
 const jwt = require('jsonwebtoken');
+
 const Joi = require('joi');
 
 exports.register = (server, options, next) => {
@@ -64,21 +65,12 @@ exports.register = (server, options, next) => {
                             else {
                                 delete userDetails[0].password;
 
-                                const uid = uuid();
-                                const client = server.app.redisCli;
-
-                                const twoWeeks = 60 * 60 * 24 * 14;
-                                client.setAsync(userDetails[0].user_id.toString(), uid, 'EX', twoWeeks)
-                                    .then(() => {
-                                        const userObject = { user_details: userDetails[0], uid: uid, scope: [userDetails[0].is_super_admin ? "super-admin" : "", userDetails[0].is_group_admin ? "group-admin" : ""] };
-                                        const token = jwt.sign(userObject, process.env.JWT_SECRET);
-                                        const options = { path: "/", isSecure: false, isHttpOnly: false };
-                                        return reply(userDetails[0])
-                                            .header("Authorization", token)
-                                            .state('token', token, options)
-                                            .state('cul_is_cookie_accepted', 'true', options);
-                                    })
-                                    .catch((err) => reply(err));
+                                return setSession(server, userDetails[0], (err, token, options) => {
+                                  return reply(userDetails[0])
+                                      .header("Authorization", token)
+                                      .state('token', token, options)
+                                      .state('cul_is_cookie_accepted', 'true', options);
+                                })
                             }
                         });
                     }

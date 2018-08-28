@@ -3,17 +3,18 @@ import { Link } from 'react-router';
 import isEmail from 'validator/lib/isEmail';
 import lowerCaseBeforeAt from '../../lib/lowerCaseBeforeAt.js';
 
-const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthenticateUser }) => {
+const Login = ({ login, user, handleEmailChange, handlePasswordChange, location, handleAuthenticateUser, handleMigrateUser }) => {
+    const submit = login.isMerging ? () => handleMigrateUser(login.email, login.password, location.query.module) : () => handleAuthenticateUser(login.email, login.password);
 
     const submitOnEnter = (e) => {
         if (e.keyCode === 13 && isEmail(login.email) && login.password.length !== 0) {
-            handleAuthenticateUser(login.email, login.password);
+            submit();
         }
     };
 
     const handleOnSubmit = () => {
         if (isEmail(login.email) && login.password.length !== 0) {
-            handleAuthenticateUser(login.email, login.password);
+          submit();
         }
     };
 
@@ -24,6 +25,9 @@ const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthentic
               <div className="header">
                   <img src="/assets/logo/Login_signup_icon.svg"></img>
                   <h3 className="f-title"> Realtime Quizzes for Better Lectures</h3>
+                  { login.isMerging &&
+                    <p>Confirm email and password to merge your accounts</p>
+                  }
               </div>
               <div className="form">
                 <div className="form__field f-body">
@@ -33,6 +37,7 @@ const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthentic
                     onChange={ (e) => handleEmailChange(lowerCaseBeforeAt(e.target.value).trim()) }
                     className="form__input"
                     type="text"
+                    defaultValue={login.isMerging ? user.email : ''}
                     ></input>
                 </div>
                 <div className="form__field f-body">
@@ -51,13 +56,15 @@ const Login = ({ login, handleEmailChange, handlePasswordChange, handleAuthentic
                 <div className={ login.email && !isEmail(login.email) ? 'f-body--warning' : 'display-none' }>
                   Invalid Email Address
                 </div>
-                <button id="ga-signin" onClick={ handleOnSubmit } className="button">Log in</button>
+                <button id="ga-signin" onClick={ handleOnSubmit } className="button">{login.isMerging ? 'Merge Accounts' : 'Log In'}</button>
 
-                <div className="login__links">
+                { !login.isMerging &&
+                  <div className="login__links">
                     <p className="f-body"> Don&#39;t have an Account? </p>
                     <Link className="login__link f-body f-body--link" to="/register-student"> Sign Up </Link>
 
-                </div>
+                  </div>
+                }
 
               </div>
 

@@ -35,5 +35,9 @@ module.exports = {
                 loader: "json-loader"
             }
         ]
+    },
+    node: {
+      net: 'empty',
+      dns: 'empty'
     }
 };

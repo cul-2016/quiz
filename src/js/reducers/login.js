@@ -6,7 +6,9 @@ export const initialState = {
     password: "",
     isAuthenticating: false,
     userIsAuthenticated: undefined,
-    error: undefined
+    error: undefined,
+    isMerging: false,
+    redirectTo: undefined
 };
 
 export const login = (state = initialState, action ) => {
@@ -38,6 +40,22 @@ export const login = (state = initialState, action ) => {
             isAuthenticating: { $set: false },
             userIsAuthenticated: { $set: false },
             message: { $set: action.data }
+        });
+
+    case actionsTypes.MERGE_USER:
+        return update(state, {
+          isAuthenticating: { $set: false },
+          isMerging: { $set: true }
+        });
+
+    case actionsTypes.ADD_REDIRECT:
+        return update(state, {
+          redirectTo: { $set: action.redirect }
+        });
+
+    case actionsTypes.CLEAR_REDIRECT:
+        return update(state, {
+          redirectTo: { $set: null }
         });
 
     default:

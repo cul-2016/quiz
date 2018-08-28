@@ -4,7 +4,7 @@ import * as actionsTypes from '../actions/module';
 export const initialState = {
     module_id: undefined,
     name: undefined,
-    medals: undefined,
+    medals: {},
     uses_trophies: undefined,
     trophies: undefined,
     num_enrolled: undefined,
@@ -19,7 +19,8 @@ export const initialState = {
     isRemovingMember: false,
     isGeneratingShareId: false,
     importCode: '',
-    isSubmittingImportCode: false
+    isSubmittingImportCode: false,
+    owner: undefined
 };
 
 export function module (state = initialState, action ) {
@@ -57,7 +58,8 @@ export function module (state = initialState, action ) {
                 uses_trophies: { $set: action.data.uses_trophies },
                 num_enrolled: { $set: action.data.num_enrolled },
                 quizzes: { $set: action.data.quizzes },
-                surveys: { $set: action.data.surveys }
+                surveys: { $set: action.data.surveys },
+                owner: { $set: action.data.owner }
             });
         }
         if (action.is_lecturer == false) {

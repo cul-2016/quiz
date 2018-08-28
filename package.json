@@ -68,6 +68,7 @@
     "hapi-auth-jwt2": "^7.3.0",
     "hapi-require-https": "^2.0.10",
     "hoek": "^4.2.1",
+    "ims-lti": "^3.0.2",
     "inert": "^4.2.1",
     "istanbul": "^1.0.0-alpha.2",
     "joi": "^10.6.0",

@@ -10,6 +10,7 @@ export const ADD_NEW_MODULE_REQUEST = 'ADD_NEW_MODULE_REQUEST';
 export const ADD_NEW_MODULE_SUCCESS = 'ADD_NEW_MODULE_SUCCESS';
 export const ADD_NEW_MODULE_FAILURE = 'ADD_NEW_MODULE_FAILURE';
 export const TOGGLE_DISABLE_TROPHIES = 'TOGGLE_DISABLE_TROPHIES';
+export const MOODLE_MODULE = 'MOODLE_MODULE';
 
 
 export const validateModuleID = (id) => (dispatch) => {
@@ -93,3 +94,8 @@ export const addNewModuleFailure = (error) => ({
     type: ADD_NEW_MODULE_FAILURE,
     error
 });
+
+export const createMoodleModule = (moduleId) => ({
+  type: MOODLE_MODULE,
+  moduleId
+})

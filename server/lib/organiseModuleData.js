@@ -19,7 +19,8 @@ function organiseModuleData (is_lecturer, module_id, data, callback) {
 
         organisedData = {
             module_id: module_id,
-            name: data.name[0].name,
+            name: data.info[0].name,
+            owner: data.info[0].user_id,
             num_enrolled: parseInt(data.num_enrolled[0].num_enrolled, 10),
             medals: {
                 medal_name: [

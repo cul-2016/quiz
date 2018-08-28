@@ -1,0 +1,2 @@
+ALTER TABLE users
+  ADD COLUMN merge_required BOOLEAN DEFAULT FALSE;

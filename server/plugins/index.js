@@ -13,6 +13,8 @@ const quizes = require('./quizes.js');
 const superAdmin = require('./super-admin.js');
 const groupAdmin = require('./group-admin.js');
 
+const lti = require('./lti.js');
+
 const plugins = [
     Inert,
     JWT,
@@ -20,6 +22,7 @@ const plugins = [
     Database,
     Strategy,
     Auth,
+    lti,
 
     modules,
     users,

@@ -34,7 +34,6 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
     { url: '/remove-module-member?user_id=1&module_id=TEST' },
     { url: '/validate-module?module_id=TEST' },
     { url: '/join-module?module_id=FAC8' },
-    { url: '/get-leaderboard?module_id=TEST' },
     { url: '/get-feedback?module_id=TEST' },
     { url: '/get-student-history?module_id=TEST&user_id=1' },
 
@@ -384,6 +383,7 @@ const franzCreds = { email: 'franzmoro@hotmail.com', password: 'testinglecturer'
     { url: '/submit-new-password', method: 'post', payload: { code: 'reset-password-code-2', password: 'testing' } },
     { url: '/reset-password-request', method: 'post', payload: { email: 'sohilpandya@foundersandcoders.com' } },
     { url: '/verification?code=testing-verification-code-lecturer', method: 'get', payload: verificationCreds },
+    { url: '/get-leaderboard?module_id=TEST' },
 // authenticate-user plugin
     { url: '/logout', method: 'post' },
 ].forEach((endpoint) => {

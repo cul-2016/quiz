@@ -12,7 +12,7 @@ var query = require('../query');
 * @param {string} is_group_admin - boolean denoting whether the user is a group_admin or not
 * @param {Function} callback - callback function.
 */
-function saveUser (pool, email, password, is_lecturer, username, group_code, verification_code, is_group_admin, group_admin_has_paid, callback) {
+function saveUser (pool, email, password, is_lecturer, username, group_code, verification_code, is_group_admin, group_admin_has_paid, moodle_id, callback) {
     var userQuery;
     var userArray;
     if (is_lecturer) {
@@ -23,15 +23,16 @@ function saveUser (pool, email, password, is_lecturer, username, group_code, ver
             expiry = Date.now() + (91 * 24 * 60 * 60 * 1000); // 3 Month Trial
         }
 
-        userQuery = 'INSERT INTO users (email, password, is_lecturer, username, group_code, verification_code, is_group_admin, group_admin_has_paid, trial_expiry_time) VALUES ( $1, $2, $3, $4, $5, $6, $7, $8, $9);';
-        userArray = [email, password, is_lecturer, username, group_code, verification_code, is_group_admin, group_admin_has_paid, expiry];
+        userQuery = 'INSERT INTO users (email, password, is_lecturer, username, group_code, verification_code, is_group_admin, group_admin_has_paid, trial_expiry_time, moodle_id) VALUES ( $1, $2, $3, $4, $5, $6, $7, $8, $9, $10);';
+        userArray = [email, password, is_lecturer, username, group_code, verification_code, is_group_admin, group_admin_has_paid, expiry, moodle_id];
     } else {
-        userQuery = 'INSERT INTO users (email, password, username, is_verified) VALUES ( $1, $2, $3, $4);';
-        userArray = [email, password, username, true];
+        userQuery = 'INSERT INTO users (email, password, username, is_verified, moodle_id) VALUES ( $1, $2, $3, $4, $5);';
+        userArray = [email, password, username, true, moodle_id];
     }
     query(pool, userQuery, userArray, (error, result) => {
         /* istanbul ignore if */
         if (error) {
+          console.log(error);
             callback(error);
         }
         callback(null, result);

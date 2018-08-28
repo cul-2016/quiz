@@ -9,8 +9,7 @@ import validateForm from '../../lib/validateForm';
 const NewModule = ({ isValidatingModuleID, moduleIDExists,
                      medals, trophies, updateMedalVals, updateTrophyVals,
                      toggleDisableTrophies, handleInputChange, handleCodeInputChange,
-                     submit, module_id, name }) => {
-
+                     submit, module_id, name, isMoodleModule }) => {
 
     function applyOffset (originalValue, offset) {
 
@@ -42,7 +41,8 @@ const NewModule = ({ isValidatingModuleID, moduleIDExists,
                         isValidatingModuleID={ isValidatingModuleID }
                         module_id_length={ module_id.length }
                         handleCodeInputChange={ handleCodeInputChange }
-                        handleInputChange={ handleInputChange } />
+                        handleInputChange={ handleInputChange }
+                        isMoodleModule={isMoodleModule} />
                       <p className="line-primary--short-grey"></p>
                       <h2 className="f-subheader"> Medals </h2>
                       <Medals medals={ medals }
