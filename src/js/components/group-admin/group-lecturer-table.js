@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import classnames from 'classnames';
 
-const GroupLecturerTable = ({ users, user_limit, user_count, updateUserIsActive, groupAdminId }) => {
+const GroupLecturerTable = ({ users, user_limit, user_count, updateUserIsActive, groupAdmin, groupAdminId }) => {
     const table = users.map((user, i) => {
         return (
             <tr key={ i } className={`leaderboard__row--${i % 2 === 0 || i === 0 ? 'even' : 'odd'}` }>
@@ -27,6 +27,7 @@ const GroupLecturerTable = ({ users, user_limit, user_count, updateUserIsActive,
     return (
         <div className="content__body">
             <h1 className="f-headline">Group Lecturers</h1>
+
             <div>
                 {
                     user_count &&
@@ -37,6 +38,7 @@ const GroupLecturerTable = ({ users, user_limit, user_count, updateUserIsActive,
                     <p> You have used all your seats, please contact Quodl to upgrade the account or deactivate some users to free up spaces </p>
                 }
             </div>
+            <h2 className="f-subheader">Group Code: { groupAdmin.group_code }</h2>
             <div className="line" />
             <div className="group-lecturer-table__container">
               <table className="group-lecturer-table">
@@ -105,7 +107,8 @@ GroupLecturerTable.propTypes = {
     user_limit: PropTypes.number,
     user_count: PropTypes.number,
     updateUserIsActive: PropTypes.func,
-    groupAdminId: PropTypes.number
+    groupAdminId: PropTypes.number,
+    groupAdmin: PropTypes.object
 };
 
 export default GroupLecturerTable;
