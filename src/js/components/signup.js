@@ -25,7 +25,7 @@ const Signup = ({ register, user, updateInputField, registeringUser, toggleTcAgr
         }
     };
 
-    const handleOnSubmit = () => {        
+    const handleOnSubmit = () => {
 
         if (isEmailValid
             && register.tcAgreed
@@ -57,7 +57,7 @@ const Signup = ({ register, user, updateInputField, registeringUser, toggleTcAgr
 
             <div className="form">
               <div className="form__field f-body">
-                <p className="f-title">Register</p>
+                <p className="f-title">{is_lecturer ? "Lecturer sign-up" : "Student sign-up"}</p>
                 <label className="form__label">Email address</label>
                 <input
                   onKeyDown={ submitOnEnter }
@@ -114,7 +114,7 @@ const Signup = ({ register, user, updateInputField, registeringUser, toggleTcAgr
                       type="password" />
                   </div>
                 </div>
-              
+
               <div className="form__field f-body form__field__tc" >
                   <span
                   className="icon"
@@ -151,14 +151,6 @@ const Signup = ({ register, user, updateInputField, registeringUser, toggleTcAgr
                 <p className="f-body">
                   Already have an account?
                   <Link className="login__link f-body f-body--link" to={is_moodle ? `/merge-users?module=${location.query.module}` : "/"}> Please sign in here </Link>
-                  {
-                      !is_lecturer &&
-                      <Link className="login__link f-body f-body--link" to="/register-lecturer"> or sign up as a lecturer </Link>
-                  }
-                  {
-                      is_lecturer &&
-                      <Link className="login__link f-body f-body--link" to="/register-student"> or sign up as a student </Link>
-                  }
                 </p>
               </div>
 
