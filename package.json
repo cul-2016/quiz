@@ -60,6 +60,7 @@
     "bcrypt": "^1.0.2",
     "bluebird": "^3.5.0",
     "classnames": "^2.2.5",
+    "cron": "^1.4.1",
     "css-loader": "^0.26.4",
     "env2": "^2.2.0",
     "es6-promise": "^4.1.1",
