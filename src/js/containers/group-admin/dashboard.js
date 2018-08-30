@@ -6,7 +6,8 @@ const mapStateToProps = (state) => ({
     lecturers: state.groupAdmin.lecturers,
     user_count: state.groupAdmin.user_count,
     user_limit: state.groupAdmin.user_limit,
-    groupAdminId: state.user.user_id
+    groupAdminId: state.user.user_id,
+    groupAdmin: state.user
 });
 
 const mapDispatchToProps = (dispatch) => ({

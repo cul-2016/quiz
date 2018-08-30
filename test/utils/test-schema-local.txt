@@ -53,7 +53,8 @@ CREATE TABLE IF NOT EXISTS users (
     group_admin_has_paid BOOLEAN DEFAULT NULL,
     is_group_admin BOOLEAN DEFAULT FALSE NOT NULL,
     is_user_active BOOLEAN DEFAULT TRUE NOT NULL,
-    moodle_id INT UNIQUE
+    moodle_id INT UNIQUE,
+    forum_id INT UNIQUE
 );
 
 /* modules */

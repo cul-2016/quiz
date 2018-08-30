@@ -16,7 +16,8 @@ const users = [{
     account_type: null,
     paid: null,
     is_user_active: true,
-    moodle_id: null
+    moodle_id: null,
+    forum_id: null
 }];
 
 const usersById = [{
@@ -35,7 +36,8 @@ const usersById = [{
     group_admin_has_paid: null,
     is_group_admin: false,
     is_user_active: true,
-    moodle_id: null
+    moodle_id: null,
+    forum_id: null
 }];
 
 
