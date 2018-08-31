@@ -82,6 +82,18 @@ class Dashboard extends Component {
                 <div>
                   { moduleList }
                 </div>
+                <div className="dashboard__lecturer">
+                  <div className="dashboard__lecturer--title">
+                    <a href={`${process.env.STUDY_PLANNER_URL}`}>
+                      <h2 className="f-headline f-headline--primary forum__link"> Study Planner </h2>
+                    </a>
+                  </div>
+                  <div className="dashboard__lecturer--title">
+                    <a href={`${process.env.FORUM_URL}`}>
+                      <h2 className="f-headline f-headline--primary forum__link"> Forum </h2>
+                    </a>
+                  </div>
+                </div>
                 <div className="f-body dashboard__tc" >
                     View <Link className="f-body f-body--primary" target="_blank" to="/privacy">privacy statement</Link>
                 </div>
