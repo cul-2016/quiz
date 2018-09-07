@@ -3,7 +3,7 @@ const server = require('../../../server/server.js');
 const simulateAuthStudents = require('../../utils/simulateAuthStudents.js')(server);
 const simulateAuth = require('../../utils/simulateAuth.js')(server);
 const pool = require('../../utils/dbClient.js');
-const redisCli = server.app.redisCli;
+const redisCli = require('../../utils/configureRedis.js');
 const initDb = require('../../utils/initDb.js')(pool, redisCli);
 
 const { moduleInfo } = require('../../utils/data-fixtures.js');
