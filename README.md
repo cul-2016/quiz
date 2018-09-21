@@ -37,6 +37,8 @@ export AWS_ACCESS_KEY_ID=<aws_access_key>
 export AWS_SECRET_ACCESS_KEY=<aws_secret_access_key>
 export SERVER_ROUTE=http://localhost:9000
 export JWT_SECRET=<secret>
+export FORUM_URL=http://localhost:4567
+export STUDY_PLANNER_URL=http://localhost:5000
 ```
 and run `source local.env`
  - Start the server with: `npm start`
