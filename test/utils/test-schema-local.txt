@@ -53,7 +53,8 @@ CREATE TABLE IF NOT EXISTS users (
     group_admin_has_paid BOOLEAN DEFAULT NULL,
     is_group_admin BOOLEAN DEFAULT FALSE NOT NULL,
     is_user_active BOOLEAN DEFAULT TRUE NOT NULL,
-    moodle_id INT UNIQUE
+    moodle_id INT UNIQUE,
+    forum_id INT UNIQUE
 );
 
 /* modules */
@@ -61,7 +62,8 @@ CREATE TABLE IF NOT EXISTS modules (
     module_id CHAR(4) PRIMARY KEY,
     user_id INTEGER NOT NULL,
     name TEXT NOT NULL,
-    uses_trophies BOOLEAN NOT NULL DEFAULT TRUE
+    uses_trophies BOOLEAN NOT NULL DEFAULT TRUE,
+    forum_cid INT UNIQUE
 );
 
 /* medals */
@@ -309,7 +311,7 @@ INSERT INTO users (email, username, password, is_verified, reset_password_code, 
 
 /*** User with a future timestamp for resetting password ***/
 INSERT INTO users (email, username, password, is_verified, reset_password_code, expiry_code)
-    VALUES ('validexpiry@city.ac.uk', 'valid-password-expiry', '$2a$10$UnvUuW91Jh6.zWQi3G/2J.HLDTomSqJHxvBC.TYx/Bj8HZa.AAm4K', true, 'reset-password-code', 1536863650381);
+    VALUES ('validexpiry@city.ac.uk', 'valid-password-expiry', '$2a$10$UnvUuW91Jh6.zWQi3G/2J.HLDTomSqJHxvBC.TYx/Bj8HZa.AAm4K', true, 'reset-password-code', 1836863650381);
 
 /*** User with an expired timestamp for resetting the password ***/
 INSERT INTO users (email, username, password, is_verified, reset_password_code, expiry_code)

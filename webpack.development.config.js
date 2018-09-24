@@ -41,7 +41,12 @@ module.exports = {
         ]
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.DefinePlugin({
+            "process.env": {
+                STUDY_PLANNER_URL: JSON.stringify(process.env.STUDY_PLANNER_URL)
+            }
+        })
     ],
     node: {
       net: 'empty',

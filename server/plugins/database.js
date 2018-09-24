@@ -15,8 +15,17 @@ exports.register = (server, options, next) => {
 
     const config = { idleTimeoutMillis: 3000 };
 
-    if (env.CIRCLE_CI || env.TESTING) {
-        config.database = env.CIRCLE_CI ? 'circle_test' : 'testing';
+    if (process.env.CIRCLE_CI) {
+        Object.assign(config, {
+            user: 'postgres',
+            database: 'circle_test',
+            host: 'localhost',
+            port: 5432
+        });
+    } else if (process.env.TESTING) {
+        Object.assign(config, {
+            database: 'testing'
+        });
     }
     /* istanbul ignore if|else */
     else {

@@ -1,5 +1,5 @@
 const path = require('path');
-
+const webpack = require('webpack');
 
 module.exports = {
     entry: "./src/js/index.js",
@@ -36,6 +36,14 @@ module.exports = {
             }
         ]
     },
+    plugins: [
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.DefinePlugin({
+          "process.env": {
+              STUDY_PLANNER_URL: JSON.stringify(process.env.STUDY_PLANNER_URL)
+          }
+        })
+    ],
     node: {
       net: 'empty',
       dns: 'empty'

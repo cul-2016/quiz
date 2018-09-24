@@ -1,0 +1,2 @@
+ALTER TABLE modules
+  ADD COLUMN forum_cid INT UNIQUE;

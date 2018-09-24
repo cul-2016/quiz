@@ -1,5 +1,7 @@
 {
     "joinModule": "INSERT INTO module_members (module_id, user_id) VALUES ($1, $2) ON CONFLICT DO NOTHING;",
+    "getModuleBasics": "SELECT * FROM modules WHERE module_id = $1",
+    "getForumModules": "SELECT module_id, forum_cid FROM modules",
     "getModuleForLecturer": {
         "quizzes": "SELECT quizzes.quiz_id, quizzes.name, quizzes.is_presented, quizzes.is_last_quiz, quizzes.share_id, ( SELECT COUNT(DISTINCT(responses.user_id)) AS num_entries FROM responses WHERE responses.quiz_id = quizzes.quiz_id GROUP BY quizzes.quiz_id ), (SELECT COUNT(questions.question_id) AS num_questions FROM questions WHERE questions.quiz_id = quizzes.quiz_id GROUP BY quizzes.quiz_id ) FROM quizzes LEFT JOIN responses ON quizzes.quiz_id = responses.quiz_id WHERE quizzes.module_id = ($1) GROUP BY quizzes.quiz_id ORDER BY quizzes.quiz_id",
         "surveys": "SELECT surveys.survey_id, surveys.name, surveys.is_presented, surveys.share_id, ( SELECT COUNT(DISTINCT(responses.user_id)) AS num_entries FROM responses WHERE responses.survey_id = surveys.survey_id GROUP BY surveys.survey_id ), (SELECT COUNT(questions.question_id) AS num_questions FROM questions WHERE questions.survey_id = surveys.survey_id GROUP BY surveys.survey_id ) FROM surveys LEFT JOIN responses ON surveys.survey_id = responses.survey_id WHERE surveys.module_id = ($1) GROUP BY surveys.survey_id ORDER BY surveys.survey_id",

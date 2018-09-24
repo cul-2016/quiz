@@ -16,6 +16,8 @@ const getParticipationRate = require('../lib/getParticipationRate');
 const getStudentHistory = require('../lib/getStudentHistory.js');
 const generateShareId = require('../lib/generateShareId.js');
 const submitImportCode = require('../lib/submitImportCode.js').submitImportCode;
+const forum = require('../lib/forum');
+const defaultPrivileges = require('../lib/forum/defaultPrivileges.js');
 
 const jwt = require('jsonwebtoken');
 const Joi = require('joi');
@@ -256,17 +258,27 @@ exports.register = (server, options, next) => {
                 }
             },
             handler: (request, reply) => {
-                jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
-                    /* istanbul ignore if */
-                    if (error) { return reply(error); }
-                    const { user_id } = decoded.user_details;
-                    const { module_id, name, medals, trophies, uses_trophies } = request.payload;
+              jwt.verify(request.state.token, process.env.JWT_SECRET, (error, decoded) => {
+                /* istanbul ignore if */
+                if (error) { return reply(error); }
+                const { user_id, forum_id } = decoded.user_details;
+                const { module_id, name, medals, trophies, uses_trophies } = request.payload;
 
-                    saveModule(pool, module_id, user_id, name, medals, uses_trophies, trophies, (error, result) => {
-                        const verdict = error || result;
-                        reply(verdict);
-                    });
+                return forum.createCategory(name, forum_id, function (err, res) {
+                  let forum_cid;
+
+                  if (err) {
+                    console.log(err);
+                  } else {
+                    forum_cid = res.data.payload.cid;
+                  }
+
+                  return saveModule(pool, module_id, user_id, name, medals, uses_trophies, trophies, forum_cid, (error, result) => {
+                    const verdict = error || result;
+                    return reply(verdict);
+                  });
                 });
+              });
             }
         },
         {
@@ -285,13 +297,15 @@ exports.register = (server, options, next) => {
                     if (error) { return reply(error); }
 
                     const { module_id } = request.query;
-                    const { user_id } = decoded.user_details;
+                    const { user_id, forum_id } = decoded.user_details;
                     if (module_id !== undefined) {
 
                         joinModule(pool, module_id.toUpperCase(), user_id, (error, result) => {
-
                             if (!error) {
+                              return forum.addPrivileges(result.rows[0].forum_cid, [forum_id], defaultPrivileges.user, function (err, res) {
+                                if (err) console.log(err);
                                 reply(result);
+                              })
                             } else if (error.detail) {
                                 reply({ message: 'Module does not exist' });
                             } else {

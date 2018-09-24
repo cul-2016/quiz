@@ -3,7 +3,10 @@ let config;
 
 if (process.env.CIRCLE_CI) {
     config = {
-        database: 'circle_test'
+        user: 'postgres',
+        database: 'circle_test',
+        host: 'localhost',
+        port: 5432
     };
 } else if (process.env.TESTING) {
     config = {
