@@ -38,7 +38,8 @@ module.exports = {
         new webpack.DefinePlugin({
             "process.env": {
                 NODE_ENV: JSON.stringify("production"),
-                STUDY_PLANNER_URL: JSON.stringify(process.env.STUDY_PLANNER_URL)
+                STUDY_PLANNER_URL: JSON.stringify(process.env.STUDY_PLANNER_URL),
+                FORUM_URL: JSON.stringify(process.env.FORUM_URL)
             }
         })
     ],
