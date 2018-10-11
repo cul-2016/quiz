@@ -1,8 +1,9 @@
 const path = require('path');
 const webpack = require('webpack');
+const BabelEnginePlugin = require('babel-engine-plugin');
 
 module.exports = {
-    entry: "./src/js/index.js",
+    entry: ["babel-polyfill", "./src/js/index.js"],
     output: {
         path: path.join(__dirname, "public"),
         filename: "bundle.js",
@@ -42,6 +43,9 @@ module.exports = {
           "process.env": {
               STUDY_PLANNER_URL: JSON.stringify(process.env.STUDY_PLANNER_URL)
           }
+        }),
+        new BabelEnginePlugin({
+            presets: ["react", "es2015", "stage-0", "env"]
         })
     ],
     node: {

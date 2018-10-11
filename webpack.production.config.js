@@ -1,5 +1,7 @@
 'use strict';
 const webpack = require('webpack');
+const BabelEnginePlugin = require('babel-engine-plugin');
+
 
 module.exports = {
     entry: ["babel-polyfill", "./src/js/index.js"],
@@ -40,6 +42,9 @@ module.exports = {
                 NODE_ENV: JSON.stringify("production"),
                 STUDY_PLANNER_URL: JSON.stringify(process.env.STUDY_PLANNER_URL)
             }
+        }),
+        new BabelEnginePlugin({
+            presets: ["react", "es2015", "stage-0", "env"]
         })
     ],
     node: {
