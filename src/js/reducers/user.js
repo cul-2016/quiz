@@ -13,7 +13,8 @@ export const initialState = {
     paid: undefined,
     isCookieAccepted: isCookieMessageRequired(),
     error: undefined,
-    is_group_admin: undefined
+    is_group_admin: undefined,
+    group_code: undefined
 };
 
 export function user (state = initialState, action ) {
@@ -54,6 +55,7 @@ function setUserDetails (state, action) {
         isFetchingUser: { $set: false },
         is_group_admin: { $set: action.data.is_group_admin },
         trial_expiry_time: { $set: action.data.trial_expiry_time },
-        paid: { $set: action.data.paid }
+        paid: { $set: action.data.paid },
+        group_code: { $set: action.data.group_code }
     });
 }

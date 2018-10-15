@@ -28,7 +28,11 @@
         border-radius: 0.625rem;
         padding: 0.5rem;
         outline: none;
-
+        
+        &.disabled {
+          color: $dark-grey;
+          background-color: $grey;
+        }
 
         &--edit-score {
           font-size: 1.3rem;

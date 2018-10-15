@@ -57,8 +57,8 @@ const StudentModule = ({ location,
         const arr = [
             `Complete ${value} quiz`,
             `Get ${value} percentage`,
-            `Take ${value} quizzes`,
-            `Get ${value} score overall`
+            `Get ${value} score overall`,
+            `Take ${value} quizzes`
         ];
         return arr[i];
     };

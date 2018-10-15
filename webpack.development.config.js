@@ -1,8 +1,10 @@
 const path = require('path');
 const webpack = require('webpack');
+const BabelEnginePlugin = require('babel-engine-plugin');
 
 module.exports = {
     entry: [
+        "babel-polyfill",
         "./src/js/index.js",
         "webpack/hot/dev-server",
         "webpack-dev-server/client?http://localhost:8080/"
@@ -41,6 +43,18 @@ module.exports = {
         ]
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin()
-    ]
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.DefinePlugin({
+            "process.env": {
+                STUDY_PLANNER_URL: JSON.stringify(process.env.STUDY_PLANNER_URL)
+            }
+        }),
+        new BabelEnginePlugin({
+            presets: ["react", "es2015", "stage-0", "env"]
+        })
+    ],
+    node: {
+      net: 'empty',
+      dns: 'empty'
+    }
 };

@@ -15,7 +15,9 @@ const users = [{
     is_group_admin: false,
     account_type: null,
     paid: null,
-    is_user_active: true
+    is_user_active: true,
+    moodle_id: null,
+    forum_id: null
 }];
 
 const usersById = [{
@@ -33,7 +35,9 @@ const usersById = [{
     trial_expiry_time: null,
     group_admin_has_paid: null,
     is_group_admin: false,
-    is_user_active: true
+    is_user_active: true,
+    moodle_id: null,
+    forum_id: null
 }];
 
 
@@ -104,6 +108,7 @@ const _module = Object.assign({}, newModule, { quizzes });
 const expectedLecturer = {
     module_id: 'TEST',
     name: 'test module',
+    owner: 2,
     medals: {
         medal_name: ["bronze", "silver", "gold"],
         condition: [39, 69]
@@ -422,6 +427,7 @@ const moduleInfo = {
     module_id: 'TEST',
     name: 'test module',
     num_enrolled: 5,
+    owner: 2,
     quizzes: [
         {
             is_last_quiz: false,

@@ -37,6 +37,8 @@ export AWS_ACCESS_KEY_ID=<aws_access_key>
 export AWS_SECRET_ACCESS_KEY=<aws_secret_access_key>
 export SERVER_ROUTE=http://localhost:9000
 export JWT_SECRET=<secret>
+export FORUM_URL=http://localhost:4567
+export STUDY_PLANNER_URL=http://localhost:5000
 ```
 and run `source local.env`
  - Start the server with: `npm start`
@@ -240,3 +242,9 @@ The staging version of the app is hosted on basic heroku with no paid options. (
 
 ##### Live
 The live version of the app is hosted on 1 dyno @ $25. We reached a saturation point somewhere between 320 - 500 concurrent users where it started to throw errors. This is approximately a six fold increase.
+
+### LTI Integration
+
+Quodl is available to be used as an external tool in [Moodle](https://moodle.org/) through [LTI](https://www.imsglobal.org/activity/learning-tools-interoperability).
+
+For details on how to set this up, see the [LTI Integration guide](LTI.md)

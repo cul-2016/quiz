@@ -3,7 +3,7 @@ const server = require('../../../server/server.js');
 const simulateAuthStudents = require('../../utils/simulateAuthStudents.js')(server);
 const simulateAuth = require('../../utils/simulateAuth.js')(server);
 const pool = require('../../utils/dbClient.js');
-const redisCli = server.app.redisCli;
+const redisCli = require('../../utils/configureRedis.js');
 const initDb = require('../../utils/initDb.js')(pool, redisCli);
 
 const { moduleInfo } = require('../../utils/data-fixtures.js');
@@ -103,7 +103,9 @@ test('/authenticate-user endpoint returns error for delAsync Redis call', (t) =>
             paid: null,
             group_admin_has_paid: null,
             is_group_admin: false,
-            is_user_active: true
+            is_user_active: true,
+            moodle_id: null,
+            forum_id: null
         }
     },
     {
@@ -186,11 +188,7 @@ test('/authenticate-user endpoint returns error for delAsync Redis call', (t) =>
     {
         method: 'post',
         url: '/save-user',
-        payload: {
-            email: 'lecturer@city.ac.uk',
-            password: 'testinglecturer',
-            is_lecturer: true
-        },
+        payload: franzCreds,
         expected: {
             message: 'user exists'
         }
@@ -221,35 +219,6 @@ test('/authenticate-user endpoint returns error for delAsync Redis call', (t) =>
         },
         expected: {
             message: 'The code you have entered is invalid'
-        }
-    },
-    {
-        method: 'post',
-        url: '/save-user',
-        payload: {
-            email: 'sohilpandya1990@gmail.com',
-            password: 'testingstudent',
-            is_lecturer: false,
-            username: 'testingstudent',
-            group_code: ''
-        },
-        expected: {
-            email: 'sohilpandya1990@gmail.com',
-            expiry_code: null,
-            is_lecturer: false,
-            is_verified: true,
-            reset_password_code: null,
-            user_id: 44,
-            username: 'testingstudent',
-            group_code: null,
-            verification_code: null,
-            is_super_admin: false,
-            trial_expiry_time: null,
-            account_type: null,
-            paid: null,
-            group_admin_has_paid: null,
-            is_group_admin: false,
-            is_user_active: true
         }
     },
     {
@@ -293,7 +262,7 @@ test('/authenticate-user endpoint returns error for delAsync Redis call', (t) =>
     {
         method: 'get',
         url: '/get-user-details',
-        expected: { email: 'lecturer@city.ac.uk', expiry_code: null, is_lecturer: true, is_super_admin: true, is_verified: true, reset_password_code: null, user_id: 2, username: 'lecturer', group_code: null, verification_code: null, trial_expiry_time: null, group_admin_has_paid: null, is_group_admin: false, is_user_active: true }
+        expected: { email: 'lecturer@city.ac.uk', expiry_code: null, is_lecturer: true, is_super_admin: true, is_verified: true, reset_password_code: null, user_id: 2, username: 'lecturer', group_code: null, verification_code: null, trial_expiry_time: null, group_admin_has_paid: null, is_group_admin: false, is_user_active: true, moodle_id: 1, forum_id: null }
     },
     {
         method: 'get',
@@ -553,7 +522,7 @@ test('/authenticate-user endpoint returns error for delAsync Redis call', (t) =>
     {
         method: 'get',
         url: '/get-user-details',
-        expected: { email: 'student@city.ac.uk', expiry_code: null, is_lecturer: false, is_super_admin: false, is_verified: true, reset_password_code: null, user_id: 1, username: 'student', group_code: null, verification_code: null, trial_expiry_time: null, group_admin_has_paid: null, is_group_admin: false, is_user_active: true }
+        expected: { email: 'student@city.ac.uk', expiry_code: null, is_lecturer: false, is_super_admin: false, is_verified: true, reset_password_code: null, user_id: 1, username: 'student', group_code: null, verification_code: null, trial_expiry_time: null, group_admin_has_paid: null, is_group_admin: false, is_user_active: true, moodle_id: null, forum_id: null }
     }
 ].forEach((endpoint) => {
     test(endpoint.url + ' endpoint returns correct payload', (t) => {

@@ -52,7 +52,9 @@ CREATE TABLE IF NOT EXISTS users (
     trial_expiry_time BIGINT,
     group_admin_has_paid BOOLEAN DEFAULT NULL,
     is_group_admin BOOLEAN DEFAULT FALSE NOT NULL,
-    is_user_active BOOLEAN DEFAULT TRUE NOT NULL
+    is_user_active BOOLEAN DEFAULT TRUE NOT NULL,
+    moodle_id INT UNIQUE,
+    forum_id INT UNIQUE
 );
 
 /* modules */
@@ -60,7 +62,8 @@ CREATE TABLE IF NOT EXISTS modules (
     module_id CHAR(4) PRIMARY KEY,
     user_id INTEGER NOT NULL,
     name TEXT NOT NULL,
-    uses_trophies BOOLEAN NOT NULL DEFAULT TRUE
+    uses_trophies BOOLEAN NOT NULL DEFAULT TRUE,
+    forum_cid INT UNIQUE
 );
 
 /* medals */
@@ -261,8 +264,8 @@ VALUES ('jsalmon', 'jessica@city.ac.uk' , 'FAC' , 'Ten', 'group admin', true, 10
 INSERT INTO users (email, username, password, is_verified)
     VALUES ('student@city.ac.uk', 'student', '$2a$10$UnvUuW91Jh6.zWQi3G/2J.HLDTomSqJHxvBC.TYx/Bj8HZa.AAm4K', true);
 
-INSERT INTO users (email, username, password, is_lecturer, is_verified, is_super_admin)
-VALUES ('lecturer@city.ac.uk', 'lecturer', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, true, true);
+INSERT INTO users (email, username, password, is_lecturer, is_verified, is_super_admin, moodle_id)
+VALUES ('lecturer@city.ac.uk', 'lecturer', '$2a$10$3xJ58ADV1YvwSiaRXBK6FOsy/wIMF3/p6nJzDid3qesRpmSMhXy8G', true, true, true, 1);
 
 INSERT INTO users (email, username, password, is_verified)
     VALUES ('sohil@city.ac.uk', 'Sohil', '$2a$10$UnvUuW91Jh6.zWQi3G/2J.HLDTomSqJHxvBC.TYx/Bj8HZa.AAm4K', true),
@@ -308,7 +311,7 @@ INSERT INTO users (email, username, password, is_verified, reset_password_code, 
 
 /*** User with a future timestamp for resetting password ***/
 INSERT INTO users (email, username, password, is_verified, reset_password_code, expiry_code)
-    VALUES ('validexpiry@city.ac.uk', 'valid-password-expiry', '$2a$10$UnvUuW91Jh6.zWQi3G/2J.HLDTomSqJHxvBC.TYx/Bj8HZa.AAm4K', true, 'reset-password-code', 1536863650381);
+    VALUES ('validexpiry@city.ac.uk', 'valid-password-expiry', '$2a$10$UnvUuW91Jh6.zWQi3G/2J.HLDTomSqJHxvBC.TYx/Bj8HZa.AAm4K', true, 'reset-password-code', 1836863650381);
 
 /*** User with an expired timestamp for resetting the password ***/
 INSERT INTO users (email, username, password, is_verified, reset_password_code, expiry_code)

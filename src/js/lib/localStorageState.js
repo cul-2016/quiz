@@ -1,3 +1,5 @@
+import parseCookie from "./parseCookie";
+
 /**
  * Function that returns serialised state from browser local storage
  */
@@ -9,7 +11,7 @@ export function loadState () {
         if (serialisedState === null) {
             return undefined;
         }
-        return JSON.parse(serialisedState);
+        return replaceUser(JSON.parse(serialisedState));
     } catch (error) {
 
         return undefined;
@@ -27,4 +29,14 @@ export function saveState (state) {
     } catch (error) {
         console.error("Could not save state in localstorage");
     }
+}
+
+function replaceUser (state) {
+    var user = parseCookie().user_details;
+    for(let key in user){
+        if(state[key]) {
+            state[key]=user[key]
+        }
+    }
+    return state;
 }

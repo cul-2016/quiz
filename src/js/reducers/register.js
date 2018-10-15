@@ -11,7 +11,8 @@ const initialState = {
     userIsRegistered: undefined,
     userExists: false,
     tcAgreed: false,
-    group_code: ""
+    group_code: "",
+    mergeUsers: false
 };
 
 
@@ -49,6 +50,12 @@ export default function register (state = initialState, action ) {
         return update(state, {
             error: { $set: action.error }
         });
+
+    case actionsTypes.REGISTERING_USER_MERGE:
+      return update(state, {
+        isRegistering: { $set: false },
+        mergeUsers: { $set: true }
+      });
 
     default:
         return state;
