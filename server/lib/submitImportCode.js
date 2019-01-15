@@ -5,7 +5,7 @@ const importQuizQuery = require('./queries.json').importQuiz;
 const importSurveyQuery = require('./queries.json').importSurvey;
 const importQuestionQuery = require('./queries.json').importQuestion;
 
-function submitImportCode (client, import_code, module_id, callback) {
+function submitImportCode(client, import_code, module_id, callback) {
     const importParams = [import_code];
     // query for quiz
     query(client, getQuizForImportQuery, importParams, (error, response) => {
@@ -23,7 +23,7 @@ function submitImportCode (client, import_code, module_id, callback) {
     });
 }
 
-function insertSurvey (client, import_params, module_id, callback) {
+function insertSurvey(client, import_params, module_id, callback) {
     query(client, getSurveyForImportQuery, import_params, (error, response) => {
         /* istanbul ignore if */
         if (error) {
@@ -45,7 +45,7 @@ function insertSurvey (client, import_params, module_id, callback) {
     });
 }
 
-function insertQuiz (client, questions, module_id, callback) {
+function insertQuiz(client, questions, module_id, callback) {
     const quiz_name = questions[0].name;
     const importQuizParams = [module_id, quiz_name];
     // query to insert quiz
@@ -60,12 +60,12 @@ function insertQuiz (client, questions, module_id, callback) {
     });
 }
 
-function insertMultipleQuestions (client, import_question_query, questions, quiz_id, survey_id, responseFromDB, callback) {
+function insertMultipleQuestions(client, import_question_query, questions, quiz_id, survey_id, responseFromDB, callback) {
     if (questions.length === 0) {
         return callback(null, responseFromDB);
     } else {
         const question = questions[0];
-        const params = [question.order_id, quiz_id, survey_id, question.question, question.a, question.b, question.c, question.d, question.correct_answer];
+        const params = [question.order_id, quiz_id, survey_id, question.question, question.a, question.b, question.c, question.d, question.correct_answer, question.more_information];
         return query(client, import_question_query, params, (error, response) => {
             if (error) {
                 return callback(error);
