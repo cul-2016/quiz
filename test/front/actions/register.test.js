@@ -235,7 +235,7 @@ test('showTcAgreedError creates the correct action', (t) => {
 
     const expected = {
         type: actions.SHOW_TC_AGREED_ERROR,
-        error: 'Please agree to the privacy statement before proceeding'
+        error: 'You need to accept the privacy policy to register'
     };
     const actual = deepFreeze(actions.showTcAgreedError());
     t.deepEqual(actual, expected);

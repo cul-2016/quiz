@@ -12,6 +12,8 @@ export const REGISTERING_USER_SUCCESS = 'REGISTERING_USER_SUCCESS';
 export const REGISTERING_USER_FAILURE = 'REGISTERING_USER_FAILURE';
 export const TOGGLE_TC_AGREED = 'TOGGLE_TC_AGREED';
 export const SHOW_TC_AGREED_ERROR = 'SHOW_TC_AGREED_ERROR';
+export const TOGGLE_COOKIES_AGREED = 'TOGGLE_COOKIES_AGREED';
+export const SHOW_COOKIES_AGREED_ERROR = 'SHOW_COOKIES_AGREED_ERROR';
 export const REGISTERING_USER_MERGE = 'REGISTERING_USER_MERGE';
 
 export const updateInputField = (inputKey, value) => ({
@@ -20,7 +22,7 @@ export const updateInputField = (inputKey, value) => ({
     inputKey
 });
 
-export function registeringUser (email, username, password, is_lecturer, group_code, moduleId) {
+export function registeringUser(email, username, password, is_lecturer, group_code, moduleId) {
     return (dispatch) => {
 
         dispatch(registeringUserRequest());
@@ -44,22 +46,22 @@ export function registeringUser (email, username, password, is_lecturer, group_c
                     dispatch(registeringUserSuccess(true));
                     dispatch(setUserDetails(response.data));
                     if (moduleId) {
-                      if (!is_lecturer) {
-                        hashHistory.push(`/${moduleId}/student`);
-                      } else {
-                        request.post(dispatch)(`/get-module?module-id=${moduleId}`)
-                          .then(response => {
-                            hashHistory.push(`/${moduleId}/lecturer`);
-                          })
-                          .catch(err => {
-                            if (err.response.status === 404) {
-                              dispatch(createMoodleModule(moduleId));
-                              hashHistory.push(`/add-new-module`);
-                            };
-                          })
-                      }
+                        if (!is_lecturer) {
+                            hashHistory.push(`/${moduleId}/student`);
+                        } else {
+                            request.post(dispatch)(`/get-module?module-id=${moduleId}`)
+                                .then(response => {
+                                    hashHistory.push(`/${moduleId}/lecturer`);
+                                })
+                                .catch(err => {
+                                    if (err.response.status === 404) {
+                                        dispatch(createMoodleModule(moduleId));
+                                        hashHistory.push(`/add-new-module`);
+                                    };
+                                })
+                        }
                     } else {
-                      hashHistory.push('/dashboard');
+                        hashHistory.push('/dashboard');
                     }
                 }
             })
@@ -83,13 +85,23 @@ export const registeringUserFailure = (error) => ({
     type: REGISTERING_USER_FAILURE,
     error
 });
+
 export const toggleTcAgreed = () => ({
     type: TOGGLE_TC_AGREED
 });
 
 export const showTcAgreedError = () => ({
     type: SHOW_TC_AGREED_ERROR,
-    error: 'Please agree to the privacy statement before proceeding'
+    error: 'You need to accept the privacy policy to register'
+});
+
+export const toggleCookiesAgreed = () => ({
+    type: TOGGLE_COOKIES_AGREED
+});
+
+export const showCookiesAgreedError = () => ({
+    type: SHOW_COOKIES_AGREED_ERROR,
+    error: 'You need to consent to the use of cookies to register'
 });
 
 export const mergeUsers = () => ({
