@@ -22,7 +22,7 @@ export const updateInputField = (inputKey, value) => ({
     inputKey
 });
 
-export function registeringUser(email, username, password, is_lecturer, group_code, moduleId) {
+export function registeringUser (email, username, password, is_lecturer, group_code, moduleId) {
     return (dispatch) => {
 
         dispatch(registeringUserRequest());
@@ -46,22 +46,22 @@ export function registeringUser(email, username, password, is_lecturer, group_co
                     dispatch(registeringUserSuccess(true));
                     dispatch(setUserDetails(response.data));
                     if (moduleId) {
-                        if (!is_lecturer) {
-                            hashHistory.push(`/${moduleId}/student`);
-                        } else {
-                            request.post(dispatch)(`/get-module?module-id=${moduleId}`)
-                                .then(response => {
-                                    hashHistory.push(`/${moduleId}/lecturer`);
-                                })
-                                .catch(err => {
-                                    if (err.response.status === 404) {
-                                        dispatch(createMoodleModule(moduleId));
-                                        hashHistory.push(`/add-new-module`);
-                                    };
-                                })
-                        }
+                      if (!is_lecturer) {
+                        hashHistory.push(`/${moduleId}/student`);
+                      } else {
+                        request.post(dispatch)(`/get-module?module-id=${moduleId}`)
+                          .then(response => {
+                            hashHistory.push(`/${moduleId}/lecturer`);
+                          })
+                          .catch(err => {
+                            if (err.response.status === 404) {
+                              dispatch(createMoodleModule(moduleId));
+                              hashHistory.push(`/add-new-module`);
+                            };
+                          })
+                      }
                     } else {
-                        hashHistory.push('/dashboard');
+                      hashHistory.push('/dashboard');
                     }
                 }
             })
@@ -85,7 +85,6 @@ export const registeringUserFailure = (error) => ({
     type: REGISTERING_USER_FAILURE,
     error
 });
-
 export const toggleTcAgreed = () => ({
     type: TOGGLE_TC_AGREED
 });

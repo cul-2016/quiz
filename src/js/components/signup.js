@@ -2,7 +2,6 @@ import React, { PropTypes } from 'react';
 import classnames from 'classnames';
 import { Link } from 'react-router';
 import isEmail from 'validator/lib/isEmail';
-import lowerCaseBeforeAt from '../lib/lowerCaseBeforeAt.js';
 
 const Signup = ({ register, user, updateInputField, registeringUser, toggleTcAgreed, toggleCookiesAgreed, location, showTcAgreedError, showCookiesAgreedError }) => {
 
@@ -35,7 +34,7 @@ const Signup = ({ register, user, updateInputField, registeringUser, toggleTcAgr
       && (register.password === register.confirmPassword)
     ) {
       registeringUser(
-        lowerCaseBeforeAt(register.email).trim(),
+        register.email.toLowerCase().trim(),
         register.username,
         register.password,
         is_lecturer,
