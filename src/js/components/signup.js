@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import { Link } from 'react-router';
 import isEmail from 'validator/lib/isEmail';
 
-const Signup = ({ register, user, updateInputField, registeringUser, toggleTcAgreed, location, showTcAgreedError }) => {
+const Signup = ({ register, user, updateInputField, registeringUser, toggleTcAgreed, toggleCookiesAgreed, location, showTcAgreedError, showCookiesAgreedError }) => {
 
   const isEmailValid = isEmail(register.email);
   const is_lecturer = location.pathname.indexOf('student') === -1;
@@ -28,6 +28,7 @@ const Signup = ({ register, user, updateInputField, registeringUser, toggleTcAgr
 
     if (isEmailValid
       && register.tcAgreed
+      && register.cookiesAgreed
       && (register.password)
       && (!register.username && is_lecturer ? true : register.username)
       && (register.password === register.confirmPassword)
@@ -40,6 +41,8 @@ const Signup = ({ register, user, updateInputField, registeringUser, toggleTcAgr
         register.group_code,
         location.query.module
       );
+    } else if (!register.cookiesAgreed) {
+      showCookiesAgreedError();
     } else if (!register.tcAgreed) {
       showTcAgreedError();
     }
@@ -115,15 +118,28 @@ const Signup = ({ register, user, updateInputField, registeringUser, toggleTcAgr
           </div>
 
           <div className="form__field f-body form__field__tc" >
-            <span
-              className="icon"
-              onClick={() => toggleTcAgreed()}
-            >
-              <i className={`fa ${register.tcAgreed ? 'fa-check-square' : 'fa-square'}`} />
-            </span>
-            <span className="f-body">
-              I agree with the <Link className="f-body f-body--primary" target="_blank" to="/privacy">privacy statement</Link>, including the <Link className="f-body f-body--primary" target="_blank" to="/privacy">use of cookies.</Link>
-            </span>
+            <div className="f-body">
+              <span
+                className="icon"
+                onClick={() => toggleCookiesAgreed()}
+              >
+                <i className={`fa ${register.cookiesAgreed ? 'fa-check-square' : 'fa-square'}`} />
+                <span className="f-body">
+                  I agree to the <Link className="f-body f-body--primary" target="_blank" to="/privacy">use of cookies </Link> for anonymised analytics collection and to keep me logged into the application.
+                  </span>
+              </span>
+            </div>
+            <div className="f-body">
+              <span
+                className="icon"
+                onClick={() => toggleTcAgreed()}
+              >
+                <i className={`fa ${register.tcAgreed ? 'fa-check-square' : 'fa-square'}`} />
+              </span>
+              <span className="f-body">
+                I agree with the <Link className="f-body f-body--primary" target="_blank" to="/privacy">privacy statement</Link>.
+                  </span>
+            </div>
             {register.mergeUsers &&
               <span className="login__err-message">
                 This account already exists. <Link to="/merge-users">Click here</Link> to migrate your account to Moodle?
@@ -166,6 +182,8 @@ Signup.propTypes = {
   registeringUser: PropTypes.func.isRequired,
   toggleTcAgreed: PropTypes.func.isRequired,
   showTcAgreedError: PropTypes.func.isRequired,
+  toggleCookiesAgreed: PropTypes.func.isRequired,
+  showCookiesAgreedError: PropTypes.func.isRequired,
   location: PropTypes.object.isRequired
 };
 
