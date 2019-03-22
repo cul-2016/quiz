@@ -174,7 +174,6 @@ const PrivacyMessageComponent = () => {
                       data in the ways described in the privacy statement. Consent
                       is an ongoing process – you are free to withdraw consent at any time.
                       If you want to withdraw consent, you can email <a href="mailto:hello@quodl.co.uk">hello@quodl.co.uk</a>.
-                      <a href="mailto:hello@quodl.co.uk">hello@quodl.co.uk</a>.
                       Depending on the specific aspects of consent you wish to withdraw,
                       you may not be able to continue to log in to Quodl once consent is
                       withdrawn. As you can see from the privacy statement, you can
