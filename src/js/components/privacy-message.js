@@ -181,7 +181,6 @@ const PrivacyMessageComponent = () => {
                       also request a copy of your data, request a correction to
                       anything that you think is inaccurate, or have all of your
                       identifying data deleted. For all of these you can just email <a href="mailto:hello@quodl.co.uk">hello@quodl.co.uk</a>.
-                      <a href="mailto:hello@quodl.co.uk">hello@quodl.co.uk</a>.
                       </div>
                       <br />
 
