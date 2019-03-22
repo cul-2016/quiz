@@ -134,7 +134,7 @@ const PrivacyMessageComponent = () => {
                       <div className="subtitle">
                           Yes. You can see virtually all the data we hold when you are logged in: The scores and answers on
                           the questions across the quizzes you have taken. If you would like to request all of the data we hold
-                          that is associated with your email address, email:
+                          that is associated with your email address, email: <a href="mailto:hello@quodl.co.uk">hello@quodl.co.uk</a>.
                           <a href="mailto:hello@quodl.co.uk">hello@quodl.co.uk</a>.
                       </div>
                       <br />
