@@ -166,7 +166,7 @@ const PrivacyMessageComponent = () => {
                       </div>
                       <br />
 
-
+                      <a name="consent"></a>
                       <h2 className="f-title">Consent</h2>
                       <br />
                       <div className="subtitle">
