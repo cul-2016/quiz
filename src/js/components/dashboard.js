@@ -96,6 +96,7 @@ class Dashboard extends Component {
                 </div>
                 <div className="f-body dashboard__tc" >
                     View <Link className="f-body f-body--primary" target="_blank" to="/privacy">privacy statement</Link>
+                    and <Link className="f-body f-body--primary" target="_blank" to="/privacy#consent">manage data consent</Link>
                 </div>
               </div>
             </div>
