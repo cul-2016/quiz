@@ -88,11 +88,6 @@ class Dashboard extends Component {
                       <h2 className="f-headline f-headline--primary forum__link"> Study Planner [Coming Soon] </h2>
                     </a>
                   </div>
-                  <div className="dashboard__lecturer--title">
-                    <a href={`${process.env.FORUM_URL}`}>
-                      <h2 className="f-headline f-headline--primary forum__link"> Forum [Coming Soon] </h2>
-                    </a>
-                  </div>
                 </div>
                 <div className="f-body dashboard__tc" >
                     View <Link className="f-body f-body--primary" target="_blank" to="/privacy">privacy statement</Link>
