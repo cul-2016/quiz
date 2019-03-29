@@ -32,10 +32,8 @@ socketClient.on('receive_quiz_invite', (idObj) => {
 
     console.log("have received quiz invite");
 
-    if (!store.getState().module.isQuizOpen) {
-        store.dispatch(openQuiz());
-        store.dispatch(setIsSurvey(idObj.quiz_id, idObj.survey_id));
-    }
+    store.dispatch(openQuiz());
+    store.dispatch(setIsSurvey(idObj.quiz_id, idObj.survey_id));
 });
 
 socketClient.on('receive_next_question', (questionObj) => {
