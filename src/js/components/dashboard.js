@@ -11,7 +11,9 @@ class Dashboard extends Component {
     }
 
     componentDidMount () {
-        store.dispatch(clearModuleState());
+        if (window.location.hash === "#/dashboard") {
+            store.dispatch(clearModuleState())
+        }
     }
 
     render () {
