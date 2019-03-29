@@ -10,15 +10,15 @@ var MEDAL_2_UPPER_BOUND = 100;
  * @param {function} callback - a callback function
  */
 
-function saveModule (pool, module_id, user_id, name, medals, uses_trophies, trophies, forum_cid, callback) {
+function saveModule(pool, module_id, user_id, name, medals, uses_trophies, trophies, callback) {
 
     var moduleQuery = [
-        'INSERT INTO modules (module_id, user_id, name, uses_trophies, forum_cid) VALUES ($1, $2, $3, $4, $5);',
+        'INSERT INTO modules (module_id, user_id, name, uses_trophies) VALUES ($1, $2, $3, $4);',
         'INSERT INTO medals (module_id, medal_name, condition) VALUES ($1, $2, $3), ($1, $4, $5), ($1, $6, $7);',
         'INSERT INTO trophies (module_id, trophy_name, condition) VALUES ($1, $2, $3), ($1, $4, $5), ($1, $6, $7), ($1, $8, $9);'
     ];
     var moduleArray = [
-        [module_id, user_id, name, uses_trophies, forum_cid],
+        [module_id, user_id, name, uses_trophies],
         [
             module_id,
             medals.medal_name[0], medals.condition[0],
@@ -38,7 +38,7 @@ function saveModule (pool, module_id, user_id, name, medals, uses_trophies, trop
     var index = 0;
     query(pool, moduleQuery[index], moduleArray[index], report);
 
-    function report (error, result) {
+    function report(error, result) {
         index++;
         /* istanbul ignore if */
         if (error) {

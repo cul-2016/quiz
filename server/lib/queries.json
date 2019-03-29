@@ -1,7 +1,6 @@
 {
     "joinModule": "INSERT INTO module_members (module_id, user_id) VALUES ($1, $2) ON CONFLICT DO NOTHING;",
     "getModuleBasics": "SELECT * FROM modules WHERE module_id = $1",
-    "getForumModules": "SELECT module_id, forum_cid FROM modules",
     "getModuleForLecturer": {
         "quizzes": "SELECT quizzes.quiz_id, quizzes.name, quizzes.is_presented, quizzes.is_last_quiz, quizzes.share_id, ( SELECT COUNT(DISTINCT(responses.user_id)) AS num_entries FROM responses WHERE responses.quiz_id = quizzes.quiz_id GROUP BY quizzes.quiz_id ), (SELECT COUNT(questions.question_id) AS num_questions FROM questions WHERE questions.quiz_id = quizzes.quiz_id GROUP BY quizzes.quiz_id ) FROM quizzes LEFT JOIN responses ON quizzes.quiz_id = responses.quiz_id WHERE quizzes.module_id = ($1) GROUP BY quizzes.quiz_id ORDER BY quizzes.quiz_id",
         "surveys": "SELECT surveys.survey_id, surveys.name, surveys.is_presented, surveys.share_id, ( SELECT COUNT(DISTINCT(responses.user_id)) AS num_entries FROM responses WHERE responses.survey_id = surveys.survey_id GROUP BY surveys.survey_id ), (SELECT COUNT(questions.question_id) AS num_questions FROM questions WHERE questions.survey_id = surveys.survey_id GROUP BY surveys.survey_id ) FROM surveys LEFT JOIN responses ON surveys.survey_id = responses.survey_id WHERE surveys.module_id = ($1) GROUP BY surveys.survey_id ORDER BY surveys.survey_id",
@@ -56,9 +55,9 @@
     "hasStudentSubmitted": "SELECT responses.quiz_id FROM responses JOIN quizzes ON responses.quiz_id = quizzes.quiz_id WHERE user_id = $1 AND module_id = $2;",
     "getStudentHistory": "SELECT quizzes.quiz_id, quizzes.name, scores.score, COUNT(DISTINCT(questions.question_id)) AS num_questions FROM quizzes JOIN questions ON quizzes.quiz_id = questions.quiz_id JOIN scores ON quizzes.quiz_id = scores.quiz_id WHERE scores.user_id = $1 AND quizzes.module_id = $2 GROUP BY quizzes.quiz_id, scores.score, quizzes.name ORDER BY quizzes.quiz_id;",
     "deleteResponses": "DELETE FROM responses WHERE quiz_id = $1;",
-    "getQuizforImport": "SELECT quizzes.quiz_id, quizzes.name, questions.question, questions.a, questions.b, questions.c, questions.d, questions.correct_answer, questions.order_id, questions.quiz_id FROM quizzes JOIN questions ON questions.quiz_id = quizzes.quiz_id WHERE quizzes.share_id = $1;",
-    "getSurveyforImport": "SELECT surveys.survey_id, surveys.name, questions.question, questions.a, questions.b, questions.c, questions.d, questions.correct_answer, questions.order_id, questions.survey_id FROM surveys JOIN questions ON questions.survey_id = surveys.survey_id WHERE surveys.share_id = $1;",
+    "getQuizforImport": "SELECT quizzes.quiz_id, quizzes.name, questions.question, questions.a, questions.b, questions.c, questions.d, questions.correct_answer, questions.order_id, questions.quiz_id, questions.more_information FROM quizzes JOIN questions ON questions.quiz_id = quizzes.quiz_id WHERE quizzes.share_id = $1;",
+    "getSurveyforImport": "SELECT surveys.survey_id, surveys.name, questions.question, questions.a, questions.b, questions.c, questions.d, questions.correct_answer, questions.order_id, questions.survey_id, questions.more_information FROM surveys JOIN questions ON questions.survey_id = surveys.survey_id WHERE surveys.share_id = $1;",
     "importQuiz": "INSERT INTO quizzes (module_id, name) VALUES ($1, $2) RETURNING quiz_id;",
     "importSurvey": "INSERT INTO surveys (module_id, name) VALUES ($1, $2) RETURNING survey_id;",
-    "importQuestion": "INSERT INTO questions (order_id, quiz_id, survey_id, question, a, b, c, d, correct_answer) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);"
+    "importQuestion": "INSERT INTO questions (order_id, quiz_id, survey_id, question, a, b, c, d, correct_answer, more_information) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);"
 }
