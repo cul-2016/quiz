@@ -235,8 +235,31 @@ test('showTcAgreedError creates the correct action', (t) => {
 
     const expected = {
         type: actions.SHOW_TC_AGREED_ERROR,
-        error: 'Please agree to the privacy statement before proceeding'
+        error: 'You need to accept the privacy policy to register'
     };
     const actual = deepFreeze(actions.showTcAgreedError());
+    t.deepEqual(actual, expected);
+});
+
+test('togglingCookiesAgreed creates the correct action', (t) => {
+
+    t.plan(1);
+
+    const expected = {
+        type: actions.TOGGLE_COOKIES_AGREED,
+    };
+    const actual = deepFreeze(actions.toggleCookiesAgreed());
+    t.deepEqual(actual, expected);
+});
+
+test('showCookiesAgreedError creates the correct action', (t) => {
+
+    t.plan(1);
+
+    const expected = {
+        type: actions.SHOW_COOKIES_AGREED_ERROR,
+        error: 'You need to consent to the use of cookies to register'
+    };
+    const actual = deepFreeze(actions.showCookiesAgreedError());
     t.deepEqual(actual, expected);
 });

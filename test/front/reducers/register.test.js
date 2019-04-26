@@ -122,3 +122,29 @@ test('SHOW_TC_AGREED_ERROR works', (t) => {
     const result = reducer(initialState, action);
     t.deepEqual(result, expected);
 });
+
+test('TOGGLE_COOKIES_AGREED works', (t) => {
+
+    t.plan(1);
+    const initialState = deepFreeze(registerState);
+    const action = {
+        type: 'TOGGLE_COOKIES_AGREED',
+    };
+    const expected = { ...initialState, cookiesAgreed: true };
+    const result = reducer(initialState, action);
+
+    t.deepEqual(result, expected);
+});
+
+test('SHOW_COOKIES_AGREED_ERROR works', (t) => {
+
+    t.plan(1);
+    const initialState = deepFreeze(registerState);
+    const action = {
+        type: 'SHOW_COOKIES_AGREED_ERROR',
+        error: 'Please agree to the privacy statement before proceeding'
+    };
+    const expected = { ...initialState, error: 'Please agree to the privacy statement before proceeding' };
+    const result = reducer(initialState, action);
+    t.deepEqual(result, expected);
+});

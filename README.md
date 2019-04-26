@@ -248,3 +248,9 @@ The live version of the app is hosted on 1 dyno @ $25. We reached a saturation p
 Quodl is available to be used as an external tool in [Moodle](https://moodle.org/) through [LTI](https://www.imsglobal.org/activity/learning-tools-interoperability).
 
 For details on how to set this up, see the [LTI Integration guide](LTI.md)
+
+### Privacy Statement
+The in-app privacy statement for Quodl has been updated in line with GDPR as
+per [issue #716](https://github.com/cul-2016/quiz/issues/716).  
+If further changes are required, these can be easily made by updating the following file:
+[`src/js/components/privacy-message.js`](https://github.com/cul-2016/quiz/blob/staging/src/js/components/privacy-message.js).

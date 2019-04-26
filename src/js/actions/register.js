@@ -12,6 +12,8 @@ export const REGISTERING_USER_SUCCESS = 'REGISTERING_USER_SUCCESS';
 export const REGISTERING_USER_FAILURE = 'REGISTERING_USER_FAILURE';
 export const TOGGLE_TC_AGREED = 'TOGGLE_TC_AGREED';
 export const SHOW_TC_AGREED_ERROR = 'SHOW_TC_AGREED_ERROR';
+export const TOGGLE_COOKIES_AGREED = 'TOGGLE_COOKIES_AGREED';
+export const SHOW_COOKIES_AGREED_ERROR = 'SHOW_COOKIES_AGREED_ERROR';
 export const REGISTERING_USER_MERGE = 'REGISTERING_USER_MERGE';
 
 export const updateInputField = (inputKey, value) => ({
@@ -89,7 +91,16 @@ export const toggleTcAgreed = () => ({
 
 export const showTcAgreedError = () => ({
     type: SHOW_TC_AGREED_ERROR,
-    error: 'Please agree to the privacy statement before proceeding'
+    error: 'You need to accept the privacy policy to register'
+});
+
+export const toggleCookiesAgreed = () => ({
+    type: TOGGLE_COOKIES_AGREED
+});
+
+export const showCookiesAgreedError = () => ({
+    type: SHOW_COOKIES_AGREED_ERROR,
+    error: 'You need to consent to the use of cookies to register'
 });
 
 export const mergeUsers = () => ({
